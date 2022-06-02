@@ -1,8 +1,10 @@
 /*@tailwind base;*/
+
 /*@tailwind components;*/
+
 /*@tailwind utilities;*/
 
 body {
-    background-color: whitesmoke;
-    color: white;
+  background-color: whitesmoke;
+  color: white;
 }
