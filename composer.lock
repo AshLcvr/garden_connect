@@ -1376,8 +1376,6 @@
             "time": "2021-11-05T11:11:14+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "egulias/email-validator",
             "version": "3.2",
             "source": {
@@ -1446,7 +1444,6 @@
             "time": "2022-05-28T22:19:18+00:00"
         },
         {
->>>>>>> polo
             "name": "friendsofphp/proxy-manager-lts",
             "version": "v1.0.12",
             "source": {
@@ -4135,8 +4132,6 @@
             "time": "2021-11-30T18:21:41+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "symfony/property-access",
             "version": "v6.1.0",
             "source": {
@@ -4305,7 +4300,6 @@
             "time": "2022-05-24T19:09:44+00:00"
         },
         {
->>>>>>> polo
             "name": "symfony/proxy-manager-bridge",
             "version": "v6.1.0",
             "source": {
@@ -5942,8 +5936,6 @@
     ],
     "packages-dev": [
         {
-<<<<<<< HEAD
-=======
             "name": "doctrine/data-fixtures",
             "version": "1.5.3",
             "source": {
@@ -6109,7 +6101,6 @@
             "time": "2022-04-28T17:58:29+00:00"
         },
         {
->>>>>>> polo
             "name": "nikic/php-parser",
             "version": "v4.14.0",
             "source": {
