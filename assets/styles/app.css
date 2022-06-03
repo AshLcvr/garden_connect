@@ -9,10 +9,17 @@
 }
 body {
     background-color: whitesmoke;
+    color: rgb(70, 70, 70);
+    font-family: 'Roboto', sans-serif;
 }
 ul, ol{
     list-style: none;
 }
 a{
     text-decoration: none;
+    color: rgb(70, 70, 70);
+}
+img{
+    width: 100%;
+    vertical-align: bottom;
 }

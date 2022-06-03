@@ -3,6 +3,10 @@ header{
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    padding: 0.5rem 5rem 0.5rem 5rem;
+}
+header .logo{
+    width: 10%;
 }
 header nav ul{
     display: flex;
@@ -10,9 +14,13 @@ header nav ul{
 header nav ul li{
     padding: 1rem;
 }
-header nav ul li:focus{
-    color: #41B04F;
+header nav ul li a{
+    transition: all 0.4s;
+    font-size: large;
 }
-header nav ul li:hover{
-    
+header nav ul li a:hover{
+    color: #8FC642;
+}
+.active{
+    color: #41B04F;
 }

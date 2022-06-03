@@ -1,5 +1,31 @@
 {% extends 'layout/front_base.html.twig' %}
 
-  {% block body %}
-      <h1>Bonjour les copains</h1>
-  {% endblock %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
+{% endblock %}
+{% block body %}
+  <section id="slider-home">
+    <div class="flexslider" id="slider">
+      <ul class="slides">
+        <li>
+          <img src="https://picsum.photos/id/237/1200/300" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/236/1200/300" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/235/1200/300" />
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <h2>Découvrez les produits</h2>
+  <p>
+  {# {{  }} #}
+  </p>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('/asset/flex/jquery.flexslider.js') }}"></script>
+{% endblock %}
