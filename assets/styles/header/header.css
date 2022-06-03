@@ -1,6 +1,7 @@
 header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: white;
 }
 header nav ul{
@@ -13,4 +14,5 @@ header nav ul li:focus{
     color: #41B04F;
 }
 header nav ul li:hover{
+    
 }
