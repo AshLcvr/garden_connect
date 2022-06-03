@@ -1,21 +1,73 @@
-<!DOCTYPE html>
-
-<title>Register</title>
+{% extends 'layout/front_base.html.twig' %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
+    <div class="body">
+        <div id="contener_form">
+            {{ form_start(registrationForm, {attr : {novalidate: 'novalidate'}}) }}
+                <h1>Register</h1>
+                <div class="bloc_form">
+                    {{ form_widget(registrationForm.name) }}
+                    <div class="cut"></div>
+                    {{ form_label(registrationForm.name) }}
+                    
 
-    <h1>Register</h1>
+                    <small>{{ form_help(registrationForm.name) }}</small>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.name) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_widget(registrationForm.surname) }}
+                    <div class="cut"></div>
+                    {{ form_label(registrationForm.surname) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                    <small>{{ form_help(registrationForm.surname) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.surname) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_widget(registrationForm.email) }}
+                    <div class="cut"></div>
+                    {{ form_label(registrationForm.email) }}
+
+                    <small>{{ form_help(registrationForm.email) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_widget(registrationForm.plainPassword) }}
+                    <div class="cut"></div>
+                    {{ form_label(registrationForm.plainPassword) }}
+
+                    <small>{{ form_help(registrationForm.plainPassword) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_widget(registrationForm.agreeTerms) }}
+                    <div class="cut cut-long"></div>
+                    {{ form_label(registrationForm.agreeTerms) }}
+
+                    <small>{{ form_help(registrationForm.agreeTerms) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_widget(registrationForm.submit) }}
+                </div>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
 {% endblock %}

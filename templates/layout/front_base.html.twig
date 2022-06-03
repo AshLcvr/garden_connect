@@ -9,18 +9,9 @@
         {% endblock %}
     </head>
     <body>
-    <ul>
-        <li><a href="{{ path('homepage') }}">home</a></li>
-        {% if app.user %}
-        <p>ok</p>
-          <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
-          {# <li><a href="{{ path('boutique') }}">Boutique</a></li> #}
-        {% else %}
-            <li><a href="{{ path('app_login') }}">Connexion</a></li>  
-            <li><a href="{{ path('app_register') }}">Inscription</a></li> 
-        {% endif %}
-      </ul>
-        {% block body %}{% endblock %}
+      {{ include('_partials/_header-front.html.twig') }}
+      {% block body %}{% endblock %}
+      {{ include('_partials/_footer-front.html.twig') }}
     </body>
     {% block javascripts %}
     {% endblock %}
