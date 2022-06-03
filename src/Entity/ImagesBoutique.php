@@ -42,4 +42,9 @@ class ImagesBoutique
 
         return $this;
     }
+
+    public function getBoutique(): ?Boutique
+    {
+        return $this->boutique;
+    }
 }

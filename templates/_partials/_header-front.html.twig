@@ -10,7 +10,7 @@
                     <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
                 {% endif %}
                 {% if is_granted('ROLE_VENDEUR') %}
-                    <li><a href="{{ path('boutique') }}">Boutique</a></li>
+                    <li><a href="{{ path('app_boutique_index') }}">Boutique</a></li>
                 {% endif %}
                 <li><a href="{{ path('app_logout') }}">déconnexion</a></li>
             {% else %}
