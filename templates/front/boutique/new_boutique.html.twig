@@ -1,0 +1,13 @@
+{% extends 'layout/boutique_base.html.twig' %}
+
+{% block title %}
+<title>Ajouter une nouvelle boutique</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Nouvelle boutique</h1>
+
+    {{ include('front/boutique/_form.html.twig') }}
+
+{#    <a href="{{ path('app_boutique_index') }}">back to list</a>#}
+{% endblock %}
