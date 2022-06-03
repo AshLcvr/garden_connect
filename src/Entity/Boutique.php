@@ -80,9 +80,13 @@ class Boutique
     #[ORM\OneToMany(mappedBy: 'boutique', targetEntity: ImagesBoutique::class)]
     private $imagesBoutiques;
 
+    #[ORM\OneToMany(mappedBy: 'boutique', targetEntity: Annonce::class)]
+    private $annonces;
+
     public function __construct()
     {
         $this->imagesBoutiques = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -234,6 +238,36 @@ class Boutique
             // set the owning side to null (unless already changed)
             if ($imagesBoutique->getBoutique() === $this) {
                 $imagesBoutique->setBoutique(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Annonce>
+     */
+    public function getAnnonces(): Collection
+    {
+        return $this->annonces;
+    }
+
+    public function addAnnonce(Annonce $annonce): self
+    {
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces[] = $annonce;
+            $annonce->setBoutique($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnonce(Annonce $annonce): self
+    {
+        if ($this->annonces->removeElement($annonce)) {
+            // set the owning side to null (unless already changed)
+            if ($annonce->getBoutique() === $this) {
+                $annonce->setBoutique(null);
             }
         }
 

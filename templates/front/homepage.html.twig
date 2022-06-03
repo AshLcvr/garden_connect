@@ -6,12 +6,14 @@
 {% block body %}
   <section id="slider-home">
     <div class="flexslider" id="slider">
-      <ul class="slides">
+      <ul class="slides relative">
         <li>
           <img src="https://picsum.photos/id/237/1200/300" />
+          <h2 class="absolute">Citation alacon qui fait bien</h2>
         </li>
         <li>
           <img src="https://picsum.photos/id/236/1200/300" />
+          <h2 class="absolute">Philo alacon qui fait bien</h2>
         </li>
         <li>
           <img src="https://picsum.photos/id/235/1200/300" />
@@ -19,11 +21,34 @@
       </ul>
     </div>
   </section>
-
-  <h2>Découvrez les produits</h2>
-  <p>
-  {# {{  }} #}
-  </p>
+  <section class="slider-category">
+    <h2>Découvrez les produits</h2>
+    <div class="flexslider carousel" id="slider-category">
+      <ul class="slides">
+        <li class="padding-10">
+          <img src="https://picsum.photos/id/237/300/300" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/236/300/300" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/235/300/300" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/234/300/300" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/233/300/300" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/232/300/300" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/231/300/300" />
+        </li>
+      </ul>
+    </div>
+  </section>
 {% endblock %}
 
 {% block javascripts %}

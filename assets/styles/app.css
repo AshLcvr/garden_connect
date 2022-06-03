@@ -23,3 +23,12 @@ img{
     width: 100%;
     vertical-align: bottom;
 }
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute;
+}
+.padding-10{
+    padding: 10px;
+}

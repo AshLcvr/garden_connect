@@ -31,6 +31,10 @@ class Annonce
     #[ORM\Column(type: 'boolean')]
     private $actif;
 
+    #[ORM\ManyToOne(targetEntity: Boutique::class, inversedBy: 'annonces')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $boutique;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +108,18 @@ class Annonce
     public function setActif(bool $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getBoutique(): ?Boutique
+    {
+        return $this->boutique;
+    }
+
+    public function setBoutique(?Boutique $boutique): self
+    {
+        $this->boutique = $boutique;
 
         return $this;
     }

@@ -14,6 +14,14 @@ class CategoriesFixtures extends Fixture
         $legumes->setTitle('Légumes');
         $manager->persist($legumes);
 
+        $condiments = new Categories();
+        $condiments->setTitle('Condiments');
+        $manager->persist($condiments);
+
+        $animaux = new Categories();
+        $animaux->setTitle('Animaux');
+        $manager->persist($animaux);
+
         $haricots = new Categories();
         $haricots->setTitle('Haricots');
         $haricots->setParent($legumes);
@@ -39,5 +47,7 @@ class CategoriesFixtures extends Fixture
         $manager->persist($bananes);
 
         $manager->flush();
+
+        $this->addReference('fruit', $fruits);
     }
 }
