@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -37,6 +39,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Boutique::class)]
+    private $boutiques;
+
+    public function __construct()
+    {
+        $this->boutiques = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -159,5 +169,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function isIsVerified(): ?bool
     {
         return $this->isVerified;
+    }
+
+    /**
+     * @return Collection<int, Boutique>
+     */
+    public function getBoutiques(): Collection
+    {
+        return $this->boutiques;
+    }
+
+    public function addBoutique(Boutique $boutique): self
+    {
+        if (!$this->boutiques->contains($boutique)) {
+            $this->boutiques[] = $boutique;
+            $boutique->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBoutique(Boutique $boutique): self
+    {
+        if ($this->boutiques->removeElement($boutique)) {
+            // set the owning side to null (unless already changed)
+            if ($boutique->getUser() === $this) {
+                $boutique->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

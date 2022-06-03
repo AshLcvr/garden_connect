@@ -80,7 +80,6 @@ class UserFixtures extends Fixture
         }
 
         $manager->flush();
-
         
         $this->addReference('polo', $adminPolo);
         $this->addReference('sacha', $adminSacha);

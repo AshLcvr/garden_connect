@@ -12,9 +12,12 @@
     <ul>
         <li><a href="{{ path('homepage') }}">home</a></li>
         {% if app.user %}
-        <p>ok</p>
+            {% if is_granted('ROLE_ADMIN') %}
           <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
-          {# <li><a href="{{ path('boutique') }}">Boutique</a></li> #}
+            {% endif %}
+            {% if is_granted('ROLE_VENDEUR') %}
+                <li><a href="{{ path('app_boutique_index')}}">Ma Boutique</a></li>
+            {% endif %}
         {% else %}
             <li><a href="{{ path('app_login') }}">Connexion</a></li>  
             <li><a href="{{ path('app_register') }}">Inscription</a></li> 

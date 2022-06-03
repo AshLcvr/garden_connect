@@ -1,0 +1,39 @@
+{% extends 'layout/boutique_base.html.twig' %}
+
+{% block title %}
+<title>Boutique</title>
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_boutique_edit', {'id': boutique.id}) }}">Modifier</a>
+    <a href="{{ path('app_boutique_inactif', {'id': boutique.id}) }}">Supprimer</a>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Photos</th>
+                {%  for imageboutique in boutique.imagesBoutiques %}
+                    <img src="{{ asset('uploads/boutique/'~imageboutique.title) }}" alt="">
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Titre de la boutique</th>
+                <td>{{ boutique.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ boutique.description }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ boutique.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ boutique.adresse }} {{ boutique.codePostal }} </td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{ include('front/boutique/_delete_form.html.twig') }}
+{% endblock %}
