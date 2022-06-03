@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -18,6 +19,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner un E-mail')]
+    #[Assert\Length(min: 10 ,max: 180, minMessage: 'Votre E-mail doit comporter au moin {{ limit }} caractères', maxMessage: "Votre E-mail ne pas exceder {{ limit }} caractères")]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -30,9 +33,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre Prénom')]
+    #[Assert\Length(min: 3 ,max: 150, minMessage: 'Votre Prénom doit comporter au moin {{ limit }} caractères', maxMessage: "Votre Prénom ne pas exceder {{ limit }} caractères")]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre Nom')]
+    #[Assert\Length(min: 3 ,max: 150, minMessage: 'Votre Nom doit comporter au moin {{ limit }} caractères', maxMessage: "Votre Nom ne pas exceder {{ limit }} caractères")]
     private $surname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
