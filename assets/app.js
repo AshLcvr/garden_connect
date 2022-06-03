@@ -6,9 +6,18 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
+// css général
 import './styles/app.css';
+// css formulaire
 import './styles/form/form.css';
+// css, js header footer
 import './styles/header/header.css';
+import './styles/header/header.js';
+
+// css, js homepage
+import './styles/homepage/homepage.css';
+import './styles/homepage/slider/slider.css';
+import './styles/homepage/slider/slider.js';
 
 // start the Stimulus application
 // import './bootstrap';

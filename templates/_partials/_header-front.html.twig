@@ -1,21 +1,37 @@
 <header>
     <div class="logo">
-        <img src="{{ asset('public/images/logo.png') }}"/>
+        <a href="{{ path('homepage') }}"><img src="{{ asset('images/logo.png') }}"/></a>
     </div>
     <nav>
         <ul>
-            <li><a href="{{ path('homepage') }}">home</a></li>
+            {% if app.request.pathinfo == '/' %}
+                <li><a class="active" href="{{ path('homepage') }}">Acceuil</a></li>
+            {% else %}
+                <li><a href="{{ path('homepage') }}">Acceuil</a></li>
+            {% endif %}
             {% if app.user %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
                 {% endif %}
                 {% if is_granted('ROLE_VENDEUR') %}
-                    <li><a href="{{ path('boutique') }}">Boutique</a></li>
+                    {% if app.request.pathinfo == '/' %}
+                        <li><a class="active" href="{{ path('boutique') }}">Boutique</a></li>
+                    {% else %}
+                        <li><a href="{{ path('boutique') }}">Boutique</a></li>
+                    {% endif %}
                 {% endif %}
                 <li><a href="{{ path('app_logout') }}">déconnexion</a></li>
             {% else %}
-                <li><a href="{{ path('app_login') }}">Connexion</a></li>  
-                <li><a href="{{ path('app_register') }}">Inscription</a></li> 
+                {% if app.request.pathinfo == '/login' %}
+                    <li><a class="active" href="{{ path('app_login') }}">Connexion</a></li>
+                {% else %}
+                    <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                {% endif %}
+                {% if app.request.pathinfo == '/register' %}
+                    <li><a class="active" href="{{ path('app_register') }}">Inscription</a></li>
+                {% else %}
+                    <li><a href="{{ path('app_register') }}">Inscription</a></li>
+                {% endif %}
             {% endif %}
         </ul>
     </nav>
