@@ -1,0 +1,31 @@
+{% extends 'layout/boutique_base.html.twig' %}
+
+{% block title %}
+<title>Annonce index</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Mes annonces</h1>
+
+        {% for annonce in annonces %}
+            {% if annonce.actif %}
+                <div class="card shadow mb-4">
+                    <a href="#collapseCardExample" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">{{ annonce.title }}</a>
+                    <div id="collapseCardExample" class="collapse">
+                        <div class="card-body">
+                            {{ annonce.title }}
+                        </div>
+                    </div>
+                </div>
+
+
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+
+
+    <a href="{{ path('app_annonce_new') }}">Create new</a>
+{% endblock %}

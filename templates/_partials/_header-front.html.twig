@@ -5,22 +5,22 @@
     <nav>
         <ul>
             {% if app.request.pathinfo == '/' %}
-                <li><a class="active" href="{{ path('homepage') }}">Acceuil</a></li>
+                <li><a class="active" href="{{ path('homepage') }}">Accueil</a></li>
             {% else %}
-                <li><a href="{{ path('homepage') }}">Acceuil</a></li>
+                <li><a href="{{ path('homepage') }}">Accueil</a></li>
             {% endif %}
             {% if app.user %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
                 {% endif %}
                 {% if is_granted('ROLE_VENDEUR') %}
-                    {% if app.request.pathinfo == '/' %}
+                    {% if app.request.pathinfo == '/boutique' %}
                         <li><a class="active" href="{{ path('app_boutique_index') }}">Boutique</a></li>
                     {% else %}
                         <li><a href="{{ path('app_boutique_index') }}">Boutique</a></li>
                     {% endif %}
                 {% endif %}
-                <li><a href="{{ path('app_logout') }}">déconnexion</a></li>
+                <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
             {% else %}
                 {% if app.request.pathinfo == '/login' %}
                     <li><a class="active" href="{{ path('app_login') }}">Connexion</a></li>

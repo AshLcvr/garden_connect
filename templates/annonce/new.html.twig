@@ -1,0 +1,14 @@
+{% extends 'layout/boutique_base.html.twig' %}
+
+{% block title %}
+    <title>Nouvelle annonce</title>
+{% endblock %}
+
+
+{% block body %}
+    <h1>Create new Annonce</h1>
+
+    {{ include('annonce/_form.html.twig') }}
+
+    <a href="{{ path('app_annonce_index') }}">back to list</a>
+{% endblock %}

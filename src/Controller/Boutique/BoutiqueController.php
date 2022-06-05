@@ -22,12 +22,10 @@ class BoutiqueController extends AbstractController
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
-        $nbBoutiques = count($user->getBoutiques());
         $boutique = $boutiques[0];
 
         return $this->render('front/boutique/index_boutique.html.twig', [
             'boutiques' => $boutiques,
-            'nbBoutiques' => $nbBoutiques,
             'boutique' => $boutique,
         ]);
     }

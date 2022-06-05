@@ -57,6 +57,27 @@ class UploadImage
         }
     }
 
+    public function uploadProfile(UploadedFile $file)
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = $this->slugger->slug($originalFilename);
+        $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+
+        try {
+            $file->move($this->getTargetDirectory(), $fileName);
+        } catch (FileException $e) {
+            dd($e);
+        }
+
+        // Resize de l'image (optionnel)
+        // Profile
+        $avatar = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
+        $avatar->resizeToBestFit(100, 100);
+        $avatar->save($this->getUploadDirectory() .'/profile/'. $fileName);
+
+        return $fileName;
+    }
+
     public function getUploadDirectory()
     {
         return $this->uploadDirectory;
