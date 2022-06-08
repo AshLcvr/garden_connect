@@ -40,6 +40,10 @@ class Annonce
     #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: ImagesAnnonces::class)]
     private $imagesAnnonces;
 
+    #[ORM\ManyToOne(targetEntity: Categories::class, inversedBy: 'annonces')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $category;
+
     public function __construct()
     {
         $this->imagesAnnonces = new ArrayCollection();
@@ -160,6 +164,18 @@ class Annonce
                 $imagesAnnonce->setAnnonce(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Categories
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Categories $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

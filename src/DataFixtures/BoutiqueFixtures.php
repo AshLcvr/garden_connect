@@ -6,7 +6,6 @@ use App\Entity\Boutique;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use function App\Entity\setCreatedAt;
 
 class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
 {
