@@ -26,22 +26,24 @@
   </section>
   
   <section class="slider-category">
-    <h2>Découvrez les produits</h2>
-    <div class="flexslider" id="slider-category">
-      <ul class="slides relative">
-        {% for cat in categories %}
-          <li>
-            <img src="{{ asset('images/fall-915629.jpg') }}" />
-            <h3 class="title-cat">{{ cat.title }}</h3>
-          </li>
-        {% endfor %}
-        {% for cat in categories %}
-          <li>
-            <img src="{{ asset('images/fall-915629.jpg') }}" />
-            <h3 class="title-cat">{{ cat.title }}</h3>
-          </li>
-        {% endfor %}
-      </ul>
+    <div class="contener carousel">
+      <h2>Découvrez les produits</h2>
+      <div class="flexslider" id="slider-category">
+        <ul class="slides relative">
+          {% for cat in categories %}
+            <li>
+              <img src="{{ asset('images/fall-915629.jpg') }}" />
+              <h3 class="title-cat">{{ cat.title }}</h3>
+            </li>
+          {% endfor %}
+          {% for cat in categories %}
+            <li>
+              <img src="{{ asset('images/fall-915629.jpg') }}" />
+              <h3 class="title-cat">{{ cat.title }}</h3>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </section>
 

@@ -10,8 +10,8 @@ $(document).ready(function () {
         animation: "slide",
         animationLoop: false,
         itemWidth: 210,
-        itemMargin: 5,
+        itemMargin: 15,
         minItems: 2,
-        maxItems: 4
+        maxItems: 4,
     });
 })

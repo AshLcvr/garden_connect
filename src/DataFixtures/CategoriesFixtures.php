@@ -5,49 +5,46 @@ namespace App\DataFixtures;
 use App\Entity\Categories;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use App\Service\Categories\DataCategories;
+use App\Service\CerealesEtGrains\DataCerealesEtGrains;
+use App\Service\EngraisNaturelsEtAccessoires\DataEngraisNaturelsEtAccessoires;
 
 class CategoriesFixtures extends Fixture
 {
+    public function __construct()
+    {
+        $categories = new DataCategories();
+        $this->categories = $categories->getCategoriesData();
+
+        $cerealesEtGrains = new DataCerealesEtGrains();
+        $engraisNaturelsEtAccessoires = new DataEngraisNaturelsEtAccessoires();
+        
+        $sousCats = [];
+        $sousCats[] =  $cerealesEtGrains->getCerealesEtGrainsData();
+        $sousCats[] =  $engraisNaturelsEtAccessoires->getEngraisNaturelsEtAccessoiresData();
+
+        $this->sousCats = $sousCats;
+    }
     public function load(ObjectManager $manager): void
     {
-        $legumes = new Categories();
-        $legumes->setTitle('Légumes');
-        $manager->persist($legumes);
+        foreach ($this->categories as $key => $catParent) {
+            $categorieP = new Categories();
+            $categorieP->setTitle($catParent['title']);
+            $manager->persist($categorieP);
+            $this->addReference(str_replace(' ', '', $catParent['title']), $categorieP);
 
-        $condiments = new Categories();
-        $condiments->setTitle('Condiments');
-        $manager->persist($condiments);
-
-        $animaux = new Categories();
-        $animaux->setTitle('Animaux');
-        $manager->persist($animaux);
-
-        $haricots = new Categories();
-        $haricots->setTitle('Haricots');
-        $haricots->setParent($legumes);
-        $manager->persist($haricots);
-
-        $endives = new Categories();
-        $endives->setTitle('Endives');
-        $endives->setParent($legumes);
-        $manager->persist($endives);
-
-        $fruits = new Categories();
-        $fruits->setTitle('Fruits');
-        $manager->persist($fruits);
-
-        $fraises = new Categories();
-        $fraises->setTitle('Fraises');
-        $fraises->setParent($fruits);
-        $manager->persist($fraises);
-
-        $bananes = new Categories();
-        $bananes->setTitle('Bananes');
-        $bananes->setParent($fruits);
-        $manager->persist($bananes);
-
+            foreach ($this->sousCats as $key => $catEnfant) {
+                foreach ($catEnfant as $key => $value) {
+                    if ($value['cat'] === $catParent['title']) {
+                        $categorieE = new Categories();
+                        $categorieE->setTitle($value['title']);
+                        $categorieE->setParent($categorieP);
+                        $manager->persist($categorieE);
+                    }
+                }
+            }
+        }
         $manager->flush();
 
-        $this->addReference('fruit', $fruits);
     }
 }
