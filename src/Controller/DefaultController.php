@@ -13,7 +13,9 @@ class DefaultController extends AbstractController
     #[Route('/', name: 'homepage')]
     public function index(CategoriesRepository $categoriesRepository, AnnonceRepository $annonceRepository): Response
     {
-        $categories = $categoriesRepository->findAll();
+        $categories = $categoriesRepository->findBy([
+            'parent' => null
+        ]);
         $annonces = $annonceRepository->findAll();
 
         return $this->render('front/homepage.html.twig',[

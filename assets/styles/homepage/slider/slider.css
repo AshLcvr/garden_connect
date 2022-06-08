@@ -1,4 +1,7 @@
 /* slider bannière */
+#slider-home{
+    margin-bottom: 3rem;
+}
 .flexslider {
     margin: 0!important;
     border: none!important;
@@ -12,17 +15,32 @@
 }
 
 /* slider categories */
+.slider-category{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: White;
+}
+.slider-category .contener{
+    width: 80%;
+}
+.slider-category .contener h2{
+    text-align: center;
+    color: #AB7B52;
+    margin-bottom: 2rem;
+    font-family: 'Unkempt';
+}
 .slider-category li{
     display: flex!important;
     flex-flow: column;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 10px 5px 5px;
-    margin-right: 1.5rem!important;
     margin-bottom: 3rem!important;
 }
 .slider-category .title-cat{
     color: #AB7B52;
     text-align: center;
     padding: 3rem 3rem;
+    font-family: 'Unkempt';
 }
