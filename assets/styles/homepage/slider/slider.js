@@ -6,6 +6,7 @@ $(document).ready(function () {
 
     $('#slider-category').flexslider({
         controlNav: false,
+        directionNav: true,
         animation: "slide",
         animationLoop: false,
         itemWidth: 210,

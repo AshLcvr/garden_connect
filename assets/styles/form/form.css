@@ -148,7 +148,7 @@ label {
 /*    color: #dc2f55;*/
 /*}*/
   
-button {
+#contener_form button {
     /* background-color: #08d; */
     background: linear-gradient(to right, transparent 50%, #41B04F 50%);
     background-size: 200% 100%;
@@ -168,12 +168,12 @@ button {
     transition: all 0.4s;
 }
 
-button:hover {
+#contener_form button:hover {
     background-color: #F7941D;
     background-position: left;
 }
   
-button:active {
+#contener_form button:active {
     background-color: #06b;
 }
 .form-error{
