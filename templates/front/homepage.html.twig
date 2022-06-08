@@ -21,10 +21,20 @@
       </ul>
     </div>
   </section>
-  <section class="slider-category">
+  <section id="slider-category">
     <h2>Découvrez les produits</h2>
-    <div class="flexslider carousel" id="slider-category">
+    <div class="flexslider slider-category">
       <ul class="slides">
+        {# {% for cat in categories %}
+          <li class="d-flex flex-column">
+            <div>
+              <img src="https://picsum.photos/id/237/300/300" />
+            </div>
+            <div>
+              <h3>{{ cat.title }}</h3>
+            </div>
+          </li>
+        {% endfor %} #}
         <li class="padding-10">
           <img src="https://picsum.photos/id/237/300/300" />
         </li>

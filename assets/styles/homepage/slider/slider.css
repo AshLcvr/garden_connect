@@ -1,3 +1,4 @@
+/* slider bannière */
 .flexslider {
     margin: 0 0 60px;
     border: none;
@@ -8,4 +9,22 @@ h2{
     top: 50%;
     transform: translate(-50%, -50%);
     color: #F7941D;
+}
+
+/* slider categories */
+#slider-category{
+    /* display: flex;
+    justify-content: center; */
+    padding: 0 3rem 0 3rem;
+}
+#slider-category ul li{
+    box-shadow: 10px 5px 5px;
+    margin-right: 2rem!important;
+}
+#slider-category ul li div img{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+#slider-category ul li h3{
+ 
 }

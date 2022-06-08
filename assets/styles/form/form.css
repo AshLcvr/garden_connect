@@ -84,7 +84,7 @@ input {
     border-radius: 12px;
     border: none;
     box-sizing: border-box;
-    color: #eee;
+    color: rgb(70, 70, 70);
     font-size: 18px;
     min-height: 50px;
     outline: 0;
@@ -94,7 +94,6 @@ input {
 input[type=checkbox] , input[type=radio] {
     border-radius: 12px;
     box-sizing: border-box;
-    color: #eee;
     font-size: 18px;
     min-height: 20px;
     padding: 4px 20px 0;

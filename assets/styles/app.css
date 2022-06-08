@@ -32,3 +32,12 @@ img{
 .padding-10{
     padding: 10px;
 }
+.d-flex{
+    display: flex;
+}
+.flex-column{
+    flex-flow: column;
+}
+.wrap{
+    width: 1200px!important;
+}
