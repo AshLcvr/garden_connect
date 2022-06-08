@@ -8,7 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    {% block title %}
     <title>Gestion de ma boutique</title>
+    {% endblock %}
 
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v6.0.0/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -21,12 +23,12 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="box-shadow: 50px 30px 30px 3px black">
 
         <!-- Sidebar - Brand -->
-        <li style="margin: 3rem 0">
+        <li style="margin: 0" class="">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <img src="{{ asset('images/garden-default.jpg') }}" alt="Photo de ma boutique" style="width: 150px;height: 150px; border-radius: 50%;">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo Garden Connect" style="width: 50px;height:50px;    margin: 0 auto; background-color: white;border-radius: 50%">
             </a>
         </li>
 
@@ -62,10 +64,18 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_annonce_index') }}" >
+            <a class="nav-link collapsed" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce"
+               aria-expanded="true" aria-controls="collapseUtilities" >
                 <i class="fa-solid fa-basket-shopping"></i>
                 <span>Mes annonces</span>
             </a>
+            <div id="collapseAnnonce" class="collapse" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ path('app_annonce_new') }}">Ajouter une annonce</a>
+                    <a class="collapse-item" href="{{ path('app_annonce_index') }}">Gérer mes annonces</a>
+                </div>
+            </div>
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
@@ -105,9 +115,6 @@
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-
-
-
     </ul>
     <!-- End of Sidebar -->
 
@@ -118,7 +125,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow bg-gradient-secondary">
 
                 <!-- Sidebar Toggle (Topbar) -->
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -130,10 +137,6 @@
 
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                     <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
                         <!-- Dropdown - Messages -->
                         <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                              aria-labelledby="searchDropdown">
@@ -160,7 +163,7 @@
                             <!-- Counter - Messages -->
                             <span class="badge badge-danger badge-counter">7</span>
                         </a>
-{#                        <!-- Dropdown - Messages -->#}
+                        <!-- Dropdown - Messages -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="messagesDropdown">
                             <h6 class="dropdown-header">
@@ -222,11 +225,10 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid d-flex">
+
                 {% block body %}
 
 
-
-                <img src="{{ asset('images/logo.png') }}" alt="Logo Garden Connect" style="width: 80%; margin: 0 auto">
 
 
                 {% endblock %}

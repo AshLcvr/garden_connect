@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnnonceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
@@ -34,6 +36,14 @@ class Annonce
     #[ORM\ManyToOne(targetEntity: Boutique::class, inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
     private $boutique;
+
+    #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: ImagesAnnonces::class)]
+    private $imagesAnnonces;
+
+    public function __construct()
+    {
+        $this->imagesAnnonces = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +130,36 @@ class Annonce
     public function setBoutique(?Boutique $boutique): self
     {
         $this->boutique = $boutique;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ImagesAnnonces>
+     */
+    public function getImagesAnnonces(): Collection
+    {
+        return $this->imagesAnnonces;
+    }
+
+    public function addImagesAnnonce(ImagesAnnonces $imagesAnnonce): self
+    {
+        if (!$this->imagesAnnonces->contains($imagesAnnonce)) {
+            $this->imagesAnnonces[] = $imagesAnnonce;
+            $imagesAnnonce->setAnnonce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImagesAnnonce(ImagesAnnonces $imagesAnnonce): self
+    {
+        if ($this->imagesAnnonces->removeElement($imagesAnnonce)) {
+            // set the owning side to null (unless already changed)
+            if ($imagesAnnonce->getAnnonce() === $this) {
+                $imagesAnnonce->setAnnonce(null);
+            }
+        }
 
         return $this;
     }

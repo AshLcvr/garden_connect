@@ -7,7 +7,7 @@
     <div class="body">
         <div id="contener_form">
             {{ form_start(registrationForm, {attr : {novalidate: 'novalidate'}}) }}
-                <h1>Register</h1>
+                <h1>Inscription</h1>
                 <div class="bloc_form">
                     {{ form_widget(registrationForm.name) }}
                     <div class="cut"></div>
@@ -64,6 +64,7 @@
                         {{ form_errors(registrationForm.agreeTerms) }}
                     </div>
                 </div>
+
                 <div class="bloc_form">
                     {{ form_widget(registrationForm.submit) }}
                 </div>

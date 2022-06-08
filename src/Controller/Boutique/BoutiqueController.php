@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use function Psr\Log\alert;
 
 #[Route('/boutique')]
 class BoutiqueController extends AbstractController
@@ -44,7 +43,7 @@ class BoutiqueController extends AbstractController
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
-                $uploadImage->upload($boutiqueImage, $boutique->getId());
+                $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
             }else{
                 $this->addFlash('failure','4 photos max !');
                 return $this->redirectToRoute('app_boutique_new', [], Response::HTTP_SEE_OTHER);
@@ -65,11 +64,8 @@ class BoutiqueController extends AbstractController
         $boutiques = $user->getBoutiques();
         $boutique = $boutiques[0];
 
-//        $images = $boutique->getImagesBoutiques();
-
         return $this->render('front/boutique/detail_boutique.html.twig', [
             'boutique' => $boutique,
-//            'images' => $images
         ]);
     }
 
@@ -84,7 +80,7 @@ class BoutiqueController extends AbstractController
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
-                $uploadImage->upload($boutiqueImage, $boutique->getId());
+                $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
             }else{
                 $this->addFlash('failure','4 photos max !');
                 return $this->redirectToRoute('app_boutique_new', [], Response::HTTP_SEE_OTHER);

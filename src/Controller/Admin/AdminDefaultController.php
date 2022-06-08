@@ -11,7 +11,7 @@ class AdminDefaultController extends AbstractController
     #[Route('/admin/', name: 'dashboard')]
     public function index(): Response
     {
-        return $this->render('admin/dashboard.html.twig', [
+        return $this->render('admin/reset_password.html.twig', [
 //            'controller_name' => 'AdminDefaultController',
         ]);
     }
