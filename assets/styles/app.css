@@ -8,6 +8,8 @@
     box-sizing: border-box;
 }
 body {
+    box-sizing: border-box;
+    overflow-x: hidden;
     background-color: whitesmoke;
     color: rgb(70, 70, 70);
     font-family: 'Roboto', sans-serif;
@@ -22,4 +24,7 @@ a{
 img{
     width: 100%;
     vertical-align: bottom;
+}
+.wrap{
+    max-width: 1000px ; width: 100%; margin: 0 auto;
 }

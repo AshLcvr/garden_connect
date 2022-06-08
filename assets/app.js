@@ -12,7 +12,8 @@ import './styles/app.css';
 import './styles/form/form.css';
 // css, js header footer
 import './styles/header/header.css';
-import './styles/header/header.js';
+import "./styles/header/header.js";
+import "./styles/footer/footer.css";
 
 // css, js homepage
 import './styles/homepage/homepage.css';
