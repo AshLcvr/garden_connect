@@ -2,3 +2,48 @@
     display: flex;
     justify-content: center;
 }
+/* Annonces */
+#annonces {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+#annonces h2 {
+    font-family: 'Unkempt';
+    color: #AB7B52;
+    margin-bottom: 25px;
+}
+#annonces p {
+    padding: .3em;
+}
+.annonce_box {
+    background-color: #FFFFFF;
+    display: flex;
+    /* align-items: center; */
+    padding: .5em .5em;
+    box-shadow:  10px 5px 5px grey;
+    margin-bottom: 20px;
+    position: relative;
+}
+.annonce_box:nth-child(2n+1) {
+    flex-flow: row-reverse;
+}
+.annonce_img {
+    width: 22%;
+    display: flex;
+    justify-content: center;
+}
+.annonce_img img {
+    width: 80%;
+}
+.annonce_text {
+    width: 78%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 1em;
+}
+.annonce_title {
+    font-weight: bold;
+}

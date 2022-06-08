@@ -8,19 +8,23 @@
     <div class="flexslider" id="slider">
       <ul class="slides relative">
         <li>
-          <img src="https://picsum.photos/id/237/1200/300" />
           <h2 class="absolute">Citation alacon qui fait bien</h2>
+          <img src="{{ asset('images/field-3629120.jpg') }}" />
+          {# field-3629120.jpg #}
         </li>
         <li>
-          <img src="https://picsum.photos/id/236/1200/300" />
           <h2 class="absolute">Philo alacon qui fait bien</h2>
+          <img src="{{ asset('images/tomatoes-1583134.jpg') }}" />
+          {# tomatoes-1583134.jpg #}
         </li>
         <li>
-          <img src="https://picsum.photos/id/235/1200/300" />
+          <img src="{{ asset('images/fall-915629.jpg') }}" />
+          {# fall-915629.jpg #}
         </li>
       </ul>
     </div>
   </section>
+  
   <section id="slider-category">
     <h2>Découvrez les produits</h2>
     <div class="flexslider slider-category">
@@ -59,7 +63,31 @@
       </ul>
     </div>
   </section>
+
+  <section id="annonces" class="wrap">
+    <h2>Découvrez les produits</h2>
+    {% for annonce in annonces %}
+      <div class="annonce_box">
+        <div class="annonce_img">
+          <img src="{{ asset('images/fruit-3860991.jpg') }}"/>
+        </div>
+        <div class="annonce_text">
+          <div>
+            <p class="annonce_title">{{ annonce.title }}</p>
+          </div>
+          <div class="annonce_description_box">
+            <p>{{ annonce.description }}</p>
+          </div>
+          <div class="annonce_price_box">
+            <p class="annonce_price">{{ annonce.price }}€/Kg</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+
 {% endblock %}
+
 
 {% block javascripts %}
   <script src="{{ asset('/asset/flex/jquery.flexslider.js') }}"></script>

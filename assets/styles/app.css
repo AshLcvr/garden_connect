@@ -8,6 +8,8 @@
     box-sizing: border-box;
 }
 body {
+    box-sizing: border-box;
+    overflow-x: hidden;
     background-color: whitesmoke;
     color: rgb(70, 70, 70);
     font-family: 'Roboto', sans-serif;
@@ -39,5 +41,5 @@ img{
     flex-flow: column;
 }
 .wrap{
-    width: 1200px!important;
+    max-width: 1000px ; width: 100%; margin: 0 auto;
 }

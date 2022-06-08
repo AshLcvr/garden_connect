@@ -1,4 +1,5 @@
 <header>
+<<<<<<< HEAD
     <div class="logo">
         <a href="{{ path('homepage') }}" style="flex-direction: row-reverse"><img src="{{ asset('images/logo.png') }}"/></a>
     </div>
@@ -40,4 +41,44 @@
             {% endif %}
         </ul>
     </nav>
+=======
+    <div class="wrap">
+        <div class="logo">
+            <a href="{{ path('homepage') }}"><img src="{{ asset('images/logo.png') }}"/></a>
+        </div>
+        <nav>
+            <ul>
+                {% if app.request.pathinfo == '/' %}
+                    <li><a class="active" href="{{ path('homepage') }}">Accueil</a></li>
+                {% else %}
+                    <li><a href="{{ path('homepage') }}">Accueil</a></li>
+                {% endif %}
+                {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_VENDEUR') %}
+                        {% if app.request.pathinfo == '/' %}
+                            <li><a class="active" href="{{ path('app_boutique_index') }}">Boutique</a></li>
+                        {% else %}
+                            <li><a href="{{ path('app_boutique_index') }}">Boutique</a></li>
+                        {% endif %}
+                    {% endif %}
+                    <li><a href="{{ path('app_logout') }}">déconnexion</a></li>
+                {% else %}
+                    {% if app.request.pathinfo == '/login' %}
+                        <li><a class="active" href="{{ path('app_login') }}">Connexion</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                    {% endif %}
+                    {% if app.request.pathinfo == '/register' %}
+                        <li><a class="active" href="{{ path('app_register') }}">Inscription</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_register') }}">Inscription</a></li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+>>>>>>> orianne-accueil3
 </header>
