@@ -9,17 +9,17 @@
       <ul class="slides relative">
         <li>
           <h2 class="absolute text">Citation alacon qui fait bien</h2>
-          <img src="{{ asset('images/field-3629120.jpg') }}" />
-          {# field-3629120.jpg #}
+          <img src="{{ asset('/images/field-3629120.jpg') | imagine_filter('my_fixed_filter') }}" />
         </li>
         <li>
           <h2 class="absolute">Philo alacon qui fait bien</h2>
-          <img src="{{ asset('images/tomatoes-1583134.jpg') }}" />
-          {# tomatoes-1583134.jpg #}
+          <img src="{{ asset('/images/tomatoes-1583134.jpg') | imagine_filter('my_fixed_filter') }}" />
         </li>
         <li>
-          <img src="{{ asset('images/fall-915629.jpg') }}" />
-          {# fall-915629.jpg #}
+          <img src="{{ asset('/images/fall-915629.jpg') | imagine_filter('my_fixed_filter') }}" />
+        </li>
+        <li>
+          <img src="{{ asset('/images/parsley-261039_640.jpg') | imagine_filter('my_fixed_filter') }}" />
         </li>
       </ul>
     </div>
