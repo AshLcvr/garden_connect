@@ -85,19 +85,75 @@
                             </a>
                         </li>
                         <li class="mr-3 flex-1">
-                            <a href="{{ path('all-users') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
-                                <i class="fa fa-envelope pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Users</span>
-                            </a>
+                            {% if app.request.attributes.get('_route') == 'images_hero' %}
+                                <a href="{{ path('images_hero') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-yellow-500">
+                                    <i class="fa fa-envelope pr-0 md:pr-3 text-yellow-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Hero Front</span>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('images_hero') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-yellow-500">
+                                    <i class="fa fa-envelope pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Hero Front</span>
+                                </a>
+                            {% endif %}
                         </li>
                         <li class="mr-3 flex-1">
-                            <a href="{{ path('all-annonces') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
-                                <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Annonces</span>
-                            </a>
+                            {% if app.request.attributes.get('_route') == 'all-users' %}
+                                <a href="{{ path('all-users') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-purple-500">
+                                    <i class="fa fa-envelope pr-0 md:pr-3 text-purple-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Users</span>
+                                </a>
+                            {% elseif app.request.attributes.get('_route') == 'details-user' %}
+                                <a href="{{ path('all-users') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-purple-500">
+                                    <i class="fa fa-envelope pr-0 md:pr-3 text-purple-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Users</span>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('all-users') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
+                                    <i class="fa fa-envelope pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Users</span>
+                                </a>
+                            {% endif %}
                         </li>
                         <li class="mr-3 flex-1">
-                            <a href="{{ path('all-boutiques') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
-                                <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Boutiques</span>
-                            </a>
+                            {% if app.request.attributes.get('_route') == 'all-annonces' %}
+                                <a href="{{ path('all-annonces') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-blue-600">
+                                    <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Annonces</span>
+                                </a>
+                            {% elseif app.request.attributes.get('_route') == 'details-annonce' %}
+                                <a href="{{ path('all-annonces') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-blue-600">
+                                    <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Annonces</span>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('all-annonces') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-blue-600">
+                                    <i class="fas fa-chart-area pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Annonces</span>
+                                </a>
+                            {% endif %}
+                        </li>
+                        <li class="mr-3 flex-1">
+                            {% if app.request.attributes.get('_route') == 'all-boutiques' %}
+                                <a href="{{ path('all-boutiques') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-red-500">
+                                    <i class="fa fa-wallet pr-0 md:pr-3 text-red-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Boutiques</span>
+                                </a>
+                            {% elseif app.request.attributes.get('_route') == 'details-boutique' %}
+                                <a href="{{ path('all-boutiques') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-red-500">
+                                    <i class="fa fa-wallet pr-0 md:pr-3 text-red-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Boutiques</span>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('all-boutiques') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                                    <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Boutiques</span>
+                                </a>
+                            {% endif %}
+                        </li>
+                        <li class="mr-3 flex-1">
+                            {% if app.request.attributes.get('_route') == 'app_category_index' %}
+                                <a href="{{ path('app_category_index') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-green-500">
+                                    <i class="fa fa-wallet pr-0 md:pr-3 text-green-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Catégories</span>
+                                </a>
+                            {% elseif app.request.attributes.get('_route') == 'details-boutique' %}
+                                <a href="{{ path('app_category_index') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-green-500">
+                                    <i class="fa fa-wallet pr-0 md:pr-3 text-green-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Catégories</span>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('app_category_index') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-green-500">
+                                    <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Catégories</span>
+                                </a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>

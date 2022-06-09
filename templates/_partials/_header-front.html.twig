@@ -5,19 +5,19 @@
         </div>
         <nav>
             <ul>
-                {% if app.request.pathinfo == '/' %}
+                {% if app.request.attributes.get('_route') == 'homepage' %}
                     <li><a class="active" href="{{ path('homepage') }}">Accueil</a></li>
                 {% else %}
                     <li><a href="{{ path('homepage') }}">Accueil</a></li>
                 {% endif %}
-                {% if app.request.pathinfo == '/annonce/recherche' %}
+                {% if app.request.attributes.get('_route')  == 'app_annonce_recherche' %}
                     <li><a class="active" href="{{ path('app_annonce_recherche') }}">Annonces</a></li>
                 {% else %}
                     <li><a href="{{ path('app_annonce_recherche') }}">Annonces</a></li>
                 {% endif %}
                 {% if app.user %}
                     {% if is_granted('ROLE_VENDEUR') %}
-                        {% if app.request.pathinfo == '/boutique' %}
+                        {% if app.request.attributes.get('_route')  == 'app_boutique_index' %}
                             <li><a class="active" href="{{ path('app_boutique_index') }}">Ma boutique</a></li>
                         {% else %}
                             <li><a href="{{ path('app_boutique_index') }}">Ma boutique</a></li>
@@ -28,12 +28,12 @@
                     {% endif %}
                     <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
                 {% else %}
-                    {% if app.request.pathinfo == '/login' %}
+                    {% if app.request.attributes.get('_route')  == 'app_login' %}
                         <li><a class="active" href="{{ path('app_login') }}">Connexion</a></li>
                     {% else %}
                         <li><a href="{{ path('app_login') }}">Connexion</a></li>
                     {% endif %}
-                    {% if app.request.pathinfo == '/register' %}
+                    {% if app.request.attributes.get('_route')  == 'app_register' %}
                         <li><a class="active" href="{{ path('app_register') }}">Inscription</a></li>
                     {% else %}
                         <li><a href="{{ path('app_register') }}">Inscription</a></li>
