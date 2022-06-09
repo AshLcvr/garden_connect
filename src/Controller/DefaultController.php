@@ -17,6 +17,7 @@ class DefaultController extends AbstractController
             'parent_id' => null
         ]);
         $annonces = $annonceRepository->findBy([],['created_at' => 'DESC'], 4);
+//         $imageHero =
 
         return $this->render('front/homepage.html.twig',[
             'categories' => $categories,
