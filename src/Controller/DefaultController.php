@@ -17,6 +17,7 @@ class DefaultController extends AbstractController
             'parent' => null
         ]);
         $annonces = $annonceRepository->findAll();
+        // $imageHero = 
 
         return $this->render('front/homepage.html.twig',[
             'categories' => $categories,

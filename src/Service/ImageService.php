@@ -20,23 +20,23 @@ class ImageService
     }
 
     public function filter(int $width, int $height) {
-    $filter = 'my_fixed_filter'; // Name of the `filter_set` in `config/packages/liip_imagine.yaml`
-    $path = 'images/'; // Path of the image, relative to `/public/`
+        $filter = 'my_fixed_filter'; // Name of the `filter_set` in `config/packages/liip_imagine.yaml`
+        $path = 'images/'; // Path of the image, relative to `/public/`
 
-    if (!$this->cacheManager->isStored($path, $filter)) {
-    $binary = $this->dataManager->find($filter, $path);
+        if (!$this->cacheManager->isStored($path, $filter)) {
+            $binary = $this->dataManager->find($filter, $path);
 
-    $filteredBinary = $this->filterManager->applyFilter($binary, $filter, [
-    'filters' => [
-    'fixed' => [
-    'width' => $width,
-    'height' => $height
-    ],
-    ]
-    ]);
+            $filteredBinary = $this->filterManager->applyFilter($binary, $filter, [
+                'filters' => [
+                    'fixed' => [
+                        'width' => $width,
+                        'height' => $height
+                    ],
+                ]
+            ]);
 
-    $this->cacheManager->store($filteredBinary, $path, $filter);
-    }
+            $this->cacheManager->store($filteredBinary, $path, $filter);
+        }
     return new RedirectResponse($this->cacheManager->resolve($path, $filter), Response::HTTP_MOVED_PERMANENTLY);
     }
 }
