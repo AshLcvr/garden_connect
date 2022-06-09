@@ -4,8 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Annonce;
+use App\Entity\Boutique;
 use App\Repository\UserRepository;
 use App\Repository\AnnonceRepository;
+use App\Repository\BoutiqueRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,6 +23,8 @@ class AdminDefaultController extends AbstractController
         ]);
     }
 
+
+    // users
     #[Route('/users', name: 'all-users')]
     public function allUsers(UserRepository $userRepository): Response
     {
@@ -31,12 +35,18 @@ class AdminDefaultController extends AbstractController
             'actif' => false
         ]);
 
-        return $this->render('admin/users.html.twig',[
+        return $this->render('admin/user/users.html.twig',[
             'usersActif' => $usersActif,
             'usersInactif' => $usersInactif,
         ]);
     }
-
+    #[Route('/user/{id}', name: 'details-user')]
+    public function detailsUser(User $user): Response
+    {
+        return $this->render('admin/user/details-user.html.twig',[
+            'user' => $user,
+        ]);
+    }
     #[Route('/users/disable/{id}', name: 'disable-user')]
     public function disableUser(User $user, UserRepository $userRepository): Response
     {
@@ -52,19 +62,27 @@ class AdminDefaultController extends AbstractController
         return $this->redirectToRoute('all-users', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/annonce', name: 'all-annonce')]
-    public function annoce(AnnonceRepository $annonceRepository): Response
-    {
-        $annonces = $annonceRepository->findAll();
 
-        return $this->render('admin/annonces.html.twig',[
-            'annonces' => $annonces,
+    // annonces
+    #[Route('/annonce', name: 'all-annonces')]
+    public function annonce(AnnonceRepository $annonceRepository): Response
+    {
+        $annoncesActif = $annonceRepository->findBy([
+            'actif' => true
+        ]);
+        $annoncesInactif = $annonceRepository->findBy([
+            'actif' => false
+        ]);
+
+        return $this->render('admin/annonce/annonces.html.twig',[
+            'annoncesActif' => $annoncesActif,
+            'annoncesInactif' => $annoncesInactif
         ]);
     }
     #[Route('/annonce/{id}', name: 'details-annonce')]
-    public function detailsAnnoce(Annonce $annonce): Response
+    public function detailsAnnonce(Annonce $annonce): Response
     {
-        return $this->render('admin/details-annonce.html.twig',[
+        return $this->render('admin/annonce/details-annonce.html.twig',[
             'annonce' => $annonce,
         ]);
     }
@@ -81,5 +99,43 @@ class AdminDefaultController extends AbstractController
         $annonce->setActif(true);
         $annonceRepository->add($annonce, true);
         return $this->redirectToRoute('details-annonce', ['id' => $annonce->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    // boutiques
+    #[Route('/boutique', name: 'all-boutiques')]
+    public function boutique(BoutiqueRepository $boutiqueRepository): Response
+    {
+        $boutiquesActif = $boutiqueRepository->findBy([
+            'actif' => true
+        ]);
+        $boutiquesInactif = $boutiqueRepository->findBy([
+            'actif' => false
+        ]);
+
+        return $this->render('admin/boutique/boutiques.html.twig',[
+            'boutiquesActif' => $boutiquesActif,
+            'boutiquesInactif' => $boutiquesInactif
+        ]);
+    }
+    #[Route('/boutique/{id}', name: 'details-boutique')]
+    public function detailsBoutique(Boutique $boutique): Response
+    {
+        return $this->render('admin/boutique/details-boutique.html.twig',[
+            'boutique' => $boutique,
+        ]);
+    }
+    #[Route('/boutique/disable/{id}', name: 'disable-boutique')]
+    public function disableBoutique(Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
+    {
+        $boutique->setActif(false);
+        $boutiqueRepository->add($boutique, true);
+        return $this->redirectToRoute('details-boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/boutique/active/{id}', name: 'active-boutique')]
+    public function activeBoutique(Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
+    {
+        $boutique->setActif(true);
+        $boutiqueRepository->add($boutique, true);
+        return $this->redirectToRoute('details-boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
 }

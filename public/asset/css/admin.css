@@ -11,6 +11,18 @@
 .m-b-20{
     margin-bottom: 20px;
 }
+.m-t-20{
+    margin-top: 20px;
+}
+.width-100{
+    width: 100%;
+}
+.inline-block{
+    display: inline-block;
+}
+.text-align-center{
+    text-align: center;
+}
 .action{
     color: red;
     padding: 0.5rem 1rem;
@@ -46,9 +58,9 @@
 .card .description-card{
     width: 75%;
     padding: 0.5rem;
-}
-.card .description-card p{
-    margin-bottom: 1rem;
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
 }
 .card .description-card span{
     font-weight: bold;
