@@ -1,0 +1,89 @@
+{% extends 'layout/admin_base.html.twig' %}
+
+{% block title %}
+    <title>Users</title>
+{% endblock %}
+
+{% block body %}
+<div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
+    <h2>Users Actif</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>E-mail</th>
+                <th>Roles</th>
+                <th>Verifier</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in usersActif %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                {% if user.roles[1] is defined %}
+                    <td>Vendeur</td>
+                {% else %}
+                        <td>Acheteur</td> 
+                {% endif %}
+                {% if user.isVerified == true %}
+                    <td>Vérifier</td>
+                {% else %}
+                    <td>Non Vérifier</td>
+                {% endif %}
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td><a href="{{ path('disable-user', {id: user.id}) }}">Rendre Inactif</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Users Inactif</h2>
+    <table class="table table-bordered width-100" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>E-mail</th>
+                <th>Roles</th>
+                <th>Verifier</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in usersInactif %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                {% if user.roles[1] is defined %}
+                    <td>Vendeur</td>
+                {% else %}
+                    <td>Acheteur</td> 
+                {% endif %}
+                {% if user.isVerified == true %}
+                    <td>Vérifier</td>
+                {% else %}
+                    <td>Non Vérifier</td>
+                {% endif %}
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td><a href="{{ path('active-user', {id: user.id}) }}">Rendre actif</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

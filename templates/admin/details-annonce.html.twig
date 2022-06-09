@@ -1,0 +1,24 @@
+{% extends 'layout/admin_base.html.twig' %}
+
+{% block title %}
+    <title>Annonce détails</title>
+{% endblock %}
+
+{% block body %}
+<div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
+    <h3>{{ annonce.title }}</h3>
+    <p>{{ annonce.description }}</p>
+    <p>{{ annonce.price }}</p>
+    <p>{{ annonce.createdAt|date('Y-m-d H:i:s') }}</p>
+    {% if annonce.actif %}
+        <p>Actif</p>
+        <a href="{{ path('disable-annonce', {id: annonce.id}) }}">Rendre inactif</a>
+    {% else %}
+        <p>Inactif</p>
+        <a href="{{ path('active-annonce', {id: annonce.id}) }}">Rendre actif</a>
+    {% endif %}
+    
+    {# <a href="{{ path('', {id: annonce.id}) }}">Envoyer message d'avertissement</a> #}
+    
+</div>
+{% endblock %}

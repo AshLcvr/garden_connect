@@ -33,7 +33,9 @@
           {% for cat in categories %}
             <li>
               <img src="{{ asset('images/fall-915629.jpg') }}" />
-              <h3 class="title-cat">{{ cat.title }}</h3>
+              <div class="title-cat">
+                <h3>{{ cat.title }}</h3>
+              </div>
             </li>
           {% endfor %}
           {% for cat in categories %}

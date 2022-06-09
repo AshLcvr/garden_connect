@@ -40,7 +40,10 @@
 }
 .slider-category .title-cat{
     color: #AB7B52;
-    text-align: center;
-    padding: 3rem 3rem;
+    height: 100px;
     font-family: 'Unkempt';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
