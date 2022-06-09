@@ -9,21 +9,8 @@
             {{ form_start(registrationForm, {attr : {novalidate: 'novalidate'}}) }}
                 <h1>Inscription</h1>
                 <div class="bloc_form">
-                    {{ form_widget(registrationForm.name) }}
-                    <div class="cut"></div>
-                    {{ form_label(registrationForm.name) }}
-                    
-
-                    <small>{{ form_help(registrationForm.name) }}</small>
-
-                    <div class="form-error">
-                        {{ form_errors(registrationForm.name) }}
-                    </div>
-                </div>
-                <div class="bloc_form">
-                    {{ form_widget(registrationForm.surname) }}
-                    <div class="cut"></div>
                     {{ form_label(registrationForm.surname) }}
+                    {{ form_widget(registrationForm.surname) }}
 
                     <small>{{ form_help(registrationForm.surname) }}</small>
 
@@ -32,9 +19,18 @@
                     </div>
                 </div>
                 <div class="bloc_form">
-                    {{ form_widget(registrationForm.email) }}
-                    <div class="cut"></div>
+                    {{ form_label(registrationForm.name) }}
+                    {{ form_widget(registrationForm.name) }}
+
+                    <small>{{ form_help(registrationForm.name) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.name) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
                     {{ form_label(registrationForm.email) }}
+                    {{ form_widget(registrationForm.email) }}
 
                     <small>{{ form_help(registrationForm.email) }}</small>
 
@@ -42,21 +38,43 @@
                         {{ form_errors(registrationForm.email) }}
                     </div>
                 </div>
+
                 <div class="bloc_form">
-                    {{ form_widget(registrationForm.plainPassword) }}
-                    <div class="cut"></div>
-                    {{ form_label(registrationForm.plainPassword) }}
-
+                    {{ form_label(registrationForm.plainPassword.first) }}
+                    {{ form_widget(registrationForm.plainPassword.first) }}
                     <small>{{ form_help(registrationForm.plainPassword) }}</small>
-
                     <div class="form-error">
                         {{ form_errors(registrationForm.plainPassword) }}
+                        {{ form_errors(registrationForm.plainPassword.first) }}
                     </div>
                 </div>
                 <div class="bloc_form">
-                    {{ form_widget(registrationForm.agreeTerms) }}
-                    <div class="cut cut-long"></div>
+                    {{ form_label(registrationForm.plainPassword.second) }}
+                    {{ form_widget(registrationForm.plainPassword.second) }}
+                    <small>{{ form_help(registrationForm.plainPassword) }}</small>
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.plainPassword) }}
+                        {{ form_errors(registrationForm.plainPassword.second) }}
+                    </div>
+                </div>
+
+                <div class="bloc_form">
+                    {{ form_label(registrationForm.role) }}
+{#                    <div class="radio_box">#}
+
+                        {{ form_widget(registrationForm.role, {attr : {class :  'radio_box '}}) }}
+{#                    </div>#}
+
+                    <small>{{ form_help(registrationForm.role) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.role) }}
+                    </div>
+                </div>
+
+                <div class="bloc_form">
                     {{ form_label(registrationForm.agreeTerms) }}
+                    {{ form_widget(registrationForm.agreeTerms) }}
 
                     <small>{{ form_help(registrationForm.agreeTerms) }}</small>
 

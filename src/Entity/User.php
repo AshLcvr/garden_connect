@@ -22,7 +22,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank(message: 'Veuillez renseigner un E-mail')]
-    #[Assert\Length(min: 10 ,max: 180, minMessage: 'Votre E-mail doit comporter au moin {{ limit }} caractères', maxMessage: "Votre E-mail ne pas exceder {{ limit }} caractères")]
+    #[Assert\Email(message : 'Format d\'email invalide')]
+    #[Assert\Length(min: 10 ,max: 180, minMessage: 'Votre E-mail doit comporter au moins {{ limit }} caractères', maxMessage: "Votre E-mail ne doit pas exceder {{ limit }} caractères")]
     private $email;
 
     #[ORM\Column(type: 'json')]

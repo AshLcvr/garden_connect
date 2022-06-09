@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -13,6 +13,13 @@
     </head>
     <body>
       {{ include('_partials/_header-front.html.twig') }}
+      {% for label, messages in app.flashes %}
+          {% for message in messages %}
+              <div class="flash-{{ label }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      {% endfor %}
       {% block body %}{% endblock %}
       {{ include('_partials/_footer-front.html.twig') }}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

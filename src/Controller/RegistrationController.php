@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -37,7 +38,9 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+                        // generate a signed url and email it to the user
+
+            // do anything else you need here, like send an email
             $user->setPassword(
             $userPasswordHasher->hashPassword(
                     $user,
@@ -46,35 +49,44 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // generate a signed url and email it to the user
-//            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+//                            $url = $this->generateUrl('app_verify_email', [], UrlGeneratorInterface::ABSOLUTE_URL);
+//
+//                 $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
 //                (new TemplatedEmail())
 //                    ->from(new Address('paul.joret@hotmail.fr', 'paulJoret'))
-//                    ->to($user->getEmail())
+//                    ->to($form->get('email')->getData())
 //                    ->subject('Please Confirm your Email')
-//                    ->htmlTemplate('registration/confirmation_email.html.twig')
+//                    ->htmlTemplate('admin/emails/verification_email.html.twig')
+//                    ->context([
+//                        'username' => $user->getName(),
+//                        'url'      => $url
+//                    ])
 //            );
-            // do anything else you need here, like send an email
 
             $authenticatorManager->authenticateUser($user, $this->authenticator, $request);
-
-            return $this->redirectToRoute('app_register_success');
+            if($form->get('role')->getData() === 'vendeur' ){
+                 $this->addFlash('register_vendeur', 'Bienvenue sur Garden Connect ! Votre inscription a bien été prise en compte. Un email de validation vous a été envoyé. Vous pouvez maintenant créer votre boutique !');
+                 return $this->redirectToRoute('app_boutique_new');
+            }else{
+                $this->addFlash('register_user', 'Bienvenue sur Garden Connect ! Votre inscription a bien été prise en compte. Un email de validation vous a été envoyé.');
+                return $this->redirectToRoute('homepage');
+            }
         }
 
         return $this->render('front/registration/register.html.twig', [
             'registrationForm' => $form->createView()
         ]);
     }
-
-    #[Route('/register/success', name: 'app_register_success')]
-    public function sucessRegister(Request $request): Response
-    {
-        $user = $this->getUser();
-
-        return $this->render('front/registration/success_register.html.twig', [
-           'user' => $user
-        ]);
-    }
+//
+//    #[Route('/register/success', name: 'app_register_success')]
+//    public function sucessRegister(Request $request): Response
+//    {
+//        $user = $this->getUser();
+//
+//        return $this->render('front/registration/success_register.html.twig', [
+//           'user' => $user
+//        ]);
+//    }
 
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request): Response

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
@@ -39,21 +40,35 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
-                'label' => 'Mot de passe',
+            ->add('plainPassword', RepeatedType::class, [
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les mots de passes ne correspondent pas.',
+                'options' => ['attr' => ['class' => 'password-field']],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez renseigner un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit comporter au moin {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères',
                         'max' => 255,
-                        'maxMessage' => 'Votre mot de passe ne doit pas exceder {{ limit }} characters'
-                    ]),
+                        'maxMessage' => 'Votre mot de passe ne doit pas exceder {{ limit }} caractères'
+                    ])
                 ],
+                'required' => true,
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmer le mot de passe'],
+            ])
+            ->add('role', ChoiceType::class, [
+                'mapped' => false,
+                'required' => true,
+                "expanded" => true,
+                'label' => 'Voulez-vous vendre des produits? ',
+                'choices' => [
+                    'Oui' => 'vendeur',
+                    'Non' => 'acheteur'
+                ]
             ])
             ->add('submit', SubmitType::class)
         ;
