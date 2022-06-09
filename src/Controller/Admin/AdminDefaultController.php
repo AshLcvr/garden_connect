@@ -4,8 +4,13 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Annonce;
+use App\Entity\ImagesHero;
+use App\Form\ImagesHeroType;
+use App\Service\UploadImage;
 use App\Repository\UserRepository;
 use App\Repository\AnnonceRepository;
+use App\Repository\ImagesHeroRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -81,5 +86,21 @@ class AdminDefaultController extends AbstractController
         $annonce->setActif(true);
         $annonceRepository->add($annonce, true);
         return $this->redirectToRoute('details-annonce', ['id' => $annonce->getId()], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/hero', name: 'images_hero')]
+    public function imagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, UploadImage $uploadImage): Response
+    {
+        $form = $this->createForm(ImagesHeroType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageHero = $form->get('upload')->getData();
+            // dd($imageHero);
+            $uploadImage->uploadHero($imageHero);
+        }
+
+        return $this->render('admin/hero.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

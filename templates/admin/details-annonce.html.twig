@@ -14,7 +14,9 @@
         <div class="description-card">
             <p><span>Description : </span>{{ annonce.description }}</p>
             <p><span>Prix : </span>{{ annonce.price }} €</p>
-            <p><span>Mis en ligne le : </span>{{ annonce.createdAt|format_datetime('full', 'full', locale='fr') }}</p>
+            <p><span>Mis en ligne le : </span>
+            {# {{ annonce.createdAt|format_datetime('full', 'full', locale='fr') }} #}
+            </p>
             {% if annonce.actif %}
                 <p><span>Status : </span>Actif</p>
                 <a href="{{ path('disable-annonce', {id: annonce.id}) }}">Rendre inactif</a>
