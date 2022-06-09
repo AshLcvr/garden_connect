@@ -6,17 +6,28 @@ use App\Entity\Boutique;
 use App\Form\BoutiqueType;
 use App\Repository\BoutiqueRepository;
 use App\Repository\UserRepository;
+use App\Security\EmailVerifier;
 use App\Service\UploadImage;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 
-#[Route('/boutique')]
+//#[Route('/boutique')]
 class BoutiqueController extends AbstractController
 {
-    #[Route('/', name: 'app_boutique_index', methods: ['GET'])]
+
+//    private $authenticator;
+
+//    public function __construct( FormLoginAuthenticator $authenticator)
+//    {
+//        $this->authenticator = $authenticator;
+//    }
+
+    #[Route('/boutique/', name: 'app_boutique_index', methods: ['GET'])]
     public function indexBoutique(BoutiqueRepository $boutiqueRepository): Response
     {
         $user = $this->getUser();
@@ -29,9 +40,10 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_boutique_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
+    #[Route('/nouvelleboutique', name: 'app_boutique_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator): Response
     {
+        $user = $this->getUser();
         $boutique = new Boutique();
         $form = $this->createForm(BoutiqueType::class, $boutique);
         $form->handleRequest($request);
@@ -39,16 +51,22 @@ class BoutiqueController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setCreatedAt(new \DateTimeImmutable());
             $boutique->setActif(true);
-            $boutique->setUser($this->getUser());
+            $boutique->setUser($user);
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
+//                dd($user);
                 $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
+
+                $user->setRoles(['ROLE_VENDEUR']);
+                $userRepository->add($user, true);
+                $userAuthenticator->authenticateUser($user, $formLoginAuthenticator, $request);
+                return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
             }else{
                 $this->addFlash('failure','4 photos max !');
                 return $this->redirectToRoute('app_boutique_new', [], Response::HTTP_SEE_OTHER);
             }
-            return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
+
         }
 
         return $this->renderForm('front/boutique/new_boutique.html.twig', [
@@ -57,7 +75,7 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
+    #[Route('/boutique/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
     public function show(): Response
     {
         $user = $this->getUser();
@@ -69,7 +87,7 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
+    #[Route('/boutique/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
     {
         $form = $this->createForm(BoutiqueType::class, $boutique);
@@ -94,7 +112,7 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_boutique_delete', methods: ['POST'])]
+    #[Route('/boutique/{id}', name: 'app_boutique_delete', methods: ['POST'])]
     public function delete(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
@@ -104,7 +122,7 @@ class BoutiqueController extends AbstractController
         return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}', name: 'app_boutique_inactif', methods: ['GET','POST'])]
+    #[Route('/boutique/{id}', name: 'app_boutique_inactif', methods: ['GET','POST'])]
     public function setInactif(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
         $boutique->setActif(false);
