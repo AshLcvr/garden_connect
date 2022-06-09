@@ -24,20 +24,17 @@ class Category
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'parent')]
-    #[ORM\JoinColumn(nullable:true)]
-    private $children;
-
-    #[ORM\OneToMany(mappedBy: 'children', targetEntity: self::class)]
-    private $parent;
-
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Annonce::class)]
     private $annonces;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $parent_id;
 
     public function __construct()
     {
         $this->parent = new ArrayCollection();
         $this->annonces = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -81,47 +78,6 @@ class Category
         return $this;
     }
 
-    public function getChildren(): ?self
-    {
-        return $this->children;
-    }
-
-    public function setChildren(?self $children): self
-    {
-        $this->children = $children;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, self>
-     */
-    public function getParent(): Collection
-    {
-        return $this->parent;
-    }
-
-    public function addParent(self $parent): self
-    {
-        if (!$this->parent->contains($parent)) {
-            $this->parent[] = $parent;
-            $parent->setChildren($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParent(self $parent): self
-    {
-        if ($this->parent->removeElement($parent)) {
-            // set the owning side to null (unless already changed)
-            if ($parent->getChildren() === $this) {
-                $parent->setChildren(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Annonce>
@@ -152,4 +108,17 @@ class Category
 
         return $this;
     }
+
+    public function getParentId(): ?int
+    {
+        return $this->parent_id;
+    }
+
+    public function setParentId(?int $parent_id): self
+    {
+        $this->parent_id = $parent_id;
+
+        return $this;
+    }
+
 }

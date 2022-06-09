@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Annonce;
 use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
+use App\Repository\CategoryRepository;
 use App\Service\UploadImage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,14 +42,19 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AnnonceRepository $annonceRepository, UploadImage $uploadImage): Response
+    public function new(Request $request, AnnonceRepository $annonceRepository, UploadImage $uploadImage, CategoryRepository $categoryRepository): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
         $boutique = $boutiques[0];
+//        $categoryParent = $categoryRepository->findBy(['parent_id'=> null]);
+        $categoryParent = $categoryRepository->findAll();
+//        dd($categoryParent);
 
         $annonce = new Annonce();
-        $form = $this->createForm(AnnonceType::class, $annonce);
+        $form = $this->createForm(AnnonceType::class, $annonce, [
+            'categoryParent' => $categoryParent
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Annonce;
 use App\Entity\Categories;
+use App\Entity\Category;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,15 +22,14 @@ class AnnonceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $categoryParent = $options['categoryParent'];
+
         $builder
             ->add('title',TextType::class, [
                 'label' => 'Titre de l\'annonce',
             ])
             ->add('description', TextareaType::class, [
                 'required' => false,
-            ])
-            ->add('category', EntityType::class,[
-                'class' => Categories::class
             ])
             ->add('price',IntegerType::class, [
                 'label' => 'Prix'
@@ -59,6 +60,18 @@ class AnnonceType extends AbstractType
                 ])
             ],
         ])
+        ->add('category', EntityType::class,[
+            'class' =>  Category::class,
+            'choice_label' => 'title',
+            'mapped' => false,
+            'query_builder' => function (EntityRepository $er) use ($categoryParent){
+                return $er->createQueryBuilder('c')
+                    ->where('c.parent_id = :parent_id')
+                    ->setParameter('parent_id' , null)
+                    ->orderBy('c.title', 'ASC')
+;
+             },
+        ])
         ;
     }
 
@@ -66,6 +79,6 @@ class AnnonceType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Annonce::class,
-        ]);
-    }
+            'categoryParent' => null
+            ]);}
 }

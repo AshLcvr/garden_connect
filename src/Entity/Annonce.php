@@ -58,10 +58,6 @@ class Annonce
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
-//
-//    #[ORM\ManyToOne(targetEntity: Categories::class, inversedBy: 'annonces')]
-//    #[ORM\JoinColumn(nullable: false)]
-//    private $category;
 
     public function __construct()
     {
@@ -187,28 +183,15 @@ class Annonce
         return $this;
     }
 
-//
-//   public function getCategory(): ?Categories
-//    {
-//        return $this->category;
-//    }
-//
-//    public function setCategory(?Categories $category): self
-//    {
-//        $this->category = $category;
-//
-//        return $this;
-//    }
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
 
-public function getCategory(): ?Category
-{
-    return $this->category;
-}
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
-public function setCategory(?Category $category): self
-{
-    $this->category = $category;
-
-    return $this;
-}
+        return $this;
+    }
 }

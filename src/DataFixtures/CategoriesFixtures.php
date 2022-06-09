@@ -28,17 +28,18 @@ class CategoriesFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         foreach ($this->categories as $key => $catParent) {
-            $categorieP = new Categories();
+            $categorieP = new Category();
             $categorieP->setTitle($catParent['title']);
             $manager->persist($categorieP);
             $this->addReference(str_replace(' ', '', $catParent['title']), $categorieP);
+            $manager->flush();
 
-            foreach ($this->sousCats as $key => $catEnfant) {
-                foreach ($catEnfant as $key => $value) {
+            foreach ($this->sousCats as $catEnfant) {
+                foreach ($catEnfant as $value) {
                     if ($value['cat'] === $catParent['title']) {
-                        $categorieE = new Categories();
+                        $categorieE = new Category();
                         $categorieE->setTitle($value['title']);
-                        $categorieE->setParent($categorieP);
+                        $categorieE->setParentId($categorieP->getId());
                         $manager->persist($categorieE);
                     }
                 }
