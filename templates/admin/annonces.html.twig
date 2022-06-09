@@ -1,0 +1,46 @@
+{% extends 'layout/admin_base.html.twig' %}
+
+{% block title %}
+    <title>Annonces</title>
+{% endblock %}
+
+{% block body %}
+<div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
+    <h2>Annonces</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Créer le</th>
+                <th>Actif</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce in annonces %}
+            <tr>
+                <td>{{ annonce.id }}</td>
+                <td>{{ annonce.title }}</td>
+                <td>{{ annonce.description | striptags | slice(0, 65) }}</td>
+                <td>{{ annonce.price }}</td>
+                <td>{{ annonce.createdAt|date('Y-m-d H:i:s') }}</td>
+                {% if annonce.actif %}
+                    <td>Actif</td>
+                {% else %}
+                    <td>Inactif</td>
+                {% endif %}
+                <td><a href="{{ path('details-annonce', {id: annonce.id}) }}">Détails</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+{% endblock %}

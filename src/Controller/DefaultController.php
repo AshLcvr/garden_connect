@@ -23,4 +23,6 @@ class DefaultController extends AbstractController
             'annonces' => $annonces,
         ]);
     }
+
+    
 }

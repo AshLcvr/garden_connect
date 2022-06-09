@@ -26,6 +26,7 @@ class UserFixtures extends Fixture
         $adminPolo->isIsVerified();
         $adminPolo->setEmail('paul.joret@hotmail.fr');
         $adminPolo->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
+        $adminPolo->setActif(true);
         $password = $this->hasher->hashPassword($adminPolo, 'michel');
         $adminPolo->setPassword($password);
 
@@ -37,6 +38,7 @@ class UserFixtures extends Fixture
         $adminSacha->isIsVerified();
         $adminSacha->setEmail('sacha.lcvr@gmail.com');
         $adminSacha->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
+        $adminSacha->setActif(true);
         $password = $this->hasher->hashPassword($adminSacha, 'michel');
         $adminSacha->setPassword($password);
 
@@ -48,6 +50,7 @@ class UserFixtures extends Fixture
         $adminOrianne->isIsVerified();
         $adminOrianne->setEmail('orianne.cielat@gmail.com');
         $adminOrianne->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
+        $adminOrianne->setActif(true);
         $password = $this->hasher->hashPassword($adminOrianne, 'michel');
         $adminOrianne->setPassword($password);
 
@@ -60,6 +63,7 @@ class UserFixtures extends Fixture
             $user->isIsVerified();
             $user->setEmail('user_'.$i.'@gmail.com');
             $user->setRoles(['ROLE_USER']);
+            $user->setActif(true);
             $password = $this->hasher->hashPassword($user, 'user_'.$i);
             $user->setPassword($password);
             $this->addReference('user_'.$i, $user);
@@ -73,6 +77,7 @@ class UserFixtures extends Fixture
             $user->isIsVerified();
             $user->setEmail('vendeur_'.$i.'@gmail.com');
             $user->setRoles(['ROLE_USER','ROLE_VENDEUR']);
+            $user->setActif(true);
             $password = $this->hasher->hashPassword($user, 'vendeur_'.$i);
             $user->setPassword($password);
             $this->addReference('vendeur_'.$i, $user);

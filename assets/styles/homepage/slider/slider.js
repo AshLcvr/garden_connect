@@ -9,6 +9,7 @@ $(document).ready(function () {
         directionNav: true,
         animation: "slide",
         animationLoop: false,
+        slideshow: false,
         itemWidth: 210,
         itemMargin: 15,
         minItems: 2,
