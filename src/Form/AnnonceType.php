@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Annonce;
+use App\Entity\Categories;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -19,11 +21,18 @@ class AnnonceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title',TextType::class)
-            ->add('description', TextareaType::class, [
-                'required' => false
+            ->add('title',TextType::class, [
+                'label' => 'Titre de l\'annonce',
             ])
-            ->add('price',IntegerType::class)
+            ->add('description', TextareaType::class, [
+                'required' => false,
+            ])
+            ->add('category', EntityType::class,[
+                'class' => Categories::class
+            ])
+            ->add('price',IntegerType::class, [
+                'label' => 'Prix'
+            ])
             ->add('upload', FileType::class,[
             'label' => 'Ajouter des images à votre annonce (4 max)',
             'mapped' => false,

@@ -2,18 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoriesRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use Doctrine\ORM\Mapping as ORM;
 
-#[Gedmo\Tree(type: 'nested')]
-#[ORM\Table(name: 'categories')]
-#[ORM\Entity(repositoryClass: NestedTreeRepository::class)]
-class Categories
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -29,21 +24,19 @@ class Categories
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
 
-    #[Gedmo\TreeParent]
-    #[ORM\ManyToOne(targetEntity: Categories::class, inversedBy: 'children')]
-    #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
-    private $parent;
-
-    #[ORM\OneToMany(targetEntity: Categories::class, mappedBy: 'parent')]
-    #[ORM\OrderBy(['lft' => 'ASC'])]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'parent')]
+    #[ORM\JoinColumn(nullable:true)]
     private $children;
+
+    #[ORM\OneToMany(mappedBy: 'children', targetEntity: self::class)]
+    private $parent;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Annonce::class)]
     private $annonces;
 
     public function __construct()
     {
-        $this->children = new ArrayCollection();
+        $this->parent = new ArrayCollection();
         $this->annonces = new ArrayCollection();
     }
 
@@ -81,49 +74,49 @@ class Categories
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
         return $this;
     }
 
-    public function getParent(): ?self
+    public function getChildren(): ?self
     {
-        return $this->parent;
+        return $this->children;
     }
 
-    public function setParent(?self $parent): self
+    public function setChildren(?self $children): self
     {
-        $this->parent = $parent;
+        $this->children = $children;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Categories>
+     * @return Collection<int, self>
      */
-    public function getChildren(): Collection
+    public function getParent(): Collection
     {
-        return $this->children;
+        return $this->parent;
     }
 
-    public function addChild(Categories $child): self
+    public function addParent(self $parent): self
     {
-        if (!$this->children->contains($child)) {
-            $this->children[] = $child;
-            $child->setParent($this);
+        if (!$this->parent->contains($parent)) {
+            $this->parent[] = $parent;
+            $parent->setChildren($this);
         }
 
         return $this;
     }
 
-    public function removeChild(Categories $child): self
+    public function removeParent(self $parent): self
     {
-        if ($this->children->removeElement($child)) {
+        if ($this->parent->removeElement($parent)) {
             // set the owning side to null (unless already changed)
-            if ($child->getParent() === $this) {
-                $child->setParent(null);
+            if ($parent->getChildren() === $this) {
+                $parent->setChildren(null);
             }
         }
 

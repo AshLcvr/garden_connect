@@ -22,7 +22,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce->setCreatedAt(new DateTimeImmutable());
         $annonce->setActif(true);
         $annonce->setBoutique($this->getReference('boutique_polo'));
-        $annonce->setCategory($this->getReference('Céréalesetgrains'));
+//        $annonce->setCategory($this->getReference('Céréalesetgrains'));
         $manager->persist($annonce);
 
         $annonce2 = new Annonce();
@@ -32,7 +32,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce2->setCreatedAt(new DateTimeImmutable());
         $annonce2->setActif(true);
         $annonce2->setBoutique($this->getReference('boutique_sacha'));
-        $annonce2->setCategory($this->getReference('Engraisnaturelsetaccessoires'));
+//        $annonce2->setCategory($this->getReference('Engraisnaturelsetaccessoires'));
         $manager->persist($annonce2);
 
         $manager->flush();
@@ -41,7 +41,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             BoutiqueFixtures::class,
-            CategoriesFixtures::class
+//            CategoriesFixtures::class
         ];
     }
 }

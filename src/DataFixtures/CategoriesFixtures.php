@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Categories;
+use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Service\Categories\DataCategories;
@@ -18,8 +18,8 @@ class CategoriesFixtures extends Fixture
 
         $cerealesEtGrains = new DataCerealesEtGrains();
         $engraisNaturelsEtAccessoires = new DataEngraisNaturelsEtAccessoires();
-        
-        $sousCats = [];
+
+        $sousCats   = [];
         $sousCats[] =  $cerealesEtGrains->getCerealesEtGrainsData();
         $sousCats[] =  $engraisNaturelsEtAccessoires->getEngraisNaturelsEtAccessoiresData();
 
@@ -45,6 +45,5 @@ class CategoriesFixtures extends Fixture
             }
         }
         $manager->flush();
-
     }
 }

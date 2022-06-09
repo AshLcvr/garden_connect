@@ -6,6 +6,7 @@ use App\Repository\AnnonceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
 class Annonce
@@ -16,12 +17,26 @@ class Annonce
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+    min: 3,
+    max: 255,
+    minMessage: 'Votre titre doit faire au moins {{ limit }} caractères de long',
+    maxMessage: 'Votre titre doit faire au maxmium {{ limit }} caractères de long',
+    )]
     private $title;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Assert\Length(
+    max: 1200,
+    maxMessage: 'Votre description doit faire au maxmium {{ limit }} caractères de long',
+    )]
     private $description;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\Type(
+    type: 'integer',
+    message: 'Le prix doit être un nombre.',
+    )]
     private $price;
 
     #[ORM\Column(type: 'datetime_immutable')]
@@ -40,9 +55,13 @@ class Annonce
     #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: ImagesAnnonces::class)]
     private $imagesAnnonces;
 
-    #[ORM\ManyToOne(targetEntity: Categories::class, inversedBy: 'annonces')]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
+//
+//    #[ORM\ManyToOne(targetEntity: Categories::class, inversedBy: 'annonces')]
+//    #[ORM\JoinColumn(nullable: false)]
+//    private $category;
 
     public function __construct()
     {
@@ -168,15 +187,28 @@ class Annonce
         return $this;
     }
 
-    public function getCategory(): ?Categories
-    {
-        return $this->category;
-    }
+//
+//   public function getCategory(): ?Categories
+//    {
+//        return $this->category;
+//    }
+//
+//    public function setCategory(?Categories $category): self
+//    {
+//        $this->category = $category;
+//
+//        return $this;
+//    }
 
-    public function setCategory(?Categories $category): self
-    {
-        $this->category = $category;
+public function getCategory(): ?Category
+{
+    return $this->category;
+}
 
-        return $this;
-    }
+public function setCategory(?Category $category): self
+{
+    $this->category = $category;
+
+    return $this;
+}
 }

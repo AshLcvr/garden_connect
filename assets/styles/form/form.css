@@ -90,7 +90,11 @@ input {
     padding: 4px 20px 0;
     width: 60%;
 }
+textarea {
+    resize: none;
+    width: 60%;
 
+}
 input[type=checkbox] , input[type=radio] {
     border-radius: 12px;
     box-sizing: border-box;
@@ -120,56 +124,15 @@ input[type=file]{
     background-color: white;
 }
 
-/*  */
-/*.cut {*/
-/*    background-color: white;*/
-/*    border: 1px solid #F7941D;*/
-/*    border-radius: 10px;*/
-/*    height: 20px;*/
-/*    !*left: 270px;*!*/
-/*    !*position: absolute;*!*/
-/*    !*top: -20px;*!*/
-/*    transform: translateY(0);*/
-/*    transition: transform 200ms;*/
-/*    width: 100px;*/
-/*}*/
-/*  */
-/*.cut-long {*/
-/*    width: 150px;*/
-/*}*/
-/*  */
-/*input:focus ~ .cut,*/
-/*input:not(:placeholder-shown) ~ .cut {*/
-/*    transform: translateY(8px);*/
-/*}*/
-  
 label {
     color: #424242;
     font-family: sans-serif;
     left: 270px;
     line-height: 14px;
     pointer-events: none;
-    /*position: absolute;*/
-    /*transform-origin: 0 50%;*/
-    /*transition: transform 200ms, color 200ms;*/
-    /*top: 20px;*/
 }
   
-/*input:focus ~ label,*/
-/*input:not(:placeholder-shown) ~ label {*/
-/*    transform: translateY(-30px) translateX(10px) scale(0.75);*/
-/*}*/
-/*  */
-/*input:not(:placeholder-shown) ~ label {*/
-/*    color: #808097;*/
-/*}*/
-/*  */
-/*input:focus ~ label {*/
-/*    color: #dc2f55;*/
-/*}*/
-  
 #contener_form button {
-    /* background-color: #08d; */
     background: linear-gradient(to right, transparent 50%, #41B04F 50%);
     background-size: 200% 100%;
     background-position: right;
@@ -196,9 +159,7 @@ label {
 #contener_form button:active {
     background-color: #06b;
 }
-/*.form-error{*/
-/*    margin: 5rem 0;*/
-/*}*/
+
 .form-error ul li{
       color: red;
 }

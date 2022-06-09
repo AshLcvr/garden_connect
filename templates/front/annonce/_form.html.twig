@@ -1,4 +1,52 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="body">
+    <div id="contener_form">
+        {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+        <div class="bloc_form">
+            {{ form_label(form.title) }}
+            {{ form_widget(form.title) }}
+
+            <small>{{ form_help(form.title) }}</small>
+
+            <div class="form-error">
+                {{ form_errors(form.title) }}
+            </div>
+        </div>
+        <div class="bloc_form">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+
+            <small>{{ form_help(form.description) }}</small>
+
+            <div class="form-error">
+                {{ form_errors(form.description) }}
+            </div>
+        </div>
+
+        <div class="bloc_form">
+            {{ form_label(form.price) }}
+            {{ form_widget(form.price) }}
+
+            <small>{{ form_help(form.price) }}</small>
+
+            <div class="form-error">
+                {{ form_errors(form.price) }}
+            </div>
+        </div>
+
+        <div class="bloc_form">
+            {{ form_label(form.upload) }}
+            {{ form_widget(form.upload) }}
+
+            <small>{{ form_help(form.upload) }}</small>
+
+            <div class="form-error">
+                {{ form_errors(form.upload) }}
+            </div>
+        </div>
+
+        <div class="bloc_form">
+            <button class="btn">{{ button_label|default('C\'est parti !') }}</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>

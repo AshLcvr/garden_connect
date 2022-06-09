@@ -16,13 +16,11 @@ class DefaultController extends AbstractController
         $categories = $categoriesRepository->findBy([
             'parent' => null
         ]);
-        $annonces = $annonceRepository->findAll();
+        $annonces = $annonceRepository->findBy([],['created_at' => 'DESC'], 4);
 
         return $this->render('front/homepage.html.twig',[
             'categories' => $categories,
             'annonces' => $annonces,
         ]);
     }
-
-    
 }

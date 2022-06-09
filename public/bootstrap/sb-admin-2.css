@@ -558,6 +558,11 @@ pre code {
   margin-left: auto;
 }
 
+.container-fluid{
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 @media (min-width: 576px) {
   .container, .container-sm {
     max-width: 540px;
