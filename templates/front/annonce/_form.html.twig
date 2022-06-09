@@ -23,6 +23,18 @@
         </div>
 
         <div class="bloc_form">
+            {{ form_label(form.category) }}
+            {{ form_widget(form.category) }}
+
+            <small>{{ form_help(form.category) }}</small>
+
+            <div class="form-error">
+                {{ form_errors(form.category) }}
+            </div>
+        </div>
+
+
+        <div class="bloc_form">
             {{ form_label(form.price) }}
             {{ form_widget(form.price) }}
 

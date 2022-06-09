@@ -14,6 +14,9 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\File;
@@ -61,18 +64,45 @@ class AnnonceType extends AbstractType
             ],
         ])
         ->add('category', EntityType::class,[
+            'label' => 'Sélectionnez une catégorie',
             'class' =>  Category::class,
             'choice_label' => 'title',
             'mapped' => false,
             'query_builder' => function (EntityRepository $er) use ($categoryParent){
                 return $er->createQueryBuilder('c')
-                    ->where('c.parent_id = :parent_id')
-                    ->setParameter('parent_id' , null)
-                    ->orderBy('c.title', 'ASC')
-;
+                    ->where('c.parent_id is NULL')
+                    ->orderBy('c.title', 'ASC');
              },
         ])
         ;
+
+//        $builder->get('category')->addEventListener(
+//            FormEvents::POST_SET_DATA,
+//            function (FormEvent $event) {
+//                $data = $event->getData();
+//                $form = $event->getForm();
+//                $category_parent = $form->get('category')->getData();
+//                if($category_parent){
+//                    $this->addSubCatField($form->getParent(), $category_parent);
+//                    $form->get('subcat')->setData($region);
+//                }
+//            }
+//        );
+    }
+
+    private function addSubCatField(FormInterface $form, $category_parent)
+    {
+        $form->add('subcat', EntityType::class, [
+            'class'       => 'AppBundle\Entity\Ville',
+            'placeholder' => $category_parent ? 'Sélectionnez votre ville' : 'Sélectionnez votre département',
+//            'choices'     => $categories ? $categories->getVilles() : [],
+            'query_builder' => function (EntityRepository $er) use ($category_parent){
+                return $er->createQueryBuilder('c')
+                    ->where('c.parent_id : :parend_id')
+                    ->setParameter('parend_id' , $category_parent)
+                    ->orderBy('c.title', 'ASC');
+            },
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

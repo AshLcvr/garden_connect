@@ -58,6 +58,8 @@ class AnnonceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $category_parent = $form->get('category')->getData();
+            dd($category_parent);
             $annonce->setBoutique($boutique);
             $annonce->setActif(1);
             $annonce->setCreatedAt(new \DateTimeImmutable());
