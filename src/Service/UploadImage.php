@@ -125,17 +125,17 @@ class UploadImage
         // Flush
         $this->imagesHeroRepository->add($image, true);
 
-        // Déplacement vers dossier uploads
         try {
-            $file->move($this->getTargetDirectory(), $fileName);
+            $file->move($this->getUploadDirectory(), $fileName);
         } catch (FileException $e) {
             dd($e);
         }
 
         // Resize de l'image (optionnel)
-        // 
+        // Hero
         $imgHero = new ImageResize($this->getUploadDirectory() . '/' . $fileName);
-        $imgHero->resizeToBestFit(1400, 350);
+        // $imgHero->resizeToBestFit(1400, 350);
+        $imgHero->crop(1400, 350, true, ImageResize::CROPCENTER);
         $imgHero->save($this->getUploadDirectory() . '/hero/' . $fileName);
     }
 
@@ -146,7 +146,7 @@ class UploadImage
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
 
         try {
-            $file->move($this->getTargetDirectory(), $fileName);
+            $file->move($this->getUploadDirectory(), $fileName);
         } catch (FileException $e) {
             dd($e);
         }
