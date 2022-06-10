@@ -1,3 +1,45 @@
-<h1>HERO</h1>
+{% extends 'layout/admin_base.html.twig' %}
 
-{{ form(form) }}
+{% block title %}Hero{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('asset/js/admin.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
+    <section id="slider-home">
+        <div class="flexslider" id="slider">
+            <ul class="slides relative">
+                {% for imageHero in imagesHero %}
+                    <li>
+                        <h2 class="absolute text">Citation à la con qui fait bien</h2>
+                        <img src="{{ asset('uploads/hero/'~imageHero.title) }}" alt="">
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+    <div class="body">
+        <div id="contener_form">
+            {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+                <div class="bloc_form">
+                    {{ form_label(form.upload) }}
+                    {{ form_widget(form.upload) }}
+
+                    <small>{{ form_help(form.upload) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.upload) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_widget(form.submit) }}
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

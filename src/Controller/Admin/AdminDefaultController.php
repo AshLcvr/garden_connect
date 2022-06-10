@@ -57,14 +57,14 @@ class AdminDefaultController extends AbstractController
     {
         $user->setActif(false);
         $userRepository->add($user, true);
-        return $this->redirectToRoute('all-users', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('details-user', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
     }
     #[Route('/users/active/{id}', name: 'active-user')]
     public function activeUser(User $user, UserRepository $userRepository): Response
     {
         $user->setActif(true);
         $userRepository->add($user, true);
-        return $this->redirectToRoute('all-users', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('details-user', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
     }
 
 
@@ -147,6 +147,7 @@ class AdminDefaultController extends AbstractController
     #[Route('/hero', name: 'images_hero')]
     public function imagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, UploadImage $uploadImage): Response
     {
+        $imagesHero = $imagesHeroRepository->findAll();
         $form = $this->createForm(ImagesHeroType::class);
         $form->handleRequest($request);
 
@@ -157,7 +158,8 @@ class AdminDefaultController extends AbstractController
         }
 
         return $this->render('admin/hero.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'imagesHero' => $imagesHero
         ]);
     }
 }

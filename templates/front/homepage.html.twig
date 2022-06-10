@@ -12,10 +12,10 @@
           {# <img src="{{ asset('/images/field-3629120.jpg') | imagine_filter('my_fixed_filter') }}" /> 
         </li> #}
           {%  for imageHero in imagesHero %}
-          <li>
-            <h2 class="absolute text">Citation à la con qui fait bien</h2>
-            <img src="{{ asset('uploads/hero/'~imageHero.title) }}" alt="">
-          </li>
+            <li>
+              <h2 class="absolute text">Citation à la con qui fait bien</h2>
+              <img src="{{ asset('uploads/hero/'~imageHero.title) }}" alt="">
+            </li>
           {% endfor %}
 
       </ul>

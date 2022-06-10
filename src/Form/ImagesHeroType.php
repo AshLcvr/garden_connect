@@ -16,7 +16,6 @@ class ImagesHeroType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('title', TextType::class)
             ->add('upload', FileType::class, [
                 'label' => 'Modifier les images du slider',
                 'mapped' => false,

@@ -9,10 +9,10 @@ class DataCategories
     {
         $categories = [
             [
-                'title' => 'Céréales et grains',
+                'title' => 'CerealesEtGrains',
             ],
             [
-                'title' => 'Engrais naturels et accessoires',
+                'title' => 'EngraisNaturelsEtAccessoires',
             ],
             [
                 'title' => 'Farine',
