@@ -57,9 +57,10 @@ class Annonce
     #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: ImagesAnnonces::class)]
     private $imagesAnnonces;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'annonces')]
+    #[ORM\ManyToOne(targetEntity: Subcategory::class, inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
-    private $category;
+    private $subcategory;
+
 
 
     public function __construct()
@@ -186,14 +187,14 @@ class Annonce
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getSubcategory(): ?Subcategory
     {
-        return $this->category;
+        return $this->subcategory;
     }
 
-    public function setCategory(?Category $category): self
+    public function setSubcategory(?Subcategory $subcategory): self
     {
-        $this->category = $category;
+        $this->subcategory = $subcategory;
 
         return $this;
     }

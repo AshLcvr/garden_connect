@@ -75,11 +75,6 @@ class AnnonceType extends AbstractType
             'choice_label' => 'title',
             'mapped' => false,
             'required' => false,
-            'query_builder' => function (EntityRepository $er){
-                return $er->createQueryBuilder('c')
-                    ->where('c.parent_id is NULL')
-                    ->orderBy('c.title', 'ASC');
-            },
         ]);
 
         $builder->get('category')->addEventListener(
@@ -94,17 +89,18 @@ class AnnonceType extends AbstractType
         $builder->addEventListener(
             FormEvents::POST_SET_DATA,
             function(FormEvent $event){
-
                 $data = $event->getData();
                 $form = $event->getForm();
-//                if($subcat){
-//                    $category = $subcat->getParentCategory();
-//                    $this->addSubCategoryField($event->getForm(), $category);
-//                    $form->get('category')->setData($category);
-//                    $form->get('subcategory')->setData($subcat);
-//                }else{
+                /* @var $subcat Subcategory */
+                $subcat = $data->getSubcategory();
+                if($subcat){
+                    $category = $subcat->getParentCategory();
+                    $this->addSubCategoryField($event->getForm(), $category);
+                    $form->get('category')->setData($category);
+                    $form->get('subcategory')->setData($subcat);
+                }else{
                     $this->addSubCategoryField($event->getForm(), null);
-//                }
+                }
         });
     }
 
@@ -115,18 +111,11 @@ class AnnonceType extends AbstractType
     private function addSubCategoryField(FormInterface $form, ?Category $category)
     {
         $form->add('subcategory',EntityType::class,[
-            'class' => Category::class,
-            'mapped' => false,
+            'class' => Subcategory::class,
             'label' =>  'Sélectionnez votre type de produit' ,
             'placeholder' => $category? 'Type de produit' : 'Sélectionnez une catégorie',
             'choices' => $category? $category->getSubcategories() : [],
             'choice_label' => 'title',
-            'query_builder' => function (EntityRepository $er) use ($category){
-                return $er->createQueryBuilder('c')
-                    ->where('c.parent_id = :parent_id')
-                    ->setParameter('parent_id' , $category->getId())
-                    ->orderBy('c.title', 'ASC');
-            },
         ]);
     }
 

@@ -28,12 +28,6 @@ class Category
     #[ORM\OneToMany(mappedBy: 'parent_category', targetEntity: Subcategory::class)]
     private $subcategories;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $parent_id;
-
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Annonce::class)]
-    private $annonces;
-
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -123,35 +117,4 @@ class Category
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Annonce>
-     */
-    public function getAnnonces(): Collection
-    {
-        return $this->annonces;
-    }
-
-    public function addAnnonce(Annonce $annonce): self
-    {
-        if (!$this->annonces->contains($annonce)) {
-            $this->annonces[] = $annonce;
-            $annonce->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAnnonce(Annonce $annonce): self
-    {
-        if ($this->annonces->removeElement($annonce)) {
-            // set the owning side to null (unless already changed)
-            if ($annonce->getCategory() === $this) {
-                $annonce->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

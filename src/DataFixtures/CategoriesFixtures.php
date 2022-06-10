@@ -32,17 +32,17 @@ class CategoriesFixtures extends Fixture
             $categorieP = new Category();
             $categorieP->setTitle($catParent['title']);
             $manager->persist($categorieP);
-            $this->addReference(str_replace(' ', '', $catParent['title']), $categorieP);
-            $manager->flush();
-
 
             foreach ($this->sousCats as $catEnfant) {
-                foreach ($catEnfant as $value) {
+                foreach ($catEnfant as $key => $value) {
                     if ($value['cat'] === $catParent['title']) {
-                        $categorieE = new Category();
+                        $categorieE = new Subcategory();
                         $categorieE->setTitle($value['title']);
-                        $categorieE->setParentId($categorieP->getId());
+                        $categorieE->setParentCategory($categorieP);
                         $manager->persist($categorieE);
+                        if($value['title'] !== 'Autre'){
+                            $this->addReference(str_replace(' ', '', $value['title']), $categorieE);
+                        }
                     }
                 }
             }

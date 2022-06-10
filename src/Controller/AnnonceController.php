@@ -35,7 +35,6 @@ class AnnonceController extends AbstractController
         $boutiques = $user->getBoutiques();
         $boutique = $boutiques[0];
         $annonces = $boutique->getAnnonces();
-//        $annonces = $annonceRepository->findBy(['annonce'=>$annonce->getId()]);
 
         return $this->render('front/annonce/index_annonce.html.twig', [
             'annonces' => $annonces,
