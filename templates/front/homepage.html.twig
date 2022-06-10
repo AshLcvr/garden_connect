@@ -30,15 +30,11 @@
           {% for cat in categories %}
             <li>
               <img src="{{ asset('images/fall-915629.jpg') }}" />
-              <div class="title-cat">
-                <h3>{{ cat.title }}</h3>
+              <div>
+                <a href="#" class="title-cat">
+                  <h3>{{ cat.title }}</h3>
+                </a>
               </div>
-            </li>
-          {% endfor %}
-          {% for cat in categories %}
-            <li>
-              <img src="{{ asset('images/fall-915629.jpg') }}" />
-              <h3 class="title-cat">{{ cat.title }}</h3>
             </li>
           {% endfor %}
         </ul>
@@ -46,25 +42,31 @@
     </div>
   </section>
 
+  <div class="separator"></div>
+
   <section id="annonces" class="wrap">
-    <h2>Découvrez les produits</h2>
+    <h2>Les dernières annonces</h2>
     {% for annonce in annonces %}
-      <div class="annonce_box">
-        <div class="annonce_img">
-          <img src="{{ asset('images/fruit-3860991.jpg') }}"/>
+        <div class="annonce_box">
+          <div class="annonce_img">
+            <a href="#" class="annonce_link">
+              <img src="{{ asset('images/fruit-3860991.jpg') }}"/>
+            </a>
+          </div>
+          <div class="annonce_text">
+            <a href="#" class="annonce_link">
+              <div>
+                <p class="annonce_title">{{ annonce.title }}</p>
+              </div>
+              <div class="annonce_description_box">
+                <p>{{ annonce.description }}</p>
+              </div>
+              <div class="annonce_price_box">
+                <p class="annonce_price">{{ annonce.price }}€/Kg</p>
+              </div>
+            </a>
+          </div>
         </div>
-        <div class="annonce_text">
-          <div>
-            <p class="annonce_title">{{ annonce.title }}</p>
-          </div>
-          <div class="annonce_description_box">
-            <p>{{ annonce.description }}</p>
-          </div>
-          <div class="annonce_price_box">
-            <p class="annonce_price">{{ annonce.price }}€/Kg</p>
-          </div>
-        </div>
-      </div>
     {% endfor %}
   </section>
 

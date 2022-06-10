@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Entity\Images;
 use Gumlet\ImageResize;
 use App\Entity\ImagesHero;
 use App\Entity\ImagesAnnonces;

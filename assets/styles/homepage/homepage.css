@@ -17,20 +17,21 @@
 #annonces p {
     padding: .3em;
 }
+.annonce_box a {
+    display:block;
+}
 .annonce_box {
     background-color: #FFFFFF;
-    display: flex;
-    box-shadow:  10px 5px 5px rgb(228, 228, 228);
+    box-shadow: 10px 5px 5px rgb(228, 228, 228);
     margin-bottom: 20px;
     position: relative;
+    display: flex;
 }
 .annonce_box:nth-child(2n+1) {
     flex-flow: row-reverse;
 }
 .annonce_img {
     width: 22%;
-    display: flex;
-    justify-content: center;
 }
 .annonce_text {
     width: 78%;
