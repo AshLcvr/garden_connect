@@ -17,6 +17,7 @@ class Annonce
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner un titre')]
     #[Assert\Length(
     min: 3,
     max: 255,
@@ -33,6 +34,7 @@ class Annonce
     private $description;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: 'Veuillez renseigner un prix')]
     #[Assert\Type(
     type: 'integer',
     message: 'Le prix doit être un nombre.',
@@ -55,9 +57,11 @@ class Annonce
     #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: ImagesAnnonces::class)]
     private $imagesAnnonces;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'annonces')]
+    #[ORM\ManyToOne(targetEntity: Subcategory::class, inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
-    private $category;
+    private $subcategory;
+
+
 
     public function __construct()
     {
@@ -183,15 +187,16 @@ class Annonce
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getSubcategory(): ?Subcategory
     {
-        return $this->category;
+        return $this->subcategory;
     }
 
-    public function setCategory(?Category $category): self
+    public function setSubcategory(?Subcategory $subcategory): self
     {
-        $this->category = $category;
+        $this->subcategory = $subcategory;
 
         return $this;
     }
+
 }

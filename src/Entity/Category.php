@@ -21,17 +21,15 @@ class Category
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Annonce::class)]
-    private $annonces;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $parent_id;
+    #[ORM\OneToMany(mappedBy: 'parent_category', targetEntity: Subcategory::class)]
+    private $subcategories;
 
     public function __construct()
     {
-        $this->parent = new ArrayCollection();
-        $this->annonces = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->subcategories = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,31 +61,30 @@ class Category
         return $this;
     }
 
-
     /**
-     * @return Collection<int, Annonce>
+     * @return Collection<int, Subcategory>
      */
-    public function getAnnonces(): Collection
+    public function getSubcategories(): Collection
     {
-        return $this->annonces;
+        return $this->subcategories;
     }
 
-    public function addAnnonce(Annonce $annonce): self
+    public function addSubcategory(Subcategory $subcategory): self
     {
-        if (!$this->annonces->contains($annonce)) {
-            $this->annonces[] = $annonce;
-            $annonce->setCategory($this);
+        if (!$this->subcategories->contains($subcategory)) {
+            $this->subcategories[] = $subcategory;
+            $subcategory->setParentCategory($this);
         }
 
         return $this;
     }
 
-    public function removeAnnonce(Annonce $annonce): self
+    public function removeSubcategory(Subcategory $subcategory): self
     {
-        if ($this->annonces->removeElement($annonce)) {
+        if ($this->subcategories->removeElement($subcategory)) {
             // set the owning side to null (unless already changed)
-            if ($annonce->getCategory() === $this) {
-                $annonce->setCategory(null);
+            if ($subcategory->getParentCategory() === $this) {
+                $subcategory->setParentCategory(null);
             }
         }
 
@@ -105,5 +102,4 @@ class Category
 
         return $this;
     }
-
 }

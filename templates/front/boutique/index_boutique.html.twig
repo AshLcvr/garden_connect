@@ -5,8 +5,23 @@
 {% endblock %}
 
 {% block body %}
- <img src="{{ asset('images/logo.png') }}" alt="Logo Garden Connect" style="width: 80%; margin: 0 auto">
- {{ boutique.title }}
+    <div class="wrap">
 
- <a href="#">Voir ma boutique</a>
+        <img src="{{ asset('images/logo.png') }}" alt="Logo Garden Connect" style="width: 50%; margin: 0 auto">
+        <h1>  {{ boutique.title }} </h1>
+        <h3>Bienvenue sur votre espace boutique ! </h3>
+        <p>D'ici, vous pourrez:</p>
+        <ul>
+            <li> gérer les infos de votre boutique,  </li>
+            <li> ajouter et éditer vos annonces,  </li>
+            <li>   accéder à votre messagerie, </li>
+            <li>   voir vos avis (émis et reçus) </li>
+        </ul>
+
+
+        <a href="#">Voir ma boutique</a>
+
+
+    </div>
+
 {% endblock %}

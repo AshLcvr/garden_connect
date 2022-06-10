@@ -6,6 +6,7 @@ use App\Entity\Annonce;
 use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\SubcategoryRepository;
 use App\Service\UploadImage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +35,6 @@ class AnnonceController extends AbstractController
         $boutiques = $user->getBoutiques();
         $boutique = $boutiques[0];
         $annonces = $boutique->getAnnonces();
-//        $annonces = $annonceRepository->findBy(['annonce'=>$annonce->getId()]);
 
         return $this->render('front/annonce/index_annonce.html.twig', [
             'annonces' => $annonces,
@@ -42,24 +42,17 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AnnonceRepository $annonceRepository, UploadImage $uploadImage, CategoryRepository $categoryRepository): Response
+    public function new(Request $request, SubcategoryRepository $subcategoryRepository ,AnnonceRepository $annonceRepository, UploadImage $uploadImage, CategoryRepository $categoryRepository): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
         $boutique = $boutiques[0];
-//        $categoryParent = $categoryRepository->findBy(['parent_id'=> null]);
-        $categoryParent = $categoryRepository->findAll();
-//        dd($categoryParent);
 
         $annonce = new Annonce();
-        $form = $this->createForm(AnnonceType::class, $annonce, [
-            'categoryParent' => $categoryParent
-        ]);
+        $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category_parent = $form->get('category')->getData();
-            dd($category_parent);
             $annonce->setBoutique($boutique);
             $annonce->setActif(1);
             $annonce->setCreatedAt(new \DateTimeImmutable());
@@ -102,7 +95,6 @@ class AnnonceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $annonce->setModifiedAt(new \DateTimeImmutable());
-            $annonceRepository->add($annonce, true);
             $annonceRepository->add($annonce, true);
             $annonceImage = $form->get('upload')->getData();
             if (count($annonceImage) <= 4 || empty($annonceImage)) {

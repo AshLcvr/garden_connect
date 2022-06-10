@@ -16,6 +16,7 @@
                     <div id="collapse{{ index + 1 }}" class="card-body collapse">
                         <div class="d-flex justify-content-between align-items-center p-10 mb-10">
                             {{ annonce.title }}
+                            <a href="{{ path('app_annonce_edit', {'id' : annonce.id}) }}">Editer</a>
                         </div>
                     </div>
                 </div><br>
