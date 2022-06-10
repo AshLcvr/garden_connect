@@ -15,8 +15,7 @@
                     <th scope="col" class="px-6 py-3">Id</th>
                     <th scope="col" class="px-6 py-3">Titre</th>
                     <th scope="col" class="px-6 py-3">Image</th>
-                    <th scope="col" class="px-6 py-3">Parent_id</th>
-                    <th scope="col" class="px-6 py-3"><span class="sr-only">Action</span></th>
+                    <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,11 +24,6 @@
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ category.id }}</th>
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ category.title }}</th>
                     <td class="px-6 py-4">{{ category.image }}</td>
-                    {% if category.parentId == null %}
-                        <td class="px-6 py-4">Parent</td>
-                    {% else %}
-                        <td class="px-6 py-4">{{ category.parentId }}</td>
-                    {% endif %}
                     <td class="px-6 py-4 text-right">
                         <a href="{{ path('app_category_show', {'id': category.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">show</a> / 
                         <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">edit</a>
