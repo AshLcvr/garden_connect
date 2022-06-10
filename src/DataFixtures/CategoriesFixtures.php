@@ -70,13 +70,17 @@ class CategoriesFixtures extends Fixture
                         $categorieE->setTitle($value['title']);
                         $categorieE->setParentCategory($categorieP);
                         $manager->persist($categorieE);
-                        if($value['title'] !== 'Autre'){
-                            $this->addReference(str_replace(' ', '', $value['title']), $categorieE);
-                        }
                     }
                 }
             }
         }
+        $categorieE2 = new Subcategory();
+        $categorieE2->setTitle('Pain');
+        $categorieE2->setParentCategory($categorieP);
+        $manager->persist($categorieE2);
         $manager->flush();
+        $this->addReference('Miel', $categorieE);
+        $this->addReference('Avoine', $categorieE2);
+
     }
 }
