@@ -137,6 +137,12 @@ class UploadImage
         // $imgHero->resizeToBestFit(1400, 350);
         $imgHero->crop(1400, 350, true, ImageResize::CROPCENTER);
         $imgHero->save($this->getUploadDirectory() . '/hero/' . $fileName);
+
+        // Delete image originale
+        // $this->imagesHeroRepository->remove($image, true);
+
+        $file_path = $this->getUploadDirectory() . '/' . $fileName;
+        if (file_exists($file_path)) unlink($file_path);
     }
 
     public function uploadProfile(UploadedFile $file)
