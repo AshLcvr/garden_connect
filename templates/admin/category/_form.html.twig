@@ -1,0 +1,49 @@
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <div class="body">
+        <div id="contener_form">
+            {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+                <h1>Inscription</h1>
+                <div class="bloc_form">
+                    {{ form_label(form.title) }}
+                    {{ form_widget(form.title) }}
+
+                    <small>{{ form_help(form.title) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.title) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_label(form.image) }}
+                    {{ form_widget(form.image) }}
+
+                    <small>{{ form_help(form.image) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.image) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_label(form.parent) }}
+                    {{ form_widget(form.parent) }}
+
+                    <small>{{ form_help(form.parent) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.parent) }}
+                    </div>
+                </div>
+
+                <div class="bloc_form">
+                    {{ form_widget(form.submit) }}
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>

@@ -9,43 +9,43 @@ class DataEngraisNaturelsEtAccessoires
     {
         $engraisNaturelsEtAccessoires = [
             [
-                'cat' => 'Engrais naturels et accessoires',
+                'cat' => 'EngraisNaturelsEtAccessoires',
                 'title' => 'Autre',
             ],
             [
-                'cat' => 'Engrais naturels et accessoires',
+                'cat' => 'EngraisNaturelsEtAccessoires',
                 'title' => 'Cendre de bois',
             ],
             [
-                'cat' => 'Engrais naturels et accessoires',
+                'cat' => 'EngraisNaturelsEtAccessoires',
                 'title' => 'Compost',
             ],
             [
-                'cat' => 'Engrais naturels et accessoires',
+                'cat' => 'EngraisNaturelsEtAccessoires',
                 'title' => 'Foins',
             ],
             [
-                'cat' => 'Engrais naturels et accessoires',
+                'cat' => 'EngraisNaturelsEtAccessoires',
                 'title' => 'Fumier et crottin',
             ],
             [
-                'cat' => 'Engrais naturels et accessoires',
+                'cat' => 'EngraisNaturelsEtAccessoires',
                 'title' => 'Marc de café',
             ],
             [
-                'cat' => 'Engrais naturels et accessoires',
+                'cat' => 'EngraisNaturelsEtAccessoires',
                 'title' => 'Ortie',
             ],
             [
-                'cat' => 'Engrais naturels et accessoires',
+                'cat' => 'EngraisNaturelsEtAccessoires',
                 'title' => 'Paille',
             ],
             [
-                'cat' => 'Engrais naturels et accessoires',
+                'cat' => 'EngraisNaturelsEtAccessoires',
                 'title' => 'Purin',
             ],
             [
-                'cat' => 'Engrais naturels et accessoires',
+                'cat' => 'EngraisNaturelsEtAccessoires',
                 'title' => 'Tuteurs',
             ],
 

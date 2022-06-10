@@ -9,6 +9,16 @@ use Doctrine\Persistence\ObjectManager;
 use App\Service\Categories\DataCategories;
 use App\Service\CerealesEtGrains\DataCerealesEtGrains;
 use App\Service\EngraisNaturelsEtAccessoires\DataEngraisNaturelsEtAccessoires;
+use App\Service\Farine\DataFarine;
+use App\Service\Fruits\DataFruits;
+use App\Service\FruitsACoques\DataFruitsACoques;
+use App\Service\HerbesEpicesAromatesGraines\DataHerbesEpicesAromatesGraines;
+use App\Service\HuilesMielTruffes\DataHuilesMielTruffes;
+use App\Service\JusFruitsLegumes\DataJusFruitsLegumes;
+use App\Service\LegumesEtPois\DataLegumesEtPois;
+use App\Service\Oeufs\DataOeufs;
+use App\Service\Panier\DataPanier;
+use App\Service\PlantsPlantesFeuillesArbresGrainesPousses\DataPlantsPlantesFeuillesArbresGrainesPousses;
 
 class CategoriesFixtures extends Fixture
 {
@@ -19,10 +29,30 @@ class CategoriesFixtures extends Fixture
 
         $cerealesEtGrains = new DataCerealesEtGrains();
         $engraisNaturelsEtAccessoires = new DataEngraisNaturelsEtAccessoires();
+        $farine = new DataFarine();
+        $fruits = new DataFruits();
+        $fruitsACoques = new DataFruitsACoques();
+        $herbesEpicesAromatesGraines = new DataHerbesEpicesAromatesGraines();
+        $huilesMielTruffes = new DataHuilesMielTruffes();
+        $jusFruitsLegumes = new DataJusFruitsLegumes();
+        $legumesEtPois = new DataLegumesEtPois();
+        $oeufs = new DataOeufs();
+        $panier = new DataPanier();
+        $plantsPlantesFeuillesArbresGrainesPousses = new DataPlantsPlantesFeuillesArbresGrainesPousses();
 
         $sousCats   = [];
         $sousCats[] =  $cerealesEtGrains->getCerealesEtGrainsData();
         $sousCats[] =  $engraisNaturelsEtAccessoires->getEngraisNaturelsEtAccessoiresData();
+        $sousCats[] =  $farine->getFarineData();
+        $sousCats[] =  $fruits->getFruitsData();
+        $sousCats[] =  $fruitsACoques->getFruitsACoquesData();
+        $sousCats[] =  $herbesEpicesAromatesGraines->getHerbesEpicesAromatesGrainesData();
+        $sousCats[] =  $huilesMielTruffes->getHuilesMielTruffesData();
+        $sousCats[] =  $jusFruitsLegumes->getJusFruitsLegumesData();
+        $sousCats[] =  $legumesEtPois->getLegumesEtPoisData();
+        $sousCats[] =  $oeufs->getOeufsData();
+        $sousCats[] =  $panier->getPanierData();
+        $sousCats[] =  $plantsPlantesFeuillesArbresGrainesPousses->getPlantsPlantesFeuillesArbresGrainesPoussesData();
 
         $this->sousCats = $sousCats;
     }
