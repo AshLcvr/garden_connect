@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Subcategory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Service\Categories\DataCategories;
@@ -33,6 +34,7 @@ class CategoriesFixtures extends Fixture
             $manager->persist($categorieP);
             $this->addReference(str_replace(' ', '', $catParent['title']), $categorieP);
             $manager->flush();
+
 
             foreach ($this->sousCats as $catEnfant) {
                 foreach ($catEnfant as $value) {

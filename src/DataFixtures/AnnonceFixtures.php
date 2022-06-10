@@ -32,7 +32,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce2->setCreatedAt(new DateTimeImmutable());
         $annonce2->setActif(true);
         $annonce2->setBoutique($this->getReference('boutique_sacha'));
-        $annonce2->setCategory($this->getReference('Engraisnaturelsetaccessoires'));
+        $annonce2->setCategory($this->getReference('Céréalesetgrains'));
         $manager->persist($annonce2);
 
         $manager->flush();

@@ -13,9 +13,7 @@ class DefaultController extends AbstractController
     #[Route('/', name: 'homepage')]
     public function index(CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository): Response
     {
-        $categories = $categoryRepository->findBy([
-            'parent_id' => null
-        ]);
+        $categories = $categoryRepository->findAll();
         $annonces = $annonceRepository->findBy([],['created_at' => 'DESC'], 4);
 //         $imageHero =
 

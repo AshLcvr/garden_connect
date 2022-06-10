@@ -10,9 +10,9 @@
 import './styles/app.css';
 // css formulaire
 import './styles/form/form.css';
+import './styles/form/form.js';
 // css, js header footer
 import './styles/header/header.css';
-import "./styles/header/header.js";
 import "./styles/footer/footer.css";
 
 // css, js homepage
@@ -22,5 +22,3 @@ import './styles/homepage/slider/slider.js';
 
 // start the Stimulus application
 // import './bootstrap';
-
-console.log('Salut les copains !')

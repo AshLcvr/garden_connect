@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Annonce;
 use App\Entity\Categories;
 use App\Entity\Category;
+use App\Entity\Subcategory;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -21,21 +22,25 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\File;
 
+/**
+ * Class AnnonceType
+ * @package App\Form
+ */
 class AnnonceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $categoryParent = $options['categoryParent'];
-
         $builder
             ->add('title',TextType::class, [
                 'label' => 'Titre de l\'annonce',
+                'required' => false
             ])
             ->add('description', TextareaType::class, [
                 'required' => false,
             ])
             ->add('price',IntegerType::class, [
-                'label' => 'Prix'
+                'label' => 'Prix',
+                'required' => false
             ])
             ->add('upload', FileType::class,[
             'label' => 'Ajouter des images à votre annonce (4 max)',
@@ -65,41 +70,61 @@ class AnnonceType extends AbstractType
         ])
         ->add('category', EntityType::class,[
             'label' => 'Sélectionnez une catégorie',
+            'placeholder' => 'Catégorie de produit',
             'class' =>  Category::class,
             'choice_label' => 'title',
             'mapped' => false,
-            'query_builder' => function (EntityRepository $er) use ($categoryParent){
+            'required' => false,
+            'query_builder' => function (EntityRepository $er){
                 return $er->createQueryBuilder('c')
                     ->where('c.parent_id is NULL')
                     ->orderBy('c.title', 'ASC');
-             },
-        ])
-        ;
+            },
+        ]);
 
-//        $builder->get('category')->addEventListener(
-//            FormEvents::POST_SET_DATA,
-//            function (FormEvent $event) {
-//                $data = $event->getData();
-//                $form = $event->getForm();
-//                $category_parent = $form->get('category')->getData();
-//                if($category_parent){
-//                    $this->addSubCatField($form->getParent(), $category_parent);
-//                    $form->get('subcat')->setData($region);
+        $builder->get('category')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event){
+                $form = $event->getForm()->getParent();
+                $category = $event->getForm()->getData();
+                $this->addSubCategoryField($form, $category);
+            }
+        );
+
+        $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            function(FormEvent $event){
+
+                $data = $event->getData();
+                $form = $event->getForm();
+//                if($subcat){
+//                    $category = $subcat->getParentCategory();
+//                    $this->addSubCategoryField($event->getForm(), $category);
+//                    $form->get('category')->setData($category);
+//                    $form->get('subcategory')->setData($subcat);
+//                }else{
+                    $this->addSubCategoryField($event->getForm(), null);
 //                }
-//            }
-//        );
+        });
     }
 
-    private function addSubCatField(FormInterface $form, $category_parent)
+    /**
+     * @param FormInterface $form
+     * @param Category $category
+     */
+    private function addSubCategoryField(FormInterface $form, ?Category $category)
     {
-        $form->add('subcat', EntityType::class, [
-            'class'       => 'AppBundle\Entity\Ville',
-            'placeholder' => $category_parent ? 'Sélectionnez votre ville' : 'Sélectionnez votre département',
-//            'choices'     => $categories ? $categories->getVilles() : [],
-            'query_builder' => function (EntityRepository $er) use ($category_parent){
+        $form->add('subcategory',EntityType::class,[
+            'class' => Category::class,
+            'mapped' => false,
+            'label' =>  'Sélectionnez votre type de produit' ,
+            'placeholder' => $category? 'Type de produit' : 'Sélectionnez une catégorie',
+            'choices' => $category? $category->getSubcategories() : [],
+            'choice_label' => 'title',
+            'query_builder' => function (EntityRepository $er) use ($category){
                 return $er->createQueryBuilder('c')
-                    ->where('c.parent_id : :parend_id')
-                    ->setParameter('parend_id' , $category_parent)
+                    ->where('c.parent_id = :parent_id')
+                    ->setParameter('parent_id' , $category->getId())
                     ->orderBy('c.title', 'ASC');
             },
         ]);
@@ -109,6 +134,5 @@ class AnnonceType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Annonce::class,
-            'categoryParent' => null
             ]);}
-}
+    }

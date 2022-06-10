@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+{% extends 'layout/boutique_base.html.twig' %}
 
-<title>Edit Annonce</title>
+{% block title %}
+    <title>Modifier une annonce</title>
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Annonce</h1>
+    <h1>Modifier une Annonce</h1>
 
-    {{ include('annonce/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('front/annonce/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_annonce_index') }}">back to list</a>
-
-    {{ include('annonce/_delete_form.html.twig') }}
 {% endblock %}

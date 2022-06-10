@@ -4,19 +4,16 @@
         <div class="bloc_form">
             {{ form_label(form.title) }}
             {{ form_widget(form.title) }}
-
             <small>{{ form_help(form.title) }}</small>
-
             <div class="form-error">
                 {{ form_errors(form.title) }}
             </div>
         </div>
+
         <div class="bloc_form">
             {{ form_label(form.description) }}
             {{ form_widget(form.description) }}
-
             <small>{{ form_help(form.description) }}</small>
-
             <div class="form-error">
                 {{ form_errors(form.description) }}
             </div>
@@ -25,21 +22,25 @@
         <div class="bloc_form">
             {{ form_label(form.category) }}
             {{ form_widget(form.category) }}
-
             <small>{{ form_help(form.category) }}</small>
-
             <div class="form-error">
                 {{ form_errors(form.category) }}
             </div>
         </div>
 
+        <div class="bloc_form">
+            {{ form_label(form.subcategory) }}
+            {{ form_widget(form.subcategory) }}
+            <small>{{ form_help(form.subcategory) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.subcategory) }}
+            </div>
+        </div>
 
         <div class="bloc_form">
             {{ form_label(form.price) }}
             {{ form_widget(form.price) }}
-
             <small>{{ form_help(form.price) }}</small>
-
             <div class="form-error">
                 {{ form_errors(form.price) }}
             </div>
@@ -48,9 +49,7 @@
         <div class="bloc_form">
             {{ form_label(form.upload) }}
             {{ form_widget(form.upload) }}
-
             <small>{{ form_help(form.upload) }}</small>
-
             <div class="form-error">
                 {{ form_errors(form.upload) }}
             </div>
@@ -62,3 +61,7 @@
         {{ form_end(form) }}
     </div>
 </div>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}

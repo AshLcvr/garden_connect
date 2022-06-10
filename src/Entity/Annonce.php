@@ -17,6 +17,7 @@ class Annonce
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner un titre')]
     #[Assert\Length(
     min: 3,
     max: 255,
@@ -33,6 +34,7 @@ class Annonce
     private $description;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: 'Veuillez renseigner un prix')]
     #[Assert\Type(
     type: 'integer',
     message: 'Le prix doit être un nombre.',
@@ -58,6 +60,7 @@ class Annonce
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
+
 
     public function __construct()
     {
@@ -194,4 +197,5 @@ class Annonce
 
         return $this;
     }
+
 }
