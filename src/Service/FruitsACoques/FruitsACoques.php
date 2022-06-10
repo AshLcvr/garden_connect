@@ -9,47 +9,47 @@ class DataFruitsACoques
     {
         $fruitsACoques = [
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Amande',
             ],
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Chataîgne',
             ],
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Noisette',
             ],
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Noix',
             ],
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Noix de Brésil',
             ],
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Noix de cajou',
             ],
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Noix de coco',
             ],
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Noix de macadamia',
             ],
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Noix de pécan',
             ],
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Noix du Queensland',
             ],
             [
-                'cat' => 'FruitsACoques',
+                'cat' => 'Fruits à coques',
                 'title' => 'Pistache',
             ],
 

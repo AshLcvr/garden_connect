@@ -9,223 +9,223 @@ class DataLegumesEtPois
     {
         $legumesEtPois = [
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Artichaut',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Asperges',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Aubergine',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Autre',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Banane plantin',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Betterave',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Blettes',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Brocolis',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Cardon',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Carottes',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Céleri branche',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Céleri rave',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Champignon',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Chayotte ou Christophine (chayottes)',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Choux',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Citrouilles',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Concombre',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Courge',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Courgette',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Cresson',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Crosne',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Échalote',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Endives',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Épinard',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Fruit à pain',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Giraumon',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Haricots',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Igname',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Lentilles',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Macérat huileux',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Mâche',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Madère',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Maïs',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Malanga',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Manioc',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Navet',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Oignon',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Patate douce',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Petit pois',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Patate douce',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Poire de terre',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Poireau',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Pois chiche',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Pois d’Angole',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Poivron',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Pomme de terre',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Potimarron',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Potiron',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Radis noirs',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Rhubarbe',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Rutabaga',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Salade',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Tétragone',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Tomate',
             ],
             [
-                'cat' => 'LegumesEtPois',
+                'cat' => 'Légumes et pois',
                 'title' => 'Topinanbour',
             ],
         ];

@@ -9,27 +9,27 @@ class DataHuilesMielTruffes
     {
         $huilesMielTruffes = [
             [
-                'cat' => 'HuilesMielTruffes',
+                'cat' => 'Huiles, miel et truffes',
                 'title' => 'Autre huile',
             ],
             [
-                'cat' => 'HuilesMielTruffes',
+                'cat' => 'Huiles, miel et truffes',
                 'title' => 'Gelée royale',
             ],
             [
-                'cat' => 'HuilesMielTruffes',
+                'cat' => 'Huiles, miel et truffes',
                 'title' => 'Huile d’olive',
             ],
             [
-                'cat' => 'HuilesMielTruffes',
+                'cat' => 'Huiles, miel et truffes',
                 'title' => 'Miel',
             ],
             [
-                'cat' => 'HuilesMielTruffes',
+                'cat' => 'Huiles, miel et truffes',
                 'title' => 'Pollen',
             ],
             [
-                'cat' => 'HuilesMielTruffes',
+                'cat' => 'Huiles, miel et truffes',
                 'title' => 'Truffe',
             ],
         ];

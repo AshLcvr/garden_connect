@@ -9,20 +9,20 @@ class DataOeufs
     {
         $oeufs = [
             [
-                'cat' => 'Oeufs',
+                'cat' => 'Œufs',
                 'title' => 'Autre',
             ],
             [
-                'cat' => 'Oeufs',
-                'title' => 'Oeuf d’oie',
+                'cat' => 'Œufs',
+                'title' => 'Œuf d’oie',
             ],
             [
-                'cat' => 'Oeufs',
-                'title' => 'Oeuf de caille',
+                'cat' => 'Œufs',
+                'title' => 'Œuf de caille',
             ],
             [
-                'cat' => 'Oeufs',
-                'title' => 'Oeufs de poule',
+                'cat' => 'Œufs',
+                'title' => 'Œufs de poule',
             ],
         ];
         return $oeufs;

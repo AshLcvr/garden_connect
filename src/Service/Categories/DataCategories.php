@@ -36,7 +36,7 @@ class DataCategories
                 'title' => 'Légumes et pois',
             ],
             [
-                'title' => 'œufs',
+                'title' => 'Œufs',
             ],
             [
                 'title' => 'Panier',

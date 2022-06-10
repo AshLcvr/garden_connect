@@ -17,6 +17,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce->setTitle('Pommes');
         $annonce->setDescription('Goûtez les pommes de notre verger ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
         $annonce->setPrice(2);
+        $annonce->setMesure($this->getReference('Kg'));
         $annonce->setCreatedAt(new DateTimeImmutable());
         $annonce->setActif(true);
         $annonce->setBoutique($this->getReference('boutique_polo'));
@@ -27,10 +28,12 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce2->setTitle('Miel');
         $annonce2->setDescription('Miel de Pont-Audemer ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
         $annonce2->setPrice(5);
+        $annonce2->setMesure($this->getReference('Kg'));
         $annonce2->setCreatedAt(new DateTimeImmutable());
         $annonce2->setActif(true);
         $annonce2->setBoutique($this->getReference('boutique_sacha'));
         $annonce2->setSubcategory($this->getReference('Miel'));
+
         $manager->persist($annonce2);
 
         $manager->flush();
