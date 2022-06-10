@@ -61,6 +61,10 @@ class Annonce
     #[ORM\JoinColumn(nullable: false)]
     private $subcategory;
 
+    #[ORM\ManyToOne(targetEntity: Mesure::class, inversedBy: 'annonces')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $mesure;
+
 
 
     public function __construct()
@@ -195,6 +199,18 @@ class Annonce
     public function setSubcategory(?Subcategory $subcategory): self
     {
         $this->subcategory = $subcategory;
+
+        return $this;
+    }
+
+    public function getMesure(): ?Mesure
+    {
+        return $this->mesure;
+    }
+
+    public function setMesure(?Mesure $mesure): self
+    {
+        $this->mesure = $mesure;
 
         return $this;
     }

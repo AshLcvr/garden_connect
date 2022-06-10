@@ -47,6 +47,15 @@
         </div>
 
         <div class="bloc_form">
+            {{ form_label(form.mesure) }}
+            {{ form_widget(form.mesure) }}
+            <small>{{ form_help(form.mesure) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.mesure) }}
+            </div>
+        </div>
+
+        <div class="bloc_form">
             {{ form_label(form.upload) }}
             {{ form_widget(form.upload) }}
             <small>{{ form_help(form.upload) }}</small>

@@ -81,6 +81,5 @@ class CategoriesFixtures extends Fixture
         $manager->flush();
         $this->addReference('Miel', $categorieE);
         $this->addReference('Avoine', $categorieE2);
-
     }
 }

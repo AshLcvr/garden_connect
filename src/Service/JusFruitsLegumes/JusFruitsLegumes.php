@@ -9,7 +9,7 @@ class DataJusFruitsLegumes
     {
         $jusFruitsLegumes = [
             [
-                'cat' => 'JusFruitsLegumes',
+                'cat' => 'Jus de fruits et de légumes',
                 'title' => 'Jus',
             ],
         ];

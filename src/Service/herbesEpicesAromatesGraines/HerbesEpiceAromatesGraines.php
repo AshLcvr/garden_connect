@@ -9,167 +9,167 @@ class DataHerbesEpicesAromatesGraines
     {
         $herbesEpicesAromatesGraines = [
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Ail',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Aneth',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Anis',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Autre',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Badiane',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Basilic',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Cacao',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Camomille',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Canne à sucre',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Cannelle',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Câpre',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Cardamome',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Cerfeuil',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Ciboulette',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Citronnelle',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Coriandre',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Cumin',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Curcuma',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Estragon',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Genièvre',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Gingembre',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Girofle',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Laurier',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Marjolaine',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Menthe',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Moutarde',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Muscade',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Origan',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Oseille',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Persil',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Pignon de pin',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Piment',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Poivre',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Raifort',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Rhubarbe',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Romarin',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Safran',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Sarriette',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Sauge',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Sésame',
             ],
             [
-                'cat' => 'HerbesEpicesAromatesGraines',
+                'cat' => 'Herbes, épices, aromates, graines',
                 'title' => 'Thym',
             ],
         ];

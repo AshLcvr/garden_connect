@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Annonce;
 use App\Entity\Categories;
 use App\Entity\Category;
+use App\Entity\Mesure;
 use App\Entity\Subcategory;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -41,6 +42,10 @@ class AnnonceType extends AbstractType
             ->add('price',IntegerType::class, [
                 'label' => 'Prix',
                 'required' => false
+            ])
+            ->add('mesure',EntityType::class, [
+                'class' => Mesure::class,
+                'choice_label' => 'title'
             ])
             ->add('upload', FileType::class,[
             'label' => 'Ajouter des images à votre annonce (4 max)',

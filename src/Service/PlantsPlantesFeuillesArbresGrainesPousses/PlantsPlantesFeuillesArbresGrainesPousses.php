@@ -9,39 +9,39 @@ class DataPlantsPlantesFeuillesArbresGrainesPousses
     {
         $plantsPlantesFeuillesArbresGrainesPousses = [
             [
-                'cat' => 'PlantsPlantesFeuillesArbresGrainesPousses',
+                'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',
                 'title' => 'Arbres',
             ],
             [
-                'cat' => 'PlantsPlantesFeuillesArbresGrainesPousses',
+                'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',
                 'title' => 'Bulbes et rhizomes',
             ],
             [
-                'cat' => 'PlantsPlantesFeuillesArbresGrainesPousses',
+                'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',
                 'title' => 'Cactus',
             ],
             [
-                'cat' => 'PlantsPlantesFeuillesArbresGrainesPousses',
+                'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',
                 'title' => 'Fleurs',
             ],
             [
-                'cat' => 'PlantsPlantesFeuillesArbresGrainesPousses',
+                'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',
                 'title' => 'Graines',
             ],
             [
-                'cat' => 'PlantsPlantesFeuillesArbresGrainesPousses',
+                'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',
                 'title' => 'Micro Pousses',
             ],
             [
-                'cat' => 'PlantsPlantesFeuillesArbresGrainesPousses',
+                'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',
                 'title' => 'Pilea',
             ],
             [
-                'cat' => 'PlantsPlantesFeuillesArbresGrainesPousses',
+                'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',
                 'title' => 'Plante',
             ],
             [
-                'cat' => 'PlantsPlantesFeuillesArbresGrainesPousses',
+                'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',
                 'title' => 'Plants',
             ],
         ];
