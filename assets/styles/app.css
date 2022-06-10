@@ -1,3 +1,9 @@
+:root{
+  --vertfonce:#41B04F;
+  --vertclair:#8FC642;
+  --orange:#F7941D;
+  --marron:#AB7B52;
+}
 *{
     margin: 0;
     padding: 0;
@@ -9,6 +15,7 @@ body {
     background-color: white;
     color: rgb(70, 70, 70);
     font-family: 'Roboto', sans-serif;
+    /* margin: 0 auto; */
 }
 ul, ol{
     list-style: none;
@@ -20,6 +27,9 @@ a{
 img{
     width: 100%;
     vertical-align: bottom;
+}
+.wrap{
+    max-width: 1000px ; width: 100%; margin: 0 auto;
 }
 .relative{
     position: relative;
@@ -36,6 +46,9 @@ img{
 .flex-column{
     flex-flow: column;
 }
-.wrap{
-    max-width: 1000px ; width: 100%; margin: 0 auto;
+.separator {
+    margin-bottom: 2em;
+    border-top: 1px solid var(--orange);
+    width: 50%;
+    margin: 0 auto 2em;
 }
