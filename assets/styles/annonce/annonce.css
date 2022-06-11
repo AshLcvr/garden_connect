@@ -1,0 +1,38 @@
+#annonce_card {
+    padding: 20px;
+}
+.card{
+    background-color: rgb(240, 240, 240);
+    padding: 0.5rem;
+    box-shadow: 2px 2px 5px lightgray;
+    border-radius: 5px;
+}
+.title{
+    text-align: center;
+    font-family: 'Unkempt';
+    background-color: lightgrey;
+    color: #41B04F;
+    font-size: 1.7rem;
+    padding: 0.3rem;
+    border-radius: 5px;
+}
+.content-card {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.5rem;
+}
+.card .image-card{
+    width: 15%;
+}
+.card .description-card{
+    width: 75%;
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+}
+.card .description-card span{
+    font-weight: bold;
+    color: #F7941D;
+}

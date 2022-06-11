@@ -20,5 +20,8 @@ import './styles/homepage/homepage.css';
 import './styles/homepage/slider/slider.css';
 import './styles/homepage/slider/slider.js';
 
+// css, annonce recherche / listing
+import "./styles/annonce/annonce.css";
+
 // start the Stimulus application
 // import './bootstrap';

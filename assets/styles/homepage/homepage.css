@@ -9,10 +9,14 @@
     align-items: center;
     margin-bottom: 20px;
 }
-#annonces h2 {
-    font-family: 'Unkempt';
+#annonces .title_section_home {
+    /* font-family: 'Unkempt'; */
+    font: var(--title-font);
     color: #AB7B52;
     margin-bottom: 25px;
+}
+#annonces .title_section_home:hover {
+    transform: scale(1.2);
 }
 #annonces p {
     padding: .3em;
@@ -42,4 +46,13 @@
 }
 .annonce_title {
     font-weight: bold;
+    color: dimgray;
+    font-size: 1.2rem;
+}
+.annonce_box {
+    color: dimgray;
+}
+.annonce_box:hover .annonce_title{
+    color: var(--vertclair);
+    filter: brightness(.9);
 }

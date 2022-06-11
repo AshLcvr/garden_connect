@@ -7,28 +7,23 @@
   <section id="slider-home">
     <div class="flexslider" id="slider">
       <ul class="slides relative">
-        {# <li> #}
-          {# <h2 class="absolute text">Citation alacon qui fait bien</h2> #}
-          {# <img src="{{ asset('/images/field-3629120.jpg') | imagine_filter('my_fixed_filter') }}" /> 
-        </li> #}
           {%  for imageHero in imagesHero %}
             <li>
               <h2 class="absolute text">Citation à la con qui fait bien</h2>
               <img src="{{ asset('uploads/hero/'~imageHero.title) }}" alt="">
             </li>
           {% endfor %}
-
       </ul>
     </div>
   </section>
   
   <section class="slider-category">
     <div class="contener carousel">
-      <h2>Découvrez les produits</h2>
+      <a href="#"><h2 class="title_section_home">Découvrez les produits</h2></a>
       <div class="flexslider" id="slider-category">
         <ul class="slides relative">
           {% for cat in categories %}
-            <li>
+            <li class="card_cat">
               <img src="{{ asset('images/fall-915629.jpg') }}" />
               <div>
                 <a href="#" class="title-cat">
@@ -45,7 +40,7 @@
   <div class="separator"></div>
 
   <section id="annonces" class="wrap">
-    <h2>Les dernières annonces</h2>
+    <a href="#"><h2 class="title_section_home">Les dernières annonces</h2></a>
     {% for annonce in annonces %}
         <div class="annonce_box">
           <div class="annonce_img">

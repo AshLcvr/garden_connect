@@ -6,6 +6,20 @@
 
 {% block body %}
     {% for annonce in annonces %}
-    {{ annonce.title }}
+    <div id="annonce_card" class="wrap">
+        <div class="card">
+            <h3 class="title">{{ annonce.title }}</h3>
+            <div class="content-card">
+                <div class="image-card">
+                    <img src="{{ asset('asset/images/logo-paul.svg') }}"/>
+                </div>
+                <div class="description-card">
+                    <p><span>Description : </span>{{ annonce.description }}</p>
+                    <p><span>Prix : </span>{{ annonce.price }} €</p>
+                    <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
 {% endblock %}
