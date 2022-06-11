@@ -3,6 +3,8 @@
   --vertclair:#8FC642;
   --orange:#F7941D;
   --marron:#AB7B52;
+  --text-font: 400 14px/1.4 'Roboto', 'Arial', sans-serif;
+  --title-font: 700 28px/2.8 'Unkempt', 'Arial', cursive, sans-serif;
 }
 *{
     margin: 0;
@@ -48,7 +50,7 @@ img{
 }
 .separator {
     margin-bottom: 2em;
-    border-top: 1px solid var(--orange);
+    border-top: 1px solid var(--vertfonce);
     width: 50%;
     margin: 0 auto 2em;
 }

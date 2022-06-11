@@ -28,7 +28,11 @@
     text-align: center;
     color: #AB7B52;
     margin-bottom: 1rem;
-    font-family: 'Unkempt';
+    /* font-family: 'Unkempt'; */
+    font: var(--title-font);
+}
+.slider-category .contener h2:hover{
+    transform: scale(1.2);
 }
 .slider-category li{
     display: flex!important;
@@ -40,16 +44,20 @@
     transition: all 0.3s;
 }
 .slider-category .title-cat{
-    color: var(--marron);
+    color:dimgray;
     height: 100px;
     font-family: 'Unkempt';
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    filter: opacity(.8);
+
 }
 .slider-category .title-cat:hover {
     color: var(--vertclair);
     font-weight: bolder;
-    background-color: rgb(253, 253, 253);
+    background-color: rgb(255, 255, 255);
+    filter: brightness(1);
 }
+

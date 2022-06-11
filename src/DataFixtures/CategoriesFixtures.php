@@ -78,9 +78,11 @@ class CategoriesFixtures extends Fixture
         $categorieE2->setTitle('Pain');
         $categorieE2->setParentCategory($categorieP);
         $manager->persist($categorieE2);
+
         $manager->flush();
         $this->addReference('Miel', $categorieE);
         $this->addReference('Avoine', $categorieE2);
+
 
     }
 }

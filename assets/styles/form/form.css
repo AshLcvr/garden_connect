@@ -29,7 +29,6 @@
     padding: 10px 20px;
 }
 .radio_box{
-    border: 10px solid green;
     margin: 1rem auto;
     display: flex;
     flex-direction: row;

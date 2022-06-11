@@ -27,7 +27,6 @@ class AnnonceController extends AbstractController
     }
 
 
-
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository): Response
     {
