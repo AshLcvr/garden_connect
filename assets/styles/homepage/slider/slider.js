@@ -15,4 +15,11 @@ $(document).ready(function () {
         minItems: 2,
         maxItems: 4,
     });
+
+    $('.slider-annonce').flexslider({
+        controlNav: false,
+        directionNav: false,
+        animation: "slide",
+        animationLoop: true,
+    });
 })

@@ -2,7 +2,7 @@
  * @property {HTMLElement} pagination
  * @property {HTMLElement} content
  * @property {HTMLElement} sort
- * @property {HTMLElement} form
+ * @property {HTMLFormElement} form
  */
 
 export default class Filter {
@@ -18,29 +18,44 @@ export default class Filter {
         this.content = element.querySelector('.js-filter-content')
         this.sort = element.querySelector('.js-filter-sort')
         this.form = element.querySelector('.js-filter-form')
-        this.bindEvents()
+        this.bindEvent()
     }
 
     bindEvent(){
-        this.sort.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', e =>{
+        this.sort.addEventListener('click', e =>{
+            if (e.target.tagName === 'A'){
                 e.preventDefault()
-                this.loadUrl( a.getAttribute('href'))
-            })
+                this.loadUrl(e.target.getAttribute('href'))
+            }
+        })
+
+        this.form.querySelectorAll('.annonce_category').forEach(input => {
+            input.addEventListener('change', this.loadForm.bind(this))
         })
     }
 
-    loadUrl(url){
-        const  response =  fetch (url, {
+    async loadForm(){
+        const data = new FormData(this.form)
+        const url = new URL(this.form.getAttribute('action') || window.location.href)
+        const params = new URLSearchParams()
+        data.forEach((value, key) =>
+            params.append(key,value)
+        )
+        return this.loadUrl(url.pathname + '?' + params.toString())
+    }
+
+    async loadUrl(url){
+        const response = await fetch (url, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
         })
-
-        if (response >= 200 && response.status > 300){
-            const data =  response.json()
+        try{
+            const data = await response.json()
             this.content.innerHTML = data.content
-        }else{
+            this.sort.innerHTML = data.sort
+            history.replaceState({},'',url)
+        }catch {
             console.log(response)
         }
     }

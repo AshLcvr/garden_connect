@@ -26,7 +26,7 @@
             <li class="card_cat">
               <img src="{{ asset('images/fall-915629.jpg') }}" />
               <div>
-                <a href="#" class="title-cat">
+                <a href="{{ path('app_annonce_recherche')~'?category='~cat.id }}" class="title-cat" target="_blank">
                   <h3>{{ cat.title }}</h3>
                 </a>
               </div>
@@ -40,16 +40,16 @@
   <div class="separator"></div>
 
   <section id="annonces" class="wrap">
-    <a href="#"><h2 class="title_section_home">Les dernières annonces</h2></a>
+    <a href="{{ path('app_annonce_recherche') }}" target="_blank"><h2 class="title_section_home">Les dernières annonces</h2></a>
     {% for annonce in annonces %}
         <div class="annonce_box">
           <div class="annonce_img">
-            <a href="#" class="annonce_link">
+            <a href="{{ path('app_annonce_recherche')~'/'~annonce.id }}" class="annonce_link" target="_blank">
               <img src="{{ asset('images/fruit-3860991.jpg') }}"/>
             </a>
           </div>
           <div class="annonce_text">
-            <a href="#" class="annonce_link">
+            <a href="{{ path('app_annonce_recherche')~'/'~annonce.id }}" class="annonce_link" target="_blank">
               <div>
                 <p class="annonce_title">{{ annonce.title }}</p>
               </div>
@@ -66,7 +66,6 @@
   </section>
 
 {% endblock %}
-
 
 {% block javascripts %}
   <script src="{{ asset('/asset/flex/jquery.flexslider.js') }}"></script>

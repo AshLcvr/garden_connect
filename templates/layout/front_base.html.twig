@@ -10,11 +10,13 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Unkempt:wght@400;700&display=swap" rel="stylesheet">
         {{ encore_entry_link_tags('app') }}
-{#        {% block stylesheets %}#}
-{#        {% endblock %}#}
+        {% block stylesheets %}
+        {% endblock %}
+
     </head>
     <body>
       {{ include('_partials/_header-front.html.twig') }}
+
       {% for label, messages in app.flashes %}
           {% for message in messages %}
               <div class="flash-{{ label }}">
@@ -22,8 +24,12 @@
               </div>
           {% endfor %}
       {% endfor %}
-      {% block body %}{% endblock %}
+
+      {% block body %}
+      {% endblock %}
+
       {{ include('_partials/_footer-front.html.twig') }}
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js" integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k="
         crossorigin="anonymous"></script>

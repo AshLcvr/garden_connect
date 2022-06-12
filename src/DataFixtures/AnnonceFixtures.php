@@ -12,7 +12,6 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-
         $annonce = new Annonce();
         $annonce->setTitle('Pommes');
         $annonce->setDescription('Goûtez les pommes de notre verger ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
@@ -47,9 +46,9 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce3->setSubcategory($this->getReference('Miel'));
         $manager->persist($annonce3);
 
-
         $manager->flush();
     }
+
     public function getDependencies()
     {
         return [

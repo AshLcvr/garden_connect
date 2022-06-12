@@ -16,7 +16,7 @@ class DefaultController extends AbstractController
     public function index(CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $categories = $categoryRepository->findAll();
-        $annonces = $annonceRepository->findBy([],['created_at' => 'DESC'], 4);
+        $annonces = $annonceRepository->findBy(['actif'=> 1],['created_at' => 'DESC'], 4);
         $imagesHero = $imagesHeroRepository->findAll();
         // dd($imagesHero);
 

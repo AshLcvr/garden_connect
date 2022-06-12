@@ -25,7 +25,7 @@ class SearchType extends AbstractType
                'label' => false,
                'required'=> false,
                 'attr' => [
-                    'placeholder' => 'Rechercher'
+                    'placeholder' => 'Mots clés'
                 ]
            ])
            ->add('category', EntityType::class, [
@@ -81,7 +81,6 @@ class SearchType extends AbstractType
             });
     }
 
-
     /**
      * @param FormInterface $form
      * @param Category $category
@@ -91,12 +90,11 @@ class SearchType extends AbstractType
         $form->add('subcategory',EntityType::class,[
             'class' => Subcategory::class,
             'label' =>  false ,
-            'placeholder' => 'Sous-catégorie',
+            'placeholder' => $category? 'Type de produit' : 'Sous-catégories',
             'choices' => $category? $category->getSubcategories() : [],
             'choice_label' => 'title',
         ]);
     }
-
 
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -111,6 +109,4 @@ class SearchType extends AbstractType
     {
        return '';
     }
-
-
 }

@@ -4,38 +4,33 @@
     Recherche d'annonce
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
+{% endblock %}
 {% block body %}
-    <div class="js-filter">
-{#        <div class="js-filter-form">#}
-{#            {% include 'front/annonce/_filter.html.twig' with {form : recherche, min : min, max : max} only %}#}
-{#        </div>#}
+    <div class="wrap d-flex flex-column">
+        <div class="js-filter">
+            <div class="box-shadow" id="filter_form">
+                <h3 class="title">Filter les produits par : </h3>
+                {% include 'front/annonce/_filter.html.twig' with {form : recherche, min : min, max : max} only %}
+            </div>
 
-        <div class="recherche-tri js-filter-sort">
-            {{ knp_pagination_sortable(annonces, 'Prix', 'a.price') }}
-        </div>
+            <div class="recherche-tri js-filter-sort">
+                <p><u>Trier par :</u></p>
+                {% include 'front/annonce/_sort.html.twig' %}
+            </div>
 
-        <div class="js-filter-content">
-            {% for annonce in annonces %}
-                <div id="annonce_card" class="wrap">
-                    <div class="card">
-                        <h3 class="title">{{ annonce.title }}</h3>
-                        <div class="content-card">
-                            <div class="image-card">
-                                <img src="{{ asset('asset/images/logo-paul.svg') }}" alt="Image Annonce"/>
-                            </div>
-                            <div class="description-card">
-                                <p><span>Description : </span>{{ annonce.description }}</p>
-                                <p><span>Prix : </span>{{ annonce.price }} €</p>
-                                <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+            <div class="js-filter-content">
+                {% include 'front/annonce/_annonces.html.twig' %}
+            </div>
 
-        <div class="js-filter-pagination">
-            {{ knp_pagination_render(annonces) }}
+            <div class="js-filter-pagination" id="pagination">
+                {{ knp_pagination_render(annonces) }}
+            </div>
         </div>
     </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('/asset/flex/jquery.flexslider.js') }}"></script>
 {% endblock %}

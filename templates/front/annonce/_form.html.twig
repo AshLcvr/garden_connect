@@ -1,5 +1,5 @@
 <div class="body">
-    <div id="contener_form">
+    <div class="wrap annonce_form">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
         <div class="bloc_form">
             {{ form_label(form.title) }}
@@ -11,8 +11,10 @@
         </div>
 
         <div class="bloc_form">
-            {{ form_label(form.description) }}
-            {{ form_widget(form.description) }}
+
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description) }}
+
             <small>{{ form_help(form.description) }}</small>
             <div class="form-error">
                 {{ form_errors(form.description) }}
@@ -37,18 +39,20 @@
             </div>
         </div>
 
-        <div class="bloc_form">
-            {{ form_label(form.price) }}
-            {{ form_widget(form.price) }}
+        <div class=" bloc_form d-flex" style="gap : 1rem">
+            <div class="d-flex flex-column" style="width: 30%">
+                {{ form_label(form.price) }}
+                {{ form_widget(form.price) }}
+            </div>
             <small>{{ form_help(form.price) }}</small>
             <div class="form-error">
                 {{ form_errors(form.price) }}
             </div>
-        </div>
 
-        <div class="bloc_form">
-            {{ form_label(form.mesure) }}
-            {{ form_widget(form.mesure) }}
+            <div class="d-flex flex-column" style="width: 20%">
+                {{ form_label(form.mesure) }}
+                {{ form_widget(form.mesure) }}
+            </div>
             <small>{{ form_help(form.mesure) }}</small>
             <div class="form-error">
                 {{ form_errors(form.mesure) }}
@@ -56,16 +60,18 @@
         </div>
 
         <div class="bloc_form">
+            <div class="d-flex flex-column">
             {{ form_label(form.upload) }}
             {{ form_widget(form.upload) }}
+            </div>
             <small>{{ form_help(form.upload) }}</small>
             <div class="form-error">
                 {{ form_errors(form.upload) }}
             </div>
         </div>
 
-        <div class="bloc_form">
-            <button class="btn">{{ button_label|default('C\'est parti !') }}</button>
+        <div class="bloc_submit">
+            <button class="btn btn-primary">{{ button_label|default('C\'est parti !') }}</button>
         </div>
         {{ form_end(form) }}
     </div>

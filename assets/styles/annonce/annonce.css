@@ -21,16 +21,23 @@
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 .card .image-card{
-    width: 15%;
+    width: 30%;
+}
+.card .image-card ul li img{
+    border-radius: 5px;
 }
 .card .description-card{
-    width: 75%;
+    width: 60%;
     display: flex;
     flex-flow: column;
     gap: 1rem;
+    margin: auto 0;
+}
+.card .description-card p{
+    margin: 0;
 }
 .card .description-card span{
     font-weight: bold;

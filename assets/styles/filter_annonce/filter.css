@@ -1,0 +1,66 @@
+.js-filter-content{
+    min-height: 105vh;
+}
+#filter_form{
+    border: solid 3px var(--vertfonce);
+    border-radius: 10px;
+    width: 70%;
+    margin: 2rem auto;
+    padding: 1rem
+}
+#filter_form form > *{
+    margin-bottom: 1rem;
+}
+#filter_form .form-group, #filter_form .d-flex.justify-content-center{
+    margin: 0
+}
+#filter_form form .bloc_form{
+    justify-content: space-between;
+}
+#filter_form form .bloc_form div{
+    width: 48%;
+}
+#filter_form .noUi-connect {
+    background: var(--vertclair);
+}
+#filter_form .d-flex.justify-content-center{
+    gap: 2rem;
+}
+.recherche-tri{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    gap: 2rem;
+}
+.recherche-tri p{
+    text-align: center;
+    margin: auto 0
+}
+.recherche-tri a:hover{
+    color: white;
+}
+.recherche-tri a{
+    color: white;
+}
+#pagination{
+    margin: 2rem auto;
+}
+#pagination span {
+    margin-right: .5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: var(--vertclair);
+    border: solid 1px var(--vertfonce);
+    border-radius: 10px;
+}
+#pagination span:hover{
+    background-color: var(--vertfonce);}
+#pagination span a{
+    color: white;
+    padding: .4rem 1rem;
+    margin: auto;
+}

@@ -7,7 +7,6 @@ use App\Entity\Annonce;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Knp\Component\Pager\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
@@ -52,7 +51,7 @@ class AnnonceRepository extends ServiceEntityRepository
     public function findBySearch(SearchData $search)
     {
         $query = $this->getSearchQuery($search)->getQuery();
-        return $this->paginator->paginate($query, $search->page, 2);
+        return $this->paginator->paginate($query, $search->page, 10);
     }
 
     /**
@@ -79,6 +78,7 @@ class AnnonceRepository extends ServiceEntityRepository
                 ->createQueryBuilder('a')
                 ->select('c', 'a')
                 ->join('a.subcategory', 'c')
+                ->andWhere('a.actif = 1')
                 ->orderBy('a.created_at', 'DESC');
 
             if (!empty($search->q)) {
@@ -113,6 +113,7 @@ class AnnonceRepository extends ServiceEntityRepository
         }else {
                 $query = $this
                     ->createQueryBuilder('a')
+                    ->andWhere('a.actif = 1')
                     ->orderBy('a.created_at', 'DESC');
             }
          return $query;

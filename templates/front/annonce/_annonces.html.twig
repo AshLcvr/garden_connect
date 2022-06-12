@@ -1,0 +1,29 @@
+{% for annonce in annonces %}
+    <div id="annonce_card" class="wrap">
+        <div class="card">
+            <h3 class="title">{{ annonce.title }}</h3>
+            <div class="content-card ">
+                <div class="image-card flexslider slider-annonce">
+                    <ul class="slides">
+                        {% for image in annonce.imagesAnnonces %}
+                            {%  if image.annonce.id == annonce.id %}
+                            <li>
+                                <img src="{{ asset('uploads/mini/'~image.title) }}" alt="Image Annonce" />
+                            </li>
+                            {% else %}
+                                <img src="{{ asset('asset/images/logo-paul.svg') }}" alt="Image Annonce"/>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="description-card">
+                    <p><span>Description : </span>{{ annonce.description }}</p>
+                    <p><span>Prix : </span>{{ annonce.price }} €</p>
+                    <p><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
+                    <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
