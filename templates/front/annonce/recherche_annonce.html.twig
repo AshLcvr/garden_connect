@@ -5,21 +5,37 @@
 {% endblock %}
 
 {% block body %}
-    {% for annonce in annonces %}
-    <div id="annonce_card" class="wrap">
-        <div class="card">
-            <h3 class="title">{{ annonce.title }}</h3>
-            <div class="content-card">
-                <div class="image-card">
-                    <img src="{{ asset('asset/images/logo-paul.svg') }}"/>
+    <div class="js-filter">
+{#        <div class="js-filter-form">#}
+{#            {% include 'front/annonce/_filter.html.twig' with {form : recherche, min : min, max : max} only %}#}
+{#        </div>#}
+
+        <div class="recherche-tri js-filter-sort">
+            {{ knp_pagination_sortable(annonces, 'Prix', 'a.price') }}
+        </div>
+
+        <div class="js-filter-content">
+            {% for annonce in annonces %}
+                <div id="annonce_card" class="wrap">
+                    <div class="card">
+                        <h3 class="title">{{ annonce.title }}</h3>
+                        <div class="content-card">
+                            <div class="image-card">
+                                <img src="{{ asset('asset/images/logo-paul.svg') }}" alt="Image Annonce"/>
+                            </div>
+                            <div class="description-card">
+                                <p><span>Description : </span>{{ annonce.description }}</p>
+                                <p><span>Prix : </span>{{ annonce.price }} €</p>
+                                <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="description-card">
-                    <p><span>Description : </span>{{ annonce.description }}</p>
-                    <p><span>Prix : </span>{{ annonce.price }} €</p>
-                    <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
-                </div>
-            </div>
+            {% endfor %}
+        </div>
+
+        <div class="js-filter-pagination">
+            {{ knp_pagination_render(annonces) }}
         </div>
     </div>
-    {% endfor %}
 {% endblock %}

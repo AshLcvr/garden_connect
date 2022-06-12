@@ -40,6 +40,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce3->setTitle('Miel');
         $annonce3->setDescription('Miel de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
         $annonce3->setPrice(1);
+        $annonce3->setMesure($this->getReference('Kg'));
         $annonce3->setCreatedAt(new DateTimeImmutable());
         $annonce3->setActif(true);
         $annonce3->setBoutique($this->getReference('boutique_orianne'));

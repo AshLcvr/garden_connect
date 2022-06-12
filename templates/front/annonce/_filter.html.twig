@@ -1,0 +1,57 @@
+<div class="body">
+    <div id="contener_form">
+        {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+        <div class="bloc_form">
+            {{ form_label(form.q) }}
+            {{ form_widget(form.q) }}
+            <small>{{ form_help(form.q) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.q) }}
+            </div>
+        </div>
+
+        <div class="bloc_form">
+            {{ form_label(form.category) }}
+            {{ form_widget(form.category, { 'attr' : {'class' : 'annonce_category' }}) }}
+            <small>{{ form_help(form.category) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.category) }}
+            </div>
+        </div>
+
+        <div class="bloc_form">
+            {{ form_label(form.subcategory) }}
+            {{ form_widget(form.subcategory, { 'attr' : {'class' : 'annonce_subcategory' }}) }}
+            <small>{{ form_help(form.subcategory) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.subcategory) }}
+            </div>
+        </div>
+
+        <div class="bloc_form">
+            {{ form_label(form.min) }}
+            {{ form_widget(form.min) }}
+            <small>{{ form_help(form.min) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.min) }}
+            </div>
+        </div>
+
+        <div class="bloc_form">
+            {{ form_label(form.max) }}
+            {{ form_widget(form.max) }}
+            <small>{{ form_help(form.max) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.max) }}
+            </div>
+        </div>
+
+        <div id="price-slider" data-min="{{ min }}" data-max=" {{ max }}"></div>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+
+{#{% block javascripts %}#}
+{#    {{ encore_entry_script_tags('app') }}#}
+{#{% endblock %}#}

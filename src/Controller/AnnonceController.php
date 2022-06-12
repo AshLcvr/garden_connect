@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Annonce;
+use App\Entity\Category;
 use App\Form\AnnonceType;
+use App\Form\SearchType;
 use App\Repository\AnnonceRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\SubcategoryRepository;
@@ -17,12 +20,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnnonceController extends AbstractController
 {
     #[Route('/recherche', name: 'app_annonce_recherche', methods: ['GET'])]
-    public function recherche(AnnonceRepository $annonceRepository): Response
+    public function recherche(AnnonceRepository $annonceRepository, Request $request , CategoryRepository $categoryRepository): Response
     {
-        $annonces = $annonceRepository->findAll();
+        $data = new SearchData();
+        $data->page = $request->get('page',1);
+        $recherche = $this->createForm(SearchType::class,$data);
+        $recherche->handleRequest($request);
+        [$min, $max] = $annonceRepository->findMinMax($data);
+        $annonces = $annonceRepository->findBySearch($data);
+//
+        if ($recherche->isSubmitted() && $recherche->isValid()) {
+//            dd($data);
+        }
+
 
         return $this->render('front/annonce/recherche_annonce.html.twig', [
             'annonces' => $annonces,
+            'recherche' => $recherche->createView(),
+            'min' => $min,
+            'max' => $max,
         ]);
     }
 
