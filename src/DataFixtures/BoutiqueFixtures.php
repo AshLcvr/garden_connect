@@ -3,9 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Boutique;
+use App\Entity\ImagesBoutique;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Persistence\ObjectManager;
 
 class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -19,29 +20,44 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
+        $imageBoutique = (new ImagesBoutique())
+            ->setTitle('imageBoutiqueDefault.jpg');
+
         $boutiquePolo = (new Boutique())
             ->setTitle('La boutique de Polo')
             ->setDescription('La boutique qu\'elle est belle')
+            ->setCity('Nointot')
+            ->setTelephone('0744556677')
             ->setUser($this->getReference('polo'))
             ->setActif(1)
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->addImagesBoutique($imageBoutique);
             $manager->persist($boutiquePolo);
+        $manager->persist($imageBoutique);
 
         $boutiqueSacha= (new Boutique())
             ->setTitle('La boutique de Sacha')
             ->setDescription('La boutique qu\'elle est belle')
+            ->setCity('Routot')
+            ->setTelephone('0600998877')
             ->setUser($this->getReference('sacha'))
             ->setActif(1)
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->addImagesBoutique($imageBoutique);
         $manager->persist($boutiqueSacha);
+        $manager->persist($imageBoutique);
 
         $boutiqueOrianne = (new Boutique())
             ->setTitle('La boutique de Orianne')
-            ->setDescription('La boutique qu\'elle est belle')
+            ->setDescription('La boutique qu\'elle est belle. 3 wolf moon banh mi vaporware raclette, DSA XOXO single-origin coffee chicharrones chillwave yuccie church-key vinyl small batch. Shoreditch paleo readymade narwhal pork belly four loko. Fashion axe master cleanse salvia, vexillologist flannel taxidermy swag four loko jean shorts kale chips hoodie. 3 wolf moon banh mi vaporware raclette, DSA XOXO single-origin coffee chicharrones chillwave yuccie church-key vinyl small batch. Shoreditch paleo readymade narwhal pork belly four loko. Fashion axe master cleanse salvia, vexillologist flannel taxidermy swag four loko jean shorts kale chips hoodie. 3 wolf moon banh mi vaporware raclette, DSA XOXO single-origin coffee chicharrones chillwave yuccie church-key vinyl small batch. Shoreditch paleo readymade narwhal pork belly four loko. Fashion axe master cleanse salvia, vexillologist flannel taxidermy swag four loko jean shorts kale chips hoodie.')
+            ->setCity('Pont-Audemer')
+            ->setTelephone('0677889900')
             ->setUser($this->getReference('orianne'))
             ->setActif(1)
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->addImagesBoutique($imageBoutique);
         $manager->persist($boutiqueOrianne);
+        $manager->persist($imageBoutique);
 
         $manager->flush();
 

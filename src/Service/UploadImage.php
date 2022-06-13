@@ -73,7 +73,7 @@ class UploadImage
             $miniature->save($this->getUploadDirectory() .'/mini/'. $fileName);
             // Images boutiques
             $miniature = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
-            $miniature->resizeToBestFit(500, 500);
+            $miniature->crop(1400, 400, true, ImageResize::CROPCENTER);
             $miniature->save($this->getUploadDirectory() .'/boutique/'. $fileName);
         }
     }

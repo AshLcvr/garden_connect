@@ -1,0 +1,63 @@
+{% extends 'layout/front_base.html.twig' %}
+
+{% block body %}
+    <section id="slider-home">
+        <div class="flexslider" id="slider">
+            <ul class="slides relative">
+                {% for imageBoutique in images %}
+                    <li>
+                        {# <img src="{{ asset('uploads/boutique/imageBoutiqueDefault.jpg') }}" /> #}
+                        <img src="{{ asset('uploads/boutique/'~imageBoutique.title) }}" />
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <section id="profile" class="wrap">
+        <div class="photo_profile">
+            <img src="{{ asset('images/test-profile.png') }}" />
+        </div>
+        <div class="infos_vendeur">
+            <p>{{ user.name }} de {{ city }}</p>
+            <p>Boutique en ligne depuis le : {{ createdAt|date('d/m/Y') }}</p>
+        </div>
+        
+    </section>
+
+    <section id="boutique" class="wrap">
+        <div class="infos_boutique">
+            <h1 class="title_boutique">{{ title }}</h1>
+            <p class="description_boutique">{{ description }}</p>
+        </div>
+        <div class="contact_vendeur">
+            <p class="contact"> Contacter le vendeur</p>
+            {% if telephone %}
+                <p class="telephone">{{ telephone }}</p>
+            {% endif %}
+            <a href="#" class="message_link">Message</a>
+        </div>
+    </section>
+
+    <section id="annonces" class="wrap">
+        <div id="annonce_card">
+        {% for annonce in annonces %}
+        <div class="card">
+            <h3 class="title">{{ annonce.title }}</h3>
+                <div class="content-card">
+                    <div class="image-card">
+                        <img src="{{ asset('asset/images/logo-paul.svg') }}"/>
+                    </div>
+                    <div class="description-card">
+                        <p><span>Description : </span>{{ annonce.description }}</p>
+                        <p><span>Prix : </span>{{ annonce.price }} €</p>
+                        <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+    </section>
+
+{% endblock %}

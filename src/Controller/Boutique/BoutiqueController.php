@@ -4,17 +4,19 @@ namespace App\Controller\Boutique;
 
 use App\Entity\Boutique;
 use App\Form\BoutiqueType;
-use App\Repository\BoutiqueRepository;
-use App\Repository\UserRepository;
-use App\Security\EmailVerifier;
 use App\Service\UploadImage;
+use App\Entity\ImagesBoutique;
+use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\UserRepository;
+use App\Repository\BoutiqueRepository;
+use App\Repository\ImagesBoutiqueRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 //#[Route('/boutique')]
 class BoutiqueController extends AbstractController
@@ -41,7 +43,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/nouvelleboutique', name: 'app_boutique_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator): Response
+    public function new(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, ImagesBoutiqueRepository $imagesBoutiqueRepository, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator): Response
     {
         $user = $this->getUser();
         $boutique = new Boutique();
@@ -55,9 +57,15 @@ class BoutiqueController extends AbstractController
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
-//                dd($user);
-                $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
-
+                //              dd($user);
+                if (empty($boutiqueImage)) {
+                    $imageDefault = new ImagesBoutique();
+                    $imageDefault->setTitle('imageBoutiqueDefault.jpg');
+                    $imageDefault->setBoutique($boutique);
+                    $imagesBoutiqueRepository->add($imageDefault, true);
+                } else {
+                    $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
+                }
                 $user->setRoles(['ROLE_VENDEUR']);
                 $userRepository->add($user, true);
                 $userAuthenticator->authenticateUser($user, $formLoginAuthenticator, $request);
@@ -130,5 +138,33 @@ class BoutiqueController extends AbstractController
         $boutiqueRepository->add($boutique, true);
 
         return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/viewboutique/{id}', name: 'view_boutique', methods: ['GET'])]
+    public function oneBoutique(Boutique $boutique, ImagesBoutiqueRepository $imagesBoutiqueRepository)
+    {
+        $boutique_user = $boutique->getUser();
+        $boutique_city = $boutique->getCity();
+        $boutique_telephone = $boutique->getTelephone();
+        $boutique_title = $boutique->getTitle();
+        $boutique_createdAt = $boutique->getCreatedAt();
+        $boutique_description = $boutique->getDescription();
+        $boutique_annonces = $boutique->getAnnonces();
+        $imagesBoutiques = $imagesBoutiqueRepository->findAll();
+
+
+        return $this->render(
+            'front/boutique/viewboutique.html.twig',
+            [
+                'user' => $boutique_user,
+                'city' => $boutique_city,
+                'telephone' => $boutique_telephone,
+                'title' => $boutique_title,
+                'description' => $boutique_description,
+                'createdAt' => $boutique_createdAt,
+                'annonces' => $boutique_annonces,
+                'images' => $imagesBoutiques
+            ]
+        );
     }
 }
