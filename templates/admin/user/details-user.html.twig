@@ -34,7 +34,7 @@
                 <div>
                     <a href="{{ path('active-user', {id: user.id}) }}" class="action">Rendre actif</a>
             {% endif %}
-                <a href="{{ path('active-annonce', {id: user.id}) }}" class="action">Envoyer message d'avertissement</a>
+                <a href="{{ path('new_conversation', {id: user.id}) }}" class="action">Envoyer message d'avertissement</a>
             </div>
         </div>
     </div>

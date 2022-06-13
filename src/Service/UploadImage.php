@@ -73,7 +73,7 @@ class UploadImage
             $miniature->save($this->getUploadDirectory() .'/mini/'. $fileName);
             // Images boutiques
             $miniature = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
-            $miniature->resizeToBestFit(500, 500);
+            $miniature->crop(1400, 400, true, ImageResize::CROPCENTER);
             $miniature->save($this->getUploadDirectory() .'/boutique/'. $fileName);
         }
     }
@@ -139,6 +139,27 @@ class UploadImage
         // Suppression de l'originale
         $file_path = $this->getUploadDirectory() . '/' . $fileName;
         if (file_exists($file_path)) unlink($file_path);
+    }
+
+    public function uploadCat(UploadedFile $file)
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = $this->slugger->slug($originalFilename);
+        $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+
+        try {
+            $file->move($this->getUploadDirectory(), $fileName);
+        } catch (FileException $e) {
+            dd($e);
+        }
+
+        // Resize de l'image (optionnel)
+        // Profile
+        $imageCat = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
+        $imageCat->crop(240, 140);
+        $imageCat->save($this->getUploadDirectory() .'/category/'. $fileName);
+
+        return $fileName;
     }
 
     public function uploadProfile(UploadedFile $file)

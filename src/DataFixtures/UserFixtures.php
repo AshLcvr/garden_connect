@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -27,6 +28,7 @@ class UserFixtures extends Fixture
         $adminPolo->setEmail('paul.joret@hotmail.fr');
         $adminPolo->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
         $adminPolo->setActif(true);
+        $adminPolo->setCreatedAt(new \DateTimeImmutable('-2 week'));
         $password = $this->hasher->hashPassword($adminPolo, 'michel');
         $adminPolo->setPassword($password);
 
@@ -39,6 +41,7 @@ class UserFixtures extends Fixture
         $adminSacha->setEmail('sacha.lcvr@gmail.com');
         $adminSacha->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
         $adminSacha->setActif(true);
+        $adminSacha->setCreatedAt(new \DateTimeImmutable('-2 week'));
         $password = $this->hasher->hashPassword($adminSacha, 'michel');
         $adminSacha->setPassword($password);
 
@@ -51,6 +54,7 @@ class UserFixtures extends Fixture
         $adminOrianne->setEmail('orianne.cielat@gmail.com');
         $adminOrianne->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
         $adminOrianne->setActif(true);
+        $adminOrianne->setCreatedAt(new \DateTimeImmutable('-2 week'));
         $password = $this->hasher->hashPassword($adminOrianne, 'michel');
         $adminOrianne->setPassword($password);
 
@@ -64,6 +68,7 @@ class UserFixtures extends Fixture
             $user->setEmail('user_'.$i.'@gmail.com');
             $user->setRoles(['ROLE_USER']);
             $user->setActif(true);
+            $user->setCreatedAt(new \DateTimeImmutable());
             $password = $this->hasher->hashPassword($user, 'user_'.$i);
             $user->setPassword($password);
             $this->addReference('user_'.$i, $user);
@@ -78,6 +83,7 @@ class UserFixtures extends Fixture
             $user->setEmail('vendeur_'.$i.'@gmail.com');
             $user->setRoles(['ROLE_USER','ROLE_VENDEUR']);
             $user->setActif(true);
+            $user->setCreatedAt(new \DateTimeImmutable());
             $password = $this->hasher->hashPassword($user, 'vendeur_'.$i);
             $user->setPassword($password);
             $this->addReference('vendeur_'.$i, $user);

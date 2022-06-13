@@ -36,8 +36,7 @@ class BoutiqueType extends AbstractType
                 'constraints' => [
                     new All([
 
-                        new File([
-                            'maxSize' => '1024k',
+                        new File(['maxSize' => '5000k',
                             'mimeTypes' => [
                                 'image/jpeg',
                                 'image/png',
