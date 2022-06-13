@@ -1,0 +1,66 @@
+{% extends 'layout/admin_base.html.twig' %}
+
+{% block title %}Conversations{% endblock %}
+
+{% block body %}
+<div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
+    <h2 class="title">Conversation initier</h2>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-b-20">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Id</th>
+                    <th scope="col" class="px-6 py-3">Initiateur</th>
+                    <th scope="col" class="px-6 py-3">Destinateur</th>
+                    <th scope="col" class="px-6 py-3">Premier messages</th>
+                    <th scope="col" class="px-6 py-3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for conv in conversationsInit %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ conv.id }}</th>
+                    <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ conv.user.name }}</th>
+                    <td class="px-6 py-4">{{ conv.correspondant.name }}</td>
+                    <td class="px-6 py-4">{{ conv.premierMessage }}</td>
+                    <td class="px-6 py-4"><a href="{{ path('conversation_message', {id: conv.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a></td>
+                </tr>
+            {% else %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h2 class="title">Conversation correspondant</h2>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-b-20">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Id</th>
+                    <th scope="col" class="px-6 py-3">Initiateur</th>
+                    <th scope="col" class="px-6 py-3">Destinateur</th>
+                    <th scope="col" class="px-6 py-3">Premier messages</th>
+                    <th scope="col" class="px-6 py-3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for conv in conversationsCorresp %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ conv.id }}</th>
+                    <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ conv.user.name }}</th>
+                    <td class="px-6 py-4">{{ conv.correspondant.name }}</td>
+                    <td class="px-6 py-4">{{ conv.premierMessage }}</td>
+                    <td class="px-6 py-4"><a href="{{ path('conversation_message', {id: conv.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a></td>
+                </tr>
+            {% else %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

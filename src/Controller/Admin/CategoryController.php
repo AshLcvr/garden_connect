@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Entity\Subcategory;
+use App\Service\UploadImage;
 use App\Form\SubcategoryType;
 use App\Repository\CategoryRepository;
 use App\Repository\SubcategoryRepository;
@@ -25,7 +26,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CategoryRepository $categoryRepository): Response
+    public function new(Request $request, CategoryRepository $categoryRepository, UploadImage $uploadImage): Response
     {
 
         $category = new Category();
@@ -33,6 +34,8 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageHero = $form->get('image')->getData();
+            $category->setImage($uploadImage->uploadCat($imageHero));
             $categoryRepository->add($category, true);
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);

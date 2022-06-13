@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ImagesHeroType extends AbstractType
@@ -24,7 +24,9 @@ class ImagesHeroType extends AbstractType
                 // 'multiple' => true,
                 'constraints' => [
                     // new All([
-
+                    new NotBlank([
+                        'message' => 'Veuillez renseigner une image',
+                    ]),
                     new File([
                         'maxSize' => '10000k',
                         'mimeTypes' => [

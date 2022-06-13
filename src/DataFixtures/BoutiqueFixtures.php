@@ -24,7 +24,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setDescription('La boutique qu\'elle est belle')
             ->setUser($this->getReference('polo'))
             ->setActif(1)
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable('-2 week'));
             $manager->persist($boutiquePolo);
 
         $boutiqueSacha= (new Boutique())

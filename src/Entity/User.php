@@ -57,9 +57,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $actif;
 
+    #[ORM\Column(type: 'datetime_immutable')]
+    private $created_at;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Conversation::class)]
+    private $conversations_init;
+
+    #[ORM\OneToMany(mappedBy: 'correspondant', targetEntity: Conversation::class)]
+    private $conversations_corresp;
+
+    #[ORM\OneToMany(mappedBy: 'expediteur', targetEntity: Message::class)]
+    private $messages;
+
     public function __construct()
     {
         $this->boutiques = new ArrayCollection();
+        $this->conversations_init = new ArrayCollection();
+        $this->conversations_corresp = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -235,6 +250,108 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActif(bool $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Conversation>
+     */
+    public function getConversationsInit(): Collection
+    {
+        return $this->conversations_init;
+    }
+
+    public function addConversationsInit(Conversation $conversationsInit): self
+    {
+        if (!$this->conversations_init->contains($conversationsInit)) {
+            $this->conversations_init[] = $conversationsInit;
+            $conversationsInit->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConversationsInit(Conversation $conversationsInit): self
+    {
+        if ($this->conversations_init->removeElement($conversationsInit)) {
+            // set the owning side to null (unless already changed)
+            if ($conversationsInit->getUser() === $this) {
+                $conversationsInit->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Conversation>
+     */
+    public function getConversationsCorresp(): Collection
+    {
+        return $this->conversations_corresp;
+    }
+
+    public function addConversationsCorresp(Conversation $conversationsCorresp): self
+    {
+        if (!$this->conversations_corresp->contains($conversationsCorresp)) {
+            $this->conversations_corresp[] = $conversationsCorresp;
+            $conversationsCorresp->setCorrespondant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConversationsCorresp(Conversation $conversationsCorresp): self
+    {
+        if ($this->conversations_corresp->removeElement($conversationsCorresp)) {
+            // set the owning side to null (unless already changed)
+            if ($conversationsCorresp->getCorrespondant() === $this) {
+                $conversationsCorresp->setCorrespondant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setExpediteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getExpediteur() === $this) {
+                $message->setExpediteur(null);
+            }
+        }
 
         return $this;
     }

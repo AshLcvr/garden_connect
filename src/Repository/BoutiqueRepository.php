@@ -38,6 +38,15 @@ class BoutiqueRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function newBoutiques($value1): array
+    {
+        return $this->createQueryBuilder('b')
+            ->where('b.created_at > :val1')
+            ->setParameter('val1', $value1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    /**
 //     * @return Boutique[] Returns an array of Boutique objects

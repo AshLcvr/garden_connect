@@ -118,4 +118,13 @@ class AnnonceRepository extends ServiceEntityRepository
             }
          return $query;
     }
+    public function newAnnonces($value1): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.created_at > :val1')
+            ->setParameter('val1', $value1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
