@@ -1,17 +1,16 @@
 {% extends 'layout/admin_base.html.twig' %}
 
-{% block title %}New sous-catégorie{% endblock %}
+{% block title %}Edit sous-catégorie{% endblock %}
 
 {% block body %}
 <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
-    <h2 class="title">Créer une nouvelle sous-catégorie</h2>
-    {% for flash_error in app.flashes('verify_email_error') %}
+    <h2 class="title">Edit category</h2>
+{% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
     <div class="body">
         <div id="contener_form">
             {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
-                <h1>Nouvelle Catégorie</h1>
                 <div class="bloc_form">
                     {{ form_label(form.title) }}
                     {{ form_widget(form.title) }}
@@ -29,6 +28,7 @@
         </div>
     </div>
     <div class="m-t-20">
-        <a href="{{ path('app_category_index') }}" class="action width-100 text-align-center inline-block">Retour à la liste</a>
+        <a href="{{ path('details-sous-cat', {id: subcategory.id}) }}" class="action width-100 text-align-center inline-block">Retour au détails</a>
     <div>
+</div>
 {% endblock %}
