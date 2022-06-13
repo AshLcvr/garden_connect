@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Data\SearchData;
 use App\Entity\Annonce;
+use App\Entity\ImagesAnnonces;
 use App\Form\AnnonceType;
 use App\Form\SearchType;
 use App\Repository\AnnonceRepository;
@@ -60,7 +61,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SubcategoryRepository $subcategoryRepository ,AnnonceRepository $annonceRepository, UploadImage $uploadImage, CategoryRepository $categoryRepository): Response
+    public function new(Request $request,AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository, ImagesAnnonces $imagesAnnonces): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
@@ -78,6 +79,12 @@ class AnnonceController extends AbstractController
             $annonceImage = $form->get('upload')->getData();
             if (count($annonceImage) <= 4 || empty($annonceImage)) {
                 $uploadImage->uploadAnnonce($annonceImage, $annonce->getId());
+                if (empty($annonceImage)){
+                    $imageDefault = new ImagesAnnonces();
+                    $imageDefault->setTitle('logo-sans-fond.png');
+                    $imageDefault->setAnnonce($annonce);
+                    $imagesAnnoncesRepository->add($imageDefault, true);
+                }
             }else{
                 $this->addFlash('failure','4 photos max !');
                 return $this->redirectToRoute('app_annonce_new', [], Response::HTTP_SEE_OTHER);
