@@ -5,8 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Modifier une Annonce</h1>
-
-    {{ include('front/annonce/_form.html.twig', {'button_label': 'Modifier'}) }}
-
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h3 class="annonce_title" style="margin: 0">Modifier une annonce</h3>
+    </div>
+    <div class="card-body">
+        {{ include('front/annonce/_form.html.twig', {'button_label': 'Modifier'}) }}
+    </div>
 {% endblock %}

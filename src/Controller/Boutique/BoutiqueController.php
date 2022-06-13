@@ -19,14 +19,6 @@ use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 //#[Route('/boutique')]
 class BoutiqueController extends AbstractController
 {
-
-//    private $authenticator;
-
-//    public function __construct( FormLoginAuthenticator $authenticator)
-//    {
-//        $this->authenticator = $authenticator;
-//    }
-
     #[Route('/boutique/', name: 'app_boutique_index', methods: ['GET'])]
     public function indexBoutique(BoutiqueRepository $boutiqueRepository): Response
     {
@@ -49,15 +41,15 @@ class BoutiqueController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $formatedTel =  $form->get('indicatif')->getData() . $form->get('telephone')->getData();
+            $boutique->setTelephone($formatedTel);
             $boutique->setCreatedAt(new \DateTimeImmutable());
             $boutique->setActif(true);
             $boutique->setUser($user);
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
-//                dd($user);
                 $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
-
                 $user->setRoles(['ROLE_VENDEUR']);
                 $userRepository->add($user, true);
                 $userAuthenticator->authenticateUser($user, $formLoginAuthenticator, $request);
@@ -101,9 +93,9 @@ class BoutiqueController extends AbstractController
                 $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
             }else{
                 $this->addFlash('failure','4 photos max !');
-                return $this->redirectToRoute('app_boutique_new', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_boutique_edit', ['id'=> $boutique->getId()], Response::HTTP_SEE_OTHER);
             }
-            return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_boutique_detail', ['id'=> $boutique->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('front/boutique/edit_boutique.html.twig', [
@@ -130,5 +122,18 @@ class BoutiqueController extends AbstractController
         $boutiqueRepository->add($boutique, true);
 
         return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/actif', name: 'app_boutique_actif', methods: ['POST', 'GET'])]
+    public function toggleActif(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
+    {
+        if ($boutique->isActif()) {
+            $boutique->setActif(false);
+        }else{
+            $boutique->setActif(true);
+        }
+        $boutiqueRepository->add($boutique,true);
+
+        return $this->redirectToRoute('app_boutique_detail', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
 }

@@ -61,7 +61,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request,AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository, ImagesAnnonces $imagesAnnonces): Response
+    public function new(Request $request,AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
@@ -78,12 +78,13 @@ class AnnonceController extends AbstractController
             $annonceRepository->add($annonce, true);
             $annonceImage = $form->get('upload')->getData();
             if (count($annonceImage) <= 4 || empty($annonceImage)) {
-                $uploadImage->uploadAnnonce($annonceImage, $annonce->getId());
-                if (empty($annonceImage)){
+                if ( empty($annonceImage)){
                     $imageDefault = new ImagesAnnonces();
                     $imageDefault->setTitle('logo-sans-fond.png');
                     $imageDefault->setAnnonce($annonce);
-                    $imagesAnnoncesRepository->add($imageDefault, true);
+                    $imagesAnnoncesRepository->add($imageDefault,true);
+                }else{
+                    $uploadImage->uploadAnnonce($annonceImage, $annonce->getId());
                 }
             }else{
                 $this->addFlash('failure','4 photos max !');

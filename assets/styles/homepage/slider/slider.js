@@ -22,4 +22,11 @@ $(document).ready(function () {
         animation: "slide",
         animationLoop: true,
     });
+
+    $('.slider-boutique').flexslider({
+        controlNav: true,
+        directionNav: true,
+        animation: "slide",
+        animationLoop: true,
+    });
 })

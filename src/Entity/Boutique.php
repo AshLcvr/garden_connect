@@ -35,8 +35,8 @@ class Boutique
 
     #[ORM\Column(type: 'string' , length: 255, nullable: true)]
     #[Assert\Length(
-    min: 10,
-    max: 13,
+    min: 9,
+    max: 12,
     minMessage: ' {{ limit }} chiffres minimum !',
     maxMessage: '{{ limit }} chiffres maximum ! ',
     )]
@@ -118,12 +118,12 @@ class Boutique
         return $this;
     }
 
-    public function getTelephone(): ?int
+    public function getTelephone()
     {
         return $this->telephone;
     }
 
-    public function setTelephone(int|string $telephone): self
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
 

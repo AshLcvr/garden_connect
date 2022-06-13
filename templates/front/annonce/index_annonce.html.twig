@@ -23,7 +23,14 @@
             </tr>
             </thead>
             <tbody>
-            {% for index, annonce in annonces %}
+            {% if annonces is empty %}
+                <tr>
+                    <td colspan="6">
+                        Pas (encore) d'annonces !
+                    </td>
+                </tr>
+            {% endif %}
+            {% for annonce in annonces %}
                 <tr>
                     <td>{{ annonce.title }}</td>
                     <td>{{ annonce.subcategory.title }}</td>

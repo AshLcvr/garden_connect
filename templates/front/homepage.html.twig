@@ -45,7 +45,9 @@
         <div class="annonce_box">
           <div class="annonce_img">
             <a href="{{ path('app_annonce_recherche')~'/'~annonce.id }}" class="annonce_link" target="_blank">
-              <img src="{{ asset('images/fruit-3860991.jpg') }}"/>
+              {% for image in annonce.imagesAnnonces %}
+               <img src="{{ asset('uploads/annonce/'~ image.title) }}"/>
+              {% endfor  %}
             </a>
           </div>
           <div class="annonce_text">

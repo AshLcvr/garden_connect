@@ -3,20 +3,12 @@
         <div class="card">
             <h3 class="title">{{ annonce.title }}</h3>
             <div class="content-card ">
-
                 <div class="image-card flexslider slider-annonce">
                     <ul class="slides">
-
                         {% for image in annonce.imagesAnnonces %}
-                            {% if image.title != '' %}
                             <li>
-                                <img src="{{ asset('uploads/mini/'~image.title) }}" alt="Image Annonce" />
+                                <img src="{{ asset('uploads/annonce/'~image.title) }}" alt="Image Annonce" />
                             </li>
-                            {% else %}
-                        <li>
-                                <img src="{{ asset('asset/images/logo-paul.svg') }}" alt="Image Annonce"/>
-                        </li>
-                            {% endif %}
                         {% endfor %}
                     </ul>
                 </div>

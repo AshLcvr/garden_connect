@@ -1,3 +1,7 @@
+/* Layout boutique */
+.fa-envelope{
+    color: white;
+}
 /* Tableaux boutique */
 .card-body table th,.card-body table td{
     text-align: center;
@@ -10,7 +14,7 @@
 .card-body table .table_actions{
     width: 20%;
 }
-/* Formulaires boutique */
+/* Formulaires annonce */
 .annonce_form .bloc_form{
      margin-bottom: 2rem;
  }
@@ -21,9 +25,57 @@
 .annonce_form .bloc_submit{
     display: flex;
     justify-content: center;
-
 }
 .annonce_form .bloc_submit button{
     width: 40%;
     margin-top: 2rem;
+}
+/* Détail boutique */
+.boutique_detail h4{
+    margin: 0;
+}
+.boutique_infos div{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+/* Formulaires boutique */
+.boutique_form .bloc_form{
+    margin-bottom: 2rem;
+}
+.boutique_form .bloc_form textarea{
+    height: 15rem;
+    resize: none;
+}
+.boutique_form .bloc_submit{
+    display: flex;
+    justify-content: center;
+}
+.boutique_form .bloc_submit button{
+    width: 40%;
+    margin-top: 2rem;
+}
+/* Index boutique */
+.boutique_accueil .wrap2{
+    text-align: center;
+    display: flex;
+    flex-flow: column nowrap;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.boutique_accueil ul{
+    margin: 0 auto;
+    max-width : 300px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    text-align: start;
+}
+.boutique_accueil ul li{
+    align-self: flex-start;
+    text-align: right;
+    list-style: initial;
+}
+.boutique_accueil ul li:last-child{
+    margin-bottom: 2rem;
 }

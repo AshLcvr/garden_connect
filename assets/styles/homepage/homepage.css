@@ -52,7 +52,8 @@
 .annonce_box {
     color: dimgray;
 }
-.annonce_box:hover .annonce_title{
-    color: var(--vertclair);
-    filter: brightness(.9);
+.annonce_box:hover{
+    transform: scale(1.003);
+    transition: .3s;
+    box-shadow: 15px 10px 15px rgb(228, 228, 228);
 }

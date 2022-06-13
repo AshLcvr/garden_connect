@@ -119,7 +119,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-envelope fa-fw"></i>
-                                    <span class="badge badge-danger badge-counter">7</span>
+{#                                    <span class="badge badge-danger badge-counter">{{ app.user.messages |length }}</span>#}
                                 </a>
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="messagesDropdown">
@@ -146,7 +146,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {% block user_avatar %}
-                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Bonjour {{app.user.name}}</span>
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span style="color: white">Bonjour {{app.user.name}}</span></span>
                                         {% if app.user.image %}
                                         <img class="img-profile rounded-circle" src="{{ asset('uploads/profile/'~app.user.image) }}">
                                         {% else %}

@@ -3,37 +3,66 @@
 {% block title %}
 <title>Boutique</title>
 {% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
+{% endblock %}
 {% block body %}
-    <a href="{{ path('app_boutique_edit', {'id': boutique.id}) }}">Modifier</a>
-    <a href="{{ path('app_boutique_inactif', {'id': boutique.id}) }}">Supprimer</a>
+<div class="card shadow mb-4 boutique_detail">
+    <div class="card-header py-3  d-flex justify-content-between align-items-center">
+        <h4 class="annonce_title">{{ boutique.title }}</h4>
+        <div>
+                <a title="Editer l'annonce" class="btn btn-primary" href="{{ path('app_boutique_edit', {'id' : boutique.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+            {% if boutique.actif == 1 %}
+                <a title="Désactiver l'annonce" class="btn btn-warning" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
+            {% else %}
+                <a title="Activer l'annonce" class="btn btn-primary" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye"></i></a>
+            {% endif %}
+            {{ include('front/boutique/_delete_form.html.twig') }}
+        </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Photos</th>
-                {%  for imageboutique in boutique.imagesBoutiques %}
-                    <img src="{{ asset('uploads/boutique/'~imageboutique.title) }}" alt="">
-                {% endfor %}
-            </tr>
-            <tr>
-                <th>Titre de la boutique</th>
-                <td>{{ boutique.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ boutique.description }}</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ boutique.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ boutique.adresse }} {{ boutique.codePostal }} </td>
-            </tr>
-        </tbody>
-    </table>
+    </div>
+    <div class="card-body boutique_infos">
+        <div>
+            <h6 class="annonce_title">Photos: </h6>
+            <div class="flexslider" id="slider">
+                <ul class="slides">
+                    {%  for imageboutique in boutique.imagesBoutiques %}
+                        <li>
+                            <img src="{{ asset('uploads/boutique/'~imageboutique.title) }}" alt="Images boutique">
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-    {{ include('front/boutique/_delete_form.html.twig') }}
+        </div>
+        <hr>
+        <div>
+            <h6 class="annonce_title">Description:</h6>
+            {{ boutique.description  }}
+        </div>
+        <hr>
+         <div>
+            <h6 class="annonce_title">Téléphone:</h6>
+             {{ boutique.telephone }}
+        </div>
+        <hr>
+         <div>
+             <h6 class="annonce_title">Adresse:</h6>
+             <div class="d-flex flex-column">
+                 <div class="text-align-center">
+                     {{ boutique.adresse }}
+                 </div>
+                 <div class="text-align-center">
+                     {{ boutique.codePostal }} {{ boutique.city }}
+                 </div>
+             </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('/asset/flex/jquery.flexslider.js') }}"></script>
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}
