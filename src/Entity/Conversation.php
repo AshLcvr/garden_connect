@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ConversationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ConversationRepository::class)]
@@ -21,6 +23,22 @@ class Conversation
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $modified_at;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'conversations_init')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'conversations_corresp')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $correspondant;
+
+    #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: Message::class)]
+    private $messages;
+
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +77,60 @@ class Conversation
     public function setModifiedAt(?\DateTimeImmutable $modified_at): self
     {
         $this->modified_at = $modified_at;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCorrespondant(): ?User
+    {
+        return $this->correspondant;
+    }
+
+    public function setCorrespondant(?User $correspondant): self
+    {
+        $this->correspondant = $correspondant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setConversation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getConversation() === $this) {
+                $message->setConversation(null);
+            }
+        }
 
         return $this;
     }

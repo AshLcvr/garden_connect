@@ -17,7 +17,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce->setDescription('Goûtez les pommes de notre verger ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
         $annonce->setPrice(2);
         $annonce->setMesure($this->getReference('Kg'));
-        $annonce->setCreatedAt(new DateTimeImmutable());
+        $annonce->setCreatedAt(new DateTimeImmutable('-2 week'));
         $annonce->setActif(true);
         $annonce->setBoutique($this->getReference('boutique_polo'));
         $annonce->setSubcategory($this->getReference('Avoine'));

@@ -14,7 +14,7 @@
             <p><span>Id parent : </span>{{ subcategory.parentCategory.id }}</p>
             <div>
                 <a href="{{ path('edit-sous-cat', {id: subcategory.id}) }}" class="action">Editer</a>
-                {{ include('admin/category/_delete-sous-cat_form.html.twig') }}
+                {{ include('admin/subcategory/_delete-sous-cat_form.html.twig') }}
             </div>
         </div>
     </div>

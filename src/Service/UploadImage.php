@@ -141,6 +141,27 @@ class UploadImage
         if (file_exists($file_path)) unlink($file_path);
     }
 
+    public function uploadCat(UploadedFile $file)
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = $this->slugger->slug($originalFilename);
+        $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+
+        try {
+            $file->move($this->getUploadDirectory(), $fileName);
+        } catch (FileException $e) {
+            dd($e);
+        }
+
+        // Resize de l'image (optionnel)
+        // Profile
+        $imageCat = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
+        $imageCat->crop(240, 140);
+        $imageCat->save($this->getUploadDirectory() .'/category/'. $fileName);
+
+        return $fileName;
+    }
+
     public function uploadProfile(UploadedFile $file)
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);

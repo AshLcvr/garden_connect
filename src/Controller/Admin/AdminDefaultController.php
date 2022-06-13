@@ -21,10 +21,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminDefaultController extends AbstractController
 {
     #[Route('/', name: 'dashboard')]
-    public function index(): Response
+    public function index(UserRepository $userRepository, AnnonceRepository $annonceRepository, BoutiqueRepository $boutiqueRepository): Response
     {
+        $users = $userRepository->findAll();
+        $totalUsers = count($users);
+        $newUsers = $userRepository->newUsers(new \DateTimeImmutable('-1 week'));
+        $totalNewUsers = count($newUsers);
+
+        $annonces = $annonceRepository->findAll();
+        $totalAnnonces = count($annonces);
+        $newAnnonces = $annonceRepository->newAnnonces(new \DateTimeImmutable('-1 week'));
+        $totalNewAnnonces = count($newAnnonces);
+
+        $boutiques = $boutiqueRepository->findAll();
+        $totalBoutiques = count($boutiques);
+        $newBoutiques = $boutiqueRepository->newBoutiques(new \DateTimeImmutable('-1 week'));
+        $totalNewBoutiques = count($newBoutiques);
+        
         return $this->render('admin/dashboard.html.twig', [
-//            'controller_name' => 'AdminDefaultController',
+            'totalUsers' => $totalUsers,
+            'totalNewUsers' => $totalNewUsers,
+            'totalAnnonces' => $totalAnnonces,
+            'totalNewAnnonces' => $totalNewAnnonces,
+            'totalBoutiques' => $totalBoutiques,
+            'totalNewBoutiques' => $totalNewBoutiques,
         ]);
     }
 

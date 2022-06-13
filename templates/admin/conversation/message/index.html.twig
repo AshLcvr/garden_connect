@@ -1,0 +1,73 @@
+{% extends 'layout/admin_base.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+<div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
+    <h2 class="title">Conversation</h2>
+    <div class="chatbox-holder">
+        <div class="chatbox">
+            <div class="chatbox-top">
+                {% if conversation.user.email == app.user.email %}
+                    <div class="message-box-holder background-white-plus">
+                        <div class="message-box">{{ conversation.premierMessage }}</div>
+                    </div>
+                {% else %}
+                    <div class="message-box-holder background-lightgrey">
+                        <div class="message-sender">{{ conversation.user.name }}</div>
+                        <div class="message-box message-partner">{{ conversation.premierMessage }}</div>
+                    </div>
+                {% endif %}
+                {% for message in conversation.messages %}
+                    {% if message.expediteur.email == app.user.email %}
+                        <div class="message-box-holder background-white-plus">
+                            <div class="message-box">{{ message.message }}</div>
+                        </div>
+                    {% else %}
+                        <div class="message-box-holder background-lightgrey">
+                            <div class="message-sender">{{ message.expediteur.name }}</div>
+                            <div class="message-box message-partner">{{ message.message }}</div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="chat-input-holder">
+                {{ form_start(form, {attr : {novalidate: 'novalidate', class: 'width-100 d-flex row-wrap'}}) }}
+                    {{ form_widget(form.message) }}
+                    {{ form_widget(form.submit) }}
+                    <div class="form-error width-100">
+                        {{ form_errors(form.message) }}
+                    </div>
+                {{ form_end(form) }}
+                {# <textarea class="chat-input"></textarea> #}
+                {# <input type="submit" value="Send" class="message-send" /> #}
+            </div>
+        </div>
+    </div>
+    {# {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <div class="body">
+        <div id="contener_form">
+            {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+                <div class="bloc_form">
+                    {{ form_label(form.message) }}
+                    {{ form_widget(form.message) }}
+
+                    <small>{{ form_help(form.message) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.message) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_widget(form.submit) }}
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div> #}
+    <div class="m-t-20">
+        <a href="{{ path('app_conversation_index') }}" class="action width-100 text-align-center inline-block">Retour à la liste</a>
+    <div>
+</div>
+{% endblock %}

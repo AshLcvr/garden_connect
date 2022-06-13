@@ -30,8 +30,8 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setTelephone('0744556677')
             ->setUser($this->getReference('polo'))
             ->setActif(1)
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->addImagesBoutique($imageBoutique);
+            ->addImagesBoutique($imageBoutique)
+            ->setCreatedAt(new \DateTimeImmutable('-2 week'));
             $manager->persist($boutiquePolo);
         $manager->persist($imageBoutique);
 
