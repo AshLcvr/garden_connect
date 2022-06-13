@@ -13,8 +13,8 @@
             <p><span>Id : </span>{{ subcategory.id }}</p>
             <p><span>Id parent : </span>{{ subcategory.parentCategory.id }}</p>
             <div>
-                <a href="{{ path('app_category_edit', {id: subcategory.id}) }}" class="action">Editer</a>
-                <a href="{{ path('app_category_delete', {id: subcategory.id}) }}" class="action">Supprimer</a>
+                <a href="{{ path('edit-sous-cat', {id: subcategory.id}) }}" class="action">Editer</a>
+                {{ include('admin/category/_delete-sous-cat_form.html.twig') }}
             </div>
         </div>
     </div>
