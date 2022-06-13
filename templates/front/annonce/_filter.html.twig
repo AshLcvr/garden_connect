@@ -1,0 +1,61 @@
+{% block stylesheets %}
+    <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
+{% endblock %}
+{{ form_start(form, {attr : {novalidate: 'novalidate', class : 'js-filter-form'}}) }}
+<div class="bloc_form">
+    {{ form_label(form.q) }}
+    {{ form_widget(form.q) }}
+    <small>{{ form_help(form.q) }}</small>
+    <div class="form-error">
+        {{ form_errors(form.q) }}
+    </div>
+</div>
+
+<div class="bloc_form d-flex">
+    <div>
+        {{ form_label(form.category) }}
+        {{ form_widget(form.category, { 'attr' : {'class' : 'annonce_category' }}) }}
+        <small>{{ form_help(form.category) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.category) }}
+        </div>
+    </div>
+    <div>
+        {{ form_label(form.subcategory) }}
+        {{ form_widget(form.subcategory, { 'attr' : {'class' : 'annonce_subcategory' }}) }}
+        <small>{{ form_help(form.subcategory) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.subcategory) }}
+        </div>
+    </div>
+</div>
+
+<div class="bloc_form d-flex">
+    <div>
+        {{ form_label(form.min) }}
+        {{ form_widget(form.min) }}
+        <small>{{ form_help(form.min) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.min) }}
+        </div>
+    </div>
+    <div>
+        {{ form_label(form.max) }}
+        {{ form_widget(form.max) }}
+        <small>{{ form_help(form.max) }}</small>
+        <div class="form-error">
+            {{ form_errors(form.max) }}
+        </div>
+    </div>
+</div>
+
+<div id="price-slider" class="m-3" data-min="{{ min }}" data-max=" {{ max }}"></div>
+
+<div class="d-flex justify-content-center">
+    {{ form_row(form.submit, { 'attr' : {'class' : 'btn-primary' }}) }}
+    {% if app.request.query.get('q') is not null %}
+        <a class="btn btn-warning" href="{{ path('app_annonce_recherche') }}">Supprimer les filtres</a>
+    {% endif %}
+</div>
+
+{{ form_end(form) }}

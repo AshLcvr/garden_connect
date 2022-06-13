@@ -159,14 +159,14 @@ sup {
 }
 
 a {
-  color: #4e73df;
+  /*color: #4e73df;*/
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
   color: #224abe;
-  text-decoration: underline;
+  /*text-decoration: underline;*/
 }
 
 a:not([href]):not([class]) {
@@ -2362,27 +2362,27 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #8FC642;
+  border-color: #41B04F;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: #41B04F;
+  border-color: #8FC642;
 }
 
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: #41B04F;
+  border-color: #8FC642;
   box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #41B04F;
+  border-color: #8FC642;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
@@ -10335,7 +10335,7 @@ a:focus {
 
 .sidebar {
   width: 6.5rem;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
 }
 
 .sidebar .nav-item {

@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Annonce;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Annonce>
@@ -16,9 +19,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AnnonceRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Annonce::class);
+        $this->paginator = $paginator;
     }
 
     public function add(Annonce $entity, bool $flush = false): void
@@ -39,28 +45,77 @@ class AnnonceRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Annonce[] Returns an array of Annonce objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return PaginatorInterface
+     */
+    public function findBySearch(SearchData $search)
+    {
+        $query = $this->getSearchQuery($search)->getQuery();
+        return $this->paginator->paginate($query, $search->page, 10);
+    }
 
-//    public function findOneBySomeField($value): ?Annonce
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @param SearchData $search
+     * @return integer[]
+     */
+    public function findMinMax(SearchData $search) :array
+    {
+        $results = $this->getSearchQuery($search)
+            ->select('MIN(a.price) as min', 'MAX(a.price) as max')
+            ->getQuery()
+            ->getScalarResult();
+        return [(int)$results[0]['min'],(int)$results[0]['max']];
+    }
+
+    /**
+     * @param SearchData $search
+     * @return integer[]
+     */
+    public function getSearchQuery(SearchData $search) : QueryBuilder
+    {
+        if (!empty($search->q) ||!empty($search->category) || !empty($search->min) || !empty($search->max) ) {
+            $query = $this
+                ->createQueryBuilder('a')
+                ->select('c', 'a')
+                ->join('a.subcategory', 'c')
+                ->andWhere('a.actif = 1')
+                ->orderBy('a.created_at', 'DESC');
+
+            if (!empty($search->q)) {
+                $query = $query
+                    ->andWhere('a.title LIKE :q')
+                    ->setParameter('q', "%{$search->q}%");
+            }
+
+            if (!empty($search->category)) {
+                $query = $query
+                    ->andWhere('c.parent_category IN (:category)')
+                    ->setParameter(':category', $search->category);
+            }
+
+            if (!empty($search->subcategory)) {
+                $query = $query
+                    ->andWhere('c.id IN (:subcategory)')
+                    ->setParameter(':subcategory', $search->subcategory);
+            }
+
+            if (!empty($search->min)) {
+                $query = $query
+                    ->andWhere('a.price >= :min')
+                    ->setParameter('min', "$search->min");
+            }
+
+            if (!empty($search->max)) {
+                $query = $query
+                    ->andWhere('a.price <= :max')
+                    ->setParameter('max', "$search->max");
+            }
+        }else {
+                $query = $this
+                    ->createQueryBuilder('a')
+                    ->andWhere('a.actif = 1')
+                    ->orderBy('a.created_at', 'DESC');
+            }
+         return $query;
+    }
 }

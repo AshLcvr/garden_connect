@@ -9,47 +9,47 @@ class DataCerealesEtGrains
     {
         $cerealesEtGrains = [
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Autre',
             ],
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Avoine',
             ],
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Blé',
             ],
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Boulghour',
             ],
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Épeautre',
             ],
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Maïs',
             ],
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Orge',
             ],
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Quinoa',
             ],
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Riz',
             ],
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Sarrasin',
             ],
             [
-                'cat' => 'CerealesEtGrains',
+                'cat' => 'Cereales Et Grains',
                 'title' => 'Seigle',
             ],
 

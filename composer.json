@@ -13,6 +13,7 @@
         "doctrine/orm": "^2.12",
         "gedmo/doctrine-extensions": "^3.7",
         "gumlet/php-image-resize": "2.0.*",
+        "knplabs/knp-paginator-bundle": "^5.8",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "6.1.*",
         "symfony/dotenv": "6.1.*",

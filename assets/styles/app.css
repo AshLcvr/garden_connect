@@ -54,3 +54,6 @@ img{
     width: 50%;
     margin: 0 auto 2em;
 }
+.box-shadow{
+    box-shadow: 15px 15px 15px lightgrey;
+}

@@ -5,28 +5,50 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Mes annonces</h1>
-
-        {% for index, annonce in annonces %}
-            {% if annonce.actif %}
-                <div class="card shadow mb-4">
-                    <a href="#collapse{{ index + 1 }}" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExemple">
-                        {{ annonce.title }}
-                    </a>
-                    <div id="collapse{{ index + 1 }}" class="card-body collapse">
-                        <div class="d-flex justify-content-between align-items-center p-10 mb-10">
-                            {{ annonce.title }}
-                            <a href="{{ path('app_annonce_edit', {'id' : annonce.id}) }}">Editer</a>
-                        </div>
-                    </div>
-                </div><br>
-                <hr>
-            {% else %}
-                <h3>Pas encore d'annonce</h3>
-            {% endif %}
-        {% endfor %}
-
-
-    <a href="{{ path('app_annonce_new') }}">Create new</a>
-    <a href="{{ path('app_annonce_edit', {'id' : 2}) }}">edit new</a>
+<div class="card-header py-3 d-flex justify-content-between align-items-center">
+    <h3 class="annonce_title" style="margin: 0">Mes annonces</h3>
+    <a title="Créer une annonce" class="btn btn-primary" href="{{ path('app_annonce_new') }}"><i class="fa-solid fa-plus"></i></a>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Catégories</th>
+                <th>Prix</th>
+                <th>Créée le</th>
+                <th>Actif</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for index, annonce in annonces %}
+                <tr>
+                    <td>{{ annonce.title }}</td>
+                    <td>{{ annonce.subcategory.title }}</td>
+                    <td>{{ annonce.price }} €</td>
+                    <td>{{ annonce.createdAt|date('Y-m-d') }}</td>
+                    <td>
+                        {% if annonce.actif == 1 %}
+                            <p>Oui</p>
+                        {% else %}
+                            <p>Non</p>
+                        {% endif %}
+                    </td>
+                    <td class="table_actions" >
+                        <a title="Editer l'annonce" class="btn btn-primary" href="{{ path('app_annonce_edit', {'id' : annonce.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        {% if annonce.actif == 1 %}
+                            <a title="Désactiver l'annonce" class="btn btn-warning" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
+                        {% else %}
+                            <a title="Activer l'annonce" class="btn btn-primary" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}"><i class="fa-regular fa-eye"></i></a>
+                        {% endif %}
+                        <span title="Supprimer l'annonce">{{ include('front/annonce/_delete_form.html.twig') }}</span>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

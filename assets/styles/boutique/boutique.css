@@ -1,0 +1,29 @@
+/* Tableaux boutique */
+.card-body table th,.card-body table td{
+    text-align: center;
+    margin: auto 0;
+    vertical-align: baseline;
+}
+.card-body table th p,.card-body table td p{
+    margin: 0;
+}
+.card-body table .table_actions{
+    width: 20%;
+}
+/* Formulaires boutique */
+.annonce_form .bloc_form{
+     margin-bottom: 2rem;
+ }
+.annonce_form .bloc_form textarea{
+    height: 15rem;
+    resize: none;
+}
+.annonce_form .bloc_submit{
+    display: flex;
+    justify-content: center;
+
+}
+.annonce_form .bloc_submit button{
+    width: 40%;
+    margin-top: 2rem;
+}
