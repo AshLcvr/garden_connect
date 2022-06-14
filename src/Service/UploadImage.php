@@ -159,6 +159,10 @@ class UploadImage
         $imageCat->crop(240, 140);
         $imageCat->save($this->getUploadDirectory() .'/category/'. $fileName);
 
+        // Suppression de l'originale
+        $file_path = $this->getUploadDirectory() . '/' . $fileName;
+        if (file_exists($file_path)) unlink($file_path);
+
         return $fileName;
     }
 
@@ -179,6 +183,10 @@ class UploadImage
         $avatar = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
         $avatar->resizeToBestFit(100, 100);
         $avatar->save($this->getUploadDirectory() .'/profile/'. $fileName);
+
+        // Suppression de l'originale
+        $file_path = $this->getUploadDirectory() . '/' . $fileName;
+        if (file_exists($file_path)) unlink($file_path);
 
         return $fileName;
     }

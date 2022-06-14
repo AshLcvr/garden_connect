@@ -34,9 +34,11 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageHero = $form->get('image')->getData();
-            $category->setImage($uploadImage->uploadCat($imageHero));
+            $imageCat = $form->get('image')->getData();
+            $category->setImage($uploadImage->uploadCat($imageCat));
+            dd($category);
             $categoryRepository->add($category, true);
+
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -57,14 +59,16 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Category $category, CategoryRepository $categoryRepository): Response
+    public function edit(Request $request, Category $category, CategoryRepository $categoryRepository, UploadImage $uploadImage): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categoryRepository->add($category, true);
 
+            $imageCat = $form->get('image')->getData();
+            $category->setImage($uploadImage->uploadCat($imageCat));
+            $categoryRepository->add($category, true);
             return $this->redirectToRoute('app_category_show', ['id' => $category->getId()], Response::HTTP_SEE_OTHER);
         }
 

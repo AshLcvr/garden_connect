@@ -24,23 +24,12 @@
 .slider-category .contener{
     width: 80%;
 }
-.slider-category .contener h2{
-    text-align: center;
-    color: #AB7B52;
-    margin-bottom: 1rem;
-    /* font-family: 'Unkempt'; */
-    font: var(--title-font);
-}
-.slider-category .contener h2:hover{
-    transform: scale(1.2);
-}
 .slider-category li{
     display: flex!important;
     flex-flow: column;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 10px 5px 5px rgb(228, 228, 228);
-    margin: 1rem .5rem !important;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;    margin: 1rem .5rem !important;
     transition: all 0.3s;
 }
 .slider-category .title-cat{
