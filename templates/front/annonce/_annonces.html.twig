@@ -1,4 +1,5 @@
 {% for annonce in annonces %}
+<a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
     <div id="annonce_card" class="wrap">
         <div class="card">
             <h3 class="title">{{ annonce.title }}</h3>
@@ -21,5 +22,6 @@
             </div>
         </div>
     </div>
+</a>
 {% endfor %}
 

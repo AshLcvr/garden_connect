@@ -4,7 +4,7 @@
             <a href="{{ path('homepage') }}" style="flex-direction: row-reverse"><img src="{{ asset('images/logo.png') }}"/></a>
         </div>
         <nav>
-            <ul>
+            <ul >
                 {% if app.request.attributes.get('_route') == 'homepage' %}
                     <li><a class="active" href="{{ path('homepage') }}">Accueil</a></li>
                 {% else %}

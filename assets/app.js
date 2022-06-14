@@ -17,3 +17,4 @@ import './styles/filter_annonce/filter.js';
 // css, boutique
 import "./styles/boutique/boutique.css";
 import "./styles/boutique_public/boutique_public.css";
+import "./styles/annonce_public/annonce_public.css";

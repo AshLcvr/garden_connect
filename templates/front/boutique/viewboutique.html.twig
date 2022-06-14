@@ -12,12 +12,13 @@
                 {% endfor %}
             </ul>
         </div>
-    </section>
-
-    <section id="profile" class="wrap">
         <div class="photo_profile">
             <img src="{{ asset('images/test-profile.png') }}" />
         </div>
+    </section>
+
+    <section id="profile" class="wrap">
+        
         <div class="infos_vendeur">
             <p>{{ user.name }} de {{ city }}</p>
             <p>Boutique en ligne depuis le : {{ createdAt|date('d/m/Y') }}</p>
@@ -39,24 +40,81 @@
         </div>
     </section>
 
-    <section id="annonces" class="wrap">
-        <div id="annonce_card">
+
+    <section id="annonces_public" class="wrap">
+
+        <div id="annonce_card_public">
         {% for annonce in annonces %}
-        <div class="card">
-            <h3 class="title">{{ annonce.title }}</h3>
-                <div class="content-card">
-                    <div class="image-card">
-                        <img src="{{ asset('asset/images/logo-paul.svg') }}"/>
+
+            <div class="card_public">
+                <div class="content_card_public">
+                    <div class="image_card_public">
+                        <img src="{{ asset('/images/parsley-261039_640.jpg') }}"/>
                     </div>
-                    <div class="description-card">
+                    <div class="description_card_public">
+                        <h3 class="title_public">{{ annonce.title }}</h3>
+                        {# <p><span>{{ annonce.subcategory.title }}</span></p> #}
                         <p><span>Description : </span>{{ annonce.description }}</p>
-                        <p><span>Prix : </span>{{ annonce.price }} €</p>
-                        <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                        <div class="price_date">
+                            <p><span>Prix : </span>{{ annonce.price }} €</p>
+                            <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
         {% endfor %}
+
+
+        
+        <h1>Les annonces de {{ user.name }}</h1>
+        <div id="listing_annonces">
+            {# <div class="card_public"> #}
+                <div class="content_card_public">
+                    <div class="image_card_public">
+                        <img src="{{ asset('/images/parsley-261039_640.jpg') }}"/>
+                    </div>
+                    <div class="description_card_public">
+                        <h3 class="title_public">{{ annonce.title }}</h3>
+                        {# <p><span>Description : </span>{{ annonce.description }}</p> #}
+                        <p><span>Prix : </span>{{ annonce.price }} €</p>
+                        <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                    </div>
+                </div>
+            {# </div> #}
+
+
+            {# <div class="card_public"> #}
+                <div class="content_card_public">
+                    <div class="image_card_public">
+                        <img src="{{ asset('/images/parsley-261039_640.jpg') }}"/>
+                    </div>
+                    <div class="description_card_public">
+                        <h3 class="title_public">{{ annonce.title }}</h3>
+                        {# <p><span>Description : </span>{{ annonce.description }}</p> #}
+                        <p><span>Prix : </span>{{ annonce.price }} €</p>
+                        <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                    </div>
+                </div>
+            {# </div> #}
+
+            {# <div class="card_public"> #}
+                <div class="content_card_public">
+                    <div class="image_card_public">
+                        <img src="{{ asset('/images/parsley-261039_640.jpg') }}"/>
+                    </div>
+                    <div class="description_card_public">
+                        <h3 class="title_public">{{ annonce.title }}</h3>
+                        {# <p><span>Description : </span>{{ annonce.description }}</p> #}
+                        <p><span>Prix : </span>{{ annonce.price }} €</p>
+                        <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                    </div>
+                </div>
+            {# </div> #}
+        </div>
+
+        <div class="separator"></div>
         
     </section>
 

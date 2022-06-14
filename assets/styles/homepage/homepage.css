@@ -30,6 +30,7 @@
     margin-bottom: 20px;
     position: relative;
     display: flex;
+    width: 100%;
 }
 .annonce_box:nth-child(2n+1) {
     flex-flow: row-reverse;
