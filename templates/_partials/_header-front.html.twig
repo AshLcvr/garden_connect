@@ -6,7 +6,7 @@
 {#        <input class="menu-btn" type="checkbox" id="menu-btn" />#}
 {#        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>#}
         <nav>
-            <ul id="ul_burger" class="ul_burger d-flex">
+            <ul >
                 {% if app.request.attributes.get('_route') == 'homepage' %}
                     <li><a class="active" href="{{ path('homepage') }}">Accueil</a></li>
                 {% else %}
