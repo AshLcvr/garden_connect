@@ -79,3 +79,7 @@
 .boutique_accueil ul li:last-child{
     margin-bottom: 2rem;
 }
+.boutique_accueil .btn-primary{
+    width: 20%;
+    margin: 0 auto;
+}

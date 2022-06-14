@@ -22,7 +22,6 @@ class Category
     private $title;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Assert\NotBlank(message: 'Veuillez renseigner une image')]
     private $image;
 
 

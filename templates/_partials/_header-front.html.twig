@@ -1,10 +1,12 @@
-<header>
+<header class="header">
     <div class="wrap">
         <div class="logo">
             <a href="{{ path('homepage') }}" style="flex-direction: row-reverse"><img src="{{ asset('images/logo.png') }}"/></a>
         </div>
+{#        <input class="menu-btn" type="checkbox" id="menu-btn" />#}
+{#        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>#}
         <nav>
-            <ul>
+            <ul id="ul_burger" class="ul_burger d-flex">
                 {% if app.request.attributes.get('_route') == 'homepage' %}
                     <li><a class="active" href="{{ path('homepage') }}">Accueil</a></li>
                 {% else %}
@@ -41,5 +43,9 @@
                 {% endif %}
             </ul>
         </nav>
+
+{#        <a id="link_burger" href="#">#}
+{#            <span id="burger"></span>#}
+{#        </a>#}
     </div>
 </header>

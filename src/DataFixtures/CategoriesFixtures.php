@@ -61,6 +61,7 @@ class CategoriesFixtures extends Fixture
         foreach ($this->categories as $key => $catParent) {
             $categorieP = new Category();
             $categorieP->setTitle($catParent['title']);
+            $categorieP->setImage($catParent['image']);
             $manager->persist($categorieP);
 
             foreach ($this->sousCats as $catEnfant) {
