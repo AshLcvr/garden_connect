@@ -39,33 +39,9 @@
                         {{ form_errors(form.message) }}
                     </div>
                 {{ form_end(form) }}
-                {# <textarea class="chat-input"></textarea> #}
-                {# <input type="submit" value="Send" class="message-send" /> #}
             </div>
         </div>
     </div>
-    {# {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-    <div class="body">
-        <div id="contener_form">
-            {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
-                <div class="bloc_form">
-                    {{ form_label(form.message) }}
-                    {{ form_widget(form.message) }}
-
-                    <small>{{ form_help(form.message) }}</small>
-
-                    <div class="form-error">
-                        {{ form_errors(form.message) }}
-                    </div>
-                </div>
-                <div class="bloc_form">
-                    {{ form_widget(form.submit) }}
-                </div>
-            {{ form_end(form) }}
-        </div>
-    </div> #}
     <div class="m-t-20">
         <a href="{{ path('app_conversation_index') }}" class="action width-100 text-align-center inline-block">Retour à la liste</a>
     <div>
