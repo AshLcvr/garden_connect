@@ -76,21 +76,6 @@ class CategoriesFixtures extends Fixture
                 }
             }
         }
-        for ($i=0; $i < 15; $i++) { 
-            $cat = new Category();
-            $cat->setTitle('Cat_'.$i);
-            $manager->persist($cat);
-
-            for ($a = 0;$a <= 15;$a++) { 
-                $subCat = new Subcategory();
-                $subCat->setTitle('subCat_'.$a);
-                $subCat->setParentCategory($cat);
-                $manager->persist($subCat);
-                
-                $this->setReference($subCat->getTitle(), $subCat);
-            }
-        }
-        
 
         $manager->flush();
 
