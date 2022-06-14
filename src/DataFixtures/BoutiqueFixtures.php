@@ -17,7 +17,6 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
-
     public function load(ObjectManager $manager): void
     {
         $imageBoutique = (new ImagesBoutique())
@@ -32,7 +31,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setActif(1)
             ->addImagesBoutique($imageBoutique)
             ->setCreatedAt(new \DateTimeImmutable('-2 week'));
-            $manager->persist($boutiquePolo);
+        $manager->persist($boutiquePolo);
         $manager->persist($imageBoutique);
 
         $boutiqueSacha= (new Boutique())
@@ -65,6 +64,4 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
         $this->addReference('boutique_sacha', $boutiqueSacha);
         $this->addReference('boutique_orianne', $boutiqueOrianne);
     }
-
-
 }
