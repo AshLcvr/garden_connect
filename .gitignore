@@ -5,10 +5,6 @@
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
-/public/uploads/profile/
-/public/uploads/mini/
-/public/uploads/annonce/
-/public/uploads/boutique/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
