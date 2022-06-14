@@ -113,7 +113,7 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique/{id}', name: 'app_boutique_delete', methods: ['POST'])]
+    #[Route('/boutique/{id}', name: 'app_boutique_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function delete(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
@@ -123,7 +123,7 @@ class BoutiqueController extends AbstractController
         return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/boutique/{id}', name: 'app_boutique_inactif', methods: ['GET','POST'])]
+    #[Route('/boutique/{id}', name: 'app_boutique_inactif', methods: ['GET','POST'], requirements: ['id' => '\d+'])]
     public function setInactif(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
         $boutique->setActif(false);
@@ -146,29 +146,13 @@ class BoutiqueController extends AbstractController
         return $this->redirectToRoute('app_boutique_detail', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/viewboutique/{id}', name: 'view_boutique', methods: ['GET'])]
-    public function oneBoutique(Boutique $boutique, ImagesBoutiqueRepository $imagesBoutiqueRepository)
+    #[Route('/viewboutique/{id}', name: 'view_boutique')]
+    public function oneBoutique(Boutique $boutique)
     {
-        $boutique_user = $boutique->getUser();
-        $boutique_city = $boutique->getCity();
-        $boutique_telephone = $boutique->getTelephone();
-        $boutique_title = $boutique->getTitle();
-        $boutique_createdAt = $boutique->getCreatedAt();
-        $boutique_description = $boutique->getDescription();
-        $boutique_annonces = $boutique->getAnnonces();
-        $imagesBoutiques = $imagesBoutiqueRepository->findAll();
 
         return $this->render(
-            'front/boutique/viewboutique.html.twig',
-            [
-                'user' => $boutique_user,
-                'city' => $boutique_city,
-                'telephone' => $boutique_telephone,
-                'title' => $boutique_title,
-                'description' => $boutique_description,
-                'createdAt' => $boutique_createdAt,
-                'annonces' => $boutique_annonces,
-                'images' => $imagesBoutiques
+            'front/boutique/viewboutique.html.twig', [
+                'boutique' => $boutique,
             ]
         );
     }

@@ -175,11 +175,19 @@ class AdminDefaultController extends AbstractController
             $imageHero = $form->get('upload')->getData();
             // dd($imageHero);
             $uploadImage->uploadHero($imageHero);
+            return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/hero.html.twig', [
             'form' => $form->createView(),
             'imagesHero' => $imagesHero
         ]);
+    }
+    #[Route('/hero/delete/{id}', name: 'delete_images_hero')]
+    public function deleteImagesHero(ImagesHero $imageHero, ImagesHeroRepository $imagesHeroRepository): Response
+    {
+        $imagesHeroRepository->remove($imageHero);
+
+        return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
     }
 }

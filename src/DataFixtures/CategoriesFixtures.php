@@ -69,19 +69,29 @@ class CategoriesFixtures extends Fixture
                         $categorieE = new Subcategory();
                         $categorieE->setTitle($value['title']);
                         $categorieE->setParentCategory($categorieP);
+                        $this->setReference($value['title'], $categorieE);
                         $manager->persist($categorieE);
                     }
                 }
             }
         }
-        $categorieE2 = new Subcategory();
-        $categorieE2->setTitle('Pain');
-        $categorieE2->setParentCategory($categorieP);
-        $manager->persist($categorieE2);
+        for ($i=0; $i < 15; $i++) { 
+            $cat = new Category();
+            $cat->setTitle('Cat_'.$i);
+            $manager->persist($cat);
+
+            for ($a = 0;$a <= 15;$a++) { 
+                $subCat = new Subcategory();
+                $subCat->setTitle('subCat_'.$a);
+                $subCat->setParentCategory($cat);
+                $manager->persist($subCat);
+                
+                $this->setReference($subCat->getTitle(), $subCat);
+            }
+        }
+        
 
         $manager->flush();
-        $this->addReference('Miel', $categorieE);
-        $this->addReference('Avoine', $categorieE2);
 
     }
 }

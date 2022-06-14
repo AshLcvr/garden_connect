@@ -2,23 +2,26 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Conversation;
-use App\Entity\Message;
 use App\Entity\User;
-use App\Form\ConversationType;
+use App\Entity\Message;
 use App\Form\MessageType;
-use App\Repository\ConversationRepository;
-use App\Repository\MessageRepository;
+use App\Entity\Conversation;
+use App\Form\ConversationType;
+use App\Repository\AnnonceRepository;
+use App\Repository\BoutiqueRepository;
 use App\Repository\UserRepository;
+use App\Repository\MessageRepository;
+use App\Repository\ConversationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ConversationController extends AbstractController
 {
     #[Route('/conversation', name: 'app_conversation_index')]
-    public function index(UserRepository $userRepository): Response
+    public function index(): Response
     {
         $user = $this->getUser();
         $conversationsCorresp = $user->getConversationsCorresp();
@@ -44,6 +47,55 @@ class ConversationController extends AbstractController
             $conversationRepository->add($conversation, true);
 
             return $this->redirectToRoute('conversation_message', ['id' => $conversation->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/conversation/new.html.twig', [
+            'conversation' => $conversation,
+            'form' => $form,
+        ]);
+    }
+    #[Route('/conversation/annonce/{id}/{id_annonce}', name: 'new_conversation_with_id_annonce', requirements: ['id' => '\d+', 'id_annonce' => '\d+'])]
+    public function newConversationWithIdAnnonce(Request $request, ConversationRepository $conversationRepository, User $user, $id_annonce, AnnonceRepository $annonceRepository): Response
+    {
+        $annonce = $annonceRepository->find($id_annonce);
+        $annonceUrl = $this->generateUrl('app_annonce_edit', ['id' => urlencode($annonce->getId())], UrlGeneratorInterface::ABSOLUTE_URL);
+        $conversation = new Conversation();
+        $conversation->setPremierMessage($annonceUrl);
+        $form = $this->createForm(ConversationType::class, $conversation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $conversation->setCreatedAt(new \DateTimeImmutable());
+            $conversation->setUser($this->getUser());
+            $conversation->setCorrespondant($user);
+            $conversationRepository->add($conversation, true);
+
+            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/conversation/new.html.twig', [
+            'conversation' => $conversation,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/conversation/boutique/{id}/{id_boutique}', name: 'new_conversation_with_id_boutique', requirements: ['id' => '\d+', 'id_boutique' => '\d+'])]
+    public function newConversationWithIdBoutique(Request $request, ConversationRepository $conversationRepository, User $user, $id_boutique, BoutiqueRepository $boutiqueRepository): Response
+    {
+        $boutique = $boutiqueRepository->find($id_boutique);
+        $boutiqueUrl = $this->generateUrl('app_boutique_edit', ['id' => urlencode($boutique->getId())], UrlGeneratorInterface::ABSOLUTE_URL);
+        $conversation = new Conversation();
+        $conversation->setPremierMessage($boutiqueUrl);
+        $form = $this->createForm(ConversationType::class, $conversation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $conversation->setCreatedAt(new \DateTimeImmutable());
+            $conversation->setUser($this->getUser());
+            $conversation->setCorrespondant($user);
+            $conversationRepository->add($conversation, true);
+
+            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/conversation/new.html.twig', [

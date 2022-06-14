@@ -21,6 +21,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
     {
         $imageBoutique = (new ImagesBoutique())
             ->setTitle('imageBoutiqueDefault.jpg');
+            $manager->persist($imageBoutique);
 
         $boutiquePolo = (new Boutique())
             ->setTitle('La boutique de Polo')
@@ -32,7 +33,10 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->addImagesBoutique($imageBoutique)
             ->setCreatedAt(new \DateTimeImmutable('-2 week'));
         $manager->persist($boutiquePolo);
-        $manager->persist($imageBoutique);
+
+        $imageBoutique2 = (new ImagesBoutique())
+            ->setTitle('imageBoutiqueDefault.jpg');
+            $manager->persist($imageBoutique2);
 
         $boutiqueSacha= (new Boutique())
             ->setTitle('La boutique de Sacha')
@@ -42,9 +46,12 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setUser($this->getReference('sacha'))
             ->setActif(1)
             ->setCreatedAt(new \DateTimeImmutable())
-            ->addImagesBoutique($imageBoutique);
+            ->addImagesBoutique($imageBoutique2);
         $manager->persist($boutiqueSacha);
-        $manager->persist($imageBoutique);
+
+        $imageBoutique3 = (new ImagesBoutique())
+            ->setTitle('imageBoutiqueDefault.jpg');
+            $manager->persist($imageBoutique3);
 
         $boutiqueOrianne = (new Boutique())
             ->setTitle('La boutique de Orianne')
@@ -54,9 +61,8 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setUser($this->getReference('orianne'))
             ->setActif(1)
             ->setCreatedAt(new \DateTimeImmutable())
-            ->addImagesBoutique($imageBoutique);
+            ->addImagesBoutique($imageBoutique3);
         $manager->persist($boutiqueOrianne);
-        $manager->persist($imageBoutique);
 
         $manager->flush();
 

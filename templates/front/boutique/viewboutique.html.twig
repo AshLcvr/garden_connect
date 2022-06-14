@@ -4,10 +4,10 @@
     <section id="slider-home">
         <div class="flexslider" id="slider">
             <ul class="slides relative">
-                {% for imageBoutique in images %}
+                {% for imageBoutique in boutique.imagesBoutiques %}
                     <li>
                         {# <img src="{{ asset('uploads/boutique/imageBoutiqueDefault.jpg') }}" /> #}
-                        <img src="{{ asset('uploads/boutique/'~imageBoutique.title) }}" />
+                        <img src="{{ asset('uploads/boutique/' ~ imageBoutique.title) }}" />
                     </li>
                 {% endfor %}
             </ul>
@@ -19,21 +19,21 @@
             <img src="{{ asset('images/test-profile.png') }}" />
         </div>
         <div class="infos_vendeur">
-            <p>{{ user.name }} de {{ city }}</p>
-            <p>Boutique en ligne depuis le : {{ createdAt|date('d/m/Y') }}</p>
+            <p>{{ boutique.user.name }} de {{ boutique.city }}</p>
+            <p>Boutique en ligne depuis le : {{ boutique.createdAt|date('d/m/Y') }}</p>
         </div>
         
     </section>
 
     <section id="boutique" class="wrap">
         <div class="infos_boutique">
-            <h1 class="title_boutique">{{ title }}</h1>
-            <p class="description_boutique">{{ description }}</p>
+            <h1 class="title_boutique">{{ boutique.title }}</h1>
+            <p class="description_boutique">{{ boutique.description }}</p>
         </div>
         <div class="contact_vendeur">
             <p class="contact"> Contacter le vendeur</p>
-            {% if telephone %}
-                <p class="telephone">{{ telephone }}</p>
+            {% if boutique.telephone %}
+                <p class="telephone">{{ boutique.telephone }}</p>
             {% endif %}
             <a href="#" class="message_link">Message</a>
         </div>
@@ -41,7 +41,7 @@
 
     <section id="annonces" class="wrap">
         <div id="annonce_card">
-        {% for annonce in annonces %}
+        {% for annonce in boutique.annonces %}
         <div class="card">
             <h3 class="title">{{ annonce.title }}</h3>
                 <div class="content-card">
