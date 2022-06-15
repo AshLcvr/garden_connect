@@ -32,8 +32,6 @@
             <p class="description_boutique">{{ boutique.description }}</p>
             {% endif %}
         </div>
-
-
     </section>
 
     <section id="annonces_public" class="wrap">
@@ -73,17 +71,16 @@
                     {% if boutique.telephone %}
                         <p class="telephone">{{ boutique.telephone }}</p>
                     {% endif %}
-                    <a href="#" class="message_link">Message</a>
+                    {% if is_granted('ROLE_VENDEUR') %}
+                        <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                    {% else %}
+                        <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                    {% endif %}
                 {% else %}
                     <p class="contact"> Contacter le vendeur</p>
-                    <a href="{{ path('app_login') }}">Connectez vous</a>
+                    <a class="message_visiteur" href="{{ path('app_login') }}">Connectez vous</a>
                     <p>ou</p>
-                    <a href="{{ path('app_register') }}">Inscrivez-vous</a>
-                {% endif %}
-                {% if is_granted('ROLE_VENDEUR') %}
-                    <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
-                {% else %}
-                    <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                    <a class="message_visiteur"  href="{{ path('app_register') }}">Inscrivez-vous</a>
                 {% endif %}
             </div>
         </div>
@@ -116,9 +113,6 @@
         </a>
 
     {% endfor %}
-
-        {# <div class="separator"></div> #}
-        
     </section>
 
 {% endblock %}

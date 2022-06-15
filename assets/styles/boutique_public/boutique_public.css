@@ -47,7 +47,7 @@
 #boutique .description_boutique {
     padding: 1rem 0;
 }
-/* #boutique .contact_vendeur {
+.contact_vendeur {
     border-left: 1px solid rgb(241, 241, 241);
     border-top: 1px solid rgb(241, 241, 241);
     text-align: center;
@@ -61,12 +61,12 @@
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
-#boutique .contact_vendeur a {
+.contact_vendeur .message_visiteur{
     color: var(--orange);
 }
 #boutique .contact {
-} */
-/* #boutique .contact {
+}
+#boutique .contact {
     font-size: 1.1rem;
 }
 #boutique .telephone {
@@ -82,4 +82,4 @@
 }
 #boutique .message_link:hover {
     filter: brightness(.8);
-} */
+}
