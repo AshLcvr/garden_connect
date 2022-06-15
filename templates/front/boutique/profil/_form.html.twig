@@ -1,0 +1,44 @@
+
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <div class="wrapform">
+        <div id="contener_form">
+            {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+                <div class="bloc_form">
+                    {{ form_label(form.surname) }}
+                    {{ form_widget(form.surname) }}
+
+                    <small>{{ form_help(form.surname) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.surname) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name) }}
+
+                    <small>{{ form_help(form.name) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.name) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+
+                    <small>{{ form_help(form.email) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.email) }}
+                    </div>
+                </div>
+
+                <div class="bloc_form">
+                    {{ form_widget(form.submit) }}
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>

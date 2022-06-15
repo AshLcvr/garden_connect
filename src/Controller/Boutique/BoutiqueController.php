@@ -2,8 +2,10 @@
 
 namespace App\Controller\Boutique;
 
+use App\Entity\User;
 use App\Entity\Boutique;
 use App\Form\BoutiqueType;
+use App\Form\EditProfilType;
 use App\Service\UploadImage;
 use App\Entity\ImagesBoutique;
 use App\Security\EmailVerifier;
@@ -177,5 +179,21 @@ class BoutiqueController extends AbstractController
                 'boutique' => $boutique
             ]
         );
+    }
+
+    #[Route('/boutique/edit/profil/{id}', name: 'boutique_edit_profil', methods: ['GET'])]
+    public function editProfil(Request $request, User $user)
+    {
+        $form = $this->createForm(EditProfilType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('boutique_view_profil', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('front/boutique/profil/edit_profil.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
     }
 }
