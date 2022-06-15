@@ -36,7 +36,6 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $imageCat = $form->get('image')->getData();
             $category->setImage($uploadImage->uploadCat($imageCat));
-            dd($category);
             $categoryRepository->add($category, true);
 
 
