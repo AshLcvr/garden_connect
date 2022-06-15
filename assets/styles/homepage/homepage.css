@@ -44,6 +44,9 @@
 .annonce_img {
     width: 22%;
 }
+.annonce_img img{
+    max-height: 162px;
+}
 .annonce_text {
     width: 78%;
     display: flex;
@@ -85,11 +88,17 @@
     .annonce_box {
         display: flex;
         flex-flow: column nowrap;
+        width: 60%;
+        margin: 2rem auto;
     }
     .annonce_box:nth-child(2n+1) {
         flex-flow: row-reverse;
         display: flex;
         flex-flow: column nowrap;
+
+    }
+    .annonce_img img{
+        max-height: 400px;
     }
     .annonce_text{
         padding: 1rem;
