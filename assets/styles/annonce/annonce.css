@@ -1,6 +1,9 @@
 #annonce_card {
     padding: 20px;
 }
+#annonce_card .flexslider{
+    margin: 0;
+}
 .card{
     background-color: rgb(240, 240, 240);
     padding: 0.5rem;

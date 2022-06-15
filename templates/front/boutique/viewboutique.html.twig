@@ -57,7 +57,6 @@
                         <div class="description_bottom">
                             <p><span>Description : </span>{{ annonce.description }}</p>
                             <div class="price_date">
-                                {# <p><span>Prix : </span>{{ annonce.price }} €</p> #}
                                 <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
                             </div>
                         </div>
@@ -107,11 +106,9 @@
                     <p><span>Prix : </span>{{ annonce.price }} €</p> |
                     <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
                 </div>
-
             </div>
         </div>
         </a>
-
     {% endfor %}
     </section>
 
