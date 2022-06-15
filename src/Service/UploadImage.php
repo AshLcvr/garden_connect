@@ -105,9 +105,9 @@ class UploadImage
             $miniature->crop(200, 200);
             $miniature->save($this->getUploadDirectory() .'/mini/'. $fileName);
             // Images annonces
-//            $miniature = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
-//            $miniature->resizeToBestFit(500, 500);
-//            $miniature->save($this->getUploadDirectory() .'/annonce/'. $fileName);
+            $miniature = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
+            $miniature->crop(500, 500);
+            $miniature->save($this->getUploadDirectory() .'/annonce/'. $fileName);
 
             // Suppression de l'originale
             $file_path = $this->getUploadDirectory() . '/' . $fileName;

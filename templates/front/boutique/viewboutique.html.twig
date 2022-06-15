@@ -6,7 +6,6 @@
             <ul class="slides relative">
                 {% for imageBoutique in boutique.imagesBoutiques %}
                     <li>
-                        {# <img src="{{ asset('uploads/boutique/imageBoutiqueDefault.jpg') }}" /> #}
                         <img src="{{ asset('uploads/boutique/' ~ imageBoutique.title) }}" />
                     </li>
                 {% endfor %}
@@ -34,25 +33,7 @@
             {% endif %}
         </div>
 
-        <div class="contact_vendeur">
-            {% if app.user %}
-                <p class="contact"> Contacter le vendeur</p>
-                {% if boutique.telephone %}
-                    <p class="telephone">{{ boutique.telephone }}</p>
-                {% endif %}
-                <a href="#" class="message_link">Message</a>
-            {% else %}
-                <p class="contact"> Contacter le vendeur</p>
-                <a href="{{ path('app_login') }}">Connectez vous</a>
-                <p>ou</p>
-                <a href="{{ path('app_register') }}">Inscrivez-vous</a>
-            {% endif %}
-            {% if is_granted('ROLE_VENDEUR') %}
-                <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
-            {% else %}
-                <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
-            {% endif %}
-        </div>
+
     </section>
 
     <section id="annonces_public" class="wrap">
@@ -62,7 +43,9 @@
             <div class="card_public">
                 <div class="content_card_public">
                     <div class="image_card_public">
-                        <img src="{{ asset('/images/parsley-261039_640.jpg') }}"/>
+                        {% for image in annonce.imagesAnnonces %}
+                            <img src="{{ asset('uploads/mini/'~image.title) }}"/>
+                        {% endfor %}
                     </div>
                     <div class="description_card_public">
                         <div class="description_top">
@@ -85,11 +68,23 @@
                 </div>
             </div>
             <div class="contact_vendeur">
-                <p class="contact"> Contacter le vendeur</p>
-                {% if boutique.telephone %}
-                    <p class="telephone">{{ boutique.telephone }}</p>
+                {% if app.user %}
+                    <p class="contact"> Contacter le vendeur</p>
+                    {% if boutique.telephone %}
+                        <p class="telephone">{{ boutique.telephone }}</p>
+                    {% endif %}
+                    <a href="#" class="message_link">Message</a>
+                {% else %}
+                    <p class="contact"> Contacter le vendeur</p>
+                    <a href="{{ path('app_login') }}">Connectez vous</a>
+                    <p>ou</p>
+                    <a href="{{ path('app_register') }}">Inscrivez-vous</a>
                 {% endif %}
-                <a href="#" class="message_link">Message</a>
+                {% if is_granted('ROLE_VENDEUR') %}
+                    <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                {% else %}
+                    <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                {% endif %}
             </div>
         </div>
     {% endif %}
@@ -102,7 +97,6 @@
 
         <div class="content_card_public">
             <div class="image_card_public">
-                {# <img src="{{ asset('/images/parsley-261039_640.jpg') }}"/> #}
                 {% for image in annonce.imagesAnnonces %}
                     <img src="{{ asset('uploads/mini/'~image.title) }}"/>
                 {% endfor %}
