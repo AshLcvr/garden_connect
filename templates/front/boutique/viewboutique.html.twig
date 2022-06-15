@@ -18,12 +18,10 @@
     </section>
 
     <section id="profile" class="wrap">
-        
         <div class="infos_vendeur">
             <p>{{ boutique.user.name }} de {{ boutique.city }}</p>
             <p>Boutique en ligne depuis le : {{ boutique.createdAt|date('d/m/Y') }}</p>
         </div>
-        
     </section>
 
     <section id="boutique" class="wrap">
@@ -46,6 +44,11 @@
                 <a href="{{ path('app_login') }}">Connectez vous</a>
                 <p>ou</p>
                 <a href="{{ path('app_register') }}">Inscrivez-vous</a>
+            {% endif %}
+            {% if is_granted('ROLE_VENDEUR') %}
+                <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+            {% else %}
+                <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
             {% endif %}
         </div>
     </section>

@@ -40,13 +40,15 @@
         </div>
 
         <div class=" bloc_form d-flex" style="gap : 1rem">
-            <div class="d-flex flex-column" style="width: 30%">
-                {{ form_label(form.price) }}
-                {{ form_widget(form.price) }}
-            </div>
-            <small>{{ form_help(form.price) }}</small>
-            <div class="form-error">
-                {{ form_errors(form.price) }}
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-column" style="width: 30%">
+                    {{ form_label(form.price) }}
+                    {{ form_widget(form.price) }}
+                </div>
+                <small>{{ form_help(form.price) }}</small>
+                <div class="form-error">
+                    {{ form_errors(form.price) }}
+                </div>
             </div>
 
             <div class="d-flex flex-column" style="width: 20%">

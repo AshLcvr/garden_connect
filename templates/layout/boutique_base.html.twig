@@ -35,9 +35,9 @@
                         <span>Retour au site</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('boutique_messagerie') }}">
-                        <i class="fa-solid fa-envelope"></i>
-                        <span>Messagerie</span></a>
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-crown"></i>
+                        <span>Favory</span></a>
                 </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">
@@ -115,7 +115,7 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                <a class="nav-link dropdown-toggle" href="{{ path('boutique_messagerie') }}" id="messagesDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-envelope fa-fw"></i>
 {#                                    <span class="badge badge-danger badge-counter">{{ app.user.messages |length }}</span>#}
@@ -137,7 +137,7 @@
                                             <div class="small text-gray-500">Emily Fowler · 58m</div>
                                         </div>
                                     </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                                    <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Read More Messages</a>
                                 </div>
                             </li>
                             <div class="topbar-divider d-none d-sm-block"></div>

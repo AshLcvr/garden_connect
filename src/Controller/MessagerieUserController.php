@@ -19,10 +19,17 @@ class MessagerieUserController extends AbstractController
         $user = $this->getUser();
         $conversationsCorresp = $user->getConversationsCorresp();
         $conversationsInit = $user->getConversationsInit();
+        $conversations = [];
 
-        return $this->renderForm('front/messagerie/index.html.twig', [
-            'conversationsCorresp' => $conversationsCorresp,
-            'conversationsInit' => $conversationsInit
+        foreach ($conversationsCorresp as $key => $value) {
+            $conversations[] = $value;
+        }
+        foreach ($conversationsInit as $key => $value) {
+            $conversations[] = $value;
+        }
+
+        return $this->renderForm('front/boutique/messagerie/index.html.twig', [
+            'conversations' => $conversations,
         ]);
     }
 
