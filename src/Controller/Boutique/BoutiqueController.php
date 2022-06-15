@@ -9,6 +9,7 @@ use App\Entity\ImagesBoutique;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManager;
 use App\Repository\UserRepository;
+use App\Repository\AnnonceRepository;
 use App\Repository\BoutiqueRepository;
 use App\Repository\ImagesBoutiqueRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -153,6 +154,24 @@ class BoutiqueController extends AbstractController
         return $this->render(
             'front/boutique/viewboutique.html.twig', [
                 'boutique' => $boutique,
+            ]
+        );
+    }
+    #[Route('/viewboutique/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
+    public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique, $id_annonce)
+    {
+        $annonce = null;
+
+        if (!empty($id_annonce)) {
+            $annonce = $annonceRepository->find($id_annonce);
+        } 
+        // dd($annonce);
+
+        return $this->render(
+            'front/boutique/viewboutique.html.twig',
+            [
+                'annonce' => $annonce,
+                'boutique' => $boutique
             ]
         );
     }
