@@ -34,4 +34,24 @@ footer a:hover {
 }
 .brand {
     color: rgb(192, 192, 192);
+    padding: .5rem 0 .3rem;
+}
+@media all and (max-width: 850px){
+    .footer_box {
+        flex-flow: column wrap;
+        padding: .5rem;
+    }
+    .footer_infos li {
+        padding: .8rem .5rem;
+    }
+    .footer_legals {
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+    .footer_legals li {
+        padding: .2rem .2rem;
+    }
+}
+@media all and (max-width: 750px){
+
 }

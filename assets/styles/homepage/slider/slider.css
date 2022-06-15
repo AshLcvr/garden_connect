@@ -50,4 +50,12 @@
     background-color: rgb(255, 255, 255);
     filter: brightness(1);
 }
-
+@media all and (max-width: 650px){
+    .text {
+        border: 2px soli red;
+        font-size: 1.2rem;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
