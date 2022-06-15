@@ -16,7 +16,7 @@
 #slider-home .photo_profile img {
     border-radius: 50%;
 }
-#profile .infos_vendeur {
+.infos_vendeur {
     /* border: 1px solid red; */
     display: flex;
     flex-flow: row nowrap;
@@ -36,11 +36,18 @@
 #boutique .infos_boutique {
     width: 75%;
 }
+#boutique .title_boutique {
+    /* border: 1px solid green; */
+    margin-bottom: 30px;
+}
+.title_listing_aanonces {
+    margin-bottom: 30px;
+
+}
 #boutique .description_boutique {
     padding: 1rem 0;
 }
-#boutique .contact_vendeur {
-    /* border: 1px solid blue; */
+/* #boutique .contact_vendeur {
     border-left: 1px solid rgb(241, 241, 241);
     border-top: 1px solid rgb(241, 241, 241);
     width: 22%;
@@ -51,10 +58,9 @@
     align-content: center;
     gap: 1rem;
     padding: 1rem;
-    /* box-shadow: 10px 5px 5px rgb(228, 228, 228); */
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
-}
-#boutique .contact {
+} */
+/* #boutique .contact {
     font-size: 1.1rem;
 }
 #boutique .telephone {
@@ -70,4 +76,4 @@
 }
 #boutique .message_link:hover {
     filter: brightness(.8);
-}
+} */
