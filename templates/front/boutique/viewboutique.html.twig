@@ -29,8 +29,11 @@
     <section id="boutique" class="wrap">
         <div class="infos_boutique">
             <h1 class="title_boutique">{{ boutique.title }}</h1>
+            {% if annonce == null %}
             <p class="description_boutique">{{ boutique.description }}</p>
+            {% endif %}
         </div>
+
         <div class="contact_vendeur">
             <p class="contact"> Contacter le vendeur</p>
             {% if boutique.telephone %}
@@ -51,7 +54,7 @@
 
     <section id="annonces_public" class="wrap">
 
-    {% if annonce %}
+    {% if annonce != null %}
         <div id="annonce_card_public">
             
             <div class="card_public">
@@ -72,60 +75,28 @@
             </div>
         </div>
     {% endif %}
-
-
-
-        {% for annonce in boutique.annonces %}
         
         {# <h1>Les annonces de {{ user.name }}</h1> #}
         <div id="listing_annonces">
-            {# <div class="card_public"> #}
-                <div class="content_card_public">
-                    <div class="image_card_public">
-                        <img src="{{ asset('/images/parsley-261039_640.jpg') }}"/>
-                    </div>
-                    <div class="description_card_public">
-                        <h3 class="title_public">{{ annonce.title }}</h3>
-                        {# <p><span>Description : </span>{{ annonce.description }}</p> #}
-                        <p><span>Prix : </span>{{ annonce.price }} €</p>
-                        <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
-                    </div>
-                </div>
-            {# </div> #}
-
+        {% for annonce in boutique.annonces %}
 
             {# <div class="card_public"> #}
-                <div class="content_card_public">
-                    <div class="image_card_public">
-                        <img src="{{ asset('/images/parsley-261039_640.jpg') }}"/>
-                    </div>
-                    <div class="description_card_public">
-                        <h3 class="title_public">{{ annonce.title }}</h3>
-                        {# <p><span>Description : </span>{{ annonce.description }}</p> #}
-                        <p><span>Prix : </span>{{ annonce.price }} €</p>
-                        <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
-                    </div>
+            <div class="content_card_public">
+                <div class="image_card_public">
+                    <img src="{{ asset('/images/parsley-261039_640.jpg') }}"/>
                 </div>
-            {# </div> #}
-
-            {# <div class="card_public"> #}
-                <div class="content_card_public">
-                    <div class="image_card_public">
-                        <img src="{{ asset('/images/parsley-261039_640.jpg') }}"/>
-                    </div>
-                    <div class="description_card_public">
-                        <h3 class="title_public">{{ annonce.title }}</h3>
-                        {# <p><span>Description : </span>{{ annonce.description }}</p> #}
-                        <p><span>Prix : </span>{{ annonce.price }} €</p>
-                        <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
-                    </div>
+                <div class="description_card_public">
+                    <h3 class="title_public">{{ annonce.title }}</h3>
+                    {# <p><span>Description : </span>{{ annonce.description }}</p> #}
+                    <p><span>Prix : </span>{{ annonce.price }} €</p>
+                    <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
                 </div>
+            </div>
             {# </div> #}
-        </div>
+        {% endfor %}
 
-        <div class="separator"></div>
+        {# <div class="separator"></div> #}
         
     </section>
-        {% endfor %}
 
 {% endblock %}
