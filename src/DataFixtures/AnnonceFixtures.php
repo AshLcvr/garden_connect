@@ -19,9 +19,9 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce = new Annonce();
         $annonce->setTitle('Quinoa');
         $annonce->setDescription('Quinoa ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce->setPrice(5);
+        $annonce->setPrice(20);
         $annonce->setMesure($this->getReference('Kg'));
-        $annonce->setCreatedAt(new DateTimeImmutable('-2 week'));
+        $annonce->setCreatedAt(new DateTimeImmutable('-2 weeks'));
         $annonce->setActif(true);
         $annonce->addImagesAnnonce($imageAnnonce);
         $annonce->setBoutique($this->getReference('boutique_polo'));
@@ -34,9 +34,9 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce2 = new Annonce();
         $annonce2->setTitle('Blé');
         $annonce2->setDescription('Blé de Pont-Audemer ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce2->setPrice(5);
+        $annonce2->setPrice(2);
         $annonce2->setMesure($this->getReference('Kg'));
-        $annonce2->setCreatedAt(new DateTimeImmutable());
+        $annonce2->setCreatedAt(new DateTimeImmutable('-1 week'));
         $annonce2->setActif(true);
         $annonce2->addImagesAnnonce($imageAnnonce2);
         $annonce2->setBoutique($this->getReference('boutique_sacha'));
@@ -66,7 +66,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce4->setDescription('Épeautre de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
         $annonce4->setPrice(5);
         $annonce4->setMesure($this->getReference('Kg'));
-        $annonce4->setCreatedAt(new DateTimeImmutable());
+        $annonce4->setCreatedAt(new DateTimeImmutable('-3 days'));
         $annonce4->setActif(true);
         $annonce4->addImagesAnnonce($imageAnnonce4);
         $annonce4->setBoutique($this->getReference('boutique_orianne'));
@@ -231,7 +231,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce15->setDescription('Seigle de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
         $annonce15->setPrice(12);
         $annonce15->setMesure($this->getReference('Kg'));
-        $annonce15->setCreatedAt(new DateTimeImmutable());
+        $annonce15->setCreatedAt(new DateTimeImmutable('-6 days'));
         $annonce15->setActif(true);
         $annonce15->addImagesAnnonce($imageAnnonce15);
         $annonce15->setBoutique($this->getReference('boutique_orianne'));

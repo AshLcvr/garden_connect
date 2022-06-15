@@ -43,7 +43,7 @@
         </div>
     </div>
     <div class="m-t-20">
-        <a href="{{ path('app_conversation_index') }}" class="action width-100 text-align-center inline-block">Retour à la liste</a>
+        <a href="{{ path('app_conversation_index', {id: app.user.id}) }}" class="action width-100 text-align-center inline-block">Retour à la liste</a>
     <div>
 </div>
 {% endblock %}

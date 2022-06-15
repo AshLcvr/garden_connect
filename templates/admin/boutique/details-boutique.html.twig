@@ -24,7 +24,7 @@
                 <div>
                     <a href="{{ path('active-boutique', {id: boutique.id}) }}" class="action">Rendre actif</a>
             {% endif %}
-                <a href="{{ path('new_conversation_with_id_boutique', {id: boutique.user.id, id_boutique: boutique.id}) }}" class="action">Envoyer message d'avertissement</a>
+                <a href="{{ path('new_conversation_with_id_boutique', {id: boutique.user.id, id_boutique: boutique.id}) }}" class="action">Envoyer message</a>
                 <a href="{{ path('details-user', {id: boutique.user.id}) }}" class="action">Voir l'utilisateur</a>
             </div>
         </div>

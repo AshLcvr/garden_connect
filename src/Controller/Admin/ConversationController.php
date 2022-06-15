@@ -21,10 +21,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/admin')]
 class ConversationController extends AbstractController
 {
-    #[Route('/conversation', name: 'app_conversation_index')]
-    public function index(): Response
+    #[Route('/conversation-admin/{id}', name: 'app_conversation_index')]
+    public function index(User $user): Response
     {
-        $user = $this->getUser();
         $conversationsCorresp = $user->getConversationsCorresp();
         $conversationsInit = $user->getConversationsInit();
 
@@ -34,7 +33,7 @@ class ConversationController extends AbstractController
         ]);
     }
 
-    #[Route('/conversation/{id}', name: 'new_conversation')]
+    #[Route('/new-conversation/{id}', name: 'new_conversation')]
     public function newConversation(Request $request, ConversationRepository $conversationRepository, User $user): Response
     {
         $conversation = new Conversation();
@@ -71,7 +70,7 @@ class ConversationController extends AbstractController
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
 
-            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_conversation_index', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/conversation/new.html.twig', [
@@ -96,7 +95,7 @@ class ConversationController extends AbstractController
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
 
-            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_conversation_index', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/conversation/new.html.twig', [

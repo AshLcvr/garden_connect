@@ -25,4 +25,10 @@ class DefaultController extends AbstractController
             'imagesHero' => $imagesHero
         ]);
     }
+
+    #[Route('/mention-legale', name: 'mention_legale')]
+    public function mentionLegale(): Response
+    {
+        return $this->render('front/mention.html.twig');
+    }
 }
