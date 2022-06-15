@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Controller\Boutique;
+namespace App\Controller;
 
 use App\Entity\Message;
 use App\Form\MessageType;
@@ -11,23 +11,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class MessagerieBoutiqueController extends AbstractController
+class MessagerieUserController extends AbstractController
 {
-
-    #[Route('/boutique/messagerie', name: 'boutique_messagerie')]
+    #[Route('/user/messagerie', name: 'user_messagerie')]
     public function boutiqueMessagerie()
     {
         $user = $this->getUser();
         $conversationsCorresp = $user->getConversationsCorresp();
         $conversationsInit = $user->getConversationsInit();
 
-        return $this->renderForm('front/boutique/messagerie/index.html.twig', [
+        return $this->renderForm('front/messagerie/index.html.twig', [
             'conversationsCorresp' => $conversationsCorresp,
             'conversationsInit' => $conversationsInit
         ]);
     }
 
-    #[Route('/boutique/messagerie/{id}', name: 'boutique_messagerie_message')]
+    #[Route('/user/messagerie/{id}', name: 'user_messagerie_message')]
     public function newMessage(Request $request, MessageRepository $messageRepository, Conversation $conversation): Response
     {
         $message = new Message();
@@ -39,7 +38,7 @@ class MessagerieBoutiqueController extends AbstractController
             $message->setExpediteur($this->getUser());
             $messageRepository->add($message, true);
 
-            return $this->redirectToRoute('boutique_messagerie_message', ['id' => $conversation->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('user_messagerie_message', ['id' => $conversation->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('front/boutique/messagerie/show.html.twig', [

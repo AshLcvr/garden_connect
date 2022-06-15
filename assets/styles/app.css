@@ -45,6 +45,9 @@ img{
 .d-flex{
     display: flex;
 }
+.row-wrap{
+    flex-flow: row wrap;
+}
 .flex-column{
     flex-flow: column;
 }
@@ -56,4 +59,7 @@ img{
 }
 .box-shadow{
     box-shadow: 15px 15px 15px lightgrey;
+}
+.width-100{
+    width: 100%;
 }

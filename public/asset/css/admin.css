@@ -283,7 +283,7 @@ label {
 }
 
 .chatbox {
-  width: 80%;
+  width: 100%;
   position: relative;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2);
   display: flex;

@@ -1,0 +1,46 @@
+{% extends 'layout/boutique_base.html.twig' %}
+
+{% block title %}
+ <title>Messagerie</title>
+{% endblock %}
+
+{% block body %}
+    <h2 class="title">Conversation</h2>
+    <div class="chatbox-holder">
+        <div class="chatbox">
+            <div class="chatbox-top">
+                {% if conversation.user.email == app.user.email %}
+                    <div class="message-box-holder background-white-plus">
+                        <div class="message-box">{{ conversation.premierMessage }}</div>
+                    </div>
+                {% else %}
+                    <div class="message-box-holder background-lightgrey">
+                        <div class="message-sender">{{ conversation.user.name }}</div>
+                        <div class="message-box message-partner">{{ conversation.premierMessage }}</div>
+                    </div>
+                {% endif %}
+                {% for message in conversation.messages %}
+                    {% if message.expediteur.email == app.user.email %}
+                        <div class="message-box-holder background-white-plus">
+                            <div class="message-box">{{ message.message }}</div>
+                        </div>
+                    {% else %}
+                        <div class="message-box-holder background-lightgrey">
+                            <div class="message-sender">{{ message.expediteur.name }}</div>
+                            <div class="message-box message-partner">{{ message.message }}</div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="chat-input-holder">
+                {{ form_start(form, {attr : {novalidate: 'novalidate', class: 'width-100 d-flex row-wrap'}}) }}
+                    {{ form_widget(form.message) }}
+                    {{ form_widget(form.submit) }}
+                    <div class="form-error width-100">
+                        {{ form_errors(form.message) }}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
