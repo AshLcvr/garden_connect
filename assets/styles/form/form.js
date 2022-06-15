@@ -1,6 +1,5 @@
 // Ajax categories select
 $(document).on('change', '.annonce_category', function () {
-
     let $field = $(this)
     let $form = $field.closest('form')
     let data = {}

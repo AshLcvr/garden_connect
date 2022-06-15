@@ -11,11 +11,11 @@
     <div class="card-header py-3  d-flex justify-content-between align-items-center">
         <h4 class="annonce_title">{{ boutique.title }}</h4>
         <div>
-                <a title="Editer l'annonce" class="btn btn-primary" href="{{ path('app_boutique_edit', {'id' : boutique.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a title="Modifier ma boutique" class="btn btn-primary" href="{{ path('app_boutique_edit', {'id' : boutique.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
             {% if boutique.actif == 1 %}
-                <a title="Désactiver l'annonce" class="btn btn-warning" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
+                <a title="Désactiver ma boutique" class="btn btn-warning" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"  onclick="return confirm('Voulez vous vraiment désactiver votre boutique?')"><i class="fa-regular fa-eye-slash"></i></a>
             {% else %}
-                <a title="Activer l'annonce" class="btn btn-primary" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye"></i></a>
+                <a title="Activer ma boutique" class="btn btn-primary" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye"></i></a>
             {% endif %}
             {{ include('front/boutique/_delete_form.html.twig') }}
         </div>

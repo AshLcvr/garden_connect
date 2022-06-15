@@ -1,6 +1,13 @@
 footer {
     background-image: url("../../../public/asset/images/meadow-3375052_1920.jpg");
 }
+footer a {
+    color: lightgrey;
+}
+footer a:hover {
+    color: white;
+    transition: .3s;
+}
 .footer_box {
     display: flex;
     flex-flow: column nowrap;
@@ -15,7 +22,6 @@ footer {
 }
 .footer_infos li {
     padding: 1rem 2rem;
-    color: white;
 }
 .footer_legals {
     display: flex;

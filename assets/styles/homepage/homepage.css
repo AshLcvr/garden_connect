@@ -28,7 +28,7 @@
     margin-bottom: 3rem;
     position: relative;
     display: flex;
-    width: 100%;
+    width: 80%;
 }
 .annonce_box:nth-child(2n+1) {
     flex-flow: row-reverse;
@@ -56,5 +56,38 @@
     margin-bottom: 3rem;
     transition: .6s;
     box-shadow: rgba(17, 17, 26, 0.1) 5px 10px 16px, rgba(17, 17, 26, 0.1) 20px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-    /*margin-bottom: 20px;*/
+}
+
+@media (max-width: 1100px){
+    #annonces p {
+        font-size: .8rem;
+    }
+    .annonce_img {
+        width: 50%;
+    }
+}
+
+@media (max-width: 650px){
+    #annonces p {
+        font-size: 1rem;
+    }
+    .annonce_img {
+        width: 100%;
+    }
+    .annonce_box {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    .annonce_box:nth-child(2n+1) {
+        flex-flow: row-reverse;
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    .annonce_text{
+        padding: 1rem;
+        margin: 0 auto;
+    }
+    .annonce_text div{
+        margin-bottom: 1rem;
+    }
 }

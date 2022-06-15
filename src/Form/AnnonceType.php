@@ -57,7 +57,7 @@ class AnnonceType extends AbstractType
                 new All([
 
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '5000k',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',

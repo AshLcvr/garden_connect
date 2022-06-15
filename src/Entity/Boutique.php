@@ -24,6 +24,7 @@ class Boutique
     minMessage: 'Votre titre doit faire au moins {{ limit }} caractères de long',
     maxMessage: 'Votre titre doit faire au maxmium {{ limit }} caractères de long',
     )]
+    #[Assert\NotBlank(message: 'Veuillez renseigner un titre')]
     private $title;
 
     #[ORM\Column(type: 'text', nullable: true)]

@@ -108,6 +108,10 @@ class UploadImage
             $miniature = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
             $miniature->resizeToBestFit(500, 500);
             $miniature->save($this->getUploadDirectory() .'/annonce/'. $fileName);
+
+            // Suppression de l'originale
+            $file_path = $this->getUploadDirectory() . '/' . $fileName;
+            if (file_exists($file_path)) unlink($file_path);
         }
     }
 
