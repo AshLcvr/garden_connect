@@ -35,22 +35,20 @@
         </div>
 
         <div class="contact_vendeur">
-            <p class="contact"> Contacter le vendeur</p>
-            {% if boutique.telephone %}
-                <p class="telephone">{{ boutique.telephone }}</p>
+            {% if app.user %}
+                <p class="contact"> Contacter le vendeur</p>
+                {% if boutique.telephone %}
+                    <p class="telephone">{{ boutique.telephone }}</p>
+                {% endif %}
+                <a href="#" class="message_link">Message</a>
+            {% else %}
+                <p class="contact"> Contacter le vendeur</p>
+                <a href="{{ path('app_login') }}">Connectez vous</a>
+                <p>ou</p>
+                <a href="{{ path('app_register') }}">Inscrivez-vous</a>
             {% endif %}
-            <a href="#" class="message_link">Message</a>
         </div>
     </section>
-
-    {# <section id="annonces" class="wrap">
-        <div id="annonce_card"> #}
-        {# {% for annonce in boutique.annonces %} #}
-        {# <div class="card">
-            <h3 class="title">{{ annonce.title }}</h3> #}
-                {# <div class="content-card">
-                    <div class="image-card">
-                        <img src="{{ asset('asset/images/logo-paul.svg') }}"/> #}
 
     <section id="annonces_public" class="wrap">
 

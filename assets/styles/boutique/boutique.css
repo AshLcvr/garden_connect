@@ -2,6 +2,9 @@
 .fa-envelope{
     color: white;
 }
+#sidebarToggleTop {
+    display: none;
+}
 /* Tableaux boutique */
 .card-body table th,.card-body table td{
     text-align: center;
@@ -76,10 +79,20 @@
     text-align: right;
     list-style: initial;
 }
+.boutique_accueil ul li, .boutique_accueil p{
+    font-size: 1.2rem;
+}
 .boutique_accueil ul li:last-child{
     margin-bottom: 2rem;
 }
 .boutique_accueil .btn-primary{
     width: 20%;
     margin: 0 auto;
+}
+
+@media (max-width: 767px){
+    #sidebarToggleTop {
+        display: block;
+    }
+
 }

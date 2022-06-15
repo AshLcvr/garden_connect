@@ -3,6 +3,7 @@
 namespace App\Controller\Boutique;
 
 use App\Entity\Boutique;
+use App\Entity\User;
 use App\Form\BoutiqueType;
 use App\Service\UploadImage;
 use App\Entity\ImagesBoutique;
@@ -150,7 +151,6 @@ class BoutiqueController extends AbstractController
     #[Route('/viewboutique/{id}', name: 'view_boutique')]
     public function oneBoutique(Boutique $boutique)
     {
-
         $annonce = null;
 
         return $this->render(
@@ -160,6 +160,7 @@ class BoutiqueController extends AbstractController
             ]
         );
     }
+
     #[Route('/viewboutique/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
     public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique, $id_annonce)
     {
@@ -167,14 +168,24 @@ class BoutiqueController extends AbstractController
 
         if (!empty($id_annonce)) {
             $annonce = $annonceRepository->find($id_annonce);
-        } 
-        // dd($annonce);
+        }
 
         return $this->render(
             'front/boutique/viewboutique.html.twig',
             [
                 'annonce' => $annonce,
                 'boutique' => $boutique
+            ]
+        );
+    }
+
+    #[Route('/viewprofil/{id}', name: 'boutique_view_profil', methods: ['GET'])]
+    public function viewProfile(User $user)
+    {
+        return $this->render(
+            'front/boutique/profil/view_profil.html.twig',
+            [
+                'user' => $user,
             ]
         );
     }

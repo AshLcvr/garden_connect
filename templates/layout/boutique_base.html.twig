@@ -20,8 +20,7 @@
         <div id="wrapper">
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
                 <li style="margin: 0" class="">
-                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-{#                        <img src="{{ asset('images/logo.png') }}" alt="Logo Garden Connect" style="width: 50px;height:50px; background-color: white;border-radius: 50%">#}
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                     </a>
                 </li>
                 <hr class="sidebar-divider my-0">
@@ -156,7 +155,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ path('boutique_view_profil', {id : app.user.id}) }}">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Mon profil
                                     </a>

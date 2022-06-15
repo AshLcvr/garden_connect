@@ -19,7 +19,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce = new Annonce();
         $annonce->setTitle('Quinoa');
         $annonce->setDescription('Quinoa ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce->setPrice(2);
+        $annonce->setPrice(5);
         $annonce->setMesure($this->getReference('Kg'));
         $annonce->setCreatedAt(new DateTimeImmutable('-2 week'));
         $annonce->setActif(true);
@@ -49,7 +49,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce3 = new Annonce();
         $annonce3->setTitle('Boulghour');
         $annonce3->setDescription('Boulghour de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce3->setPrice(1);
+        $annonce3->setPrice(10);
         $annonce3->setMesure($this->getReference('Kg'));
         $annonce3->setCreatedAt(new DateTimeImmutable());
         $annonce3->setActif(true);
@@ -64,7 +64,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce4 = new Annonce();
         $annonce4->setTitle('Épeautre');
         $annonce4->setDescription('Épeautre de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce4->setPrice(1);
+        $annonce4->setPrice(5);
         $annonce4->setMesure($this->getReference('Kg'));
         $annonce4->setCreatedAt(new DateTimeImmutable());
         $annonce4->setActif(true);
@@ -79,7 +79,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce5 = new Annonce();
         $annonce5->setTitle('Maïs');
         $annonce5->setDescription('Maïs de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce5->setPrice(1);
+        $annonce5->setPrice(6);
         $annonce5->setMesure($this->getReference('Kg'));
         $annonce5->setCreatedAt(new DateTimeImmutable());
         $annonce5->setActif(true);
@@ -94,7 +94,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce6 = new Annonce();
         $annonce6->setTitle('Compost');
         $annonce6->setDescription('Compost de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce6->setPrice(1);
+        $annonce6->setPrice(3);
         $annonce6->setMesure($this->getReference('Kg'));
         $annonce6->setCreatedAt(new DateTimeImmutable());
         $annonce6->setActif(true);
@@ -109,7 +109,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce7 = new Annonce();
         $annonce7->setTitle('Foins');
         $annonce7->setDescription('Foins de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce7->setPrice(1);
+        $annonce7->setPrice(12);
         $annonce7->setMesure($this->getReference('Kg'));
         $annonce7->setCreatedAt(new DateTimeImmutable());
         $annonce7->setActif(true);
@@ -124,7 +124,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce8 = new Annonce();
         $annonce8->setTitle('Ortie');
         $annonce8->setDescription('Ortie de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce8->setPrice(1);
+        $annonce8->setPrice(4);
         $annonce8->setMesure($this->getReference('Kg'));
         $annonce8->setCreatedAt(new DateTimeImmutable());
         $annonce8->setActif(true);
@@ -139,7 +139,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce9 = new Annonce();
         $annonce9->setTitle('Paille');
         $annonce9->setDescription('Paille de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce9->setPrice(1);
+        $annonce9->setPrice(9);
         $annonce9->setMesure($this->getReference('Kg'));
         $annonce9->setCreatedAt(new DateTimeImmutable());
         $annonce9->setActif(true);
@@ -154,7 +154,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce10 = new Annonce();
         $annonce10->setTitle('Purin');
         $annonce10->setDescription('Purin de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce10->setPrice(1);
+        $annonce10->setPrice(20);
         $annonce10->setMesure($this->getReference('Kg'));
         $annonce10->setCreatedAt(new DateTimeImmutable());
         $annonce10->setActif(true);
@@ -169,7 +169,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce11 = new Annonce();
         $annonce11->setTitle('Chataîgne');
         $annonce11->setDescription('Chataîgne de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce11->setPrice(1);
+        $annonce11->setPrice(15);
         $annonce11->setMesure($this->getReference('Kg'));
         $annonce11->setCreatedAt(new DateTimeImmutable());
         $annonce11->setActif(true);
@@ -184,7 +184,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce12 = new Annonce();
         $annonce12->setTitle('Pommes');
         $annonce12->setDescription('Mélange de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce12->setPrice(1);
+        $annonce12->setPrice(7);
         $annonce12->setMesure($this->getReference('Kg'));
         $annonce12->setCreatedAt(new DateTimeImmutable());
         $annonce12->setActif(true);
@@ -199,7 +199,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce13 = new Annonce();
         $annonce13->setTitle('Laitue');
         $annonce13->setDescription('Riz de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce13->setPrice(1);
+        $annonce13->setPrice(8);
         $annonce13->setMesure($this->getReference('Kg'));
         $annonce13->setCreatedAt(new DateTimeImmutable());
         $annonce13->setActif(true);
@@ -214,7 +214,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce14 = new Annonce();
         $annonce14->setTitle('Radis');
         $annonce14->setDescription('Sarrasin de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce14->setPrice(1);
+        $annonce14->setPrice(6);
         $annonce14->setMesure($this->getReference('Kg'));
         $annonce14->setCreatedAt(new DateTimeImmutable());
         $annonce14->setActif(true);
@@ -229,7 +229,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $annonce15 = new Annonce();
         $annonce15->setTitle('Seigle');
         $annonce15->setDescription('Seigle de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
-        $annonce15->setPrice(1);
+        $annonce15->setPrice(12);
         $annonce15->setMesure($this->getReference('Kg'));
         $annonce15->setCreatedAt(new DateTimeImmutable());
         $annonce15->setActif(true);

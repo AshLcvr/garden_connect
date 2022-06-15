@@ -25,11 +25,11 @@
           {% for cat in categories %}
 
             <li class="card_cat">
-              <a href="{{ path('app_annonce_recherche')~'?category='~cat.id }}" class="title-cat" target="_blank">
+              <a href="{{ path('app_annonce_recherche')~'?category='~cat.id }}" class="title-cat">
               <img src="{{ asset('uploads/category/' ~ cat.image) }}" />
               </a>
               <div>
-                <a href="{{ path('app_annonce_recherche')~'?category='~cat.id }}" class="title-cat" target="_blank">
+                <a href="{{ path('app_annonce_recherche')~'?category='~cat.id }}" class="title-cat" >
                   <h3>{{ cat.title }}</h3>
                 </a>
               </div>
@@ -43,18 +43,22 @@
   <div class="separator"></div>
 
   <section id="annonces" class="wrap">
-    <a href="{{ path('app_annonce_recherche') }}" target="_blank"><h2 class="title_section_home">Les dernières annonces</h2></a>
+    <a href="{{ path('app_annonce_recherche') }}" ><h2 class="title_section_home">Les dernières annonces</h2></a>
     {% for annonce in annonces %}
         <div class="annonce_box">
           <div class="annonce_img">
-            <a href="{{ path('app_annonce_recherche')~'/'~annonce.id }}" class="annonce_link" target="_blank">
-              {% for image in annonce.imagesAnnonces %}
-               <img src="{{ asset('uploads/annonce/'~ image.title) }}"/>
-              {% endfor  %}
+            <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
+              <ul class="slides">
+                {% for image in annonce.imagesAnnonces %}
+                    <li>
+                      <img src="{{ asset('uploads/annonce/'~ image.title) }}"/>
+                    </li>
+                  {% endfor %}
+              </ul>
             </a>
           </div>
           <div class="annonce_text">
-            <a href="{{ path('app_annonce_recherche')~'/'~annonce.id }}" class="annonce_link" target="_blank">
+            <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link" >
               <div>
                 <p class="annonce_title">{{ annonce.title }}</p>
               </div>

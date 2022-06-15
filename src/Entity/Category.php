@@ -16,7 +16,7 @@ class Category
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable : true)]
     #[Assert\NotBlank(message: 'Veuillez renseigner un titre')]
     #[Assert\Length(min: 3, minMessage: 'Votre titre est trop court')]
     private $title;

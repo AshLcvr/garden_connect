@@ -7,15 +7,15 @@
 {% block body %}
     <section class="boutique_accueil">
         <div class="wrap2">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo Garden Connect" style="width: 50%; margin: 0 auto">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo Garden Connect" style="width: 60%; margin: 0 auto">
             <h1 class="m-4 title">  {{ boutique.title }} </h1>
             <h3><u>Bienvenue sur votre espace boutique ! </u></h3>
             <p>D'ici, vous pourrez:</p>
             <ul>
                 <li> gérer les infos de votre boutique,  </li>
                 <li> ajouter et éditer vos annonces,  </li>
-                <li>   accéder à votre messagerie, </li>
-                <li>   voir vos avis (émis et reçus) </li>
+                <li> accéder à votre messagerie, </li>
+                <li> voir vos avis (émis et reçus) </li>
             </ul>
            <a class="btn btn-primary" href="{{ path('view_boutique', {'id' : boutique.id }) }}">Voir ma boutique</a>
         </div>

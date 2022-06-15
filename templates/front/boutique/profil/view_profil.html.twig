@@ -1,0 +1,57 @@
+{% extends 'layout/boutique_base.html.twig' %}
+
+{% block name %}
+    <name>{{app.user.name}}</name>
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
+{% endblock %}
+{% block body %}
+    <div class="card shadow mb-4 user_detail">
+        <div class="card-header py-3  d-flex justify-content-between align-items-center">
+            <h4 class="annonce_name">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
+            <div>
+{#                <a name="Modifier mon profil" class="btn btn-primary" href="{{ path('boutique_edit_profil', {'id' : user.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>#}
+            </div>
+
+        </div>
+        <div class="card-body user_infos">
+            <div>
+                <h6 class="annonce_name">Photo: </h6>
+                <div class="flexslider" id="slider">
+                    {% if user.image %}
+                            <li>
+                                <img src="{{ asset('uploads/profile/'~user.image) }}" alt="Images user">
+                            </li>
+                    {% endif %}
+                </div>
+
+            </div>
+            <hr>
+            <div>
+                <h6 class="annonce_name">Email:</h6>
+                {{ user.email  }}
+            </div>
+            <hr>
+            <div>
+                <h6 class="annonce_name">Prénom:</h6>
+                {{ user.name }}
+            </div>
+            <hr>
+            <div>
+                <h6 class="annonce_name">Nom:</h6>
+                    {{ user.surname }}
+            </div>
+            <hr>
+            <a style="color: var(--orange)" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('/asset/flex/jquery.flexslider.js') }}"></script>
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}

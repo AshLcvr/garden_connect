@@ -18,7 +18,6 @@ class DefaultController extends AbstractController
         $categories = $categoryRepository->findAll();
         $annonces = $annonceRepository->findBy(['actif'=> 1],['created_at' => 'DESC'], 4);
         $imagesHero = $imagesHeroRepository->findAll();
-        // dd($imagesHero);
 
         return $this->render('front/homepage.html.twig',[
             'categories' => $categories,
