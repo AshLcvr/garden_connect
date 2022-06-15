@@ -1,5 +1,6 @@
 #annonce_card_public {
     margin-bottom: 20px;
+    width: 75%;
 }
 #annonce_card_public .card_public {
     /* border: 1px solid black; */
@@ -13,7 +14,7 @@
     padding: 0.3rem;
 }
 #annonce_card_public .content_card_public {
-    /* border: 1px solid green; */
+    border: 1px solid red;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -46,20 +47,21 @@
 #listing_annonces {
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-between;
 }
-/* #listing_annonces .card_public {
-    border: 1px solid red;
-    width: 45%;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-} */
 #listing_annonces .content_card_public {
-    border: 1px solid green;
-    max-width: 45%;
+    /* border: 1px solid green; */
+    max-width: 48%;
     width: 100%;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     display: flex;
+    flex-flow: row wrap;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
+    margin-bottom: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    display: flex;
+    align-items: center; */
 }
 #listing_annonces .content_card_public .image_card_public {
     border: 1px solid black;

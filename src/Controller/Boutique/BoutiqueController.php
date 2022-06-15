@@ -151,9 +151,12 @@ class BoutiqueController extends AbstractController
     public function oneBoutique(Boutique $boutique)
     {
 
+        $annonce = null;
+
         return $this->render(
             'front/boutique/viewboutique.html.twig', [
                 'boutique' => $boutique,
+                'annonce' => $annonce
             ]
         );
     }
