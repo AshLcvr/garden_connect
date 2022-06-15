@@ -1,10 +1,10 @@
-<header class="header">
+<header id="header" class="header">
     <div class="wrap">
         <div class="logo">
             <a href="{{ path('homepage') }}" style="flex-direction: row-reverse"><img src="{{ asset('images/logo.png') }}"/></a>
         </div>
         <nav>
-            <ul >
+            <ul id="ul_burger" class="ul_burger">
                 {% if app.request.attributes.get('_route') == 'homepage' %}
                     <li><a class="active" href="{{ path('homepage') }}">Accueil</a></li>
                 {% else %}
@@ -48,9 +48,11 @@
                 {% endif %}
             </ul>
         </nav>
+    
 
-{#        <a id="link_burger" href="#">#}
-{#            <span id="burger"></span>#}
-{#        </a>#}
+       <a id="link_burger" href="#">
+           <span id="burger"></span>
+       </a>
+       
     </div>
 </header>

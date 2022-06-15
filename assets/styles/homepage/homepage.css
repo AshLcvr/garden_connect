@@ -67,17 +67,28 @@
 }
 
 @media (max-width: 1100px){
-    #annonces p {
+    /* #annonces p {
         font-size: .8rem;
-    }
+    } */
     .annonce_img {
         width: 50%;
     }
 }
 
+@media all and (max-width: 750px){
+    .title_section_home {
+        /* border: 1px solid red; */
+        font-size: 1.5rem;
+        margin-bottom: 0;
+    }
+    .annonce_text {
+        width: 100%;
+    }
+}
+
 @media (max-width: 650px){
     #annonces p {
-        font-size: 1rem;
+        font-size: .9rem;
     }
     .annonce_img {
         width: 100%;
