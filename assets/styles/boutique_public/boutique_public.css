@@ -53,7 +53,7 @@
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
-#boutique .contact_vendeur a {
+#boutique .contact_vendeur .message_visitor{
     color: var(--orange);
 }
 #boutique .contact {
