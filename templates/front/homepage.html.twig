@@ -9,7 +9,7 @@
       <ul class="slides relative">
           {%  for imageHero in imagesHero %}
             <li>
-              <h2 class="absolute text">Citation à la con qui fait bien</h2>
+              <h2 class="absolute text text-center"><span>Bienvenue sur Garden Connect</span><br>Acheter ou vender<br>des produits fraits autour de chez vous !</h2>
               <img src="{{ asset('uploads/hero/'~imageHero.title) }}" alt="">
             </li>
           {% endfor %}
@@ -19,15 +19,13 @@
   
   <section class="slider-category">
     <div class="contener carousel">
-      <a href="#"><h2 class="title_section_home">Découvrez les produits</h2></a>
+      <h2 class="title_section_home">Que cherchez vous ?</h2>
       <div class="flexslider" id="slider-category">
         <ul class="slides relative">
           {% for cat in categories %}
 
             <li class="card_cat">
-              <a href="{{ path('app_annonce_recherche')~'?category='~cat.id }}" class="title-cat">
               <img src="{{ asset('uploads/category/' ~ cat.image) }}" />
-              </a>
               <div>
                 <a href="{{ path('app_annonce_recherche')~'?category='~cat.id }}" class="title-cat" >
                   <h3>{{ cat.title }}</h3>
@@ -43,7 +41,7 @@
   <div class="separator"></div>
 
   <section id="annonces" class="wrap">
-    <a href="{{ path('app_annonce_recherche') }}" ><h2 class="title_section_home">Les dernières annonces</h2></a>
+    <a href="{{ path('app_annonce_recherche') }}" ><h2 class="title_section_home derniere_annonce">Les dernières annonces</h2></a>
     {% for annonce in annonces %}
         <div class="annonce_box">
           <div class="annonce_img">

@@ -16,6 +16,14 @@
     margin-bottom: 25px;
     font-size: 2rem;
 }
+.derniere_annonce{
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: all 0.4s;
+}
+.derniere_annonce:hover{
+    text-decoration-color: #AB7B52;;
+}
 #annonces p {
     padding: .3em;
 }
