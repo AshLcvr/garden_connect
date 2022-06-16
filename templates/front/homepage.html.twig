@@ -49,7 +49,7 @@
               <ul class="slides">
                 {% for image in annonce.imagesAnnonces %}
                     <li>
-                      <img src="{{ asset('uploads/mini/'~ image.title) }}" style="max-height: 162px"/>
+                      <img src="{{ asset('uploads/mini/'~ image.title) }}" />
                     </li>
                   {% endfor %}
               </ul>
