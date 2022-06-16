@@ -25,6 +25,9 @@
     justify-content: center;
     background-color: white;
 }
+.slider-category .flexslider {
+    margin: 0 !important;
+}
 .slider-category .contener{
     width: 80%;
 }
@@ -56,10 +59,13 @@
 }
 @media all and (max-width: 650px){
     .text {
-        border: 2px soli red;
+        /* border: 2px solid red; */
         font-size: 1.2rem;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+    }
+    .text{
+        font-size: 1rem;
     }
 }
