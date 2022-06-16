@@ -32,6 +32,7 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: flex-start;
+    padding: 0 1rem;
 }
 #boutique .infos_boutique {
     width: 75%;
@@ -81,4 +82,7 @@
 }
 #boutique .message_link:hover {
     filter: brightness(.8);
+}
+#annonces_public{
+    padding: 0 1rem;
 }

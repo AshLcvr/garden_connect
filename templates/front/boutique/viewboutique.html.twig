@@ -12,7 +12,7 @@
             </ul>
         </div>
         <div class="photo_profile">
-            <img src="{{ asset('images/test-profile.png') }}" />
+            <a href="{{ path('view_boutique', {id: boutique.id}) }}"><img src="{{ asset('images/test-profile.png') }}" /></a>
         </div>
     </section>
 
@@ -87,9 +87,9 @@
         
     <h1 class="title_listing_aanonces">Les annonces de {{  boutique.user.name|capitalize }}</h1>
     <div id="listing_annonces">
-    {% for annonce in boutique.annonces %}
+    {% for annonce in annonces %}
 
-<a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
+    <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
 
         <div class="content_card_public">
             <div class="image_card_public">

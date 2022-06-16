@@ -112,7 +112,7 @@
     display: flex;
     flex-flow: row wrap;
     /* align-items: stretch; */
-    gap: 1rem;
+    justify-content: space-between;
     /* padding: .5rem; */
     /* min-height: 80px; */
 
@@ -124,7 +124,8 @@
 }
 #listing_annonces .description_card_public {
     /* border: 1px solid purple; */
-    padding: 1rem 0;
+    padding: 1rem;
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -140,6 +141,7 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
+    margin-bottom: 0.5rem;
     gap: .8rem;
 }
 #listing_annonces .description_bottom {

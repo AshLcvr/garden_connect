@@ -150,13 +150,18 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/viewboutique/{id}', name: 'view_boutique')]
-    public function oneBoutique(Boutique $boutique)
+    public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository)
     {
         $annonce = null;
+        $annonces = $annonceRepository->findBy([
+            'boutique' => $boutique->getId(),
+            'actif' => true
+        ]);
 
         return $this->render(
             'front/boutique/viewboutique.html.twig', [
                 'boutique' => $boutique,
+                'annonces' => $annonces,
                 'annonce' => $annonce
             ]
         );
