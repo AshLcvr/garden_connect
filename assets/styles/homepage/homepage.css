@@ -13,13 +13,13 @@
     text-align: center;
     font: var(--title-font);
     color: #AB7B52;
-    margin-bottom: 25px;
     font-size: 2rem;
 }
 .derniere_annonce{
     text-decoration: underline;
     text-decoration-color: transparent;
     transition: all 0.4s;
+    margin: .5rem;
 }
 .derniere_annonce:hover{
     text-decoration-color: #AB7B52;;
@@ -74,7 +74,11 @@
         width: 50%;
     }
 }
-
+@media all and (max-width: 850px){
+    .title_section_home {
+        margin-bottom: 0;
+    }
+}
 @media all and (max-width: 750px){
     .title_section_home {
         /* border: 1px solid red; */
