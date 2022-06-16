@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
@@ -181,12 +182,16 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/viewprofil/{id}', name: 'boutique_view_profil', methods: ['GET', 'POST'])]
-    public function viewProfile(User $user)
+    public function viewProfile(User $user, TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
     {
+        $token = $tokenGenerator->generateToken();
+        $user->setToken($token);
+        $userRepository->add($user, true);
         return $this->render(
             'front/boutique/profil/view_profil.html.twig',
             [
                 'user' => $user,
+                'token' => $token
             ]
         );
     }

@@ -72,3 +72,6 @@ img{
 .text-center{
     text-align: center;
 }
+.big-margin{
+    margin: 7rem 0;
+}

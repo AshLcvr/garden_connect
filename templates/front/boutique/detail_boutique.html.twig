@@ -13,9 +13,9 @@
         <div>
                 <a title="Modifier ma boutique" class="btn btn-primary" href="{{ path('app_boutique_edit', {'id' : boutique.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
             {% if boutique.actif == 1 %}
-                <a title="Désactiver ma boutique" class="btn btn-warning" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"  onclick="return confirm('Voulez vous vraiment désactiver votre boutique?')"><i class="fa-regular fa-eye-slash"></i></a>
+                <a title="Désactiver l'boutique" class="btn btn-primary" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}" onclick="return confirm('Voulez vous vraiment désactiver votre boutique?')"><i class="fa-regular fa-eye"></i></a>
             {% else %}
-                <a title="Activer ma boutique" class="btn btn-primary" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye"></i></a>
+                <a title="Activer l'boutique" class="btn btn-warning" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
             {% endif %}
             {{ include('front/boutique/_delete_form.html.twig') }}
         </div>
@@ -23,17 +23,10 @@
     </div>
     <div class="card-body boutique_infos">
         <div class="d-flex flex-column">
-            <h6 class="annonce_title">Photos: </h6>
-            <div class="flexslider" id="slider">
-                <ul class="slides">
-                    {%  for imageboutique in boutique.imagesBoutiques %}
-                        <li>
-                            <img src="{{ asset('uploads/boutique/'~imageboutique.title) }}" alt="Images boutique">
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
+            <h6 class="annonce_title">Photo : </h6>
+            {%  for imageboutique in boutique.imagesBoutiques %}
+                    <img src="{{ asset('uploads/boutique/imageBoutiqueDefault.jpg') }}" alt="Images boutique">
+            {% endfor %}
         </div>
         <hr>
         <div class="d-flex flex-column">

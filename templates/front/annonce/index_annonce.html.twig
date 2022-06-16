@@ -38,18 +38,13 @@
                     <td>{{ annonce.createdAt|date('Y-m-d') }}</td>
                     <td>
                         {% if annonce.actif == 1 %}
-                            <p>Oui</p>
+                            <a title="Désactiver l'annonce" class="btn btn-primary" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}" onclick="return confirm('Voulez vous vraiment désactiver votre annonce?')"><i class="fa-regular fa-eye"></i></a>
                         {% else %}
-                            <p>Non</p>
+                            <a title="Activer l'annonce" class="btn btn-warning" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
                         {% endif %}
                     </td>
                     <td class="table_actions" >
                         <a title="Modifier l'annonce" class="btn btn-primary" href="{{ path('app_annonce_edit', {'id' : annonce.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        {% if annonce.actif == 1 %}
-                            <a title="Désactiver l'annonce" class="btn btn-warning" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}" onclick="return confirm('Voulez vous vraiment désactiver votre annonce?')"><i class="fa-regular fa-eye-slash"></i></a>
-                        {% else %}
-                            <a title="Activer l'annonce" class="btn btn-primary" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}"><i class="fa-regular fa-eye"></i></a>
-                        {% endif %}
                         <span title="Supprimer l'annonce">{{ include('front/annonce/_delete_form.html.twig') }}</span>
                     </td>
                 </tr>
