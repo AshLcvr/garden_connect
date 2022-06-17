@@ -13,13 +13,13 @@
         <div class="description-card justify-content-between">
             <p><span>Id : </span>{{ category.id }}</p>
             <div class="d-flex gap-1">
-                <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="action text-align-center inline-block">edit</a>
+                <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="action text-align-center inline-block">Modifier</a>
                 {{ include('admin/category/_delete_form.html.twig') }}
             </div>
         </div>
     </div>
     <div class="m-t-20 m-b-20">
-        <a href="{{ path('app_category_index') }}" class="action width-100 text-align-center inline-block">Retour listing Categories</a>
+        <a href="{{ path('app_category_index') }}" class="action width-100 text-align-center inline-block">Retour listing categories</a>
     </div>
 
     <h2 class="title">Listing sous-catégorie</h2>

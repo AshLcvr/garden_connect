@@ -13,6 +13,7 @@
                     <th scope="col" class="px-6 py-3">Initiateur</th>
                     <th scope="col" class="px-6 py-3">Destinataire</th>
                     <th scope="col" class="px-6 py-3">Premier messages</th>
+                    <th scope="col" class="px-6 py-3">Messages non lu</th>
                     <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                     <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ conv.user.name }}</th>
                     <td class="px-6 py-4">{{ conv.correspondant.name }}</td>
                     <td class="px-6 py-4">{{ conv.premierMessage }}</td>
+                    <td class="px-6 py-4">{{ conv.messages.isRead }}</td>
                     <td class="px-6 py-4"><a href="{{ path('conversation_message', {id: conv.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a></td>
                 </tr>
             {% else %}
@@ -42,6 +44,7 @@
                     <th scope="col" class="px-6 py-3">Initiateur</th>
                     <th scope="col" class="px-6 py-3">Destinataire</th>
                     <th scope="col" class="px-6 py-3">Premier messages</th>
+                    <th scope="col" class="px-6 py-3">Messages non lu</th>
                     <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
             </thead>
@@ -52,6 +55,11 @@
                     <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ conv.user.name }}</th>
                     <td class="px-6 py-4">{{ conv.correspondant.name }}</td>
                     <td class="px-6 py-4">{{ conv.premierMessage }}</td>
+                    {% for mess in conv.messages %}
+                        {% if mess.isRead == true %}
+                            <td class="px-6 py-4">{{ conv.messages.isRead }}</td>
+                        {% endif %}
+                    {% endfor %}
                     <td class="px-6 py-4"><a href="{{ path('conversation_message', {id: conv.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a></td>
                 </tr>
             {% else %}

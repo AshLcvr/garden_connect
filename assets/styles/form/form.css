@@ -19,6 +19,7 @@
     margin: 1rem 0;
     display: flex;
     flex-flow: column;
+    gap: 0.7rem;
 }
 #contener_form input {
     background-color: rgb(235, 235, 235);

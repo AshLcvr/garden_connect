@@ -13,13 +13,13 @@
             <p><span>Id : </span>{{ subcategory.id }}</p>
             <p><span>Id parent : </span>{{ subcategory.parentCategory.id }}</p>
             <div>
-                <a href="{{ path('edit-sous-cat', {id: subcategory.id}) }}" class="action">Editer</a>
+                <a href="{{ path('edit-sous-cat', {id: subcategory.id}) }}" class="action">Modifier</a>
                 {{ include('admin/subcategory/_delete-sous-cat_form.html.twig') }}
             </div>
         </div>
     </div>
     <div class="m-t-20">
-        <a href="{{ path('app_category_show', {id: subcategory.parentCategory.id}) }}" class="action width-100 text-align-center inline-block">Retour details category</a>
+        <a href="{{ path('app_category_show', {id: subcategory.parentCategory.id}) }}" class="action width-100 text-align-center inline-block">Retour details categorie</a>
     </div>
 </div>
 {% endblock %}

@@ -17,7 +17,9 @@ class ConversationType extends AbstractType
             ->add('premier_message', TextType::class, [
                 'label' => 'Premier message'
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Envoyer'
+            ])
         ;
     }
 

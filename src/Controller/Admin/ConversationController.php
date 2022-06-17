@@ -24,7 +24,17 @@ class ConversationController extends AbstractController
     #[Route('/conversation-admin/{id}', name: 'app_conversation_index')]
     public function index(User $user): Response
     {
+        $nbrNonlus = [];
         $conversationsCorresp = $user->getConversationsCorresp();
+        foreach ($conversationsCorresp as $key => $conv) {
+            foreach ($conv->getMessages() as $key => $mess) {
+                if ($mess->isIsRead()) {
+                    $nbrNonlus[$conv->getId()] .= 1;
+                }
+            }
+        }
+
+        
         $conversationsInit = $user->getConversationsInit();
 
         return $this->renderForm('admin/conversation/index.html.twig', [

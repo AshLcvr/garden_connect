@@ -25,13 +25,13 @@
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ category.title }}</th>
                     <td class="px-6 py-4">{{ category.image }}</td>
                     <td class="px-6 py-4 text-right">
-                        <a href="{{ path('app_category_show', {'id': category.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">show</a> / 
-                        <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">edit</a>
+                        <a href="{{ path('app_category_show', {'id': category.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Voir</a> / 
+                        <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Modifier</a>
                     </td>
                 </tr>
             {% else %}
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-4">no records found</td>
+                    <td class="px-6 py-4">Aucune donnée</td>
                 </tr>
             {% endfor %}
             </tbody>
