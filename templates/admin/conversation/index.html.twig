@@ -24,12 +24,20 @@
                     <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ conv.user.name }}</th>
                     <td class="px-6 py-4">{{ conv.correspondant.name }}</td>
                     <td class="px-6 py-4">{{ conv.premierMessage }}</td>
-                    <td class="px-6 py-4">{{ conv.messages.isRead }}</td>
+                    {% if nbrNonlusInit %}
+                        {% for key, nbr in nbrNonlusInit %}
+                            {% if key == conv.id %}
+                                <td class="px-6 py-4">{{ nbr }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <td class="px-6 py-4">0</td>
+                    {% endif %}
                     <td class="px-6 py-4"><a href="{{ path('conversation_message', {id: conv.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a></td>
                 </tr>
             {% else %}
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-4">no records found</td>
+                    <td class="px-6 py-4">Aucune donnée</td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -55,16 +63,16 @@
                     <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ conv.user.name }}</th>
                     <td class="px-6 py-4">{{ conv.correspondant.name }}</td>
                     <td class="px-6 py-4">{{ conv.premierMessage }}</td>
-                    {% for mess in conv.messages %}
-                        {% if mess.isRead == true %}
-                            <td class="px-6 py-4">{{ conv.messages.isRead }}</td>
+                    {% for key, nbr in nbrNonlusCorresp %}
+                        {% if key == conv.id %}
+                            <td class="px-6 py-4">{{ nbr }}</td>
                         {% endif %}
                     {% endfor %}
                     <td class="px-6 py-4"><a href="{{ path('conversation_message', {id: conv.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a></td>
                 </tr>
             {% else %}
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-4">no records found</td>
+                    <td class="px-6 py-4">Aucune donnée</td>
                 </tr>
             {% endfor %}
             </tbody>

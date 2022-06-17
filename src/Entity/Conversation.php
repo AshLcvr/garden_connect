@@ -35,6 +35,9 @@ class Conversation
     #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: Message::class)]
     private $messages;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $is_read;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -131,6 +134,18 @@ class Conversation
                 $message->setConversation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isIsRead(): ?bool
+    {
+        return $this->is_read;
+    }
+
+    public function setIsRead(?bool $is_read): self
+    {
+        $this->is_read = $is_read;
 
         return $this;
     }

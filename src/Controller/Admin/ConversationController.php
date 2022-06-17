@@ -24,22 +24,39 @@ class ConversationController extends AbstractController
     #[Route('/conversation-admin/{id}', name: 'app_conversation_index')]
     public function index(User $user): Response
     {
-        $nbrNonlus = [];
+        $nbrNonlus = 0;
+        $nbrNonlusCorresp = [];
         $conversationsCorresp = $user->getConversationsCorresp();
         foreach ($conversationsCorresp as $key => $conv) {
+            if ($conv->isIsRead() === false) {
+                $nbrNonlus = $nbrNonlus + 1;
+            }
             foreach ($conv->getMessages() as $key => $mess) {
-                if ($mess->isIsRead()) {
-                    $nbrNonlus[$conv->getId()] .= 1;
+                if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
+                    $nbrNonlus += 1;
                 }
             }
+            $nbrNonlusCorresp[$conv->getId()] = $nbrNonlus;
+            $nbrNonlus = 0;
         }
 
-        
+        $nbrNonlus = 0;
+        $nbrNonlusInit = [];
         $conversationsInit = $user->getConversationsInit();
+        foreach ($conversationsInit as $key => $conv) {
+            foreach ($conv->getMessages() as $key => $mess) {
+                if ($mess->isIsRead() == false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
+                    $nbrNonlus += 1;
+                }
+            }
+            $nbrNonlusInit[$conv->getId()] = $nbrNonlus;
+        }
 
         return $this->renderForm('admin/conversation/index.html.twig', [
             'conversationsCorresp' => $conversationsCorresp,
-            'conversationsInit' => $conversationsInit
+            'conversationsInit' => $conversationsInit,
+            'nbrNonlusCorresp' => $nbrNonlusCorresp,
+            'nbrNonlusInit' => $nbrNonlusInit
         ]);
     }
 
@@ -52,6 +69,7 @@ class ConversationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $conversation->setCreatedAt(new \DateTimeImmutable());
+            $conversation->setIsRead(false);
             $conversation->setUser($this->getUser());
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
@@ -115,14 +133,27 @@ class ConversationController extends AbstractController
     }
 
     #[Route('/conversation/message/{id}', name: 'conversation_message')]
-    public function newMessage(Request $request, MessageRepository $messageRepository, Conversation $conversation): Response
+    public function newMessage(Request $request, MessageRepository $messageRepository, Conversation $conversation, ConversationRepository $conversationRepository): Response
     {
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
+        
+
+        foreach ($conversation->getMessages() as $key => $mess) {
+            if ($mess->getExpediteur()->getId() != $this->getUser()->getId()) {
+                $mess->setIsRead(true);
+                if ($conversation->isIsRead() === false) {
+                    $conversation->setIsRead(true);
+                }
+            }
+        }
+        $conversationRepository->add($conversation, true);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
             $message->setConversation($conversation);
+            $message->setIsRead(false);
             $message->setExpediteur($this->getUser());
             $messageRepository->add($message, true);
 
