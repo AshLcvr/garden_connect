@@ -153,15 +153,15 @@
                         <li class="mr-3 flex-1">
                             {% if app.request.attributes.get('_route') == 'app_conversation_index' %}
                                 <a href="{{ path('app_conversation_index', {id: app.user.id}) }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-yellow-500">
-                                    <i class="fa-solid fa-message pr-0 md:pr-3 text-yellow-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Conversations</span>
+                                    <i class="fa-solid fa-message pr-0 md:pr-3 text-yellow-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Conversations{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</span>
                                 </a>
                             {% elseif app.request.attributes.get('_route') == 'conversation_message' %}
                                 <a href="{{ path('app_conversation_index', {id: app.user.id}) }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-yellow-500">
-                                    <i class="fa-solid fa-message pr-0 md:pr-3 text-yellow-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Conversations</span>
+                                    <i class="fa-solid fa-message pr-0 md:pr-3 text-yellow-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Conversations{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</span>
                                 </a>
                             {% else %}
                                 <a href="{{ path('app_conversation_index', {id: app.user.id}) }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-yellow-500">
-                                    <i class="fa-solid fa-message pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Conversations</span>
+                                    <i class="fa-solid fa-message pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Conversations{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</span>
                                 </a>
                             {% endif %}
                         </li>

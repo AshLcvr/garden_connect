@@ -71,7 +71,7 @@
                         <p class="telephone">{{ boutique.telephone }}</p>
                     {% endif %}
                     {% if is_granted('ROLE_VENDEUR') %}
-                        <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                        <a href="{{ path('boutique_messagerie_new_conversation', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
                     {% else %}
                         <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
                     {% endif %}

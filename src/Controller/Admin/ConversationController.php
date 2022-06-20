@@ -50,6 +50,7 @@ class ConversationController extends AbstractController
                 }
             }
             $nbrNonlusInit[$conv->getId()] = $nbrNonlus;
+            $nbrNonlus = 0;
         }
 
         return $this->renderForm('admin/conversation/index.html.twig', [
@@ -140,11 +141,13 @@ class ConversationController extends AbstractController
         $form->handleRequest($request);
         
 
-        foreach ($conversation->getMessages() as $key => $mess) {
-            if ($mess->getExpediteur()->getId() != $this->getUser()->getId()) {
-                $mess->setIsRead(true);
-                if ($conversation->isIsRead() === false) {
-                    $conversation->setIsRead(true);
+        if ($conversation->getCorrespondant()->getId() === $this->getUser()->getId()) {
+            if ($conversation->isIsRead() === false) {
+                $conversation->setIsRead(true);
+            }
+            foreach ($conversation->getMessages() as $key => $mess) {
+                if ($mess->getExpediteur()->getId() != $this->getUser()->getId()) {
+                    $mess->setIsRead(true);
                 }
             }
         }
@@ -155,6 +158,7 @@ class ConversationController extends AbstractController
             $message->setConversation($conversation);
             $message->setIsRead(false);
             $message->setExpediteur($this->getUser());
+            $message->setCreatedAt(new \DateTimeImmutable());
             $messageRepository->add($message, true);
 
             return $this->redirectToRoute('conversation_message', ['id' => $conversation->getId()], Response::HTTP_SEE_OTHER);
@@ -164,6 +168,36 @@ class ConversationController extends AbstractController
             'message' => $message,
             'form' => $form,
             'conversation' => $conversation
+        ]);
+    }
+
+    public function notification(): Response
+    {
+        $user = $this->getUser();
+
+        $nbrNonlus = 0;
+        $conversationsCorresp = $user->getConversationsCorresp();
+        foreach ($conversationsCorresp as $key => $conv) {
+            if ($conv->isIsRead() === false) {
+                $nbrNonlus = $nbrNonlus + 1;
+            }
+            foreach ($conv->getMessages() as $key => $mess) {
+                if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
+                    $nbrNonlus += 1;
+                }
+            }
+        }
+
+        $conversationsInit = $user->getConversationsInit();
+        foreach ($conversationsInit as $key => $conv) {
+            foreach ($conv->getMessages() as $key => $mess) {
+                if ($mess->isIsRead() == false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
+                    $nbrNonlus += 1;
+                }
+            }
+        }
+        return $this->render('_partials/_notification.html.twig', [
+            'nbrNonlus' => $nbrNonlus
         ]);
     }
 }

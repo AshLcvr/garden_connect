@@ -15,6 +15,7 @@
                 <tr>
                     <th>Initiateur</th>
                     <th>Modifier le</th>
+                    <th>Messages non lus</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -31,6 +32,11 @@
                     {% else %}
                         <td>{{ conv.modifiedAt|date('Y-m-d') }}</td>
                     {% endif %}
+                    {% for key, nbr in tblNbrNonlus %}
+                        {% if conv.id == key %}
+                            <td>{{ nbr }}</td>
+                        {% endif %}
+                    {% endfor %}
                     <td class="table_actions">
                         <a title="Editer l'annonce" class="btn btn-primary" href="{{ path('boutique_messagerie_message', {'id' : conv.id}) }}">Voir</a>
                     </td>
