@@ -174,6 +174,11 @@ class BoutiqueController extends AbstractController
         $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
 
         $annonce = null;
+        $annonces = $annonceRepository->findBy([
+            'boutique' => $boutique->getId(),
+            'actif' => true,
+            'id' => $id_annonce
+        ]);
 
         if (!empty($id_annonce)) {
             $annonce = $annonceRepository->find($id_annonce);
