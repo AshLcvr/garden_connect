@@ -74,3 +74,10 @@ img{
 .big-margin{
     margin: 7rem 0;
 }
+.flash-register_vendeur{
+    background-color: var(--vertfonce);
+    text-align: center;
+    font-size: 1.2rem;
+    width: 80%;
+    color: white;
+}

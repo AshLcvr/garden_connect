@@ -172,6 +172,11 @@ class BoutiqueController extends AbstractController
     public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique, $id_annonce)
     {
         $annonce = null;
+        $annonces = $annonceRepository->findBy([
+            'boutique' => $boutique->getId(),
+            'actif' => true,
+            'id' => $id_annonce
+        ]);
 
         if (!empty($id_annonce)) {
             $annonce = $annonceRepository->find($id_annonce);
@@ -181,6 +186,7 @@ class BoutiqueController extends AbstractController
             'front/boutique/viewboutique.html.twig',
             [
                 'annonce' => $annonce,
+                'annonces' => $annonces,
                 'boutique' => $boutique
             ]
         );

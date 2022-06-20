@@ -52,7 +52,7 @@ class SearchType extends AbstractType
            ->add('submit', SubmitType::class,[
                'label' => 'Rechercher'
            ])
-       ;
+       ; 
 
         $builder->get('category')->addEventListener(
             FormEvents::POST_SUBMIT,
