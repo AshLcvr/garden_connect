@@ -127,4 +127,17 @@ class AnnonceRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function getActifAnnoncesBoutique($value1, $value3): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.boutique = :val1')
+            ->setParameter('val1', $value1)
+            ->andWhere('a.actif = true')
+            ->andWhere('a.id != :val3')
+            ->setParameter('val3', $value3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

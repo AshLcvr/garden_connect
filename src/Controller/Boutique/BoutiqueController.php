@@ -171,6 +171,8 @@ class BoutiqueController extends AbstractController
     #[Route('/viewboutique/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
     public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique, $id_annonce)
     {
+        $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
+
         $annonce = null;
 
         if (!empty($id_annonce)) {
@@ -181,6 +183,7 @@ class BoutiqueController extends AbstractController
             'front/boutique/viewboutique.html.twig',
             [
                 'annonce' => $annonce,
+                'annonces' => $annonces,
                 'boutique' => $boutique
             ]
         );
