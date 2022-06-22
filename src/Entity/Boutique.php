@@ -86,9 +86,9 @@ class Boutique
 
     #[ORM\OneToMany(mappedBy: 'boutique', targetEntity: Avis::class)]
     private $avis;
-    
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'boutique_favory')]
-    private $users_favory;
+
+    #[ORM\OneToMany(mappedBy: 'boutique_favory', targetEntity: User::class)]
+    private $user_favory;
 
     public function __construct()
     {
@@ -96,6 +96,8 @@ class Boutique
         $this->annonces = new ArrayCollection();
         $this->avis = new ArrayCollection();
         $this->users_favory = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->user_favory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -310,30 +312,32 @@ class Boutique
         }
         return $this;
     }
-    
+
     /**
      * @return Collection<int, User>
      */
-    public function getUsersFavory(): Collection
+    public function getUserFavory(): Collection
     {
-        return $this->users_favory;
+        return $this->user_favory;
     }
 
-    public function addUsersFavory(User $usersFavory): self
+    public function addUserFavory(User $userFavory): self
     {
-        if (!$this->users_favory->contains($usersFavory)) {
-            $this->users_favory[] = $usersFavory;
-            $usersFavory->addBoutiqueFavory($this);
+        if (!$this->user_favory->contains($userFavory)) {
+            $this->user_favory[] = $userFavory;
+            $userFavory->setBoutiqueFavory($this);
         }
 
         return $this;
     }
 
-    
-    public function removeUsersFavory(User $usersFavory): self
+    public function removeUserFavory(User $userFavory): self
     {
-        if ($this->users_favory->removeElement($usersFavory)) {
-            $usersFavory->removeBoutiqueFavory($this);
+        if ($this->user_favory->removeElement($userFavory)) {
+            // set the owning side to null (unless already changed)
+            if ($userFavory->getBoutiqueFavory() === $this) {
+                $userFavory->setBoutiqueFavory(null);
+            }
         }
 
         return $this;

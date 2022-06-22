@@ -84,3 +84,6 @@ img{
 .m-t-20{
     margin-top: 20px;
 }
+.favory{
+    color: var(--orange);
+}

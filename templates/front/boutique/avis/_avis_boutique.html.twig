@@ -36,7 +36,7 @@
                     <div class="rating" data-rating="{{ globalRating }}">
                         {% for i in 1..5 %}
                             {% if i <= av.rating %}
-                                <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}" style="color: orange"></i>
+                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                             {% else %}
                                 <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
                             {% endif %}

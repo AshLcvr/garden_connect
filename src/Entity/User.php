@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Il y a déja un compte avec cet e-mail')]
@@ -71,8 +71,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class)]
     private $avis;
-    
-    #[ORM\ManyToMany(targetEntity: Boutique::class, inversedBy: 'users')]
+
+    #[ORM\ManyToOne(targetEntity: Boutique::class, inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: true)]
     private $boutique_favory;
 
     public function __construct()
@@ -390,28 +391,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
         return $this;
     }
-    
-    /**
-     * @return Collection<int, Boutique>
-     */
+
     public function getBoutiqueFavory(): Collection
     {
         return $this->boutique_favory;
     }
 
-    public function addBoutiqueFavory(Boutique $boutiqueFavory): self
+    public function setBoutiqueFavory(?Boutique $boutique_favory): self
     {
-        if (!$this->boutique_favory->contains($boutiqueFavory)) {
-            $this->boutique_favory[] = $boutiqueFavory;
-        }
-
-        return $this;
-    }
-
-    
-    public function removeBoutiqueFavory(Boutique $boutiqueFavory): self
-    {
-        $this->boutique_favory->removeElement($boutiqueFavory);
+        $this->boutique_favory = $boutique_favory;
 
         return $this;
     }
