@@ -156,7 +156,6 @@ class MessagerieBoutiqueController extends AbstractController
             $tblNbrNonlus[$value->getId()] = $nbrNonlus;
             $nbrNonlus = 0;
         }
-
         
         return $this->render('_partials/_listingMessagesNonLus.html.twig', [
             'listing' => $listing,

@@ -84,10 +84,15 @@ class Boutique
     #[ORM\OneToMany(mappedBy: 'boutique', targetEntity: Annonce::class)]
     private $annonces;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'boutique_favory')]
+    private $users_favory;
+
     public function __construct()
     {
         $this->imagesBoutiques = new ArrayCollection();
         $this->annonces = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->users_favory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -270,6 +275,33 @@ class Boutique
             if ($annonce->getBoutique() === $this) {
                 $annonce->setBoutique(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsersFavory(): Collection
+    {
+        return $this->users_favory;
+    }
+
+    public function addUsersFavory(User $usersFavory): self
+    {
+        if (!$this->users_favory->contains($usersFavory)) {
+            $this->users_favory[] = $usersFavory;
+            $usersFavory->addBoutiqueFavory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersFavory(User $usersFavory): self
+    {
+        if ($this->users_favory->removeElement($usersFavory)) {
+            $usersFavory->removeBoutiqueFavory($this);
         }
 
         return $this;

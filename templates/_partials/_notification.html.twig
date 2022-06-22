@@ -1,1 +1,9 @@
-<span>({{ nbrNonlus }})</span>
+<span>
+    (
+        {% if nbrNonlus > 99 %}
+            99+
+        {% else %}
+            {{ nbrNonlus }}
+        {% endif %}
+    )
+</span>

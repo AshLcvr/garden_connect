@@ -69,12 +69,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'expediteur', targetEntity: Message::class)]
     private $messages;
 
+    #[ORM\ManyToMany(targetEntity: Boutique::class, inversedBy: 'users')]
+    private $boutique_favory;
+
     public function __construct()
     {
         $this->boutiques = new ArrayCollection();
         $this->conversations_init = new ArrayCollection();
         $this->conversations_corresp = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->boutique_favory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -352,6 +356,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $message->setExpediteur(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Boutique>
+     */
+    public function getBoutiqueFavory(): Collection
+    {
+        return $this->boutique_favory;
+    }
+
+    public function addBoutiqueFavory(Boutique $boutiqueFavory): self
+    {
+        if (!$this->boutique_favory->contains($boutiqueFavory)) {
+            $this->boutique_favory[] = $boutiqueFavory;
+        }
+
+        return $this;
+    }
+
+    public function removeBoutiqueFavory(Boutique $boutiqueFavory): self
+    {
+        $this->boutique_favory->removeElement($boutiqueFavory);
 
         return $this;
     }
