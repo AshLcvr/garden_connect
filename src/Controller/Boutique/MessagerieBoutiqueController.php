@@ -9,6 +9,7 @@ use App\Entity\Conversation;
 use App\Form\ConversationType;
 use App\Repository\MessageRepository;
 use App\Repository\ConversationRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -115,57 +116,84 @@ class MessagerieBoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/listing', name: 'boutique_messagerie_listing')]
-    public function listing(ConversationRepository $conversationRepository, MessageRepository $messageRepository ): Response
+    public function listing(ConversationRepository $conversationRepository, UserRepository $userRepository): Response
     {
-        $user = $this->getUser();
-//        $listing = $conversationRepository->findBy(['user'=> $user, 'is_read' => false], ['created_at' => 'ASC'], 10);
+        $user = $userRepository->findOneBy([
+            'id' => $this->getUser()->getId()
+        ]);
+        $listing = [];
+        $nbrNonlus = 0;
+        $tblNbrNonlus = [];
 
-//        $listing = [];
-//        $nbrNonlus = 0;
-//        $tblNbrNonlus = [];
-//
-//        $conversationsCorresp = $user->getConversationsCorresp();
-//        foreach ($conversationsCorresp as $key => $value) {
-//            if ($value->isIsRead() === false) {
-//                $listing[] = $value;
-//                $nbrNonlus += 1;
-//                foreach ($value->getMessages() as $key => $mess) {
-//                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
-//                        $nbrNonlus += 1;
-//                    }
-//                }
-//            }
-//            else {
-//                foreach ($value->getMessages() as $key => $mess) {
-//                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
-//                        $listing[] = $value;
-//                        $nbrNonlus += 1;
-//                    }
-//                }
-//            }
-//            $tblNbrNonlus[$value->getId()] = $nbrNonlus;
-//            $nbrNonlus = 0;
-//        }
-//
-//        $conversationsInit = $user->getConversationsInit();
-//        foreach ($conversationsInit as $key => $value) {
-//            foreach ($value->getMessages() as $key => $mess) {
-//                if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
-//                    $listing[] = $value;
-//                    $nbrNonlus += 1;
-//                }
-//            }
-//            $tblNbrNonlus[$value->getId()] = $nbrNonlus;
-//            $nbrNonlus = 0;
-//        }
-//        $listing = $messageRepository->findByExampleField($user);
-        $listing = $conversationRepository->getListingConversationsandMessagesUnread($user);
-        dd($listing);
 
+        $conversationsCorresp = $conversationRepository->findBy(
+            [
+            'correspondant' => $user,
+            ],
+            [
+            'created_at' => 'ASC',
+            ],
+        );
+        foreach ($conversationsCorresp as $key => $value) {
+            if ($value->isIsRead() === false) {
+                $listing[] = $value;
+                $nbrNonlus += 1;
+                foreach ($value->getMessages() as $key => $mess) {
+                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $user->getId()) {
+                        $nbrNonlus += 1;
+                    }
+                }
+            }
+            else {
+                foreach ($value->getMessages() as $key => $mess) {
+                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $user->getId()) {
+                        $listing[] = $value;
+                        $nbrNonlus += 1;
+                    }
+                }
+            }
+            $tblNbrNonlus[$value->getId()] = $nbrNonlus;
+            $nbrNonlus = 0;
+        }
+
+        $conversationsInit = $conversationRepository->findBy(
+            [
+            'user' => $user,
+            ],
+            [
+            'created_at' => 'ASC',
+            ],
+        );
+        foreach ($conversationsInit as $key => $value) {
+            foreach ($value->getMessages() as $key => $mess) {
+                if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $value->getUser()->getId()) {
+                    $listing[] = $value;
+                    $nbrNonlus += 1;
+                }
+            }
+            $tblNbrNonlus[$value->getId()] = $nbrNonlus;
+            $nbrNonlus = 0;
+        }
+        
+        usort($listing, function(Conversation $a, Conversation $b){
+            return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
+        });
+
+        $countListing = count($listing);
+
+        $newListing = [];
+
+        for ($i = 0; $i <= 8 ; $i++) { 
+            $newListing[] = $listing[$i];
+        }
+
+        $countNewListing = count($newListing);
+        $count = $countListing - $countNewListing;
+        
         return $this->render('_partials/_listingMessagesNonLus.html.twig', [
-            'listing' => $listing,
-//            'tblNbrNonlus' => $tblNbrNonlus
+            'newListing' => $newListing,
+            'tblNbrNonlus' => $tblNbrNonlus,
+            'count' => $count
         ]);
     }
 }

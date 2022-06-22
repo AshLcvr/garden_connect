@@ -20,13 +20,14 @@
         <div class="infos_vendeur">
             <p>{{ boutique.user.name|capitalize }} de {{ boutique.city }} |</p>
             <p>Boutique en ligne depuis le : {{ boutique.createdAt|date('d/m/Y') }}</p>
+            <p><a href="">Ajouter aux favoris <i class="fa-regular fa-star"></a></i><a href="">Favori <i class="fa-solid fa-star favory"></i></a></p>
         </div>
         <div class="rating_boutique">
             <a href="#avis_listing">
                  <span class="rating" data-rating="{{ globalRating }}">
                     {% for i in 1..5 %}
                         {% if i <= globalRating %}
-                            <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}" style="color: orange"></i>
+                            <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                         {% else %}
                             <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
                         {% endif %}
