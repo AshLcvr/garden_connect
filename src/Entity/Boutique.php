@@ -87,8 +87,8 @@ class Boutique
     #[ORM\OneToMany(mappedBy: 'boutique', targetEntity: Avis::class)]
     private $avis;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'boutiques_favory')]
-    private $User_favory;
+    #[ORM\OneToMany(mappedBy: 'boutique', targetEntity: Favory::class)]
+    private $favories;
 
     public function __construct()
     {
@@ -96,6 +96,7 @@ class Boutique
         $this->annonces = new ArrayCollection();
         $this->avis = new ArrayCollection();
         $this->user = new ArrayCollection();
+        $this->favories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -311,14 +312,32 @@ class Boutique
         return $this;
     }
 
-    public function getUserFavory(): ?User
+    /**
+     * @return Collection<int, Favory>
+     */
+    public function getFavories(): Collection
     {
-        return $this->User_favory;
+        return $this->favories;
     }
 
-    public function setUserFavory(?User $User_favory): self
+    public function addFavory(Favory $favory): self
     {
-        $this->User_favory = $User_favory;
+        if (!$this->favories->contains($favory)) {
+            $this->favories[] = $favory;
+            $favory->setBoutique($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavory(Favory $favory): self
+    {
+        if ($this->favories->removeElement($favory)) {
+            // set the owning side to null (unless already changed)
+            if ($favory->getBoutique() === $this) {
+                $favory->setBoutique(null);
+            }
+        }
 
         return $this;
     }

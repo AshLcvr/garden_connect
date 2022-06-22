@@ -72,8 +72,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class)]
     private $avis;
 
-    #[ORM\OneToMany(mappedBy: 'User_favory', targetEntity: Boutique::class)]
-    private $boutiques_favory;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Favory::class)]
+    private $favories;
 
     public function __construct()
     {
@@ -82,7 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->conversations_corresp = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->avis = new ArrayCollection();
-        $this->boutiques_favory = new ArrayCollection();
+        $this->favories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -392,29 +392,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Boutique>
+     * @return Collection<int, Favory>
      */
-    public function getBoutiquesFavory(): Collection
+    public function getFavories(): Collection
     {
-        return $this->boutiques_favory;
+        return $this->favories;
     }
 
-    public function addBoutiquesFavory(Boutique $boutiquesFavory): self
+    public function addFavory(Favory $favory): self
     {
-        if (!$this->boutiques_favory->contains($boutiquesFavory)) {
-            $this->boutiques_favory[] = $boutiquesFavory;
-            $boutiquesFavory->setUserFavory($this);
+        if (!$this->favories->contains($favory)) {
+            $this->favories[] = $favory;
+            $favory->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeBoutiquesFavory(Boutique $boutiquesFavory): self
+    public function removeFavory(Favory $favory): self
     {
-        if ($this->boutiques_favory->removeElement($boutiquesFavory)) {
+        if ($this->favories->removeElement($favory)) {
             // set the owning side to null (unless already changed)
-            if ($boutiquesFavory->getUserFavory() === $this) {
-                $boutiquesFavory->setUserFavory(null);
+            if ($favory->getUser() === $this) {
+                $favory->setUser(null);
             }
         }
 
