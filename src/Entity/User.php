@@ -71,6 +71,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class)]
     private $avis;
+    
+    #[ORM\ManyToMany(targetEntity: Boutique::class, inversedBy: 'users')]
+    private $boutique_favory;
 
     public function __construct()
     {
@@ -79,6 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->conversations_corresp = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->avis = new ArrayCollection();
+        $this->boutique_favory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -368,17 +372,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->avis;
     }
 
-    public function addAvi(Avis $avi): self
+    public function addAvis(Avis $avi): self
     {
         if (!$this->avis->contains($avi)) {
             $this->avis[] = $avi;
             $avi->setUser($this);
         }
-
-        return $this;
     }
 
-    public function removeAvi(Avis $avi): self
+    public function removeAvis(Avis $avi): self
     {
         if ($this->avis->removeElement($avi)) {
             // set the owning side to null (unless already changed)
@@ -386,6 +388,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $avi->setUser(null);
             }
         }
+        return $this;
+    }
+    
+    /**
+     * @return Collection<int, Boutique>
+     */
+    public function getBoutiqueFavory(): Collection
+    {
+        return $this->boutique_favory;
+    }
+
+    public function addBoutiqueFavory(Boutique $boutiqueFavory): self
+    {
+        if (!$this->boutique_favory->contains($boutiqueFavory)) {
+            $this->boutique_favory[] = $boutiqueFavory;
+        }
+
+        return $this;
+    }
+
+    
+    public function removeBoutiqueFavory(Boutique $boutiqueFavory): self
+    {
+        $this->boutique_favory->removeElement($boutiqueFavory);
 
         return $this;
     }

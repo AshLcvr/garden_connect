@@ -31,11 +31,4 @@ class DefaultController extends AbstractController
     {
         return $this->render('front/mention.html.twig');
     }
-
-
-    public function notification(): Response
-    {
-        
-        return $this->render('front/mention.html.twig');
-    }
 }

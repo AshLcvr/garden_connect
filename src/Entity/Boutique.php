@@ -86,12 +86,16 @@ class Boutique
 
     #[ORM\OneToMany(mappedBy: 'boutique', targetEntity: Avis::class)]
     private $avis;
+    
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'boutique_favory')]
+    private $users_favory;
 
     public function __construct()
     {
         $this->imagesBoutiques = new ArrayCollection();
         $this->annonces = new ArrayCollection();
         $this->avis = new ArrayCollection();
+        $this->users_favory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -287,23 +291,49 @@ class Boutique
         return $this->avis;
     }
 
-    public function addAvi(Avis $avi): self
+    public function addAvis(Avis $avi): self
     {
         if (!$this->avis->contains($avi)) {
             $this->avis[] = $avi;
             $avi->setBoutique($this);
         }
-
         return $this;
     }
 
-    public function removeAvi(Avis $avi): self
+    public function removeAvis(Avis $avi): self
     {
         if ($this->avis->removeElement($avi)) {
             // set the owning side to null (unless already changed)
             if ($avi->getBoutique() === $this) {
                 $avi->setBoutique(null);
             }
+        }
+        return $this;
+    }
+    
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsersFavory(): Collection
+    {
+        return $this->users_favory;
+    }
+
+    public function addUsersFavory(User $usersFavory): self
+    {
+        if (!$this->users_favory->contains($usersFavory)) {
+            $this->users_favory[] = $usersFavory;
+            $usersFavory->addBoutiqueFavory($this);
+        }
+
+        return $this;
+    }
+
+    
+    public function removeUsersFavory(User $usersFavory): self
+    {
+        if ($this->users_favory->removeElement($usersFavory)) {
+            $usersFavory->removeBoutiqueFavory($this);
         }
 
         return $this;

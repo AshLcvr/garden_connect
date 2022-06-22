@@ -29,6 +29,9 @@ class Message
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $is_read;
 
+    #[ORM\Column(type: 'datetime_immutable')]
+    private $created_at;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,6 +81,18 @@ class Message
     public function setIsRead(?bool $is_read): self
     {
         $this->is_read = $is_read;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }

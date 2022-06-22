@@ -10322,11 +10322,11 @@ a:focus {
 }
 
 .topbar.navbar-light .navbar-nav .nav-item .nav-link {
-  color: #d1d3e2;
+  color: #e1e2e9;
 }
 
 .topbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
-  color: #b7b9cc;
+  color: white;
 }
 
 .topbar.navbar-light .navbar-nav .nav-item .nav-link:active {
