@@ -185,7 +185,7 @@ class UploadImage
         // Resize de l'image (optionnel)
         // Profile
         $avatar = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
-        $avatar->resizeToBestFit(100, 100);
+        $avatar->crop(100, 100);
         $avatar->save($this->getUploadDirectory() .'/profile/'. $fileName);
 
         // Suppression de l'originale

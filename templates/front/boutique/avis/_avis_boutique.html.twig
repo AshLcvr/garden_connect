@@ -1,0 +1,57 @@
+<section id="avis_boutique" class="wrap">
+    {% if annonce == null  %}
+        {% if app.user %}
+            {% for av in avis %}
+                {% if av.user.id == app.user.id %}
+                    {% set avisAlreadyExist = true %}
+                    <p>Vous avez déja donné votre avis sur
+                        cette boutique</p>
+                    <p>Vous pouvez le modifier dans la section 'Avis' de votre profil.</p>
+                {% endif %}
+            {% endfor %}
+
+            {% if avisAlreadyExist == false and app.user.id != boutique.user.id %}
+                <h2> Laissez votre avis</h2>
+                <div style="border: 1px black solid">
+                    {% include 'front/boutique/avis/_form.html.twig' %}
+                </div>
+            {% elseif app.user.id == boutique.user.id %}
+                <p>Vous ne pouvez pas donner un avis sur votre propre boutique.</p>
+            {% endif %}
+
+        {% endif %}
+
+        <ul id="avis_listing">
+            {% for av in avis %}
+                <li class="avis_box">
+                    <div class="avis_image d-flex ">
+                        {% if av.user.image %}
+                            <img src="{{ asset('uploads/profile/')~av.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                        {% else %}
+                            <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                        {% endif %}
+                        <span style="margin: auto .5rem">{{ av.user.name|capitalize }}</span>
+                    </div>
+                    <br>
+                    <div class="rating" data-rating="{{ globalRating }}">
+                        {% for i in 1..5 %}
+                            {% if i <= av.rating %}
+                                <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}" style="color: orange"></i>
+                            {% else %}
+                                <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                            {% endif %}
+                        {% endfor %}
+                        <span>{{ av.title }}</span>
+                    </div>
+                    <div><i>Avis émis le {{ av.createdAt|date('d m Y')  }}</i> </div>
+                    <br>
+                    <div> {{ av.commentaire  }} </div>
+                </li>
+                <br>
+                <hr>
+                <br>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+</section>

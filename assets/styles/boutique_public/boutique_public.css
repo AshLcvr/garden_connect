@@ -17,7 +17,6 @@
     border-radius: 50%;
 }
 .infos_vendeur {
-    /* border: 1px solid red; */
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
@@ -27,7 +26,6 @@
     padding: 1rem;
 }
 #boutique {
-    /* border: 1px solid green; */
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -38,12 +36,10 @@
     width: 75%;
 }
 #boutique .title_boutique {
-    /* border: 1px solid green; */
     margin-bottom: 30px;
 }
-.title_listing_aanonces {
+.title_listing_annonces {
     margin-bottom: 30px;
-
 }
 #boutique .description_boutique {
     padding: 1rem 0;
@@ -85,4 +81,11 @@
 }
 #annonces_public{
     padding: 0 1rem;
+}
+.hover {
+    color: orange;
+
+}
+.rating{
+    cursor: pointer;
 }

@@ -18,8 +18,21 @@
 
     <section id="profile" class="wrap">
         <div class="infos_vendeur">
-            <p>{{ boutique.user.name|capitalize }} de {{ boutique.city }}</p>
+            <p>{{ boutique.user.name|capitalize }} de {{ boutique.city }} |</p>
             <p>Boutique en ligne depuis le : {{ boutique.createdAt|date('d/m/Y') }}</p>
+        </div>
+        <div class="rating_boutique">
+            <a href="#avis_listing">
+                 <span class="rating" data-rating="{{ globalRating }}">
+                    {% for i in 1..5 %}
+                        {% if i <= globalRating %}
+                            <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}" style="color: orange"></i>
+                        {% else %}
+                            <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                        {% endif %}
+                    {% endfor %}
+                </span>
+            </a>
         </div>
     </section>
 
@@ -33,6 +46,8 @@
             {% endif %}
         </div>
     </section>
+
+    {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
 
     <section id="annonces_public" class="wrap">
     {% if annonce != null %}
@@ -85,7 +100,7 @@
         </div>
     {% endif %}
         
-    <h1 class="title_listing_aanonces">Les annonces de {{  boutique.user.name|capitalize }}</h1>
+    <h1 class="title_listing_annonces">Les annonces de {{  boutique.user.name|capitalize }}</h1>
     <div id="listing_annonces">
     {% for annonce in annonces %}
 

@@ -2,10 +2,13 @@
 
 namespace App\Controller\Boutique;
 
+use App\Entity\Avis;
 use App\Entity\User;
 use App\Entity\Boutique;
+use App\Form\AvisFormType;
 use App\Form\BoutiqueType;
 use App\Form\EditProfilType;
+use App\Repository\AvisRepository;
 use App\Service\UploadImage;
 use App\Entity\ImagesBoutique;
 use App\Security\EmailVerifier;
@@ -14,6 +17,7 @@ use App\Repository\UserRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\BoutiqueRepository;
 use App\Repository\ImagesBoutiqueRepository;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +25,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use function Symfony\Bundle\FrameworkBundle\Controller\createForm;
 
 //#[Route('/boutique')]
 class BoutiqueController extends AbstractController
@@ -151,19 +156,54 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/viewboutique/{id}', name: 'view_boutique')]
-    public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository)
+    public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository, AvisRepository $avisRepository, Request $request)
     {
         $annonce = null;
         $annonces = $annonceRepository->findBy([
             'boutique' => $boutique->getId(),
             'actif' => true
         ]);
+        $avis = $avisRepository->findBy(['boutique'=>$boutique]);
+
+        if ($avis){
+            $numberAvis = count($avis);
+            $total = [];
+            foreach ($avis as  $avi){
+                $total[] = $avi->getRating();
+            }
+            $globalRating = round(array_sum($total)/$numberAvis);
+        }else{
+            $globalRating = 0;
+        }
+
+
+        $avisAlreadyExist = false;
+
+        $newAvis = new Avis();
+
+        $form = $this->createForm(AvisFormType::class,$newAvis);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rating = $form->get('rating')->getData();
+            $newAvis
+                ->setRating($rating)
+                ->setUser($this->getUser())
+                ->setBoutique($boutique)
+                ->setCreatedAt(new \DateTimeImmutable());
+            $avisRepository->add($newAvis, true);
+
+            return $this->redirectToRoute('view_boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
+        }
 
         return $this->render(
             'front/boutique/viewboutique.html.twig', [
                 'boutique' => $boutique,
                 'annonces' => $annonces,
-                'annonce' => $annonce
+                'annonce'  => $annonce,
+                'avis'     => $avis,
+                'avisAlreadyExist' => $avisAlreadyExist,
+                'form'     => $form->createView(),
+                'globalRating' => $globalRating
             ]
         );
     }
@@ -172,13 +212,8 @@ class BoutiqueController extends AbstractController
     public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique, $id_annonce)
     {
         $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
-
         $annonce = null;
-        $annonces = $annonceRepository->findBy([
-            'boutique' => $boutique->getId(),
-            'actif' => true,
-            'id' => $id_annonce
-        ]);
+
 
         if (!empty($id_annonce)) {
             $annonce = $annonceRepository->find($id_annonce);
@@ -189,7 +224,8 @@ class BoutiqueController extends AbstractController
             [
                 'annonce' => $annonce,
                 'annonces' => $annonces,
-                'boutique' => $boutique
+                'boutique' => $boutique,
+
             ]
         );
     }
@@ -222,7 +258,6 @@ class BoutiqueController extends AbstractController
             }
             $userRepository->add($user,true);
             return $this->redirectToRoute('boutique_view_profil', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
-
         }
 
 

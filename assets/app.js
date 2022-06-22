@@ -19,4 +19,5 @@ import './styles/filter_annonce/filter.js';
 import "./styles/boutique/boutique.css";
 import "./styles/boutique/messagerie/messagerie.css";
 import "./styles/boutique_public/boutique_public.css";
+import "./styles/boutique_public/rating";
 import "./styles/annonce_public/annonce_public.css";
