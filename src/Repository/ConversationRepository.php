@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Conversation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,20 +40,28 @@ class ConversationRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Conversation[] Returns an array of Conversation objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Conversation[] Returns an array of Conversation objects
+     */
+    public function getListingConversationsandMessagesUnread($user): array
+    {
+        return $this->createQueryBuilder('c')
+//            ->leftJoin(
+//                'App\Entity\Message',
+//                'm',
+//                Join::WITH,
+//                'genus = genus_note.genus'
+//            )
+            ->andWhere('c.is_read = :val')
+            ->andWhere('c.correspondant = :user')
+            ->setParameter('val', false)
+            ->setParameter('user', $user)
+            ->orderBy('c.created_at', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Conversation
 //    {

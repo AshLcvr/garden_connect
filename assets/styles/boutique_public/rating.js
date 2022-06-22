@@ -1,5 +1,3 @@
-console.log('coucou')
-
 const ratings = document.querySelectorAll('.rating');
 ratings.forEach(rating =>
     rating.addEventListener('mouseleave', ratingHandler)

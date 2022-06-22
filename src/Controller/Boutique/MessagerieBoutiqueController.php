@@ -115,51 +115,58 @@ class MessagerieBoutiqueController extends AbstractController
         ]);
     }
 
-    public function listing(): Response
+    #[Route('/listing', name: 'boutique_messagerie_listing')]
+    public function listing(ConversationRepository $conversationRepository, MessageRepository $messageRepository ): Response
     {
         $user = $this->getUser();
-        $listing = [];
-        $nbrNonlus = 0;
-        $tblNbrNonlus = [];
+//        $listing = $conversationRepository->findBy(['user'=> $user, 'is_read' => false], ['created_at' => 'ASC'], 10);
 
-        $conversationsCorresp = $user->getConversationsCorresp();
-        foreach ($conversationsCorresp as $key => $value) {
-            if ($value->isIsRead() === false) {
-                $listing[] = $value;
-                $nbrNonlus += 1;
-                foreach ($value->getMessages() as $key => $mess) {
-                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
-                        $nbrNonlus += 1;
-                    }
-                }
-            }
-            else {
-                foreach ($value->getMessages() as $key => $mess) {
-                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
-                        $listing[] = $value;
-                        $nbrNonlus += 1;
-                    }
-                }
-            }
-            $tblNbrNonlus[$value->getId()] = $nbrNonlus;
-            $nbrNonlus = 0;
-        }
+//        $listing = [];
+//        $nbrNonlus = 0;
+//        $tblNbrNonlus = [];
+//
+//        $conversationsCorresp = $user->getConversationsCorresp();
+//        foreach ($conversationsCorresp as $key => $value) {
+//            if ($value->isIsRead() === false) {
+//                $listing[] = $value;
+//                $nbrNonlus += 1;
+//                foreach ($value->getMessages() as $key => $mess) {
+//                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
+//                        $nbrNonlus += 1;
+//                    }
+//                }
+//            }
+//            else {
+//                foreach ($value->getMessages() as $key => $mess) {
+//                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
+//                        $listing[] = $value;
+//                        $nbrNonlus += 1;
+//                    }
+//                }
+//            }
+//            $tblNbrNonlus[$value->getId()] = $nbrNonlus;
+//            $nbrNonlus = 0;
+//        }
+//
+//        $conversationsInit = $user->getConversationsInit();
+//        foreach ($conversationsInit as $key => $value) {
+//            foreach ($value->getMessages() as $key => $mess) {
+//                if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
+//                    $listing[] = $value;
+//                    $nbrNonlus += 1;
+//                }
+//            }
+//            $tblNbrNonlus[$value->getId()] = $nbrNonlus;
+//            $nbrNonlus = 0;
+//        }
+//        $listing = $messageRepository->findByExampleField($user);
+        $listing = $conversationRepository->getListingConversationsandMessagesUnread($user);
+        dd($listing);
 
-        $conversationsInit = $user->getConversationsInit();
-        foreach ($conversationsInit as $key => $value) {
-            foreach ($value->getMessages() as $key => $mess) {
-                if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
-                    $listing[] = $value;
-                    $nbrNonlus += 1;
-                }
-            }
-            $tblNbrNonlus[$value->getId()] = $nbrNonlus;
-            $nbrNonlus = 0;
-        }
-        
         return $this->render('_partials/_listingMessagesNonLus.html.twig', [
             'listing' => $listing,
-            'tblNbrNonlus' => $tblNbrNonlus
+//            'tblNbrNonlus' => $tblNbrNonlus
         ]);
     }
 }
+

@@ -34,6 +34,9 @@
                 </span>
             </a>
         </div>
+        <div class="favory_boutique">
+            <a id="boutton_favory" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="fa-solid fa-heart" style="font-size:2rem;padding:.5rem;border: 1px solid black; border-radius: 50%"></i></a>
+        </div>
     </section>
 
     <section id="boutique" class="wrap">
@@ -46,8 +49,6 @@
             {% endif %}
         </div>
     </section>
-
-    {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
 
     <section id="annonces_public" class="wrap">
     {% if annonce != null %}
@@ -126,5 +127,8 @@
         </a>
     {% endfor %}
     </section>
+
+    {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
+
 
 {% endblock %}
