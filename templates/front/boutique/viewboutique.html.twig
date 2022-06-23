@@ -1,5 +1,13 @@
 {% extends 'layout/front_base.html.twig' %}
 
+{% block title %}
+    {% if annonce == null %}
+        {{  boutique.title }}
+    {% else %}
+        {{  annonce.title }}
+    {% endif %}
+{% endblock %}
+
 {% block body %}
     <section id="slider-home">
         <div class="flexslider" id="slider">
@@ -20,10 +28,24 @@
         <div class="infos_vendeur">
             <p>{{ boutique.user.name|capitalize }} de {{ boutique.city }} |</p>
             <p>Boutique en ligne depuis le : {{ boutique.createdAt|date('d/m/Y') }}</p>
-            <p><a href="">Ajouter aux favoris <i class="fa-regular fa-star"></a></i><a href="">Favori <i class="fa-solid fa-star favory"></i></a></p>
         </div>
-        <div class="rating_boutique">
-            <a href="#avis_listing">
+    </section>
+
+    <section id="boutique" class="wrap">
+        <div class="infos_boutique">
+            <div class="d-flex" style="justify-content: space-between; align-items: center">
+                <div>
+                    <h1 class="title_boutique"><a href="{{ path('view_boutique', {id: boutique.id}) }}">{{ boutique.title }}</a></h1>
+                </div>
+                {% if app.user and annonce == null %}
+                    <div class="favory_boutique">
+                        <a class="favory_button {{ favory }}" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="favory_icon fa-solid fa-heart" ></i></a>
+                    </div>
+                {% endif %}
+            </div>
+            {% if app.user and annonce == null %}
+            <div class="rating_boutique">
+                <a href="#avis_listing">
                  <span class="rating" data-rating="{{ globalRating }}">
                     {% for i in 1..5 %}
                         {% if i <= globalRating %}
@@ -33,28 +55,20 @@
                         {% endif %}
                     {% endfor %}
                 </span>
-            </a>
-        </div>
-        <div class="favory_boutique">
-            <a id="boutton_favory" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="fa-solid fa-heart" style="font-size:2rem;padding:.5rem;border: 1px solid black; border-radius: 50%"></i></a>
-        </div>
-    </section>
-
-    <section id="boutique" class="wrap">
-        <div class="infos_boutique">
-
-            <h1 class="title_boutique"><a href="{{ path('view_boutique', {id: boutique.id}) }}">{{ boutique.title }}</a></h1>
+                </a>
+                <span>({{ avis|length }} avis)</span>
+            </div>
+            {% endif %}
             {% if annonce == null %}
-
             <p class="description_boutique">{{ boutique.description }}</p>
             {% endif %}
         </div>
     </section>
 
-    <section id="annonces_public" class="wrap">
     {% if annonce != null %}
+    <section id="focus_annonce" class="wrap">
         <div id="annonce_card_public">
-            
+
             <div class="card_public">
                 <div class="content_card_public">
                     <div class="image_card_public">
@@ -100,36 +114,66 @@
                 {% endif %}
             </div>
         </div>
+    </section>
     {% endif %}
-        
-    <h1 class="title_listing_annonces">Les annonces de {{  boutique.user.name|capitalize }}</h1>
-    <div id="listing_annonces">
-    {% for annonce in annonces %}
 
-    <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
-
-        <div class="content_card_public">
-            <div class="image_card_public">
-                {% for image in annonce.imagesAnnonces %}
-                    <img src="{{ asset('uploads/mini/'~image.title) }}"/>
-                {% endfor %}
-            </div>
-            <div class="description_card_public">
-                <div class="description_top">
-                    <h3 class="title_public">{{ annonce.title }}</h3> |
-                    <p><span>{{ annonce.subcategory.parentCategory.title }}</span></p>
-                </div>
-                <div class="description_top">
-                    <p><span>Prix : </span>{{ annonce.price }} €</p> |
-                    <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
-                </div>
-            </div>
-        </div>
-        </a>
-    {% endfor %}
+    <section id="listing_annonces_public" class="wrap">
+        <h1 class="boutique_title">Les annonces de {{  boutique.user.name|capitalize }}</h1>
+        <ul>
+            {% for annonce in annonces %}
+                <li class="annonces_card">
+                    <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
+                        <div class="content_card_public">
+                            <div class="image_card_public">
+                                {% for image in annonce.imagesAnnonces %}
+                                    <img src="{{ asset('uploads/mini/'~image.title) }}"/>
+                                {% endfor %}
+                            </div>
+                            <div class="description_card_public">
+                                <div class="description_title">
+                                    <h3>{{ annonce.title }}</h3>
+                                </div>
+                                <div class="description_category">
+                                    <span >Catégorie :</span> <span class="category_public">{{ annonce.subcategory.parentCategory.title }}</span>
+                                </div>
+                                <div class="description_down">
+                                    <p><span>Prix : </span>{{ annonce.price }} €</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     </section>
 
-    {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
+    {% if annonce == null %}
+        {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
+    {% endif %}
 
 
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            const boutton_favory =    $('.favory_button')
+            boutton_favory.click( function (e) {
+                e.preventDefault();
+                let path = '{{ path('app_toggle_favory', {id:boutique.id}) }}';
+                $.ajax({
+                    type: "POST",
+                    url: path,
+                    dataType : 'html',
+                    data: {{ boutique.id }},
+                    success: function(res){
+                        if (boutton_favory.hasClass('favory_active')){
+                            boutton_favory.removeClass('favory_active')
+                        }else{
+                            boutton_favory.addClass('favory_active')
+                        }
+                    }
+                });
+            })
+        })
+    </script>
 {% endblock %}

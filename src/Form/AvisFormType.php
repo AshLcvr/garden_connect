@@ -19,10 +19,14 @@ class AvisFormType extends AbstractType
         $builder
             ->add('rating', HiddenType::class, [
                 'mapped' => false,
+                'label' => 'Note générale'
             ])
-            ->add('title',TextType::class)
-            ->add('commentaire', TextareaType::class)
-            ->add('submit', SubmitType::class)
+            ->add('title',TextType::class,[
+                'label' => 'Ajouter un titre'
+            ])
+            ->add('commentaire', TextareaType::class,[
+            'label' => 'Votre commentaire'
+            ])
         ;
     }
 

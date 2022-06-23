@@ -9,6 +9,7 @@ use App\Form\AvisFormType;
 use App\Form\BoutiqueType;
 use App\Form\EditProfilType;
 use App\Repository\AvisRepository;
+use App\Repository\FavoryRepository;
 use App\Service\UploadImage;
 use App\Entity\ImagesBoutique;
 use App\Security\EmailVerifier;
@@ -156,13 +157,20 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/viewboutique/{id}', name: 'view_boutique')]
-    public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository, AvisRepository $avisRepository, Request $request)
+    public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository, AvisRepository $avisRepository, Request $request, FavoryRepository $favoryRepository)
     {
         $annonce = null;
         $annonces = $annonceRepository->findBy([
             'boutique' => $boutique->getId(),
             'actif' => true
         ]);
+
+        $favory = '';
+        $alreadyFavory = $favoryRepository->findOneBy(['user'=> $this->getUser(), 'boutique' => $boutique]);
+        if (!empty($alreadyFavory)){
+            $favory = 'favory_active';
+        }
+
         $avis = $avisRepository->findBy(['boutique'=>$boutique]);
 
         if ($avis){
@@ -176,11 +184,9 @@ class BoutiqueController extends AbstractController
             $globalRating = 0;
         }
 
-
         $avisAlreadyExist = false;
 
         $newAvis = new Avis();
-
         $form = $this->createForm(AvisFormType::class,$newAvis);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -202,8 +208,9 @@ class BoutiqueController extends AbstractController
                 'annonce'  => $annonce,
                 'avis'     => $avis,
                 'avisAlreadyExist' => $avisAlreadyExist,
+                'globalRating' => $globalRating,
                 'form'     => $form->createView(),
-                'globalRating' => $globalRating
+                'favory' => $favory
             ]
         );
     }
@@ -225,7 +232,6 @@ class BoutiqueController extends AbstractController
                 'annonce' => $annonce,
                 'annonces' => $annonces,
                 'boutique' => $boutique,
-
             ]
         );
     }

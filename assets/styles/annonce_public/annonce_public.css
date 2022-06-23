@@ -1,5 +1,4 @@
 #annonce_card_public {
-    /* border: 1px solid blue; */
     margin-bottom: 40px;
     display: flex;
     flex-flow: row nowrap;
@@ -7,25 +6,21 @@
     justify-content: space-between;
 }
 #annonce_card_public .card_public {
-    /* border: 10px solid black; */
     width: 72%;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 #annonce_card_public .title_public {
-    /* border: 1px solid black; */
     font-family: 'Unkempt';
     font-size: 1.7rem;
     padding-top: .5rem;
 }
 #annonce_card_public .content_card_public {
-    /* border: 1px solid red; */
     display: flex;
     flex-flow: row wrap;
     align-items: center;
     gap: 1rem;
 }
 #annonce_card_public .card_public .image_card_public {
-    /* border: 1px solid red; */
     width: 35%;
 }
 #annonce_card_public .card_public .description_card_public{
@@ -42,7 +37,6 @@
     color: #F7941D;
 }
 #annonce_card_public .infos_vendeur {
-    /* border: 1px solid red; */
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
@@ -53,10 +47,8 @@
 }
 /* contact vendeur */
 .contact_vendeur {
-    /* border: 1px solid blue; */
     border-left: 1px solid rgb(241, 241, 241);
     border-top: 1px solid rgb(241, 241, 241);
-    width: 22%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -84,12 +76,10 @@
     filter: brightness(.8);
 }
 .description_top {
-    /* border: 1px solid black; */
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-
 /* listing */
 #listing_annonces {
     display: flex;
@@ -97,45 +87,29 @@
     justify-content: space-between;
 }
 #listing_annonces .content_card_public_link {
-    /* border: 1px solid green; */
     max-width: 48%;
     width: 100%;
-    /* min-height: 80px; */
-    /* display: flex;
-    flex-flow: row wrap;
-    align-items: center; */
     margin-bottom: 20px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 #listing_annonces .content_card_public {
-    /* border: 1px solid green; */
     display: flex;
     flex-flow: row wrap;
-    /* align-items: stretch; */
     justify-content: space-between;
-    /* padding: .5rem; */
-    /* min-height: 80px; */
-
 }
 #listing_annonces .content_card_public .image_card_public {
-    /* border: 1px solid black; */
     width: 25%;
-    /* min-height: 80px; */
 }
 #listing_annonces .description_card_public {
-    /* border: 1px solid purple; */
     padding: 1rem;
     width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
 }
 #listing_annonces .title_public {
-    /* border: 1px solid black; */
     font-family: 'Unkempt';
     font-size: 1.2rem;
-    /* padding: 0.3rem; */
 }
 #listing_annonces .description_top {
     display: flex;

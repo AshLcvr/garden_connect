@@ -1,27 +1,7 @@
 <section id="avis_boutique" class="wrap">
-    {% if annonce == null  %}
-        {% if app.user %}
-            {% for av in avis %}
-                {% if av.user.id == app.user.id %}
-                    {% set avisAlreadyExist = true %}
-                    <p>Vous avez déja donné votre avis sur
-                        cette boutique</p>
-                    <p>Vous pouvez le modifier dans la section 'Avis' de votre profil.</p>
-                {% endif %}
-            {% endfor %}
-
-            {% if avisAlreadyExist == false and app.user.id != boutique.user.id %}
-                <h2> Laissez votre avis</h2>
-                <div style="border: 1px black solid">
-                    {% include 'front/boutique/avis/_form.html.twig' %}
-                </div>
-            {% elseif app.user.id == boutique.user.id %}
-                <p>Vous ne pouvez pas donner un avis sur votre propre boutique.</p>
-            {% endif %}
-
-        {% endif %}
-
-        <ul id="avis_listing">
+    {% if avis %}
+    <h1  id="avis_listing" class="boutique_title">Les avis</h1>
+        <ul>
             {% for av in avis %}
                 <li class="avis_box">
                     <div class="avis_image d-flex ">
@@ -33,7 +13,7 @@
                         <span style="margin: auto .5rem">{{ av.user.name|capitalize }}</span>
                     </div>
                     <br>
-                    <div class="rating" data-rating="{{ globalRating }}">
+                    <div data-rating="{{ globalRating }}">
                         {% for i in 1..5 %}
                             {% if i <= av.rating %}
                                 <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
@@ -47,11 +27,36 @@
                     <br>
                     <div> {{ av.commentaire  }} </div>
                 </li>
-                <br>
-                <hr>
-                <br>
             {% endfor %}
         </ul>
-
     {% endif %}
+
+    <h2 class="boutique_title"> Laissez votre avis</h2>
+    <div class="avis_form">
+        {% if app.user %}
+            {% for av in avis %}
+                {% if av.user.id == app.user.id %}
+                    {% set avisAlreadyExist = true %}
+                    <div style="text-align: center">
+                        <p>Vous avez déja donné votre avis sur cette boutique! </p>
+                        <p>Vous pouvez le modifier dans la section 'Avis' de votre profil.</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            {% if avisAlreadyExist == false and app.user.id != boutique.user.id %}
+                <div>
+                    {% include 'front/boutique/avis/_form.html.twig' %}
+                </div>
+            {% elseif app.user.id == boutique.user.id %}
+                <div style="text-align: center">
+                    <p>Vous ne pouvez pas donner un avis sur votre propre boutique.</p>
+                </div>
+            {% endif %}
+        {% else %}
+            <div style="text-align: center">
+                <a class="connect-link" href="{{ path('app_login') }}">Connectez-vous</a><span> pour donner votre avis !</span>
+            </div>
+        {% endif %}
+    </div>
 </section>

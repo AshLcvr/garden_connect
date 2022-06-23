@@ -20,7 +20,7 @@ class CategoryController extends AbstractController
     #[Route('/category', name: 'app_category_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository): Response
     {
-        return $this->render('admin/category/index.html.twig', [
+        return $this->render('admin/category/avis_recus.html.twig', [
             'categories' => $categoryRepository->findAll(),
         ]);
     }
@@ -53,7 +53,7 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'app_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
-        return $this->render('admin/category/show.html.twig', [
+        return $this->render('admin/category/avis_emis.html.twig', [
             'category' => $category,
             'sousCategory' => $category->getSubcategories()
         ]);
@@ -73,7 +73,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('app_category_show', ['id' => $category->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/category/edit.html.twig', [
+        return $this->renderForm('admin/category/edit_avis.html.twig', [
             'category' => $category,
             'form' => $form,
         ]);

@@ -28,7 +28,7 @@ class MessagerieUserController extends AbstractController
             $conversations[] = $value;
         }
 
-        return $this->renderForm('front/boutique/messagerie/index.html.twig', [
+        return $this->renderForm('front/boutique/messagerie/avis_recus.html.twig', [
             'conversations' => $conversations,
         ]);
     }
@@ -48,7 +48,7 @@ class MessagerieUserController extends AbstractController
             return $this->redirectToRoute('user_messagerie_message', ['id' => $conversation->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('front/boutique/messagerie/show.html.twig', [
+        return $this->renderForm('front/boutique/messagerie/avis_emis.html.twig', [
             'message' => $message,
             'form' => $form,
             'conversation' => $conversation

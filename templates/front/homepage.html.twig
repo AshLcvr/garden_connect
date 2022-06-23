@@ -1,8 +1,9 @@
 {% extends 'layout/front_base.html.twig' %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
+  {{ encore_entry_link_tags('flexslider') }}
 {% endblock %}
+
 {% block body %}
   <section id="slider-home">
     <div class="flexslider" id="slider">
@@ -75,5 +76,5 @@
 {% endblock %}
 
 {% block javascripts %}
-  <script src="{{ asset('/asset/flex/jquery.flexslider.js') }}"></script>
+  {{ encore_entry_script_tags('flexslider') }}
 {% endblock %}

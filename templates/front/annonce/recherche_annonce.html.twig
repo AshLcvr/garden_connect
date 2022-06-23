@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
+    {{ encore_entry_link_tags('flexslider') }}
 {% endblock %}
+
 {% block body %}
     <div class="wrap d-flex flex-column">
         <div class="js-filter">
@@ -29,8 +30,8 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
+
 {% block javascripts %}
-    <script src="{{ asset('/asset/flex/jquery.flexslider.js') }}"></script>
+    {{ encore_entry_script_tags('flexslider') }}
 {% endblock %}

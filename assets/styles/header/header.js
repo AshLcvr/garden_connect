@@ -1,5 +1,3 @@
-console.log("Hello JS!");
-
 // Menu burger
 /* Sélection des éléments HTML */
 let link_burger = document.getElementById("link_burger");

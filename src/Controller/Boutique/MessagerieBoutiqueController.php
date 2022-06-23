@@ -104,6 +104,7 @@ class MessagerieBoutiqueController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $message->setConversation($conversation);
             $message->setExpediteur($this->getUser());
+            $message->setCreatedAt(new \DateTimeImmutable());
             $messageRepository->add($message, true);
 
             return $this->redirectToRoute('boutique_messagerie_message', ['id' => $conversation->getId()], Response::HTTP_SEE_OTHER);

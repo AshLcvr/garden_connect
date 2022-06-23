@@ -1,0 +1,40 @@
+{% extends 'layout/boutique_base.html.twig' %}
+{% block title %}
+    <title>Boutiques favorites</title>
+{% endblock %}
+
+{% block body %}
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h3 class="annonce_title" style="margin: 0">Mes boutiques favorites</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Titre de la boutique</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if favorites is empty %}
+                    <tr>
+                        <td colspan="6">
+                            Pas (encore) de boutiques favorites !
+                        </td>
+                    </tr>
+                {% endif %}
+                {% for favory in favorites %}
+                    <tr>
+                        <td>{{ favory.boutique.title }}</td>
+                        <td>
+                            <a class="btn btn-primary" title="Voir la boutique" href="{{ path('view_boutique', {id : favory.boutique.id}) }}"><i class="fa-solid fa-arrow-right"></i></a>
+                            <a class="btn btn-danger" title="Retirer des favoris" href="{{ path('app_remove_favory', {id : favory.boutique.id}) }}"><i class="fa-solid fa-xmark"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

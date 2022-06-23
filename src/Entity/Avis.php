@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AvisRepository::class)]
 class Avis
@@ -14,9 +15,19 @@ class Avis
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(
+    min: 3,
+    max: 255,
+    minMessage: 'Votre titre doit faire au moins {{ limit }} caractères de long',
+    maxMessage: 'Votre titre doit faire au maxmium {{ limit }} caractères de long',
+    )]
     private $title;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Assert\Length(
+    max: 1200,
+    maxMessage: 'Votre description doit faire au maxmium {{ limit }} caractères de long',
+    )]
     private $commentaire;
 
     #[ORM\Column(type: 'integer')]

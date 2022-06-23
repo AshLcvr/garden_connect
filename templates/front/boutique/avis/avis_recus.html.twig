@@ -1,0 +1,47 @@
+{% extends 'layout/boutique_base.html.twig' %}
+{% block title %}
+    <title>Avis reçus</title>
+{% endblock %}
+
+{% block body %}
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h3 class="annonce_title" style="margin: 0">Avis reçus</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Commentaire</th>
+                    <th>Note</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if avis is empty %}
+                    <tr>
+                        <td colspan="6">
+                            Pas (encore) d'avis !
+                        </td>
+                    </tr>
+                {% endif %}
+                {% for avi in avis %}
+                    <tr>
+                        <td>{{ (avi.title)? avi.title : '<i>Pas de titre</i>' }}</td>
+                        <td>{{ (avi.commentaire)? avi.commentaire : '<i>Pas de commentaire</i>' }}</td>
+                        <td>
+                            {% for i in 1..5 %}
+                                {% if i <= avi.rating %}
+                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

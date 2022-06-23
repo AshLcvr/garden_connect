@@ -7,39 +7,6 @@
  {% for annonce in annonces %}
      {{ annonce.id }}
     {% endfor %}
-{#    <table class="table">#}
-{#        <tbody>#}
-{#            <tr>#}
-{#                <th>Id</th>#}
-{#                <td>{{ annonces.id }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>Title</th>#}
-{#                <td>{{ annonce.title }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>Description</th>#}
-{#                <td>{{ annonce.description }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>Price</th>#}
-{#                <td>{{ annonce.price }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>Created_at</th>#}
-{#                <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>Modified_at</th>#}
-{#                <td>{{ annonce.modifiedAt ? annonce.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>Actif</th>#}
-{#                <td>{{ annonce.actif ? 'Yes' : 'No' }}</td>#}
-{#            </tr>#}
-{#        </tbody>#}
-{#    </table>#}
-
     <a href="{{ path('app_annonce_index') }}">back to list</a>
 
     <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>

@@ -1,0 +1,18 @@
+{% extends 'layout/boutique_base.html.twig' %}
+{% block title %}
+    <title>Modifier mon avis</title>
+{% endblock %}
+
+
+{% block body %}
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h3 class="annonce_title" style="margin: 0">Modifier mon avis</h3>
+        <div>
+            <a title="Retour à la liste" class="btn btn-primary" href="{{ path('app_avis_sent') }}"><i class="fa-solid fa-angles-left"></i></a>
+            {{ include('front/boutique/avis/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <div class="card-body">
+        {{ include('front/boutique/avis/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+{% endblock %}
