@@ -8,6 +8,10 @@
     {% endif %}
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('flexslider') }}
+{% endblock %}
+
 {% block body %}
     <section id="slider-home">
         <div class="flexslider" id="slider">
@@ -176,4 +180,5 @@
             })
         })
     </script>
+    {{ encore_entry_script_tags('flexslider') }}
 {% endblock %}
