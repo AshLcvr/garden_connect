@@ -41,7 +41,7 @@
                 <div>
                     <h1 class="title_boutique"><a href="{{ path('view_boutique', {id: boutique.id}) }}">{{ boutique.title }}</a></h1>
                 </div>
-                {% if app.user and annonce == null %}
+                {% if app.user and annonce == null and notMyboutique %}
                     <div class="favory_boutique">
                         <a class="favory_button {{ favory }}" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="favory_icon fa-solid fa-heart" ></i></a>
                     </div>
@@ -99,24 +99,26 @@
                     </div>
                 </div>
             </div>
-            <div class="contact_vendeur">
-                {% if app.user %}
-                    <p class="contact"> Contacter le vendeur</p>
-                    {% if boutique.telephone %}
-                        <p class="telephone">{{ boutique.telephone }}</p>
-                    {% endif %}
-                    {% if is_granted('ROLE_VENDEUR') %}
-                        <a href="{{ path('boutique_messagerie_new_conversation', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
+            {% if notMyboutique %}
+                <div class="contact_vendeur">
+                    {% if app.user %}
+                        <p class="contact"> Contacter le vendeur</p>
+                        {% if boutique.telephone %}
+                            <p class="telephone">{{ boutique.telephone }}</p>
+                        {% endif %}
+                        {% if is_granted('ROLE_VENDEUR') %}
+                            <a href="{{ path('boutique_messagerie_new_conversation', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
+                        {% else %}
+                            <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                        {% endif %}
                     {% else %}
-                        <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                        <p class="contact"> Contacter le vendeur</p>
+                        <a class="message_visiteur" href="{{ path('app_login') }}">Connectez vous</a>
+                        <p>ou</p>
+                        <a class="message_visiteur"  href="{{ path('app_register') }}">Inscrivez-vous</a>
                     {% endif %}
-                {% else %}
-                    <p class="contact"> Contacter le vendeur</p>
-                    <a class="message_visiteur" href="{{ path('app_login') }}">Connectez vous</a>
-                    <p>ou</p>
-                    <a class="message_visiteur"  href="{{ path('app_register') }}">Inscrivez-vous</a>
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
         </div>
     </section>
     {% endif %}

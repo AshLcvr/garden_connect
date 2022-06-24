@@ -159,11 +159,18 @@ class BoutiqueController extends AbstractController
     #[Route('/viewboutique/{id}', name: 'view_boutique')]
     public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository, AvisRepository $avisRepository, Request $request, FavoryRepository $favoryRepository)
     {
+        $user = $this->getUser();
         $annonce = null;
         $annonces = $annonceRepository->findBy([
             'boutique' => $boutique->getId(),
             'actif' => true
         ]);
+
+        $notMyboutique = true;
+        $me = $boutique->getUser();
+        if ($me->getId() === $user->getId() ){
+            $notMyboutique = false;
+        }
 
         $favory = '';
         $alreadyFavory = $favoryRepository->findOneBy(['user'=> $this->getUser(), 'boutique' => $boutique]);
@@ -204,6 +211,7 @@ class BoutiqueController extends AbstractController
         return $this->render(
             'front/boutique/viewboutique.html.twig', [
                 'boutique' => $boutique,
+                'notMyboutique' => $notMyboutique,
                 'annonces' => $annonces,
                 'annonce'  => $annonce,
                 'avis'     => $avis,
@@ -218,9 +226,15 @@ class BoutiqueController extends AbstractController
     #[Route('/viewboutique/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
     public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique, $id_annonce)
     {
+        $user = $this->getUser();
         $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
         $annonce = null;
 
+        $notMyboutique = true;
+        $me = $boutique->getUser();
+        if ($me->getId() === $user->getId() ){
+            $notMyboutique = false;
+        }
 
         if (!empty($id_annonce)) {
             $annonce = $annonceRepository->find($id_annonce);
@@ -232,6 +246,7 @@ class BoutiqueController extends AbstractController
                 'annonce' => $annonce,
                 'annonces' => $annonces,
                 'boutique' => $boutique,
+                'notMyboutique' => $notMyboutique
             ]
         );
     }
