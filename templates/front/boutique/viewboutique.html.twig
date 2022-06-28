@@ -47,7 +47,7 @@
                     </div>
                 {% endif %}
             </div>
-            {% if app.user and annonce == null %}
+            {% if annonce == null %}
             <div class="rating_boutique">
                 <a href="#avis_listing">
                  <span class="rating" data-rating="{{ globalRating }}">
@@ -62,65 +62,70 @@
                 </a>
                 <span>({{ avis|length }} avis)</span>
             </div>
-            {% endif %}
-            {% if annonce == null %}
             <p class="description_boutique">{{ boutique.description }}</p>
             {% endif %}
         </div>
     </section>
 
+    {% if annonce == null and boutique.coordinates != null %}
+        <section class="wrap">
+            <h1 class="boutique_title">Où me trouver?</h1>
+            <div id="maCarte" style="height: 400px" data-city="{{ boutique.city }}" data-lon="{{ boutique.coordinates.lon }}" data-lat="{{ boutique.coordinates.lat}}"></div>
+        </section>
+    {% endif %}
+
     {% if annonce != null %}
-    <section id="focus_annonce" class="wrap">
-        <div id="annonce_card_public">
+        <section id="focus_annonce" class="wrap">
+            <div id="annonce_card_public">
 
-            <div class="card_public">
-                <div class="content_card_public">
-                    <div class="image_card_public">
-                        {% for image in annonce.imagesAnnonces %}
-                            <img src="{{ asset('uploads/mini/'~image.title) }}"/>
-                        {% endfor %}
-                    </div>
-                    <div class="description_card_public">
-                        <div class="description_top">
-                            <div>
-                                <h3 class="title_public">{{ annonce.title }}</h3>
-                                <p>dans la catégorie <span>{{ annonce.subcategory.parentCategory.title }}</span></p>
-                            </div>
-                            <p><span>Prix : </span>{{ annonce.price }} €</p>
+                <div class="card_public">
+                    <div class="content_card_public">
+                        <div class="image_card_public">
+                            {% for image in annonce.imagesAnnonces %}
+                                <img src="{{ asset('uploads/mini/'~image.title) }}"/>
+                            {% endfor %}
                         </div>
-
-                        <div class="description_bottom">
-                            <p><span>Description : </span>{{ annonce.description }}</p>
-                            <div class="price_date">
-                                <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                        <div class="description_card_public">
+                            <div class="description_top">
+                                <div>
+                                    <h3 class="title_public">{{ annonce.title }}</h3>
+                                    <p>dans la catégorie <span>{{ annonce.subcategory.parentCategory.title }}</span></p>
+                                </div>
+                                <p><span>Prix : </span>{{ annonce.price }} €</p>
                             </div>
-                        </div>
 
+                            <div class="description_bottom">
+                                <p><span>Description : </span>{{ annonce.description }}</p>
+                                <div class="price_date">
+                                    <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% if notMyboutique %}
-                <div class="contact_vendeur">
-                    {% if app.user %}
-                        <p class="contact"> Contacter le vendeur</p>
-                        {% if boutique.telephone %}
-                            <p class="telephone">{{ boutique.telephone }}</p>
-                        {% endif %}
-                        {% if is_granted('ROLE_VENDEUR') %}
-                            <a href="{{ path('boutique_messagerie_new_conversation', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
+                {% if notMyboutique %}
+                    <div class="contact_vendeur">
+                        {% if app.user %}
+                            <p class="contact"> Contacter le vendeur</p>
+                            {% if boutique.telephone %}
+                                <p class="telephone">{{ boutique.telephone }}</p>
+                            {% endif %}
+                            {% if is_granted('ROLE_VENDEUR') %}
+                                <a href="{{ path('boutique_messagerie_new_conversation', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
+                            {% else %}
+                                <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                            {% endif %}
                         {% else %}
-                            <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                            <p class="contact"> Contacter le vendeur</p>
+                            <a class="message_visiteur" href="{{ path('app_login') }}">Connectez vous</a>
+                            <p>ou</p>
+                            <a class="message_visiteur"  href="{{ path('app_register') }}">Inscrivez-vous</a>
                         {% endif %}
-                    {% else %}
-                        <p class="contact"> Contacter le vendeur</p>
-                        <a class="message_visiteur" href="{{ path('app_login') }}">Connectez vous</a>
-                        <p>ou</p>
-                        <a class="message_visiteur"  href="{{ path('app_register') }}">Inscrivez-vous</a>
-                    {% endif %}
-                </div>
-            {% endif %}
-        </div>
-    </section>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
     {% endif %}
 
     <section id="listing_annonces_public" class="wrap">
@@ -160,8 +165,10 @@
 
 {% endblock %}
 {% block javascripts %}
+
     <script>
         $(document).ready(function () {
+            // oneBoutiqueCard();
             const boutton_favory =    $('.favory_button')
             boutton_favory.click( function (e) {
                 e.preventDefault();
@@ -182,5 +189,6 @@
             })
         })
     </script>
+
     {{ encore_entry_script_tags('flexslider') }}
 {% endblock %}

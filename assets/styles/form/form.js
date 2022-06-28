@@ -16,3 +16,35 @@ $(document).on('change', '.annonce_category', function () {
         }
     });
 })
+
+// Ajax categories select
+$(document).on('keyup', '#boutique_city', function () {
+    let $field = $(this)
+    let $form = $field.closest('form')
+    let data = $field.val()
+    let search = 'postcode'
+    if (isNaN(data) ){
+        search = 'city'
+    }
+    let endpoint = 'https://api-adresse.data.gouv.fr'
+    $.ajax({
+        url: endpoint + "/search/?&q="+search+"=" + data + "&limit=3",
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(result){
+            let resultats = result.features
+            // console.log(resultats);
+            let resultat = resultats.filter()
+            // for ($i = 0 ; $i < resultats.length; $i++){
+            //
+            //     if (resultats[$i].properties.city === resultats[$i-1].properties.city){
+            //         resultats[$i].pop()
+            //     }
+            //     console.log(resultats[$i].properties.city)
+            // }
+            // resultats.forEach((resultat) => {
+            //     console.log(resultat.properties.city)
+            // })
+        }
+    })
+})

@@ -90,6 +90,9 @@ class Boutique
     #[ORM\OneToMany(mappedBy: 'boutique', targetEntity: Favory::class)]
     private $favories;
 
+    #[ORM\Column(type: 'array', nullable: true)]
+    private $coordinates = [];
+
     public function __construct()
     {
         $this->imagesBoutiques = new ArrayCollection();
@@ -338,6 +341,18 @@ class Boutique
                 $favory->setBoutique(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCoordinates(): ?array
+    {
+        return $this->coordinates;
+    }
+
+    public function setCoordinates(?array $coordinates): self
+    {
+        $this->coordinates = $coordinates;
 
         return $this;
     }

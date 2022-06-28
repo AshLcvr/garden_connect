@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Subcategory;
+;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Service\Categories\DataCategories;
@@ -24,21 +25,21 @@ class CategoriesFixtures extends Fixture
 {
     public function __construct()
     {
-        $categories = new DataCategories();
+        $categories       = new DataCategories();
         $this->categories = $categories->getCategoriesData();
 
-        $cerealesEtGrains = new DataCerealesEtGrains();
+        $cerealesEtGrains             = new DataCerealesEtGrains();
         $engraisNaturelsEtAccessoires = new DataEngraisNaturelsEtAccessoires();
-        $farine = new DataFarine();
-        $fruits = new DataFruits();
-        $fruitsACoques = new DataFruitsACoques();
-        $herbesEpicesAromatesGraines = new DataHerbesEpicesAromatesGraines();
-        $huilesMielTruffes = new DataHuilesMielTruffes();
-        $jusFruitsLegumes = new DataJusFruitsLegumes();
-        $legumesEtPois = new DataLegumesEtPois();
-        $oeufs = new DataOeufs();
-        $panier = new DataPanier();
-        $plantsPlantesFeuillesArbresGrainesPousses = new DataPlantsPlantesFeuillesArbresGrainesPousses();
+        $farine                       = new DataFarine();
+        $fruits                       = new DataFruits();
+        $fruitsACoques                = new DataFruitsACoques();
+        $herbesEpicesAromatesGraines  = new DataHerbesEpicesAromatesGraines();
+        $huilesMielTruffes            = new DataHuilesMielTruffes();
+        $jusFruitsLegumes             = new DataJusFruitsLegumes();
+        $legumesEtPois                = new DataLegumesEtPois();
+        $oeufs                        = new DataOeufs();
+        $panier                       = new DataPanier();
+        $plantsPlantesFeuillesArbres  = new DataPlantsPlantesFeuillesArbresGrainesPousses();
 
         $sousCats   = [];
         $sousCats[] =  $cerealesEtGrains->getCerealesEtGrainsData();
@@ -52,10 +53,11 @@ class CategoriesFixtures extends Fixture
         $sousCats[] =  $legumesEtPois->getLegumesEtPoisData();
         $sousCats[] =  $oeufs->getOeufsData();
         $sousCats[] =  $panier->getPanierData();
-        $sousCats[] =  $plantsPlantesFeuillesArbresGrainesPousses->getPlantsPlantesFeuillesArbresGrainesPoussesData();
+        $sousCats[] =  $plantsPlantesFeuillesArbres->getPlantsPlantesFeuillesArbresGrainesPoussesData();
 
         $this->sousCats = $sousCats;
     }
+
     public function load(ObjectManager $manager): void
     {
         foreach ($this->categories as $key => $catParent) {
@@ -76,8 +78,6 @@ class CategoriesFixtures extends Fixture
                 }
             }
         }
-
         $manager->flush();
-
     }
 }

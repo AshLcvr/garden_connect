@@ -91,6 +91,13 @@
       <path value="$PROJECT_DIR$/vendor/symfony/intl" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-components" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle" />
+      <path value="$PROJECT_DIR$/vendor/liip/imagine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/imagine/imagine" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug-bundle" />
+      <path value="$PROJECT_DIR$/vendor/maxmind/web-service-common" />
+      <path value="$PROJECT_DIR$/vendor/geoip2/geoip2" />
+      <path value="$PROJECT_DIR$/vendor/maxmind-db/reader" />
     </include_path>
   </component>
 </project>
