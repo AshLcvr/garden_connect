@@ -112,7 +112,7 @@ class AvisController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $avisRepository->add($avis, true);
 
-            return $this->redirectToRoute('app_avis_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_avis_sent', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('front/boutique/avis/edit_avis.html.twig', [

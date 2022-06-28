@@ -5,6 +5,9 @@
     background-color: lightgrey;
     margin-bottom: 1rem;
 }
+.largeur-nav{
+  width: 13rem!important;
+}
 .p-20{
     padding: 20px;
 }
@@ -16,7 +19,7 @@
 
 }
 .width-100{
-    width: 100%;
+    width: 100%!important;
 }
 .inline-block{
     display: inline-block;

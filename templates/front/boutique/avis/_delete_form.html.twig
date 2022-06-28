@@ -1,4 +1,4 @@
-<form style="display: inline-block" method="post" action="{{ path('app_avis_delete', {'id': av.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cet avis?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ av.id) }}">
+<form style="display: inline-block" method="post" action="{{ path('app_avis_delete', {'id': avi.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cet avis?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avi.id) }}">
     <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
 </form>
