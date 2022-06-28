@@ -2,6 +2,11 @@
     display: flex;
     justify-content: center;
 }
+.separator_home {
+    border-top: 1px solid var(--vertfonce);
+    width: 50%;
+    margin: 0 auto;
+}
 /* Annonces */
 #annonces {
     display: flex;

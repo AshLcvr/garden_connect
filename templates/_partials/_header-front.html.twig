@@ -29,6 +29,7 @@
                     {% else %}
                         <li><a href="{{ path('app_conversation_index', {id : app.user.id}) }}">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% endif %}
+                    <li><a href="{{ path('profil') }}">Profil</a></li>
                     <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
                 {% else %}
                     {% if app.request.attributes.get('_route')  == 'app_login' %}

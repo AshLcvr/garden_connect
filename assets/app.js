@@ -17,3 +17,6 @@ import './styles/filter_annonce/filter.js';
 import "./styles/boutique_public/boutique_public.css";
 import "./styles/boutique_public/rating.js";
 import "./styles/annonce_public/annonce_public.css";
+// css, js profil
+
+import "./styles/profil/profil.css";

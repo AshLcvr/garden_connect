@@ -1,0 +1,16 @@
+{% extends 'layout/front_profil_base.html.twig' %}
+{% block title %}Modifier mon avis{% endblock %}
+
+
+{% block container %}
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h3 class="annonce_title" style="margin: 0">Modifier mon avis</h3>
+        <div>
+            <a title="Retour à la liste" class="btn btn-primary" href="{{ path('profil_avis') }}"><i class="fa-solid fa-angles-left"></i></a>
+            {{ include('front/profil/avis/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <div class="card-body">
+        {{ include('front/profil/avis/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+{% endblock %}

@@ -48,16 +48,17 @@ img{
 .d-flex{
     display: flex;
 }
+.justify-content-between{
+    justify-content: space-between;
+}
+.align-items-center{
+    align-items: center;
+}
 .row-wrap{
     flex-flow: row wrap;
 }
 .flex-column{
     flex-flow: column;
-}
-.separator {
-    border-top: 1px solid var(--vertfonce);
-    width: 50%;
-    margin: 0 auto;
 }
 .box-shadow{
     box-shadow: 15px 15px 15px lightgrey;
@@ -92,4 +93,7 @@ img{
 }
 .favory_active{
     color: red;
+}
+.title_front{
+    text-align: center;
 }

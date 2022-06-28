@@ -52,7 +52,12 @@ class EditProfilType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'E-mail'
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Modifier',
+                'attr' => [
+                    'class' => 'btn btn-primary width-100 m-t-20'
+                ]
+            ])
         ;
     }
 

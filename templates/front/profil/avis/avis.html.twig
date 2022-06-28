@@ -1,0 +1,74 @@
+{% extends 'layout/front_profil_base.html.twig' %}
+
+{% block container %}
+<div class="container_avis">
+    {% if mesAvis %}
+        <h1>Mes avis</h1>
+        <ul>
+            {% for av in mesAvis %}
+                <li>
+                    <div class="block_avis">
+                        <div>
+                            {% if av.user.image %}
+                                <img src="{{ asset('uploads/profile/')~av.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                            {% else %}
+                                <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                            {% endif %}
+                            <span style="margin: auto .5rem">{{ av.user.name|capitalize }}</span>
+                        </div>
+                        <div>
+                            {% for i in 1..5 %}
+                                {% if i <= av.rating %}
+                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                {% endif %}
+                            {% endfor %}
+                            <span>{{ av.title }}</span>
+                        </div>
+                        <div><i>Avis émis le {{ av.createdAt|date('d m Y')  }}</i> </div>
+                        <div> {{ av.commentaire  }} </div>
+                        <a class="btn btn-primary" href="{{ path('profil_avis_edit', {id: av.id}) }}">Modifier mon commentaire</a>
+                    </div>
+                    <div class="separator"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="block_boutique">
+                        <div>
+                            {% if av.boutique.user.image %}
+                                <img src="{{ asset('uploads/profile/')~av.boutique.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                            {% else %}
+                                <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                            {% endif %}
+                            <span style="margin: auto .5rem">{{ av.boutique.user.name|capitalize }}</span>
+                        </div>
+                        <p>{{ av.boutique.title }}</p>
+                        <p>Boutique en ligne depuis le : {{ av.boutique.createdAt|date('d/m/Y') }}</p>
+                        <div>
+                            {% for key, globalRating in totalGlobalRating %}
+                                {% if key == av.boutique.id %}
+                                    <span class="rating" data-rating="{{ globalRating }}">
+                                        {% for i in 1..5 %}
+                                            {% if i <= globalRating %}
+                                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                            {% else %}
+                                                <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                    {% for key, nbr in totalNumberAvis %}
+                                        {% if key == av.boutique.id %}
+                                            <span>({{ nbr }} avis)</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <a class="btn btn-primary" href="{{ path('view_boutique', {id: av.boutique.id}) }}">Voir la boutique</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h1>Vous n'avez pas émis d'avis.</h1>        
+    {% endif %}
+</div>
+{% endblock %}

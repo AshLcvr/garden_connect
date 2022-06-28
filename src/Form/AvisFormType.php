@@ -25,7 +25,13 @@ class AvisFormType extends AbstractType
                 'label' => 'Ajouter un titre'
             ])
             ->add('commentaire', TextareaType::class,[
-            'label' => 'Votre commentaire'
+                'label' => 'Votre commentaire'
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Modifier',
+                'attr' => [
+                    'class' => 'btn btn-primary width-100 m-t-20'
+                ]
             ])
         ;
     }
