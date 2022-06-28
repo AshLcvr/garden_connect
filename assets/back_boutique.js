@@ -12,3 +12,8 @@ import "./styles/boutique_public/boutique_public.css";
 import "./styles/boutique/messagerie/messagerie.css";
 //Footer
 import "./styles/footer/footer.css";
+// css, js profil
+import "./styles/profil/profil.css";
+// pagination
+import './styles/filter_annonce/filter.css';
+import './styles/filter_annonce/filter.js';

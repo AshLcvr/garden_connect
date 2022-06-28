@@ -54,6 +54,9 @@ img{
 .align-items-center{
     align-items: center;
 }
+.flex-end{
+    justify-content: flex-end;
+}
 .row-wrap{
     flex-flow: row wrap;
 }
