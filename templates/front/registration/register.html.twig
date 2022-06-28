@@ -60,10 +60,7 @@
 
                 <div class="bloc_form">
                     {{ form_label(registrationForm.role) }}
-{#                    <div class="radio_box">#}
-
-                        {{ form_widget(registrationForm.role, {attr : {class :  'radio_box '}}) }}
-{#                    </div>#}
+                    {{ form_widget(registrationForm.role, {attr : {class :  'radio_box '}}) }}
 
                     <small>{{ form_help(registrationForm.role) }}</small>
 

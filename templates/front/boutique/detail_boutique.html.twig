@@ -3,19 +3,17 @@
 {% block title %}
 <title>Boutique</title>
 {% endblock %}
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
-{% endblock %}
+
 {% block body %}
 <div class="card shadow mb-4 boutique_detail">
     <div class="card-header py-3  d-flex justify-content-between align-items-center">
         <h4 class="annonce_title">{{ boutique.title }}</h4>
         <div>
-                <a title="Modifier ma boutique" class="btn btn-primary" href="{{ path('app_boutique_edit', {'id' : boutique.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a title="Modifier ma boutique" class="btn btn-primary" href="{{ path('app_boutique_edit', {'id' : boutique.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
             {% if boutique.actif == 1 %}
-                <a title="Désactiver l'boutique" class="btn btn-primary" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}" onclick="return confirm('Voulez vous vraiment désactiver votre boutique?')"><i class="fa-regular fa-eye"></i></a>
+                <a title="Désactiver la boutique" class="btn btn-primary" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}" onclick="return confirm('Voulez vous vraiment désactiver votre boutique?')"><i class="fa-regular fa-eye"></i></a>
             {% else %}
-                <a title="Activer l'boutique" class="btn btn-warning" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
+                <a title="Activer la boutique" class="btn btn-warning" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
             {% endif %}
             {{ include('front/boutique/_delete_form.html.twig') }}
         </div>
@@ -46,7 +44,7 @@
                      {{ boutique.adresse }}
                  </div>
                  <div class="text-align-center">
-                     {{ boutique.codePostal }} {{ boutique.city }}
+                     <p><span id="cp"> {{ boutique.codePostal }} </span> <span id="city"> {{ boutique.city }} </span></p>
                  </div>
              </div>
         </div>
@@ -56,6 +54,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('/asset/flex/jquery.flexslider.js') }}"></script>
-    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('back-boutique') }}
 {% endblock %}

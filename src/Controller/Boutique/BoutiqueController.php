@@ -27,6 +27,7 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use function Symfony\Bundle\FrameworkBundle\Controller\createForm;
+use function Symfony\Config\em;
 
 //#[Route('/boutique')]
 class BoutiqueController extends AbstractController
@@ -106,7 +107,15 @@ class BoutiqueController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($this->getUser());
+            // Récupération des coordonnées
+            $postCode = $form->get('code_postal')->getData();
+            $city = $form->get('city')->getData();
+            $adress = $form->get('adresse')->getData();
+            if(!empty($postCode) || !empty($city)){
+                $boutique->setCoordinates($this->getCoordinatesFromAPI($postCode, $city, $adress));
+            }
             $boutiqueRepository->add($boutique, true);
+
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
                 $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
@@ -134,7 +143,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique/{id}', name: 'app_boutique_inactif', methods: ['GET','POST'], requirements: ['id' => '\d+'])]
-    public function setInactif(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
+    public function setInactif(Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
         $boutique->setActif(false);
         $boutique->setModifiedAt(new \DateTimeImmutable());
@@ -166,20 +175,24 @@ class BoutiqueController extends AbstractController
             'actif' => true
         ]);
 
+        // Détection si la page actuelle est notre boutique
         $notMyboutique = true;
         $me = $boutique->getUser();
-        if ($me->getId() === $user->getId() ){
-            $notMyboutique = false;
+        if($user){
+            if ($me->getId() === $user->getId() ){
+                $notMyboutique = false;
+            }
         }
 
+        // Favoris
         $favory = '';
         $alreadyFavory = $favoryRepository->findOneBy(['user'=> $this->getUser(), 'boutique' => $boutique]);
         if (!empty($alreadyFavory)){
             $favory = 'favory_active';
         }
 
+        /// Avis
         $avis = $avisRepository->findBy(['boutique'=>$boutique]);
-
         if ($avis){
             $numberAvis = count($avis);
             $total = [];
@@ -190,7 +203,6 @@ class BoutiqueController extends AbstractController
         }else{
             $globalRating = 0;
         }
-
         $avisAlreadyExist = false;
 
         $newAvis = new Avis();
@@ -232,8 +244,10 @@ class BoutiqueController extends AbstractController
 
         $notMyboutique = true;
         $me = $boutique->getUser();
-        if ($me->getId() === $user->getId() ){
-            $notMyboutique = false;
+        if($user){
+            if ($me->getId() === $user->getId() ){
+                $notMyboutique = false;
+            }
         }
 
         if (!empty($id_annonce)) {
@@ -281,10 +295,41 @@ class BoutiqueController extends AbstractController
             return $this->redirectToRoute('boutique_view_profil', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
-
         return $this->renderForm('front/boutique/profil/edit_profil.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
     }
+
+    private function getCoordinatesFromAPI($postCode, $city = null, $adress = null)
+    {
+        $coordinates = [];
+        $apiUrl = "https://api-adresse.data.gouv.fr/search/?q=";
+        if (!empty($adress)) {
+            $apiUrl .= $this->formatedAdress($adress).'&' ;
+        }
+        if (!empty($city)) {
+            $apiUrl .= 'city='.$city.'&' ;
+        }
+        $apiUrl .= 'postcode='.$postCode ;
+        $response = file_get_contents($apiUrl, false);
+        $data = json_decode($response);
+        $lon = $data->features[0]->geometry->coordinates[0];
+        $lat = $data->features[0]->geometry->coordinates[1];
+        $coordinates['lon'] = $lon;
+        $coordinates['lat'] = $lat;
+
+        return $coordinates;
+    }
+
+    private function formatedAdress($adress)
+    {
+        $utf8Adress = utf8_decode($adress);
+        $explodedAdress = explode(' ',$utf8Adress);
+        $implodedAdress = implode('+',$explodedAdress);
+        $formatedAdress = str_replace([' ',',','++'], '+', $implodedAdress);
+
+        return $formatedAdress;
+    }
+
 }

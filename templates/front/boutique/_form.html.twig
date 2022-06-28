@@ -26,7 +26,6 @@
         </div>
 
         <div class="bloc_form d-flex " style="gap: 2rem">
-
             {% if app.request.attributes.get('_route') == 'app_boutique_new'%}
                 <div style="width: 10%">
                     {{ form_label(form.indicatif) }}
@@ -88,6 +87,7 @@
         <div class="bloc_form">
             {{ form_label(form.city) }}
             {{ form_widget(form.city) }}
+            <input type="hidden" id="test">
 
             <small>{{ form_help(form.city) }}</small>
 
@@ -96,22 +96,37 @@
             </div>
         </div>
 
-        <div class="bloc_form">
-            <div class="d-flex flex-column">
+{#        <div class="bloc_form">#}
+{#            {{ form_label(form.adressIsVisible) }}  #}
+{#            {{ form_widget(form.adressIsVisible, {attr : {class :  'radio_box '}}) }}#}
+
+{#            <small>{{ form_help(form.adressIsVisible) }}</small>#}
+
+{#            <div class="form-error">#}
+{#                {{ form_errors(form.adressIsVisible) }}#}
+{#            </div>#}
+{#        </div>#}
+
+
+        {% if app.request.attributes.get('_route')  == 'app_boutique_edit' %}
+            <div class="bloc_form">
                 {{ form_label(form.upload) }}
-            </div>
-            <small>{{ form_help(form.upload) }}</small>
-            <div class="form-error">
-                {% for label, messages in app.flashes %}
-                    {% for message in messages %}
-                        <div class="flash-{{ label }}">
-                            {{ message }}
-                        </div>
+                <br>
+                {{ form_widget(form.upload) }}
+                <br>
+                <small>{{ form_help(form.upload) }}</small>
+                <br>
+                <div class="form-error">
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="flash-{{ label }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}
-                {{ form_errors(form.upload) }}
+                </div>
             </div>
-        </div>
+        {% endif %}
 
         <div class="bloc_submit mb-5">
             <button class="btn btn-primary">{{ button_label|default('C\'est parti !') }}</button>

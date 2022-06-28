@@ -1,6 +1,6 @@
 // css général
 import './styles/app.css';
-// css formulaire
+// css, js formulaire
 import './styles/form/form.css';
 import './styles/form/form.js';
 // css, js header footer
@@ -18,5 +18,7 @@ import "./styles/boutique_public/boutique_public.css";
 import "./styles/boutique_public/rating.js";
 import "./styles/annonce_public/annonce_public.css";
 // css, js profil
-
 import "./styles/profil/profil.css";
+// js carte
+import "./modules/Carte.js";
+
