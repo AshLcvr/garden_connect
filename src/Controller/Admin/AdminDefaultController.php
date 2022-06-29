@@ -2,22 +2,25 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Avis;
 use App\Entity\User;
 use App\Entity\Annonce;
-use App\Entity\Avis;
+use App\Entity\Boutique;
 use App\Entity\ImagesHero;
 use App\Form\ImagesHeroType;
 use App\Service\UploadImage;
+use App\Repository\AvisRepository;
 use App\Repository\UserRepository;
 use App\Repository\AnnonceRepository;
-use App\Repository\ImagesHeroRepository;
-use Symfony\Component\HttpFoundation\Request;
 use App\Repository\BoutiqueRepository;
-use App\Entity\Boutique;
-use App\Repository\AvisRepository;
+use App\Repository\ImagesHeroRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 #[Route('/admin')]
 class AdminDefaultController extends AbstractController
@@ -50,10 +53,44 @@ class AdminDefaultController extends AbstractController
         ]);
     }
 
+    #[Route('/viewprofil/{id}', name: 'admin_view_profil', methods: ['GET', 'POST'])]
+    public function viewProfile(User $user, TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
+    {
+        $token = $tokenGenerator->generateToken();
+        $user->setToken($token);
+        $userRepository->add($user, true);
+        return $this->render('admin/profil/view_profil.html.twig', [
+                'user' => $user,
+                'token' => $token
+            ]
+        );
+    }
+
+    #[Route('/edit/profil/{id}', name: 'admin_edit_profil', methods: ['GET', 'POST'])]
+    public function editProfil(Request $request, User $user, UserRepository $userRepository, UploadImage $uploadImage)
+    {
+        $form = $this->createForm(EditProfilType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            if($image){
+                $user->setImage($uploadImage->uploadProfile($image));
+            }
+            $userRepository->add($user,true);
+            return $this->redirectToRoute('boutique_view_profil', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/profil/edit_profil.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
+
 
     // users
     #[Route('/users', name: 'all-users')]
-    public function allUsers(UserRepository $userRepository): Response
+    public function allUsers(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
         $usersActif = $userRepository->findBy([
             'actif' => true
@@ -61,6 +98,17 @@ class AdminDefaultController extends AbstractController
         $usersInactif = $userRepository->findBy([
             'actif' => false
         ]);
+        
+        $usersActif = $paginator->paginate(
+            $usersActif, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            20 // Nombre de résultats par page
+        );
+        $usersInactif = $paginator->paginate(
+            $usersInactif, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            20 // Nombre de résultats par page
+        );
 
         return $this->render('admin/user/users.html.twig',[
             'usersActif' => $usersActif,
@@ -92,7 +140,7 @@ class AdminDefaultController extends AbstractController
 
     // annonces
     #[Route('/annonce', name: 'all-annonces')]
-    public function annonce(AnnonceRepository $annonceRepository): Response
+    public function annonce(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
     {
         $annoncesActif = $annonceRepository->findBy([
             'actif' => true
@@ -100,6 +148,16 @@ class AdminDefaultController extends AbstractController
         $annoncesInactif = $annonceRepository->findBy([
             'actif' => false
         ]);
+        $annoncesActif = $paginator->paginate(
+            $annoncesActif, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            20 // Nombre de résultats par page
+        );
+        $annoncesInactif = $paginator->paginate(
+            $annoncesInactif, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            20 // Nombre de résultats par page
+        );
 
         return $this->render('admin/annonce/annonces.html.twig',[
             'annoncesActif' => $annoncesActif,
@@ -130,7 +188,7 @@ class AdminDefaultController extends AbstractController
 
     // boutiques
     #[Route('/boutique', name: 'all-boutiques')]
-    public function boutique(BoutiqueRepository $boutiqueRepository): Response
+    public function boutique(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
     {
         $boutiquesActif = $boutiqueRepository->findBy([
             'actif' => true
@@ -138,6 +196,16 @@ class AdminDefaultController extends AbstractController
         $boutiquesInactif = $boutiqueRepository->findBy([
             'actif' => false
         ]);
+        $boutiquesActif = $paginator->paginate(
+            $boutiquesActif, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            20 // Nombre de résultats par page
+        );
+        $boutiquesInactif = $paginator->paginate(
+            $boutiquesInactif, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            20 // Nombre de résultats par page
+        );
 
         return $this->render('admin/boutique/boutiques.html.twig',[
             'boutiquesActif' => $boutiquesActif,
@@ -195,7 +263,7 @@ class AdminDefaultController extends AbstractController
 
     // boutiques
     #[Route('/avis', name: 'all-avis')]
-    public function avis(AvisRepository $avisRepository): Response
+    public function avis(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
     {
         $avisActif = $avisRepository->findBy([
             'actif' => true
@@ -203,6 +271,17 @@ class AdminDefaultController extends AbstractController
         $avisInactif = $avisRepository->findBy([
             'actif' => false
         ]);
+        
+        $avisActif = $paginator->paginate(
+            $avisActif, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            2 // Nombre de résultats par page
+        );
+        $avisInactif = $paginator->paginate(
+            $avisInactif, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            20 // Nombre de résultats par page
+        );
 
         return $this->render('admin/avis/avis.html.twig',[
             'avisActif' => $avisActif,
@@ -229,5 +308,25 @@ class AdminDefaultController extends AbstractController
         $avis->setActif(true);
         $avisRepository->add($avis, true);
         return $this->redirectToRoute('details-avis', ['id' => $avis->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    public function configPaginator(ContainerConfigurator $configurator, $key): void
+    {
+        $configurator->extension('knp_paginator', [
+            'page_range' => 5,                        // number of links shown in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links
+            'default_options' => [
+                'page_name' => $key,                // page query parameter name
+                'sort_field_name' => 'sort',          // sort field query parameter name
+                'sort_direction_name' => 'direction', // sort direction query parameter name
+                'distinct' => true,                   // ensure distinct results, useful when ORM queries are using GROUP BY statements
+                'filter_field_name' => 'filterField', // filter field query parameter name
+                'filter_value_name' => 'filterValue'  // filter value query parameter name
+            ],
+            'template' => [
+                'pagination' => '@KnpPaginator/Pagination/sliding.html.twig',     // sliding pagination controls template
+                'sortable' => '@KnpPaginator/Pagination/sortable_link.html.twig', // sort link template
+                'filtration' => '@KnpPaginator/Pagination/filtration.html.twig'   // filters template
+            ]
+        ]);
     }
 }

@@ -1,0 +1,42 @@
+{% extends 'layout/admin_base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
+{% endblock %}
+{% block body %}
+    <div>
+        <div>
+            <h4>{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
+            <div>
+                <a name="Modifier mon profil" class="" href="{{ path('boutique_edit_profil', {'id' : user.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h6>Photo: </h6>
+                <div>
+                    {% if user.image %}
+                        <img src="{{ asset('uploads/profile/'~user.image) }}" alt="Images user" style=" width: 10%; border-radius: 50%">
+                    {% endif %}
+                </div>
+            </div>
+            <hr>
+            <div>
+                <h6>Email:</h6>
+                {{ user.email  }}
+            </div>
+            <hr>
+            <div>
+                <h6>Prénom:</h6>
+                {{ user.name }}
+            </div>
+            <hr>
+            <div>
+                <h6>Nom:</h6>
+                    {{ user.surname }}
+            </div>
+            <hr>
+            <a style="color: var(--orange)" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>
+        </div>
+    </div>
+{% endblock %}

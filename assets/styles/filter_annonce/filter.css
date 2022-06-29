@@ -61,7 +61,14 @@
     border-radius: 10px;
 }
 #pagination_box span:hover{
-    background-color: var(--vertfonce);}
+    background-color: var(--vertfonce);
+}
+#pagination_box .pagination .current{
+    background-color: var(--orange);
+}
+#pagination_box .pagination .current:hover{
+    background-color: var(--orange);
+}
 #pagination_box span a{
     color: white;
     padding: .4rem 1rem;

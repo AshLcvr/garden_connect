@@ -40,6 +40,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="js-filter-pagination" id="pagination_box">
+            {{ knp_pagination_render(annoncesActif) }}
+        </div>
     </div>
     <h2 class="title">Annonces Inactives</h2>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-b-20">
@@ -77,6 +80,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="js-filter-pagination" id="pagination_box">
+            {{ knp_pagination_render(annoncesInactif) }}
+        </div>
     </div>
 </div>
 {% endblock %}
