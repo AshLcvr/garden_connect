@@ -8,6 +8,7 @@ use App\Form\MessageType;
 use App\Entity\Conversation;
 use App\Form\ConversationType;
 use App\Repository\AnnonceRepository;
+use App\Repository\AvisRepository;
 use App\Repository\BoutiqueRepository;
 use App\Repository\UserRepository;
 use App\Repository\MessageRepository;
@@ -21,9 +22,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/admin')]
 class ConversationController extends AbstractController
 {
-    #[Route('/conversation-admin/{id}', name: 'app_conversation_index')]
-    public function index(User $user): Response
+    #[Route('/conversation/admin', name: 'app_conversation_index')]
+    public function index(): Response
     {
+        $user = $this->getUser();
         $nbrNonlus = 0;
         $nbrNonlusCorresp = [];
         $conversationsCorresp = $user->getConversationsCorresp();
@@ -75,7 +77,7 @@ class ConversationController extends AbstractController
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
 
-            return $this->redirectToRoute('conversation_message', ['id' => $conversation->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/conversation/new.html.twig', [
@@ -99,7 +101,7 @@ class ConversationController extends AbstractController
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
 
-            return $this->redirectToRoute('app_conversation_index', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/conversation/new.html.twig', [
@@ -124,7 +126,38 @@ class ConversationController extends AbstractController
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
 
-            return $this->redirectToRoute('app_conversation_index', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/conversation/new.html.twig', [
+            'conversation' => $conversation,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/conversation/avis/{id}/{id_avis}', name: 'new_conversation_with_id_avis', requirements: ['id' => '\d+', 'id_boutique' => '\d+'])]
+    public function newConversationWithIdAvis(Request $request, ConversationRepository $conversationRepository, User $user, $id_avis, AvisRepository $avisRepository): Response
+    {
+        $avis = $avisRepository->find($id_avis);
+        // dd($user->getRoles());
+        if (in_array("ROLE_VENDEUR", $user->getRoles(), true)) {
+            $avisUrl = $this->generateUrl('app_avis_edit', ['id' => urlencode($avis->getId())], UrlGeneratorInterface::ABSOLUTE_URL);
+        }
+        else{
+            $avisUrl = $this->generateUrl('profil_avis_edit', ['id' => urlencode($avis->getId())], UrlGeneratorInterface::ABSOLUTE_URL);
+        }
+        $conversation = new Conversation();
+        $conversation->setPremierMessage($avisUrl);
+        $form = $this->createForm(ConversationType::class, $conversation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $conversation->setCreatedAt(new \DateTimeImmutable());
+            $conversation->setUser($this->getUser());
+            $conversation->setCorrespondant($user);
+            $conversationRepository->add($conversation, true);
+
+            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/conversation/new.html.twig', [

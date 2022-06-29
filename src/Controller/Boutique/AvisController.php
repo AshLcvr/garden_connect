@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/avis')]
+#[Route('/boutique/avis')]
 class AvisController extends AbstractController
 {
     #[Route('/avis-recus', name: 'app_avis_received', methods: ['GET'])]

@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Annonce;
+use App\Entity\Avis;
 use App\Entity\ImagesHero;
 use App\Form\ImagesHeroType;
 use App\Service\UploadImage;
@@ -13,6 +14,7 @@ use App\Repository\ImagesHeroRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\BoutiqueRepository;
 use App\Entity\Boutique;
+use App\Repository\AvisRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -186,8 +188,46 @@ class AdminDefaultController extends AbstractController
     #[Route('/hero/delete/{id}', name: 'delete_images_hero')]
     public function deleteImagesHero(ImagesHero $imageHero, ImagesHeroRepository $imagesHeroRepository): Response
     {
-        $imagesHeroRepository->remove($imageHero);
+        $imagesHeroRepository->remove($imageHero, true);
 
         return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
+    }
+
+    // boutiques
+    #[Route('/avis', name: 'all-avis')]
+    public function avis(AvisRepository $avisRepository): Response
+    {
+        $avisActif = $avisRepository->findBy([
+            'actif' => true
+        ]);
+        $avisInactif = $avisRepository->findBy([
+            'actif' => false
+        ]);
+
+        return $this->render('admin/avis/avis.html.twig',[
+            'avisActif' => $avisActif,
+            'avisInactif' => $avisInactif
+        ]);
+    }
+    #[Route('/avis/{id}', name: 'details-avis')]
+    public function detailsAvis(Avis $avis): Response
+    {
+        return $this->render('admin/avis/details-avis.html.twig',[
+            'avi' => $avis,
+        ]);
+    }
+    #[Route('/avis/disable/{id}', name: 'disable-avis')]
+    public function disableAvis(Avis $avis, AvisRepository $avisRepository): Response
+    {
+        $avis->setActif(false);
+        $avisRepository->add($avis, true);
+        return $this->redirectToRoute('details-avis', ['id' => $avis->getId()], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/avis/active/{id}', name: 'active-avis')]
+    public function activeAvis(Avis $avis, AvisRepository $avisRepository): Response
+    {
+        $avis->setActif(true);
+        $avisRepository->add($avis, true);
+        return $this->redirectToRoute('details-avis', ['id' => $avis->getId()], Response::HTTP_SEE_OTHER);
     }
 }

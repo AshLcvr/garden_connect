@@ -21,6 +21,9 @@
 .width-100{
     width: 100%!important;
 }
+.favory{
+  color: #F7941D;
+}
 .inline-block{
     display: inline-block;
 }
