@@ -74,38 +74,28 @@
         </div>
 
         <div class="bloc_form">
-            {{ form_label(form.code_postal) }}
-            {{ form_widget(form.code_postal) }}
+            {{ form_label(form.postcode) }}
+            {{ form_widget(form.postcode, {attr : {style: '-moz-appearance: textfield'}}) }}
 
-            <small>{{ form_help(form.code_postal) }}</small>
+            <small>{{ form_help(form.postcode) }}</small>
 
             <div class="form-error">
-                {{ form_errors(form.code_postal) }}
+                {{ form_errors(form.postcode) }}
             </div>
         </div>
 
         <div class="bloc_form">
-            {{ form_label(form.city) }}
-            {{ form_widget(form.city) }}
-            <input type="hidden" id="test">
+            <label class="control-label" for="boutique_city">Ville</label>
+            <select class="form-control" name="" id="boutique_city" >
+                <option value="">Veuillez renseigner votre code postal.</option>
+            </select>
 
-            <small>{{ form_help(form.city) }}</small>
+            <small>{{ form_help(form.adresse) }}</small>
 
             <div class="form-error">
-                {{ form_errors(form.city) }}
+                {{ form_errors(form.adresse) }}
             </div>
         </div>
-
-{#        <div class="bloc_form">#}
-{#            {{ form_label(form.adressIsVisible) }}  #}
-{#            {{ form_widget(form.adressIsVisible, {attr : {class :  'radio_box '}}) }}#}
-
-{#            <small>{{ form_help(form.adressIsVisible) }}</small>#}
-
-{#            <div class="form-error">#}
-{#                {{ form_errors(form.adressIsVisible) }}#}
-{#            </div>#}
-{#        </div>#}
 
 
         {% if app.request.attributes.get('_route')  == 'app_boutique_edit' %}

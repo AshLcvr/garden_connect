@@ -107,13 +107,12 @@ class BoutiqueController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($this->getUser());
-            // Récupération des coordonnées
-            $postCode = $form->get('code_postal')->getData();
-            $city = $form->get('city')->getData();
-            $adress = $form->get('adresse')->getData();
-            if(!empty($postCode) || !empty($city)){
-                $boutique->setCoordinates($this->getCoordinatesFromAPI($postCode, $city, $adress));
-            }
+            $coordinates_array  = $form->get('coordinates')->getData();
+            $coordinates = explode(',',$coordinates_array);
+            $city_name = array_pop($coordinates);
+            $boutique->setCoordinates($coordinates);
+            $adress = $form->get('adresse')->getData(). ' ' .  $form->get('postcode')->getData() . ' ' . $city_name;
+            $boutique->setAdresse($adress);
             $boutiqueRepository->add($boutique, true);
 
             $boutiqueImage = $form->get('upload')->getData();
@@ -138,16 +137,6 @@ class BoutiqueController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
             $boutiqueRepository->remove($boutique, true);
         }
-
-        return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    #[Route('/boutique/{id}', name: 'app_boutique_inactif', methods: ['GET','POST'], requirements: ['id' => '\d+'])]
-    public function setInactif(Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
-    {
-        $boutique->setActif(false);
-        $boutique->setModifiedAt(new \DateTimeImmutable());
-        $boutiqueRepository->add($boutique, true);
 
         return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
     }
@@ -301,35 +290,6 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    private function getCoordinatesFromAPI($postCode, $city = null, $adress = null)
-    {
-        $coordinates = [];
-        $apiUrl = "https://api-adresse.data.gouv.fr/search/?q=";
-        if (!empty($adress)) {
-            $apiUrl .= $this->formatedAdress($adress).'&' ;
-        }
-        if (!empty($city)) {
-            $apiUrl .= 'city='.$city.'&' ;
-        }
-        $apiUrl .= 'postcode='.$postCode ;
-        $response = file_get_contents($apiUrl, false);
-        $data = json_decode($response);
-        $lon = $data->features[0]->geometry->coordinates[0];
-        $lat = $data->features[0]->geometry->coordinates[1];
-        $coordinates['lon'] = $lon;
-        $coordinates['lat'] = $lat;
 
-        return $coordinates;
-    }
-
-    private function formatedAdress($adress)
-    {
-        $utf8Adress = utf8_decode($adress);
-        $explodedAdress = explode(' ',$utf8Adress);
-        $implodedAdress = implode('+',$explodedAdress);
-        $formatedAdress = str_replace([' ',',','++'], '+', $implodedAdress);
-
-        return $formatedAdress;
-    }
 
 }

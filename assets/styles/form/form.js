@@ -1,4 +1,5 @@
 // Ajax categories select
+
 $(document).on('change', '.annonce_category', function () {
     let $field = $(this)
     let $form = $field.closest('form')
@@ -17,34 +18,79 @@ $(document).on('change', '.annonce_category', function () {
     });
 })
 
-// Ajax categories select
-$(document).on('keyup', '#boutique_city', function () {
+
+// Ajax API Request for City Coordinates
+
+const postcode_input = $('#boutique_postcode');
+const city_select = $('#boutique_city');
+const coordinates_box = $('#boutique_coordinates');
+const coordinates = [];
+
+// Fill the city suggestions select using postcode
+postcode_input.on('keyup', function () {
     let $field = $(this)
-    let $form = $field.closest('form')
     let data = $field.val()
-    let search = 'postcode'
-    if (isNaN(data) ){
-        search = 'city'
+    const citySuggest = [];
+    city_select.empty();
+    let endpoint = 'https://api-adresse.data.gouv.fr/search/?q=postcode='+ data + "&limit=3";
+    if (data.length !== 5){
+        if (data.length > 5 ){
+            citySuggest.push('<option>Code postal trop long !</option>')
+        }else{
+            citySuggest.push('<option>Renseignez un code postal</option>')
+        }
+        coordinates_box.val(null);
     }
-    let endpoint = 'https://api-adresse.data.gouv.fr'
+    else {
+        $.ajax({
+            url: endpoint,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                city_select.empty();
+                const resultats = result.features
+                if (resultats.length !== 0 ){
+                    for ( let i = 0; i < resultats.length ; i++)
+                    {
+                        let city_name = resultats[i].properties.city;
+                        let li = '<option id="'+city_name+'">'+city_name+' </option>'
+                        if (!citySuggest.includes(li)){
+                            citySuggest.push(li) ;
+                        }else{
+                            li = '<option>Le code postal ne correspond pas</option>'
+                        }
+                    }
+                }else{
+                    citySuggest.push('<option>Code postal inconnu</option>')
+                }
+                city_select.append(citySuggest);
+                let coordinate = [resultats[0].geometry.coordinates[0],resultats[0].geometry.coordinates[1],resultats[0].properties.city ];
+                coordinates.length = 0;
+                coordinates.push(coordinate);
+                coordinates_box.val(coordinates)
+            }
+        })
+
+    }
+    city_select.append(citySuggest);
+})
+
+// Get the new coordinates on city's select change
+city_select.on('change', function () {
+    coordinates_box.val(null);
+    coordinates.length = 0;
+    let $field = $(this)
+    let data = $field.val()
+    let postcode = postcode_input.val()
+    console.log(data);
+    let endpoint = 'https://api-adresse.data.gouv.fr/search/?q=city=' + data + "&postcode="+postcode+"&limit=1";
     $.ajax({
-        url: endpoint + "/search/?&q="+search+"=" + data + "&limit=3",
-        contentType: "application/json",
-        dataType: 'json',
-        success: function(result){
-            let resultats = result.features
-            // console.log(resultats);
-            let resultat = resultats.filter()
-            // for ($i = 0 ; $i < resultats.length; $i++){
-            //
-            //     if (resultats[$i].properties.city === resultats[$i-1].properties.city){
-            //         resultats[$i].pop()
-            //     }
-            //     console.log(resultats[$i].properties.city)
-            // }
-            // resultats.forEach((resultat) => {
-            //     console.log(resultat.properties.city)
-            // })
+        url: endpoint,
+        success: function (result) {
+            const resultats = result.features;
+            let coordinate = [resultats[0].geometry.coordinates[0], resultats[0].geometry.coordinates[1], resultats[0].properties.city];
+            coordinates.push(coordinate);
+            coordinates_box.val(coordinates)
         }
     })
 })

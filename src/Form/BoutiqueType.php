@@ -6,7 +6,9 @@ use App\Entity\Boutique;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -64,14 +66,16 @@ class BoutiqueType extends AbstractType
                 'trim' => false,
             ])
             ->add('adresse',TextType::class,[
+                'mapped' => false,
                 'required' => false
             ])
-            ->add('code_postal',TextType::class,[
-                'required' => false
+            ->add('postcode', IntegerType::class,[
+                'mapped' => false,
+                'required' => true,
+                'label'    => 'Code Postal'
             ])
-            ->add('city',TextType::class,[
-                'required' => false,
-                'label'    => 'Ville'
+            ->add('coordinates',HiddenType::class,[
+                'mapped' => false,
             ])
         ;
     }

@@ -97,3 +97,7 @@ img{
 .title_front{
     text-align: center;
 }
+.hidden{
+    display: none;
+    height: 0px;
+}

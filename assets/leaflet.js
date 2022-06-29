@@ -2,30 +2,26 @@
 //// Carte page publique vendeur
 //////////////////////////////////
 
-    // function oneBoutiqueCard()
-    // {
-        var carte_box = document.getElementById('maCarte')
-        var city = carte_box.getAttribute('city');
-        var lon = carte_box.getAttribute('data-lon');
-        var lat = carte_box.getAttribute('data-lat');
+// function oneBoutiqueCard()
+// {
+var carte_box      = document.getElementById('boutique_coordinates')
+var boutique_title = carte_box.getAttribute('boutiqueTitle');
+var lon            = carte_box.getAttribute('data-lon');
+var lat            = carte_box.getAttribute('data-lat');
 
-        // On initialise la carte
-        var carte = L.map(carte_box).setView([lat, lon], 14);
+// On initialise la carte
+var carte = L.map(carte_box).setView([lat, lon], 14);
 
-        // On ajoute une couche (tiles)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(carte);
+// On ajoute une couche (tiles)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(carte);
 
-        var marqueur = L.marker([parseFloat(lat), parseFloat(lon)]).addTo(carte);
-        marqueur.bindPopup("<b>"+city+"</b>");
+var marqueur = L.marker([parseFloat(lat), parseFloat(lon)]).addTo(carte);
+marqueur.bindPopup("<b>"+boutique_title+"</b><br><i>Position approximative</i>");
 
-    // }
-
-    // oneBoutiqueCard()
-
-
+// }
 
 //////////////////////////////////////////////
 //// Carte homepage avec toutes les boutiques
@@ -60,7 +56,7 @@
 
 // for (ville in villes){
 // var marqueur = L.marker([parseFloat(lattitude),parseFloat(lon)]);
-    // , {icon: icone})
+// , {icon: icone})
 //     marqueur.bindPopup("<b>"+city+"</b>")
 //     marqueurs.addLayer(marqueur)
 // }

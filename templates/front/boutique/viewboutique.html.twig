@@ -30,7 +30,7 @@
 
     <section id="profile" class="wrap">
         <div class="infos_vendeur">
-            <p>{{ boutique.user.name|capitalize }} de {{ boutique.city }} |</p>
+            <p>{{ boutique.user.name|capitalize }}  |</p>
             <p>Boutique en ligne depuis le : {{ boutique.createdAt|date('d/m/Y') }}</p>
         </div>
     </section>
@@ -70,7 +70,10 @@
     {% if annonce == null and boutique.coordinates != null %}
         <section class="wrap">
             <h1 class="boutique_title">Où me trouver?</h1>
-            <div id="maCarte" style="height: 400px" data-city="{{ boutique.city }}" data-lon="{{ boutique.coordinates.lon }}" data-lat="{{ boutique.coordinates.lat}}"></div>
+        {#           A FAIRE QUAND PASSAGE A VUE
+         <button class="btn btn-primary" >Afficher la carte</button>
+{#         #}
+            <div id="boutique_coordinates" style="height: 400px" data-boutiqueTitle="{{ boutique.title }}" data-lon="{{ boutique.coordinates[0] }}" data-lat="{{ boutique.coordinates[1]}}"></div>
         </section>
     {% endif %}
 
@@ -168,7 +171,6 @@
 
     <script>
         $(document).ready(function () {
-            // oneBoutiqueCard();
             const boutton_favory =    $('.favory_button')
             boutton_favory.click( function (e) {
                 e.preventDefault();
@@ -191,4 +193,5 @@
     </script>
 
     {{ encore_entry_script_tags('flexslider') }}
+    {{ encore_entry_script_tags('leaflet') }}
 {% endblock %}
