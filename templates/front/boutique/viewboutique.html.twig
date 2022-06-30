@@ -30,7 +30,7 @@
 
     <section id="profile" class="wrap">
         <div class="infos_vendeur">
-            <p>{{ boutique.user.name|capitalize }} de {{ boutique.city }} |</p>
+            <p>{{ boutique.user.name|capitalize }}  |</p>
             <p>Boutique en ligne depuis le : {{ boutique.createdAt|date('d/m/Y') }}</p>
         </div>
     </section>
@@ -52,10 +52,14 @@
                 <a href="#avis_listing">
                  <span class="rating" data-rating="{{ globalRating }}">
                     {% for i in 1..5 %}
-                        {% if i <= globalRating %}
-                            <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                        {% if i <= globalRating|round %}
+                            {% if (i - globalRating) > 0  %}
+                                <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+                            {% else %}
+                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                            {% endif %}
                         {% else %}
-                            <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                            <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                         {% endif %}
                     {% endfor %}
                 </span>
@@ -70,14 +74,16 @@
     {% if annonce == null and boutique.coordinates != null %}
         <section class="wrap">
             <h1 class="boutique_title">Où me trouver?</h1>
-            <div id="maCarte" style="height: 400px" data-city="{{ boutique.city }}" data-lon="{{ boutique.coordinates.lon }}" data-lat="{{ boutique.coordinates.lat}}"></div>
+        {#           A FAIRE QUAND PASSAGE A VUE
+         <button class="btn btn-primary" >Afficher la carte</button>
+         #}
+            <div id="boutique_coordinates" style="height: 400px" data-boutique_title="{{ boutique.title }}" data-lon="{{ boutique.coordinates[0] }}" data-lat="{{ boutique.coordinates[1]}}"></div>
         </section>
     {% endif %}
 
     {% if annonce != null %}
         <section id="focus_annonce" class="wrap">
             <div id="annonce_card_public">
-
                 <div class="card_public">
                     <div class="content_card_public">
                         <div class="image_card_public">
@@ -93,14 +99,12 @@
                                 </div>
                                 <p><span>Prix : </span>{{ annonce.price }} €</p>
                             </div>
-
                             <div class="description_bottom">
                                 <p><span>Description : </span>{{ annonce.description }}</p>
                                 <div class="price_date">
                                     <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -128,6 +132,7 @@
         </section>
     {% endif %}
 
+    {% if boutique.annonces|length > 0 %}
     <section id="listing_annonces_public" class="wrap">
         <h1 class="boutique_title">Les annonces de {{  boutique.user.name|capitalize }}</h1>
         <ul>
@@ -157,18 +162,18 @@
             {% endfor %}
         </ul>
     </section>
+    {% endif %}
 
     {% if annonce == null %}
         {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
     {% endif %}
-
-
 {% endblock %}
-{% block javascripts %}
 
+{% block javascripts %}
+    {{ encore_entry_script_tags('flexslider') }}
+    {{ encore_entry_script_tags('leaflet') }}
     <script>
         $(document).ready(function () {
-            // oneBoutiqueCard();
             const boutton_favory =    $('.favory_button')
             boutton_favory.click( function (e) {
                 e.preventDefault();
@@ -189,6 +194,4 @@
             })
         })
     </script>
-
-    {{ encore_entry_script_tags('flexslider') }}
 {% endblock %}

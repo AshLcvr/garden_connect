@@ -46,7 +46,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/nouvelleboutique', name: 'app_boutique_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, ImagesBoutiqueRepository $imagesBoutiqueRepository, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator): Response
+    public function newBoutique(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, ImagesBoutiqueRepository $imagesBoutiqueRepository, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator): Response
     {
         $user = $this->getUser();
         $boutique = new Boutique();
@@ -54,11 +54,17 @@ class BoutiqueController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $boutique->setUser($user);
             $formatedTel =  $form->get('indicatif')->getData() . $form->get('telephone')->getData();
             $boutique->setTelephone($formatedTel);
-            $boutique->setCreatedAt(new \DateTimeImmutable());
+            $coordinates_array  = $form->get('coordinates')->getData();
+            $coordinates = explode(',',$coordinates_array);
+            $city_name = array_pop($coordinates);
+            $boutique->setCoordinates($coordinates);
+            $adress = $form->get('adresse')->getData(). ' ' .  $form->get('postcode')->getData() . ' ' . $city_name;
+            $boutique->setAdresse($adress);
             $boutique->setActif(true);
-            $boutique->setUser($user);
+            $boutique->setCreatedAt(new \DateTimeImmutable());
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
@@ -88,7 +94,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
-    public function show(): Response
+    public function detailBoutique(): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
@@ -100,20 +106,20 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
+    public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
     {
         $form = $this->createForm(BoutiqueType::class, $boutique);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($this->getUser());
-            // Récupération des coordonnées
-            $postCode = $form->get('code_postal')->getData();
-            $city = $form->get('city')->getData();
-            $adress = $form->get('adresse')->getData();
-            if(!empty($postCode) || !empty($city)){
-                $boutique->setCoordinates($this->getCoordinatesFromAPI($postCode, $city, $adress));
-            }
+            $coordinates_array  = $form->get('coordinates')->getData();
+            $coordinates = explode(',',$coordinates_array);
+            $city_name = array_pop($coordinates);
+            $boutique->setCoordinates($coordinates);
+            $adress = $form->get('adresse')->getData(). ' ' .  $form->get('postcode')->getData() . ' ' . $city_name;
+            $boutique->setAdresse($adress);
+            $boutique->setModifiedAt(new \DateTimeImmutable());
             $boutiqueRepository->add($boutique, true);
 
             $boutiqueImage = $form->get('upload')->getData();
@@ -138,16 +144,6 @@ class BoutiqueController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
             $boutiqueRepository->remove($boutique, true);
         }
-
-        return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    #[Route('/boutique/{id}', name: 'app_boutique_inactif', methods: ['GET','POST'], requirements: ['id' => '\d+'])]
-    public function setInactif(Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
-    {
-        $boutique->setActif(false);
-        $boutique->setModifiedAt(new \DateTimeImmutable());
-        $boutiqueRepository->add($boutique, true);
 
         return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
     }
@@ -199,7 +195,7 @@ class BoutiqueController extends AbstractController
             foreach ($avis as  $avi){
                 $total[] = $avi->getRating();
             }
-            $globalRating = round(array_sum($total)/$numberAvis);
+            $globalRating = array_sum($total)/$numberAvis;
         }else{
             $globalRating = 0;
         }
@@ -309,35 +305,6 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    private function getCoordinatesFromAPI($postCode, $city = null, $adress = null)
-    {
-        $coordinates = [];
-        $apiUrl = "https://api-adresse.data.gouv.fr/search/?q=";
-        if (!empty($adress)) {
-            $apiUrl .= $this->formatedAdress($adress).'&' ;
-        }
-        if (!empty($city)) {
-            $apiUrl .= 'city='.$city.'&' ;
-        }
-        $apiUrl .= 'postcode='.$postCode ;
-        $response = file_get_contents($apiUrl, false);
-        $data = json_decode($response);
-        $lon = $data->features[0]->geometry->coordinates[0];
-        $lat = $data->features[0]->geometry->coordinates[1];
-        $coordinates['lon'] = $lon;
-        $coordinates['lat'] = $lat;
 
-        return $coordinates;
-    }
-
-    private function formatedAdress($adress)
-    {
-        $utf8Adress = utf8_decode($adress);
-        $explodedAdress = explode(' ',$utf8Adress);
-        $implodedAdress = implode('+',$explodedAdress);
-        $formatedAdress = str_replace([' ',',','++'], '+', $implodedAdress);
-
-        return $formatedAdress;
-    }
 
 }

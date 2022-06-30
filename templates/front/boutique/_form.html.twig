@@ -1,15 +1,41 @@
 {% block stylesheets %}
     <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
 {% endblock %}
+{% set hidden_class = '' %}
+{% if app.request.attributes.get('_route') == 'app_boutique_new' %}
+    {% set hidden_class = 'hidden' %}
+{% endif %}
 <div class="body">
     <div class="wrap boutique_form">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+
+        <h3>Les informations de votre boutique</h3>
+        <p>Les informations de base de votre boutique</p>
+        <p>Le numéro de téléphone n'est pas obligatoire.</p>
+        <p>Si renseigné, seul les utilisateurs connectés pourront le consulter.</p><br>
+
+        <div id="form_upload" class=" bloc_form {{ hidden_class }}">
+            {{ form_label(form.upload) }}
+            <br>
+            {{ form_widget(form.upload) }}
+            <br>
+            <small>{{ form_help(form.upload) }}</small>
+            <br>
+            <div class="form-error">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="flash-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
         <div class="bloc_form">
             {{ form_label(form.title) }}
             {{ form_widget(form.title) }}
-
             <small>{{ form_help(form.title) }}</small>
-
             <div class="form-error">
                 {{ form_errors(form.title) }}
             </div>
@@ -17,9 +43,7 @@
         <div class="bloc_form">
             {{ form_label(form.description) }}
             {{ form_widget(form.description) }}
-
             <small>{{ form_help(form.description) }}</small>
-
             <div class="form-error">
                 {{ form_errors(form.description) }}
             </div>
@@ -30,9 +54,7 @@
                 <div style="width: 10%">
                     {{ form_label(form.indicatif) }}
                     {{ form_widget(form.indicatif) }}
-
                     <small>{{ form_help(form.indicatif) }}</small>
-
                     <div class="form-error">
                         {{ form_errors(form.indicatif) }}
                     </div>
@@ -41,9 +63,7 @@
                 <div style="display: none">
                     {{ form_label(form.indicatif) }}
                     {{ form_widget(form.indicatif) }}
-
                     <small>{{ form_help(form.indicatif) }}</small>
-
                     <div class="form-error">
                         {{ form_errors(form.indicatif) }}
                     </div>
@@ -53,80 +73,44 @@
             <div>
                 {{ form_label(form.telephone) }}
                 {{ form_widget(form.telephone) }}
-
                 <small>{{ form_help(form.telephone) }}</small>
-
                 <div class="form-error">
                     {{ form_errors(form.telephone) }}
                 </div>
             </div>
         </div>
 
+        <h3>Votre addresse</h3>
+        <p>Votre adresse doit être renseignée à titre indicatif.</p>
+        <p>Seule votre ville appaitra sur la carte.</p>
+        <p>Aucune de ces informations ne sera utilisée par nos services.</p><br>
+
         <div class="bloc_form">
             {{ form_label(form.adresse) }}
             {{ form_widget(form.adresse) }}
-
             <small>{{ form_help(form.adresse) }}</small>
-
             <div class="form-error">
                 {{ form_errors(form.adresse) }}
             </div>
         </div>
 
-        <div class="bloc_form">
-            {{ form_label(form.code_postal) }}
-            {{ form_widget(form.code_postal) }}
-
-            <small>{{ form_help(form.code_postal) }}</small>
-
-            <div class="form-error">
-                {{ form_errors(form.code_postal) }}
-            </div>
-        </div>
-
-        <div class="bloc_form">
-            {{ form_label(form.city) }}
-            {{ form_widget(form.city) }}
-            <input type="hidden" id="test">
-
-            <small>{{ form_help(form.city) }}</small>
-
-            <div class="form-error">
-                {{ form_errors(form.city) }}
-            </div>
-        </div>
-
-{#        <div class="bloc_form">#}
-{#            {{ form_label(form.adressIsVisible) }}  #}
-{#            {{ form_widget(form.adressIsVisible, {attr : {class :  'radio_box '}}) }}#}
-
-{#            <small>{{ form_help(form.adressIsVisible) }}</small>#}
-
-{#            <div class="form-error">#}
-{#                {{ form_errors(form.adressIsVisible) }}#}
-{#            </div>#}
-{#        </div>#}
-
-
-        {% if app.request.attributes.get('_route')  == 'app_boutique_edit' %}
+        <div class="bloc_form d-flex" style="gap: 2rem; ">
             <div class="bloc_form">
-                {{ form_label(form.upload) }}
-                <br>
-                {{ form_widget(form.upload) }}
-                <br>
-                <small>{{ form_help(form.upload) }}</small>
-                <br>
+                {{ form_label(form.postcode) }}
+                {{ form_widget(form.postcode, {attr : {style: '-moz-appearance: textfield'}}) }}
+                <small>{{ form_help(form.postcode) }}</small>
                 <div class="form-error">
-                    {% for label, messages in app.flashes %}
-                        {% for message in messages %}
-                            <div class="flash-{{ label }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
+                    {{ form_errors(form.postcode) }}
                 </div>
             </div>
-        {% endif %}
+
+            <div class="bloc_form">
+                <label class="control-label" for="boutique_city">Ville</label>
+                <select class="form-control" id="boutique_city">
+                    <option>Veuillez renseigner votre code postal</option>
+                </select>
+            </div>
+        </div>
 
         <div class="bloc_submit mb-5">
             <button class="btn btn-primary">{{ button_label|default('C\'est parti !') }}</button>

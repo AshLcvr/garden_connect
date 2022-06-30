@@ -24,7 +24,7 @@ class Boutique
     minMessage: 'Votre titre doit faire au moins {{ limit }} caractères de long',
     maxMessage: 'Votre titre doit faire au maxmium {{ limit }} caractères de long',
     )]
-    #[Assert\NotBlank(message: 'Veuillez renseigner un titre')]
+    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
     private $title;
 
     #[ORM\Column(type: 'text', nullable: true)]
@@ -47,23 +47,8 @@ class Boutique
     )]
     private $telephone;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: false)]
     private $adresse;
-
-    #[ORM\Column(type: 'string' , length: 255, nullable: true)]
-    #[Assert\Length(
-    min: 5,
-    max: 5,
-    exactMessage: 'Votre Code Postal doit comporter 5 chiffres !',
-    )]
-    #[Assert\Type(
-    type: 'integer',
-    message: 'Le code postal ne correspond pas.',
-    )]
-    private $code_postal;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $city;
 
     #[ORM\Column(type: 'datetime_immutable')]
     #[Gedmo\Timestampable(on: 'create')]
@@ -151,30 +136,6 @@ class Boutique
     public function setAdresse(?string $adresse): self
     {
         $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getCodePostal(): ?int
-    {
-        return $this->code_postal;
-    }
-
-    public function setCodePostal(int $code_postal): self
-    {
-        $this->code_postal = $code_postal;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(?string $city): self
-    {
-        $this->city = $city;
 
         return $this;
     }

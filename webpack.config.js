@@ -23,6 +23,7 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('back_boutique', './assets/back_boutique.js')
     .addEntry('flexslider', './assets/flexslider.js')
+    .addEntry('leaflet', './assets/leaflet.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

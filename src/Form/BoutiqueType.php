@@ -6,7 +6,9 @@ use App\Entity\Boutique;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -15,6 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class BoutiqueType extends AbstractType
 {
@@ -64,14 +67,27 @@ class BoutiqueType extends AbstractType
                 'trim' => false,
             ])
             ->add('adresse',TextType::class,[
-                'required' => false
-            ])
-            ->add('code_postal',TextType::class,[
-                'required' => false
-            ])
-            ->add('city',TextType::class,[
+                'mapped' => false,
                 'required' => false,
-                'label'    => 'Ville'
+                'label'  => 'N° et nom de voie',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez renseigner ce champ'
+                    ])
+                ]
+            ])
+            ->add('postcode', IntegerType::class,[
+                'mapped' => false,
+                'required' => true,
+                'label'    => 'Code Postal',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez renseigner ce champ'
+                    ])
+                ]
+            ])
+            ->add('coordinates',HiddenType::class,[
+                'mapped' => false,
             ])
         ;
     }

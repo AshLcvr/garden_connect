@@ -124,7 +124,7 @@
     font-size: .9rem;
     color: black;
 }
-
+/* Avis Boutique */
 #avis_boutique .connect-link{
     color: var(--orange);
 }
@@ -145,8 +145,15 @@
     margin-bottom: 3rem;
     padding: 1rem;
 }
+#avis_boutique .avis_form .bloc_form{
+    margin-bottom: 1rem;
+}
 #avis_boutique .avis_form textarea{
     height: 8rem;
+    resize: none;
+}
+#avis_boutique .avis_form button{
+    width: 50%;
 }
 
 @media (max-width: 800px){

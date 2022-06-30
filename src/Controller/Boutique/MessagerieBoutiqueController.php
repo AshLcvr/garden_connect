@@ -133,7 +133,7 @@ class MessagerieBoutiqueController extends AbstractController
             ],
             [
             'created_at' => 'ASC',
-            ],
+            ]
         );
         if (!empty($conversationsCorresp)) {
             foreach ($conversationsCorresp as $key => $value) {
