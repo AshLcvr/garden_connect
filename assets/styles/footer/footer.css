@@ -1,10 +1,10 @@
-footer {
+#footer {
     background-image: url("../../../public/asset/images/meadow-3375052_1920.jpg");
 }
-footer a {
+#footer a {
     color: lightgrey;
 }
-footer a:hover {
+#footer a:hover {
     color: white;
     transition: .3s;
 }
@@ -36,8 +36,9 @@ footer a:hover {
     padding: .2rem .2rem;
 }
 .brand {
+    /* border: 1px solid red; */
     color: rgb(192, 192, 192);
-    padding: .5rem 0 .3rem;
+    /* padding: .5rem 0 .3rem; */
 }
 @media all and (max-width: 850px){
     .footer_box {

@@ -65,6 +65,20 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->addImagesBoutique($imageBoutique3);
         $manager->persist($boutiqueOrianne);
 
+        // boutique des vendeurs (userFixtures)
+        for ($i = 0; $i <= 3; $i++) {
+            $boutiqueVendeur = (new Boutique())
+                ->setTitle('La boutique de vendeur_' . $i)
+                ->setDescription('La boutique qu\'elle est belle. 3 wolf moon banh mi vaporware raclette, DSA XOXO single-origin coffee chicharrones chillwave yuccie church-key vinyl small batch. Shoreditch paleo readymade narwhal pork belly four loko. Fashion axe master cleanse salvia, vexillologist flannel taxidermy swag four loko jean shorts kale chips hoodie. 3 wolf moon banh mi vaporware raclette, DSA XOXO single-origin coffee chicharrones chillwave yuccie church-key vinyl small batch.')
+                ->setCity('Beuzeville')
+                ->setTelephone('0677889933')
+                ->setUser($this->getReference('vendeur_' . $i))
+                ->setActif(1)
+                ->setCreatedAt(new \DateTimeImmutable())
+                ->addImagesBoutique($imageBoutique3);
+            $manager->persist($boutiqueVendeur);
+        }
+
         $manager->flush();
 
         $this->addReference('boutique_polo', $boutiquePolo);

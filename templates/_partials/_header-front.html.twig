@@ -3,53 +3,80 @@
         <div class="logo">
             <a href="{{ path('homepage') }}" style="flex-direction: row-reverse"><img src="{{ asset('images/logo.png') }}"/></a>
         </div>
-        <nav>
-            <ul id="ul_burger" class="ul_burger">
+        <nav class="main_nav">
+            <ul id="ul_burger" class="main_ul ul_burger">
                 {% if app.request.attributes.get('_route') == 'homepage' %}
-                    <li><a class="active" href="{{ path('homepage') }}">Accueil</a></li>
+                    <li class="main_li"><a class="active" href="{{ path('homepage') }}">Accueil</a></li>
                 {% else %}
-                    <li><a href="{{ path('homepage') }}">Accueil</a></li>
+                    <li class="main_li"><a href="{{ path('homepage') }}">Accueil</a></li>
                 {% endif %}
                 {% if app.request.attributes.get('_route')  == 'app_annonce_recherche' %}
-                    <li><a class="active" href="{{ path('app_annonce_recherche') }}">Annonces</a></li>
+                    <li class="main_li"><a class="active" href="{{ path('app_annonce_recherche') }}">Annonces</a></li>
                 {% else %}
-                    <li><a href="{{ path('app_annonce_recherche') }}">Annonces</a></li>
+                    <li class="main_li"><a href="{{ path('app_annonce_recherche') }}">Annonces</a></li>
                 {% endif %}
                 {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('app_conversation_index', {id: app.user.id}) }}">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
-                        <li><a href="{{ path('dashboard') }}">Administration</a></li>
+                        <li class="main_li"><a href="{{ path('app_conversation_index', {id: app.user.id}) }}">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('dashboard') }}">Administration</a></li>
                     {% elseif is_granted('ROLE_VENDEUR') %}
-                        {% if app.request.attributes.get('_route')  == 'app_boutique_index' %}
-                            <li><a class="active" href="{{ path('app_boutique_index') }}">Ma boutique</a></li>
-                        {% else %}
-                            <li><a href="{{ path('app_boutique_index') }}">Ma boutique</a></li>
-                        {% endif %}
-                        <li><a href="{{ path('boutique_messagerie') }}">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('boutique_messagerie') }}">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+
+                        {# Menu déroulant vendeur #}
+                        <nav class="dropdown">
+                            <div id="button_dropdown" class="button_dropdown">
+                                {# <a id="link_menu_drop" class="link_menu_drop">Click on me!</a> #}
+                                <a id="link_menu_drop" class="link_menu_drop">
+                                    {# À garder #}
+                                    {# <img src="{{ asset('uploads/profile/'~user.image) }}"> #}
+                                    {# Test #}
+                                    {# <img src="{{ asset('images/logo.png') }}"> #}
+                                    {# <img src="{{ asset('images/test-profile.png') }}"> #}
+                                    <img class="img_profile" src="{{ asset('images/default-profile-picture.jpg') }}">
+                                </a>
+                            </div>
+                            <ul id="ul_dropdown" class="ul_dropdown">
+                            {% if app.request.attributes.get('_route')  == 'app_boutique_index' %}
+                                <li class="li_dropdown"><a class="active" href="{{ path('app_boutique_index') }}">Ma boutique<span class="span_dropdown"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                            {% else %}
+                                <li class="li_dropdown"><a href="{{ path('app_boutique_index') }}">Ma boutique<span class="span_dropdown"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                            {% endif %}
+                            {# Profil vendeur back boutique #}
+                            <li class="li_dropdown"><a href="{{ path('boutique_view_profil', {id: app.user.id}) }}">Profil<span class="span_dropdown"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                            <li class="li_dropdown"><a href="{{ path('app_logout') }}">Déconnexion<span class="span_dropdown"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                            </ul>
+                        </nav>
+                        {# Fin menu déroulant vendeur #}
+
                     {% else %}
-                        <li><a href="{{ path('app_conversation_index', {id : app.user.id}) }}">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('app_conversation_index', {id : app.user.id}) }}">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+
+                    {# Menu déroulant user #}
+                        {# Profil user #}
+                        <li class="main_li"><a href="{{ path('profil', {id: app.user.id}) }}">Profil</a></li>
+                        <li class="main_li"><a href="{{ path('app_logout') }}">Déconnexion</a></li>
                     {% endif %}
-                    <li><a href="{{ path('profil') }}">Profil</a></li>
-                    <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                    {# <li><a href="{{ path('app_logout') }}">Déconnexion</a></li> #}
+                    {# Fin menu déroulant user #}
+
                 {% else %}
                     {% if app.request.attributes.get('_route')  == 'app_login' %}
                         <li><a class="active" href="{{ path('app_login') }}">Connexion</a></li>
                     {% else %}
-                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                        <li class="main_li"><a href="{{ path('app_login') }}">Connexion</a></li>
                     {% endif %}
                     {% if app.request.attributes.get('_route')  == 'app_register' %}
-                        <li><a class="active" href="{{ path('app_register') }}">Inscription</a></li>
+                        <li class="main_li"><a class="active" href="{{ path('app_register') }}">Inscription</a></li>
                     {% else %}
-                        <li><a href="{{ path('app_register') }}">Inscription</a></li>
+                        <li class="main_li"><a href="{{ path('app_register') }}">Inscription</a></li>
                     {% endif %}
                 {% endif %}
             </ul>
         </nav>
     
-
-       <a id="link_burger" href="#">
-           <span id="burger"></span>
-       </a>
-       
+        <a id="link_burger" href="#">
+            <span id="burger"></span>
+        </a>
+    
     </div>
 </header>
