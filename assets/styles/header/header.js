@@ -10,3 +10,15 @@ link_burger.addEventListener("click", function (e) {
   burger.classList.toggle("open");
   ul.classList.toggle("open");
 });
+
+// Menu dropdown connecté
+let link_dropdown = document.getElementById("link_menu_drop");
+let dropdown = document.getElementById("button_dropdown");
+let ul_drop = document.getElementById("ul_dropdown");
+
+link_dropdown.addEventListener("click", function (e) {
+  e.preventDefault();
+  dropdown.classList.toggle("open_drop");
+  ul_drop.classList.toggle("open_drop");
+})
+
