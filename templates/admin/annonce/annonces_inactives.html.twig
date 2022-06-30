@@ -1,0 +1,66 @@
+{% extends 'layout/admin_base.html.twig' %}
+
+{% block title %}Annonces Inactives{% endblock %}
+
+{% block body %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Annonces inactives</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="js-filter-pagination" id="pagination_box">
+                    {{ knp_pagination_render(annoncesInactif) }}
+                </div>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Prix</th>
+                            <th>Créée le</th>
+                            <th>Actif</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Prix</th>
+                            <th>Créée le</th>
+                            <th>Actif</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for annonce in annoncesInactif %}
+                            <tr>
+                                <th>{{ annonce.id }}</th>
+                                <th>{{ annonce.title|length > 20 ? annonce.title|striptags|slice(0, 20) ~ '...' : annonce.title }}</th>
+                                <td>{{ annonce.description|length > 20 ? annonce.description|striptags|slice(0, 20) ~ '...' : annonce.description }}</td>
+                                <td>{{ annonce.price }} €</td>
+                                <td>{{ annonce.createdAt|date('Y-m-d H:i:s') }}</td>
+                                {% if annonce.actif %}
+                                    <td>Actif</td>
+                                {% else %}
+                                    <td>Inactif</td>
+                                {% endif %}
+                                <td><a href="{{ path('details-annonce', {id: annonce.id}) }}" class="btn btn-primary">Détails</a></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Pas de données</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="js-filter-pagination" id="pagination_box">
+                    {{ knp_pagination_render(annoncesInactif) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

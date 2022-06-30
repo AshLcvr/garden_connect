@@ -4,42 +4,41 @@
 <div class="body">
     <div class="wrap boutique_form" style="text-align: center">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
-
-        <div class="bloc_form">
-            {{ form_label(form.rating) }}
-            <div class="rating" data-rating="0" style="font-size: 2rem">
-                <i class="star fa-solid fa-star" data-checked="false" data-note="1"></i>
-                <i class="star fa-solid fa-star" data-checked="false" data-note="2"></i>
-                <i class="star fa-solid fa-star" data-checked="false" data-note="3"></i>
-                <i class="star fa-solid fa-star" data-checked="false" data-note="4"></i>
-                <i class="star fa-solid fa-star" data-checked="false" data-note="5"></i>
+            <div class="bloc_form">
+                {{ form_label(form.rating) }}
+                <div class="rating" data-rating="0" style="font-size: 2rem">
+                    <i class="star fa-solid fa-star" data-checked="false" data-note="1"></i>
+                    <i class="star fa-solid fa-star" data-checked="false" data-note="2"></i>
+                    <i class="star fa-solid fa-star" data-checked="false" data-note="3"></i>
+                    <i class="star fa-solid fa-star" data-checked="false" data-note="4"></i>
+                    <i class="star fa-solid fa-star" data-checked="false" data-note="5"></i>
+                </div>
             </div>
-        </div>
 
-        <div class="bloc_form">
-            {{ form_label(form.title) }}
-            {{ form_widget(form.title) }}
+            <div class="bloc_form">
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title) }}
 
-            <small>{{ form_help(form.title) }}</small>
+                <small>{{ form_help(form.title) }}</small>
 
-            <div class="form-error"  style="text-align: center">
-                {{ form_errors(form.title) }}
+                <div class="form-error"  style="text-align: center">
+                    {{ form_errors(form.title) }}
+                </div>
             </div>
-        </div>
 
-        <div class="bloc_form">
-            {{ form_label(form.commentaire) }}
-            {{ form_widget(form.commentaire) }}
+            <div class="bloc_form">
+                {{ form_label(form.commentaire) }}
+                {{ form_widget(form.commentaire) }}
 
-            <small>{{ form_help(form.commentaire) }}</small>
+                <small>{{ form_help(form.commentaire) }}</small>
 
-            <div class="form-error" style="text-align: center">
-                {{ form_errors(form.commentaire) }}
+                <div class="form-error" style="text-align: center">
+                    {{ form_errors(form.commentaire) }}
+                </div>
             </div>
-        </div>
-        <div class="bloc_submit">
-            <button class="btn btn-primary width-100 m-t-20">{{ button_label|default('Envoyer') }}</button>
-        </div>
+            <div class="bloc_submit">
+                <button class="btn btn-primary width-100 m-t-20">{{ button_label|default('Envoyer') }}</button>
+            </div>
         {{ form_end(form) }}
     </div>
 </div>

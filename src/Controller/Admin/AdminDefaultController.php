@@ -8,6 +8,7 @@ use App\Entity\Annonce;
 use App\Entity\Boutique;
 use App\Entity\ImagesHero;
 use App\Form\ImagesHeroType;
+use App\Form\PaginationType;
 use App\Service\UploadImage;
 use App\Repository\AvisRepository;
 use App\Repository\UserRepository;
@@ -20,7 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 #[Route('/admin')]
 class AdminDefaultController extends AbstractController
@@ -98,32 +98,53 @@ class AdminDefaultController extends AbstractController
 
 
     // users
-    #[Route('/users', name: 'all-users')]
-    public function allUsers(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
+    #[Route('/users/actifs', name: 'all_users_actifs')]
+    public function allUsersActifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
+        $form = $this->createForm(PaginationType::class);
+        $form->handleRequest($request);
+
+        
         $usersActif = $userRepository->findBy([
             'actif' => true
         ]);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $form->get('pagination')->getData();
+            dd($form->get('pagination')->getData());
+            $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
+            return $this->redirectToRoute('all_users_actifs', [], Response::HTTP_SEE_OTHER);
+        }
+        else {
+            $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
+        }
+
+        return $this->render('admin/user/users_actifs.html.twig',[
+            'usersActif' => $usersActif,
+            'form' => $form
+        ]);
+    }
+    #[Route('/users/inactifs', name: 'all_users_inactifs')]
+    public function allUsersInactifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
+    {
         $usersInactif = $userRepository->findBy([
             'actif' => false
         ]);
-        
-        $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
         $usersInactif = $this->maPagination($usersInactif, $paginator, $request, 5);
 
-        return $this->render('admin/user/users.html.twig',[
-            'usersActif' => $usersActif,
+        return $this->render('admin/user/users_inactifs.html.twig',[
             'usersInactif' => $usersInactif,
         ]);
     }
-    #[Route('/user/{id}', name: 'details-user')]
+
+    #[Route('/user/details/{id}', name: 'details-user', requirements: ['id' => '\d+'])]
     public function detailsUser(User $user): Response
     {
         return $this->render('admin/user/details-user.html.twig',[
             'user' => $user,
         ]);
     }
-    #[Route('/users/active/{id}', name: 'toggle_active_user')]
+    #[Route('/users/active/{id}', name: 'toggle_active_user', requirements: ['id' => '\d+'])]
     public function toggleActiveUser(User $user, UserRepository $userRepository): Response
     {
         if ($user->isActif()) {
@@ -137,20 +158,27 @@ class AdminDefaultController extends AbstractController
 
 
     // annonces
-    #[Route('/annonce', name: 'all-annonces')]
-    public function annonce(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
+    #[Route('/annonces/actives', name: 'all_annonces_actives')]
+    public function allAnnonceActives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
     {
         $annoncesActif = $annonceRepository->findBy([
             'actif' => true
         ]);
+        $annoncesActif = $this->maPagination($annoncesActif, $paginator, $request, 5);
+
+        return $this->render('admin/annonce/annonces_actives.html.twig',[
+            'annoncesActif' => $annoncesActif
+        ]);
+    }
+    #[Route('/annonces/inactives', name: 'all_annonces_inactives')]
+    public function allAnnonceInactives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
+    {
         $annoncesInactif = $annonceRepository->findBy([
             'actif' => false
         ]);
-        $annoncesActif = $this->maPagination($annoncesActif, $paginator, $request, 5);
         $annoncesInactif = $this->maPagination($annoncesInactif, $paginator, $request, 5);
 
-        return $this->render('admin/annonce/annonces.html.twig',[
-            'annoncesActif' => $annoncesActif,
+        return $this->render('admin/annonce/annonces_inactives.html.twig',[
             'annoncesInactif' => $annoncesInactif
         ]);
     }
@@ -174,20 +202,27 @@ class AdminDefaultController extends AbstractController
     }
 
     // boutiques
-    #[Route('/boutique', name: 'all-boutiques')]
-    public function boutique(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
+    #[Route('/boutiques/actives', name: 'all_boutiques_actives')]
+    public function allBoutiquesActives(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
     {
         $boutiquesActif = $boutiqueRepository->findBy([
             'actif' => true
         ]);
+        $boutiquesActif = $this->maPagination($boutiquesActif, $paginator, $request, 5);
+
+        return $this->render('admin/boutique/boutiques_actives.html.twig',[
+            'boutiquesActif' => $boutiquesActif
+        ]);
+    }
+    #[Route('/boutiques/inactives', name: 'all_boutiques_inactives')]
+    public function allBoutiquesInactives(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
+    {
         $boutiquesInactif = $boutiqueRepository->findBy([
             'actif' => false
         ]);
-        $boutiquesActif = $this->maPagination($boutiquesActif, $paginator, $request, 5);
         $boutiquesInactif = $this->maPagination($boutiquesInactif, $paginator, $request, 5);
 
-        return $this->render('admin/boutique/boutiques.html.twig',[
-            'boutiquesActif' => $boutiquesActif,
+        return $this->render('admin/boutique/boutiques_inactives.html.twig',[
             'boutiquesInactif' => $boutiquesInactif
         ]);
     }
@@ -210,6 +245,7 @@ class AdminDefaultController extends AbstractController
         return $this->redirectToRoute('details-boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
     
+    // diapo page home
     #[Route('/hero', name: 'images_hero')]
     public function imagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, UploadImage $uploadImage): Response
     {
@@ -237,21 +273,28 @@ class AdminDefaultController extends AbstractController
         return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
     }
 
-    // boutiques
-    #[Route('/avis', name: 'all-avis')]
-    public function avis(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
+    // avis
+    #[Route('/avis/actifs', name: 'all_avis_actifs')]
+    public function allAvisActifs(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
     {
         $avisActif = $avisRepository->findBy([
             'actif' => true
         ]);
+        $avisActif = $this->maPagination($avisActif, $paginator, $request, 5);
+
+        return $this->render('admin/avis/avis_actifs.html.twig',[
+            'avisActif' => $avisActif
+        ]);
+    }
+    #[Route('/avis/inactifs', name: 'all_avis_inactifs')]
+    public function allAvisInactifs(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
+    {
         $avisInactif = $avisRepository->findBy([
             'actif' => false
         ]);
-        $avisActif = $this->maPagination($avisActif, $paginator, $request, 5);
         $avisInactif = $this->maPagination($avisInactif, $paginator, $request, 5);
 
-        return $this->render('admin/avis/avis.html.twig',[
-            'avisActif' => $avisActif,
+        return $this->render('admin/avis/avis_inactifs.html.twig',[
             'avisInactif' => $avisInactif
         ]);
     }
