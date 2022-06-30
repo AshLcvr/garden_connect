@@ -5,6 +5,9 @@
     background-color: lightgrey;
     margin-bottom: 1rem;
 }
+.largeur-nav{
+  width: 13rem!important;
+}
 .p-20{
     padding: 20px;
 }
@@ -16,7 +19,10 @@
 
 }
 .width-100{
-    width: 100%;
+    width: 100%!important;
+}
+.favory{
+  color: #F7941D;
 }
 .inline-block{
     display: inline-block;
@@ -527,5 +533,46 @@ label {
 
 .settings-popup ul li a:hover {
   background: rgba(0, 0, 0, .05);
+}
+/* */
+
+/* pagination */
+#pagination_box{
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+}
+#pagination_box .pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.35rem;
+}
+
+#pagination_box .pagination span {
+  margin-right: .5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #364e6e;
+  border: solid 1px #1f2937;
+  border-radius: 10px;
+}
+#pagination_box .pagination span:hover{
+  background-color: #1f2937;
+}
+#pagination_box .pagination .current{
+  background-color: red;
+}
+#pagination_box .pagination .current:hover{
+  background-color: red;
+}
+#pagination_box .pagination span a{
+  color: white;
+  padding: .4rem 1rem;
+  margin: auto;
 }
 /* */

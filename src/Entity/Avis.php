@@ -47,6 +47,9 @@ class Avis
     #[ORM\JoinColumn(nullable: false)]
     private $boutique;
 
+    #[ORM\Column(type: 'boolean')]
+    private $actif;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -132,6 +135,18 @@ class Avis
     public function setBoutique(?Boutique $boutique): self
     {
         $this->boutique = $boutique;
+
+        return $this;
+    }
+
+    public function isActif(): ?bool
+    {
+        return $this->actif;
+    }
+
+    public function setActif(bool $actif): self
+    {
+        $this->actif = $actif;
 
         return $this;
     }

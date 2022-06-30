@@ -135,27 +135,29 @@ class MessagerieBoutiqueController extends AbstractController
             'created_at' => 'ASC',
             ]
         );
-        foreach ($conversationsCorresp as $key => $value) {
-            if ($value->isIsRead() === false) {
-                $listing[] = $value;
-                $nbrNonlus += 1;
-                foreach ($value->getMessages() as $key => $mess) {
-                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $user->getId()) {
-                        $nbrNonlus += 1;
+        if (!empty($conversationsCorresp)) {
+            foreach ($conversationsCorresp as $key => $value) {
+                if ($value->isIsRead() === false) {
+                    $listing[] = $value;
+                    $nbrNonlus += 1;
+                    foreach ($value->getMessages() as $key => $mess) {
+                        if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $user->getId()) {
+                            $nbrNonlus += 1;
+                        }
                     }
                 }
-            }
-            else {
-                foreach ($value->getMessages() as $key => $mess) {
-                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $user->getId()) {
-                        $listing[] = $value;
-                        $nbrNonlus += 1;
+                else {
+                    foreach ($value->getMessages() as $key => $mess) {
+                        if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $user->getId()) {
+                            $listing[] = $value;
+                            $nbrNonlus += 1;
+                        }
                     }
                 }
+                $tblNbrNonlus[$value->getId()] = $nbrNonlus;
+                $nbrNonlus = 0;
             }
-            $tblNbrNonlus[$value->getId()] = $nbrNonlus;
-            $nbrNonlus = 0;
-        }
+        } 
 
         $conversationsInit = $conversationRepository->findBy(
             [
@@ -165,31 +167,41 @@ class MessagerieBoutiqueController extends AbstractController
             'created_at' => 'ASC',
             ],
         );
-        foreach ($conversationsInit as $key => $value) {
-            foreach ($value->getMessages() as $key => $mess) {
-                if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $value->getUser()->getId()) {
-                    $listing[] = $value;
-                    $nbrNonlus += 1;
+        if (!empty($conversationsInit)) {
+            foreach ($conversationsInit as $key => $value) {
+                foreach ($value->getMessages() as $key => $mess) {
+                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $value->getUser()->getId()) {
+                        $listing[] = $value;
+                        $nbrNonlus += 1;
+                    }
                 }
+                $tblNbrNonlus[$value->getId()] = $nbrNonlus;
+                $nbrNonlus = 0;
             }
-            $tblNbrNonlus[$value->getId()] = $nbrNonlus;
-            $nbrNonlus = 0;
         }
         
-        usort($listing, function(Conversation $a, Conversation $b){
-            return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
-        });
+        if (!empty($listing)) {
+            usort($listing, function(Conversation $a, Conversation $b){
+                return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
+            });
 
-        $countListing = count($listing);
+            $countListing = count($listing);
 
-        $newListing = [];
+            $newListing = [];
 
-        for ($i = 0; $i <= 8 ; $i++) { 
-            $newListing[] = $listing[$i];
+            for ($i = 0; $i <= 8 ; $i++) { 
+                $newListing[] = $listing[$i];
+            }
+            
+
+            $countNewListing = count($newListing);
+            $count = $countListing - $countNewListing;
         }
-
-        $countNewListing = count($newListing);
-        $count = $countListing - $countNewListing;
+        else{
+            $newListing = false;
+            $count = false;
+        }
+        
         
         return $this->render('_partials/_listingMessagesNonLus.html.twig', [
             'newListing' => $newListing,

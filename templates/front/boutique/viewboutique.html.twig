@@ -41,7 +41,7 @@
                 <div>
                     <h1 class="title_boutique"><a href="{{ path('view_boutique', {id: boutique.id}) }}">{{ boutique.title }}</a></h1>
                 </div>
-                {% if app.user and annonce == null and notMyboutique %}
+                {% if app.user and notMyboutique %}
                     <div class="favory_boutique">
                         <a class="favory_button {{ favory }}" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="favory_icon fa-solid fa-heart" ></i></a>
                     </div>

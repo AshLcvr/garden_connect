@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Avis;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,12 +26,12 @@ class AvisFormType extends AbstractType
             ->add('commentaire', TextareaType::class,[
                 'label' => 'Votre commentaire'
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Envoyer',
-                'attr' => [
-                    'class' => 'btn btn-primary width-100 m-t-20'
-                ]
-            ])
+            // ->add('submit', SubmitType::class, [
+            //     'label' => 'Envoyer',
+            //     'attr' => [
+            //         'class' => 'btn btn-primary width-100 m-t-20'
+            //     ]
+            // ])
         ;
     }
 

@@ -37,6 +37,9 @@
                 {{ form_errors(form.commentaire) }}
             </div>
         </div>
+        <div class="bloc_submit">
+            <button class="btn btn-primary width-100 m-t-20">{{ button_label|default('Envoyer') }}</button>
+        </div>
         {{ form_end(form) }}
     </div>
 </div>

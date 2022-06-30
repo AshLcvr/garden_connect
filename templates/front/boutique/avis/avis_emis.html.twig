@@ -4,49 +4,85 @@
 {% endblock %}
 
 {% block body %}
+<div id="container_profil">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h3 class="annonce_title" style="margin: 0">Avis émis</h3>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th>Titre</th>
-                    <th>Commentaire</th>
-                    <th>Note</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% if avis is empty %}
-                    <tr>
-                        <td colspan="6">
-                            Pas (encore) d'avis !
-                        </td>
-                    </tr>
-                {% endif %}
-                {% for avi in avis %}
-                    <tr>
-                        <td>{{ (avi.title)? avi.title : '<i>Pas de titre</i>' }}</td>
-                        <td>{{ (avi.commentaire)? avi.commentaire : '<i>Pas de commentaire</i>' }}</td>
-                        <td>
-                            {% for i in 1..5 %}
-                                {% if i <= avi.rating %}
-                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+    
+    <div class="container_avis">
+        {% if mesAvis %}
+            <ul>
+                {% for avi in mesAvis %}
+                    <li>
+                        <div class="block_avis">
+                            <div>
+                                {% if avi.user.image %}
+                                    <img src="{{ asset('uploads/profile/')~avi.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
                                 {% else %}
-                                    <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                    <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
                                 {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td class="table_actions" >
-                            <a title="Modifier l'avis" class="btn btn-primary" href="{{ path('app_avis_edit', {'id' : avi.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <span title="Supprimer l'avis">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
-                        </td>
-                    </tr>
+                                <span style="margin: auto .5rem">{{ avi.user.name|capitalize }}</span>
+                            </div>
+                            <div>
+                                {% for i in 1..5 %}
+                                    {% if i <= avi.rating %}
+                                        <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                    {% else %}
+                                        <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                    {% endif %}
+                                {% endfor %}
+                                <span>{{ avi.title }}</span>
+                            </div>
+                            <div><i>Avis émis le {{ avi.createdAt|date('d m Y')  }}</i> </div>
+                            <div> {{ avi.commentaire  }} </div>
+                            <div>
+                                <a class="btn btn-primary" href="{{ path('app_avis_edit', {id: avi.id}) }}">Modifier mon commentaire</a>
+                                <span title="Supprimer l'avis">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
+                            </div>
+                        </div>
+                        <div class="separator"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="block_boutique">
+                            <div>
+                                {% if avi.boutique.user.image %}
+                                    <img src="{{ asset('uploads/profile/')~avi.boutique.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                                {% else %}
+                                    <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                                {% endif %}
+                                <span style="margin: auto .5rem">{{ avi.boutique.user.name|capitalize }}</span>
+                            </div>
+                            <p>{{ avi.boutique.title }}</p>
+                            <p>Boutique en ligne depuis le : {{ avi.boutique.createdAt|date('d/m/Y') }}</p>
+                            <div>
+                                {% for key, globalRating in totalGlobalRating %}
+                                    {% if key == avi.boutique.id %}
+                                        <span class="rating" data-rating="{{ globalRating }}">
+                                            {% for i in 1..5 %}
+                                                {% if i <= globalRating %}
+                                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                                {% else %}
+                                                    <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </span>
+                                        {% for key, nbr in totalNumberAvis %}
+                                            {% if key == avi.boutique.id %}
+                                                <span>({{ nbr }} avis)</span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <a class="btn btn-primary" href="{{ path('view_boutique', {id: avi.boutique.id}) }}">Voir la boutique</a>
+                        </div>
+                    </li>
                 {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            </ul>
+            <div class="js-filter-pagination" id="pagination_box">
+                {{ knp_pagination_render(mesAvis) }}
+            </div>
+        {% else %}
+            <h1>Vous n'avez pas émis d'avis.</h1>        
+        {% endif %}
     </div>
+</div>
 {% endblock %}

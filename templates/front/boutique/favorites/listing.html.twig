@@ -4,37 +4,56 @@
 {% endblock %}
 
 {% block body %}
+<div id="container_profil">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h3 class="annonce_title" style="margin: 0">Mes boutiques favorites</h3>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th>Titre de la boutique</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% if favorites is empty %}
-                    <tr>
-                        <td colspan="6">
-                            Pas (encore) de boutiques favorites !
-                        </td>
-                    </tr>
-                {% endif %}
-                {% for favory in favorites %}
-                    <tr>
-                        <td>{{ favory.boutique.title }}</td>
-                        <td>
-                            <a class="btn btn-primary" title="Voir la boutique" href="{{ path('view_boutique', {id : favory.boutique.id}) }}"><i class="fa-solid fa-arrow-right"></i></a>
-                            <a class="btn btn-danger" title="Retirer des favoris" href="{{ path('app_remove_favory', {id : favory.boutique.id}) }}"><i class="fa-solid fa-xmark"></i></a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+    <div class="container_favory">
+        <ul>
+            {% for fav in favories %}
+                <li>
+                    <div class="block_favory">
+                        <div>
+                            {% if fav.boutique.user.image %}
+                                <img src="{{ asset('uploads/profile/')~fav.boutique.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                            {% else %}
+                                <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                            {% endif %}
+                            <span style="margin: auto .5rem">{{ fav.boutique.user.name|capitalize }}</span>
+                        </div>
+                        <h3>{{ fav.boutique.title }}</h3>
+                        <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
+                        <div>
+                            {% for key, globalRating in totalGlobalRating %}
+                                {% if key == fav.boutique.id %}
+                                    <span class="rating" data-rating="{{ globalRating }}">
+                                        {% for i in 1..5 %}
+                                            {% if i <= globalRating %}
+                                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                            {% else %}
+                                                <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                    {% for key, nbr in totalNumberAvis %}
+                                        {% if key == fav.boutique.id %}
+                                            <span>({{ nbr }} avis)</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <a class="btn btn-primary" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
+                            <span title="Retirer des favoris">{{ include('front/boutique/favorites/_delete_form.html.twig') }}</span>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="js-filter-pagination" id="pagination_box">
+            {{ knp_pagination_render(favories) }}
         </div>
     </div>
+</div>
 {% endblock %}

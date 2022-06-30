@@ -1,59 +1,65 @@
+/* avis */
 #container_profil{
     background-color: #f8f9fc;
 }
-.sidenav{
-    background-color: var(--vertclair);
-    padding: 1rem;
-    width: 20%;
-}
-.sidenav ul {
-    display: flex;
-    flex-flow: column;
-    gap: 1rem;
-}
-.sidenav ul li a{
-    color: white;
-    padding: 0.5rem;
-    border-radius: 6px;
-    transition: all 0.4s;
-}
-.sidenav ul li a:hover{
-    background-color: var(--vertfonce);
-}
-.container_profil{
-    padding: 1.5rem;
+#container_profil .container_profil{
+    padding: 0.75rem;
     width: 100%;
     color: #858796;
 }
-.container_avis{
+#container_profil .container_avis{
     background-color: white;
+    padding: 0.75rem;
 }
-.container_avis ul li{
+#container_profil .container_avis ul li{
     padding: 0.5rem;
     box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69 / 15%) !important;
     border: 1px solid #e3e6f0;
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
-    position: relative;
 }
-.container_avis ul li .block_avis{
+#container_profil .container_avis ul li .block_avis{
     width: 40%;
     display: flex;
     flex-flow: column;
     gap: 0.8rem;
 }
-.container_avis ul li .separator{
+#container_profil .container_avis ul li .separator{
     margin:auto;
     font-size:2rem;
     color:var(--vertclair);
 }
-.container_avis ul li .block_boutique{
+#container_profil .container_avis ul li .block_boutique{
     width: 40%;
     display: flex;
     flex-flow: column;
     gap: 0.8rem;
+    justify-content: space-between;
 }
-.container_avis ul li .block_boutique p{
+#container_profil .container_avis ul li .block_boutique p{
     margin: 0;
+}
+
+/* favory */
+#container_profil .container_favory ul{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+#container_profil .container_favory ul li{
+    width: 45%;
+    padding: 0.5rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69 / 15%) !important;
+    border: 1px solid #e3e6f0;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+#container_profil .container_favory ul li .block_favory{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    gap: 0.8rem;
 }

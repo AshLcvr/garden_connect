@@ -25,7 +25,8 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setRating(5)
             ->setUser($this->getReference('sacha'))
             ->setBoutique($this->getReference('boutique_orianne'))
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setActif(true);
         $manager->persist($avis1);
 
 
@@ -35,8 +36,36 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setRating(4)
             ->setUser($this->getReference('polo'))
             ->setBoutique($this->getReference('boutique_orianne'))
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setActif(true);
         $manager->persist($avis2);
+        $avis4 = (new Avis())
+            ->setTitle('Pas mal ..')
+            ->setCommentaire('Bon produit mais j\'ai été malade le lendemain')
+            ->setRating(4)
+            ->setUser($this->getReference('polo'))
+            ->setBoutique($this->getReference('boutique_sacha'))
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setActif(true);
+        $manager->persist($avis4);
+        $avis5 = (new Avis())
+            ->setTitle('super mal ..')
+            ->setCommentaire('Bon produit mais j\'ai été malade le lendemain')
+            ->setRating(4)
+            ->setUser($this->getReference('polo'))
+            ->setBoutique($this->getReference('boutique_sacha'))
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setActif(true);
+        $manager->persist($avis5);
+        $avis6 = (new Avis())
+            ->setTitle('super mal dede ..')
+            ->setCommentaire('Bon produit mais j\'ai été malade le lendemain')
+            ->setRating(4)
+            ->setUser($this->getReference('polo'))
+            ->setBoutique($this->getReference('boutique_sacha'))
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setActif(true);
+        $manager->persist($avis6);
 
 
         $avis3 = (new Avis())
@@ -45,7 +74,8 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setRating(3)
             ->setUser($this->getReference('vendeur_1'))
             ->setBoutique($this->getReference('boutique_orianne'))
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setActif(true);
         $manager->persist($avis3);
 
 
@@ -55,7 +85,8 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setRating(2)
             ->setUser($this->getReference('vendeur_2'))
             ->setBoutique($this->getReference('boutique_orianne'))
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setActif(true);
         $manager->persist($avis4);
 
 

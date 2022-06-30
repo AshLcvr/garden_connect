@@ -138,7 +138,7 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique/{id}', name: 'app_boutique_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[Route('/boutique-delete/{id}', name: 'app_boutique_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function delete(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
@@ -161,7 +161,7 @@ class BoutiqueController extends AbstractController
         return $this->redirectToRoute('app_boutique_detail', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/viewboutique/{id}', name: 'view_boutique')]
+    #[Route('/boutique/public/{id}', name: 'view_boutique')]
     public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository, AvisRepository $avisRepository, Request $request, FavoryRepository $favoryRepository)
     {
         $user = $this->getUser();
@@ -231,8 +231,8 @@ class BoutiqueController extends AbstractController
         );
     }
 
-    #[Route('/viewboutique/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
-    public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique, $id_annonce)
+    #[Route('/boutique/public/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
+    public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique,FavoryRepository $favoryRepository, $id_annonce)
     {
         $user = $this->getUser();
         $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
@@ -250,13 +250,21 @@ class BoutiqueController extends AbstractController
             $annonce = $annonceRepository->find($id_annonce);
         }
 
+        // Favoris
+        $favory = '';
+        $alreadyFavory = $favoryRepository->findOneBy(['user'=> $this->getUser(), 'boutique' => $boutique]);
+        if (!empty($alreadyFavory)){
+            $favory = 'favory_active';
+        }
+
         return $this->render(
             'front/boutique/viewboutique.html.twig',
             [
                 'annonce' => $annonce,
                 'annonces' => $annonces,
                 'boutique' => $boutique,
-                'notMyboutique' => $notMyboutique
+                'notMyboutique' => $notMyboutique,
+                'favory' => $favory
             ]
         );
     }
