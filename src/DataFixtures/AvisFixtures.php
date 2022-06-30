@@ -26,7 +26,7 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setUser($this->getReference('sacha'))
             ->setBoutique($this->getReference('boutique_orianne'))
             ->setCreatedAt(new \DateTimeImmutable())
-            ->setActif(true);
+            ->setActif(1);
         $manager->persist($avis1);
 
 
@@ -37,7 +37,7 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setUser($this->getReference('polo'))
             ->setBoutique($this->getReference('boutique_orianne'))
             ->setCreatedAt(new \DateTimeImmutable())
-            ->setActif(true);
+            ->setActif(1);
         $manager->persist($avis2);
         $avis4 = (new Avis())
             ->setTitle('Pas mal ..')
@@ -46,7 +46,7 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setUser($this->getReference('polo'))
             ->setBoutique($this->getReference('boutique_sacha'))
             ->setCreatedAt(new \DateTimeImmutable())
-            ->setActif(true);
+            ->setActif(1);
         $manager->persist($avis4);
         $avis5 = (new Avis())
             ->setTitle('super mal ..')
@@ -55,7 +55,7 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setUser($this->getReference('polo'))
             ->setBoutique($this->getReference('boutique_sacha'))
             ->setCreatedAt(new \DateTimeImmutable())
-            ->setActif(true);
+            ->setActif(1);
         $manager->persist($avis5);
         $avis6 = (new Avis())
             ->setTitle('super mal dede ..')
@@ -64,7 +64,7 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setUser($this->getReference('polo'))
             ->setBoutique($this->getReference('boutique_sacha'))
             ->setCreatedAt(new \DateTimeImmutable())
-            ->setActif(true);
+            ->setActif(1);
         $manager->persist($avis6);
 
 
@@ -75,7 +75,7 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setUser($this->getReference('vendeur_1'))
             ->setBoutique($this->getReference('boutique_orianne'))
             ->setCreatedAt(new \DateTimeImmutable())
-            ->setActif(true);
+            ->setActif(1);
         $manager->persist($avis3);
 
 
@@ -86,7 +86,7 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setUser($this->getReference('vendeur_2'))
             ->setBoutique($this->getReference('boutique_orianne'))
             ->setCreatedAt(new \DateTimeImmutable())
-            ->setActif(true);
+            ->setActif(1);
         $manager->persist($avis4);
 
 
