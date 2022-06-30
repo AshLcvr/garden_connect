@@ -29,10 +29,10 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use function Symfony\Bundle\FrameworkBundle\Controller\createForm;
 use function Symfony\Config\em;
 
-//#[Route('/boutique')]
+#[Route('/boutique')]
 class BoutiqueController extends AbstractController
 {
-    #[Route('/boutique/', name: 'app_boutique_index', methods: ['GET'])]
+    #[Route('/', name: 'app_boutique_index', methods: ['GET'])]
     public function indexBoutique(BoutiqueRepository $boutiqueRepository): Response
     {
         $user = $this->getUser();
@@ -93,7 +93,7 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
+    #[Route('/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
     public function detailBoutique(): Response
     {
         $user = $this->getUser();
@@ -105,7 +105,7 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
     public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
     {
         $form = $this->createForm(BoutiqueType::class, $boutique);
@@ -161,7 +161,7 @@ class BoutiqueController extends AbstractController
         return $this->redirectToRoute('app_boutique_detail', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/boutique/public/{id}', name: 'view_boutique')]
+    #[Route('/public/{id}', name: 'view_boutique')]
     public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository, AvisRepository $avisRepository, Request $request, FavoryRepository $favoryRepository)
     {
         $user = $this->getUser();
@@ -231,7 +231,7 @@ class BoutiqueController extends AbstractController
         );
     }
 
-    #[Route('/boutique/public/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
+    #[Route('/public/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
     public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique,FavoryRepository $favoryRepository, $id_annonce)
     {
         $user = $this->getUser();
@@ -269,9 +269,10 @@ class BoutiqueController extends AbstractController
         );
     }
 
-    #[Route('/viewprofil/{id}', name: 'boutique_view_profil', methods: ['GET', 'POST'])]
-    public function viewProfile(User $user, TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
+    #[Route('/viewprofil', name: 'boutique_view_profil', methods: ['GET', 'POST'])]
+    public function viewProfile(TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
     {
+        $user = $this->getUser();
         $token = $tokenGenerator->generateToken();
         $user->setToken($token);
         $userRepository->add($user, true);
@@ -284,9 +285,10 @@ class BoutiqueController extends AbstractController
         );
     }
 
-    #[Route('/boutique/edit/profil/{id}', name: 'boutique_edit_profil', methods: ['GET', 'POST'])]
-    public function editProfil(Request $request, User $user, UserRepository $userRepository, UploadImage $uploadImage)
+    #[Route('/edit/profil', name: 'boutique_edit_profil', methods: ['GET', 'POST'])]
+    public function editProfil(Request $request, UserRepository $userRepository, UploadImage $uploadImage)
     {
+        $user = $this->getUser();
         $form = $this->createForm(EditProfilType::class, $user);
         $form->handleRequest($request);
 
@@ -304,7 +306,4 @@ class BoutiqueController extends AbstractController
             'form' => $form,
         ]);
     }
-
-
-
 }

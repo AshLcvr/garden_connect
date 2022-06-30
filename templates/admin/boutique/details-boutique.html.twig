@@ -13,16 +13,15 @@
             <p><span>Description : </span>{{ boutique.description }}</p>
             <p><span>Téléphone : </span>{{ boutique.telephone }}</p>
             <p><span>Adresse : </span>{{ boutique.adresse }}</p>
-            <p><span>Code postal : </span>{{ boutique.codePostal }}</p>
             <p><span>Mis en ligne le : </span>{{ boutique.createdAt|date('d/m/Y') }}</p>
             {% if boutique.actif %}
                 <p><span>Status : </span>Actif</p>
                 <div>
-                    <a href="{{ path('disable-boutique', {id: boutique.id}) }}" class="action">Rendre inactif</a>
+                    <a href="{{ path('toggle_active_boutique', {id: boutique.id}) }}" class="action">Rendre inactif</a>
             {% else %}
                 <p><span>Status : </span>Inactif</p>
                 <div>
-                    <a href="{{ path('active-boutique', {id: boutique.id}) }}" class="action">Rendre actif</a>
+                    <a href="{{ path('toggle_active_boutique', {id: boutique.id}) }}" class="action">Rendre actif</a>
             {% endif %}
                 <a href="{{ path('new_conversation_with_id_boutique', {id: boutique.user.id, id_boutique: boutique.id}) }}" class="action">Demander une modification</a>
                 <a href="{{ path('details-user', {id: boutique.user.id}) }}" class="action">Voir l'utilisateur</a>

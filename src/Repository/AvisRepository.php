@@ -39,6 +39,16 @@ class AvisRepository extends ServiceEntityRepository
         }
     }
 
+    public function newAvis($value1): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.created_at > :val1')
+            ->setParameter('val1', $value1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Avis[] Returns an array of Avis objects
 //     */

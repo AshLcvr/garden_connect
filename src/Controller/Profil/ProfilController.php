@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Profil;
 
 use App\Entity\Avis;
 use App\Entity\User;
@@ -11,33 +11,32 @@ use App\Service\UploadImage;
 use App\Repository\AvisRepository;
 use App\Repository\UserRepository;
 use App\Repository\FavoryRepository;
-use App\Repository\MessageRepository;
-use App\Repository\ConversationRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
+#[Route('/profil')]
 class ProfilController extends AbstractController
 {
-    #[Route('/mention-legale', name: 'mention_legale')]
-    public function mentionLegale(): Response
-    {
-        return $this->render('front/mention.html.twig');
-    }
-
-    #[Route('/profil', name: 'profil')]
-    public function profil()
+    #[Route('/', name: 'profil')]
+    public function profil(TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
     {
         $user = $this->getUser();
+        $token = $tokenGenerator->generateToken();
+        $user->setToken($token);
+        $userRepository->add($user, true);
+        
         return $this->render('front/profil/profil.html.twig', [
             'user' => $user
         ]);
     }
-    #[Route('/profil/{id}', name: 'edit_profil', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function editProfil(Request $request, User $user, UserRepository $userRepository, UploadImage $uploadImage)
+    #[Route('/edit', name: 'edit_profil', methods: ['GET', 'POST'])]
+    public function editProfil(Request $request, UserRepository $userRepository, UploadImage $uploadImage)
     {
+        $user = $this->getUser();
         $form = $this->createForm(EditProfilType::class, $user);
         $form->handleRequest($request);
 
@@ -56,7 +55,7 @@ class ProfilController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/profil/avis', name: 'profil_avis')]
+    #[Route('/avis', name: 'profil_avis')]
     public function avis_profil(Request $request, PaginatorInterface $paginator)
     {
         $user = $this->getUser();
@@ -85,11 +84,8 @@ class ProfilController extends AbstractController
         usort($mesAvis, function(Avis $a, Avis $b){
             return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
         });
-        $mesAvis = $paginator->paginate(
-            $mesAvis, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            2 // Nombre de résultats par page
-        );
+        $mesAvis = $this->maPagination($mesAvis, $paginator, $request, 5);
+
         return $this->render('front/profil/avis/avis.html.twig', [
             'user' => $user,
             'mesAvis' => $mesAvis,
@@ -97,7 +93,7 @@ class ProfilController extends AbstractController
             'totalNumberAvis' => $totalNumberAvis
         ]);
     }
-    #[Route('/profil/avis/{id}', name: 'profil_avis_edit')]
+    #[Route('/avis/{id}', name: 'profil_avis_edit')]
     public function edit_avis(Request $request, Avis $avis, AvisRepository $avisRepository)
     {
         $form = $this->createForm(AvisFormType::class, $avis);
@@ -115,7 +111,7 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    #[Route('/profil/avis-delete/{id}', name: 'profil_avis_delete', methods: ['POST'])]
+    #[Route('/avis-delete/{id}', name: 'profil_avis_delete', methods: ['POST'])]
     public function delete_avis(Request $request, Avis $avi, AvisRepository $avisRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$avi->getId(), $request->request->get('_token'))) {
@@ -125,7 +121,7 @@ class ProfilController extends AbstractController
         return $this->redirectToRoute('profil_avis', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/profil/favory', name: 'profil_favory')]
+    #[Route('/favory', name: 'profil_favory')]
     public function profil_favory(Request $request, PaginatorInterface $paginator): Response
     {
         $favories = $this->getUser()->getFavories();
@@ -151,11 +147,7 @@ class ProfilController extends AbstractController
         }else{
             $totalGlobalRating = 0;
         }
-        $favories = $paginator->paginate(
-            $favories, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            5 // Nombre de résultats par page
-        );
+        $favories = $this->maPagination($favories, $paginator, $request, 5);
 
         return $this->renderForm('front/profil/favories/favories.html.twig', [
             'favories' => $favories,
@@ -163,7 +155,7 @@ class ProfilController extends AbstractController
             'totalNumberAvis' => $totalNumberAvis
         ]);
     }
-    #[Route('/profil/favory/{id}', name: 'profil_favory_delete', methods: ['POST'])]
+    #[Route('/favory/{id}', name: 'profil_favory_delete', methods: ['POST'])]
     public function delete_favory(Request $request, Favory $favory, FavoryRepository $favoryRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$favory->getId(), $request->request->get('_token'))) {

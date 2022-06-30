@@ -14,7 +14,6 @@
                     <th scope="col" class="px-6 py-3">Description</th>
                     <th scope="col" class="px-6 py-3">Téléphone</th>
                     <th scope="col" class="px-6 py-3">Adresse</th>
-                    <th scope="col" class="px-6 py-3">Code Postal</th>
                     <th scope="col" class="px-6 py-3">Créée le :</th>
                     <th scope="col" class="px-6 py-3">Actif</th>
                     <th scope="col" class="px-6 py-3">Action</th>
@@ -28,7 +27,6 @@
                     <td class="px-6 py-4">{{ boutique.description | striptags | slice(0, 65) }}</td>
                     <td class="px-6 py-4">{{ boutique.telephone }}</td>
                     <td class="px-6 py-4">{{ boutique.adresse }}</td>
-                    <td class="px-6 py-4">{{ boutique.codePostal }}</td>
                     <td class="px-6 py-4">{{ boutique.createdAt|date('Y-m-d H:i:s') }}</td>
                     {% if boutique.actif %}
                         <td class="px-6 py-4">Actif</td>
@@ -58,7 +56,6 @@
                     <th scope="col" class="px-6 py-3">Description</th>
                     <th scope="col" class="px-6 py-3">Téléphone</th>
                     <th scope="col" class="px-6 py-3">Adresse</th>
-                    <th scope="col" class="px-6 py-3">Code Postal</th>
                     <th scope="col" class="px-6 py-3">Créée le :</th>
                     <th scope="col" class="px-6 py-3">Actif</th>
                     <th scope="col" class="px-6 py-3"><span class="sr-only">Action</span></th>
@@ -72,7 +69,6 @@
                     <td class="px-6 py-4">{{ boutique.description | striptags | slice(0, 65) }}</td>
                     <td class="px-6 py-4">{{ boutique.telephone }}</td>
                     <td class="px-6 py-4">{{ boutique.adresse }}</td>
-                    <td class="px-6 py-4">{{ boutique.codePostal }}</td>
                     <td class="px-6 py-4">{{ boutique.createdAt|date('Y-m-d H:i:s') }}</td>
                     {% if boutique.actif %}
                         <td class="px-6 py-4">Actif</td>

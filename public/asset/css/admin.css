@@ -2,8 +2,9 @@
     text-align: center;
     padding: 1.5rem;
     font-family: 'Unkempt';
-    background-color: lightgrey;
     margin-bottom: 1rem;
+    border-bottom: 2px solid #1f2937 !important;
+    color: #1F2937;
 }
 .largeur-nav{
   width: 13rem!important;
@@ -58,6 +59,23 @@
 }
 .row-wrap{
     flex-flow: row wrap;
+}
+.bg-gradient-primary {
+  background-image: linear-gradient(90deg, #1f2937 10%, #1f2937 100%);
+} 
+.bg-gradient-secondary {
+  background-image: linear-gradient(90deg, #1f2937 10%, #1f2937 100%);
+  background-size: cover;
+}
+#sidebarToggleTop {
+  display: none;
+}
+@media (max-width: 767px){
+  #sidebarToggleTop {
+      background-color: #eaecf4;
+      display: block;
+  }
+
 }
 
 /* card annonce */

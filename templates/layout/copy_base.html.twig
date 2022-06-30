@@ -5,13 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {% block title %}
-        <title>Gestion de ma boutique</title>
+        <title>Administration</title>
         {% endblock %}
         <link rel="icon" href="{{ asset('images/logo-sans-fond.png') }}" >
         <link rel="stylesheet" href="//use.fontawesome.com/releases/v6.0.0/css/all.css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
-        {{ encore_entry_link_tags('back_boutique') }}
+        <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}" type="text/css">
         {% block stylesheets %}
         {% endblock %}
     </head>
@@ -20,15 +20,9 @@
         <div id="wrapper">
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
                 <li style="margin: 0" class="">
-                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#"></a>
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ path('test') }}"><i class="fa-solid fa-hammer"></i><span>Tableau de bord</span></a>
                 </li>
                 <hr class="sidebar-divider my-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path ('app_boutique_index') }}">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Espace Boutique</span>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('homepage') }}">
                         <i class="fa-solid fa-arrow-left"></i>
@@ -36,53 +30,68 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_listing_favory') }}">
-                        <i class="fa-solid fa-heart"></i>
-                        <span>Boutiques Favorites</span>
+                    <a class="nav-link" href="{{ path('images_hero') }}">
+                        <i class="fa-solid fa-image"></i>
+                        <span>Diaporama page home</span>
                     </a>
                 </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">
-                    Interface
+                    Modération
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce"
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilisateur"
                        aria-expanded="true" aria-controls="collapseUtilities" >
-                        <i class="fa-solid fa-basket-shopping"></i>
-                        <span>Mes annonces</span>
+                        <i class="fa-solid fa-users"></i>
+                        <span>Utilisateurs</span>
+                    </a>
+                    <div id="collapseUtilisateur" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('all-users') }}">Utilisateurs actifs</a>
+                            <a class="collapse-item" href="{{ path('all-users') }}">Utilisateurs inactifs</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoutique"
+                       aria-expanded="true" aria-controls="collapseUtilities" >
+                        <i class="fa-solid fa-shop"></i>
+                        <span>Boutiques</span>
+                    </a>
+                    <div id="collapseBoutique" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('all-boutiques') }}">Boutiques actives</a>
+                            <a class="collapse-item" href="{{ path('all-boutiques') }}">Boutiques inactives</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAnnonce"
+                       aria-expanded="true" aria-controls="collapseUtilities" >
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        <span>Annonces</span>
                     </a>
                     <div id="collapseAnnonce" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{ path('app_annonce_new') }}">Ajouter une annonce</a>
-                            <a class="collapse-item" href="{{ path('app_annonce_index') }}">Gérer mes annonces</a>
+                            <a class="collapse-item" href="{{ path('all-annonces') }}">Annonce actives</a>
+                            <a class="collapse-item" href="{{ path('all-annonces') }}">Annonces inactives</a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAvis"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-comment"></i>
                         <span>Mes avis</span>
                     </a>
                     <div id="collapseAvis" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{ path('app_avis_received') }}">Avis reçus</a>
-                            <a class="collapse-item" href="{{ path('app_avis_sent') }}">Avis émis</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseParam"  aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fa-solid fa-sliders"></i>
-                        <span>Gérer ma boutique</span>
-                    </a>
-                    <div id="collapseParam" class="collapse" aria-labelledby="headingUtilities"
-                         data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{ path('app_boutique_detail') }}">Informations boutique</a>
-                            <a class="collapse-item" href="#">Mes préférences</a>
+                            <a class="collapse-item" href="{{ path('all-avis') }}">Avis actifs</a>
+                            <a class="collapse-item" href="{{ path('all-avis') }}">Avis inactifs</a>
                         </div>
                     </div>
                 </li>
@@ -133,7 +142,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {% block user_avatar %}
-                                        {# <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span style="color: white">Bonjour {{app.user.name}}</span></span> #}
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span style="color: white">Bonjour {{app.user.name}}</span></span>
                                         {% if app.user.image %}
                                         <img class="img-profile rounded-circle" src="{{ asset('uploads/profile/'~app.user.image) }}">
                                         {% else %}
@@ -143,7 +152,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="{{ path('boutique_view_profil') }}">
+                                    <a class="dropdown-item" href="{{ path('boutique_view_profil', {id : app.user.id}) }}">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Mon profil
                                     </a>
@@ -163,8 +172,6 @@
                 </div>
             </div>
         </div>
-
-        {%  include '_partials/_footer-front.html.twig' %}
 
         <script src="{{ asset('bootstrap/vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

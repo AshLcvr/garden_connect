@@ -26,4 +26,14 @@ class DefaultController extends AbstractController
             'user' => $user
         ]);
     }
+    #[Route('/mention-legale', name: 'mention_legale')]
+    public function mentionLegale(): Response
+    {
+        return $this->render('front/mention.html.twig');
+    }
+    #[Route('/test', name: 'test')]
+    public function test(): Response
+    {
+        return $this->render('front/test.html.twig');
+    }
 }

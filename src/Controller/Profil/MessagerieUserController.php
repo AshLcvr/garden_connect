@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Controller;
+namespace App\Controller\Profil;
 
 use App\Entity\Message;
 use App\Form\MessageType;
@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/profil')]
 class MessagerieUserController extends AbstractController
 {
     #[Route('/user/messagerie', name: 'user_messagerie')]

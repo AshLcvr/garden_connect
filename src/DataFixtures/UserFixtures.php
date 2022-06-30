@@ -81,7 +81,7 @@ class UserFixtures extends Fixture
             $user->setSurname('vendeurSur'.$i);
             $user->isIsVerified();
             $user->setEmail('vendeur_'.$i.'@gmail.com');
-            $user->setRoles(['ROLE_USER','ROLE_VENDEUR']);
+            $user->setRoles(['ROLE_VENDEUR']);
             $user->setActif(true);
             $user->setCreatedAt(new \DateTimeImmutable());
             $password = $this->hasher->hashPassword($user, 'vendeur_'.$i);

@@ -7,19 +7,21 @@ use App\Entity\Message;
 use App\Form\MessageType;
 use App\Entity\Conversation;
 use App\Form\ConversationType;
+use App\Repository\UserRepository;
 use App\Repository\MessageRepository;
 use App\Repository\ConversationRepository;
-use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/boutique')]
 class MessagerieBoutiqueController extends AbstractController
 {
 
-    #[Route('/boutique/messagerie', name: 'boutique_messagerie')]
-    public function boutiqueMessagerie()
+    #[Route('/messagerie', name: 'boutique_messagerie')]
+    public function boutiqueMessagerie(Request $request, PaginatorInterface $paginator)
     {
         $user = $this->getUser();
         $conversationsCorresp = $user->getConversationsCorresp();
@@ -52,6 +54,7 @@ class MessagerieBoutiqueController extends AbstractController
             $tblNbrNonlus[$value->getId()] = $nbrNonlus;
             $nbrNonlus = 0;
         }
+        $conversations = $this->maPagination($conversations, $paginator, $request, 5);
 
         return $this->renderForm('front/boutique/messagerie/index.html.twig', [
             'conversations' => $conversations,
@@ -59,7 +62,7 @@ class MessagerieBoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique/messagerie/new-conversation/{id}', name: 'boutique_messagerie_new_conversation')]
+    #[Route('/messagerie/new-conversation/{id}', name: 'boutique_messagerie_new_conversation')]
     public function newConversation(Request $request, ConversationRepository $conversationRepository, User $user): Response
     {
         $conversation = new Conversation();
@@ -82,7 +85,7 @@ class MessagerieBoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique/messagerie/message/{id}', name: 'boutique_messagerie_message')]
+    #[Route('/messagerie/message/{id}', name: 'boutique_messagerie_message')]
     public function newMessage(Request $request, MessageRepository $messageRepository, Conversation $conversation, ConversationRepository $conversationRepository): Response
     {
         $message = new Message();

@@ -24,11 +24,11 @@
             {% if avi.actif %}
                 <p><span>Status : </span>Actif</p>
                 <div>
-                    <a href="{{ path('disable-avis', {id: avi.id}) }}" class="action">Rendre inactif</a>
+                    <a href="{{ path('toggle_active_avis', {id: avi.id}) }}" class="action">Rendre inactif</a>
             {% else %}
                 <p><span>Status : </span>Inactif</p>
                 <div>
-                    <a href="{{ path('active-avis', {id: avi.id}) }}" class="action">Rendre actif</a>
+                    <a href="{{ path('toggle_active_avis', {id: avi.id}) }}" class="action">Rendre actif</a>
             {% endif %}
                 <a href="{{ path('new_conversation_with_id_avis', {id: avi.boutique.user.id, id_avis: avi.id}) }}" class="action">Demander une modification</a>
                 <a href="{{ path('details-user', {id: avi.user.id}) }}" class="action">Voir l'utilisateur</a>

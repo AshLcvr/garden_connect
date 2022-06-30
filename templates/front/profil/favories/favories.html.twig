@@ -7,15 +7,8 @@
         {% for fav in favories %}
             <li>
                 <div class="block_favory">
-                    <div>
-                        {% if fav.boutique.user.image %}
-                            <img src="{{ asset('uploads/profile/')~fav.boutique.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
-                        {% else %}
-                            <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
-                        {% endif %}
-                        <span style="margin: auto .5rem">{{ fav.boutique.user.name|capitalize }}</span>
-                    </div>
                     <h3>{{ fav.boutique.title }}</h3>
+                    <span style="margin: auto .5rem">{{ fav.boutique.user.name|capitalize }}</span>
                     <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
                     <div>
                         {% for key, globalRating in totalGlobalRating %}
