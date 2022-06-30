@@ -37,7 +37,7 @@ postcode_input.on('keyup', function () {
         if (data.length > 5 ){
             citySuggest.push('<option>Code postal trop long !</option>')
         }else{
-            citySuggest.push('<option>Renseignez un code postal</option>')
+            citySuggest.push(' <option value="">Veuillez renseigner votre code postal</option>')
         }
         coordinates_box.val(null);
     }

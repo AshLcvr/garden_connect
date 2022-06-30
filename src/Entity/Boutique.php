@@ -24,7 +24,7 @@ class Boutique
     minMessage: 'Votre titre doit faire au moins {{ limit }} caractères de long',
     maxMessage: 'Votre titre doit faire au maxmium {{ limit }} caractères de long',
     )]
-    #[Assert\NotBlank(message: 'Veuillez renseigner un titre')]
+    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
     private $title;
 
     #[ORM\Column(type: 'text', nullable: true)]
@@ -47,7 +47,7 @@ class Boutique
     )]
     private $telephone;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: false)]
     private $adresse;
 
     #[ORM\Column(type: 'datetime_immutable')]

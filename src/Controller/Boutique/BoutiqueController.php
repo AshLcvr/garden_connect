@@ -46,7 +46,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/nouvelleboutique', name: 'app_boutique_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, ImagesBoutiqueRepository $imagesBoutiqueRepository, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator): Response
+    public function newBoutique(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, ImagesBoutiqueRepository $imagesBoutiqueRepository, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator): Response
     {
         $user = $this->getUser();
         $boutique = new Boutique();
@@ -54,11 +54,17 @@ class BoutiqueController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $boutique->setUser($user);
             $formatedTel =  $form->get('indicatif')->getData() . $form->get('telephone')->getData();
             $boutique->setTelephone($formatedTel);
-            $boutique->setCreatedAt(new \DateTimeImmutable());
+            $coordinates_array  = $form->get('coordinates')->getData();
+            $coordinates = explode(',',$coordinates_array);
+            $city_name = array_pop($coordinates);
+            $boutique->setCoordinates($coordinates);
+            $adress = $form->get('adresse')->getData(). ' ' .  $form->get('postcode')->getData() . ' ' . $city_name;
+            $boutique->setAdresse($adress);
             $boutique->setActif(true);
-            $boutique->setUser($user);
+            $boutique->setCreatedAt(new \DateTimeImmutable());
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
@@ -88,7 +94,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
-    public function show(): Response
+    public function detailBoutique(): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
@@ -100,7 +106,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
+    public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
     {
         $form = $this->createForm(BoutiqueType::class, $boutique);
         $form->handleRequest($request);
@@ -113,6 +119,7 @@ class BoutiqueController extends AbstractController
             $boutique->setCoordinates($coordinates);
             $adress = $form->get('adresse')->getData(). ' ' .  $form->get('postcode')->getData() . ' ' . $city_name;
             $boutique->setAdresse($adress);
+            $boutique->setModifiedAt(new \DateTimeImmutable());
             $boutiqueRepository->add($boutique, true);
 
             $boutiqueImage = $form->get('upload')->getData();
@@ -188,7 +195,7 @@ class BoutiqueController extends AbstractController
             foreach ($avis as  $avi){
                 $total[] = $avi->getRating();
             }
-            $globalRating = round(array_sum($total)/$numberAvis);
+            $globalRating = array_sum($total)/$numberAvis;
         }else{
             $globalRating = 0;
         }

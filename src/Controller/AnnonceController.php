@@ -61,7 +61,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request,AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
+    public function newAnnonce(Request $request,AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
@@ -114,7 +114,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository, UploadImage $uploadImage): Response
+    public function editAnnonce(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository, UploadImage $uploadImage): Response
     {
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);

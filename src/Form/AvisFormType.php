@@ -28,7 +28,7 @@ class AvisFormType extends AbstractType
                 'label' => 'Votre commentaire'
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Modifier',
+                'label' => 'Envoyer',
                 'attr' => [
                     'class' => 'btn btn-primary width-100 m-t-20'
                 ]

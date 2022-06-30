@@ -70,7 +70,9 @@ class RegistrationFormType extends AbstractType
                     'Non' => 'acheteur'
                 ]
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'S\'inscrire'
+            ])
         ;
     }
 

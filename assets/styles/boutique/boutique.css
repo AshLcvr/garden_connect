@@ -43,6 +43,9 @@
     align-items: baseline;
 }
 /* Formulaires boutique */
+.boutique_form p{
+    margin: 0;
+}
 .boutique_form .bloc_form{
     margin-bottom: 2rem;
 }

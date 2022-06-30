@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#slider').flexslider({
         controlNav: false,
-        directionNav: true,
+        directionNav: false,
     });
 
     $('#slider-category').flexslider({
