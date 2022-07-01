@@ -115,10 +115,8 @@ class UploadImage
         }
     }
 
-    public function uploadHero(UploadedFile $file)
+    public function uploadHero(UploadedFile $file, $image)
     {
-        $image = new ImagesHero();
-
         // Renommage du fichier + set name en BDD
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);

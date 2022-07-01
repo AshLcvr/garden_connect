@@ -99,6 +99,8 @@ class AvisController extends AbstractController
     #[Route('/edit/{id}', name: 'app_avis_edit', methods: ['GET', 'POST'])]
     public function editAvis(Request $request, Avis $avis, AvisRepository $avisRepository): Response
     {
+        $security = $this->security($avis, $this->getUser()->getAvis());
+        
         $form = $this->createForm(AvisFormType::class, $avis);
         $form->handleRequest($request);
 

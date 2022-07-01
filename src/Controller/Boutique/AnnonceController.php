@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Boutique;
 
 use App\Data\SearchData;
 use App\Entity\Annonce;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/annonce')]
+#[Route('/boutique/annonce')]
 class AnnonceController extends AbstractController
 {
     #[Route('/recherche', name: 'app_annonce_recherche', methods: ['GET'])]
@@ -116,6 +116,11 @@ class AnnonceController extends AbstractController
     #[Route('/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
     public function editAnnonce(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository, UploadImage $uploadImage): Response
     {
+        $boutique = $this->getUser()->getBoutiques();
+        foreach ($boutique as $key => $value) {
+            $annonces = $value->getAnnonces();
+        }
+        $security = $this->security($annonce, $annonces);
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 

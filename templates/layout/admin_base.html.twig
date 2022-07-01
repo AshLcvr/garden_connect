@@ -37,6 +37,24 @@
                 </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">
+                    Création
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
+                       aria-expanded="true" aria-controls="collapseUtilities" >
+                        <i class="fa-solid fa-list"></i>
+                        <span>Catégories</span>
+                    </a>
+                    <div id="collapseCategories" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('app_category_index') }}">Catégories</a>
+                            <a class="collapse-item" href="{{ path('app_category_new') }}">Nouvelle catégorie</a>
+                        </div>
+                    </div>
+                </li>
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
                     Modération
                 </div>
                 <li class="nav-item">
@@ -133,7 +151,7 @@
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="messagesDropdown">
                                     <h6 class="dropdown-header">Messages non lus</h6>
-                                    {{ render(controller('App\\Controller\\Boutique\\MessagerieBoutiqueController::listing')) }}
+                                    {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
                                     <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
                                 </div>
                             </li>

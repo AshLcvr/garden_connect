@@ -14,8 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/admin')]
 class SubcategoryController extends AbstractController
 {
-    #[Route('/new-sous-cat/{id}', name: 'new-sous-cat', methods: ['GET', 'POST'])]
-    public function newSousCat(Request $request,Category $category, SubcategoryRepository $subcategoryRepository): Response
+    #[Route('/new-sous-cat/{id}', name: 'new_sous_cat', methods: ['GET', 'POST'])]
+    public function newSousCat(Request $request, Category $category, SubcategoryRepository $subcategoryRepository): Response
     {
         $subcategory = new Subcategory();
         $form = $this->createForm(SubcategoryType::class, $subcategory);
@@ -31,6 +31,7 @@ class SubcategoryController extends AbstractController
         return $this->renderForm('admin/subcategory/new-sous-cat.html.twig', [
             'subcategory' => $subcategory,
             'form' => $form,
+            'category' => $category
         ]);
     }
 
@@ -43,7 +44,7 @@ class SubcategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/edit-sous-cat/{id}', name: 'edit-sous-cat', methods: ['GET', 'POST'])]
+    #[Route('/edit-sous-cat/{id}', name: 'edit_sous_cat', methods: ['GET', 'POST'])]
     public function editSousCat(Request $request, Subcategory $subcategory, SubcategoryRepository $subcategoryRepository): Response
     {
         $form = $this->createForm(SubcategoryType::class, $subcategory);

@@ -13,8 +13,11 @@ class ImagesHero
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $title;
+
+    #[ORM\Column(type: 'integer')]
+    private $position;
 
     public function getId(): ?int
     {
@@ -29,6 +32,18 @@ class ImagesHero
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }

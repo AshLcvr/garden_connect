@@ -108,6 +108,7 @@ class BoutiqueController extends AbstractController
     #[Route('/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
     public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
     {
+        $security = $this->security($boutique, $this->getUser()->getBoutiques());
         $form = $this->createForm(BoutiqueType::class, $boutique);
         $form->handleRequest($request);
 

@@ -12,12 +12,16 @@ class ImagesHeroFixtures extends Fixture
     {
         $image1 = new ImagesHero();
         $image1->setTitle('vegetables-g3ecd412d0-1920-62a3139111e69.jpg');
+        $image1->setPosition(1);
         $image2 = new ImagesHero();
         $image2->setTitle('vegetables-g35e990ff8-1920-62a314f9eaadd.jpg');
+        $image2->setPosition(2);
         $image3 = new ImagesHero();
         $image3->setTitle('honey-g1f7448491-1920-62a315899516e.jpg');
+        $image3->setPosition(3);
         $image4 = new ImagesHero();
         $image4->setTitle('earth-g855f5e2f7-1280-62a3174633c5e.jpg');
+        $image4->setPosition(4);
         $manager->persist($image1);
         $manager->persist($image2);
         $manager->persist($image3);

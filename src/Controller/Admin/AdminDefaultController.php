@@ -101,27 +101,26 @@ class AdminDefaultController extends AbstractController
     #[Route('/users/actifs', name: 'all_users_actifs')]
     public function allUsersActifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
-        $form = $this->createForm(PaginationType::class);
-        $form->handleRequest($request);
-
+        // $form = $this->createForm(PaginationType::class);
+        // $form->handleRequest($request);
         
         $usersActif = $userRepository->findBy([
             'actif' => true
         ]);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $form->get('pagination')->getData();
-            dd($form->get('pagination')->getData());
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $form->get('pagination')->getData();
+        //     dd($form->get('pagination')->getData());
+        //     $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
+        //     return $this->redirectToRoute('all_users_actifs', [], Response::HTTP_SEE_OTHER);
+        // }
+        // else {
             $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
-            return $this->redirectToRoute('all_users_actifs', [], Response::HTTP_SEE_OTHER);
-        }
-        else {
-            $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
-        }
+        // }
 
         return $this->render('admin/user/users_actifs.html.twig',[
             'usersActif' => $usersActif,
-            'form' => $form
+            // 'form' => $form
         ]);
     }
     #[Route('/users/inactifs', name: 'all_users_inactifs')]
@@ -247,25 +246,60 @@ class AdminDefaultController extends AbstractController
     
     // diapo page home
     #[Route('/hero', name: 'images_hero')]
-    public function imagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, UploadImage $uploadImage): Response
+    public function imagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, PaginatorInterface $paginator): Response
     {
         $imagesHero = $imagesHeroRepository->findAll();
-        $form = $this->createForm(ImagesHeroType::class);
-        $form->handleRequest($request);
+        $imagesHero = $this->maPagination($imagesHero, $paginator, $request, 5);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageHero = $form->get('upload')->getData();
-            // dd($imageHero);
-            $uploadImage->uploadHero($imageHero);
-            return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('admin/hero.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('admin/diapo_home/hero.html.twig', [
             'imagesHero' => $imagesHero
         ]);
     }
-    #[Route('/hero/delete/{id}', name: 'delete_images_hero')]
+    #[Route('/hero/new', name: 'new_images_hero', methods: ['GET', 'POST'])]
+    public function newImagesHero(Request $request, UploadImage $uploadImage): Response
+    {
+        $image = new ImagesHero();
+        $form = $this->createForm(ImagesHeroType::class, $image);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $image->setPosition($form->get('position')->getData());
+            $imageHero = $form->get('upload')->getData();
+            $uploadImage->uploadHero($imageHero, $image);
+            return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('admin/diapo_home/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    #[Route('/hero/edit/{id}', name: 'edit_images_hero', methods: ['GET', 'POST'])]
+    public function editImagesHero(Request $request, ImagesHero $image, UploadImage $uploadImage, ImagesHeroRepository $imagesHeroRepository): Response
+    {
+        $form = $this->createForm(ImagesHeroType::class, $image);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('position')->getData()) {
+                $image->setPosition($form->get('position')->getData());
+            }
+            if ($form->get('upload')->getData()) {
+                $imageHero = $form->get('upload')->getData();
+                $uploadImage->uploadHero($imageHero, $image);
+            }
+            else {
+                $image->setTitle($image->getTitle());
+                $imagesHeroRepository->add($image, true);
+            }
+            
+            return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('admin/diapo_home/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    #[Route('/hero/delete/{id}', name: 'delete_images_hero', methods: ['POST'])]
     public function deleteImagesHero(ImagesHero $imageHero, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $imagesHeroRepository->remove($imageHero, true);

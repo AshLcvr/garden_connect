@@ -96,6 +96,7 @@ class ProfilController extends AbstractController
     #[Route('/avis/{id}', name: 'profil_avis_edit')]
     public function edit_avis(Request $request, Avis $avis, AvisRepository $avisRepository)
     {
+        $security = $this->security($avis, $this->getUser()->getAvis());
         $form = $this->createForm(AvisFormType::class, $avis);
         $form->handleRequest($request);
 

@@ -22,13 +22,13 @@
                     </div>
                 </div>
                 <div class="bloc_form">
-                    {{ form_widget(form.submit) }}
+                    <button class="btn btn-primary">{{ button_label|default('Modifier') }}</button>
                 </div>
             {{ form_end(form) }}
         </div>
     </div>
     <div class="m-t-20">
-        <a href="{{ path('details-sous-cat', {id: subcategory.id}) }}" class="action width-100 text-align-center inline-block">Retour au détails</a>
+        <a href="{{ path('details-sous-cat', {id: subcategory.id}) }}" class="btn btn-primary">Retour au détails</a>
     <div>
 </div>
 {% endblock %}
