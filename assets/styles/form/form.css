@@ -16,7 +16,7 @@
     text-align: center;
 }
 #contener_form .bloc_form {
-    margin: 1rem 0;
+    margin: 0 auto;
     display: flex;
     flex-flow: column;
     gap: 0.7rem;
@@ -29,6 +29,9 @@
     font-size: 18px;
     padding: 10px 20px;
 }
+#contener_form input:focus {
+    outline: 2px solid var(--orange);
+}
 .radio_box{
     margin: 1rem auto;
     display: flex;
@@ -38,24 +41,105 @@
     width: 50%;
 }
 #contener_form button {
-    background: linear-gradient(to right, transparent 50%, #41B04F 50%);
+    border: none;
+    cursor: pointer;
+    background: none;
+    font-size: 18px;
+    color: #eee;
+    padding: .7rem;
+    width: 100%;
+    background: linear-gradient(to right, transparent 50%, var(--vertclair) 50%);
     background-size: 200% 100%;
     background-position: right;
-    border-radius: 12px;
-    border: none;
-    color: #eee;
-    cursor: pointer;
-    font-size: 18px;
+    transition: all 0.3s;
+
+    /* border-radius: 12px; */
+    /* border-image: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
+    border: 1px solid red; */
+    /* border-width: 1;
+    color: #eee; */
+    /* font-size: 18px;
     text-align: center;
     width: 50%;
     transition: all 0.4s;
     margin: 0 auto;
-    padding: 10px 20px;
+    padding: 10px 20px; */
 }
 #contener_form button:hover {
-    background-color: #F7941D;
+    color: var(--orange);
     background-position: left;
+    background-color: white;
 }
 .form-error {
     color: red;
+}
+.btn-3 {
+    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
+    background-position: right;
+    background-size: 200% 100%;
+    transition: all 0.3s;
+    width: 40%;
+    padding: 0;
+    border: none;
+}
+.btn-3 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* border-radius: 12px; */
+}
+
+.btn-3 button:before,
+.btn-3 button:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    background: var(--orange);
+    transition: all 0.3s ease;
+}
+.btn-3 button:before {
+    height: 0%;
+    width: 2px;
+}
+.btn-3 button:after {
+    width: 0%;
+    height: 2px;
+}
+.btn-3:hover{
+    background: white;
+    color: var(--orange);
+    background-position: left;
+}
+.btn-3 button:hover:before {
+    height: 100%;
+}
+.btn-3 button:hover:after {
+    width: 100%;
+}
+.btn-3 span:before,
+.btn-3 span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    background: var(--orange);
+    transition: all 0.3s ease;
+}
+.btn-3 span:before {
+    width: 2px;
+    height: 0%;
+}
+.btn-3 span:after {
+    width: 0%;
+    height: 2px;
+}
+.btn-3 span:hover:before {
+    height: 100%;
+}
+.btn-3 span:hover:after {
+    width: 100%;
 }

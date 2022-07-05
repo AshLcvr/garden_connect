@@ -7,32 +7,43 @@
             <ul id="ul_burger" class="main_ul ul_burger">
                 {% if app.request.attributes.get('_route') == 'homepage' %}
                     <li class="main_li"><a class="active" href="{{ path('homepage') }}">Accueil</a></li>
+                    <div class="dropdown_separator"></div>
                 {% else %}
                     <li class="main_li"><a href="{{ path('homepage') }}">Accueil</a></li>
+                    <div class="dropdown_separator"></div>
                 {% endif %}
                 {% if app.request.attributes.get('_route')  == 'app_annonce_recherche' %}
                     <li class="main_li"><a class="active" href="{{ path('app_annonce_recherche') }}">Annonces</a></li>
+                    <div class="dropdown_separator"></div>
                 {% else %}
                     <li class="main_li"><a href="{{ path('app_annonce_recherche') }}">Annonces</a></li>
+                    <div class="dropdown_separator"></div>
                 {% endif %}
                 {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li class="main_li"><a href="{{ path('app_conversation_index', {id: app.user.id}) }}">Messages <i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('app_conversation_index', {id: app.user.id}) }}">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <div class="dropdown_separator"></div>
                     {% elseif is_granted('ROLE_VENDEUR') %}
-                        <li class="main_li"><a href="{{ path('boutique_messagerie') }}">Messages <i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('boutique_messagerie') }}">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <div class="dropdown_separator"></div>
                     {% else %}
-                        <li class="main_li"><a href="{{ path('app_conversation_index', {id : app.user.id}) }}">Messages <i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('app_conversation_index', {id : app.user.id}) }}">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <div class="dropdown_separator"></div>
                     {% endif %}
                 {% else %}
                     {% if app.request.attributes.get('_route')  == 'app_login' %}
                         <li><a class="active" href="{{ path('app_login') }}">Connexion</a></li>
+                        <div class="dropdown_separator"></div>
                     {% else %}
                         <li class="main_li"><a href="{{ path('app_login') }}">Connexion</a></li>
+                        <div class="dropdown_separator"></div>
                     {% endif %}
                     {% if app.request.attributes.get('_route')  == 'app_register' %}
                         <li class="main_li"><a class="active" href="{{ path('app_register') }}">Inscription</a></li>
+                        <div class="dropdown_separator"></div>
                     {% else %}
                         <li class="main_li"><a href="{{ path('app_register') }}">Inscription</a></li>
+                        <div class="dropdown_separator"></div>
                     {% endif %}
                 {% endif %}
                 {% if app.user %}
@@ -49,21 +60,25 @@
                             </a>
                         </div>
 
-                        <ul id="ul_dropdown" class="ul_dropdown">
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <li class="li_dropdown"><a href="{{ path('dashboard') }}">Administration</a></li>
-                                <li class="li_dropdown"><a href="{{ path('app_boutique_index') }}">Ma boutique<span class="span_dropdown"><i class="fa-solid fa-chevron-right"></i></span></a></li>
-                                <li class="li_dropdown"><a href="{{ path('admin_view_profil', {id: app.user.id}) }}">Profil<span class="span_dropdown"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                    <ul id="ul_dropdown" class="ul_dropdown">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="li_dropdown"><a href="{{ path('dashboard') }}">Administration</a></li>
+                            <div class="dropdown_separator"></div>
+                            <li class="li_dropdown"><a href="{{ path('app_boutique_index') }}">Ma boutique</a></li>
+                            <div class="dropdown_separator"></div>
+                            <li class="li_dropdown"><a href="{{ path('admin_view_profil', {id: app.user.id}) }}">Profil</a></li>
+                            <div class="dropdown_separator"></div>
 
-                            {% elseif is_granted('ROLE_VENDEUR') %}
-                                <li class="li_dropdown"><a href="{{ path('app_boutique_index') }}">Ma boutique<span class="span_dropdown"><i class="fa-solid fa-chevron-right"></i></span></a></li>
-                                <li class="li_dropdown"><a href="{{ path('boutique_view_profil', {id: app.user.id}) }}">Profil<span class="span_dropdown"><i class="fa-solid fa-chevron-right"></i></span></a></li>
-                            {% else %}
-                                <li class="li_dropdown"><a href="{{ path('profil', {id: app.user.id}) }}">Profil</a></li>
-                            {% endif %}
-                            <li class="li_dropdown"><a href="{{ path('app_logout') }}">Déconnexion<span class="span_dropdown"><i class="fa-solid fa-chevron-right"></i></span></a></li>
-
-                            {# Profil vendeur back boutique #}
+                        {% elseif is_granted('ROLE_VENDEUR') %}
+                            <li class="li_dropdown"><a href="{{ path('app_boutique_index') }}">Ma boutique</a></li>
+                            <div class="dropdown_separator"></div>
+                            <li class="li_dropdown"><a href="{{ path('boutique_view_profil', {id: app.user.id}) }}">Profil</a></li>
+                            <div class="dropdown_separator"></div>
+                        {% else %}
+                            <li class="li_dropdown"><a href="{{ path('profil', {id: app.user.id}) }}">Profil</a></li>
+                            <div class="dropdown_separator"></div>
+                        {% endif %}
+                        <li class="li_dropdown"><a href="{{ path('app_logout') }}">Déconnexion</a></li>
 
                         </ul>
                     </nav>
@@ -71,8 +86,8 @@
             </ul>
 
         </nav>
-       <a id="link_burger" href="#">
-           <span id="burger"></span>
-       </a>
+        <a id="link_burger" href="#">
+            <span id="burger"></span>
+        </a>
     </div>
 </header>
