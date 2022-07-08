@@ -46,6 +46,9 @@
 .boutique_form p{
     margin: 0;
 }
+.boutique_form span {
+    color: red;
+}
 .boutique_form .bloc_form{
     margin-bottom: 2rem;
 }

@@ -8,14 +8,13 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -60,26 +59,19 @@ class BoutiqueType extends AbstractType
                 'choices' => [
                     '+33' => '+33'
                 ]
-
             ])
             ->add('telephone',TelType::class,[
                 'required' => false,
                 'trim' => false,
             ])
-            ->add('adresse',TextType::class,[
-                'mapped' => false,
+            ->add('adress',TextType::class,[
+//                'mapped' => false,
                 'required' => false,
                 'label'  => 'N° et nom de voie',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez renseigner ce champ'
-                    ])
-                ]
             ])
-            ->add('postcode', IntegerType::class,[
-                'mapped' => false,
+            ->add('city', TextType::class,[
                 'required' => true,
-                'label'    => 'Code Postal',
+                'label'    => 'Ville ou Code Postal',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez renseigner ce champ'

@@ -151,6 +151,9 @@ class AnnonceController extends AbstractController
     #[Route('/{id}/actif', name: 'app_annonce_actif', methods: ['POST', 'GET'])]
     public function toggleActif(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
+        $user = $this->getUser();
+        $user->getIP();
+        dd($user);
         if ($annonce->isActif()) {
             $annonce->setActif(false);
         }else{

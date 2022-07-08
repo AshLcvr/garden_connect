@@ -116,9 +116,9 @@ class BoutiqueController extends AbstractController
             $coordinates_array  = $form->get('coordinates')->getData();
             $coordinates = explode(',',$coordinates_array);
             $city_name = array_pop($coordinates);
+            $adress = [$form->get('adress')->getData(),  $form->get('postcode')->getData() , $city_name];
             $boutique->setCoordinates($coordinates);
-            $adress = $form->get('adresse')->getData(). ' ' .  $form->get('postcode')->getData() . ' ' . $city_name;
-            $boutique->setAdresse($adress);
+            $boutique->setAdress($adress);
             $boutique->setModifiedAt(new \DateTimeImmutable());
             $boutiqueRepository->add($boutique, true);
 

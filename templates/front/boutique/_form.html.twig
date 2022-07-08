@@ -9,10 +9,10 @@
     <div class="wrap boutique_form">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
 
-        <h3>Les informations de votre boutique</h3>
-        <p>Les informations de base de votre boutique</p>
-        <p>Le numéro de téléphone n'est pas obligatoire.</p>
-        <p>Si renseigné, seul les utilisateurs connectés pourront le consulter.</p><br>
+        <div class="bloc_form">
+            <h3>Les informations de votre boutique</h3>
+            <p>Seuls les champs marqués d'un <span> *</span> sont obligatoires.</p>
+        </div>
 
         <div id="form_upload" class=" bloc_form {{ hidden_class }}">
             {{ form_label(form.upload) }}
@@ -33,7 +33,7 @@
         </div>
 
         <div class="bloc_form">
-            {{ form_label(form.title) }}
+            {{ form_label(form.title) }}<span> *</span>
             {{ form_widget(form.title) }}
             <small>{{ form_help(form.title) }}</small>
             <div class="form-error">
@@ -80,35 +80,32 @@
             </div>
         </div>
 
-        <h3>Votre addresse</h3>
-        <p>Votre adresse doit être renseignée à titre indicatif.</p>
-        <p>Seule votre ville appaitra sur la carte.</p>
-        <p>Aucune de ces informations ne sera utilisée par nos services.</p><br>
-
         <div class="bloc_form">
-            {{ form_label(form.adresse) }}
-            {{ form_widget(form.adresse) }}
-            <small>{{ form_help(form.adresse) }}</small>
-            <div class="form-error">
-                {{ form_errors(form.adresse) }}
-            </div>
+            <h3>Votre addresse</h3>
+            <p>Une adresse complète permet une meilleure visibilité pour vos annonces.</p>
+            <p>Votre adresse permet aux utilisateurs de situer votre boutique sur votre page publique.</p>
+            <p>Vous pouvez désactiver la carte de votre page dans l'onglet <i>'Gérer ma boutique'</i> puis <i>'Mes préférences'</i>.</p>
         </div>
 
         <div class="bloc_form d-flex" style="gap: 2rem; ">
-            <div class="bloc_form">
-                {{ form_label(form.postcode) }}
-                {{ form_widget(form.postcode, {attr : {style: '-moz-appearance: textfield'}}) }}
-                <small>{{ form_help(form.postcode) }}</small>
+            <div class="bloc_form adress_form">
+                {{ form_label(form.adress) }}
+                {{ form_widget(form.adress) }}
+                <small>{{ form_help(form.adress) }}</small>
                 <div class="form-error">
-                    {{ form_errors(form.postcode) }}
+                    {{ form_errors(form.adress) }}
                 </div>
             </div>
 
             <div class="bloc_form">
-                <label class="control-label" for="boutique_city">Ville</label>
-                <select class="form-control" id="boutique_city">
-                    <option>Veuillez renseigner votre code postal</option>
-                </select>
+                {{ form_label(form.city) }}<span> *</span>
+                {{ form_widget(form.city, {attr : {style: '-moz-appearance: textfield'}}) }}
+                <small>{{ form_help(form.city) }}</small>
+                <div class="form-error">
+                    {{ form_errors(form.city) }}
+                </div>
+
+                <ul id="city_suggest">qq</ul>
             </div>
         </div>
 
@@ -118,3 +115,8 @@
         {{ form_end(form) }}
     </div>
 </div>
+{% block javascripts %}
+    <script>
+
+    </script>
+{% endblock %}

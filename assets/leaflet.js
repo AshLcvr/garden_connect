@@ -6,6 +6,8 @@
 // {
 const carte_box      = document.getElementById('boutique_coordinates')
 const boutique_title = carte_box.getAttribute('data-boutique_title');
+const fullAdress     = carte_box.getAttribute('data-full');
+console.log(fullAdress)
 const lon            = carte_box.getAttribute('data-lon');
 const lat            = carte_box.getAttribute('data-lat');
 
@@ -19,7 +21,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(carte);
 
 const marqueur = L.marker([parseFloat(lat), parseFloat(lon)]).addTo(carte);
-marqueur.bindPopup("<b>"+boutique_title+"</b><br><i>Position approximative</i>");
+if (fullAdress === 'true'){
+    marqueur.bindPopup("<b>"+boutique_title+"</b>");
+}else{
+    marqueur.bindPopup("<b>"+boutique_title+"</b><br><i>Position approximative</i>");
+}
+
 
 // }
 

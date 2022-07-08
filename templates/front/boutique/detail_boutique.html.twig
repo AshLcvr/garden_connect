@@ -40,9 +40,11 @@
          <div class="d-flex flex-column">
              <h6 class="annonce_title">Adresse:</h6>
              <div class="d-flex flex-column">
-                 <div class="text-align-center">
-                     {{ boutique.adresse }}
-                 </div>
+                 <ul class="text-align-center">
+                     {% for adress in boutique.adress %}
+                     <li>{{ adress }}</li>
+                     {% endfor %}
+                 </ul>
              </div>
         </div>
     </div>
