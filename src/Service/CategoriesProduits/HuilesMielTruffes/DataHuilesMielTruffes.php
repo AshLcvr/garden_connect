@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\HuilesMielTruffes;
+namespace App\Service\CategoriesProduits\HuilesMielTruffes;
 
 
 class DataHuilesMielTruffes

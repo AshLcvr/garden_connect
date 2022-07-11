@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\CerealesEtGrains;
+namespace App\Service\CategoriesProduits\CerealesEtGrains;
 
 
 class DataCerealesEtGrains

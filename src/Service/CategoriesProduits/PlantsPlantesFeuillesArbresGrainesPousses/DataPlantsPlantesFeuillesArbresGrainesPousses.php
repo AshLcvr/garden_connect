@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\PlantsPlantesFeuillesArbresGrainesPousses;
+namespace App\Service\CategoriesProduits\PlantsPlantesFeuillesArbresGrainesPousses;
 
 
 class DataPlantsPlantesFeuillesArbresGrainesPousses

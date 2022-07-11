@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\HerbesEpicesAromatesGraines;
+namespace App\Service\CategoriesProduits\HerbesEpicesAromatesGraines;
 
 
 class DataHerbesEpicesAromatesGraines

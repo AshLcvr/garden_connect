@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\LegumesEtPois;
+namespace App\Service\CategoriesProduits\LegumesEtPois;
 
 
 class DataLegumesEtPois

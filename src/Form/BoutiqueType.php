@@ -30,11 +30,11 @@ class BoutiqueType extends AbstractType
                 'required' => false
             ])
             ->add('upload', FileType::class,[
-                'label' => 'Ajouter des images à votre boutique',
-                'mapped' => false,
-                'required' => false,
-                'data_class' => null,
-                'multiple' => true,
+                'label'       => 'Ajouter des images à votre boutique',
+                'mapped'      => false,
+                'required'    => false,
+                'data_class'  => null,
+                'multiple'    => true,
                 'constraints' => [
                     new All([
 
@@ -55,33 +55,31 @@ class BoutiqueType extends AbstractType
                 ],
             ])
             ->add('indicatif',ChoiceType::class,[
-                'mapped' => false,
+                'mapped'  => false,
                 'choices' => [
                     '+33' => '+33'
                 ]
             ])
             ->add('telephone',TelType::class,[
                 'required' => false,
-                'trim' => false,
+                'trim'     => false,
             ])
             ->add('adress',TextType::class,[
-//                'mapped' => false,
                 'required' => false,
-                'label'  => 'N° et nom de voie',
+                'label'    => 'N° et nom de voie',
             ])
-            ->add('city', TextType::class,[
-                'required' => true,
-                'label'    => 'Ville ou Code Postal',
+            ->add('search', TextType::class,[
+                'mapped'      => false,
+                'required'    => true,
+                'label'       => 'Ville ou Code Postal',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez renseigner ce champ'
                     ])
                 ]
             ])
-            ->add('coordinates',HiddenType::class,[
-                'mapped' => false,
-            ])
-        ;
+            ->add('city', HiddenType::class)
+            ->add('postcode', HiddenType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

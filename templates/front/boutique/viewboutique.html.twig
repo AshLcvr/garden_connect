@@ -72,7 +72,7 @@
     </section>
 
     {% if annonce == null and boutique.coordinates != null %}
-        {% if boutique.adress[0] == '' %}
+        {% if boutique.adress == '' %}
             {% set fullAdress = 'false' %}
         {% else %}
             {% set fullAdress = 'true' %}

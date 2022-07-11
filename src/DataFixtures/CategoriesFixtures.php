@@ -7,7 +7,7 @@ use App\Entity\Subcategory;
 ;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Service\Categories\DataCategories;
+use App\Service\CategoriesProduits\DataCategories;
 use App\Service\CerealesEtGrains\DataCerealesEtGrains;
 use App\Service\EngraisNaturelsEtAccessoires\DataEngraisNaturelsEtAccessoires;
 use App\Service\Farine\DataFarine;

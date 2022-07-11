@@ -98,14 +98,14 @@
             </div>
 
             <div class="bloc_form">
-                {{ form_label(form.city) }}<span> *</span>
-                {{ form_widget(form.city, {attr : {style: '-moz-appearance: textfield'}}) }}
-                <small>{{ form_help(form.city) }}</small>
+                {{ form_label(form.search) }}<span> *</span>
+                {{ form_widget(form.search, {attr : {style: '-moz-appearance: textfield'}}) }}
+                <small>{{ form_help(form.search) }}</small>
                 <div class="form-error">
-                    {{ form_errors(form.city) }}
+                    {{ form_errors(form.search) }}
                 </div>
 
-                <ul id="city_suggest">qq</ul>
+                <ul id="city_suggest"></ul>
             </div>
         </div>
 
@@ -115,8 +115,3 @@
         {{ form_end(form) }}
     </div>
 </div>
-{% block javascripts %}
-    <script>
-
-    </script>
-{% endblock %}

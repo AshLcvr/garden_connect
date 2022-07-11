@@ -27,6 +27,7 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use function Symfony\Bundle\FrameworkBundle\Controller\createForm;
+use function Symfony\Component\HttpFoundation\replace;
 use function Symfony\Config\em;
 
 //#[Route('/boutique')]
@@ -61,7 +62,7 @@ class BoutiqueController extends AbstractController
             $coordinates = explode(',',$coordinates_array);
             $city_name = array_pop($coordinates);
             $boutique->setCoordinates($coordinates);
-            $adress = $form->get('adresse')->getData(). ' ' .  $form->get('postcode')->getData() . ' ' . $city_name;
+            $adress = $form->get('adresse')->getData(). ' ' . $city_name;
             $boutique->setAdresse($adress);
             $boutique->setActif(true);
             $boutique->setCreatedAt(new \DateTimeImmutable());
@@ -113,12 +114,6 @@ class BoutiqueController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($this->getUser());
-            $coordinates_array  = $form->get('coordinates')->getData();
-            $coordinates = explode(',',$coordinates_array);
-            $city_name = array_pop($coordinates);
-            $adress = [$form->get('adress')->getData(),  $form->get('postcode')->getData() , $city_name];
-            $boutique->setCoordinates($coordinates);
-            $boutique->setAdress($adress);
             $boutique->setModifiedAt(new \DateTimeImmutable());
             $boutiqueRepository->add($boutique, true);
 
@@ -305,6 +300,9 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
+    private function getCoordinates()
+    {
 
+    }
 
 }
