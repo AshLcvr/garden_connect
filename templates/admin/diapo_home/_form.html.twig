@@ -1,0 +1,27 @@
+<div id="contener_form">
+    {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+        <div class="bloc_form">
+            {{ form_label(form.upload) }}
+            {{ form_widget(form.upload) }}
+
+            <small>{{ form_help(form.upload) }}</small>
+
+            <div class="form-error">
+                {{ form_errors(form.upload) }}
+            </div>
+        </div>
+        <div class="bloc_form">
+            {{ form_label(form.position) }}
+            {{ form_widget(form.position) }}
+
+            <small>{{ form_help(form.position) }}</small>
+
+            <div class="form-error">
+                {{ form_errors(form.position) }}
+            </div>
+        </div>
+        <div class="bloc_form">
+            <button class="btn btn-primary">{{ button_label|default('Créer') }}</button>
+        </div>
+    {{ form_end(form) }}
+</div>

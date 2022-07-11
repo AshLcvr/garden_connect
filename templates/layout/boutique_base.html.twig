@@ -124,7 +124,7 @@
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="messagesDropdown">
                                     <h6 class="dropdown-header">Messages non lus</h6>
-                                    {# {{ render(controller('App\\Controller\\Boutique\\MessagerieBoutiqueController::listing')) }} #}
+                                    {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
                                     <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
                                 </div>
                             </li>
@@ -143,7 +143,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="{{ path('boutique_view_profil', {id : app.user.id}) }}">
+                                    <a class="dropdown-item" href="{{ path('boutique_view_profil') }}">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Mon profil
                                     </a>

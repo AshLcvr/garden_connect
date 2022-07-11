@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/boutique')]
 class FavoryController extends AbstractController
 {
     #[Route('/favory/{id}', name: 'app_toggle_favory', methods : ['GET', 'POST'], requirements: ['id' => '\d+'])]
@@ -57,12 +58,7 @@ class FavoryController extends AbstractController
         }else{
             $totalGlobalRating = 0;
         }
-        
-        $favories = $paginator->paginate(
-            $favories, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            5 // Nombre de résultats par page
-        );
+        $favories = $this->maPagination($favories, $paginator, $request, 5);
 
         return $this->render('front/boutique/favorites/listing.html.twig',[
             'favories' => $favories,
@@ -71,7 +67,7 @@ class FavoryController extends AbstractController
         ]);
     }
 
-    #[Route('/favorites/removesdfb/{id}', name: 'app_remove_favory', methods : ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    #[Route('/favorites/removes/{id}', name: 'app_remove_favory', methods : ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function removeFavory(Request $request, Favory $favory, FavoryRepository $favoryRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$favory->getId(), $request->request->get('_token'))) {

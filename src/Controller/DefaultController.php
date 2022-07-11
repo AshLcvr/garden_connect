@@ -26,4 +26,9 @@ class DefaultController extends AbstractController
             'user' => $user
         ]);
     }
+    #[Route('/mention-legale', name: 'mention_legale')]
+    public function mentionLegale(): Response
+    {
+        return $this->render('front/mention.html.twig');
+    }
 }

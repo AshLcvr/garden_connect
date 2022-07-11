@@ -16,9 +16,8 @@ class SubcategoryType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'titre'
+                'label' => 'Titre'
             ])
-            ->add('submit', SubmitType::class)
         ;
     }
 

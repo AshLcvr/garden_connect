@@ -28,11 +28,11 @@
             {% if user.actif %}
                 <p><span>Status : </span>Actif</p>
                 <div>
-                    <a href="{{ path('disable-user', {id: user.id}) }}" class="action">Rendre inactif</a>
+                    <a href="{{ path('toggle_active_user', {id: user.id}) }}" class="action">Rendre inactif</a>
             {% else %}
                 <p><span>Status : </span>Inactif</p>
                 <div>
-                    <a href="{{ path('active-user', {id: user.id}) }}" class="action">Rendre actif</a>
+                    <a href="{{ path('toggle_active_user', {id: user.id}) }}" class="action">Rendre actif</a>
             {% endif %}
                 <a href="{{ path('new_conversation', {id: user.id}) }}" class="action">Envoyer message</a>
             </div>

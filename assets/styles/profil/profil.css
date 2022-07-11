@@ -48,7 +48,7 @@
     justify-content: space-between;
 }
 #container_profil .container_favory ul li{
-    width: 45%;
+    width: 30%;
     padding: 0.5rem;
     box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69 / 15%) !important;
     border: 1px solid #e3e6f0;

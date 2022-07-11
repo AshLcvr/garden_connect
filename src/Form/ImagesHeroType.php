@@ -6,10 +6,10 @@ use App\Entity\ImagesHero;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ImagesHeroType extends AbstractType
 {
@@ -24,9 +24,6 @@ class ImagesHeroType extends AbstractType
                 // 'multiple' => true,
                 'constraints' => [
                     // new All([
-                    new NotBlank([
-                        'message' => 'Veuillez renseigner une image',
-                    ]),
                     new File([
                         'maxSize' => '10000k',
                         'mimeTypes' => [
@@ -44,7 +41,9 @@ class ImagesHeroType extends AbstractType
                     // ])
                 ],
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Envoyer']);
+            ->add('position', IntegerType::class, [
+                'label' => 'Position'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

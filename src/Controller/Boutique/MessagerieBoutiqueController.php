@@ -7,19 +7,21 @@ use App\Entity\Message;
 use App\Form\MessageType;
 use App\Entity\Conversation;
 use App\Form\ConversationType;
+use App\Repository\UserRepository;
 use App\Repository\MessageRepository;
 use App\Repository\ConversationRepository;
-use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/boutique')]
 class MessagerieBoutiqueController extends AbstractController
 {
 
-    #[Route('/boutique/messagerie', name: 'boutique_messagerie')]
-    public function boutiqueMessagerie()
+    #[Route('/messagerie', name: 'boutique_messagerie')]
+    public function boutiqueMessagerie(Request $request, PaginatorInterface $paginator)
     {
         $user = $this->getUser();
         $conversationsCorresp = $user->getConversationsCorresp();
@@ -52,6 +54,7 @@ class MessagerieBoutiqueController extends AbstractController
             $tblNbrNonlus[$value->getId()] = $nbrNonlus;
             $nbrNonlus = 0;
         }
+        $conversations = $this->maPagination($conversations, $paginator, $request, 5);
 
         return $this->renderForm('front/boutique/messagerie/index.html.twig', [
             'conversations' => $conversations,
@@ -59,7 +62,7 @@ class MessagerieBoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique/messagerie/new-conversation/{id}', name: 'boutique_messagerie_new_conversation')]
+    #[Route('/messagerie/new-conversation/{id}', name: 'boutique_messagerie_new_conversation')]
     public function newConversation(Request $request, ConversationRepository $conversationRepository, User $user): Response
     {
         $conversation = new Conversation();
@@ -82,7 +85,7 @@ class MessagerieBoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique/messagerie/message/{id}', name: 'boutique_messagerie_message')]
+    #[Route('/messagerie/message/{id}', name: 'boutique_messagerie_message')]
     public function newMessage(Request $request, MessageRepository $messageRepository, Conversation $conversation, ConversationRepository $conversationRepository): Response
     {
         $message = new Message();
@@ -114,99 +117,6 @@ class MessagerieBoutiqueController extends AbstractController
             'message' => $message,
             'form' => $form,
             'conversation' => $conversation
-        ]);
-    }
-
-    public function listing(ConversationRepository $conversationRepository, UserRepository $userRepository): Response
-    {
-        $user = $userRepository->findOneBy([
-            'id' => $this->getUser()->getId()
-        ]);
-        $listing = [];
-        $nbrNonlus = 0;
-        $tblNbrNonlus = [];
-
-
-        $conversationsCorresp = $conversationRepository->findBy(
-            [
-            'correspondant' => $user,
-            ],
-            [
-            'created_at' => 'ASC',
-            ]
-        );
-        if (!empty($conversationsCorresp)) {
-            foreach ($conversationsCorresp as $key => $value) {
-                if ($value->isIsRead() === false) {
-                    $listing[] = $value;
-                    $nbrNonlus += 1;
-                    foreach ($value->getMessages() as $key => $mess) {
-                        if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $user->getId()) {
-                            $nbrNonlus += 1;
-                        }
-                    }
-                }
-                else {
-                    foreach ($value->getMessages() as $key => $mess) {
-                        if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $user->getId()) {
-                            $listing[] = $value;
-                            $nbrNonlus += 1;
-                        }
-                    }
-                }
-                $tblNbrNonlus[$value->getId()] = $nbrNonlus;
-                $nbrNonlus = 0;
-            }
-        } 
-
-        $conversationsInit = $conversationRepository->findBy(
-            [
-            'user' => $user,
-            ],
-            [
-            'created_at' => 'ASC',
-            ],
-        );
-        if (!empty($conversationsInit)) {
-            foreach ($conversationsInit as $key => $value) {
-                foreach ($value->getMessages() as $key => $mess) {
-                    if ($mess->isIsRead() === false && $mess->getExpediteur()->getId() != $value->getUser()->getId()) {
-                        $listing[] = $value;
-                        $nbrNonlus += 1;
-                    }
-                }
-                $tblNbrNonlus[$value->getId()] = $nbrNonlus;
-                $nbrNonlus = 0;
-            }
-        }
-        
-        if (!empty($listing)) {
-            usort($listing, function(Conversation $a, Conversation $b){
-                return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
-            });
-
-            $countListing = count($listing);
-
-            $newListing = [];
-
-            for ($i = 0; $i <= 8 ; $i++) { 
-                $newListing[] = $listing[$i];
-            }
-            
-
-            $countNewListing = count($newListing);
-            $count = $countListing - $countNewListing;
-        }
-        else{
-            $newListing = false;
-            $count = false;
-        }
-        
-        
-        return $this->render('_partials/_listingMessagesNonLus.html.twig', [
-            'newListing' => $newListing,
-            'tblNbrNonlus' => $tblNbrNonlus,
-            'count' => $count
         ]);
     }
 }

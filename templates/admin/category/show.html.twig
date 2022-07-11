@@ -4,53 +4,72 @@
 
 {% block body %}
 <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
-    <h2 class="title">Categorie</h2>
-    <div class="card">
+    <div>
         <h3 class="title">{{ category.title }}</h3>
-        <div class="image-card">
-            <img src="{{ asset('asset/images/logo-paul.svg') }}"/>
+        <p><span class="m-0 font-weight-bold text-primary">Id : </span>{{ category.id }}</p>
+        <div class="m-b-10">
+            {% if category.image %}
+                <img src="{{ asset('uploads/category/' ~ category.image) }}"/>
+            {% else %}
+                <img src="{{ asset('asset/images/logo-paul.svg') }}" style="width: 100px;"/>
+            {% endif %}
         </div>
-        <div class="description-card justify-content-between">
-            <p><span>Id : </span>{{ category.id }}</p>
-            <div class="d-flex gap-1">
-                <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="action text-align-center inline-block">Modifier</a>
-                {{ include('admin/category/_delete_form.html.twig') }}
+        <div class="d-flex gap-1">
+            <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-primary">Modifier</a>
+            {{ include('admin/category/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <div class="p-t-10 p-b-10">
+        <a href="{{ path('new_sous_cat', {id: category.id}) }}" class="btn btn-primary width-100">Créer une nouvelle sous-catégorie</a>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Sous-catégories</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="js-filter-pagination" id="pagination_box">
+                    {{ knp_pagination_render(sousCategory) }}
+                </div>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Id Parent</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Id Parent</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for cat in sousCategory %}
+                            <tr>
+                                <td>{{ cat.id }}</td>
+                                <td>{{ cat.title }}</td>
+                                <td>{{ cat.parentCategory.id }}</td>
+                                <td><a href="{{ path('details-sous-cat', {'id': cat.id}) }}" class="btn btn-primary">Détails</a></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Aucune données</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="js-filter-pagination" id="pagination_box">
+                    {{ knp_pagination_render(sousCategory) }}
+                </div>
             </div>
         </div>
     </div>
     <div class="m-t-20 m-b-20">
-        <a href="{{ path('app_category_index') }}" class="action width-100 text-align-center inline-block">Retour listing categories</a>
+        <a href="{{ path('app_category_index') }}" class="btn btn-primary">Retour listing categories</a>
     </div>
-
-    <h2 class="title">Listing sous-catégorie</h2>
-    <div class="m-t-20 m-b-20">
-        <a href="{{ path('new-sous-cat', {id: category.id}) }}" class="action width-100 text-align-center inline-block">Créer une nouvelle sous catégorie</a>
-    </div>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-b-20">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">Id</th>
-                    <th scope="col" class="px-6 py-3">Titre</th>
-                    <th scope="col" class="px-6 py-3">Id Parent</th>
-                    <th scope="col" class="px-6 py-3">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for cat in sousCategory %}
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ cat.id }}</th>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ cat.title }}</th>
-                    <td class="px-6 py-4">{{ cat.parentCategory.id }}</td>
-                    <td class="px-6 py-4 text-right"><a href="{{ path('details-sous-cat', {'id': cat.id}) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a></td>
-                </tr>
-            {% else %}
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-4">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
 {% endblock %}

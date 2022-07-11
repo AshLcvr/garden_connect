@@ -7,7 +7,6 @@
 const carte_box      = document.getElementById('boutique_coordinates')
 const boutique_title = carte_box.getAttribute('data-boutique_title');
 const fullAdress     = carte_box.getAttribute('data-full');
-console.log(fullAdress)
 const lon            = carte_box.getAttribute('data-lon');
 const lat            = carte_box.getAttribute('data-lat');
 

@@ -47,11 +47,8 @@ class AvisController extends AbstractController
         usort($mesAvis, function(Avis $a, Avis $b){
             return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
         });
-        $mesAvis = $paginator->paginate(
-            $mesAvis, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            5 // Nombre de résultats par page
-        );
+        
+        $mesAvis = $this->maPagination($mesAvis, $paginator, $request, 5);
 
         return $this->render('front/boutique/avis/avis_recus.html.twig', [
             'mesAvis' => $mesAvis,
@@ -90,11 +87,7 @@ class AvisController extends AbstractController
         usort($mesAvis, function(Avis $a, Avis $b){
             return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
         });
-        $mesAvis = $paginator->paginate(
-            $mesAvis, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            5 // Nombre de résultats par page
-        );
+        $mesAvis = $this->maPagination($mesAvis, $paginator, $request, 5);
 
         return $this->render('front/boutique/avis/avis_emis.html.twig', [
             'mesAvis' => $mesAvis,
@@ -106,6 +99,8 @@ class AvisController extends AbstractController
     #[Route('/edit/{id}', name: 'app_avis_edit', methods: ['GET', 'POST'])]
     public function editAvis(Request $request, Avis $avis, AvisRepository $avisRepository): Response
     {
+        $security = $this->security($avis, $this->getUser()->getAvis());
+        
         $form = $this->createForm(AvisFormType::class, $avis);
         $form->handleRequest($request);
 

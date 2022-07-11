@@ -11,6 +11,7 @@ use App\Form\EditProfilType;
 use App\Repository\AvisRepository;
 use App\Repository\FavoryRepository;
 use App\Service\UploadImage;
+use App\Service\CallApi;
 use App\Entity\ImagesBoutique;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManager;
@@ -30,10 +31,10 @@ use function Symfony\Bundle\FrameworkBundle\Controller\createForm;
 use function Symfony\Component\HttpFoundation\replace;
 use function Symfony\Config\em;
 
-//#[Route('/boutique')]
+#[Route('/boutique')]
 class BoutiqueController extends AbstractController
 {
-    #[Route('/boutique/', name: 'app_boutique_index', methods: ['GET'])]
+    #[Route('/', name: 'app_boutique_index', methods: ['GET'])]
     public function indexBoutique(BoutiqueRepository $boutiqueRepository): Response
     {
         $user = $this->getUser();
@@ -47,7 +48,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/nouvelleboutique', name: 'app_boutique_new', methods: ['GET', 'POST'])]
-    public function newBoutique(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, ImagesBoutiqueRepository $imagesBoutiqueRepository, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator): Response
+    public function newBoutique(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, ImagesBoutiqueRepository $imagesBoutiqueRepository, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator, CallApi $callApi): Response
     {
         $user = $this->getUser();
         $boutique = new Boutique();
@@ -58,12 +59,7 @@ class BoutiqueController extends AbstractController
             $boutique->setUser($user);
             $formatedTel =  $form->get('indicatif')->getData() . $form->get('telephone')->getData();
             $boutique->setTelephone($formatedTel);
-            $coordinates_array  = $form->get('coordinates')->getData();
-            $coordinates = explode(',',$coordinates_array);
-            $city_name = array_pop($coordinates);
-            $boutique->setCoordinates($coordinates);
-            $adress = $form->get('adresse')->getData(). ' ' . $city_name;
-            $boutique->setAdresse($adress);
+            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('postcode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData()));
             $boutique->setActif(true);
             $boutique->setCreatedAt(new \DateTimeImmutable());
             $boutiqueRepository->add($boutique, true);
@@ -94,7 +90,7 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
+    #[Route('/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
     public function detailBoutique(): Response
     {
         $user = $this->getUser();
@@ -107,15 +103,17 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
-    public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
+    public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, CallApi $callApi): Response
     {
+        $security = $this->security($boutique, $this->getUser()->getBoutiques());
         $form = $this->createForm(BoutiqueType::class, $boutique);
-        $form->get('coordinates')->setData(implode(' ' , $boutique->getCoordinates()));
+        $form->get('search')->setData($boutique->getCity().' ('.$boutique->getPostcode().')');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($this->getUser());
             $boutique->setModifiedAt(new \DateTimeImmutable());
+            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('postcode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData()));
             $boutiqueRepository->add($boutique, true);
 
             $boutiqueImage = $form->get('upload')->getData();
@@ -135,7 +133,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique-delete/{id}', name: 'app_boutique_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
-    public function delete(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
+    public function deleteBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
             $boutiqueRepository->remove($boutique, true);
@@ -157,7 +155,7 @@ class BoutiqueController extends AbstractController
         return $this->redirectToRoute('app_boutique_detail', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/boutique/public/{id}', name: 'view_boutique')]
+    #[Route('/public/{id}', name: 'view_boutique')]
     public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository, AvisRepository $avisRepository, Request $request, FavoryRepository $favoryRepository)
     {
         $user = $this->getUser();
@@ -227,7 +225,7 @@ class BoutiqueController extends AbstractController
         );
     }
 
-    #[Route('/boutique/public/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
+    #[Route('/public/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
     public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique,FavoryRepository $favoryRepository, $id_annonce)
     {
         $user = $this->getUser();
@@ -265,9 +263,10 @@ class BoutiqueController extends AbstractController
         );
     }
 
-    #[Route('/viewprofil/{id}', name: 'boutique_view_profil', methods: ['GET', 'POST'])]
-    public function viewProfile(User $user, TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
+    #[Route('/viewprofil', name: 'boutique_view_profil', methods: ['GET', 'POST'])]
+    public function viewProfile(TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
     {
+        $user = $this->getUser();
         $token = $tokenGenerator->generateToken();
         $user->setToken($token);
         $userRepository->add($user, true);
@@ -280,9 +279,10 @@ class BoutiqueController extends AbstractController
         );
     }
 
-    #[Route('/boutique/edit/profil/{id}', name: 'boutique_edit_profil', methods: ['GET', 'POST'])]
-    public function editProfil(Request $request, User $user, UserRepository $userRepository, UploadImage $uploadImage)
+    #[Route('/edit/profil', name: 'boutique_edit_profil', methods: ['GET', 'POST'])]
+    public function editProfil(Request $request, UserRepository $userRepository, UploadImage $uploadImage)
     {
+        $user = $this->getUser();
         $form = $this->createForm(EditProfilType::class, $user);
         $form->handleRequest($request);
 
@@ -300,10 +300,4 @@ class BoutiqueController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    private function getCoordinates()
-    {
-
-    }
-
 }

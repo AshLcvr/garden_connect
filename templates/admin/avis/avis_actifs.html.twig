@@ -1,0 +1,74 @@
+{% extends 'layout/admin_base.html.twig' %}
+
+{% block title %}Avis Actifs{% endblock %}
+
+{% block body %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Avis actifs</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="js-filter-pagination" id="pagination_box">
+                    {{ knp_pagination_render(avisActif) }}
+                </div>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Commentaire</th>
+                            <th>Note</th>
+                            <th>Créé le</th>
+                            <th>Actif</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Commentaire</th>
+                            <th>Note</th>
+                            <th>Créé le</th>
+                            <th>Actif</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for avi in avisActif %}
+                            <tr>
+                                <td>{{ avi.id }}</td>
+                                <td>{{ avi.title|length > 20 ? avi.title|striptags|slice(0, 20) ~ '...' : avi.title }}</td>
+                                <td>{{ avi.commentaire|length > 20 ? avi.commentaire|striptags|slice(0, 20) ~ '...' : avi.commentaire }}</td>
+                                <td>
+                                    {% for i in 1..5 %}
+                                        {% if i <= avi.rating %}
+                                            <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                        {% else %}
+                                            <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>{{ avi.createdAt|date('Y-m-d H:i:s') }}</td>
+                                {% if avi.actif %}
+                                    <td>Actif</td>
+                                {% else %}
+                                    <td>Inactif</td>
+                                {% endif %}
+                                <td><a href="{{ path('details-avis', {id: avi.id}) }}" class="btn btn-primary">Détails</a></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Pas de données</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="js-filter-pagination" id="pagination_box">
+                    {{ knp_pagination_render(avisActif) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

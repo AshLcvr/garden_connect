@@ -8,6 +8,7 @@ use App\Entity\Annonce;
 use App\Entity\Boutique;
 use App\Entity\ImagesHero;
 use App\Form\ImagesHeroType;
+use App\Form\PaginationType;
 use App\Service\UploadImage;
 use App\Repository\AvisRepository;
 use App\Repository\UserRepository;
@@ -20,13 +21,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 #[Route('/admin')]
 class AdminDefaultController extends AbstractController
 {
     #[Route('/', name: 'dashboard')]
-    public function index(UserRepository $userRepository, AnnonceRepository $annonceRepository, BoutiqueRepository $boutiqueRepository): Response
+    public function index(UserRepository $userRepository, AnnonceRepository $annonceRepository, BoutiqueRepository $boutiqueRepository, AvisRepository $avisRepository): Response
     {
         $users = $userRepository->findAll();
         $totalUsers = count($users);
@@ -42,6 +42,11 @@ class AdminDefaultController extends AbstractController
         $totalBoutiques = count($boutiques);
         $newBoutiques = $boutiqueRepository->newBoutiques(new \DateTimeImmutable('-1 week'));
         $totalNewBoutiques = count($newBoutiques);
+
+        $avis = $avisRepository->findAll();
+        $totalAvis = count($avis);
+        $newAvis = $avisRepository->newAvis(new \DateTimeImmutable('-1 week'));
+        $totalNewAvis = count($newAvis);
         
         return $this->render('admin/dashboard.html.twig', [
             'totalUsers' => $totalUsers,
@@ -50,12 +55,15 @@ class AdminDefaultController extends AbstractController
             'totalNewAnnonces' => $totalNewAnnonces,
             'totalBoutiques' => $totalBoutiques,
             'totalNewBoutiques' => $totalNewBoutiques,
+            'totalAvis' => $totalAvis,
+            'totalNewAvis' => $totalNewAvis
         ]);
     }
 
-    #[Route('/viewprofil/{id}', name: 'admin_view_profil', methods: ['GET', 'POST'])]
-    public function viewProfile(User $user, TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
+    #[Route('/viewprofil', name: 'admin_view_profil', methods: ['GET', 'POST'])]
+    public function viewProfile(TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
     {
+        $user = $this->getUser();
         $token = $tokenGenerator->generateToken();
         $user->setToken($token);
         $userRepository->add($user, true);
@@ -66,9 +74,10 @@ class AdminDefaultController extends AbstractController
         );
     }
 
-    #[Route('/edit/profil/{id}', name: 'admin_edit_profil', methods: ['GET', 'POST'])]
-    public function editProfil(Request $request, User $user, UserRepository $userRepository, UploadImage $uploadImage)
+    #[Route('/edit/profil', name: 'admin_edit_profil', methods: ['GET', 'POST'])]
+    public function editProfil(Request $request, UserRepository $userRepository, UploadImage $uploadImage)
     {
+        $user = $this->getUser();
         $form = $this->createForm(EditProfilType::class, $user);
         $form->handleRequest($request);
 
@@ -89,78 +98,86 @@ class AdminDefaultController extends AbstractController
 
 
     // users
-    #[Route('/users', name: 'all-users')]
-    public function allUsers(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
+    #[Route('/users/actifs', name: 'all_users_actifs')]
+    public function allUsersActifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
+        // $form = $this->createForm(PaginationType::class);
+        // $form->handleRequest($request);
+        
         $usersActif = $userRepository->findBy([
             'actif' => true
         ]);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $form->get('pagination')->getData();
+        //     dd($form->get('pagination')->getData());
+        //     $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
+        //     return $this->redirectToRoute('all_users_actifs', [], Response::HTTP_SEE_OTHER);
+        // }
+        // else {
+            $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
+        // }
+
+        return $this->render('admin/user/users_actifs.html.twig',[
+            'usersActif' => $usersActif,
+            // 'form' => $form
+        ]);
+    }
+    #[Route('/users/inactifs', name: 'all_users_inactifs')]
+    public function allUsersInactifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
+    {
         $usersInactif = $userRepository->findBy([
             'actif' => false
         ]);
-        
-        $usersActif = $paginator->paginate(
-            $usersActif, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            20 // Nombre de résultats par page
-        );
-        $usersInactif = $paginator->paginate(
-            $usersInactif, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            20 // Nombre de résultats par page
-        );
+        $usersInactif = $this->maPagination($usersInactif, $paginator, $request, 5);
 
-        return $this->render('admin/user/users.html.twig',[
-            'usersActif' => $usersActif,
+        return $this->render('admin/user/users_inactifs.html.twig',[
             'usersInactif' => $usersInactif,
         ]);
     }
-    #[Route('/user/{id}', name: 'details-user')]
+
+    #[Route('/user/details/{id}', name: 'details-user', requirements: ['id' => '\d+'])]
     public function detailsUser(User $user): Response
     {
         return $this->render('admin/user/details-user.html.twig',[
             'user' => $user,
         ]);
     }
-    #[Route('/users/disable/{id}', name: 'disable-user')]
-    public function disableUser(User $user, UserRepository $userRepository): Response
+    #[Route('/users/active/{id}', name: 'toggle_active_user', requirements: ['id' => '\d+'])]
+    public function toggleActiveUser(User $user, UserRepository $userRepository): Response
     {
-        $user->setActif(false);
-        $userRepository->add($user, true);
-        return $this->redirectToRoute('details-user', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
-    }
-    #[Route('/users/active/{id}', name: 'active-user')]
-    public function activeUser(User $user, UserRepository $userRepository): Response
-    {
-        $user->setActif(true);
+        if ($user->isActif()) {
+            $user->setActif(false);
+        }else{
+            $user->setActif(true);
+        }
         $userRepository->add($user, true);
         return $this->redirectToRoute('details-user', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
     }
 
 
     // annonces
-    #[Route('/annonce', name: 'all-annonces')]
-    public function annonce(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
+    #[Route('/annonces/actives', name: 'all_annonces_actives')]
+    public function allAnnonceActives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
     {
         $annoncesActif = $annonceRepository->findBy([
             'actif' => true
         ]);
+        $annoncesActif = $this->maPagination($annoncesActif, $paginator, $request, 5);
+
+        return $this->render('admin/annonce/annonces_actives.html.twig',[
+            'annoncesActif' => $annoncesActif
+        ]);
+    }
+    #[Route('/annonces/inactives', name: 'all_annonces_inactives')]
+    public function allAnnonceInactives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
+    {
         $annoncesInactif = $annonceRepository->findBy([
             'actif' => false
         ]);
-        $annoncesActif = $paginator->paginate(
-            $annoncesActif, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            20 // Nombre de résultats par page
-        );
-        $annoncesInactif = $paginator->paginate(
-            $annoncesInactif, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            20 // Nombre de résultats par page
-        );
+        $annoncesInactif = $this->maPagination($annoncesInactif, $paginator, $request, 5);
 
-        return $this->render('admin/annonce/annonces.html.twig',[
-            'annoncesActif' => $annoncesActif,
+        return $this->render('admin/annonce/annonces_inactives.html.twig',[
             'annoncesInactif' => $annoncesInactif
         ]);
     }
@@ -171,44 +188,40 @@ class AdminDefaultController extends AbstractController
             'annonce' => $annonce,
         ]);
     }
-    #[Route('/annonce/disable/{id}', name: 'disable-annonce')]
-    public function disableAnnonce(Annonce $annonce, AnnonceRepository $annonceRepository): Response
+    #[Route('/annonce/active/{id}', name: 'toggle_active_annonce')]
+    public function toggleActiveAnnonce(Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
-        $annonce->setActif(false);
-        $annonceRepository->add($annonce, true);
-        return $this->redirectToRoute('details-annonce', ['id' => $annonce->getId()], Response::HTTP_SEE_OTHER);
-    }
-    #[Route('/annonce/active/{id}', name: 'active-annonce')]
-    public function activeAnnonce(Annonce $annonce, AnnonceRepository $annonceRepository): Response
-    {
-        $annonce->setActif(true);
+        if ($annonce->isActif()) {
+            $annonce->setActif(false);
+        }else{
+            $annonce->setActif(true);
+        }
         $annonceRepository->add($annonce, true);
         return $this->redirectToRoute('details-annonce', ['id' => $annonce->getId()], Response::HTTP_SEE_OTHER);
     }
 
     // boutiques
-    #[Route('/boutique', name: 'all-boutiques')]
-    public function boutique(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
+    #[Route('/boutiques/actives', name: 'all_boutiques_actives')]
+    public function allBoutiquesActives(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
     {
         $boutiquesActif = $boutiqueRepository->findBy([
             'actif' => true
         ]);
+        $boutiquesActif = $this->maPagination($boutiquesActif, $paginator, $request, 5);
+
+        return $this->render('admin/boutique/boutiques_actives.html.twig',[
+            'boutiquesActif' => $boutiquesActif
+        ]);
+    }
+    #[Route('/boutiques/inactives', name: 'all_boutiques_inactives')]
+    public function allBoutiquesInactives(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
+    {
         $boutiquesInactif = $boutiqueRepository->findBy([
             'actif' => false
         ]);
-        $boutiquesActif = $paginator->paginate(
-            $boutiquesActif, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            20 // Nombre de résultats par page
-        );
-        $boutiquesInactif = $paginator->paginate(
-            $boutiquesInactif, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            20 // Nombre de résultats par page
-        );
+        $boutiquesInactif = $this->maPagination($boutiquesInactif, $paginator, $request, 5);
 
-        return $this->render('admin/boutique/boutiques.html.twig',[
-            'boutiquesActif' => $boutiquesActif,
+        return $this->render('admin/boutique/boutiques_inactives.html.twig',[
             'boutiquesInactif' => $boutiquesInactif
         ]);
     }
@@ -219,41 +232,74 @@ class AdminDefaultController extends AbstractController
             'boutique' => $boutique,
         ]);
     }
-    #[Route('/boutique/disable/{id}', name: 'disable-boutique')]
-    public function disableBoutique(Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
+    #[Route('/boutique/active/{id}', name: 'toggle_active_boutique')]
+    public function toggleActiveBoutique(Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
-        $boutique->setActif(false);
-        $boutiqueRepository->add($boutique, true);
-        return $this->redirectToRoute('details-boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
-    }
-    #[Route('/boutique/active/{id}', name: 'active-boutique')]
-    public function activeBoutique(Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
-    {
-        $boutique->setActif(true);
+        if ($boutique->isActif()) {
+            $boutique->setActif(false);
+        }else{
+            $boutique->setActif(true);
+        }
         $boutiqueRepository->add($boutique, true);
         return $this->redirectToRoute('details-boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
     
+    // diapo page home
     #[Route('/hero', name: 'images_hero')]
-    public function imagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, UploadImage $uploadImage): Response
+    public function imagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, PaginatorInterface $paginator): Response
     {
         $imagesHero = $imagesHeroRepository->findAll();
-        $form = $this->createForm(ImagesHeroType::class);
-        $form->handleRequest($request);
+        $imagesHero = $this->maPagination($imagesHero, $paginator, $request, 5);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageHero = $form->get('upload')->getData();
-            // dd($imageHero);
-            $uploadImage->uploadHero($imageHero);
-            return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('admin/hero.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('admin/diapo_home/hero.html.twig', [
             'imagesHero' => $imagesHero
         ]);
     }
-    #[Route('/hero/delete/{id}', name: 'delete_images_hero')]
+    #[Route('/hero/new', name: 'new_images_hero', methods: ['GET', 'POST'])]
+    public function newImagesHero(Request $request, UploadImage $uploadImage): Response
+    {
+        $image = new ImagesHero();
+        $form = $this->createForm(ImagesHeroType::class, $image);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $image->setPosition($form->get('position')->getData());
+            $imageHero = $form->get('upload')->getData();
+            $uploadImage->uploadHero($imageHero, $image);
+            return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('admin/diapo_home/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    #[Route('/hero/edit/{id}', name: 'edit_images_hero', methods: ['GET', 'POST'])]
+    public function editImagesHero(Request $request, ImagesHero $image, UploadImage $uploadImage, ImagesHeroRepository $imagesHeroRepository): Response
+    {
+        $form = $this->createForm(ImagesHeroType::class, $image);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('position')->getData()) {
+                $image->setPosition($form->get('position')->getData());
+            }
+            if ($form->get('upload')->getData()) {
+                $imageHero = $form->get('upload')->getData();
+                $uploadImage->uploadHero($imageHero, $image);
+            }
+            else {
+                $image->setTitle($image->getTitle());
+                $imagesHeroRepository->add($image, true);
+            }
+            
+            return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('admin/diapo_home/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    #[Route('/hero/delete/{id}', name: 'delete_images_hero', methods: ['POST'])]
     public function deleteImagesHero(ImagesHero $imageHero, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $imagesHeroRepository->remove($imageHero, true);
@@ -261,30 +307,28 @@ class AdminDefaultController extends AbstractController
         return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
     }
 
-    // boutiques
-    #[Route('/avis', name: 'all-avis')]
-    public function avis(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
+    // avis
+    #[Route('/avis/actifs', name: 'all_avis_actifs')]
+    public function allAvisActifs(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
     {
         $avisActif = $avisRepository->findBy([
             'actif' => true
         ]);
+        $avisActif = $this->maPagination($avisActif, $paginator, $request, 5);
+
+        return $this->render('admin/avis/avis_actifs.html.twig',[
+            'avisActif' => $avisActif
+        ]);
+    }
+    #[Route('/avis/inactifs', name: 'all_avis_inactifs')]
+    public function allAvisInactifs(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
+    {
         $avisInactif = $avisRepository->findBy([
             'actif' => false
         ]);
-        
-        $avisActif = $paginator->paginate(
-            $avisActif, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            2 // Nombre de résultats par page
-        );
-        $avisInactif = $paginator->paginate(
-            $avisInactif, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            20 // Nombre de résultats par page
-        );
+        $avisInactif = $this->maPagination($avisInactif, $paginator, $request, 5);
 
-        return $this->render('admin/avis/avis.html.twig',[
-            'avisActif' => $avisActif,
+        return $this->render('admin/avis/avis_inactifs.html.twig',[
             'avisInactif' => $avisInactif
         ]);
     }
@@ -295,38 +339,15 @@ class AdminDefaultController extends AbstractController
             'avi' => $avis,
         ]);
     }
-    #[Route('/avis/disable/{id}', name: 'disable-avis')]
-    public function disableAvis(Avis $avis, AvisRepository $avisRepository): Response
+    #[Route('/avis/active/{id}', name: 'toggle_active_avis')]
+    public function toggleActiveAvis(Avis $avis, AvisRepository $avisRepository): Response
     {
-        $avis->setActif(false);
+        if ($avis->isActif()) {
+            $avis->setActif(false);
+        }else{
+            $avis->setActif(true);
+        }
         $avisRepository->add($avis, true);
         return $this->redirectToRoute('details-avis', ['id' => $avis->getId()], Response::HTTP_SEE_OTHER);
-    }
-    #[Route('/avis/active/{id}', name: 'active-avis')]
-    public function activeAvis(Avis $avis, AvisRepository $avisRepository): Response
-    {
-        $avis->setActif(true);
-        $avisRepository->add($avis, true);
-        return $this->redirectToRoute('details-avis', ['id' => $avis->getId()], Response::HTTP_SEE_OTHER);
-    }
-
-    public function configPaginator(ContainerConfigurator $configurator, $key): void
-    {
-        $configurator->extension('knp_paginator', [
-            'page_range' => 5,                        // number of links shown in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links
-            'default_options' => [
-                'page_name' => $key,                // page query parameter name
-                'sort_field_name' => 'sort',          // sort field query parameter name
-                'sort_direction_name' => 'direction', // sort direction query parameter name
-                'distinct' => true,                   // ensure distinct results, useful when ORM queries are using GROUP BY statements
-                'filter_field_name' => 'filterField', // filter field query parameter name
-                'filter_value_name' => 'filterValue'  // filter value query parameter name
-            ],
-            'template' => [
-                'pagination' => '@KnpPaginator/Pagination/sliding.html.twig',     // sliding pagination controls template
-                'sortable' => '@KnpPaginator/Pagination/sortable_link.html.twig', // sort link template
-                'filtration' => '@KnpPaginator/Pagination/filtration.html.twig'   // filters template
-            ]
-        ]);
     }
 }

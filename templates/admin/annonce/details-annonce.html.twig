@@ -4,7 +4,7 @@
 
 {% block body %}
 <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
-    <div class="card">
+    <div class="card_annonce">
         <h3 class="title">{{ annonce.title }}</h3>
         <div class="image-card">
             <img src="{{ asset('asset/images/logo-paul.svg') }}"/>
@@ -16,11 +16,11 @@
             {% if annonce.actif %}
                 <p><span>Status : </span>Actif</p>
                 <div>
-                    <a href="{{ path('disable-annonce', {id: annonce.id}) }}" class="action">Rendre inactif</a>
+                    <a href="{{ path('toggle_active_annonce', {id: annonce.id}) }}" class="action">Rendre inactif</a>
             {% else %}
                 <p><span>Status : </span>Inactif</p>
                 <div>
-                    <a href="{{ path('active-annonce', {id: annonce.id}) }}" class="action">Rendre actif</a>
+                    <a href="{{ path('toggle_active_annonce', {id: annonce.id}) }}" class="action">Rendre actif</a>
             {% endif %}
                 <a href="{{ path('new_conversation_with_id_annonce', {id: annonce.boutique.user.id, id_annonce: annonce.id}) }}" class="action">Demander une modification</a>
                 <a href="{{ path('details-user', {id: annonce.boutique.user.id}) }}" class="action">Voir l'utilisateur</a>

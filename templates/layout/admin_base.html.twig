@@ -1,234 +1,205 @@
 <!DOCTYPE html>
 <html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>
+            {% block title %}Administration{% endblock %}
+        </title>
+        <link rel="icon" href="{{ asset('images/logo-sans-fond.png') }}" >
+        <link rel="stylesheet" href="//use.fontawesome.com/releases/v6.0.0/css/all.css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}" type="text/css">
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon" href="{{ asset('images/logo-sans-fond.png') }}">
-    <meta name="author" content="name">
-    <meta name="description" content="description here">
-    <meta name="keywords" content="keywords,here">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/> <!--Replace with your tailwind.css once created-->
-    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet"> <!--Totally optional :) -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Unkempt:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}" type="text/css">
-    {% block stylesheets %}
-    {% endblock %}
-</head>
-
-<body class="bg-gray-800 font-sans leading-normal tracking-normal mt-12">
-
-<header>
-    <!--Nav-->
-    <nav aria-label="menu nav" class="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0">
-
-        <div class="flex flex-wrap items-center justify-content-between">
-            <div class="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
-                <a href="{{ path('dashboard') }}" aria-label="Home">
-                    <span class="text-xl pl-2"><i class="em em-grinning"></i></span>
-                </a>
-            </div>
-            <div class="flex w-full pt-2 content-center justify-between md:w-1/3 md:justify-end">
-                <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
-                    <li class="flex-1 md:flex-none md:mr-3">
-                        <div class="relative inline-block">
-                            <button onclick="toggleDD('myDropdown')" class="drop-button text-white py-2 px-2"> <span class="pr-2"><i class="em em-robot_face"></i></span> Bonjour, {{ app.user.name|capitalize }} <svg class="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg></button>
-                            <div id="myDropdown" class="dropdownlist absolute bg-gray-800 text-white right-0 mt-3 p-3 overflow-auto z-30 invisible">
-                                <div class="border border-gray-800"></div>
-                                <a href="{{ path('admin_view_profil', {id: app.user.id}) }}" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa-solid fa-user"></i></i> Profil</a>
-                                <a href="{{ path('app_logout') }}" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a>
-                            </div>
+    <body id="page-top">
+        <div id="wrapper">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
+                <li style="margin: 0" class="">
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ path('dashboard') }}"><i class="fa-solid fa-hammer"></i><span>Tableau de bord</span></a>
+                </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('homepage') }}">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Retour au site</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('images_hero') }}">
+                        <i class="fa-solid fa-image"></i>
+                        <span>Diaporama page home</span>
+                    </a>
+                </li>
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Création
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
+                       aria-expanded="true" aria-controls="collapseUtilities" >
+                        <i class="fa-solid fa-list"></i>
+                        <span>Catégories</span>
+                    </a>
+                    <div id="collapseCategories" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('app_category_index') }}">Catégories</a>
+                            <a class="collapse-item" href="{{ path('app_category_new') }}">Nouvelle catégorie</a>
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                </li>
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Modération
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilisateur"
+                       aria-expanded="true" aria-controls="collapseUtilities" >
+                        <i class="fa-solid fa-users"></i>
+                        <span>Utilisateurs</span>
+                    </a>
+                    <div id="collapseUtilisateur" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('all_users_actifs') }}">Utilisateurs actifs</a>
+                            <a class="collapse-item" href="{{ path('all_users_inactifs') }}">Utilisateurs inactifs</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoutique"
+                       aria-expanded="true" aria-controls="collapseUtilities" >
+                        <i class="fa-solid fa-shop"></i>
+                        <span>Boutiques</span>
+                    </a>
+                    <div id="collapseBoutique" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('all_boutiques_actives') }}">Boutiques actives</a>
+                            <a class="collapse-item" href="{{ path('all_boutiques_inactives') }}">Boutiques inactives</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAnnonce"
+                       aria-expanded="true" aria-controls="collapseUtilities" >
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        <span>Annonces</span>
+                    </a>
+                    <div id="collapseAnnonce" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('all_annonces_actives') }}">Annonce actives</a>
+                            <a class="collapse-item" href="{{ path('all_annonces_inactives') }}">Annonces inactives</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAvis"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fa-solid fa-comment"></i>
+                        <span>Mes avis</span>
+                    </a>
+                    <div id="collapseAvis" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('all_avis_actifs') }}">Avis actifs</a>
+                            <a class="collapse-item" href="{{ path('all_avis_inactifs') }}">Avis inactifs</a>
+                        </div>
+                    </div>
+                </li>
+                <hr class="sidebar-divider">
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
+            </ul>
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow bg-gradient-secondary">
+                        <button id="sidebarToggleTop" class="btn btn-link d -md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown no-arrow d-sm-none">
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                     aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto w-100 navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small"
+                                                   placeholder="Search for..." aria-label="Search"
+                                                   aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <a class="nav-link dropdown-toggle" href="{{ path('boutique_messagerie') }}" id="messagesDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Messages <i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}
+                                </a>
+                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="messagesDropdown">
+                                    <h6 class="dropdown-header">Messages non lus</h6>
+                                    {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
+                                    <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
+                                </div>
+                            </li>
+                            <div class="topbar-divider d-none d-sm-block"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {% block user_avatar %}
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span style="color: white">Bonjour {{app.user.name}}</span></span>
+                                        {% if app.user.image %}
+                                        <img class="img-profile rounded-circle" src="{{ asset('uploads/profile/'~app.user.image) }}">
+                                        {% else %}
+                                        <img class="img-profile rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}">
+                                        {% endif %}
+                                    {% endblock %}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="{{ path('boutique_view_profil', {id : app.user.id}) }}">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Mon profil
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ path('app_logout') }}">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Déconnexion
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="container-fluid">
+                        {% block body %}
+                        {% endblock %}
+                    </div>
+                </div>
             </div>
         </div>
 
-    </nav>
-</header>
-
-
-<main>
-    <div class="flex flex-col md:flex-row">
-        <nav aria-label="alternative nav">
-            <div class="bg-gray-800 shadow-xl fixed bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-48 content-center largeur-nav">
-                <div class="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between largeur-nav">
-                    <ul class="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
-                        <li class="mr-3 flex-1">
-                            <a href="{{ path('homepage') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
-                                <i class="fa-solid fa-house pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Retour au site</span>
-                            </a>
-                        </li>
-                        <li class="mr-3 flex-1">
-                            {% if app.request.attributes.get('_route') == 'dashboard' %}
-                                <a href="{{ path('dashboard') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-indigo-500">
-                                    <i class="fa-solid fa-hammer pr-0 md:pr-3 text-indigo-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Tableau de bord</span>
-                                </a>
-                            {% else %}
-                                <a href="{{ path('dashboard') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:indigo-gray-500">
-                                    <i class="fa-solid fa-house pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Tableau de bord</span>
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="mr-3 flex-1">
-                            {% if app.request.attributes.get('_route') == 'images_hero' %}
-                                <a href="{{ path('images_hero') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-yellow-500">
-                                    <i class="fa-solid fa-image pr-0 md:pr-3 text-yellow-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Diapo page home</span>
-                                </a>
-                            {% else %}
-                                <a href="{{ path('images_hero') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-yellow-500">
-                                    <i class="fa-solid fa-image pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Diapo page home</span>
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="mr-3 flex-1">
-                            {% if app.request.attributes.get('_route') == 'all-users' %}
-                                <a href="{{ path('all-users') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-purple-500">
-                                    <i class="fa-solid fa-users pr-0 md:pr-3 text-purple-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Utilisateurs</span>
-                                </a>
-                            {% elseif app.request.attributes.get('_route') == 'details-user' %}
-                                <a href="{{ path('all-users') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-purple-500">
-                                    <i class="fa-solid fa-users pr-0 md:pr-3 text-purple-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Utilisateurs</span>
-                                </a>
-                            {% else %}
-                                <a href="{{ path('all-users') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
-                                    <i class="fa-solid fa-users pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Utilisateurs</span>
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="mr-3 flex-1">
-                            {% if app.request.attributes.get('_route') == 'all-annonces' %}
-                                <a href="{{ path('all-annonces') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-blue-600">
-                                    <i class="fa-solid fa-clipboard-list pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Annonces</span>
-                                </a>
-                            {% elseif app.request.attributes.get('_route') == 'details-annonce' %}
-                                <a href="{{ path('all-annonces') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-blue-600">
-                                    <i class="fa-solid fa-clipboard-list pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Annonces</span>
-                                </a>
-                            {% else %}
-                                <a href="{{ path('all-annonces') }}" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-blue-600">
-                                    <i class="fa-solid fa-clipboard-list pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Annonces</span>
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="mr-3 flex-1">
-                            {% if app.request.attributes.get('_route') == 'all-boutiques' %}
-                                <a href="{{ path('all-boutiques') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-red-500">
-                                    <i class="fa-solid fa-shop pr-0 md:pr-3 text-red-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Boutiques</span>
-                                </a>
-                            {% elseif app.request.attributes.get('_route') == 'details-boutique' %}
-                                <a href="{{ path('all-boutiques') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-red-500">
-                                    <i class="fa-solid fa-shop pr-0 md:pr-3 text-red-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Boutiques</span>
-                                </a>
-                            {% else %}
-                                <a href="{{ path('all-boutiques') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
-                                    <i class="fa-solid fa-shop pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Boutiques</span>
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="mr-3 flex-1">
-                            {% if app.request.attributes.get('_route') == 'all-avis' %}
-                                <a href="{{ path('all-boutiques') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-pink-500">
-                                    <i class="fa-solid fa-comment pr-0 md:pr-3 text-pink-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Avis</span>
-                                </a>
-                            {% elseif app.request.attributes.get('_route') == 'details-avis' %}
-                                <a href="{{ path('all-boutiques') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-pink-500">
-                                    <i class="fa-solid fa-comment pr-0 md:pr-3 text-pink-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Avis</span>
-                                </a>
-                            {% else %}
-                                <a href="{{ path('all-avis') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
-                                    <i class="fa-solid fa-comment pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Avis</span>
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="mr-3 flex-1">
-                            {% if app.request.attributes.get('_route') == 'app_category_index' %}
-                                <a href="{{ path('app_category_index') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-green-500">
-                                    <i class="fa-solid fa-list pr-0 md:pr-3 text-green-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Catégories</span>
-                                </a>
-                            {% elseif app.request.attributes.get('_route') == 'app_category_show' %}
-                                <a href="{{ path('app_category_index') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-green-500">
-                                    <i class="fa-solid fa-list pr-0 md:pr-3 text-green-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Catégories</span>
-                                </a>
-                            {% elseif app.request.attributes.get('_route') == 'details-sous-cat' %}
-                                <a href="{{ path('app_category_index') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-green-500">
-                                    <i class="fa-solid fa-list pr-0 md:pr-3 text-green-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Catégories</span>
-                                </a>
-                            {% else %}
-                                <a href="{{ path('app_category_index') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-green-500">
-                                    <i class="fa-solid fa-list pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Catégories</span>
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="mr-3 flex-1">
-                            {% if app.request.attributes.get('_route') == 'app_conversation_index' %}
-                                <a href="{{ path('app_conversation_index') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-yellow-500">
-                                    <i class="fa-solid fa-message pr-0 md:pr-3 text-yellow-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Conversations{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</span>
-                                </a>
-                            {% elseif app.request.attributes.get('_route') == 'conversation_message' %}
-                                <a href="{{ path('app_conversation_index') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 border-yellow-500">
-                                    <i class="fa-solid fa-message pr-0 md:pr-3 text-yellow-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Conversations{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</span>
-                                </a>
-                            {% else %}
-                                <a href="{{ path('app_conversation_index') }}" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-yellow-500">
-                                    <i class="fa-solid fa-message pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Conversations{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</span>
-                                </a>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        {% block body %}
+        <script src="{{ asset('bootstrap/vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/vendor/js/sb-admin-2.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {{ encore_entry_script_tags('back_boutique') }}
+        {% block javascripts %}
         {% endblock %}
-    </div>
-</main>
-
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js" integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k="
-crossorigin="anonymous"></script>
-<script src="https://unpkg.com/scrollreveal"></script>
-<script>
-
-    /*Toggle dropdown list*/
-    function toggleDD(myDropMenu) {
-        document.getElementById(myDropMenu).classList.toggle("invisible");
-    }
-    /*Filter dropdown options*/
-    function filterDD(myDropMenu, myDropMenuSearch) {
-        var input, filter, ul, li, a, i;
-        input = document.getElementById(myDropMenuSearch);
-        filter = input.value.toUpperCase();
-        div = document.getElementById(myDropMenu);
-        a = div.getElementsByTagName("a");
-        for (i = 0; i < a.length; i++) {
-            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-            } else {
-                a[i].style.display = "none";
-            }
-        }
-    }
-    // Close the dropdown menu if the user clicks outside of it
-    window.onclick = function(event) {
-        if (!event.target.matches('.drop-button') && !event.target.matches('.drop-search')) {
-            var dropdowns = document.getElementsByClassName("dropdownlist");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (!openDropdown.classList.contains('invisible')) {
-                    openDropdown.classList.add('invisible');
-                }
-            }
-        }
-    }
-</script>
-{% block javascripts %}
-{% endblock %}
+    </body>
 </html>

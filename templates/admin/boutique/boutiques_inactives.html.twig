@@ -1,0 +1,66 @@
+{% extends 'layout/admin_base.html.twig' %}
+
+{% block title %}Boutiques Inactives{% endblock %}
+
+{% block body %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Boutiques inactives</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="js-filter-pagination" id="pagination_box">
+                    {{ knp_pagination_render(boutiquesInactif) }}
+                </div>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Adresse</th>
+                            <th>Créée le :</th>
+                            <th>Actif</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Adresse</th>
+                            <th>Créée le :</th>
+                            <th>Actif</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for boutique in boutiquesInactif %}
+                            <tr>
+                                <td>{{ boutique.id }}</td>
+                                <td>{{ boutique.title|length > 20 ? boutique.title|striptags|slice(0, 20) ~ '...' : boutique.title }}</td>
+                                <td>{{ boutique.description|length > 20 ? boutique.description|striptags|slice(0, 20) ~ '...' : boutique.description }}</td>
+                                <td>{{ boutique.adresse|length > 20 ? boutique.adresse|striptags|slice(0, 20) ~ '...' : boutique.adresse }}</td>
+                                <td>{{ boutique.createdAt|date('Y-m-d H:i:s') }}</td>
+                                {% if boutique.actif %}
+                                    <td>Actif</td>
+                                {% else %}
+                                    <td>Inactif</td>
+                                {% endif %}
+                                <td><a href="{{ path('details-boutique', {id: boutique.id}) }}" class="btn btn-primary">Détails</a></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Pas de données</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="js-filter-pagination" id="pagination_box">
+                    {{ knp_pagination_render(boutiquesInactif) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
