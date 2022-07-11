@@ -20,26 +20,24 @@ $(document).on('change', '.annonce_category', function () {
 
 // Ajax API Request for City Coordinates
 
+const adress          = $('#boutique_adress').val();
 const search_input    = $('#boutique_search');
+const city_ul         = $('#city_suggest');
 const city_input      = $('#boutique_city');
 const postcode_input  = $('#boutique_postcode');
-const city_select     = $('#city_suggest');
-const coordinates_box = $('#boutique_coordinates');
-const adress          = $('#boutique_adress').val();
-// let search            = '';
 
 search_input.on('keyup', function () {
     let city = search_input.val();
     let citySuggest = [];
-    city_select.empty();
+    city_ul.empty();
     isNaN(city)? search = 'nom' : search = 'codePostal';
-    if (city.length >= 3){
+    if (isNaN(city) && city.length >= 3 || !isNaN(city) && city.length === 5){
         $.ajax({
             url: 'https://geo.api.gouv.fr/communes?'+search+'='+ city +'&limit=7 ',
             contentType: "application/json",
             dataType: 'json',
             success: function(result){
-                city_select.empty();
+                city_ul.empty();
                 if (result.length > 0){
                     for (let i = 0; i < result.length; i++)
                     {
@@ -50,51 +48,28 @@ search_input.on('keyup', function () {
                         }else{
                             city_postcode = result[i].codesPostaux[0];
                         }
-                        let li = '<li class="city_answer" value="'+city_name+'">'+city_name+' ('+city_postcode+')</li>'
+                        let li = '<li data-city="'+city_name+'" data-postcode="'+city_postcode+'">'+city_name+' ('+city_postcode+')</li>'
                         citySuggest.push(li)
                     }
                 }else{
-                    let li = '<li>Ville ou code postal incorrects</li>'
+                    if (isNaN(city)){
+                         li = '<li>Ville inconnue</li>'
+                    }else{
+                         li = '<li>Code postal inconnu</li>'
+                    }
                     citySuggest.push(li)
                 }
-                city_select.append(citySuggest);
-                let li = city_select.children();
+                city_ul.append(citySuggest);
+                let li = city_ul.children();
 
                 li.on('click',function () {
                     let city_infos = $(this).html();
                     search_input.val(city_infos);
-                    city_select.empty();
-                    let city_infos_array = search_input.val().split(' ');
-                    let city_name        = city_infos_array[0]
-                    let postcode         = city_infos_array[1].replace( /[^A-Za-z0-9]/g ,'')
+                    city_ul.empty();
+                    let city_name       = $(this).attr('data-city')
+                    let postcode        = $(this).attr('data-postcode')
                     city_input.val(city_name)
                     postcode_input.val(postcode)
-                    let formatedAdress   = decodeURIComponent(  adress.replace( /[^A-Za-z0-9]/g ,'+'))
-
-                    let endpoint = '';
-                    if (adress.length > 0){
-                        endpoint = 'https://api-adresse.data.gouv.fr/search/?q='  + formatedAdress +'&city='+ city_name+  '&postcode=' + postcode +'&limit=1'
-                    }else{
-                        endpoint = 'https://api-adresse.data.gouv.fr/search/?q=postcode=' + postcode + '&city='+ city_name +'&limit=1'
-                    }
-                    console.log(endpoint)
-                        $.ajax({
-                        url: endpoint,
-                        contentType: "application/json ; charset:ISO-8859-1",
-                        dataType: 'json',
-                        success: function (response) {
-                            console.log(response)
-                            if (response.features.length > 0){
-                                let city_props  = response.features[0].geometry.coordinates;
-                                let coordinates = city_props[0] + city_props[1];
-                                coordinates_box.val(coordinates);
-                                console.log( coordinates_box.val())
-                            }else{
-                                console.log('Failure')
-                                city_select.append('<li>L\'adresse ne correspond pas.</li>');
-                            }
-                        }
-                    })
                 })
             }
         })

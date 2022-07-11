@@ -111,13 +111,13 @@ class BoutiqueController extends AbstractController
     public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, CallApi $callApi): Response
     {
         $form = $this->createForm(BoutiqueType::class, $boutique);
+        $form->get('search')->setData($boutique->getCity().' ('.$boutique->getPostcode().')');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($this->getUser());
             $boutique->setModifiedAt(new \DateTimeImmutable());
             $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('postcode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData()));
-
             $boutiqueRepository->add($boutique, true);
 
             $boutiqueImage = $form->get('upload')->getData();
