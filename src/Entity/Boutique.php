@@ -84,6 +84,9 @@ class Boutique
     #[ORM\OneToMany(mappedBy: 'boutique', targetEntity: Favory::class)]
     private $favories;
 
+    #[ORM\Column(type: 'boolean')]
+    private $card_active;
+
     public function __construct()
     {
         $this->imagesBoutiques = new ArrayCollection();
@@ -345,6 +348,18 @@ class Boutique
                 $favory->setBoutique(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isCardActive(): ?bool
+    {
+        return $this->card_active;
+    }
+
+    public function setCardActive(bool $card_active): self
+    {
+        $this->card_active = $card_active;
 
         return $this;
     }

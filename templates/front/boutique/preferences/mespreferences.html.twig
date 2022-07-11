@@ -1,0 +1,47 @@
+{% extends 'layout/boutique_base.html.twig' %}
+
+{% block title %}
+    <title>Mes préférences</title>
+{% endblock %}
+
+{% block body %}
+    <div class="card shadow mb-4 boutique_detail">
+        <div class="card-header py-3  d-flex justify-content-between align-items-center">
+            <div class="pref_card">
+                <p>Afficher la carte sur ma page publique</p>
+                <label class="switch">
+                    <a href="{{ path('app_toggle_Cardactive') }}">
+                        <input id="card_checkbox" type="checkbox"  {% if boutique.cardActive  %} checked {% endif %}>
+                        <span class="slider round"></span>
+                    </a>
+                </label>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            const boutton_card = $('.slider')
+            const input_card   = $('#card_checkbox')
+            boutton_card.click( function (e) {
+                e.preventDefault();
+                let path = '{{ path('app_toggle_Cardactive') }}';
+                $.ajax({
+                    type: "POST",
+                    url: path,
+                    dataType : 'html',
+                    data: {{ boutique.id }},
+                    success: function(){
+                        if (input_card.prop('checked') === true){
+                            input_card.prop('checked', false)
+                        }else{
+                            input_card.prop('checked', true)
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+{% endblock %}

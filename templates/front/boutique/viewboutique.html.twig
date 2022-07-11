@@ -71,7 +71,7 @@
         </div>
     </section>
 
-    {% if annonce == null and boutique.coordinates != null %}
+    {% if annonce == null and boutique.coordinates != null and boutique.cardActive %}
         {% if boutique.adress == '' %}
             {% set fullAdress = 'false' %}
         {% else %}

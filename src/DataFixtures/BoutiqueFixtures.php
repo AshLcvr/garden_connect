@@ -33,13 +33,10 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setTelephone('0744556677')
             ->setUser($this->getReference('polo'))
             ->setActif(1)
+            ->setCardActive(1)
             ->addImagesBoutique($imageBoutique)
             ->setCreatedAt(new \DateTimeImmutable('-2 week'));
         $manager->persist($boutiquePolo);
-
-        $imageBoutique2 = (new ImagesBoutique())
-            ->setTitle('imageBoutiqueDefault.jpg');
-            $manager->persist($imageBoutique2);
 
         $boutiqueSacha= (new Boutique())
             ->setTitle('La boutique de Sacha')
@@ -50,13 +47,10 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setCoordinates([0.729845, 49.374605])
             ->setUser($this->getReference('sacha'))
             ->setActif(1)
+            ->setCardActive(1)
             ->setCreatedAt(new \DateTimeImmutable())
-            ->addImagesBoutique($imageBoutique2);
+            ->addImagesBoutique($imageBoutique);
         $manager->persist($boutiqueSacha);
-
-        $imageBoutique3 = (new ImagesBoutique())
-            ->setTitle('imageBoutiqueDefault.jpg');
-            $manager->persist($imageBoutique3);
 
         $boutiqueOrianne = (new Boutique())
             ->setTitle('La boutique de Orianne')
@@ -67,8 +61,9 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setCoordinates([0.525508, 49.346658])
             ->setUser($this->getReference('orianne'))
             ->setActif(1)
+            ->setCardActive(1)
             ->setCreatedAt(new \DateTimeImmutable())
-            ->addImagesBoutique($imageBoutique3);
+            ->addImagesBoutique($imageBoutique);
         $manager->persist($boutiqueOrianne);
 
         // boutique des vendeurs (userFixtures)
@@ -83,8 +78,9 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
                 ->setCoordinates([0.525508, 49.346658])
                 ->setUser($this->getReference('vendeur_' . $i))
                 ->setActif(1)
+                ->setCardActive(1)
                 ->setCreatedAt(new \DateTimeImmutable())
-                ->addImagesBoutique($imageBoutique3);
+                ->addImagesBoutique($imageBoutique);
             $manager->persist($boutiqueVendeur);
         }
 
