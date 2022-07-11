@@ -64,37 +64,37 @@ search_input.on('keyup', function () {
                     let city_infos = $(this).html();
                     search_input.val(city_infos);
                     city_select.empty();
-                    // let city_infos_array = search_input.val().split(' ');
-                    // let city_name        = city_infos_array[0]
-                    // let postcode         = city_infos_array[1].replace( /[^A-Za-z0-9]/g ,'')
-                    // city_input.val(city_name)
-                    // postcode_input.val(postcode)
-                    // let formatedAdress   = decodeURIComponent(  adress.replace( /[^A-Za-z0-9]/g ,'+'))
-                    //
-                    // let endpoint = '';
-                    // if (adress.length > 0){
-                    //     endpoint = 'https://api-adresse.data.gouv.fr/search/?q='  + formatedAdress +'&city='+ city_name+  '&postcode=' + postcode +'&limit=1'
-                    // }else{
-                    //     endpoint = 'https://api-adresse.data.gouv.fr/search/?q=postcode=' + postcode + '&city='+ city_name +'&limit=1'
-                    // }
-                    // console.log(endpoint)
-                    //     $.ajax({
-                    //     url: endpoint,
-                    //     contentType: "application/json ; charset:ISO-8859-1",
-                    //     dataType: 'json',
-                    //     success: function (response) {
-                    //         console.log(response)
-                    //         if (response.features.length > 0){
-                    //             let city_props  = response.features[0].geometry.coordinates;
-                    //             let coordinates = city_props[0] + city_props[1];
-                    //             coordinates_box.val(coordinates);
-                    //             console.log( coordinates_box.val())
-                    //         }else{
-                    //             console.log('Failure')
-                    //             city_select.append('<li>L\'adresse ne correspond pas.</li>');
-                    //         }
-                    //     }
-                    // })
+                    let city_infos_array = search_input.val().split(' ');
+                    let city_name        = city_infos_array[0]
+                    let postcode         = city_infos_array[1].replace( /[^A-Za-z0-9]/g ,'')
+                    city_input.val(city_name)
+                    postcode_input.val(postcode)
+                    let formatedAdress   = decodeURIComponent(  adress.replace( /[^A-Za-z0-9]/g ,'+'))
+
+                    let endpoint = '';
+                    if (adress.length > 0){
+                        endpoint = 'https://api-adresse.data.gouv.fr/search/?q='  + formatedAdress +'&city='+ city_name+  '&postcode=' + postcode +'&limit=1'
+                    }else{
+                        endpoint = 'https://api-adresse.data.gouv.fr/search/?q=postcode=' + postcode + '&city='+ city_name +'&limit=1'
+                    }
+                    console.log(endpoint)
+                        $.ajax({
+                        url: endpoint,
+                        contentType: "application/json ; charset:ISO-8859-1",
+                        dataType: 'json',
+                        success: function (response) {
+                            console.log(response)
+                            if (response.features.length > 0){
+                                let city_props  = response.features[0].geometry.coordinates;
+                                let coordinates = city_props[0] + city_props[1];
+                                coordinates_box.val(coordinates);
+                                console.log( coordinates_box.val())
+                            }else{
+                                console.log('Failure')
+                                city_select.append('<li>L\'adresse ne correspond pas.</li>');
+                            }
+                        }
+                    })
                 })
             }
         })

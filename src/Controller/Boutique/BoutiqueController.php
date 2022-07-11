@@ -110,6 +110,7 @@ class BoutiqueController extends AbstractController
     public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
     {
         $form = $this->createForm(BoutiqueType::class, $boutique);
+        $form->get('coordinates')->setData(implode(' ' , $boutique->getCoordinates()));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
