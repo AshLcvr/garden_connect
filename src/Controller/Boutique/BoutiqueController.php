@@ -11,6 +11,7 @@ use App\Form\EditProfilType;
 use App\Repository\AvisRepository;
 use App\Repository\FavoryRepository;
 use App\Service\UploadImage;
+use App\Service\CallApi;
 use App\Entity\ImagesBoutique;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManager;
@@ -107,7 +108,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
-    public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage): Response
+    public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, CallApi $callApi): Response
     {
         $form = $this->createForm(BoutiqueType::class, $boutique);
         $form->handleRequest($request);
@@ -115,6 +116,8 @@ class BoutiqueController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($this->getUser());
             $boutique->setModifiedAt(new \DateTimeImmutable());
+            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('postcode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData()));
+
             $boutiqueRepository->add($boutique, true);
 
             $boutiqueImage = $form->get('upload')->getData();
@@ -134,7 +137,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique-delete/{id}', name: 'app_boutique_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
-    public function delete(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
+    public function deleteBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
             $boutiqueRepository->remove($boutique, true);
@@ -298,11 +301,6 @@ class BoutiqueController extends AbstractController
             'user' => $user,
             'form' => $form,
         ]);
-    }
-
-    private function getCoordinates()
-    {
-
     }
 
 }
