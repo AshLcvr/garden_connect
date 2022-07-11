@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\EngraisNaturelsEtAccessoires;
+namespace App\Service\CategoriesProduits\EngraisNaturelsEtAccessoires;
 
 
 class DataEngraisNaturelsEtAccessoires

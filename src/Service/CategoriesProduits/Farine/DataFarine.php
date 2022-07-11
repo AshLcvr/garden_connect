@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Farine;
+namespace App\Service\CategoriesProduits\Farine;
 
 
 class DataFarine

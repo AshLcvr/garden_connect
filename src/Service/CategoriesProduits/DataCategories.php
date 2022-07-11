@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Categories;
+namespace App\Service\CategoriesProduits;
 
 
 class DataCategories

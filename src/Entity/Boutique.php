@@ -47,8 +47,17 @@ class Boutique
     )]
     private $telephone;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: false)]
-    private $adresse;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $adress;
+
+    #[ORM\Column(type: 'integer')]
+    private $postcode;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $city;
+
+    #[ORM\Column(type: 'array', nullable: true)]
+    private $coordinates = [];
 
     #[ORM\Column(type: 'datetime_immutable')]
     #[Gedmo\Timestampable(on: 'create')]
@@ -74,9 +83,6 @@ class Boutique
 
     #[ORM\OneToMany(mappedBy: 'boutique', targetEntity: Favory::class)]
     private $favories;
-
-    #[ORM\Column(type: 'array', nullable: true)]
-    private $coordinates = [];
 
     public function __construct()
     {
@@ -128,14 +134,51 @@ class Boutique
         return $this;
     }
 
-    public function getAdresse(): ?string
+
+    public function getAdress(): ?string
     {
-        return $this->adresse;
+        return $this->adress;
     }
 
-    public function setAdresse(?string $adresse): self
+    public function setAdress(?string $adress): self
     {
-        $this->adresse = $adresse;
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getPostcode(): ?int
+    {
+        return $this->postcode;
+    }
+
+    public function setPostcode(int $postcode): self
+    {
+        $this->postcode = $postcode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCoordinates(): ?array
+    {
+        return $this->coordinates;
+    }
+
+    public function setCoordinates(?array $coordinates): self
+    {
+        $this->coordinates = $coordinates;
 
         return $this;
     }
@@ -302,18 +345,6 @@ class Boutique
                 $favory->setBoutique(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCoordinates(): ?array
-    {
-        return $this->coordinates;
-    }
-
-    public function setCoordinates(?array $coordinates): self
-    {
-        $this->coordinates = $coordinates;
 
         return $this;
     }

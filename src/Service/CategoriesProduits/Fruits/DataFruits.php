@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Fruits;
+namespace App\Service\CategoriesProduits\Fruits;
 
 
 class DataFruits

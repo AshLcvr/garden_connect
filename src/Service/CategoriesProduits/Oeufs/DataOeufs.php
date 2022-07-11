@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Oeufs;
+namespace App\Service\CategoriesProduits\Oeufs;
 
 
 class DataOeufs

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Panier;
+namespace App\Service\CategoriesProduits\Panier;
 
 
 class DataPanier

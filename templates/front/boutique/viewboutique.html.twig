@@ -72,15 +72,19 @@
     </section>
 
     {% if annonce == null and boutique.coordinates != null %}
+        {% if boutique.adress == '' %}
+            {% set fullAdress = 'false' %}
+        {% else %}
+            {% set fullAdress = 'true' %}
+        {% endif %}
         <section class="wrap">
             <h1 class="boutique_title">Où me trouver?</h1>
         {#           A FAIRE QUAND PASSAGE A VUE
          <button class="btn btn-primary" >Afficher la carte</button>
          #}
-            <div id="boutique_coordinates" style="height: 400px" data-boutique_title="{{ boutique.title }}" data-lon="{{ boutique.coordinates[0] }}" data-lat="{{ boutique.coordinates[1]}}"></div>
+            <div id="boutique_coordinates" style="height: 400px" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lon="{{boutique.coordinates[0]}}" data-lat="{{boutique.coordinates[1]}}"></div>
         </section>
     {% endif %}
-
     {% if annonce != null %}
         <section id="focus_annonce" class="wrap">
             <div id="annonce_card_public">
