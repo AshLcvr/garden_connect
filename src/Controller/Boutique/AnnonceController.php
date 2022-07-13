@@ -2,21 +2,21 @@
 
 namespace App\Controller\Boutique;
 
-use App\Controller\DefaultController;
 use App\Entity\Annonce;
-use App\Entity\ImagesAnnonces;
 use App\Form\AnnonceType;
+use App\Service\UploadImage;
+use App\Entity\ImagesAnnonces;
+use App\Controller\DefaultController;
 use App\Repository\AnnonceRepository;
 use App\Repository\ImagesAnnoncesRepository;
-use App\Service\UploadImage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
-#[Route('/annonce')]
-class AnnonceController extends DefaultController{
-
+#[Route('/boutique/annonce')]
+class AnnonceController extends AbstractController
+{
 
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
     public function indexAnnonce(): Response
@@ -32,7 +32,7 @@ class AnnonceController extends DefaultController{
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function newAnnonce(Request $request,AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
+    public function newAnnonce(Request $request, AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
@@ -49,16 +49,16 @@ class AnnonceController extends DefaultController{
             $annonceRepository->add($annonce, true);
             $annonceImage = $form->get('upload')->getData();
             if (count($annonceImage) <= 4 || empty($annonceImage)) {
-                if ( empty($annonceImage)){
+                if (empty($annonceImage)) {
                     $imageDefault = new ImagesAnnonces();
                     $imageDefault->setTitle('logo-sans-fond.png');
                     $imageDefault->setAnnonce($annonce);
-                    $imagesAnnoncesRepository->add($imageDefault,true);
-                }else{
+                    $imagesAnnoncesRepository->add($imageDefault, true);
+                } else {
                     $uploadImage->uploadAnnonce($annonceImage, $annonce->getId());
                 }
-            }else{
-                $this->addFlash('failure','4 photos max !');
+            } else {
+                $this->addFlash('failure', '4 photos max !');
                 return $this->redirectToRoute('app_annonce_new', [], Response::HTTP_SEE_OTHER);
             }
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
@@ -101,8 +101,8 @@ class AnnonceController extends DefaultController{
             $annonceImage = $form->get('upload')->getData();
             if (count($annonceImage) <= 4 || empty($annonceImage)) {
                 $uploadImage->uploadAnnonce($annonceImage, $annonce->getId());
-            }else{
-                $this->addFlash('failure','4 photos max !');
+            } else {
+                $this->addFlash('failure', '4 photos max !');
                 return $this->redirectToRoute('app_annonce_new', [], Response::HTTP_SEE_OTHER);
             }
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
@@ -117,7 +117,7 @@ class AnnonceController extends DefaultController{
     #[Route('/{id}/delete', name: 'app_annonce_delete', methods: ['POST', 'GET'])]
     public function delete(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $annonce->getId(), $request->request->get('_token'))) {
             $annonceRepository->remove($annonce, true);
         }
 
@@ -129,10 +129,10 @@ class AnnonceController extends DefaultController{
     {
         if ($annonce->isActif()) {
             $annonce->setActif(false);
-        }else{
+        } else {
             $annonce->setActif(true);
         }
-        $annonceRepository->add($annonce,true);
+        $annonceRepository->add($annonce, true);
 
         return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
     }

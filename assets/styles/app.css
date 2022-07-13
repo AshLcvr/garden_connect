@@ -1,11 +1,13 @@
 :root{
-  --vertfonce:#41B04F;
-  --vertclair:#8FC642;
+  --vertfonce:#41b04f;
+  --vertclair:#8fc642;
   --orange:#F7941D;
   --marron:#AB7B52;
   --text-font: 400 14px/1.4 'Roboto', 'Arial', sans-serif;
   --title-font: 700 28px/2.8 'Unkempt', 'Arial', cursive, sans-serif;
+  --menu_link: 18px 'Roboto', 'Arial', sana-serif;
 }
+/* RESET */
 *{
     margin: 0;
     padding: 0;
@@ -31,7 +33,7 @@ img{
     vertical-align: bottom;
 }
 .wrap{
-    max-width: 1000px ;
+    max-width: 1100px ;
     width: 100%;
     margin: 0 auto;
     padding: 0 1rem;

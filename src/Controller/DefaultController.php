@@ -18,11 +18,11 @@ class DefaultController extends AbstractController
     public function index(CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $categories = $categoryRepository->findAll();
-        $annonces = $annonceRepository->findBy(['actif'=> 1],['created_at' => 'DESC'], 4);
+        $annonces = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);
         $imagesHero = $imagesHeroRepository->findAll();
         $user = $this->getUser();
 
-        return $this->render('front/homepage.html.twig',[
+        return $this->render('front/homepage.html.twig', [
             'categories' => $categories,
             'annonces' => $annonces,
             'imagesHero' => $imagesHero,

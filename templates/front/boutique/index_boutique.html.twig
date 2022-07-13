@@ -7,17 +7,31 @@
 {% block body %}
     <section class="boutique_accueil">
         <div class="wrap2">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo Garden Connect" style="width: 60%; margin: 0 auto">
-            <h1 class="m-4 title">  {{ boutique.title }} </h1>
-            <h3><u>Bienvenue sur votre espace boutique ! </u></h3>
-            <p>D'ici, vous pourrez:</p>
-            <ul>
-                <li> gérer les infos de votre boutique,  </li>
-                <li> ajouter et éditer vos annonces,  </li>
-                <li> accéder à votre messagerie, </li>
-                <li> voir vos avis (émis et reçus) </li>
-            </ul>
-           <a class="btn btn-primary" href="{{ path('view_boutique', {'id' : boutique.id }) }}">Voir ma boutique</a>
+            <h1 class="title_top">  {{ boutique.title }} </h1>
+            <div class="wrapper_text_boutique">
+                <div class="txt_top_boutique">
+                    <h3 class="welcome">Bienvenue sur votre espace boutique&nbsp!</h3>
+                    <div class="message_info">
+                        <p>D'ici, vous pouvez :</p>
+                        <ul>
+                            <li>accéder aux informations de votre boutique et les modifier (photo, description, coordonnées),</li>
+                            <li>ajouter vos annonces, les modifer, les supprimer ou les désactiver temporairement...</li>
+                            <li>voir les avis que vous avez reçus, gérer ceux que vous avez émis (les modifier ou les supprimer), </li>
+                            <li>accéder à vos messages </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="txt_bottom_boutique">
+                        <div class="button_boutique">
+                            <div class="bloc_form btn-custom">
+                                <span class="hover_effect">
+                                    {# <button type="submit">Voir ma boutique</button> #}
+                                    <a class="" href="{{ path('view_boutique', {'id' : boutique.id }) }}">Voir ma boutique</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
     </section>
 {% endblock %}
