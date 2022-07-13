@@ -8,7 +8,7 @@
         <div id="contener_form">
             {{ form_start(registrationForm, {attr : {novalidate: 'novalidate'}}) }}
                 <h1>Inscription</h1>
-                <div class="bloc_form">
+                <div class="bloc_form register">
                     {{ form_label(registrationForm.surname) }}
                     {{ form_widget(registrationForm.surname) }}
 
@@ -18,7 +18,7 @@
                         {{ form_errors(registrationForm.surname) }}
                     </div>
                 </div>
-                <div class="bloc_form">
+                <div class="bloc_form register">
                     {{ form_label(registrationForm.name) }}
                     {{ form_widget(registrationForm.name) }}
 
@@ -28,7 +28,7 @@
                         {{ form_errors(registrationForm.name) }}
                     </div>
                 </div>
-                <div class="bloc_form">
+                <div class="bloc_form register">
                     {{ form_label(registrationForm.email) }}
                     {{ form_widget(registrationForm.email) }}
 
@@ -39,7 +39,7 @@
                     </div>
                 </div>
 
-                <div class="bloc_form">
+                <div class="bloc_form register">
                     {{ form_label(registrationForm.plainPassword.first) }}
                     {{ form_widget(registrationForm.plainPassword.first) }}
                     <small>{{ form_help(registrationForm.plainPassword) }}</small>
@@ -48,7 +48,7 @@
                         {{ form_errors(registrationForm.plainPassword.first) }}
                     </div>
                 </div>
-                <div class="bloc_form">
+                <div class="bloc_form register">
                     {{ form_label(registrationForm.plainPassword.second) }}
                     {{ form_widget(registrationForm.plainPassword.second) }}
                     <small>{{ form_help(registrationForm.plainPassword) }}</small>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
 
-                <div class="bloc_form">
+                <div class="bloc_form register">
                     {{ form_label(registrationForm.role) }}
                     {{ form_widget(registrationForm.role, {attr : {class :  'radio_box '}}) }}
 
@@ -69,7 +69,7 @@
                     </div>
                 </div>
 
-                <div class="bloc_form">
+                <div class="bloc_form register">
                     {{ form_label(registrationForm.agreeTerms) }}
                     {{ form_widget(registrationForm.agreeTerms) }}
 
@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-                <div class="bloc_form btn-3">
+                <div class="bloc_form btn-custom register">
                     <span class="hover-effect">
                         {{ form_widget(registrationForm.submit) }}
                     </span>

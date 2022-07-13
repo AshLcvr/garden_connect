@@ -21,31 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/boutique/annonce')]
 class AnnonceController extends AbstractController
 {
-    #[Route('/recherche', name: 'app_annonce_recherche', methods: ['GET'])]
-    public function recherche(AnnonceRepository $annonceRepository,Request $request, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
-    {
-        $data = new SearchData();
-        $data->page = $request->get('page',1);
-        $recherche = $this->createForm(SearchType::class,$data);
-        $recherche->handleRequest($request);
-        [$min, $max] = $annonceRepository->findMinMax($data);
-        $annonces = $annonceRepository->findBySearch($data);
-//        if ($request->isXmlHttpRequest()){
-//            if(!$request->get('category') ){
-//                return new JsonResponse([
-//                    'content' => $this->renderView('front/annonce/_annonces.html.twig', ['annonces' => $annonces]),
-//                    'sort' => $this->renderView('front/annonce/_sort.html.twig', ['annonces' => $annonces]),
-//                ]);
-//            }
-//        }
-
-        return $this->render('front/annonce/recherche_annonce.html.twig', [
-            'annonces' => $annonces,
-            'recherche' => $recherche->createView(),
-            'min' => $min,
-            'max' => $max,
-        ]);
-    }
 
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository): Response
@@ -61,7 +36,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function newAnnonce(Request $request,AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
+    public function newAnnonce(Request $request, AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
@@ -78,16 +53,16 @@ class AnnonceController extends AbstractController
             $annonceRepository->add($annonce, true);
             $annonceImage = $form->get('upload')->getData();
             if (count($annonceImage) <= 4 || empty($annonceImage)) {
-                if ( empty($annonceImage)){
+                if (empty($annonceImage)) {
                     $imageDefault = new ImagesAnnonces();
                     $imageDefault->setTitle('logo-sans-fond.png');
                     $imageDefault->setAnnonce($annonce);
-                    $imagesAnnoncesRepository->add($imageDefault,true);
-                }else{
+                    $imagesAnnoncesRepository->add($imageDefault, true);
+                } else {
                     $uploadImage->uploadAnnonce($annonceImage, $annonce->getId());
                 }
-            }else{
-                $this->addFlash('failure','4 photos max !');
+            } else {
+                $this->addFlash('failure', '4 photos max !');
                 return $this->redirectToRoute('app_annonce_new', [], Response::HTTP_SEE_OTHER);
             }
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
@@ -130,8 +105,8 @@ class AnnonceController extends AbstractController
             $annonceImage = $form->get('upload')->getData();
             if (count($annonceImage) <= 4 || empty($annonceImage)) {
                 $uploadImage->uploadAnnonce($annonceImage, $annonce->getId());
-            }else{
-                $this->addFlash('failure','4 photos max !');
+            } else {
+                $this->addFlash('failure', '4 photos max !');
                 return $this->redirectToRoute('app_annonce_new', [], Response::HTTP_SEE_OTHER);
             }
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
@@ -146,7 +121,7 @@ class AnnonceController extends AbstractController
     #[Route('/{id}/delete', name: 'app_annonce_delete', methods: ['POST', 'GET'])]
     public function delete(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $annonce->getId(), $request->request->get('_token'))) {
             $annonceRepository->remove($annonce, true);
         }
 
@@ -158,10 +133,10 @@ class AnnonceController extends AbstractController
     {
         if ($annonce->isActif()) {
             $annonce->setActif(false);
-        }else{
+        } else {
             $annonce->setActif(true);
         }
-        $annonceRepository->add($annonce,true);
+        $annonceRepository->add($annonce, true);
 
         return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
     }

@@ -11,7 +11,9 @@ import "./styles/boutique_public/boutique_public.css";
 // Back Boutique Messagerie
 import "./styles/boutique/messagerie/messagerie.css";
 //Footer
-import "./styles/footer/footer.css";
+// import "./styles/footer/footer.css";
+import "./styles/header/header_boutique.css";
+import "./styles/footer/footer_boutique.css";
 // css, js profil
 import "./styles/profil/profil.css";
 // pagination

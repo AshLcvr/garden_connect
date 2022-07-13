@@ -48,7 +48,7 @@ class AnnonceType extends AbstractType
                 'choice_label' => 'title'
             ])
             ->add('upload', FileType::class,[
-            'label' => 'Ajouter des images à votre annonce (4 max)',
+            'label' => 'Ajoutez des images à votre annonce (4 max)',
             'mapped' => false,
             'required' => false,
             'data_class' => null,
@@ -65,8 +65,8 @@ class AnnonceType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'Seuls les formats PNG, JPEG ou GIF sont acceptés !)',
                         'uploadIniSizeErrorMessage' => 'Votre fichier est trop volumineux !',
-                        'uploadErrorMessage' => 'Erreur dans l \'ajout du fichier!',
-                        'uploadExtensionErrorMessage' => 'Mauvaise Extension !',
+                        'uploadErrorMessage' => 'Erreur dans l \'ajout du fichier !',
+                        'uploadExtensionErrorMessage' => 'Mauvaise extension !',
                         'uploadFormSizeErrorMessage' => 'Votre fichier est trop volumineux !',
                         'uploadNoFileErrorMessage' => 'Aucun fichier n\a été enregistré !',
                     ])

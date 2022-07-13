@@ -17,12 +17,16 @@
     </head>
 
     <body id="page-top">
+        {%  include '_partials/_header_boutique.html.twig' %}
+        <button id="sidebarToggleTop" class="btn btn-link d -md-none rounded-circle mr-3 custom">
+            <i class="fa fa-bars"></i>
+        </button>
         <div id="wrapper">
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
-                <li style="margin: 0" class="">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion side_color custom" id="accordionSidebar" style="">
+                {# <li style="margin: 0" class="">
                     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#"></a>
-                </li>
-                <hr class="sidebar-divider my-0">
+                </li> #}
+                <hr class="sidebar-divider my-0 custom">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path ('app_boutique_index') }}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -45,6 +49,19 @@
                 <div class="sidebar-heading">
                     Interface
                 </div>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseParam"  aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fa-solid fa-sliders"></i>
+                        <span>Gérer ma boutique</span>
+                    </a>
+                    <div id="collapseParam" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('app_boutique_detail') }}">Informations boutique</a>
+                            <a class="collapse-item" href="#">Mes préférences</a>
+                        </div>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce"
                        aria-expanded="true" aria-controls="collapseUtilities" >
@@ -73,19 +90,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseParam"  aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fa-solid fa-sliders"></i>
-                        <span>Gérer ma boutique</span>
-                    </a>
-                    <div id="collapseParam" class="collapse" aria-labelledby="headingUtilities"
-                         data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{ path('app_boutique_detail') }}">Informations boutique</a>
-                            <a class="collapse-item" href="#">Mes préférences</a>
-                        </div>
-                    </div>
-                </li>
+                
                 <hr class="sidebar-divider">
                 <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -93,70 +98,7 @@
             </ul>
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow bg-gradient-secondary">
-                        <button id="sidebarToggleTop" class="btn btn-link d -md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown no-arrow d-sm-none">
-                                <!-- Dropdown - Messages -->
-                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                     aria-labelledby="searchDropdown">
-                                    <form class="form-inline mr-auto w-100 navbar-search">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control bg-light border-0 small"
-                                                   placeholder="Search for..." aria-label="Search"
-                                                   aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button">
-                                                    <i class="fas fa-search fa-sm"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="{{ path('boutique_messagerie') }}" id="messagesDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Messages <i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}
-                                </a>
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="messagesDropdown">
-                                    <h6 class="dropdown-header">Messages non lus</h6>
-                                    {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
-                                    <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
-                                </div>
-                            </li>
-                            <div class="topbar-divider d-none d-sm-block"></div>
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {% block user_avatar %}
-                                        {# <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span style="color: white">Bonjour {{app.user.name}}</span></span> #}
-                                        {% if app.user.image %}
-                                        <img class="img-profile rounded-circle" src="{{ asset('uploads/profile/'~app.user.image) }}">
-                                        {% else %}
-                                        <img class="img-profile rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}">
-                                        {% endif %}
-                                    {% endblock %}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="{{ path('boutique_view_profil') }}">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Mon profil
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ path('app_logout') }}">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Déconnexion
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="container-fluid d-flex" style="padding: 1rem 1rem 8rem 1rem">
+                    <div class="container-fluid d-flex custom">
                         {% block body %}
                         {% endblock %}
                     </div>
@@ -164,7 +106,7 @@
             </div>
         </div>
 
-        {%  include '_partials/_footer-front.html.twig' %}
+        {%  include '_partials/_footer_boutique.html.twig' %}
 
         <script src="{{ asset('bootstrap/vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

@@ -1,6 +1,6 @@
 {% extends 'layout/admin_base.html.twig' %}
 
-{% block title %}Utilisateurs Inactifs{% endblock %}
+{% block title %}Utilisateurs inactifs{% endblock %}
 
 {% block body %}
     <div class="card shadow mb-4">
@@ -17,8 +17,8 @@
                         <tr>
                             <th>Id</th>
                             <th>E-mail</th>
-                            <th>Roles</th>
-                            <th>Vérifier</th>
+                            <th>Rôles</th>
+                            <th>Vérifié</th>
                             <th>Nom</th>
                             <th>Prénom</th>
                             <th>Action</th>
@@ -28,8 +28,8 @@
                         <tr>
                             <th>Id</th>
                             <th>E-mail</th>
-                            <th>Roles</th>
-                            <th>Vérifier</th>
+                            <th>Rôles</th>
+                            <th>Vérifié</th>
                             <th>Nom</th>
                             <th>Prénom</th>
                             <th>Action</th>
@@ -46,9 +46,9 @@
                                         <td>Acheteur</td> 
                                 {% endif %}
                                 {% if user.isVerified == true %}
-                                    <td>Vérifier</td>
+                                    <td>Vérifié</td>
                                 {% else %}
-                                    <td>Non Vérifier</td>
+                                    <td>Non vérifié</td>
                                 {% endif %}
                                 <td>{{ user.surname }}</td>
                                 <td>{{ user.name }}</td>
@@ -56,7 +56,7 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td>Pas de données</td>
+                                <td>Aucune donnée</td>
                             </tr>
                         {% endfor %}
                     </tbody>

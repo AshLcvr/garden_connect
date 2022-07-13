@@ -4,7 +4,7 @@
 #contener_form {
     display: flex;
     justify-content: center;
-    padding: 2rem 0;
+    padding: 3rem 0;
 }
 #contener_form form {
     width: 80%;
@@ -16,10 +16,13 @@
     text-align: center;
 }
 #contener_form .bloc_form {
-    margin: 0 auto;
+    margin: 1rem auto;
     display: flex;
     flex-flow: column;
     gap: 0.7rem;
+}
+#contener_form .bloc_form.register {
+    margin: 0 auto;
 }
 #contener_form input {
     background-color: rgb(235, 235, 235);
@@ -40,6 +43,25 @@
     justify-content: space-around;
     width: 50%;
 }
+/* Mot de passe oublié */
+.forgot {
+    text-align: center;
+    margin: 0 auto;
+}
+.forgot a {
+    color: var(--vertclair);
+}
+.forgot a:hover {
+    /* color: var(--orange); */
+    color: var(--vertfonce);
+}
+.message_forgot {
+    padding: 1rem;
+}
+/*  */
+.form-error {
+    color: red;
+}
 #contener_form button {
     border: none;
     cursor: pointer;
@@ -52,28 +74,14 @@
     background-size: 200% 100%;
     background-position: right;
     transition: all 0.3s;
-
-    /* border-radius: 12px; */
-    /* border-image: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
-    border: 1px solid red; */
-    /* border-width: 1;
-    color: #eee; */
-    /* font-size: 18px;
-    text-align: center;
-    width: 50%;
-    transition: all 0.4s;
-    margin: 0 auto;
-    padding: 10px 20px; */
 }
 #contener_form button:hover {
     color: var(--orange);
     background-position: left;
     background-color: white;
 }
-.form-error {
-    color: red;
-}
-.btn-3 {
+
+.btn-custom {
     background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
     background-position: right;
     background-size: 200% 100%;
@@ -82,7 +90,7 @@
     padding: 0;
     border: none;
 }
-.btn-3 span {
+.btn-custom span {
     position: relative;
     display: block;
     width: 100%;
@@ -92,54 +100,97 @@
     /* border-radius: 12px; */
 }
 
-.btn-3 button:before,
-.btn-3 button:after {
+.btn-custom button:before,
+.btn-custom button:after {
     position: absolute;
     content: "";
     right: 0;
     top: 0;
     background: var(--orange);
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
+    transition: 500ms ease all;
 }
-.btn-3 button:before {
+.btn-custom button:before {
     height: 0%;
     width: 2px;
 }
-.btn-3 button:after {
+.btn-custom button:after {
     width: 0%;
     height: 2px;
 }
-.btn-3:hover{
+.btn-custom:hover{
     background: white;
     color: var(--orange);
     background-position: left;
 }
-.btn-3 button:hover:before {
+.btn-custom button:hover:before {
     height: 100%;
 }
-.btn-3 button:hover:after {
+.btn-custom button:hover:after {
     width: 100%;
 }
-.btn-3 span:before,
-.btn-3 span:after {
+.btn-custom span:before,
+.btn-custom span:after {
     position: absolute;
     content: "";
     left: 0;
     bottom: 0;
     background: var(--orange);
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
+    transition: 500ms ease all;
 }
-.btn-3 span:before {
+.btn-custom span:before {
     width: 2px;
     height: 0%;
 }
-.btn-3 span:after {
+.btn-custom span:after {
     width: 0%;
     height: 2px;
 }
-.btn-3 span:hover:before {
+.btn-custom span:hover:before {
     height: 100%;
 }
-.btn-3 span:hover:after {
+.btn-custom span:hover:after {
     width: 100%;
+}
+/* Retour à l'accueil */
+.back_home {
+    color: var(--vertclair);
+}
+.back_home:hover {
+    color: var(--vertfonce);
+}
+/* RESPONSIVE */
+@media all and (max-width: 750px){
+    #contener_form button {
+        font-size: 1rem;
+    }
+}
+@media all and (max-width: 450px){
+    #contener_form {
+        padding: 1.5rem 0;
+    }
+    #contener_form input {
+        font-size: 1.2rem;
+    }
+    .btn-custom {
+        width: 80%;
+    }
+}
+@media all and (max-width: 375px){
+    #contener_form h1 {
+        font-size: 1.7rem;
+    }
+    #contener_form label {
+        font-size: .9rem;
+    }
+    #contener_form input {
+        font-size: 1rem;
+    }
+    .forgot {
+        font-size: .8rem;
+    }
+    #contener_form button {
+        font-size: .9rem;
+    }
 }

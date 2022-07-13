@@ -3,21 +3,21 @@
 
 {% block body %}
     <div class="wrapform">
-        <div id="contener_form" class="big-margin">
+        <div id="contener_form" class="">
             <form action="{{ path('app_login') }}" method="post">
                 <h1>Connexion</h1>
                 <div class="bloc_form">
-                    <label for="username">Email:</label>
+                    <label for="username">Email :</label>
                     <input type="text" id="username" name="_username" value="{{ last_username }}"/>
                 </div>
 
                 <div class="bloc_form">
-                    <label for="password">Mot de passe:</label>
+                    <label for="password">Mot de passe :</label>
                     <input type="password" id="password" name="_password"/>
                 </div>
 
-                <div class="bloc_form">
-                    <a href="{{ path('app_reset_password') }}">Mot de passe oublié?</a>
+                <div class="forgot">
+                    <a href="{{ path('app_reset_password') }}">Mot de passe oublié ?</a>
                 </div>
 
                 {% if error %}
@@ -30,8 +30,10 @@
 
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <div class="bloc_form">
-                    <button type="submit">Se Connecter</button>
+                <div class="bloc_form btn-custom">
+                    <span class="hover-effect">
+                        <button type="submit">Se Connecter</button>
+                    </span>
                 </div>
             </form>
         </div>

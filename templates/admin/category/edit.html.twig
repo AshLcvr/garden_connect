@@ -1,16 +1,16 @@
 {% extends 'layout/admin_base.html.twig' %}
 
-{% block title %}Edit Catégorie{% endblock %}
+{% block title %}Modifier catégorie{% endblock %}
 
 {% block body %}
 <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
-    <h2 class="title">Edit category</h2>
+    <h2 class="title">Modifier catégorie</h2>
     <div class="m-b-20">
         {{ include('admin/category/_delete_form.html.twig') }}
     </div>
     {{ include('admin/category/_form.html.twig', {'button_label': 'Modifier'}) }}
     <div class="m-t-20">
-        <a href="{{ path('app_category_index') }}" class="btn btn-primary">back to list</a>
+        <a href="{{ path('app_category_index') }}" class="btn btn-primary">Retour à la liste</a>
     </div>
 </div>
 {% endblock %}

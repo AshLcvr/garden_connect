@@ -46,15 +46,17 @@
     {% for annonce in annonces %}
         <div class="annonce_box">
           <div class="annonce_img">
-            <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
+            {# <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link"> #}
               <ul class="slides">
                 {% for image in annonce.imagesAnnonces %}
-                    <li>
-                      <img src="{{ asset('uploads/mini/'~ image.title) }}" />
+                    <li class="li_annonce_img">
+                      <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
+                        <img src="{{ asset('uploads/mini/'~ image.title) }}" />
+                      </a>
                     </li>
                   {% endfor %}
               </ul>
-            </a>
+            {# </a> #}
           </div>
           <div class="annonce_text">
             <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link" >

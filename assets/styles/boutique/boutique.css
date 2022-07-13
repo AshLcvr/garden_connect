@@ -5,6 +5,164 @@
 #sidebarToggleTop {
     display: none;
 }
+#sidebarToggleTop.custom {
+    /* margin: 0 auto; */
+    color: var(--vertfonce);
+}
+/* Annule le shadow autour du bouton ouverture du menu */
+.btn:focus, .btn.focus {
+    box-shadow: unset;
+}
+.navbar-nav.custom {
+    margin-top: 3rem
+}
+.container-fluid.custom {
+    padding: 3rem 1rem 3rem 1rem;
+}
+/*  */
+
+/* Menu sidebar */
+/* Reprise des classes SB2admin pour les contrer */
+.sidebar-dark hr.sidebar-divider.custom {
+    display: none;
+}
+
+/* Accueil Ma boutique */
+/* Index boutique */
+.title_top {
+    text-align: center;
+    padding-top: 1rem;
+}
+.boutique_accueil .wrap2{
+    max-width: 1100px;
+    width: 100%;
+}
+.txt_top_boutique {
+    width: 100%;
+    gap: 1rem;
+}
+.txt_top_boutique {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem 1rem 0;
+    border: 1px solid grey;
+}
+.welcome {
+    text-align: center;
+    font-size: 1.7rem;
+}
+.message_info p {
+    text-align: left;
+}
+.boutique_accueil ul{
+    margin-left: 5%;
+}
+.boutique_accueil ul li{
+    list-style: initial;
+}
+.boutique_accueil ul li, .boutique_accueil p{
+    font-size: 1.2rem;
+}
+.button_boutique {
+    margin: 0 auto;
+}
+
+/* Bouton */
+.btn-custom {
+    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
+    background-position: right;
+    background-size: 200% 100%;
+    transition: 500ms ease all;
+    width: 20%;
+    padding: 0;
+    border: none;
+    margin: 0 auto;
+}
+
+.hover_effect a {
+    border: none;
+    background: none;
+    font-size: 18px;
+    color: #eee;
+    padding: .7rem;
+    width: 100%;
+    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
+    background-size: 200% 100%;
+    background-position: right;
+    transition: 500ms ease all;
+    text-align: center;
+}
+.hover_effect a:hover {
+    /* color: var(--orange); */
+    color: var(--vertfonce);
+    background-position: left;
+    background-color: white;
+}
+.btn-custom span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btn-custom a:before,
+.btn-custom a:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    /* background: var(--orange); */
+    background: var(--vertfonce);
+    transition: 500ms ease all;
+}
+.btn-custom a:before {
+    height: 0%;
+    width: 2px;
+}
+.btn-custom a:after {
+    width: 0%;
+    height: 2px;
+}
+.btn-custom:hover{
+    background: white;
+    /* color: var(--orange); */
+    color: var(--vertfonce);
+    background-position: left;
+}
+.btn-custom a:hover:before {
+    height: 100%;
+}
+.btn-custom a:hover:after {
+    width: 100%;
+}
+.btn-custom span:before,
+.btn-custom span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    /* background: var(--orange); */
+    background: var(--vertfonce);
+    transition: 500ms ease all;
+}
+.btn-custom span:before {
+    width: 2px;
+    height: 0%;
+}
+.btn-custom span:after {
+    width: 0%;
+    height: 2px;
+}
+.btn-custom span:hover:before {
+    height: 100%;
+}
+.btn-custom span:hover:after {
+    width: 100%;
+}
+
 /* Tableaux boutique */
 .card-body table th,.card-body table td{
     text-align: center;
@@ -19,8 +177,8 @@
 }
 /* Formulaires annonce */
 .annonce_form .bloc_form{
-     margin-bottom: 2rem;
- }
+    margin-bottom: 2rem;
+}
 .annonce_form .bloc_form textarea{
     height: 15rem;
     resize: none;
@@ -61,41 +219,87 @@
     width: 40%;
     margin-top: 2rem;
 }
-/* Index boutique */
-.boutique_accueil .wrap2{
-    text-align: center;
-    display: flex;
-    flex-flow: column nowrap;
-    max-width: 800px;
-    margin: 0 auto;
+@media (max-width: 1100px){
+    .bloc_form.btn-custom {
+        width: 40%;
+    }
 }
-.boutique_accueil ul{
-    margin: 0 auto;
-    max-width : 300px;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    text-align: start;
+@media (max-width: 850px){
+    .title_top {
+        font-size: 2.2rem;
+    }
+    .welcome {
+        font-size: 1.5rem;
+    }
+    .boutique_accueil ul li, .boutique_accueil p {
+        font-size: 1rem;
+    }
 }
-.boutique_accueil ul li{
-    align-self: flex-start;
-    text-align: right;
-    list-style: initial;
-}
-.boutique_accueil ul li, .boutique_accueil p{
-    font-size: 1.2rem;
-}
-.boutique_accueil ul li:last-child{
-    margin-bottom: 2rem;
-}
-.boutique_accueil .btn-primary{
-    width: 20%;
-    margin: 0 auto;
-}
-
 @media (max-width: 767px){
     #sidebarToggleTop {
         display: block;
     }
-
+    .container-fluid.custom {
+        padding: 0rem 1rem 3rem 1rem;
+    }
+    .navbar-nav.custom {
+        margin-top: 1rem
+    }
+    .wrapper_text_boutique {
+        align-items: center;
+    }
+    .title_top {
+        font-size: 1.8rem;
+    }
+    .welcome {
+        font-size: 1.3rem;
+    }
+    .boutique_accueil ul li, .boutique_accueil p {
+        font-size: 1rem;
+    }
+    .bloc_form.btn-custom {
+        width: 50%;
+    }
+}
+@media (max-width: 500px){
+    .title_top {
+        font-size: 1.5rem;
+    }
+    .welcome {
+        font-size: 1.2rem;
+    }
+    .boutique_accueil ul li, .boutique_accueil p {
+        font-size: .9rem;
+    }
+    .bloc_form.btn-custom {
+        width: 60%;
+    }
+}
+@media (max-width: 350px){
+    .title_top {
+        font-size: 1.4rem;
+    }
+    .txt_top_boutique {
+        border: none;
+        margin: 0;
+    }
+    .welcome {
+        font-size: 1.2rem;
+    }
+    .message_info {
+        padding: 0;
+    }
+    .boutique_accueil ul {
+        margin-left: 0;
+    }
+    .boutique_accueil ul li, .boutique_accueil p {
+        font-size: .9rem;
+    }
+    .bloc_form.btn-custom {
+        width: 80%;
+    }
+    .hover_effect a {
+        font-size: .8rem;
+        padding: .5rem;
+    }
 }
