@@ -3,7 +3,6 @@
 namespace App\Controller\Boutique;
 
 use App\Entity\Avis;
-use App\Entity\User;
 use App\Entity\Boutique;
 use App\Form\AvisFormType;
 use App\Form\BoutiqueType;
@@ -13,13 +12,10 @@ use App\Repository\FavoryRepository;
 use App\Service\UploadImage;
 use App\Service\CallApi;
 use App\Entity\ImagesBoutique;
-use App\Security\EmailVerifier;
-use Doctrine\ORM\EntityManager;
 use App\Repository\UserRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\BoutiqueRepository;
 use App\Repository\ImagesBoutiqueRepository;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,9 +23,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use function Symfony\Bundle\FrameworkBundle\Controller\createForm;
-use function Symfony\Component\HttpFoundation\replace;
-use function Symfony\Config\em;
 
 #[Route('/boutique')]
 class BoutiqueController extends AbstractController

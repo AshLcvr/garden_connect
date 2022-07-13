@@ -79,8 +79,7 @@ class BoutiqueType extends AbstractType
                 ]
             ])
             ->add('city', HiddenType::class)
-            ->add('postcode', HiddenType::class)
-            ->add('coordinates', HiddenType::class);
+            ->add('postcode', HiddenType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

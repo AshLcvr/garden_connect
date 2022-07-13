@@ -2,53 +2,24 @@
 
 namespace App\Controller\Boutique;
 
-use App\Data\SearchData;
+use App\Controller\DefaultController;
 use App\Entity\Annonce;
 use App\Entity\ImagesAnnonces;
 use App\Form\AnnonceType;
-use App\Form\SearchType;
 use App\Repository\AnnonceRepository;
-use App\Repository\CategoryRepository;
 use App\Repository\ImagesAnnoncesRepository;
-use App\Repository\SubcategoryRepository;
 use App\Service\UploadImage;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/boutique/annonce')]
-class AnnonceController extends AbstractController
-{
-    #[Route('/recherche', name: 'app_annonce_recherche', methods: ['GET'])]
-    public function recherche(AnnonceRepository $annonceRepository,Request $request, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
-    {
-        $data = new SearchData();
-        $data->page = $request->get('page',1);
-        $recherche = $this->createForm(SearchType::class,$data);
-        $recherche->handleRequest($request);
-        [$min, $max] = $annonceRepository->findMinMax($data);
-        $annonces = $annonceRepository->findBySearch($data);
-//        if ($request->isXmlHttpRequest()){
-//            if(!$request->get('category') ){
-//                return new JsonResponse([
-//                    'content' => $this->renderView('front/annonce/_annonces.html.twig', ['annonces' => $annonces]),
-//                    'sort' => $this->renderView('front/annonce/_sort.html.twig', ['annonces' => $annonces]),
-//                ]);
-//            }
-//        }
 
-        return $this->render('front/annonce/recherche_annonce.html.twig', [
-            'annonces' => $annonces,
-            'recherche' => $recherche->createView(),
-            'min' => $min,
-            'max' => $max,
-        ]);
-    }
+#[Route('/annonce')]
+class AnnonceController extends DefaultController{
+
 
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
-    public function index(AnnonceRepository $annonceRepository): Response
+    public function indexAnnonce(): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();
@@ -156,9 +127,6 @@ class AnnonceController extends AbstractController
     #[Route('/{id}/actif', name: 'app_annonce_actif', methods: ['POST', 'GET'])]
     public function toggleActif(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
-        $user = $this->getUser();
-        $user->getIP();
-        dd($user);
         if ($annonce->isActif()) {
             $annonce->setActif(false);
         }else{
@@ -169,3 +137,4 @@ class AnnonceController extends AbstractController
         return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+

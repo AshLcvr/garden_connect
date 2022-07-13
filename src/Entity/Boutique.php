@@ -50,8 +50,8 @@ class Boutique
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $adress;
 
-    #[ORM\Column(type: 'integer')]
-    private $postcode;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $citycode;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $city;
@@ -86,6 +86,7 @@ class Boutique
 
     #[ORM\Column(type: 'boolean')]
     private $card_active;
+
 
     public function __construct()
     {
@@ -146,18 +147,6 @@ class Boutique
     public function setAdress(?string $adress): self
     {
         $this->adress = $adress;
-
-        return $this;
-    }
-
-    public function getPostcode(): ?int
-    {
-        return $this->postcode;
-    }
-
-    public function setPostcode(int $postcode): self
-    {
-        $this->postcode = $postcode;
 
         return $this;
     }
@@ -360,6 +349,18 @@ class Boutique
     public function setCardActive(bool $card_active): self
     {
         $this->card_active = $card_active;
+
+        return $this;
+    }
+
+    public function getCitycode(): ?string
+    {
+        return $this->citycode;
+    }
+
+    public function setCitycode(?string $citycode): self
+    {
+        $this->citycode = $citycode;
 
         return $this;
     }

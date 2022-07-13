@@ -56,6 +56,31 @@
     height: 15rem;
     resize: none;
 }
+.boutique_form .bloc_form .adress_form {
+    width: 49%;
+
+}
+
+.boutique_form .bloc_form .city_search{
+    position: relative;
+    width: 49%;
+}
+.boutique_form .bloc_form #city_suggest{
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 4px 8px 0 rgba(26,26,26,.12);
+    margin-top: .2rem;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    padding: 1rem;
+}
+.boutique_form .bloc_form #city_suggest li:hover {
+    background-color: lightgrey;
+}
+.boutique_form .bloc_form #city_suggest li {
+    cursor: pointer;
+}
 .boutique_form .bloc_submit{
     display: flex;
     justify-content: center;

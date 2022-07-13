@@ -30,8 +30,10 @@ search_input.on('keyup', function () {
     let city = search_input.val();
     let citySuggest = [];
     city_ul.empty();
+    city_ul.addClass('hidden')
     isNaN(city)? search = 'nom' : search = 'codePostal';
     if (isNaN(city) && city.length >= 3 || !isNaN(city) && city.length === 5){
+        city_ul.removeClass('hidden')
         $.ajax({
             url: 'https://geo.api.gouv.fr/communes?'+search+'='+ city +'&limit=7 ',
             contentType: "application/json",
@@ -42,32 +44,36 @@ search_input.on('keyup', function () {
                     for (let i = 0; i < result.length; i++)
                     {
                         let city_name     = result[i].nom;
+                        let city_code     = result[i].code;
                         let city_postcode = '';
                         if (result[i].codesPostaux.length > 1){
                             city_postcode = result[i].codesPostaux[1];
                         }else{
                             city_postcode = result[i].codesPostaux[0];
                         }
-                        let li = '<li data-city="'+city_name+'" data-postcode="'+city_postcode+'">'+city_name+' ('+city_postcode+')</li>'
+                        let li = '<li data-city="'+city_name+'" data-postcode="'+city_postcode+'" data-citycode="'+city_code+'" > '+city_name+' ('+city_postcode+')</li>'
                         citySuggest.push(li)
                     }
-                }else{
-                    if (isNaN(city)){
-                         li = '<li>Ville inconnue</li>'
-                    }else{
-                         li = '<li>Code postal inconnu</li>'
-                    }
-                    citySuggest.push(li)
+                }
+                else{
+                    city_ul.addClass('hidden')
+                    // if (isNaN(city)){
+                    //      li = '<li>Ville inconnue</li>'
+                    // }else{
+                    //      li = '<li>Code postal inconnu</li>'
+                    // }
+                    // citySuggest.push(li)
                 }
                 city_ul.append(citySuggest);
                 let li = city_ul.children();
 
                 li.on('click',function () {
+                    city_ul.addClass('hidden')
+                    city_ul.empty();
                     let city_infos = $(this).html();
                     search_input.val(city_infos);
-                    city_ul.empty();
-                    let city_name       = $(this).attr('data-city')
-                    let postcode        = $(this).attr('data-postcode')
+                    let city_name  = $(this).attr('data-city')
+                    let postcode   = $(this).attr('data-postcode')
                     city_input.val(city_name)
                     postcode_input.val(postcode)
                 })
