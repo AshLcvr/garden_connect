@@ -29,7 +29,7 @@ class DefaultController extends AbstractController
             'user' => $user
         ]);
     }
-
+    
     #[Route('/recherche', name: 'app_annonce_recherche', methods: ['GET'])]
     public function recherche(AnnonceRepository $annonceRepository,Request $request): Response
     {
@@ -55,6 +55,7 @@ class DefaultController extends AbstractController
             'max' => $max,
         ]);
     }
+
 
     #[Route('/mention-legale', name: 'mention_legale')]
     public function mentionLegale(): Response
