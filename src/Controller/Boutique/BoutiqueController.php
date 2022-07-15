@@ -28,7 +28,7 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 class BoutiqueController extends AbstractController
 {
     #[Route('/', name: 'app_boutique_index', methods: ['GET'])]
-    public function indexBoutique(BoutiqueRepository $boutiqueRepository): Response
+    public function indexBoutique(): Response
     {
         $user = $this->getUser();
         $boutiques = $user->getBoutiques();

@@ -41,7 +41,7 @@
                                 <td>{{ boutique.id }}</td>
                                 <td>{{ boutique.title|length > 20 ? boutique.title|striptags|slice(0, 20) ~ '...' : boutique.title }}</td>
                                 <td>{{ boutique.description|length > 20 ? boutique.description|striptags|slice(0, 20) ~ '...' : boutique.description }}</td>
-                                <td>{{ boutique.adresse|length > 20 ? boutique.adresse|striptags|slice(0, 20) ~ '...' : boutique.adresse }}</td>
+                                <td>{{ boutique.adress|length > 20 ? boutique.adress|striptags|slice(0, 20) ~ '...' : boutique.adress }}</td>
                                 <td>{{ boutique.createdAt|date('Y-m-d H:i:s') }}</td>
                                 {% if boutique.actif %}
                                     <td>Actif</td>
