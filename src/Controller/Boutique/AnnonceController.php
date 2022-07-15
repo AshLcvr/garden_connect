@@ -21,31 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/boutique/annonce')]
 class AnnonceController extends AbstractController
 {
-    #[Route('/recherche', name: 'app_annonce_recherche', methods: ['GET'])]
-    public function recherche(AnnonceRepository $annonceRepository,Request $request, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
-    {
-        $data = new SearchData();
-        $data->page = $request->get('page',1);
-        $recherche = $this->createForm(SearchType::class,$data);
-        $recherche->handleRequest($request);
-        [$min, $max] = $annonceRepository->findMinMax($data);
-        $annonces = $annonceRepository->findBySearch($data);
-//        if ($request->isXmlHttpRequest()){
-//            if(!$request->get('category') ){
-//                return new JsonResponse([
-//                    'content' => $this->renderView('front/annonce/_annonces.html.twig', ['annonces' => $annonces]),
-//                    'sort' => $this->renderView('front/annonce/_sort.html.twig', ['annonces' => $annonces]),
-//                ]);
-//            }
-//        }
-
-        return $this->render('front/annonce/recherche_annonce.html.twig', [
-            'annonces' => $annonces,
-            'recherche' => $recherche->createView(),
-            'min' => $min,
-            'max' => $max,
-        ]);
-    }
 
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository): Response
