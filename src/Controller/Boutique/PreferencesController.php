@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/boutique')]
-class Preferences extends AbstractController
+class PreferencesController extends AbstractController
 {
     #[Route('/mespreferences', name: 'app_boutique_preference')]
     public function indexPreference(){

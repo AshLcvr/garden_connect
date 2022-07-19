@@ -20,20 +20,22 @@ $(document).on('change', '.annonce_category', function () {
 
 // Ajax API Request for City Coordinates
 
-const adress          = $('#boutique_adress').val();
+const adress_input    = $('#boutique_adress');
+const adress          = adress_input.val();
 const search_input    = $('#boutique_search');
 const city_ul         = $('#city_suggest');
 const city_input      = $('#boutique_city');
 const postcode_input  = $('#boutique_postcode');
+const citycode_input  = $('#boutique_citycode');
 
 search_input.on('keyup', function () {
     let city = search_input.val();
     let citySuggest = [];
+    city_input.val('')
     city_ul.empty();
     city_ul.addClass('hidden')
     isNaN(city)? search = 'nom' : search = 'codePostal';
     if (isNaN(city) && city.length >= 3 || !isNaN(city) && city.length === 5){
-        city_ul.removeClass('hidden')
         $.ajax({
             url: 'https://geo.api.gouv.fr/communes?'+search+'='+ city +'&limit=7 ',
             contentType: "application/json",
@@ -41,6 +43,7 @@ search_input.on('keyup', function () {
             success: function(result){
                 city_ul.empty();
                 if (result.length > 0){
+                    city_ul.removeClass('hidden')
                     for (let i = 0; i < result.length; i++)
                     {
                         let city_name     = result[i].nom;
@@ -57,12 +60,6 @@ search_input.on('keyup', function () {
                 }
                 else{
                     city_ul.addClass('hidden')
-                    // if (isNaN(city)){
-                    //      li = '<li>Ville inconnue</li>'
-                    // }else{
-                    //      li = '<li>Code postal inconnu</li>'
-                    // }
-                    // citySuggest.push(li)
                 }
                 city_ul.append(citySuggest);
                 let li = city_ul.children();
@@ -72,10 +69,12 @@ search_input.on('keyup', function () {
                     city_ul.empty();
                     let city_infos = $(this).html();
                     search_input.val(city_infos);
-                    let city_name  = $(this).attr('data-city')
-                    let postcode   = $(this).attr('data-postcode')
+                    let city_name      = $(this).attr('data-city')
+                    let city_postcode  = $(this).attr('data-postcode')
+                    let city_code      = $(this).attr('data-citycode')
                     city_input.val(city_name)
-                    postcode_input.val(postcode)
+                    postcode_input.val(city_postcode)
+                    citycode_input.val(city_code)
                 })
             }
         })

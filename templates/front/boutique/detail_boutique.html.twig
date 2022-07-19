@@ -41,9 +41,8 @@
              <h6 class="annonce_title">Adresse:</h6>
              <div class="d-flex flex-column">
                  <ul class="text-align-center">
-                     {% for adress in boutique.adress %}
-                     <li>{{ adress }}</li>
-                     {% endfor %}
+                     <li>{{ boutique.adress }}</li>
+                     <li>{{ boutique.postcode }} {{ boutique.city }}</li>
                  </ul>
              </div>
         </div>

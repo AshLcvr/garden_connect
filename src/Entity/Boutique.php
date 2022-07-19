@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\BoutiqueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -50,11 +49,17 @@ class Boutique
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $adress;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $citycode;
-
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
     private $city;
+
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
+    private $postcode;
+
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
+    private $citycode;
 
     #[ORM\Column(type: 'array', nullable: true)]
     private $coordinates = [];
@@ -86,7 +91,6 @@ class Boutique
 
     #[ORM\Column(type: 'boolean')]
     private $card_active;
-
 
     public function __construct()
     {
@@ -361,6 +365,18 @@ class Boutique
     public function setCitycode(?string $citycode): self
     {
         $this->citycode = $citycode;
+
+        return $this;
+    }
+
+    public function getPostcode(): ?int
+    {
+        return $this->postcode;
+    }
+
+    public function setPostcode(int $postcode): self
+    {
+        $this->postcode = $postcode;
 
         return $this;
     }

@@ -52,7 +52,9 @@ class BoutiqueController extends AbstractController
             $boutique->setUser($user);
             $formatedTel =  $form->get('indicatif')->getData() . $form->get('telephone')->getData();
             $boutique->setTelephone($formatedTel);
-            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('postcode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData()));
+            $boutique->setCity($form->get('city')->getData());
+            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('citycode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData()));
+            $boutique->setCardActive(true);
             $boutique->setActif(true);
             $boutique->setCreatedAt(new \DateTimeImmutable());
             $boutiqueRepository->add($boutique, true);
@@ -101,12 +103,14 @@ class BoutiqueController extends AbstractController
         $security = $this->security($boutique, $this->getUser()->getBoutiques());
         $form = $this->createForm(BoutiqueType::class, $boutique);
         $form->get('search')->setData($boutique->getCity().' ('.$boutique->getPostcode().')');
+        $form->get('city')->setData($boutique->getCity());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($this->getUser());
             $boutique->setModifiedAt(new \DateTimeImmutable());
-            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('postcode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData()));
+            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('city')->getData(),$form->get('citycode')->getData(),$form->get('adress')->getData()));
+            $boutique->setCity($form->get('city')->getData());
             $boutiqueRepository->add($boutique, true);
 
             $boutiqueImage = $form->get('upload')->getData();
