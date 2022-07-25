@@ -2,6 +2,9 @@
 .fa-envelope{
     color: white;
 }
+/** SB2 **/
+/*** Reprise des classes SB2admin pour les contrer ***/
+/* Bouton toggle sidebar responsive */
 #sidebarToggleTop {
     display: none;
 }
@@ -13,25 +16,60 @@
 .btn:focus, .btn.focus {
     box-shadow: unset;
 }
-.navbar-nav.custom {
+/* Menu sidebar */
+/* .navbar-nav.custom {
     margin-top: 3rem
+} */
+.bg-gradient-primary.custom {
+    background-color: whitesmoke;
+    background-image: unset;
 }
+/* Liens sidebar */
+.sidebar-dark .nav-item .nav-link.custom {
+    color: dimgray;
+}
+.sidebar-dark .nav-item .nav-link i.custom {
+    color: dimgray;
+}
+.sidebar-dark .nav-item .nav-link.custom:hover,
+.sidebar-dark .nav-item .nav-link.custom:focus,
+.sidebar-dark .nav-item .nav-link.custom:hover i.custom,
+.sidebar-dark .nav-item .nav-link.custom:focus i.custom { 
+    color: var(--vertfonce);
+}
+/* Chevrons */
+.sidebar-dark .nav-item .nav-link.custom[data-toggle="collapse"]::after {
+    color: dimgray;
+}
+/* "INTERFACE" */
+.sidebar-dark .sidebar-heading.custom {
+    color: var(--vertfonce);
+}
+/* Séparateurs */
+.sidebar-dark hr.sidebar-divider.custom {
+    border-top: 1px solid dimgray;
+}
+.sidebar-dark hr.sidebar-divider:nth-child(1) {
+    display: none;
+}
+.sidebar-dark.custom #sidebarToggle {
+    background-color: dimgray;
+}
+.sidebar-dark.custom #sidebarToggle:hover {
+    background-color: #41b04f;
+}
+/* Container */
 .container-fluid.custom {
     padding: 3rem 1rem 3rem 1rem;
 }
+/**  **/
 /*  */
-
-/* Menu sidebar */
-/* Reprise des classes SB2admin pour les contrer */
-.sidebar-dark hr.sidebar-divider.custom {
-    display: none;
-}
 
 /* Accueil Ma boutique */
 /* Index boutique */
 .title_top {
     text-align: center;
-    padding-top: 1rem;
+    padding: 1rem;
 }
 .boutique_accueil .wrap2{
     max-width: 1100px;
@@ -70,23 +108,14 @@
 }
 
 /* Bouton */
-.btn-custom {
-    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
-    background-position: right;
-    background-size: 200% 100%;
-    transition: 500ms ease all;
+.button_boutique .btn-custom {
     width: 20%;
-    padding: 0;
-    border: none;
     margin: 0 auto;
 }
-
 .hover_effect a {
-    border: none;
-    background: none;
     font-size: 18px;
-    color: #eee;
-    padding: .7rem;
+    color: white;
+    padding: .6rem;
     width: 100%;
     background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
     background-size: 200% 100%;
@@ -95,7 +124,6 @@
     text-align: center;
 }
 .hover_effect a:hover {
-    /* color: var(--orange); */
     color: var(--vertfonce);
     background-position: left;
     background-color: white;
@@ -114,7 +142,6 @@
     content: "";
     right: 0;
     top: 0;
-    /* background: var(--orange); */
     background: var(--vertfonce);
     transition: 500ms ease all;
 }
@@ -125,12 +152,6 @@
 .btn-custom a:after {
     width: 0%;
     height: 2px;
-}
-.btn-custom:hover{
-    background: white;
-    /* color: var(--orange); */
-    color: var(--vertfonce);
-    background-position: left;
 }
 .btn-custom a:hover:before {
     height: 100%;
@@ -144,7 +165,6 @@
     content: "";
     left: 0;
     bottom: 0;
-    /* background: var(--orange); */
     background: var(--vertfonce);
     transition: 500ms ease all;
 }
@@ -161,6 +181,83 @@
 }
 .btn-custom span:hover:after {
     width: 100%;
+}
+/* Detail boutique */
+/* Boutons custom */
+.block_buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: .5rem;
+}
+button.block_btn_delete {
+    border: none;
+}
+.btn-custom.delete {
+    cursor: pointer;
+}
+/* Bouton "Modifier boutique" */
+.block_btn_modify,
+.block_btn_inactive,
+.block_btn_delete {
+    display: inline-block;
+}
+.btn-custom.modify,
+.btn-custom.inactive,
+.btn-custom.delete {
+    width: unset;
+}
+.hover_effect.modify a {
+    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
+}
+.hover_effect.inactive a {
+    background: linear-gradient(to right, transparent 50%, var(--orange) 50%);
+}
+.hover_effect.delete a {
+    background: linear-gradient(to right, transparent 50%, var(--rouge_supp) 50%);
+}
+.hover_effect.modify a,
+.hover_effect.inactive a,
+.hover_effect.delete a {
+    width: 100%;
+    background-size: 200% 100%;
+    background-position: right;
+    color: #f8f9fc;
+    display: flex;
+    justify-content: center;
+}
+.hover_effect.modify a:hover,
+.hover_effect.inactive a:hover,
+.hover_effect.delete a:hover {
+    background-position: left;
+    background-color: #f8f9fc;
+}
+.hover_effect.modify a:hover {
+    color: var(--vertfonce);
+}
+.hover_effect.inactive a:hover {
+    color: var(--orange);
+}
+.hover_effect.delete a:hover {
+    color: var(--rouge_supp);
+}
+.hover_effect.modify i,
+.hover_effect.inactive i,
+.hover_effect.delete i {
+    width: 25px;
+}
+.btn-custom.inactive span:before, .btn-custom.inactive span:after {
+    background: var(--orange);
+}
+.btn-custom.inactive a:before, .btn-custom.inactive a:after {
+    background: var(--orange);
+}
+.btn-custom.delete span:before, .btn-custom.delete span:after {
+    background: var(--rouge_supp);
+}
+.btn-custom.delete a:before, .btn-custom.delete a:after {
+    background: var(--rouge_supp);
 }
 
 /* Tableaux boutique */
@@ -192,13 +289,12 @@
     margin-top: 2rem;
 }
 /* Détail boutique */
-.boutique_detail h4{
-    margin: 0;
+div.boutique_infos {
+    margin: 1rem 0;
+    border: 1px solid rgb(222, 222, 222);
 }
-.boutique_infos div{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+h6.annonce_title {
+    font-weight: bold;
 }
 /* Formulaires boutique */
 .boutique_form p{
@@ -216,28 +312,13 @@
 }
 .boutique_form .bloc_form .adress_form {
     width: 49%;
-
 }
-
 .boutique_form .bloc_form .city_search{
     position: relative;
     width: 49%;
 }
-.boutique_form .bloc_form #city_suggest{
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 4px 8px 0 rgba(26,26,26,.12);
-    margin-top: .2rem;
-    position: absolute;
-    width: 100%;
-    z-index: 2;
-    padding: 1rem;
-}
-.boutique_form .bloc_form #city_suggest li:hover {
-    background-color: lightgrey;
-}
-.boutique_form .bloc_form #city_suggest li {
-    cursor: pointer;
+#city_suggest{
+    margin-top: 0 ;
 }
 .boutique_form .bloc_submit{
     display: flex;
@@ -250,6 +331,11 @@
 @media (max-width: 1100px){
     .bloc_form.btn-custom {
         width: 40%;
+    }
+    .bloc_form.btn-custom.modify,
+    .bloc_form.btn-custom.inactive,
+    .bloc_form.btn-custom.delete {
+        width: unset;
     }
 }
 @media (max-width: 850px){
@@ -288,6 +374,9 @@
     .bloc_form.btn-custom {
         width: 50%;
     }
+    /* .btn-custom.delete {
+        width: unset;
+    } */
 }
 @media (max-width: 500px){
     .title_top {

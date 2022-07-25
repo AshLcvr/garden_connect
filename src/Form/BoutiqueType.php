@@ -7,14 +7,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\All;
-use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -78,8 +76,17 @@ class BoutiqueType extends AbstractType
                     ])
                 ]
             ])
-            ->add('city', HiddenType::class)
-            ->add('postcode', HiddenType::class);
+            ->add('city', HiddenType::class, [
+                'mapped' => false,
+                'error_bubbling' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Ville et/ou code postal incorrects'
+                    ])
+                ]
+            ])
+            ->add('postcode', HiddenType::class)
+            ->add('citycode', HiddenType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

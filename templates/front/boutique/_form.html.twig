@@ -99,10 +99,11 @@
 
             <div class="bloc_form city_search">
                 {{ form_label(form.search) }}<span> *</span>
-                {{ form_widget(form.search, {attr : {style: '-moz-appearance: textfield'}}) }}
+                {{ form_widget(form.search) }}
                 <small>{{ form_help(form.search) }}</small>
                 <div class="form-error">
                     {{ form_errors(form.search) }}
+                    {{ form_errors(form.city) }}
                 </div>
 
                 <ul id="city_suggest" class="hidden"></ul>

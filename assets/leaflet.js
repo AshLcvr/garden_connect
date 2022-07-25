@@ -7,11 +7,11 @@
 const carte_box      = document.getElementById('boutique_coordinates')
 const boutique_title = carte_box.getAttribute('data-boutique_title');
 const fullAdress     = carte_box.getAttribute('data-full');
-const lon            = carte_box.getAttribute('data-lon');
+const lng            = carte_box.getAttribute('data-lng');
 const lat            = carte_box.getAttribute('data-lat');
 
 // On initialise la carte
-const carte = L.map(carte_box).setView([lat, lon], 14);
+const carte = L.map(carte_box).setView([lat, lng], 14);
 
 // On ajoute une couche (tiles)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -19,7 +19,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(carte);
 
-const marqueur = L.marker([parseFloat(lat), parseFloat(lon)]).addTo(carte);
+const marqueur = L.marker([parseFloat(lat), parseFloat(lng)]).addTo(carte);
 if (fullAdress === 'true'){
     marqueur.bindPopup("<b>"+boutique_title+"</b>");
 }else{
@@ -34,14 +34,14 @@ if (fullAdress === 'true'){
 /////////////////////////////////////////////
 
 // const villes = {
-//     "Paris": {"lat": 48.752969 , "lon": 2.349903},
-//     "Pont-Audemer": {"lat": 49.349998 , "lon": 0.51667},
-//     "Brest": {"lat": 48.383 , "lon": -4.500},
-//     "Quimper": {"lat": 48.000 , "lon": -4.100},
-//     "Bayonne": {"lat": 43.500 , "lon": -1.467},
+//     "Paris": {"lat": 48.752969 , "lng": 2.349903},
+//     "Pont-Audemer": {"lat": 49.349998 , "lng": 0.51667},
+//     "Brest": {"lat": 48.383 , "lng": -4.500},
+//     "Quimper": {"lat": 48.000 , "lng": -4.100},
+//     "Bayonne": {"lat": 43.500 , "lng": -1.467},
 // }
 // On initialise la carte
-// const carte = L.map(carte_box).setView([lattitude, lon ], 13);
+// const carte = L.map(carte_box).setView([lattitude, lng ], 13);
 
 // On ajoute une couche (tiles)
 // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -61,7 +61,7 @@ if (fullAdress === 'true'){
 // })
 
 // for (ville in villes){
-// const marqueur = L.marker([parseFloat(lattitude),parseFloat(lon)]);
+// const marqueur = L.marker([parseFloat(lattitude),parseFloat(lng)]);
 // , {icon: icone})
 //     marqueur.bindPopup("<b>"+city+"</b>")
 //     marqueurs.addLayer(marqueur)

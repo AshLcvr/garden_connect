@@ -52,7 +52,9 @@ class BoutiqueController extends AbstractController
             $boutique->setUser($user);
             $formatedTel =  $form->get('indicatif')->getData() . $form->get('telephone')->getData();
             $boutique->setTelephone($formatedTel);
-            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('postcode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData()));
+            $boutique->setCity($form->get('city')->getData());
+            $callApi->getBoutiqueAdressCoordinates($boutique, $form->get('citycode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData());
+            $boutique->setCardActive(true);
             $boutique->setActif(true);
             $boutique->setCreatedAt(new \DateTimeImmutable());
             $boutiqueRepository->add($boutique, true);
@@ -101,14 +103,15 @@ class BoutiqueController extends AbstractController
         $security = $this->security($boutique, $this->getUser()->getBoutiques());
         $form = $this->createForm(BoutiqueType::class, $boutique);
         $form->get('search')->setData($boutique->getCity().' ('.$boutique->getPostcode().')');
+        $form->get('city')->setData($boutique->getCity());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($this->getUser());
             $boutique->setModifiedAt(new \DateTimeImmutable());
-            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('postcode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData()));
+            $boutique->setCity($form->get('city')->getData());
+            $callApi->getBoutiqueAdressCoordinates($boutique, $form->get('city')->getData(),$form->get('citycode')->getData(),$form->get('adress')->getData());
             $boutiqueRepository->add($boutique, true);
-
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
                 $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
@@ -218,43 +221,7 @@ class BoutiqueController extends AbstractController
         );
     }
 
-    #[Route('/public/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
-    public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique,FavoryRepository $favoryRepository, $id_annonce)
-    {
-        $user = $this->getUser();
-        $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
-        $annonce = null;
 
-        $notMyboutique = true;
-        $me = $boutique->getUser();
-        if($user){
-            if ($me->getId() === $user->getId() ){
-                $notMyboutique = false;
-            }
-        }
-
-        if (!empty($id_annonce)) {
-            $annonce = $annonceRepository->find($id_annonce);
-        }
-
-        // Favoris
-        $favory = '';
-        $alreadyFavory = $favoryRepository->findOneBy(['user'=> $this->getUser(), 'boutique' => $boutique]);
-        if (!empty($alreadyFavory)){
-            $favory = 'favory_active';
-        }
-
-        return $this->render(
-            'front/boutique/viewboutique.html.twig',
-            [
-                'annonce' => $annonce,
-                'annonces' => $annonces,
-                'boutique' => $boutique,
-                'notMyboutique' => $notMyboutique,
-                'favory' => $favory
-            ]
-        );
-    }
 
     #[Route('/viewprofil', name: 'boutique_view_profil', methods: ['GET', 'POST'])]
     public function viewProfile(TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
