@@ -221,43 +221,7 @@ class BoutiqueController extends AbstractController
         );
     }
 
-    #[Route('/public/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
-    public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique,FavoryRepository $favoryRepository, $id_annonce)
-    {
-        $user = $this->getUser();
-        $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
-        $annonce = null;
 
-        $notMyboutique = true;
-        $me = $boutique->getUser();
-        if($user){
-            if ($me->getId() === $user->getId() ){
-                $notMyboutique = false;
-            }
-        }
-
-        if (!empty($id_annonce)) {
-            $annonce = $annonceRepository->find($id_annonce);
-        }
-
-        // Favoris
-        $favory = '';
-        $alreadyFavory = $favoryRepository->findOneBy(['user'=> $this->getUser(), 'boutique' => $boutique]);
-        if (!empty($alreadyFavory)){
-            $favory = 'favory_active';
-        }
-
-        return $this->render(
-            'front/boutique/viewboutique.html.twig',
-            [
-                'annonce' => $annonce,
-                'annonces' => $annonces,
-                'boutique' => $boutique,
-                'notMyboutique' => $notMyboutique,
-                'favory' => $favory
-            ]
-        );
-    }
 
     #[Route('/viewprofil', name: 'boutique_view_profil', methods: ['GET', 'POST'])]
     public function viewProfile(TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
