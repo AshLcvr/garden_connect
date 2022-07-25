@@ -20,6 +20,16 @@
 #filter_form form .bloc_form div{
     width: 48%;
 }
+.bloc_form .location_box{
+    position: relative;
+    width: 60% !important;
+}
+.bloc_form .distance_box{
+    width: 38% !important;
+}
+#filter_form form #city_suggest{
+    width: 32%;
+}
 #filter_form .noUi-connect {
     background: var(--vertclair);
 }

@@ -53,7 +53,7 @@ class BoutiqueController extends AbstractController
             $formatedTel =  $form->get('indicatif')->getData() . $form->get('telephone')->getData();
             $boutique->setTelephone($formatedTel);
             $boutique->setCity($form->get('city')->getData());
-            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('citycode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData()));
+            $callApi->getBoutiqueAdressCoordinates($boutique, $form->get('citycode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData());
             $boutique->setCardActive(true);
             $boutique->setActif(true);
             $boutique->setCreatedAt(new \DateTimeImmutable());
@@ -109,10 +109,9 @@ class BoutiqueController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($this->getUser());
             $boutique->setModifiedAt(new \DateTimeImmutable());
-            $boutique->setCoordinates($callApi->getBoutiqueAdressCoordinates($form->get('city')->getData(),$form->get('citycode')->getData(),$form->get('adress')->getData()));
             $boutique->setCity($form->get('city')->getData());
+            $callApi->getBoutiqueAdressCoordinates($boutique, $form->get('city')->getData(),$form->get('citycode')->getData(),$form->get('adress')->getData());
             $boutiqueRepository->add($boutique, true);
-
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
                 $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());

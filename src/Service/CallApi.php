@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Boutique;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CallApi
@@ -13,7 +14,7 @@ class CallApi
         $this->client = $client;
     }
 
-    public function getBoutiqueAdressCoordinates( $cityname, $city_code, $adress = null): array
+    public function getBoutiqueAdressCoordinates(Boutique $boutique, $cityname, $city_code, $adress = null): array
     {
         $formatedCityName = str_replace([' '], '+', $cityname);
 
@@ -36,6 +37,7 @@ class CallApi
             $coordinates = $content['features'][0]['geometry']['coordinates'];
         }
 
-        return $coordinates;
+        $boutique->setLng($coordinates[0]);
+        $boutique->setLat($coordinates[1]);
     }
 }

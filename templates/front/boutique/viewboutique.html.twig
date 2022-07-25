@@ -74,7 +74,7 @@
         </div>
     </section>
 
-    {% if annonce == null and boutique.coordinates != null and boutique.cardActive %}
+    {% if annonce == null and boutique.cardActive %}
         {% if boutique.adress == '' %}
             {% set fullAdress = 'false' %}
         {% else %}
@@ -85,7 +85,7 @@
         {#           A FAIRE QUAND PASSAGE A VUE
          <button class="btn btn-primary" >Afficher la carte</button>
          #}
-            <div id="boutique_coordinates" style="height: 400px" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lon="{{boutique.coordinates[0]}}" data-lat="{{boutique.coordinates[1]}}"></div>
+            <div id="boutique_coordinates" style="height: 400px" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
         </section>
     {% endif %}
     {% if annonce != null %}

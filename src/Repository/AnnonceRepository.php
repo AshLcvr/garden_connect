@@ -73,11 +73,13 @@ class AnnonceRepository extends ServiceEntityRepository
      */
     public function getSearchQuery(SearchData $search) : QueryBuilder
     {
-        if (!empty($search->q) ||!empty($search->category) || !empty($search->min) || !empty($search->max) ) {
+        if (!empty($search->q) ||!empty($search->category) ||!empty($search->lat) || !empty($search->min) || !empty($search->max) ) {
             $query = $this
+
                 ->createQueryBuilder('a')
                 ->select('c', 'a')
                 ->join('a.subcategory', 'c')
+
                 ->andWhere('a.actif = 1')
                 ->orderBy('a.created_at', 'DESC');
 
@@ -85,6 +87,23 @@ class AnnonceRepository extends ServiceEntityRepository
                 $query = $query
                     ->andWhere('a.title LIKE :q')
                     ->setParameter('q', "%{$search->q}%");
+            }
+
+            if (!empty($search->lat) && !empty($search->lng)) {
+                $query = $query
+                    ->select('a')
+                    ->join('a.boutique', 'b');
+                    if(!empty($search->distance)){
+                        $query = $query
+                        ->andWhere('(6353 * 2 * ASIN(SQRT( POWER(SIN((b.lat - :lat) * pi()/180/2 ),2) + COS(b.lat * pi()/180) * COS(:lat * pi()/180) * POWER(SIN((b.lng - :lng) * pi()/180/2), 2)))) <= :distance')
+                            ->setParameter('distance', $search->distance);
+                    }else{
+                        $query = $query
+                         ->andWhere('b.lat = :lat AND b.lng = :lng');
+                    }
+                $query = $query
+                    ->setParameter('lng', $search->lng)
+                    ->setParameter('lat', $search->lat);
             }
 
             if (!empty($search->category)) {
@@ -133,7 +152,7 @@ class AnnonceRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->where('a.boutique = :val1')
             ->setParameter('val1', $value1)
-            ->andWhere('a.actif = true')
+            ->andWhere('a.actif  = true')
             ->andWhere('a.id != :val3')
             ->setParameter('val3', $value3)
             ->getQuery()

@@ -61,8 +61,11 @@ class Boutique
     #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
     private $citycode;
 
-    #[ORM\Column(type: 'array', nullable: true)]
-    private $coordinates = [];
+    #[ORM\Column(type: 'float')]
+    private $lat;
+
+    #[ORM\Column(type: 'float')]
+    private $lng;
 
     #[ORM\Column(type: 'datetime_immutable')]
     #[Gedmo\Timestampable(on: 'create')]
@@ -91,6 +94,7 @@ class Boutique
 
     #[ORM\Column(type: 'boolean')]
     private $card_active;
+
 
     public function __construct()
     {
@@ -163,18 +167,6 @@ class Boutique
     public function setCity(string $city): self
     {
         $this->city = $city;
-
-        return $this;
-    }
-
-    public function getCoordinates(): ?array
-    {
-        return $this->coordinates;
-    }
-
-    public function setCoordinates(?array $coordinates): self
-    {
-        $this->coordinates = $coordinates;
 
         return $this;
     }
@@ -377,6 +369,30 @@ class Boutique
     public function setPostcode(int $postcode): self
     {
         $this->postcode = $postcode;
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(float $lng): self
+    {
+        $this->lng = $lng;
 
         return $this;
     }

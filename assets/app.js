@@ -13,9 +13,23 @@ import './styles/homepage/homepage.css';
 import "./styles/annonce/annonce.css";
 import './styles/filter_annonce/filter.css';
 import './styles/filter_annonce/filter.js';
-// css, boutique
+// css, boutique publique
 import "./styles/boutique_public/boutique_public.css";
 import "./styles/boutique_public/rating.js";
 import "./styles/annonce_public/annonce_public.css";
 // css, js profil
 import "./styles/profil/profil.css";
+
+// Affichage du header quand scroll up sur front
+var lastScrollTop = 0;
+let header = document.getElementById('header');
+
+document.addEventListener("scroll", function(){
+    var st = window.pageYOffset || document.documentElement.scrollTop;
+    if (st > lastScrollTop){
+        header.classList.remove('fixed')
+    } else {
+        header.classList.add('fixed')
+    }
+    lastScrollTop = st <= 0 ? 0 : st;
+}, false);
