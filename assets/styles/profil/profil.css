@@ -1,6 +1,6 @@
 /* avis */
 #container_profil{
-    background-color: #f8f9fc;
+    /* background-color: #f8f9fc; */
 }
 #container_profil .container_profil{
     padding: 0.75rem;
@@ -45,21 +45,73 @@
 #container_profil .container_favory ul{
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    /* gap: 1rem; */
+    /* justify-content: center; */
+    justify-content: flex-start;
+    padding: 1rem;
 }
 #container_profil .container_favory ul li{
-    width: 30%;
-    padding: 0.5rem;
+    width: 29%;
+    padding: 1rem;
     box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69 / 15%) !important;
     border: 1px solid #e3e6f0;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+    /* justify-content: space-between;
+    margin-bottom: 1rem; */
+    margin: 1rem;
 }
 #container_profil .container_favory ul li .block_favory{
     width: 100%;
     display: flex;
     flex-flow: column;
     justify-content: space-between;
-    gap: 0.8rem;
+    /* gap: 0.8rem; */
 }
+.block_favory h4 {
+    text-align: center;
+    padding: 1rem;
+}
+.block_rating {
+    padding: 1rem 0;
+}
+.btn_favory {
+    padding: 1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: .5rem;
+    /* align-items: baseline; */
+}
+.btn_favory .btn-custom {
+    width: unset;
+    margin: unset;
+}
+.hover_effect.supp a {
+    padding: .7rem 1rem;
+    /* width: 100%; */
+    background: linear-gradient(to right, transparent 50%, #e74a3b 50%);
+    background-size: 200% 100%;
+    background-position: right;
+} 
+.hover_effect.supp a:hover {
+    color: #e74a3b;
+    background-position: left;
+    background-color: white;
+}
+.btn-custom.supp span:before, .btn-custom.supp span:after {
+    background: #e74a3b;
+}
+.btn-custom.supp a:before, .btn-custom.supp a:after {
+    background: #e74a3b;
+}
+/* .delete_favory {
+} */
+.hover_effect.delete a.delete_xmark {
+    padding: .9rem;
+}
+/*.btn-custom.supp:hover{
+    background: white;
+    color: #e74a3b;
+    background-position: left;
+} */
+
