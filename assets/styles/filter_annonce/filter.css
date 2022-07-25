@@ -20,8 +20,18 @@
 #filter_form form .bloc_form div{
     width: 48%;
 }
+.bloc_form .location_box{
+    position: relative;
+    width: 60% !important;
+}
+.bloc_form .distance_box{
+    width: 38% !important;
+}
+#filter_form form #city_suggest{
+    width: 32%;
+}
 #filter_form .noUi-connect {
-    background: var(--vertclair);
+    background: #41B04F;
 }
 #filter_form .d-flex.justify-content-center{
     gap: 2rem;
@@ -56,12 +66,11 @@
     justify-content: center;
     align-items: center;
     color: white;
-    background-color: var(--vertclair);
-    border: solid 1px var(--vertfonce);
+    background-color: #41B04F;
     border-radius: 10px;
 }
 #pagination_box span:hover{
-    background-color: var(--vertfonce);
+    background-color: #3ac658;
 }
 #pagination_box .pagination .current{
     background-color: var(--orange);

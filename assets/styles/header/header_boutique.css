@@ -1,6 +1,6 @@
 #header_boutique {
-    /* background-color: rgba(143, 198, 66, 30%); */
     background-color: rgb(65, 176, 80);
+    background-color: var(--vertfonce);
 }
 #header_boutique .header_wrap {
     display: flex;
@@ -20,6 +20,10 @@
     padding: 1rem;
 }
 /* SB2 */
+.topbar .dropdown-list .dropdown-header.custom {
+    background-color: #F7941D;
+    border: 1px solid #F7941D;
+}
 .topbar .dropdown .dropdown-menu {
     top: 80%;
     right: 0;

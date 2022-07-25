@@ -13,18 +13,22 @@
             {% for fav in favories %}
                 <li>
                     <div class="block_favory">
-                        <h3>{{ fav.boutique.title }}</h3>
-                        <span style="margin: auto .5rem">{{ fav.boutique.user.name|capitalize }}</span>
+                        <h4>{{ fav.boutique.title }}</h4>
+                        <p>La boutique de {{ fav.boutique.user.name|capitalize }}</p>
                         <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
-                        <div>
+                        <div class="block_rating">
                             {% for key, globalRating in totalGlobalRating %}
-                                {% if key == fav.boutique.id %}
+                                {# {% if key == fav.boutique.id %} #}
                                     <span class="rating" data-rating="{{ globalRating }}">
                                         {% for i in 1..5 %}
-                                            {% if i <= globalRating %}
-                                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                            {% if i <= globalRating|round %}
+                                                {% if (i - globalRating) > 0  %}
+                                                    <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+                                                {% else %}
+                                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                                {% endif %}
                                             {% else %}
-                                                <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                                <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                             {% endif %}
                                         {% endfor %}
                                     </span>
@@ -33,12 +37,30 @@
                                             <span>({{ nbr }} avis)</span>
                                         {% endif %}
                                     {% endfor %}
-                                {% endif %}
+                                {# {% endif %} #}
                             {% endfor %}
                         </div>
-                        <div>
-                            <a class="btn btn-primary" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
-                            <span title="Retirer des favoris">{{ include('front/boutique/favorites/_delete_form.html.twig') }}</span>
+                        <div class="block_buttons">
+                        <div class="btn_favory">
+                            {# <a class="btn btn-primary" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a> #}
+
+                            <div class="bloc_form btn-custom">
+                                <span class="hover_effect">
+                                    {# <button type="submit">Voir ma boutique</button> #}
+                                    <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
+                                </span>
+                            </div>
+
+                            {# <div class="bloc_form btn-custom supp">
+                                <span class="hover_effect supp">
+                                    <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">X</a>
+                                </span>
+                            </div> #}
+
+                            <span class="delete_favory" title="Retirer des favoris">
+                            {{ include('front/boutique/favorites/_delete_form.html.twig') }}
+                            </span>
+
                         </div>
                     </div>
                 </li>

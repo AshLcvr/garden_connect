@@ -3,7 +3,9 @@
 namespace App\Controller\Boutique;
 
 use App\Entity\Annonce;
+use App\Entity\Boutique;
 use App\Form\AnnonceType;
+use App\Repository\FavoryRepository;
 use App\Service\UploadImage;
 use App\Entity\ImagesAnnonces;
 use App\Controller\DefaultController;
@@ -17,6 +19,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/boutique/annonce')]
 class AnnonceController extends AbstractController
 {
+
+    #[Route('/public/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
+    public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique,FavoryRepository $favoryRepository, $id_annonce)
+    {
+        $user = $this->getUser();
+        $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
+        $annonce = null;
+
+        $notMyboutique = true;
+        $me = $boutique->getUser();
+        if($user){
+            if ($me->getId() === $user->getId() ){
+                $notMyboutique = false;
+            }
+        }
+
+        if (!empty($id_annonce)) {
+            $annonce = $annonceRepository->find($id_annonce);
+        }
+
+        // Favoris
+        $favory = '';
+        $alreadyFavory = $favoryRepository->findOneBy(['user'=> $this->getUser(), 'boutique' => $boutique]);
+        if (!empty($alreadyFavory)){
+            $favory = 'favory_active';
+        }
+
+        return $this->render(
+            'front/boutique/viewboutique.html.twig',
+            [
+                'annonce' => $annonce,
+                'annonces' => $annonces,
+                'boutique' => $boutique,
+                'notMyboutique' => $notMyboutique,
+                'favory' => $favory
+            ]
+        );
+    }
 
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
     public function indexAnnonce(): Response
