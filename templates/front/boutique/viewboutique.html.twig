@@ -53,19 +53,19 @@
             {% if annonce == null %}
             <div class="rating_boutique">
                 <a href="#avis_listing">
-                 <span class="rating" data-rating="{{ globalRating }}">
-                    {% for i in 1..5 %}
-                        {% if i <= globalRating|round %}
-                            {% if (i - globalRating) > 0  %}
-                                <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+                    <span class="rating" data-rating="{{ globalRating }}">
+                        {% for i in 1..5 %}
+                            {% if i <= globalRating|round %}
+                                {% if (i - globalRating) > 0  %}
+                                    <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                {% endif %}
                             {% else %}
-                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                             {% endif %}
-                        {% else %}
-                            <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                        {% endif %}
-                    {% endfor %}
-                </span>
+                        {% endfor %}
+                    </span>
                 </a>
                 <span>({{ avis|length }} avis)</span>
             </div>
