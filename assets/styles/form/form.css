@@ -16,11 +16,15 @@
     text-align: center;
 }
 #contener_form .bloc_form {
-    margin: 1rem auto;
     display: flex;
     flex-flow: column;
     gap: 0.7rem;
 }
+/* Formulaire login */
+#contener_form .bloc_form.login {
+    margin: 1rem auto;
+}
+/* Formulaire register */
 #contener_form .bloc_form.register {
     margin: 0 auto;
 }
@@ -52,54 +56,61 @@
     color: var(--vertclair);
 }
 .forgot a:hover {
-    /* color: var(--orange); */
-    color: var(--vertfonce);
+    color: var(--orange);
 }
 .message_forgot {
     padding: 1rem;
 }
-/*  */
+/* Message d'erreur */
 .form-error {
     color: red;
 }
-#contener_form button {
+/* Bouton */
+.btn-custom {
+    width: 40%;
+}
+.btn-custom .hover-effect {
+    position: relative;
+}
+.btn-custom .hover-effect:before,
+.btn-custom .hover-effect:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    background: var(--orange);
+    transition: 500ms ease all;
+}
+.btn-custom .hover-effect:before {
+    width: 2px;
+    height: 0%;
+}
+.btn-custom .hover-effect:after {
+    width: 0%;
+    height: 2px;
+}
+.btn-custom .hover-effect:hover:before {
+    height: 100%;
+}
+.btn-custom .hover-effect:hover:after {
+    width: 100%;
+}
+.btn-custom button {
     border: none;
     cursor: pointer;
-    background: none;
     font-size: 18px;
-    color: #eee;
+    color: white;
     padding: .7rem;
     width: 100%;
     background: linear-gradient(to right, transparent 50%, var(--vertclair) 50%);
     background-size: 200% 100%;
     background-position: right;
-    transition: all 0.3s;
+    transition: 500ms ease all;
 }
-#contener_form button:hover {
+.btn-custom button:hover {
     color: var(--orange);
     background-position: left;
-    background-color: white;
 }
-
-.btn-custom {
-    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
-    background-position: right;
-    background-size: 200% 100%;
-    transition: all 0.3s;
-    width: 40%;
-    padding: 0;
-    border: none;
-}
-.btn-custom span {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    /* border-radius: 12px; */
-}
-
 .btn-custom button:before,
 .btn-custom button:after {
     position: absolute;
@@ -107,7 +118,6 @@
     right: 0;
     top: 0;
     background: var(--orange);
-    /* transition: all 0.3s ease; */
     transition: 500ms ease all;
 }
 .btn-custom button:before {
@@ -127,30 +137,6 @@
     height: 100%;
 }
 .btn-custom button:hover:after {
-    width: 100%;
-}
-.btn-custom span:before,
-.btn-custom span:after {
-    position: absolute;
-    content: "";
-    left: 0;
-    bottom: 0;
-    background: var(--orange);
-    /* transition: all 0.3s ease; */
-    transition: 500ms ease all;
-}
-.btn-custom span:before {
-    width: 2px;
-    height: 0%;
-}
-.btn-custom span:after {
-    width: 0%;
-    height: 2px;
-}
-.btn-custom span:hover:before {
-    height: 100%;
-}
-.btn-custom span:hover:after {
     width: 100%;
 }
 /* Retour à l'accueil */
