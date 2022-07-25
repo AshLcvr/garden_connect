@@ -47,19 +47,6 @@
                     Interface
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseParam"  aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fa-solid fa-sliders"></i>
-                        <span>Gérer ma boutique</span>
-                    </a>
-                    <div id="collapseParam" class="collapse" aria-labelledby="headingUtilities"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{ path('app_boutique_detail') }}">Informations boutique</a>
-                            <a class="collapse-item" href="{{ path('app_boutique_preference') }}">Mes préférences</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce"
                        aria-expanded="true" aria-controls="collapseUtilities" >
                         <i class="fa-solid fa-basket-shopping"></i>
@@ -70,6 +57,19 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="{{ path('app_annonce_new') }}">Ajouter une annonce</a>
                             <a class="collapse-item" href="{{ path('app_annonce_index') }}">Gérer mes annonces</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseParam"  aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Gérer ma boutique</span>
+                    </a>
+                    <div id="collapseParam" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('app_boutique_detail') }}">Informations boutique</a>
+                            <a class="collapse-item" href="{{ path('app_boutique_preference') }}">Mes préférences</a>
                         </div>
                     </div>
                 </li>
