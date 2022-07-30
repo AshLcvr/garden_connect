@@ -169,14 +169,12 @@ class BoutiqueController extends AbstractController
                 $notMyboutique = false;
             }
         }
-
         // Favoris
         $favory = '';
         $alreadyFavory = $favoryRepository->findOneBy(['user'=> $this->getUser(), 'boutique' => $boutique]);
         if (!empty($alreadyFavory)){
             $favory = 'favory_active';
         }
-
         /// Avis
         $avis = $avisRepository->findBy(['boutique'=>$boutique]);
         if ($avis){
@@ -220,8 +218,6 @@ class BoutiqueController extends AbstractController
             ]
         );
     }
-
-
 
     #[Route('/viewprofil', name: 'boutique_view_profil', methods: ['GET', 'POST'])]
     public function viewProfile(TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)

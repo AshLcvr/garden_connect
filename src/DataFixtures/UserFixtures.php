@@ -3,16 +3,25 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use Faker;
 use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use function Symfony\Component\String\indexOf;
 
+/**
+ * Class UserFixtures
+ * @package App\DataFixtures
+ */
 class UserFixtures extends Fixture
 {
-    
+
+    /**
+     * @var UserPasswordHasherInterface
+     */
     private UserPasswordHasherInterface $hasher;
-    
+
 
     public function __construct(UserPasswordHasherInterface $hasher)
     {
@@ -22,8 +31,8 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $adminPolo = new User();
-        $adminPolo->setName('paul');
-        $adminPolo->setSurname('joret');
+        $adminPolo->setName('Joret');
+        $adminPolo->setSurname('Paul');
         $adminPolo->isIsVerified();
         $adminPolo->setEmail('paul.joret@hotmail.fr');
         $adminPolo->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
@@ -31,12 +40,12 @@ class UserFixtures extends Fixture
         $adminPolo->setCreatedAt(new \DateTimeImmutable('-2 week'));
         $password = $this->hasher->hashPassword($adminPolo, 'michel');
         $adminPolo->setPassword($password);
-
+        $this->addReference('polo', $adminPolo);
         $manager->persist($adminPolo);
 
         $adminSacha = new User();
-        $adminSacha->setName('sacha');
-        $adminSacha->setSurname('lechevallier');
+        $adminSacha->setName('Lechevallier');
+        $adminSacha->setSurname('Sacha');
         $adminSacha->isIsVerified();
         $adminSacha->setEmail('sacha.lcvr@gmail.com');
         $adminSacha->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
@@ -44,12 +53,12 @@ class UserFixtures extends Fixture
         $adminSacha->setCreatedAt(new \DateTimeImmutable('-2 week'));
         $password = $this->hasher->hashPassword($adminSacha, 'michel');
         $adminSacha->setPassword($password);
-
+        $this->addReference('sacha', $adminSacha);
         $manager->persist($adminSacha);
 
         $adminOrianne = new User();
-        $adminOrianne->setName('orianne');
-        $adminOrianne->setSurname('cielat');
+        $adminOrianne->setName('Cielat');
+        $adminOrianne->setSurname('Orianne');
         $adminOrianne->isIsVerified();
         $adminOrianne->setEmail('orianne.cielat@gmail.com');
         $adminOrianne->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
@@ -57,44 +66,38 @@ class UserFixtures extends Fixture
         $adminOrianne->setCreatedAt(new \DateTimeImmutable('-2 week'));
         $password = $this->hasher->hashPassword($adminOrianne, 'michel');
         $adminOrianne->setPassword($password);
-
+        $this->addReference('orianne', $adminOrianne);
         $manager->persist($adminOrianne);
 
-        for ($i = 0;$i <= 3;$i++) {
-            $user = new User();
-            $user->setName('user_'.$i);
-            $user->setSurname('userSur_'.$i);
-            $user->isIsVerified();
-            $user->setEmail('user_'.$i.'@gmail.com');
-            $user->setRoles(['ROLE_USER']);
-            $user->setActif(true);
-            $user->setCreatedAt(new \DateTimeImmutable());
-            $password = $this->hasher->hashPassword($user, 'user_'.$i);
+        // Création d'utilisateurs factices via Faker
+        $faker = Faker\Factory::create('fr_FR');
+        $countVendeur =  0;
+        $countUser    =  0;
+        for ($i = 0; $i < 200; $i++) {
+            $user = (new User())
+            ->setName($faker->lastName)
+            ->setSurname($faker->firstName)
+            ->setEmail($faker->email)
+            ->setActif(true)
+            ->setCreatedAt(new \DateTimeImmutable());
+            $password = $this->hasher->hashPassword( $user, $faker->password);
             $user->setPassword($password);
-            $this->addReference('user_'.$i, $user);
-            $manager->persist($user);
-        }
-
-        for ($i = 0;$i <= 3;$i++) {
-            $user = new User();
-            $user->setName('vendeur_'.$i);
-            $user->setSurname('vendeurSur'.$i);
-            $user->isIsVerified();
-            $user->setEmail('vendeur_'.$i.'@gmail.com');
-            $user->setRoles(['ROLE_VENDEUR']);
-            $user->setActif(true);
-            $user->setCreatedAt(new \DateTimeImmutable());
-            $password = $this->hasher->hashPassword($user, 'vendeur_'.$i);
-            $user->setPassword($password);
-            $this->addReference('vendeur_'.$i, $user);
+            // Attribution d'un rôle aléatoire
+            $roles = [['ROLE_USER','ROLE_VENDEUR'],['ROLE_USER']];
+            $indexRandRoles = array_rand($roles);
+            $user->setRoles($roles[$indexRandRoles]);
+            if ($indexRandRoles === 0){
+                $countVendeur += 1;
+                $userRole = 'vendeur_'.$countVendeur ;
+                $this->addReference($userRole, $user);
+            }else{
+                $countUser +=  1;
+                $userRole = 'user_'.$countUser;
+                $this->addReference($userRole, $user);
+            }
             $manager->persist($user);
         }
 
         $manager->flush();
-        
-        $this->addReference('polo', $adminPolo);
-        $this->addReference('sacha', $adminSacha);
-        $this->addReference('orianne', $adminOrianne);
-        
     }
 }

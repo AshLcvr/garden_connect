@@ -5,10 +5,19 @@ namespace App\DataFixtures;
 use App\Entity\Conversation;
 use App\Entity\Message;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ConversationFixtures extends Fixture
+class ConversationFixtures extends Fixture implements DependentFixtureInterface
 {
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class,
+            BoutiqueFixtures::class
+        ];
+    }
+
     public function load(ObjectManager $manager): void
     {
         $convPolo1 = new Conversation();
@@ -131,7 +140,7 @@ class ConversationFixtures extends Fixture
         $message2ConvOrianne2->setCreatedAt(new \DateTimeImmutable());
         $manager->persist($message2ConvOrianne2);
 
-        for ($i = 0;$i <= 3;$i++) { 
+        for ($i = 1;$i <= 5;$i++) {
             $conv = new Conversation();
             $conv->setPremierMessage('convUser_'.$i);
             $conv->setCreatedAt(new \DateTimeImmutable('-2 weeks'));
@@ -141,7 +150,7 @@ class ConversationFixtures extends Fixture
             $manager->persist($conv);
         }
 
-        for ($i = 0;$i <= 3;$i++) { 
+        for ($i = 1;$i <= 5;$i++) {
             $conv = new Conversation();
             $conv->setPremierMessage('convVendeur_'.$i);
             $conv->setCreatedAt(new \DateTimeImmutable());
@@ -151,7 +160,7 @@ class ConversationFixtures extends Fixture
             $manager->persist($conv);
         }
 
-        for ($i = 0;$i <= 3;$i++) { 
+        for ($i = 1;$i <= 5;$i++) {
             $conv = new Conversation();
             $conv->setPremierMessage('convUser_'.$i);
             $conv->setCreatedAt(new \DateTimeImmutable('-2 weeks'));
@@ -161,7 +170,7 @@ class ConversationFixtures extends Fixture
             $manager->persist($conv);
         }
 
-        for ($i = 0;$i <= 3;$i++) { 
+        for ($i = 1;$i <= 5;$i++) {
             $conv = new Conversation();
             $conv->setPremierMessage('convVendeur_'.$i);
             $conv->setCreatedAt(new \DateTimeImmutable());
@@ -171,7 +180,7 @@ class ConversationFixtures extends Fixture
             $manager->persist($conv);
         }
 
-        for ($i = 0;$i <= 3;$i++) { 
+        for ($i = 1;$i <= 5;$i++) {
             $conv = new Conversation();
             $conv->setPremierMessage('convUser_'.$i);
             $conv->setCreatedAt(new \DateTimeImmutable('-2 weeks'));
@@ -181,7 +190,7 @@ class ConversationFixtures extends Fixture
             $manager->persist($conv);
         }
 
-        for ($i = 0;$i <= 3;$i++) { 
+        for ($i = 1;$i <= 5;$i++) {
             $conv = new Conversation();
             $conv->setPremierMessage('convVendeur_'.$i);
             $conv->setCreatedAt(new \DateTimeImmutable());

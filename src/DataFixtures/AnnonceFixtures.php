@@ -197,7 +197,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $imageAnnonce13 = (new ImagesAnnonces())
             ->setTitle('20-maches-62a9b9de14c91.jpg');
         $annonce13 = new Annonce();
-        $annonce13->setTitle('Laitue');
+        $annonce13->setTitle('Mâche');
         $annonce13->setDescription('Riz de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
         $annonce13->setPrice(8);
         $annonce13->setMesure($this->getReference('Kg'));
@@ -212,7 +212,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $imageAnnonce14 = (new ImagesAnnonces())
             ->setTitle('20-pdt-62a9b9ddcf708.jpg');
         $annonce14 = new Annonce();
-        $annonce14->setTitle('Radis');
+        $annonce14->setTitle('Pomme de terre du jardin');
         $annonce14->setDescription('Sarrasin de Corneville ! Intelligentsia tofu echo park, jean shorts cred typewriter crucifix leggings next level.');
         $annonce14->setPrice(6);
         $annonce14->setMesure($this->getReference('Kg'));

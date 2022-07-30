@@ -22,6 +22,7 @@ use App\Service\CategoriesProduits\PlantsPlantesFeuillesArbresGrainesPousses\Dat
 
 class CategoriesFixtures extends Fixture
 {
+
     public function __construct()
     {
         $categories       = new DataCategories();
