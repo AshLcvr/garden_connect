@@ -68,4 +68,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
            ->getResult()
        ;
    }
+
+        /**
+     * @return User[] Returns an array of Avis objects
+     */
+    public function getUserVendeur(): array
+    {
+        return $this->createQueryBuilder('u')
+            // On compte le nombre de caractères du tableau "ROLES" de la BDD afin d'exclure les rôles User et Admin.
+            ->andWhere('LENGTH(u.roles) = 28')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

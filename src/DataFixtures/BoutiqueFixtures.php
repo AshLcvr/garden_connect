@@ -4,12 +4,24 @@ namespace App\DataFixtures;
 
 use App\Entity\Boutique;
 use App\Entity\ImagesBoutique;
+use App\Repository\UserRepository;
+use App\Service\CallApi;
+use Faker;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
 {
+    private $userRepository;
+    private $callApi;
+
+    public function __construct(UserRepository $userRepository, CallApi $callApi)
+    {
+        $this->userRepository = $userRepository;
+        $this->callApi        = $callApi;
+    }
+
     public function getDependencies()
     {
         return [
@@ -17,7 +29,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
-    public function load(ObjectManager $manager): void
+    public function load(ObjectManager $manager ): void
     {
         $imageBoutique = (new ImagesBoutique())
             ->setTitle('imageBoutiqueDefault.jpg');
@@ -38,6 +50,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setCardActive(1)
             ->addImagesBoutique($imageBoutique)
             ->setCreatedAt(new \DateTimeImmutable('-2 week'));
+        $this->addReference('boutique_polo', $boutiquePolo);
         $manager->persist($boutiquePolo);
 
         $imageBoutique2 = (new ImagesBoutique())
@@ -58,6 +71,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setCardActive(1)
             ->setCreatedAt(new \DateTimeImmutable())
             ->addImagesBoutique($imageBoutique2);
+        $this->addReference('boutique_sacha', $boutiqueSacha);
         $manager->persist($boutiqueSacha);
 
         $imageBoutique3 = (new ImagesBoutique())
@@ -78,38 +92,36 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setCardActive(1)
             ->setCreatedAt(new \DateTimeImmutable())
             ->addImagesBoutique($imageBoutique3);
+        $this->addReference('boutique_orianne', $boutiqueOrianne);
         $manager->persist($boutiqueOrianne);
 
-        // boutique des vendeurs (userFixtures)
-        for ($i = 0; $i <= 3; $i++) {
+        // Création de boutiques fictives via Faker
+        $faker = Faker\Factory::create('fr_FR');
+        $allVendeurs = $this->userRepository->getUserVendeur();
+        for($i = 0; $i < count($allVendeurs); $i++){
             $imageBoutique = (new ImagesBoutique())
                 ->setTitle('imageBoutiqueDefault.jpg');
             $manager->persist($imageBoutique);
             $boutiqueVendeur = (new Boutique())
-                ->setTitle('La boutique de vendeur_' . $i)
-                ->setDescription('La boutique qu\'elle est belle. 3 wolf moon banh mi vaporware raclette, DSA XOXO single-origin coffee chicharrones chillwave yuccie church-key vinyl small batch. Shoreditch paleo readymade narwhal pork belly four loko. Fashion axe master cleanse salvia, vexillologist flannel taxidermy swag four loko jean shorts kale chips hoodie. 3 wolf moon banh mi vaporware raclette, DSA XOXO single-origin coffee chicharrones chillwave yuccie church-key vinyl small batch.')
-                ->setTelephone('0677889933')
-                ->setAdress('')
-                ->setCity('Pont-Audemer')
-                ->setPostcode(27500)
-                ->setCitycode(27467)
-                ->setLng(0.525508)
-                ->setLat(49.346658)
-                ->setUser($this->getReference('vendeur_' . $i))
+                ->setTitle('La boutique de ' . $allVendeurs[$i]->getSurname())
+                ->setDescription('Bonjour, je m\'appelle ' .$allVendeurs[$i]->getSurname(). ' et je vous présente ma boutique!')
+                ->setTelephone($faker->phoneNumber);
+            $this->setRandomAdress($boutiqueVendeur);
+            $boutiqueVendeur
+                ->setUser($allVendeurs[$i])
                 ->setActif(1)
                 ->setCardActive(1)
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->addImagesBoutique( $imageBoutique);
+            $this->addReference('boutique_'.$i , $boutiqueVendeur);
             $manager->persist($boutiqueVendeur);
         }
-
         $manager->flush();
+    }
 
-        $this->addReference('boutique_polo', $boutiquePolo);
-        $this->addReference('boutique_sacha', $boutiqueSacha);
-        $this->addReference('boutique_orianne', $boutiqueOrianne);
-        for ($i = 0; $i <= 3; $i++) {
-        $this->addReference('boutique_vendeur_' . $i, $boutiqueVendeur);
-        }
+    private function setRandomAdress($boutiqueVendeur)
+    {
+        $boutiqueVendeur->setAdress('');
+        $this->callApi->getCityInfosbyName($boutiqueVendeur);
     }
 }

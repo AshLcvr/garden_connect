@@ -19,6 +19,7 @@ doctrine:
             numeric_functions:
                 ASIN: DoctrineExtensions\Query\Mysql\Asin
                 ACOS: DoctrineExtensions\Query\Mysql\Acos
+                RAND: DoctrineExtensions\Query\Mysql\Rand
                 ROUND: DoctrineExtensions\Query\Mysql\Round
                 RADIANS: DoctrineExtensions\Query\Mysql\Radians
                 POWER: DoctrineExtensions\Query\Mysql\Power

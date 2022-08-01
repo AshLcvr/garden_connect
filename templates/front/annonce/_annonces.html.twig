@@ -14,7 +14,11 @@
                         </ul>
                     </div>
                     <div class="description-card">
-                        <p><span>Description : </span>{{ annonce.description }}</p>
+                        {% if annonce.description|length < 30 %}
+                            <p><span>Description : </span>{{ annonce.description }}</p>
+                        {% else %}
+                            <p><span>Description : </span>{{ annonce.description|slice(0,150) }}...</p>
+                        {% endif %}
                         <p><span>Prix : </span>{{ annonce.price }} €</p>
                         <p><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
                         <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>

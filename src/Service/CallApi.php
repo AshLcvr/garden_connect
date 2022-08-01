@@ -14,7 +14,24 @@ class CallApi
         $this->client = $client;
     }
 
-    public function getBoutiqueAdressCoordinates(Boutique $boutique, $cityname, $city_code, $adress = null): array
+    public function getCityInfosbyName(Boutique $boutique)
+    {
+        $url = 'https://geo.api.gouv.fr/communes?codeDepartement=27';
+        $response = $this->client->request('GET', $url);
+        $content = $response->getContent();
+        $content = $response->toArray();
+        $randCityIndex = array_rand($content);
+        $cityname = $content[$randCityIndex]['nom'];
+        $city_code = $content[$randCityIndex]['code'];
+        $post_code = $content[$randCityIndex]['codesPostaux'][0];
+        $boutique
+            ->setCity($cityname)
+            ->setCitycode($city_code)
+            ->setPostcode($post_code);
+        $this->getBoutiqueAdressCoordinates($boutique, $cityname, $city_code);
+    }
+
+    public function getBoutiqueAdressCoordinates(Boutique $boutique, $cityname, $city_code, $adress = null)
     {
         $formatedCityName = str_replace([' '], '+', $cityname);
 
@@ -37,7 +54,8 @@ class CallApi
             $coordinates = $content['features'][0]['geometry']['coordinates'];
         }
 
-        $boutique->setLng($coordinates[0]);
-        $boutique->setLat($coordinates[1]);
+        $boutique
+            ->setLng($coordinates[0])
+            ->setLat($coordinates[1]);
     }
 }
