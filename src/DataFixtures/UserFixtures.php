@@ -80,7 +80,7 @@ class UserFixtures extends Fixture
             ->setEmail($faker->email)
             ->setActif(true)
             ->setCreatedAt(new \DateTimeImmutable());
-            $password = $this->hasher->hashPassword( $user, $faker->password);
+            $password = $this->hasher->hashPassword($user, $faker->password);
             $user->setPassword($password);
             // Attribution d'un rôle aléatoire
             $roles = [['ROLE_USER','ROLE_VENDEUR'],['ROLE_USER']];

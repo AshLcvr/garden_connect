@@ -111,7 +111,7 @@
       let lng           = boutiques[i][2];
       let boutique_id   = boutiques[i][3];
       let boutique_path = '{{ path("view_boutique", {'id': 'boutique_id'}) }}';
-      boutique_path = url.replace("boutique_id", boutique_id);
+      boutique_path     = boutique_path.replace("boutique_id", boutique_id);
       let marqueur      = L.marker([ parseFloat(lat), parseFloat(lng)], {icon: icone} );
       marqueur.bindPopup("" +
               "<div style='display: flex; flex-flow: column nowrap; align-items: center'>" +

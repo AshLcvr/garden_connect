@@ -8,6 +8,8 @@ use App\Repository\AnnonceRepository;
 use App\Repository\BoutiqueRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ImagesHeroRepository;
+use App\Repository\SubcategoryRepository;
+use Faker\Provider\Lorem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
