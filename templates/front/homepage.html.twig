@@ -45,7 +45,6 @@
     {% for annonce in annonces %}
         <div class="annonce_box">
           <div class="annonce_img">
-            {# <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link"> #}
               <ul class="slides">
                 {% for image in annonce.imagesAnnonces %}
                     <li class="li_annonce_img">
@@ -63,7 +62,11 @@
                 <p class="annonce_title">{{ annonce.title }}</p>
               </div>
               <div class="annonce_description_box">
-                <p>{{ annonce.description }}</p>
+                {% if annonce.description|length < 30 %}
+                  <p><span>Description : </span>{{ annonce.description }}</p>
+                {% else %}
+                  <p><span>Description : </span>{{ annonce.description|slice(0,150) }}...</p>
+                {% endif %}
               </div>
               <div class="annonce_price_box">
                 <p class="annonce_price">{{ annonce.price }}€/Kg</p>

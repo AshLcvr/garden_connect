@@ -198,6 +198,7 @@ class BoutiqueController extends AbstractController
                 ->setRating($rating)
                 ->setUser($this->getUser())
                 ->setBoutique($boutique)
+                ->setActif(true)
                 ->setCreatedAt(new \DateTimeImmutable());
             $avisRepository->add($newAvis, true);
 
