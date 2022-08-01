@@ -7,16 +7,29 @@
     <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
 {% endblock %}
 {% block body %}
-    <div class="card shadow mb-4 user_detail">
-        <div class="card-header py-3  d-flex justify-content-between align-items-center">
-            <h4 class="annonce_title">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
-            <div>
-                <a name="Modifier mon profil" class="btn btn-primary" href="{{ path('boutique_edit_profil') }}"><i class="fa-solid fa-pen-to-square"></i></a>
+    {# <div class="card shadow mb-4 user_detail" style="border: 1px solid green;"> #}
+        {# <div class="card-header py-3  d-flex justify-content-between align-items-center"> #}
+        <div class="wrap2">
+            <h1 class="title_top">Profil</h1>
+            <h4 class="annonce_title" style="text-align: center;">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
+            <div class="block_btn_modify plus">
+                <div class="bloc_form btn-custom modify btq plus" style="">
+                    <span class="hover-effect modify btq">
+                        {# <a title="Créer une annonce" class="" href="{{ path('app_annonce_new') }}"><i class="fa-solid fa-plus"></i></a> #}
+                        <a name="Modifier mon profil" class="" href="{{ path('boutique_edit_profil') }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </span>
+                </div>
             </div>
+            {# <div>
+                <a name="Modifier mon profil" class="btn btn-primary" href="{{ path('boutique_edit_profil') }}"><i class="fa-solid fa-pen-to-square"></i></a>
+            </div> #}
         </div>
+
+        <div class="card-body boutique_infos">
+        <div class="d-flex flex-column">
         <div class="card-body user_infos">
             <div>
-                <h6 class="annonce_title">Photo: </h6>
+                <h6 class="annonce_title">Photo : </h6>
                 <div>
                     {% if user.image %}
                         <img src="{{ asset('uploads/profile/'~user.image) }}" alt="Images user" style=" width: 10%; border-radius: 50%">
@@ -25,21 +38,28 @@
             </div>
             <hr>
             <div>
-                <h6 class="annonce_title">Email:</h6>
+                <h6 class="annonce_title">Email :</h6>
                 {{ user.email  }}
             </div>
             <hr>
             <div>
-                <h6 class="annonce_title">Prénom:</h6>
+                <h6 class="annonce_title">Prénom :</h6>
                 {{ user.name }}
             </div>
             <hr>
             <div>
-                <h6 class="annonce_title">Nom:</h6>
+                <h6 class="annonce_title">Nom :</h6>
                     {{ user.surname }}
             </div>
             <hr>
-            <a style="color: var(--orange)" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>
-        </div>
-    </div>
+            <a class="modif_psd btq" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>
+
+            </div>
+            </div>
+
+
+            </div>
+
+        {# </div>
+    </div> #}
 {% endblock %}

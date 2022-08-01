@@ -10,7 +10,7 @@
         <h4 class="annonce_title">{{ boutique.title }}</h4> #}
 
 <div class="boutique_accueil">
-    <div class="wrap2">
+    <div>
         <h1 class="title_top">  {{ boutique.title }} </h1>
 
         <div class="block_buttons">
@@ -19,8 +19,8 @@
 
         {# Test bouton custom #}
             <div class="block_btn_modify">
-                <div class="bloc_form btn-custom modify">
-                    <span class="hover_effect modify">
+                <div class="bloc_form btn-custom modify btq">
+                    <span class="hover-effect modify btq">
                         <a title="Modifier ma boutique" class="" href="{{ path('app_boutique_edit', {'id' : boutique.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                     </span>
                 </div>
@@ -28,9 +28,9 @@
             {% if boutique.actif == 1 %}
                 {# <a title="Désactiver la boutique" class="btn btn-primary" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}" onclick="return confirm('Voulez vous vraiment désactiver votre boutique?')"><i class="fa-regular fa-eye"></i></a> #}
                 <div class="block_btn_modify">
-                <div class="bloc_form btn-custom modify">
-                    <span class="hover_effect modify">
-                        <a title="Désactiver la boutique" class="" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}" onclick="return confirm('Voulez vous vraiment désactiver votre boutique ?')"><i class="fa-regular fa-eye"></i></a>
+                <div class="bloc_form btn-custom modify btq">
+                    <span class="hover-effect modify btq">
+                        <a title="Désactiver la boutique" class="" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}" onclick="return confirm('Voulez-vous vraiment désactiver votre boutique ?')"><i class="fa-regular fa-eye"></i></a>
                     </span>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 {# <a title="Activer la boutique" class="btn btn-warning" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye-slash"></i></a> #}
                 <div class="block_btn_inactive">
                     <div class="bloc_form btn-custom inactive">
-                        <span class="hover_effect inactive">
+                        <span class="hover-effect inactive">
                             <a title="Activer la boutique" class="" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-solid fa-eye-slash"></i></a>
                         </span>
                     </div>
@@ -57,23 +57,23 @@
         </div>
         <hr>
         <div class="d-flex flex-column">
-            <h6 class="annonce_title">Description:</h6>
+            <h6 class="annonce_title">Description :</h6>
             {{ boutique.description  }}
         </div>
         <hr>
-         <div class="d-flex flex-column">
-            <h6 class="annonce_title">Téléphone:</h6>
-             {{ boutique.telephone }}
+        <div class="d-flex flex-column">
+            <h6 class="annonce_title">Téléphone :</h6>
+            {{ boutique.telephone }}
         </div>
         <hr>
-         <div class="d-flex flex-column">
-             <h6 class="annonce_title">Adresse:</h6>
-             <div class="d-flex flex-column">
-                 <ul class="text-align-center">
-                     <li>{{ boutique.adress }}</li>
-                     <li>{{ boutique.postcode }} {{ boutique.city }}</li>
-                 </ul>
-             </div>
+        <div class="d-flex flex-column">
+            <h6 class="annonce_title">Adresse:</h6>
+            <div class="d-flex flex-column">
+                <ul class="text-align-center">
+                    <li>{{ boutique.adress }}</li>
+                    <li>{{ boutique.postcode }} {{ boutique.city }}</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

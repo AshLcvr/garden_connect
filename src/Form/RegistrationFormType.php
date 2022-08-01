@@ -43,7 +43,7 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', RepeatedType::class, [
                 'mapped' => false,
                 'type' => PasswordType::class,
-                'invalid_message' => 'Les mots de passes ne correspondent pas.',
+                'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'constraints' => [
                     new NotBlank([
@@ -53,7 +53,7 @@ class RegistrationFormType extends AbstractType
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères',
                         'max' => 255,
-                        'maxMessage' => 'Votre mot de passe ne doit pas exceder {{ limit }} caractères'
+                        'maxMessage' => 'Votre mot de passe ne doit pas excéder {{ limit }} caractères'
                     ])
                 ],
                 'required' => true,
@@ -64,7 +64,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'required' => true,
                 "expanded" => true,
-                'label' => 'Voulez-vous vendre des produits? ',
+                'label' => 'Voulez-vous vendre des produits ? ',
                 'choices' => [
                     'Oui' => 'vendeur',
                     'Non' => 'acheteur'

@@ -52,9 +52,9 @@ class FavoryController extends AbstractController
                     $total[] = $avi->getRating();
                 }
                 // dump($total);
-                $globalRating[$fav->getBoutique()->getId()] = array_sum($total)/$numberAvis;
-                $total = [];
                 if ($numberAvis) {
+                    $globalRating[$fav->getBoutique()->getId()] = array_sum($total) / $numberAvis;
+                    $total = [];
                     // dump($globalRating);
                     $totalGlobalRating[$fav->getBoutique()->getId()] = $globalRating[$fav->getBoutique()->getId()];
                     $globalRating = [];

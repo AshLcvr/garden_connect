@@ -5,9 +5,10 @@
 
 {% block body %}
 <div id="container_profil">
-    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h3 class="annonce_title" style="margin: 0">Mes boutiques favorites</h3>
-    </div>
+    {# <div class="card-header py-3 d-flex justify-content-between align-items-center"> #}
+        {# <h3 class="annonce_title" style="margin: 0">Mes boutiques favorites</h3> #}
+        <h1 class="title_top" style="margin: 0">Mes boutiques favorites</h1>
+    {# </div> #}
     <div class="container_favory">
         <ul>
             {% for fav in favories %}
@@ -44,8 +45,8 @@
                         <div class="btn_favory">
                             {# <a class="btn btn-primary" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a> #}
 
-                            <div class="bloc_form btn-custom">
-                                <span class="hover_effect">
+                            <div class="bloc_form btn-custom btq">
+                                <span class="hover-effect btq">
                                     {# <button type="submit">Voir ma boutique</button> #}
                                     <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
                                 </span>

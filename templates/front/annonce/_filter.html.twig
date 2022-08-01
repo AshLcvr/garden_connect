@@ -73,10 +73,19 @@
 
     <div id="price-slider" class="m-3" data-min="{{ min }}" data-max=" {{ max }}"></div>
 
-    <div class="d-flex justify-content-center">
-        {{ form_row(form.submit, { 'attr' : {'class' : 'btn-primary' }}) }}
+    <div class="d-flex justify-content-center align-items-center gap1">
+        {# {{ form_row(form.submit, { 'attr' : {'class' : 'btn-primary' }}) }} #}
+        <div class="bloc_form btn-custom search">
+            <span class="hover-effect search">
+                {{ form_row(form.submit, { 'attr' : {'class' : '' }}) }}
+            </span>
+        </div>
         {% if app.request.query.get('q') is not null %}
-            <a class="btn btn-warning" href="{{ path('app_annonce_recherche') }}">Supprimer les filtres</a>
+        <div class="bloc_form btn-custom search">
+            <span class="hover-effect del_filters">
+                <a class="" href="{{ path('app_annonce_recherche') }}" style="">Supprimer les filtres</a>
+            </span>
+        </div>
         {% endif %}
     </div>
 {{ form_end(form) }}

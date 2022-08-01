@@ -69,7 +69,7 @@ class BoutiqueType extends AbstractType
             ->add('search', TextType::class,[
                 'mapped'      => false,
                 'required'    => true,
-                'label'       => 'Ville ou Code Postal',
+                'label'       => 'Ville ou code postal',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez renseigner ce champ'

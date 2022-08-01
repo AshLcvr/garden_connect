@@ -10,15 +10,23 @@
     box-shadow: 2px 2px 5px lightgray;
     border-radius: 5px;
 }
-.title{
+.title {
     text-align: center;
     font-family: 'Unkempt';
-    background-color: lightgrey;
-    color: #41B04F;
-    font-size: 1.7rem;
+    /* background-color: lightgrey; */
+    color: var(--marron);
+    /* color: dimgray; */
+    /* color: var(--orange); */
+    font-size: 2rem;
     padding: 0.3rem;
     border-radius: 5px;
 }
+.title a,
+p.title {
+    text-align: center;
+    color: var(--marron);
+}
+
 .content-card {
     display: flex;
     flex-flow: row wrap;

@@ -1,67 +1,101 @@
-{% extends 'layout/front_base.html.twig' %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block title %}
+        <title>Mon profil</title>
+        {% endblock %}
+        <link rel="icon" href="{{ asset('images/logo-sans-fond.png') }}" >
+        <link rel="stylesheet" href="//use.fontawesome.com/releases/v6.0.0/css/all.css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
+        {{ encore_entry_link_tags('back_boutique') }}
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
 
-{% block stylesheets %}
-    <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
-{% endblock %}
-
-{% block body %}
-<section class="d-flex" id="container_profil">
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('homepage') }}">
-                <i class="fa-solid fa-arrow-left"></i>
-                <span>Retour au site</span></a>
-        </li>
-        <hr class="sidebar-divider">
-        <div class="sidebar-heading">
-            Interface
-        </div>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce"
-                aria-expanded="true" aria-controls="collapseUtilities" >
-                <i class="fa-solid fa-user"></i>
-                <span>Mon profil</span>
-            </a>
-            <div id="collapseAnnonce" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{ path('profil') }}">Voir mon profil</a>
-                    <a class="collapse-item" href="{{ path('edit_profil', {'id' : app.user.id}) }}">Modifier mon profil</a>
+    <body id="page-top">
+        {%  include '_partials/_header_boutique.html.twig' %}
+        <button id="sidebarToggleTop" class="btn btn-link d -md-none rounded-circle mr-3 custom">
+            <i class="fa fa-bars"></i>
+        </button>
+        <div id="wrapper">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion side_color custom" id="accordionSidebar" style="">
+                <hr class="sidebar-divider my-0 custom">
+                {# <li class="nav-item">
+                    <a class="nav-link custom" href="{{ path ('app_boutique_index') }}">
+                        <i class="fas fa-fw fa-tachometer-alt custom"></i>
+                        <span>Espace personnel</span>
+                    </a>
+                </li> #}
+                <li class="nav-item">
+                    <a class="nav-link custom" href="{{ path('homepage') }}">
+                        <i class="fa-solid fa-arrow-left custom"></i>
+                        <span>&nbspRetour au site</span>
+                    </a>
+                </li>
+                <hr class="sidebar-divider custom">
+                <div class="sidebar-heading custom">
+                Interface
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link collapsed custom" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce"
+                    aria-expanded="true" aria-controls="collapseUtilities" >
+                        <i class="fa-solid fa-user custom"></i>
+                        <span>Mon profil</span>
+                    </a>
+                    <div id="collapseAnnonce" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('profil') }}">Voir mon profil</a>
+                            <a class="collapse-item" href="{{ path('edit_profil', {'id' : app.user.id}) }}">Modifier mon profil</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    {# <a class="nav-link custom" href="{{ path('homepage') }}"> #}
+                    <a class="nav-link custom" href="#">
+                    <i class="fa-solid fa-message custom"></i>
+                    <span>Messagerie</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom" href="{{ path('profil_avis') }}">
+                    <i class="fa-solid fa-comment custom"></i>
+                    <span>Mes avis</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom" href="{{ path('profil_favory') }}">
+                    <i class="fa-solid fa-heart custom"></i>
+                    <span>Mes boutiques favorites</span></a>
+                </li>
+                <hr class="sidebar-divider custom">
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
+            </ul>
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <div class="container-fluid d-flex custom">
+                        <div class="container_profil">
+                        {% block container %}{% endblock %}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('homepage') }}">
-                <i class="fa-solid fa-message"></i>
-                <span>Messagerie</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('profil_avis') }}">
-                <i class="fa-solid fa-comment"></i>
-                <span>Mes avis</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('profil_favory') }}">
-                <i class="fa-solid fa-heart"></i>
-                <span>Mes boutiques favorites</span></a>
-        </li>
-        <hr class="sidebar-divider">
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-    </ul>
-    <div class="container_profil">
-        {% block container %}{% endblock %}
-    </div>
-</section>
-{% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('bootstrap/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/vendor/js/sb-admin-2.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/vendor/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('bootstrap/vendor/datatables/dataTables.bootstrap4.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-{% endblock %}
+        {%  include '_partials/_footer_boutique.html.twig' %}
+
+        <script src="{{ asset('bootstrap/vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/vendor/js/sb-admin-2.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/vendor/datatables/jquery.dataTables.js') }}"></script>
+        <script src="{{ asset('bootstrap/vendor/datatables/dataTables.bootstrap4.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {{ encore_entry_script_tags('back_boutique') }}
+        {% block javascripts %}
+        {% endblock %}
+    </body>
+</html>

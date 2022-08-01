@@ -1,8 +1,11 @@
 {% extends 'layout/front_profil_base.html.twig' %}
 
 {% block container %}
+<div id="container_profil">
+        <h1 class="title_top" style="margin: 0">Mes boutiques favorites</h1>
+
 <div class="container_favory">
-    <h2>Mes boutiques favorites</h2>
+    {# <h2>Mes boutiques favorites</h2> #}
     <ul>
         {% for fav in favories %}
             <li>
@@ -30,10 +33,29 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    <div>
+                    <div class="block_buttons">
+                        <div class="btn_favory">
+                            {# <a class="btn btn-primary" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a> #}
+
+                            <div class="bloc_form btn-custom btq">
+                                <span class="hover-effect btq">
+                                    {# <button type="submit">Voir ma boutique</button> #}
+                                    <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
+                                </span>
+                            </div>
+
+                                    {# <a href="{{ path('view_boutique', {id: fav.boutique.id}) }}">X</a> #}
+                                    
+
+                            <span class="delete_favory" title="Retirer des favoris">
+                            {{ include('front/boutique/favorites/_delete_form.html.twig') }}
+                            </span>
+
+                        </div>
+                    {# <div>
                         <a class="btn btn-primary" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
                         <span title="Retirer des favoris">{{ include('front/profil/favories/_delete_form.html.twig') }}</span>
-                    </div>
+                    </div> #}
                 </div>
             </li>
         {% endfor %}
@@ -41,5 +63,6 @@
     <div class="js-filter-pagination" id="pagination_box">
         {{ knp_pagination_render(favories) }}
     </div>
+</div>
 </div>
 {% endblock %}

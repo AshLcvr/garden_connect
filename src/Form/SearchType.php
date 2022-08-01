@@ -23,17 +23,17 @@ class SearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-       $builder
-           ->add('location', TextType::class, [
-               'label' => false,
-               'required'=> false,
+        $builder
+            ->add('location', TextType::class, [
+                'label' => false,
+                'required'=> false,
                 'attr' => [
                     'placeholder' => 'Localisation'
                 ]
-           ])
-           ->add('distance', ChoiceType::class, [
-               'label' => false,
-               'required'=> false,
+            ])
+            ->add('distance', ChoiceType::class, [
+                'label' => false,
+                'required'=> false,
                 'choices' => [
                     'Distance' => '',
                     '5 km' => 5,
@@ -43,41 +43,41 @@ class SearchType extends AbstractType
                     '25 km' => 25,
                     '30 km' => 30,
                 ],
-           ])
-           ->add('lat', HiddenType::class)
-           ->add('lng', HiddenType::class)
-           ->add('q', TextType::class, [
-               'label' => false,
-               'required'=> false,
+            ])
+            ->add('lat', HiddenType::class)
+            ->add('lng', HiddenType::class)
+            ->add('q', TextType::class, [
+                'label' => false,
+                'required'=> false,
                 'attr' => [
                     'placeholder' => 'Mots clés'
                 ]
-           ])
-           ->add('category', EntityType::class, [
-               'label' => false,
-               'required' => false,
-               'class' => Category::class,
-               'choice_label' => 'title',
-               'placeholder' => 'Catégories',
-           ])
-           ->add('min', NumberType::class, [
-               'label' => false,
-               'required' => false,
-               'attr' => [
-                   'placeholder' => 'Prix min'
-               ]
-           ])
-           ->add('max', NumberType::class, [
-               'label' => false,
-               'required' => false,
-               'attr' => [
-                   'placeholder' => 'Prix max'
-               ]
-           ])
-           ->add('submit', SubmitType::class,[
-               'label' => 'Rechercher'
-           ])
-       ; 
+            ])
+            ->add('category', EntityType::class, [
+                'label' => false,
+                'required' => false,
+                'class' => Category::class,
+                'choice_label' => 'title',
+                'placeholder' => 'Catégories',
+            ])
+            ->add('min', NumberType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Prix min'
+                ]
+            ])
+            ->add('max', NumberType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Prix max'
+                ]
+            ])
+            ->add('submit', SubmitType::class,[
+                'label' => 'Rechercher'
+            ])
+        ; 
 
         $builder->get('category')->addEventListener(
             FormEvents::POST_SUBMIT,
@@ -123,15 +123,15 @@ class SearchType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-       $resolver->setDefaults([
-           'data_class' => SearchData::class,
-           'method' => 'GET',
-           'crsf_protection' => false
-       ]);
+        $resolver->setDefaults([
+            'data_class' => SearchData::class,
+            'method' => 'GET',
+            'crsf_protection' => false
+        ]);
     }
 
     public function getBlockPrefix()
     {
-       return '';
+        return '';
     }
 }

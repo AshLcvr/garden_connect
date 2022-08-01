@@ -108,5 +108,8 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
         $this->addReference('boutique_polo', $boutiquePolo);
         $this->addReference('boutique_sacha', $boutiqueSacha);
         $this->addReference('boutique_orianne', $boutiqueOrianne);
+        for ($i = 0; $i <= 3; $i++) {
+        $this->addReference('boutique_vendeur_' . $i, $boutiqueVendeur);
+        }
     }
 }

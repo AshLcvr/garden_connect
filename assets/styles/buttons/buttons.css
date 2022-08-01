@@ -1,0 +1,281 @@
+/* Style des boutons */
+/* 
+FRONT Pages Inscription / Connexion / Annonces / Boutique publique (Laisser un avis)
+BACK BOUTIQUE Pages Espace boutique / Ajouter une annonce
+http://localhost:3000/recherche
+*/
+/* Boutons par défaut */
+.btn-custom {
+    width: 40%;
+    margin: 0 auto;
+}
+/* BTQ */
+.btn-custom.btq {
+    width: 20%;
+    margin: 0 auto;
+}
+.btn-custom .hover-effect {
+    position: relative;
+    display: block;
+}
+.btn-custom .hover-effect:before {
+    width: 2px;
+    height: 0%;
+}
+.btn-custom .hover-effect:after {
+    width: 0%;
+    height: 2px;
+}
+.btn-custom .hover-effect:before,
+.btn-custom .hover-effect:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    background: var(--orange);
+    transition: 500ms ease all;
+}
+/*  */
+.btn-custom.btq .hover-effect:before,
+.btn-custom.btq .hover-effect:after {
+    background: var(--vertfonce);
+}
+/*  */
+.btn-custom .hover-effect:hover:before {
+    height: 100%;
+}
+.btn-custom .hover-effect:hover:after {
+    width: 100%;
+}
+.btn-custom button,
+.btn-custom a {
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+    padding: .7rem;
+    width: 100%;
+    background: linear-gradient(to right, transparent 50%, var(--vertclair) 50%);
+    background-size: 200% 100%;
+    background-position: right;
+    transition: 500ms ease all;
+    display: block; 
+    text-align: center;
+}
+/* BTQ */
+.btn-custom.btq button,
+.btn-custom.btq a {
+    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
+    background-size: 200% 100%;
+    background-position: right;
+    /* text-align: center; */
+}
+/*  */
+.btn-custom button:hover,
+.btn-custom a:hover {
+    color: var(--orange);
+    background-position: left;
+}
+/* BTQ */
+.btn-custom.btq button:hover,
+.btn-custom.btq a:hover {
+    color: var(--vertfonce);
+    background-position: left;
+}
+/*  */
+.btn-custom button:before,
+.btn-custom button:after,
+.btn-custom a:before,
+.btn-custom a:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    background: var(--orange);
+    transition: 500ms ease all;
+}
+/* BTQ */
+.btn-custom.btq button:before,
+.btn-custom.btq button:after,
+.btn-custom.btq a:before,
+.btn-custom.btq a:after {
+    background: var(--vertfonce);
+}
+/*  */
+.btn-custom button:before,
+.btn-custom a:before {
+    height: 0%;
+    width: 2px;
+}
+.btn-custom button:after,
+.btn-custom a:after {
+    width: 0%;
+    height: 2px;
+}
+.btn-custom button:hover:before,
+.btn-custom a:hover:before {
+    height: 100%;
+}
+.btn-custom button:hover:after,
+.btn-custom a:hover:after {
+    width: 100%;
+}
+/* Page Annonces */
+/* Supprimer les filtres */
+#filter_form .hover-effect.del_filters {
+    display: inline-block;
+    width: 100%;
+}
+#filter_form .hover-effect.del_filters a {
+    display: inline-block;
+    padding: .5rem;
+    text-align: center;
+    background: linear-gradient(to right, transparent 50%, var(--orange) 50%);
+    background-size: 200% 100%;
+    background-position: right;
+}
+#filter_form .hover-effect.del_filters a:hover {
+    background-position: left;
+    color: var(--vertclair);
+}
+#filter_form .hover-effect.del_filters a:before,
+#filter_form .hover-effect.del_filters:before,
+#filter_form .hover-effect.del_filters a:after,
+#filter_form .hover-effect.del_filters:after {
+    background: var(--vertclair);
+}
+/*
+Pages Détails boutique / Gérer mes annonces / Boutiques favorites
+http://localhost:3000/boutique/detail
+*/
+.button_boutique {
+    margin: 0 auto;
+}
+.block_buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: .5rem;
+    margin: .5rem auto;
+}
+.block_buttons.avis {
+    justify-content: unset;
+    align-items: center;
+    gap: .5rem;
+    margin: unset;
+    /* width: 70%; */
+}
+/* Page Modifier mon mot de passe */
+.btn-custom.modif_password {
+    width: unset;
+}
+.btn-custom.modif_password button {
+    padding: .7rem 2rem;
+}
+/* Page Avis émis */
+.btn-custom.avis {
+    /* width: 80%;
+    margin: unset; */
+    display: contents;
+    padding: .5rem;
+}
+.hover-effect.delete a.avis {
+    color: white;
+}
+.hover-effect.delete a.avis:hover {
+    background-color: white;
+}
+button.block_btn_delete {
+    border: none;
+}
+.block_btn_modify,
+.block_btn_inactive,
+.block_btn_delete {
+    display: inline-block;
+}
+.btn-custom.modify,
+.btn-custom.inactive,
+.btn-custom.delete {
+    width: unset;
+}
+.hover-effect.modify a {
+    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
+}
+.hover-effect.inactive a {
+    background: linear-gradient(to right, transparent 50%, var(--orange) 50%);
+}
+.hover-effect.delete a {
+    background: linear-gradient(to right, transparent 50%, var(--rouge_supp) 50%);
+}
+.hover-effect.delete a.delete_xmark {
+    /* padding: .95rem; */
+    display: block;
+}
+.hover-effect.modify a,
+.hover-effect.inactive a,
+.hover-effect.delete a {
+    width: 100%;
+    background-size: 200% 100%;
+    background-position: right;
+    color: #f8f9fc;
+    display: flex;
+    justify-content: center;
+}
+.hover-effect.modify a:hover,
+.hover-effect.inactive a:hover,
+.hover-effect.delete a:hover {
+    background-position: left;
+    background-color: #f8f9fc;
+}
+.hover-effect.modify a:hover {
+    color: var(--vertfonce);
+}
+.hover-effect.inactive a:hover {
+    color: var(--orange);
+}
+.hover-effect.delete a:hover {
+    color: var(--rouge_supp);
+}
+.hover-effect.modify i,
+.hover-effect.inactive i,
+.hover-effect.delete i {
+    width: 25px;
+}
+.btn-custom.inactive span:before, .btn-custom.inactive span:after {
+    background: var(--orange);
+}
+.btn-custom.inactive a:before, .btn-custom.inactive a:after {
+    background: var(--orange);
+}
+.btn-custom.delete span:before, .btn-custom.delete span:after {
+    background: var(--rouge_supp);
+}
+.btn-custom.delete a:before, .btn-custom.delete a:after {
+    background: var(--rouge_supp);
+}
+/* Page Mes annonces */
+.block_btn_modify.plus {
+    /* border: 1px solid red; */
+    width: 100%;
+    padding: .5rem 0;
+}
+.btn-custom.modify.plus {
+    display: flex;
+    justify-content: flex-end;
+}
+/* Page Modifier une annonce */
+.block_btn_modify.back {
+    /* border: 1px solid red; */
+    /* width: 100%; */
+    padding: 0 1rem;
+    justify-content: flex-end;
+    display: flex;
+    gap: .5rem;
+
+}
+.btn-custom.modify.back {
+    /* border: 1px solid red; */
+    display: flex;
+    margin: unset;
+}

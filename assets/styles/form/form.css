@@ -4,22 +4,24 @@
 #contener_form {
     display: flex;
     justify-content: center;
-    padding: 3rem 0;
+    padding: 1.5rem 0;
 }
 #contener_form form {
     width: 80%;
 }
 #contener_form h1 {
-    color: darkgrey;
-    font-family: sans-serif;
+    /* color: darkgrey;
+    font-family: sans-serif; */
     margin-bottom: 10px;
     text-align: center;
+    font-size: 2.5rem;
 }
 #contener_form .bloc_form {
     display: flex;
     flex-flow: column;
     gap: 0.7rem;
 }
+
 /* Formulaire login */
 #contener_form .bloc_form.login {
     margin: 1rem auto;
@@ -28,6 +30,44 @@
 #contener_form .bloc_form.register {
     margin: 0 auto;
 }
+/* Formulaire search */
+.hover-effect.search .btn {
+    border-radius: unset;
+    padding: .5rem;
+}
+/* Supprimer les filtres */
+/* #filter_form .hover-effect.del_filters {
+    display: inline-block;
+    width: 100%;
+}
+#filter_form .hover-effect.del_filters a {
+    display: inline-block;
+    padding: .5rem;
+    text-align: center;
+    background: linear-gradient(to right, transparent 50%, var(--orange) 50%);
+    background-size: 200% 100%;
+    background-position: right;
+}
+#filter_form .hover-effect.del_filters a:hover {
+    background-position: left;
+    color: var(--vertclair);
+
+}
+#filter_form .hover-effect.del_filters a:before,
+#filter_form .hover-effect.del_filters:before,
+#filter_form .hover-effect.del_filters a:after,
+#filter_form .hover-effect.del_filters:after {
+    background: var(--vertclair);
+} */
+/* Toutes les div champs */
+#filter_form form .bloc_form div {
+    width: 48%;
+}
+/* Div spécifique au bouton */
+#filter_form form .bloc_form .hover-effect.search > div.form-group {
+    width: 100%;
+}
+
 #contener_form input {
     background-color: rgb(235, 235, 235);
     border-radius: 12px;
@@ -38,6 +78,26 @@
 }
 #contener_form input:focus {
     outline: 2px solid var(--orange);
+}
+/* Page Modifier mon profil boutique / Modifier mon mot de passe */
+label.modif_profile,
+label.modif_password {
+    margin-bottom: 0;
+    padding: .1rem .2rem;
+}
+#contener_form input.modif_profile,
+#contener_form input.modif_password {
+    margin-bottom: 1rem;
+}
+#contener_form.edit_profile .bloc_form {
+    gap: 0;
+}
+.btn-custom.btq.modif_profile {
+    width: 40%;
+    margin: 1rem auto;
+}
+.btn-custom.btq.modif_profile .btn {
+    border-radius: unset;
 }
 .radio_box{
     margin: 1rem auto;
@@ -61,12 +121,12 @@
 .message_forgot {
     padding: 1rem;
 }
-/* Message d'erreur */
+/* Messages d'erreur */
 .form-error {
     color: red;
 }
 /* Bouton */
-.btn-custom {
+/* .btn-custom {
     width: 40%;
 }
 .btn-custom .hover-effect {
@@ -95,7 +155,9 @@
 .btn-custom .hover-effect:hover:after {
     width: 100%;
 }
-.btn-custom button {
+.btn-custom button,
+.btn-custom a
+ {
     border: none;
     cursor: pointer;
     font-size: 18px;
@@ -107,12 +169,15 @@
     background-position: right;
     transition: 500ms ease all;
 }
-.btn-custom button:hover {
+.btn-custom button:hover,
+.btn-custom a:hover {
     color: var(--orange);
     background-position: left;
 }
 .btn-custom button:before,
-.btn-custom button:after {
+.btn-custom button:after,
+.btn-custom a:before,
+.btn-custom a:after {
     position: absolute;
     content: "";
     right: 0;
@@ -120,11 +185,13 @@
     background: var(--orange);
     transition: 500ms ease all;
 }
-.btn-custom button:before {
+.btn-custom button:before,
+.btn-custom a:before {
     height: 0%;
     width: 2px;
 }
-.btn-custom button:after {
+.btn-custom button:after,
+.btn-custom a:after {
     width: 0%;
     height: 2px;
 }
@@ -133,12 +200,14 @@
     color: var(--orange);
     background-position: left;
 }
-.btn-custom button:hover:before {
+.btn-custom button:hover:before,
+.btn-custom a:hover:before {
     height: 100%;
 }
-.btn-custom button:hover:after {
+.btn-custom button:hover:after,
+.btn-custom a:hover:after {
     width: 100%;
-}
+} */
 /* Retour à l'accueil */
 .back_home {
     color: var(--vertclair);

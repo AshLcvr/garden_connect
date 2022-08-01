@@ -26,6 +26,30 @@ if (slider){
     })
 }
 
+// const price_slider_color = document.querySelector(".noUi-connect");
+const handle = document.querySelector(".noUi-handle");
+const aria_value = handle.getAttribute("aria-valuenow");
+console.log(aria_value);
+
+
+// let psc_style = price_slider_color.style;
+// const transform = price_slider_color.style.transform;
+// console.log(transform);
+
+
+
+// if (transform != 'translate(0%, 0px) scale(1, 1)') {
+//     price_slider_color.classList.add("change_color");
+// };
+
+// let handle = document.querySelector(".noUi-handle");
+
+// handle.addEventListener("click", function (e) {
+//     e.preventDefault();
+//     price_slider_color.classList.add("change_color");
+//   price_slider_color.classList.toggle("change_color");
+// });
+
 // Filtres en Ajax :
 
 import Filter from '../../modules/Filter';
