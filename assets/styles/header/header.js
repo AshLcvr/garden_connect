@@ -21,6 +21,5 @@ if (link_dropdown != null) {
     e.preventDefault();
     dropdown.classList.toggle("open_drop");
     ul_drop.classList.toggle("open_drop");
-  })
+  });
 }
-

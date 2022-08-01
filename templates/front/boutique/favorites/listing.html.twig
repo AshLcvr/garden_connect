@@ -5,9 +5,10 @@
 
 {% block body %}
 <div id="container_profil">
-    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h3 class="annonce_title" style="margin: 0">Mes boutiques favorites</h3>
-    </div>
+    {# <div class="card-header py-3 d-flex justify-content-between align-items-center"> #}
+        {# <h3 class="annonce_title" style="margin: 0">Mes boutiques favorites</h3> #}
+        <h1 class="title_top" style="margin: 0">Mes boutiques favorites</h1>
+    {# </div> #}
     <div class="container_favory">
         <ul>
             {% for fav in favories %}
@@ -18,13 +19,17 @@
                         <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
                         <div class="block_rating">
                             {% for key, globalRating in totalGlobalRating %}
-                                {# {% if key == fav.boutique.id %} #}
+                                {% if key == fav.boutique.id %}
                                     <span class="rating" data-rating="{{ globalRating }}">
                                         {% for i in 1..5 %}
-                                            {% if i <= globalRating %}
-                                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                            {% if i <= globalRating|round %}
+                                                {% if (i - globalRating) > 0  %}
+                                                    <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+                                                {% else %}
+                                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                                {% endif %}
                                             {% else %}
-                                                <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                                <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                             {% endif %}
                                         {% endfor %}
                                     </span>
@@ -33,15 +38,15 @@
                                             <span>({{ nbr }} avis)</span>
                                         {% endif %}
                                     {% endfor %}
-                                {# {% endif %} #}
+                                {% endif %}
                             {% endfor %}
                         </div>
                         <div class="block_buttons">
                         <div class="btn_favory">
                             {# <a class="btn btn-primary" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a> #}
 
-                            <div class="bloc_form btn-custom">
-                                <span class="hover_effect">
+                            <div class="bloc_form btn-custom btq">
+                                <span class="hover-effect btq">
                                     {# <button type="submit">Voir ma boutique</button> #}
                                     <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
                                 </span>

@@ -5,9 +5,12 @@
 
 {% block body %}
 <div id="container_profil">
-    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h3 class="annonce_title" style="margin: 0">Avis émis</h3>
-    </div>
+    <div class="wrap2">
+
+    {# <div class="card-header py-3 d-flex justify-content-between align-items-center"> #}
+        {# <h3 class="annonce_title" style="margin: 0">Avis émis</h3> #}
+        <h1 class="title_top" style="margin: 0">Avis émis</h1>
+    {# </div> #}
     
     <div class="container_avis">
         {% if mesAvis %}
@@ -31,13 +34,29 @@
                                         <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                     {% endif %}
                                 {% endfor %}
-                                <span>{{ avi.title }}</span>
+                                {# <span>{{ avi.title }}</span>
+                            <span>&nbsp&nbsp/&nbsp&nbsp<i>Avis émis le {{ avi.createdAt|date('d/m/Y')  }}</i></span> #}
+                            <span><strong>&nbsp&nbsp{{ avi.title }}</strong></span>
                             </div>
-                            <div><i>Avis émis le {{ avi.createdAt|date('d m Y')  }}</i> </div>
+                            
+                            {# <div><i>Avis émis le {{ avi.createdAt|date('d m Y')  }}</i> </div> #}
                             <div> {{ avi.commentaire  }} </div>
-                            <div>
-                                <a class="btn btn-primary" href="{{ path('app_avis_edit', {id: avi.id}) }}">Modifier mon commentaire</a>
-                                <span title="Supprimer l'avis">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
+                            <span><i>Avis émis le {{ avi.createdAt|date('d/m/Y')  }}</i></span>
+                            <div class="block_buttons avis">
+
+                            <div class="bloc_form btn-custom btq avis">
+                                <span class="hover-effect btq avis">
+
+                                <a class="" href="{{ path('app_avis_edit', {id: avi.id}) }}">Modifier</a>
+
+                                </span>
+                            </div>
+
+                            
+                                <span class="avis" title="Supprimer l'avis" style="display: block;">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
+
+                                
+
                             </div>
                         </div>
                         <div class="separator"><i class="fa-solid fa-arrow-right"></i></div>
@@ -50,7 +69,7 @@
                                 {% endif %}
                                 <span style="margin: auto .5rem">{{ avi.boutique.user.name|capitalize }}</span>
                             </div>
-                            <p>{{ avi.boutique.title }}</p>
+                            <p><strong>{{ avi.boutique.title }}</strong></p>
                             <p>Boutique en ligne depuis le : {{ avi.boutique.createdAt|date('d/m/Y') }}</p>
                             <div>
                                 {% for key, globalRating in totalGlobalRating %}
@@ -72,7 +91,15 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
-                            <a class="btn btn-primary" href="{{ path('view_boutique', {id: avi.boutique.id}) }}">Voir la boutique</a>
+
+                            <div class="bloc_form btn-custom btq avis">
+                                <span class="hover-effect btq">
+
+                            <a class="" href="{{ path('view_boutique', {id: avi.boutique.id}) }}">Voir la boutique</a>
+
+                                </span>
+                            </div>
+
                         </div>
                     </li>
                 {% endfor %}
@@ -83,6 +110,7 @@
         {% else %}
             <h1>Vous n'avez pas émis d'avis.</h1>        
         {% endif %}
+    </div>
     </div>
 </div>
 {% endblock %}

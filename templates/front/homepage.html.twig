@@ -10,7 +10,7 @@
       <ul class="slides relative">
           {%  for imageHero in imagesHero %}
             <li>
-              <h2 class="absolute text text-center"><span>Bienvenue sur Garden Connect</span><br>Achetez ou vendez<br>des produits frais autour de chez vous !</h2>
+              <h2 class="absolute text text-center"><span>Bienvenue sur Garden Connect !</span><br>Achetez ou vendez<br>des produits frais autour de chez vous</h2>
               <img src="{{ asset('uploads/hero/'~imageHero.title) }}" alt="">
             </li>
           {% endfor %}
@@ -20,7 +20,7 @@
   
   <section class="slider-category">
     <div class="contener carousel">
-      <h2 class="title_section_home">Que cherchez vous ?</h2>
+      <h2 class="title_section_home">Que cherchez-vous ?</h2>
       <div class="flexslider" id="slider-category">
         <ul class="slides relative">
           {% for cat in categories %}

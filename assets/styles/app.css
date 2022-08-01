@@ -1,7 +1,7 @@
 :root{
   --vertfonce:#41b04f;
   --vertclair:#8fc642;
-  --orange:#F7941D;
+  --orange:#f7941d;
   --marron:#AB7B52;
   --rouge_supp: #E74A3b;
   --text-font: 400 14px/1.4 'Roboto', 'Arial', sans-serif;
@@ -66,9 +66,9 @@ img{
 .flex-column{
     flex-flow: column;
 }
-.box-shadow{
+/* .box-shadow{
     box-shadow: 15px 15px 15px lightgrey;
-}
+} */
 .width-100{
     width: 100%;
 }
@@ -82,7 +82,8 @@ img{
     text-align: center;
 }
 .big-margin{
-    margin: 7rem 0;
+    /* margin: 7rem 0; */
+    margin: 3rem 0;
 }
 .flash-register_vendeur{
     background-color: var(--vertfonce);
@@ -109,10 +110,14 @@ img{
 }
 .fixed{
     position: fixed;
-    transform: translateY(1);
-    transition: visibility 5s , transform 5s ease;
+    /* transform: translateY(1); */
+    /* transition: visibility 5s , transform 5s ease; */
     width: 100%;
     z-index: 9999;
+    /* transition-duration: 10s; */
+}
+.gap1 {
+    gap: 1rem;
 }
 
 /* CSS Global input search location */
@@ -133,3 +138,5 @@ img{
 #city_suggest li {
     cursor: pointer;
 }
+
+/* CSS global boutons */

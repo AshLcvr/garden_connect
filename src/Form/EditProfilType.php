@@ -18,7 +18,13 @@ class EditProfilType extends AbstractType
     {
         $builder
             ->add('image', FileType::class, [
-                'label' => 'Photo de Profil',
+            'label' => 'Photo de profil',
+            'label_attr' => [
+                'class' => 'modif_profile'
+            ],
+            'attr' => [
+                'class' => 'modif_profile'
+            ],
                 'mapped' => false,
                 'required' => false,
                 'data_class' => null,
@@ -36,7 +42,7 @@ class EditProfilType extends AbstractType
                         'mimeTypesMessage' => 'Seuls les formats PNG, JPEG ou GIF sont acceptés !)',
                         'uploadIniSizeErrorMessage' => 'Votre fichier est trop volumineux !',
                         'uploadErrorMessage' => 'Erreur dans l\'ajout du fichier!',
-                        'uploadExtensionErrorMessage' => 'Mauvaise Extension !',
+                    'uploadExtensionErrorMessage' => 'Mauvaise extension !',
                         'uploadFormSizeErrorMessage' => 'Votre fichier est trop volumineux !',
                         'uploadNoFileErrorMessage' => 'Aucun fichier n\'a été enregistré !',
                     ])
@@ -44,18 +50,37 @@ class EditProfilType extends AbstractType
                 ],
             ])
             ->add('name', TextType::class, [
-                'label' => 'Prénom'
+            'label' => 'Prénom',
+            'label_attr' => [
+                'class' => 'modif_profile'
+            ],
+            'attr' => [
+                'class' => 'modif_profile'
+            ]
             ])
             ->add('surname', TextType::class, [
-                'label' => 'Nom'
+            'label' => 'Nom',
+            'label_attr' => [
+                'class' => 'modif_profile'
+            ],
+            'attr' => [
+                'class' => 'modif_profile'
+            ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'E-mail'
+            'label' => 'E-mail',
+            'label_attr' => [
+                'class' => 'modif_profile'
+            ],
+            'attr' => [
+                'class' => 'modif_profile'
+            ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Modifier',
                 'attr' => [
-                    'class' => 'btn btn-primary width-100 m-t-20'
+                // 'class' => 'btn btn-primary width-100 m-t-20'
+                'class' => ''
                 ]
             ])
         ;

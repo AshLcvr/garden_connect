@@ -38,7 +38,13 @@
             </div>
         </div>
         <div class="bloc_submit">
-            <button class="btn btn-primary width-100 m-t-20">{{ button_label|default('Envoyer') }}</button>
+            <div class="button_boutique">
+                <div class="bloc_form btn-custom">
+                    <span class="hover-effect">
+                        <button class="">{{ button_label|default('Envoyer') }}</button>
+                    </span>
+                </div>
+            </div>
         </div>
         {{ form_end(form) }}
     </div>
