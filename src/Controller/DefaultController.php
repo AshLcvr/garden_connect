@@ -105,7 +105,6 @@ class DefaultController extends AbstractController
         );
     }
 
-
     #[Route('/mention-legale', name: 'mention_legale')]
     public function mentionLegale(): Response
     {

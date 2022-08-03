@@ -40,51 +40,6 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/nouvelleboutique', name: 'app_boutique_new', methods: ['GET', 'POST'])]
-    public function newBoutique(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, ImagesBoutiqueRepository $imagesBoutiqueRepository, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator, CallApi $callApi): Response
-    {
-        $user = $this->getUser();
-        $boutique = new Boutique();
-        $form = $this->createForm(BoutiqueType::class, $boutique);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $boutique->setUser($user);
-            $formatedTel =  $form->get('indicatif')->getData() . $form->get('telephone')->getData();
-            $boutique->setTelephone($formatedTel);
-            $boutique->setCity($form->get('city')->getData());
-            $callApi->getBoutiqueAdressCoordinates($boutique, $form->get('citycode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData());
-            $boutique->setCardActive(true);
-            $boutique->setActif(true);
-            $boutique->setCreatedAt(new \DateTimeImmutable());
-            $boutiqueRepository->add($boutique, true);
-            $boutiqueImage = $form->get('upload')->getData();
-            if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
-                if (empty($boutiqueImage)) {
-                    $imageDefault = new ImagesBoutique();
-                    $imageDefault->setTitle('imageBoutiqueDefault.jpg');
-                    $imageDefault->setBoutique($boutique);
-                    $imagesBoutiqueRepository->add($imageDefault, true);
-                } else {
-                    $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
-                }
-                $user->setRoles(['ROLE_VENDEUR']);
-                $userRepository->add($user, true);
-                $userAuthenticator->authenticateUser($user, $formLoginAuthenticator, $request);
-                return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
-            }else{
-                $this->addFlash('failure','4 photos max !');
-                return $this->redirectToRoute('app_boutique_new', [], Response::HTTP_SEE_OTHER);
-            }
-
-        }
-
-        return $this->renderForm('front/boutique/new_boutique.html.twig', [
-            'boutique' => $boutique,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
     public function detailBoutique(): Response
     {
