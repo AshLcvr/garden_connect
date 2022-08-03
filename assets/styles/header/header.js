@@ -23,3 +23,24 @@ if (link_dropdown != null) {
     ul_drop.classList.toggle("open_drop");
   });
 }
+
+// Affichage du header quand scroll up sur front
+var lastScrollTop = 0;
+let header = document.getElementById("header");
+document.addEventListener(
+    "scroll",
+    function () {
+      var st = window.pageYOffset || document.documentElement.scrollTop;
+      console.log(st);
+      if (st > lastScrollTop ) {
+        header.classList.remove("fixed");
+      } else {
+        header.classList.add("fixed");
+      }
+      lastScrollTop = st <= 0 ? 0 : st;
+      if (st === 0) {
+        header.classList.remove("fixed");
+      }
+    },
+    false
+);

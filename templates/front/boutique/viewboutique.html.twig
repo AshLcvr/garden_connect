@@ -145,7 +145,7 @@
 
     {% if boutique.annonces|length > 0 %}
     <section id="listing_annonces_public" class="wrap">
-        <h1 class="boutique_title title">Les annonces de {{  boutique.user.name|capitalize }}</h1>
+        <h1 class="boutique_title title">Les annonces de {{  boutique.user.surname|capitalize }}</h1>
         <ul>
             {% for annonce in annonces %}
                 <li class="annonces_card">

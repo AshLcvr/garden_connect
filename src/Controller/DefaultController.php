@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
+use App\Entity\Annonce;
 use App\Entity\Boutique;
 use App\Form\SearchType;
 use App\Repository\FavoryRepository;
@@ -10,8 +11,6 @@ use App\Repository\AnnonceRepository;
 use App\Repository\BoutiqueRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ImagesHeroRepository;
-use App\Repository\SubcategoryRepository;
-use Faker\Provider\Lorem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -68,43 +67,53 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/public/{id}/{id_annonce}', name: 'view_boutique_annonce_focus', methods: ['GET'])]
-    public function oneBoutiqueFocusAnnonce(AnnonceRepository $annonceRepository, Boutique $boutique,FavoryRepository $favoryRepository, $id_annonce)
+    public function oneBoutiqueFocusAnnonce( Boutique $boutique, $id_annonce, AnnonceRepository $annonceRepository, FavoryRepository $favoryRepository)
     {
-        $user = $this->getUser();
-        $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
-        $annonce = null;
-
-        $notMyboutique = true;
-        $me = $boutique->getUser();
-        if($user){
-            if ($me->getId() === $user->getId() ){
-                $notMyboutique = false;
+        // L'annonce existe elle?
+        if (!empty($id_annonce)) {
+            $annonce = $annonceRepository->find($id_annonce);
+            if (!empty($annonce)){
+                // L'annnonce est elle bien associée à la boutique?
+                if ($annonce->getBoutique() !== $boutique)
+                {
+                    return $this->redirectToRoute('404',[], Response::HTTP_SEE_OTHER);
+                }
+            }else{
+                return $this->redirectToRoute('404',[], Response::HTTP_SEE_OTHER);
             }
         }
 
-        if (!empty($id_annonce)) {
-            $annonce = $annonceRepository->find($id_annonce);
+        // La boutique affichée est elle celle de l'utilisateur connecté?
+        $user          = $this->getUser();
+        $me            = $boutique->getUser();
+        $notMyBoutique = true;
+        if($user){
+            if ($me->getId() === $user->getId() ){
+                $notMyBoutique = false;
+            }
         }
 
         // Favoris
-        $favory = '';
+        $favory        = '';
         $alreadyFavory = $favoryRepository->findOneBy(['user'=> $this->getUser(), 'boutique' => $boutique]);
         if (!empty($alreadyFavory)){
             $favory = 'favory_active';
         }
 
+        $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
+        $annonce  = null;
+
         return $this->render(
             'front/boutique/viewboutique.html.twig',
             [
-                'annonce' => $annonce,
-                'annonces' => $annonces,
-                'boutique' => $boutique,
-                'notMyboutique' => $notMyboutique,
-                'favory' => $favory
+                'annonce'       => $annonce,
+                'annonces'      => $annonces,
+                'boutique'      => $boutique,
+                'notMyboutique' => $notMyBoutique,
+                'favory'        => $favory
             ]
         );
     }
-
 
     #[Route('/mention-legale', name: 'mention_legale')]
     public function mentionLegale(): Response

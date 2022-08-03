@@ -88,7 +88,8 @@
 {% endblock %}
 
 {% block javascripts %}
-  {{ encore_entry_script_tags('flexslider') }}
+  {{ encore_entry_script_tags('homepage') }}
+  {{ encore_entry_script_tags('app') }}
   <script>
     const carte_box = document.getElementById('card_box')
     const carte     = L.map(carte_box).setView([49.346658, 0.525508], 11);
@@ -96,13 +97,13 @@
       maxZoom    : 19,
       attribution: '© OpenStreetMap'
     }).addTo(carte);
-
-    const icone = L.icon({
-      iconUrl     : '../../build/images/icone_boutique.png',
-      iconSize    : [50, 50],
-      iconAnchor  : [20,15],
-      popupAnchor : [4,-12]
-    })
+    //
+    // const icone = L.icon({
+    //   iconUrl     : '../../build/images/logo.png',
+    //   iconSize    : [25, 40],
+    //   iconAnchor  : [20,15],
+    //   popupAnchor : [-7.5,-13]
+    // })
 
     const marqueurs = L.markerClusterGroup();
     const boutiques = JSON.parse('{{ boutiquesInfos|json_encode|raw }}');
@@ -115,7 +116,9 @@
       let boutique_id   = boutiques[i][3];
       let boutique_path = '{{ path("view_boutique", {'id': 'boutique_id'}) }}';
       boutique_path     = boutique_path.replace("boutique_id", boutique_id);
-      let marqueur      = L.marker([ parseFloat(lat), parseFloat(lng)], {icon: icone} );
+      let marqueur      = L.marker([ parseFloat(lat), parseFloat(lng)]
+              // , {icon: icone}
+              );
       marqueur.bindPopup("" +
               "<div style='display: flex; flex-flow: column nowrap; align-items: center'>" +
                 "<b>"+boutique_name+"</b><br>" +

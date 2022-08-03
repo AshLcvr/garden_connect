@@ -39,28 +39,16 @@ class ImagesBoutiqueRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return ImagesBoutique[] Returns an array of ImagesBoutique objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?ImagesBoutique
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @return ImagesBoutique[] Returns an array of ImagesBoutique objects
+     */
+    public function findImagesbyBoutiqueId($id): array
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.boutique = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
