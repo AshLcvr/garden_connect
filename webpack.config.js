@@ -30,6 +30,12 @@ Encore
     .addEntry('leaflet', './assets/leaflet.js')
 
     .addEntry('homepage', './assets/homepage.js')
+    // a voir
+    .addEntry('register', './assets/templates/front/security/register.js')
+    .addEntry('login', './assets/templates/front/security/login.js')
+    //
+    .addEntry('recherche_annonce', './assets/recherche_annonce.js')
+    //
 
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

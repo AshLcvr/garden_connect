@@ -1,7 +1,7 @@
 {% extends 'layout/front_base.html.twig' %}
 
 {% block stylesheets %}
-  {{ encore_entry_link_tags('flexslider') }}
+  {{ encore_entry_link_tags('homepage') }}
 {% endblock %}
 
 {% block body %}
@@ -89,7 +89,6 @@
 
 {% block javascripts %}
   {{ encore_entry_script_tags('homepage') }}
-  {{ encore_entry_script_tags('app') }}
   <script>
     const carte_box = document.getElementById('card_box')
     const carte     = L.map(carte_box).setView([49.346658, 0.525508], 11);
