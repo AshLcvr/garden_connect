@@ -27,7 +27,11 @@
             </ul>
         </div>
         <div class="photo_profile">
-            <a href="{{ path('view_boutique', {id: boutique.id}) }}"><img src="{{ asset('images/test-profile.png') }}" /></a>
+            <a href="{{ path('view_boutique', {id: boutique.id}) }}">
+            {# <img src="{{ asset('images/incognito.png') }}" /> #}
+            <img src="{{ asset('images/incognito-big.png') }}" />
+            {# <img src="{{ asset('images/test-profile.png') }}" /> #}
+            </a>
         </div>
     </section>
 
@@ -42,7 +46,7 @@
         <div class="infos_boutique">
             <div class="d-flex" style="justify-content: space-between; align-items: center">
                 <div>
-                    <h1 class="title_boutique"><a href="{{ path('view_boutique', {id: boutique.id}) }}">{{ boutique.title }}</a></h1>
+                    <h1 class="title_boutique title"><a href="{{ path('view_boutique', {id: boutique.id}) }}">{{ boutique.title }}</a></h1>
                 </div>
                 {% if app.user and notMyboutique %}
                     <div class="favory_boutique">
@@ -81,11 +85,11 @@
             {% set fullAdress = 'true' %}
         {% endif %}
         <section class="wrap">
-            <h1 class="boutique_title">Où me trouver?</h1>
+            <h1 class="boutique_title title">Où me trouver?</h1>
         {#           A FAIRE QUAND PASSAGE A VUE
          <button class="btn btn-primary" >Afficher la carte</button>
          #}
-            <div id="boutique_coordinates" style="height: 400px" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
+            <div id="boutique_coordinates" style="height: 400px; width: 80%; margin: 1rem auto;" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
         </section>
     {% endif %}
     {% if annonce != null %}
@@ -141,7 +145,7 @@
 
     {% if boutique.annonces|length > 0 %}
     <section id="listing_annonces_public" class="wrap">
-        <h1 class="boutique_title">Les annonces de {{  boutique.user.name|capitalize }}</h1>
+        <h1 class="boutique_title title">Les annonces de {{  boutique.user.name|capitalize }}</h1>
         <ul>
             {% for annonce in annonces %}
                 <li class="annonces_card">

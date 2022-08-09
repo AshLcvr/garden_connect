@@ -1,4 +1,12 @@
-<form style="display: inline-block" method="post" action="{{ path('app_avis_delete', {'id': avi.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cet avis?');">
+<form style="display: inline-block" method="post" action="{{ path('app_avis_delete', {'id': avi.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cet avis ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avi.id) }}">
-    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+    {# <button class=""><i class="fa-solid fa-trash"></i></button> #}
+    <button class="block_btn_delete">
+        <div class="bloc_form btn-custom delete">
+            <span class="hover-effect delete">
+                {# <a title="Supprimer la boutique"><i class="fa-solid fa-trash"></i></a> #}
+                <a class="delete_xmark avis"><i class="fa-solid fa-trash"></i></a>
+            </span>
+        </div>
+    </button>
 </form>

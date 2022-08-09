@@ -1,4 +1,14 @@
-<form style="display: inline-block" method="post" action="{{ path('app_annonce_delete', {'id': annonce.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette annonce??');">
+{# <form style="display: inline-block" method="post" action="{{ path('app_annonce_delete', {'id': annonce.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette annonce??');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ annonce.id) }}">
     <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+</form> #}
+<form style="display: inline-block" method="post" action="{{ path('app_annonce_delete', {'id': annonce.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette annonce ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ annonce.id) }}">
+    <button class="block_btn_delete">
+        <div class="bloc_form btn-custom delete">
+            <span class="hover-effect delete">
+                <a title="Supprimer la boutique"><i class="fa-solid fa-trash"></i></a>
+            </span>
+        </div>
+    </button>
 </form>

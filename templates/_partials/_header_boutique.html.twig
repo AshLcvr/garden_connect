@@ -1,4 +1,8 @@
-<header id="header_boutique" class="header">
+{# {% if is_granted('ROLE_VENDEUR') %} #}
+<header id="header_boutique" class="">
+{# {% else %}
+<header id="header_user">
+{% endif %} #}
     {# <div class="wrap"> #}
     <div class="header_wrap">
         <div class="pad_logo">
@@ -27,18 +31,44 @@
                         </form>
                     </div>
                 </li>
+                {# <li class="nav-item dropdown no-arrow mx-1"> #}
+                    {# {% if is_granted('ROLE_VENDEUR') %} #}
                 <li class="nav-item dropdown no-arrow mx-1">
+
                     <a class="nav-link dropdown-toggle custom" href="{{ path('boutique_messagerie') }}" id="messagesDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mess_header">
                         Messages&nbsp</span><i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}
                     </a>
-                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in custom"
-                            aria-labelledby="messagesDropdown">
+                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in custom" aria-labelledby="messagesDropdown">
+                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in custom" aria-labelledby="messagesDropdown">
                         <h6 class="dropdown-header custom">Messages non lus</h6>
                         {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
                         <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
                     </div>
                 </li>
+
+                    {# {% else %}
+                <li class="nav-item dropdown no-arrow mx-1">
+
+                    <a class="nav-link dropdown-toggle custom" href="{{ path('boutique_messagerie') }}" id="messagesDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mess_header">
+                        Messages&nbsp</span><i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}
+                    </a>
+                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in custom_user" aria-labelledby="messagesDropdown">
+                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in custom" aria-labelledby="messagesDropdown">
+                        <h6 class="dropdown-header custom">Messages non lus</h6>
+                        {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
+                        <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
+                    </div>
+                </li>
+
+                    {% endif %} #}
+                    {# <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in custom" aria-labelledby="messagesDropdown">
+                        <h6 class="dropdown-header custom">Messages non lus</h6>
+                        {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
+                        <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
+                    </div> #}
+                {# </li> #}
                 <div class="topbar-divider d-none d-sm-block"></div>
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle custom" href="#" id="userDropdown" role="button"

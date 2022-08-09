@@ -5,15 +5,16 @@
 
 {% block body %}
 <div id="container_profil">
-    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h3 class="annonce_title" style="margin: 0">Avis reçus</h3>
-    </div>
+    <div class="wrap2">
+    {# <div class="card-header py-3 d-flex justify-content-between align-items-center"> #}
+        <h1 class="title_top" style="margin: 0">Avis reçus</h1>
+    {# </div> #}
     <div class="container_avis">
         {% if mesAvis %}
             <ul>
                 {% for avi in mesAvis %}
-                    <li>
-                        <div class="block_avis">
+                    <li class="recus">
+                        <div class="block_avis recus">
                             <div>
                                 {% if avi.user.image %}
                                     <img src="{{ asset('uploads/profile/')~avi.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
@@ -30,10 +31,10 @@
                                         <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                     {% endif %}
                                 {% endfor %}
-                                <span>{{ avi.title }}</span>
+                                <span><strong>&nbsp&nbsp{{ avi.title }}</strong></span>
                             </div>
-                            <div><i>Avis émis le {{ avi.createdAt|date('d m Y')  }}</i> </div>
                             <div> {{ avi.commentaire  }} </div>
+                            <div><i>Avis émis le {{ avi.createdAt|date('d/m/Y')  }}</i> </div>
                         </div>
                     </li>
                 {% endfor %}
@@ -44,6 +45,7 @@
         {% else %}
             <h2>Vous n'avez reçu d'avis.</h2>        
         {% endif %}
+    </div>
     </div>
 </div>
 {% endblock %}

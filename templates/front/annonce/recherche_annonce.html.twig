@@ -12,12 +12,15 @@
     <div class="wrap d-flex flex-column">
         <div class="js-filter">
             <div class="box-shadow" id="filter_form">
-                <h3 class="title">Filter les produits par : </h3>
+                <h3 class="title">Filtres</h3>
                 {% include 'front/annonce/_filter.html.twig' with {form : recherche, min : min, max : max} only %}
             </div>
 
+            <div>
+                <p class="title">Résultats</p>
+            </div>
             <div class="recherche-tri js-filter-sort">
-                <p><u>Trier par :</u></p>
+                <p style="">Trier par :</p>
                 {% include 'front/annonce/_sort.html.twig' %}
             </div>
 

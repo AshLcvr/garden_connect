@@ -1,6 +1,6 @@
 <section id="avis_boutique" class="wrap">
     {% if avis %}
-        <h1  id="avis_listing" class="boutique_title">Les avis</h1>
+        <h1  id="avis_listing" class="boutique_title title">Les avis</h1>
         <ul>
             {% for av in avis %}
                 <li class="avis_box">
@@ -31,7 +31,7 @@
         </ul>
     {% endif %}
 
-    <h2 class="boutique_title"> Laissez votre avis</h2>
+    <h2 class="boutique_title title"> Laissez votre avis</h2>
     <div class="avis_form">
         {% if app.user %}
             {% for av in avis %}

@@ -1,0 +1,67 @@
+{% extends 'layout/front_base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<section class="d-flex" id="container_profil">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('homepage') }}">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Retour au site</span></a>
+        </li>
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading">
+            Interface
+        </div>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce"
+                aria-expanded="true" aria-controls="collapseUtilities" >
+                <i class="fa-solid fa-user"></i>
+                <span>Mon profil</span>
+            </a>
+            <div id="collapseAnnonce" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ path('profil') }}">Voir mon profil</a>
+                    <a class="collapse-item" href="{{ path('edit_profil', {'id' : app.user.id}) }}">Modifier mon profil</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('homepage') }}">
+                <i class="fa-solid fa-message"></i>
+                <span>Messagerie</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('profil_avis') }}">
+                <i class="fa-solid fa-comment"></i>
+                <span>Mes avis</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('profil_favory') }}">
+                <i class="fa-solid fa-heart"></i>
+                <span>Mes boutiques favorites</span></a>
+        </li>
+        <hr class="sidebar-divider">
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+    </ul>
+    <div class="container_profil">
+        {% block container %}{% endblock %}
+    </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bootstrap/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/vendor/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/vendor/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('bootstrap/vendor/datatables/dataTables.bootstrap4.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% endblock %}

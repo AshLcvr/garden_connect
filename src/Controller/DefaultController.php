@@ -7,28 +7,38 @@ use App\Entity\Boutique;
 use App\Form\SearchType;
 use App\Repository\FavoryRepository;
 use App\Repository\AnnonceRepository;
+use App\Repository\BoutiqueRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ImagesHeroRepository;
+use App\Repository\SubcategoryRepository;
+use Faker\Provider\Lorem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use function Symfony\Config\Security\FirewallConfig\name;
 
 class DefaultController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
+    public function index(BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
     {
-        $categories = $categoryRepository->findAll();
-        $annonces   = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);
-        $imagesHero = $imagesHeroRepository->findAll();
-        $user       = $this->getUser();
+        $categories     = $categoryRepository->findAll();
+        $annonces       = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);
+        $imagesHero     = $imagesHeroRepository->findAll();
+        $user           = $this->getUser();
+        $allBoutiques   = $boutiqueRepository->findAll();
+        $boutiquesInfos = [];
+        foreach ($allBoutiques as $boutique){
+            $boutiquesInfos[] = [ $boutique->getTitle() , $boutique->getLat() , $boutique->getLng() , $boutique->getId() ];
+        }
 
         return $this->render('front/homepage.html.twig', [
-            'categories' => $categories,
-            'annonces' => $annonces,
-            'imagesHero' => $imagesHero,
-            'user' => $user
+            'categories'   => $categories,
+            'annonces'     => $annonces,
+            'imagesHero'   => $imagesHero,
+            'user'         => $user,
+            'boutiquesInfos' => $boutiquesInfos,
         ]);
     }
     
@@ -50,10 +60,10 @@ class DefaultController extends AbstractController
 //            }
 //        }
         return $this->render('front/annonce/recherche_annonce.html.twig', [
-            'annonces' => $annonces,
+            'annonces'  => $annonces,
             'recherche' => $recherche->createView(),
-            'min' => $min,
-            'max' => $max,
+            'min'       => $min,
+            'max'       => $max,
         ]);
     }
 
@@ -94,7 +104,6 @@ class DefaultController extends AbstractController
             ]
         );
     }
-
 
     #[Route('/mention-legale', name: 'mention_legale')]
     public function mentionLegale(): Response

@@ -28,12 +28,29 @@ class ModifyPasswordType extends AbstractType
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères',
                         'max' => 255,
-                        'maxMessage' => 'Votre mot de passe ne doit pas exceder {{ limit }} caractères'
+                    'maxMessage' => 'Votre mot de passe ne doit pas excéder {{ limit }} caractères'
                     ])
                 ],
                 'required' => true,
-                'first_options'  => ['label' => 'Nouveau mot de passe'],
-                'second_options' => ['label' => 'Confirmer le nouveau mot de passe'],
+            'first_options'  => [
+                'label' => 'Nouveau mot de passe',
+                'label_attr' => [
+                    'class' => 'modif_password'
+                ],
+                'attr' => [
+                    'class' => 'modif_password'
+                ],
+            ],
+
+            'second_options' => [
+                'label' => 'Confirmer le nouveau mot de passe',
+                'label_attr' => [
+                    'class' => 'modif_password'
+                ],
+                'attr' => [
+                    'class' => 'modif_password'
+                ],
+            ],
             ])
             ->add('submit', SubmitType::class, ['label'=>'Envoyer'])
         ;

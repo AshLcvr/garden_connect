@@ -3,32 +3,53 @@
     /* background-color: #f8f9fc; */
 }
 #container_profil .container_profil{
-    padding: 0.75rem;
+    padding: 2rem;
     width: 100%;
     color: #858796;
 }
-#container_profil .container_avis{
+#container_profil .container_avis {
     background-color: white;
     padding: 0.75rem;
+    /* border: 1px solid grey; */
+
+}
+#container_profil .container_avis ul {
+    /* width: 70%; */
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 2rem;
 }
 #container_profil .container_avis ul li{
-    padding: 0.5rem;
-    box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69 / 15%) !important;
-    border: 1px solid #e3e6f0;
+    /* box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69 / 15%) !important; */
+    /* border: 1px solid #e3e6f0; */
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
+    width: 90%;
+    /* background-color: #858796; */
+}
+#container_profil .container_avis ul li.recus {
+    width: 45%;
 }
 #container_profil .container_avis ul li .block_avis{
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-flow: column;
     gap: 0.8rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69 / 15%) !important;
+    padding: 1rem;
+}
+#container_profil .container_avis ul li .block_avis.recus {
+    width: 100%;
 }
 #container_profil .container_avis ul li .separator{
-    margin:auto;
-    font-size:2rem;
-    color:var(--vertclair);
+    margin: auto;
+    font-size: 2rem;
+    color:var(--vertfonce);
+    /* width: 20%; */
+    background-color: transparent;
 }
 #container_profil .container_avis ul li .block_boutique{
     width: 40%;
@@ -36,6 +57,8 @@
     flex-flow: column;
     gap: 0.8rem;
     justify-content: space-between;
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(58 59 69 / 15%) !important;
+    padding: 1rem;
 }
 #container_profil .container_avis ul li .block_boutique p{
     margin: 0;
@@ -86,10 +109,10 @@
     width: unset;
     margin: unset;
 }
-.hover_effect.supp a {
-    padding: .7rem 1rem;
+/* .hover_effect.supp a {
+    padding: .7rem 1rem; */
     /* width: 100%; */
-    background: linear-gradient(to right, transparent 50%, #e74a3b 50%);
+    /* background: linear-gradient(to right, transparent 50%, #e74a3b 50%);
     background-size: 200% 100%;
     background-position: right;
 } 
@@ -103,12 +126,12 @@
 }
 .btn-custom.supp a:before, .btn-custom.supp a:after {
     background: #e74a3b;
-}
+} */
 /* .delete_favory {
 } */
-.hover_effect.delete a.delete_xmark {
+/* .hover_effect.delete a.delete_xmark {
     padding: .9rem;
-}
+} */
 /*.btn-custom.supp:hover{
     background: white;
     color: #e74a3b;
