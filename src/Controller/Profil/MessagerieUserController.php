@@ -29,7 +29,7 @@ class MessagerieUserController extends AbstractController
             $conversations[] = $value;
         }
 
-        return $this->renderForm('front/boutique/messagerie/avis_recus.html.twig', [
+        return $this->renderForm('front/profil/messagerie/messagerie.html.twig', [
             'conversations' => $conversations,
         ]);
     }
