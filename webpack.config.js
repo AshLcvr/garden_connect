@@ -37,8 +37,8 @@ Encore
     .addEntry('recherche_annonce', './assets/templates/front/annonces/recherche_annonce.js')
     .addEntry('focus_annonce', './assets/templates/front/annonces/focus_annonce.js')
     .addEntry('public_boutique', './assets/templates/front/boutique/public_boutique.js')
+    // Pages Erreurs, 404 & 403
     .addEntry('error404', './assets/templates/bundles/TwigBundle/Exception/error404.js')
-
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
