@@ -83,10 +83,13 @@ class DefaultController extends AbstractController
             }
         }
 
+        $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
+
         // La boutique affichée est elle celle de l'utilisateur connecté?
         $user          = $this->getUser();
         $me            = $boutique->getUser();
         $notMyBoutique = true;
+
         if($user){
             if ($me->getId() === $user->getId() ){
                 $notMyBoutique = false;
@@ -100,8 +103,6 @@ class DefaultController extends AbstractController
             $favory = 'favory_active';
         }
 
-        $annonces = $annonceRepository->getActifAnnoncesBoutique($boutique->getId(), $id_annonce);
-        $annonce  = null;
 
         return $this->render(
             'front/boutique/viewboutique.html.twig',

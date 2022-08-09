@@ -31,7 +31,6 @@ document.addEventListener(
     "scroll",
     function () {
       var st = window.pageYOffset || document.documentElement.scrollTop;
-      console.log(st);
       if (st > lastScrollTop ) {
         header.classList.remove("fixed");
       } else {

@@ -9,6 +9,11 @@
 {% endblock %}
 
 {% block stylesheets %}
+    {% if annonce == null %}
+        {{ encore_entry_link_tags('public_boutique') }}
+    {% else %}
+        {{ encore_entry_link_tags('focus_annonce') }}
+    {% endif %}
     {{ encore_entry_link_tags('flexslider') }}
 {% endblock %}
 
@@ -181,8 +186,14 @@
 {% endblock %}
 
 {% block javascripts %}
+    {% if annonce == null %}
+        {{ encore_entry_script_tags('leaflet') }}
+        {{ encore_entry_script_tags('public_boutique') }}
+    {% else %}
+        {{ encore_entry_script_tags('focus_annonce') }}
+    {% endif %}
     {{ encore_entry_script_tags('flexslider') }}
-    {{ encore_entry_script_tags('leaflet') }}
+
     <script>
         $(document).ready(function () {
             const boutton_favory =    $('.favory_button')

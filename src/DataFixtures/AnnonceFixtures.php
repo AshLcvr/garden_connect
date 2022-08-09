@@ -34,7 +34,8 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
 
                 $annonce = new Annonce();
                 $annonce->setTitle($randSubcat->getTitle());
-                $annonce->setDescription(simplexml_load_file('http://www.lipsum.com/feed/xml?amount=1&what=paras&start=0')->lipsum);
+//                $annonce->setDescription(('http://www.lipsum.com/feed/xml?amount=1&what=paras&start=0')->lipsum);
+                $annonce->setDescription('test');
                 $annonce->setPrice(random_int(1, 10));
                 $annonce->setMesure($this->getReference('Kg'));
                 $annonce->setSubcategory($randSubcat);

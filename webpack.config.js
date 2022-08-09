@@ -34,8 +34,10 @@ Encore
     .addEntry('register', './assets/templates/front/security/register.js')
     .addEntry('login', './assets/templates/front/security/login.js')
     //
-    .addEntry('recherche_annonce', './assets/recherche_annonce.js')
-    //
+    .addEntry('recherche_annonce', './assets/templates/front/annonces/recherche_annonce.js')
+    .addEntry('focus_annonce', './assets/templates/front/annonces/focus_annonce.js')
+    .addEntry('public_boutique', './assets/templates/front/boutique/public_boutique.js')
+    .addEntry('error404', './assets/templates/bundles/TwigBundle/Exception/error404.js')
 
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

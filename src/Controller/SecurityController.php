@@ -11,6 +11,6 @@ class SecurityController extends AbstractController
     #[Route('/404', name: '404')]
     public function pageNotFound(): Response
     {
-        return $this->render('security/404.html.twig');
+        return $this->render('error/404.html.twig');
     }
 }
