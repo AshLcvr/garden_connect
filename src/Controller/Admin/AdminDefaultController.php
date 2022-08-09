@@ -101,26 +101,15 @@ class AdminDefaultController extends AbstractController
     #[Route('/users/actifs', name: 'all_users_actifs')]
     public function allUsersActifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
-        // $form = $this->createForm(PaginationType::class);
-        // $form->handleRequest($request);
         
         $usersActif = $userRepository->findBy([
             'actif' => true
         ]);
 
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $form->get('pagination')->getData();
-        //     dd($form->get('pagination')->getData());
-        //     $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
-        //     return $this->redirectToRoute('all_users_actifs', [], Response::HTTP_SEE_OTHER);
-        // }
-        // else {
-            $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
-        // }
+        $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
 
         return $this->render('admin/user/users_actifs.html.twig',[
-            'usersActif' => $usersActif,
-            // 'form' => $form
+            'usersActif' => $usersActif
         ]);
     }
     #[Route('/users/inactifs', name: 'all_users_inactifs')]

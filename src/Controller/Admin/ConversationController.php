@@ -7,12 +7,13 @@ use App\Entity\Message;
 use App\Form\MessageType;
 use App\Entity\Conversation;
 use App\Form\ConversationType;
-use App\Repository\AnnonceRepository;
 use App\Repository\AvisRepository;
-use App\Repository\BoutiqueRepository;
 use App\Repository\UserRepository;
+use App\Repository\AnnonceRepository;
 use App\Repository\MessageRepository;
+use App\Repository\BoutiqueRepository;
 use App\Repository\ConversationRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,14 +23,47 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/admin')]
 class ConversationController extends AbstractController
 {
-    #[Route('/conversation/admin', name: 'app_conversation_index')]
-    public function index(): Response
+    #[Route('/conversation_moderation/admin', name: 'app_conversation_moderation')]
+    public function conversation_moderation(Request $request, PaginatorInterface $paginator): Response
+    {
+        $user = $this->getUser();
+        $nbrNonlus = 0;
+        $nbrNonlusInit = [];
+        $conversations = [];
+
+        $conversationsInit = $user->getConversationsInit();
+        foreach ($conversationsInit as $key => $conv) {
+            $conversations[] = $conv;
+            foreach ($conv->getMessages() as $key => $mess) {
+                if ($mess->isIsRead() == false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
+                    $nbrNonlus += 1;
+                }
+            }
+            $nbrNonlusInit[$conv->getId()] = $nbrNonlus;
+            $nbrNonlus = 0;
+        }
+        usort($conversations, function(Conversation $a, Conversation $b){
+            return $a->getModifiedAt()>$b->getModifiedAt()?-1:1;
+        });
+        $conversations = $this->maPagination($conversations, $paginator, $request, 5);
+
+        return $this->renderForm('admin/conversation/conversation_moderation.html.twig', [
+            'conversationsInit' => $conversations,
+            'nbrNonlusInit' => $nbrNonlusInit
+        ]);
+    }
+
+    #[Route('/conversation_demande_user/admin', name: 'app_conversation_demande_user')]
+    public function conversation_demande_user(Request $request, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
         $nbrNonlus = 0;
         $nbrNonlusCorresp = [];
+        $conversations = [];
+
         $conversationsCorresp = $user->getConversationsCorresp();
         foreach ($conversationsCorresp as $key => $conv) {
+            $conversations[] = $conv;
             if ($conv->isIsRead() === false) {
                 $nbrNonlus = $nbrNonlus + 1;
             }
@@ -41,25 +75,14 @@ class ConversationController extends AbstractController
             $nbrNonlusCorresp[$conv->getId()] = $nbrNonlus;
             $nbrNonlus = 0;
         }
+        usort($conversations, function(Conversation $a, Conversation $b){
+            return $a->getModifiedAt()>$b->getModifiedAt()?-1:1;
+        });
+        $conversations = $this->maPagination($conversations, $paginator, $request, 5);
 
-        $nbrNonlus = 0;
-        $nbrNonlusInit = [];
-        $conversationsInit = $user->getConversationsInit();
-        foreach ($conversationsInit as $key => $conv) {
-            foreach ($conv->getMessages() as $key => $mess) {
-                if ($mess->isIsRead() == false && $mess->getExpediteur()->getId() != $this->getUser()->getId()) {
-                    $nbrNonlus += 1;
-                }
-            }
-            $nbrNonlusInit[$conv->getId()] = $nbrNonlus;
-            $nbrNonlus = 0;
-        }
-
-        return $this->renderForm('admin/conversation/index.html.twig', [
-            'conversationsCorresp' => $conversationsCorresp,
-            'conversationsInit' => $conversationsInit,
-            'nbrNonlusCorresp' => $nbrNonlusCorresp,
-            'nbrNonlusInit' => $nbrNonlusInit
+        return $this->renderForm('admin/conversation/conversation_demande_user.html.twig', [
+            'conversationsCorresp' => $conversations,
+            'nbrNonlusCorresp' => $nbrNonlusCorresp
         ]);
     }
 
@@ -72,6 +95,7 @@ class ConversationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $conversation->setCreatedAt(new \DateTimeImmutable());
+            $conversation->setModifiedAt(new \DateTimeImmutable());
             $conversation->setIsRead(false);
             $conversation->setUser($this->getUser());
             $conversation->setCorrespondant($user);
@@ -97,6 +121,7 @@ class ConversationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $conversation->setCreatedAt(new \DateTimeImmutable());
+            $conversation->setModifiedAt(new \DateTimeImmutable());
             $conversation->setUser($this->getUser());
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
@@ -122,6 +147,7 @@ class ConversationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $conversation->setCreatedAt(new \DateTimeImmutable());
+            $conversation->setModifiedAt(new \DateTimeImmutable());
             $conversation->setUser($this->getUser());
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
@@ -153,6 +179,7 @@ class ConversationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $conversation->setCreatedAt(new \DateTimeImmutable());
+            $conversation->setModifiedAt(new \DateTimeImmutable());
             $conversation->setUser($this->getUser());
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
@@ -193,6 +220,9 @@ class ConversationController extends AbstractController
             $message->setExpediteur($this->getUser());
             $message->setCreatedAt(new \DateTimeImmutable());
             $messageRepository->add($message, true);
+            
+            $conversation->setModifiedAt(new \DateTimeImmutable());
+            $conversationRepository->add($conversation, true);
 
             return $this->redirectToRoute('conversation_message', ['id' => $conversation->getId()], Response::HTTP_SEE_OTHER);
         }

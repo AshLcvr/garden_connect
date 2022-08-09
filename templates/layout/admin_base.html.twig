@@ -37,6 +37,24 @@
                 </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">
+                    Messagerie
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMessages"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fa-solid fa-comment"></i>
+                        <span>Messageries</span>
+                    </a>
+                    <div id="collapseMessages" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ path('app_conversation_moderation') }}">Modération</a>
+                            <a class="collapse-item" href="{{ path('app_conversation_demande_user') }}">Demandes d'utilisateurs</a>
+                        </div>
+                    </div>
+                </li>
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
                     Création
                 </div>
                 <li class="nav-item">
@@ -141,18 +159,6 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="{{ path('boutique_messagerie') }}" id="messagesDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Messages <i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}
-                                </a>
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="messagesDropdown">
-                                    <h6 class="dropdown-header">Messages non lus</h6>
-                                    {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
-                                    <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
                                 </div>
                             </li>
                             <div class="topbar-divider d-none d-sm-block"></div>

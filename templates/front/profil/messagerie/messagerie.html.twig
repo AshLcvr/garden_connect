@@ -1,0 +1,45 @@
+{% extends 'layout/front_profil_base.html.twig' %}
+
+
+{% block container %}
+    <h1>Messagerie</h1>
+    <div class="container_conversation_profil" style="display:flex;flex-flow:column;gap:1rem;">
+        {% for conv in conversations %}
+            <a href="{{ path('user_messagerie_message', {id: conv.id}) }}">
+                <div class="block_conversation_profil" style="background-color:grey;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem 1rem 2rem">
+                    <div style="display:flex;gap:1rem;">
+                        <div style="display:flex;align-items:center;">
+                            {% if app.user.name ==  conv.user.name %}
+                                <p style="margin:0;">Moi-même</p>
+                            {% else %}
+                                <p style="margin:0;">{{ conv.user.name }}</p>
+                            {% endif %}
+                        </div>
+                        <div style="display:flex;align-items:center;"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div style="display:flex;align-items:center;">
+                            {% if app.user.name ==  conv.correspondant.name %}
+                                <p style="margin:0;">Moi-même</p>
+                            {% else %}
+                                <p style="margin:0;">{{ conv.correspondant.name }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <p style="margin:0;">
+                        Messages non lu
+                            (
+                                {% for key, nbr in tabNbrNonlus %}
+                                    {% if key == conv.id %}
+                                        {{ nbr }}
+                                    {% endif %}
+                                {% endfor %}
+                            )
+                    </p>
+                    <i class="fa-solid fa-arrow-right" style="font-size:2rem;color:green;"></i>
+                </div>
+            </a>
+        {% endfor %}
+        <div class="js-filter-pagination" id="pagination_box">
+            {{ knp_pagination_render(conversations) }}
+        </div>
+    </div>
+{% endblock %}

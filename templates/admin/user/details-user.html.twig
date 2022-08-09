@@ -39,7 +39,11 @@
         </div>
     </div>
     <div class="m-t-20">
-        <a href="{{ path('all-users') }}" class="action width-100 text-align-center inline-block">Retour liste utilisateurs</a>
+        {% if user.actif %}
+            <a href="{{ path('all_users_actifs') }}" class="action width-100 text-align-center inline-block">Retour liste utilisateurs</a>
+        {% else %}
+            <a href="{{ path('all_users_inactifs') }}" class="action width-100 text-align-center inline-block">Retour liste utilisateurs</a>
+        {% endif %}
     <div>
 </div>
 {% endblock %}

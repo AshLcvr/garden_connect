@@ -18,7 +18,10 @@ class ConversationType extends AbstractType
                 'label' => 'Premier message'
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Envoyer'
+                'label' => 'Envoyer',
+                'attr' => [
+                    'class' => 'btn btn-primary width-100 m-t-20'
+                ]
             ])
         ;
     }

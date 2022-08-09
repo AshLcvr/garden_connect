@@ -1,14 +1,23 @@
-{% extends 'layout/admin_base.html.twig' %}
+{% extends 'layout/front_profil_base.html.twig' %}
 
-{% block title %}Messages{% endblock %}
 
-{% block body %}
+{% block container %}
 <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
-    <div style="display:flex;gap:1rem;margin-bottom:1rem;">
-        <div><i class="fa-solid fa-arrow-right" style="font-size:2rem;"></i></div>
-        <div style="display:flex;align-items:center;gap:1rem;">
-            <h4 style="margin:0;">{{ conversation.correspondant.name }}</h4>
-            <a href="{{ path('details-user', {id: conversation.correspondant.id}) }}" class="btn btn-primary">Voir l'utilisateur</a>
+    <div style="display:flex;gap:1rem;">
+        <div style="display:flex;align-items:center;">
+            {% if app.user.name ==  conversation.user.name %}
+                <h2 style="margin:0;">Moi-même</h2>
+            {% else %}
+                <h2 style="margin:0;">{{ conversation.user.name }}</h2>
+            {% endif %}
+        </div>
+        <div style="display:flex;align-items:center;"><i class="fa-solid fa-arrow-right"></i></div>
+        <div style="display:flex;align-items:center;">
+            {% if app.user.name ==  conversation.correspondant.name %}
+                <h4 style="margin:0;">Moi-même</h4>
+            {% else %}
+                <h4 style="margin:0;">{{ conversation.correspondant.name }}</h4>
+            {% endif %}
         </div>
     </div>
     <div class="chatbox-holder">
@@ -38,7 +47,7 @@
                 {% endfor %}
             </div>
             <div class="chat-input-holder">
-                {{ form_start(form, {attr : {novalidate: 'novalidate', class: 'width-100 d-flex row-wrap', style: 'flex-flow:row wrap;'}}) }}
+                {{ form_start(form, {attr : {novalidate: 'novalidate', class: 'width-100 d-flex row-wrap'}}) }}
                     {{ form_widget(form.message) }}
                     {{ form_widget(form.submit) }}
                     <div class="form-error width-100">
@@ -49,11 +58,7 @@
         </div>
     </div>
     <div class="m-t-20">
-        {% if app.user.email == conversation.user.email %}
-            <a href="{{ path('app_conversation_moderation') }}" class="btn btn-primary width-100">Retour à la liste</a>
-        {% else %}
-            <a href="{{ path('app_conversation_demande_user') }}" class="btn btn-primary width-100">Retour à la liste</a>
-        {% endif %}
+        <a href="{{ path('user_messagerie') }}" class="action width-100 text-align-center inline-block">Retour à la liste</a>
     <div>
 </div>
 {% endblock %}

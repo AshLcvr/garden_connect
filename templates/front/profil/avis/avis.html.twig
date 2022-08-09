@@ -38,12 +38,8 @@
                                 <a class="" href="{{ path('profil_avis_edit', {id: avi.id}) }}">Modifier</a>
                                 </span>
                             </div>
-                                <span class="avis" title="Supprimer l'avis" style="display: block;">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
-                            </div>
-                        {# <div>
-                            <a class="btn btn-primary" href="{{ path('profil_avis_edit', {id: avi.id}) }}">Modifier mon commentaire</a>
-                            <span title="Supprimer l'avis">{{ include('front/profil/avis/_delete_form.html.twig') }}</span>
-                        </div> #}
+                            <span class="avis" title="Supprimer l'avis" style="display: block;">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
+                        </div>
                     </div>
                     <div class="separator"><i class="fa-solid fa-arrow-right"></i></div>
                     <div class="block_boutique">
@@ -84,7 +80,6 @@
                                 <a class="" href="{{ path('view_boutique', {id: avi.boutique.id}) }}">Voir la boutique</a>
                             </span>
                         </div>
-                        {# <a class="btn btn-primary flex-end" href="{{ path('view_boutique', {id: avi.boutique.id}) }}">Voir la boutique</a> #}
                     </div>
                 </li>
             {% endfor %}

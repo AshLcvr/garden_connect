@@ -128,8 +128,11 @@
                             {% endif %}
                             {% if is_granted('ROLE_VENDEUR') %}
                                 <a href="{{ path('boutique_messagerie_new_conversation', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('new_conversation_user', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
+                                {% endif %}
                             {% else %}
-                                <a href="{{ path('user_messagerie') }}" class="message_link">Message</a>
+                                <a href="{{ path('new_conversation_user', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
                             {% endif %}
                         {% else %}
                             <p class="contact"> Contacter le vendeur</p>
