@@ -46,7 +46,7 @@ class ProfilController extends AbstractController
                 $user->setImage($uploadImage->uploadProfile($image));
             }
             $userRepository->add($user,true);
-            return $this->redirectToRoute('boutique_view_profil', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('profil', [], Response::HTTP_SEE_OTHER);
         }
 
 

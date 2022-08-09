@@ -51,16 +51,13 @@ class FavoryController extends AbstractController
                 foreach ($fav->getBoutique()->getAvis() as $key => $avi) {
                     $total[] = $avi->getRating();
                 }
-                // dump($total);
-                $globalRating[$fav->getBoutique()->getId()] = array_sum($total)/$numberAvis;
-                $total = [];
                 if ($numberAvis) {
-                    // dump($globalRating);
+                    $globalRating[$fav->getBoutique()->getId()] = array_sum($total)/$numberAvis;
+                    $total = [];
                     $totalGlobalRating[$fav->getBoutique()->getId()] = $globalRating[$fav->getBoutique()->getId()];
                     $globalRating = [];
                 }
             }
-            // dd($totalGlobalRating);
         }else{
             $totalGlobalRating = 0;
         }
