@@ -33,8 +33,10 @@ document.addEventListener(
       var st = window.pageYOffset || document.documentElement.scrollTop;
       if (st > lastScrollTop ) {
         header.classList.remove("fixed");
+        header.classList.add("hidden");
       } else {
         header.classList.add("fixed");
+        header.classList.remove("hidden");
       }
       lastScrollTop = st <= 0 ? 0 : st;
       if (st === 0) {

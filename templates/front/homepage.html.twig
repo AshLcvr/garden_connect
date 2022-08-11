@@ -41,7 +41,9 @@
   <div class="separator_home"></div>
 
   <section id="annonces" class="wrap">
-    <a href="{{ path('app_annonce_recherche') }}" ><h2 class="title_section_home derniere_annonce">Les dernières annonces</h2></a>
+    <a href="{{ path('app_annonce_recherche') }}" >
+      <h2 class="title_section_home derniere_annonce">Les dernières annonces</h2>
+    </a>
     {% for annonce in annonces %}
         <div class="annonce_box">
           <div class="annonce_img">
@@ -54,7 +56,6 @@
                     </li>
                   {% endfor %}
               </ul>
-            {# </a> #}
           </div>
           <div class="annonce_text">
             <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link" >
@@ -69,7 +70,7 @@
                 {% endif %}
               </div>
               <div class="annonce_price_box">
-                <p class="annonce_price">{{ annonce.price }}€/Kg</p>
+                <p class="annonce_price">{{ annonce.price }}€/{{annonce.mesure.title}}</p>
               </div>
             </a>
           </div>

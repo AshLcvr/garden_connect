@@ -20,7 +20,7 @@ use function Symfony\Config\Security\FirewallConfig\name;
 class DefaultController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
+    public function homepage(BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $categories     = $categoryRepository->findAll();
         $annonces       = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);

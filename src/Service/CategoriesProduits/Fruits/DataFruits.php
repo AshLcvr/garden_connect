@@ -2,7 +2,6 @@
 
 namespace App\Service\CategoriesProduits\Fruits;
 
-
 class DataFruits
 {
     public function getFruitsData()
