@@ -13,11 +13,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(carte);
 
-const icone = L.icon({
-    iconUrl : '../../build/images/icone_boutique.png',
-    iconSize : [50, 50],
-    iconAnchor: [20,15],
-    popupAnchor : [4,-12]
-})
-const marqueur = L.marker( [ parseFloat(lat), parseFloat(lng) ], {icon:icone} ).addTo(carte);
+// const icone = L.icon({
+//     iconUrl : '../../build/images/icone_boutique.png',
+//     iconSize : [50, 50],
+//     iconAnchor: [20,15],
+//     popupAnchor : [4,-12]
+// })
+const marqueur = L.marker( [ parseFloat(lat), parseFloat(lng) ]
+    // , {icon:icone}
+    ).addTo(carte);
 fullAdress === 'true'? marqueur.bindPopup("<b>"+boutique_title+"</b>") : marqueur.bindPopup("<b>"+boutique_title+"</b><br><i>Position approximative</i>");

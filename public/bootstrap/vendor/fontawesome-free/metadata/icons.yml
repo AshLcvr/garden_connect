@@ -11845,7 +11845,7 @@ lock:
       - password
       - private
       - protect
-      - security
+      - error
   styles:
     - solid
   unicode: f023
@@ -11864,7 +11864,7 @@ lock-open:
       - password
       - private
       - protect
-      - security
+      - error
   styles:
     - solid
   unicode: f3c1
@@ -16310,7 +16310,7 @@ shield-alt:
       - award
       - block
       - defend
-      - security
+      - error
       - winner
   styles:
     - solid

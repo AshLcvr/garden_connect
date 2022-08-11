@@ -32,7 +32,10 @@ class RegistrationController extends AbstractController
     private EmailVerifier $emailVerifier;
     private FormLoginAuthenticator $authenticator;
 
-    public function __construct(EmailVerifier $emailVerifier, FormLoginAuthenticator $authenticator)
+    public function __construct(EmailVerifier $emailVerifier
+,
+                                FormLoginAuthenticator $authenticator
+    )
     {
         $this->emailVerifier = $emailVerifier;
         $this->authenticator = $authenticator;

@@ -84,9 +84,13 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique-delete/{id}', name: 'app_boutique_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
-    public function deleteBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
+    public function deleteBoutique($id,Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, ImagesBoutiqueRepository $imagesBoutiqueRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
+            $imagesBoutique = $imagesBoutiqueRepository->findImagesbyBoutiqueId($id);
+            foreach ($imagesBoutique as $image) {
+                $imagesBoutiqueRepository->remove($image, true);
+            }
             $boutiqueRepository->remove($boutique, true);
         }
 
