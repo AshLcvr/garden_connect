@@ -1,5 +1,5 @@
 body{
-    background: #33cc99;
+    background: var(--orange);
     color:#fff;
     font-family: 'Open Sans', sans-serif;
     max-height:700px;
@@ -61,7 +61,7 @@ body{
     padding: 5px;
     z-index: 5;
     font-size: 25px;
-    color:#33cc99;
+    color:var(--orange);
     text-decoration: none;
 }
 
@@ -89,7 +89,7 @@ hr:after {
     top: -0.75em;
     font-size: 2em;
     padding: 0 0.2em;
-    background: #33cc99;
+    background: var(--orange);
 }
 
 .cloud {

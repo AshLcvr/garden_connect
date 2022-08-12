@@ -50,15 +50,12 @@ class Boutique
     private $adress;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
     private $city;
 
     #[ORM\Column(type: 'integer')]
-    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
     private $postcode;
 
     #[ORM\Column(type: 'integer')]
-    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
     private $citycode;
 
     #[ORM\Column(type: 'float')]

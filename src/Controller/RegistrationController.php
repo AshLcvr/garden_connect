@@ -83,10 +83,8 @@ class RegistrationController extends AbstractController
 
     if ($form->isSubmitted() && $form->isValid()) {
         $boutique->setUser($user);
-        $formatedTel =  $form->get('indicatif')->getData() . $form->get('telephone')->getData();
-        $boutique->setTelephone($formatedTel);
         $boutique->setCity($form->get('city')->getData());
-        $callApi->getBoutiqueAdressCoordinates($boutique, $form->get('citycode')->getData(),$form->get('city')->getData(),$form->get('adress')->getData());
+        $callApi->getBoutiqueAdressCoordinates($boutique,$form->get('city')->getData(),$form->get('citycode')->getData(),$form->get('adress')->getData());
         $boutique->setCardActive(true);
         $boutique->setActif(true);
         $boutique->setCreatedAt(new \DateTimeImmutable());

@@ -66,9 +66,6 @@ img{
 .flex-column{
     flex-flow: column;
 }
-/* .box-shadow{
-    box-shadow: 15px 15px 15px lightgrey;
-} */
 .width-100{
     width: 100%;
 }

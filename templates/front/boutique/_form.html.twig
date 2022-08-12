@@ -1,10 +1,6 @@
 {% block stylesheets %}
     <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
 {% endblock %}
-{% set hidden_class = '' %}
-{% if app.request.attributes.get('_route') == 'app_boutique_new' %}
-    {% set hidden_class = 'hidden' %}
-{% endif %}
 <div class="body">
     <div class="wrap boutique_form">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
@@ -14,7 +10,7 @@
             <p>Seuls les champs marqués d'un <span> *</span> sont obligatoires.</p>
         </div>
 
-        <div id="form_upload" class=" bloc_form {{ hidden_class }}">
+        <div id="form_upload" class="bloc_form">
             {{ form_label(form.upload) }}
             <br>
             {{ form_widget(form.upload) }}
@@ -49,34 +45,12 @@
             </div>
         </div>
 
-        <div class="bloc_form d-flex " style="gap: 2rem">
-            {% if app.request.attributes.get('_route') == 'app_boutique_new'%}
-                <div style="width: 10%">
-                    {{ form_label(form.indicatif) }}
-                    {{ form_widget(form.indicatif) }}
-                    <small>{{ form_help(form.indicatif) }}</small>
-                    <div class="form-error">
-                        {{ form_errors(form.indicatif) }}
-                    </div>
-                </div>
-            {% else %}
-                <div style="display: none">
-                    {{ form_label(form.indicatif) }}
-                    {{ form_widget(form.indicatif) }}
-                    <small>{{ form_help(form.indicatif) }}</small>
-                    <div class="form-error">
-                        {{ form_errors(form.indicatif) }}
-                    </div>
-                </div>
-            {% endif %}
-
-            <div>
-                {{ form_label(form.telephone) }}
-                {{ form_widget(form.telephone) }}
-                <small>{{ form_help(form.telephone) }}</small>
-                <div class="form-error">
-                    {{ form_errors(form.telephone) }}
-                </div>
+        <div class="bloc_form" style="width: 48%">
+            {{ form_label(form.telephone) }}
+            {{ form_widget(form.telephone) }}
+            <small>{{ form_help(form.telephone) }}</small>
+            <div class="form-error">
+                {{ form_errors(form.telephone) }}
             </div>
         </div>
 

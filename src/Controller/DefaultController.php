@@ -50,14 +50,7 @@ class DefaultController extends AbstractController
         $recherche->handleRequest($request);
         [$min, $max] = $annonceRepository->findMinMax($data);
         $annonces = $annonceRepository->findBySearch($data);
-//        if ($request->isXmlHttpRequest()){
-//            if(!$request->get('category') ){
-//                return new JsonResponse([
-//                    'content' => $this->renderView('front/annonce/_annonces.html.twig', ['annonces' => $annonces]),
-//                    'sort' => $this->renderView('front/annonce/_sort.html.twig', ['annonces' => $annonces]),
-//                ]);
-//            }
-//        }
+
         return $this->render('front/annonce/recherche_annonce.html.twig', [
             'annonces'  => $annonces,
             'recherche' => $recherche->createView(),
