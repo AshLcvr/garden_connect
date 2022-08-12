@@ -1,11 +1,10 @@
+/* Filtres de recherche */
 .js-filter-content{
     min-height: 105vh;
 }
 #filter_form{
-    /* border: solid 1px var(--orange); */
-    /* border-radius: 10px; */
     box-shadow: grey 0px 7px 29px 0px;
-    width: 70%;
+    width: 55%;
     margin: 2rem auto 4rem;
     padding: 1rem 2rem;
 }
@@ -32,58 +31,39 @@
     width: 32%;
 }
 #filter_form .noUi-connect {
-    /* background: var(--orange); */
     background: whitesmoke;
 }
 #filter_form .noUi-connect {
     background: var(--vertclair);
     filter: brightness(1);
 }
-/* .noUi-touch-area, */
 #filter_form .noUi-handle:before,
 .noUi-handle:after {
-    /* background-color: var(--orange); */
-    /* border: .5px solid var(--vertclair); */
     border: .5px solid var(--orange);
-    /* border: 1px solid rgba(247, 148, 29, 20%); */
     left: 12px;
 }
 .noUi-touch-area {
     border: .5px solid var(--orange);
-    /* border: 1px solid rgba(247, 148, 29, 20%); */
 
 }
 .noUi-connects {
     border: .5px solid var(--vertclair);
-    /* background-color: var(--orange); */
-    /* filter: brightness(.5); */
 }
 #filter_form .noUi-connect {
     background: var(--vertclair);
-    /* filter: brightness(1); */
 }
 
 #filter_form .noUi-connect.change_color {
     background: var(--orange);
 }
 
-/* #filter_form .d-flex.justify-content-center{
-    border: 1px solid red;
-    gap: 2rem;
-} */
-
-
 #filter_form .bloc_form input.form-control,
 #filter_form .bloc_form select.form-control {
-    /* border: 1px solid var(--orange); */
     border: 1px solid rgba(247, 148, 29, 20%);
     border: 1px solid rgba(143, 198, 66, 20%);
 }
 #filter_form .bloc_form input.form-control:focus,
-#filter_form .bloc_form select.form-control:focus
-/* ,
-#filter_form .bloc_form select.form-control option  */
-{
+#filter_form .bloc_form select.form-control:focus {
     border-color: var(--orange);
     box-shadow: unset;
     border: 1px solid var(--orange);
@@ -92,22 +72,27 @@
 #filter_form .bloc_form select.form-control::placeholder {
     color: #d2d2d2;
 }
-/* Filtres prix / date */
+
+/* Tri prix / date */
+.wrap_sort {
+    max-width: 1100px ;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
 .recherche-tri{
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
-    margin-right: 20px;
     gap: .5rem;
+    /* padding: 1rem 0; */
 }
 .recherche-tri p{
     text-align: center;
     margin-bottom: 0;
     vertical-align: baseline;
 }
-/* .recherche-tri a:hover{
-    color: white;
-} */
 .recherche-tri a{
     color: white;
 }
@@ -121,13 +106,13 @@
     border: var(--orange);
     filter: brightness(.9);
 }
+
 /* Pagination */
 #pagination_box{
     margin: 2rem auto;
     display: flex;
     justify-content: center;
 }
-
 #pagination_box span {
     margin-right: .5rem;
     width: 40px;
@@ -136,14 +121,14 @@
     justify-content: center;
     align-items: center;
     color: white;
-    /* background-color: #41B04F; */
     background-color: var(--vertclair);
-    /* border-radius: 10px; */
 }
-#pagination_box span:hover{
-    /* background-color: #3ac658; */
-    filter: brightness(.9);
+#pagination_box.btq span {
+    background-color: var(--vertfonce);
+}
 
+#pagination_box span:hover{
+    filter: brightness(.9);
 }
 #pagination_box .pagination .current{
     background-color: var(--orange);
@@ -155,4 +140,21 @@
     color: white;
     padding: .4rem 1rem;
     margin: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px){
+    #filter_form{
+        width: 65%;
+    }
+}
+@media (max-width: 850px){
+    #filter_form{
+        width: 75%;
+    }
+    /* Pagination */
+    #pagination_box span {
+    width: 30px;
+    height: 30px;
+    }
 }

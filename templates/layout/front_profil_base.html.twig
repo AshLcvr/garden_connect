@@ -18,11 +18,11 @@
 
     <body id="page-top">
         {%  include '_partials/_header_boutique.html.twig' %}
-        <button id="sidebarToggleTop" class="btn btn-link d -md-none rounded-circle mr-3 custom">
+        <button id="sidebarToggleTop" class="btn btn-link d -md-none rounded-circle mr-3 custom_user">
             <i class="fa fa-bars"></i>
         </button>
         <div id="wrapper">
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion side_color custom" id="accordionSidebar" style="">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion side_color custom custom_user" id="accordionSidebar" style="">
                 <hr class="sidebar-divider my-0 custom">
                 {# <li class="nav-item">
                     <a class="nav-link custom" href="{{ path ('app_boutique_index') }}">
@@ -31,19 +31,19 @@
                     </a>
                 </li> #}
                 <li class="nav-item">
-                    <a class="nav-link custom" href="{{ path('homepage') }}">
-                        <i class="fa-solid fa-arrow-left custom"></i>
+                    <a class="nav-link custom_user" href="{{ path('homepage') }}">
+                        <i class="fa-solid fa-arrow-left custom_user"></i>
                         <span>&nbspRetour au site</span>
                     </a>
                 </li>
                 <hr class="sidebar-divider custom">
-                <div class="sidebar-heading custom">
+                <div class="sidebar-heading custom_user">
                 Interface
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link collapsed custom" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce"
+                    <a class="nav-link collapsed custom_user" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce"
                     aria-expanded="true" aria-controls="collapseUtilities" >
-                        <i class="fa-solid fa-user custom"></i>
+                        <i class="fa-solid fa-user custom_user"></i>
                         <span>Mon profil</span>
                     </a>
                     <div id="collapseAnnonce" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -54,18 +54,18 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link custom" href="{{ path('user_messagerie') }}">
-                    <i class="fa-solid fa-message custom"></i>
+                    <a class="nav-link custom_user" href="{{ path('user_messagerie') }}">
+                    <i class="fa-solid fa-message custom_user"></i>
                     <span>Messagerie</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link custom" href="{{ path('profil_avis') }}">
-                    <i class="fa-solid fa-comment custom"></i>
+                    <a class="nav-link custom_user" href="{{ path('profil_avis') }}">
+                    <i class="fa-solid fa-comment custom_user"></i>
                     <span>Mes avis</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link custom" href="{{ path('profil_favory') }}">
-                    <i class="fa-solid fa-heart custom"></i>
+                    <a class="nav-link custom_user" href="{{ path('profil_favory') }}">
+                    <i class="fa-solid fa-heart custom_user"></i>
                     <span>Mes boutiques favorites</span></a>
                 </li>
                 <hr class="sidebar-divider custom">

@@ -48,6 +48,7 @@
                         {{ form_errors(registrationForm.plainPassword.first) }}
                     </div>
                 </div>
+                {# <div class="bloc_form register"> #}
                 <div class="bloc_form register">
                     {{ form_label(registrationForm.plainPassword.second) }}
                     {{ form_widget(registrationForm.plainPassword.second) }}
@@ -80,7 +81,7 @@
                     </div>
                 </div>
 
-                <div class="bloc_form btn-custom register">
+                <div class="bloc_form btn-custom">
                     <span class="hover-effect">
                         {{ form_widget(registrationForm.submit) }}
                     </span>

@@ -1,24 +1,25 @@
 {% extends 'layout/front_profil_base.html.twig' %}
+{% block title %}
+    <title>Avis émis</title>
+{% endblock %}
 
 {% block container %}
 <div id="container_profil">
-    <div class="wrap2">
-<h1 class="title_top" style="margin: 0">Mes avis</h1>
-<div class="container_avis">
-
-    {% if mesAvis %}
-        {# <h1>Mes avis</h1> #}
+    <div class="wrap wrap_avis">
+    <h1 class="title_top">Mes avis</h1>
+        <div class="container_avis">
+        {% if mesAvis %}
         <ul>
             {% for avi in mesAvis %}
                 <li>
                     <div class="block_avis">
                         <div>
                             {% if avi.user.image %}
-                                <img src="{{ asset('uploads/profile/')~avi.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                                <img class="avatar_avis" src="{{ asset('uploads/profile/')~avi.user.image }}" alt="photo de profil">
                             {% else %}
-                                <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                                <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                             {% endif %}
-                            <span style="margin: auto .5rem">{{ avi.user.name|capitalize }}</span>
+                            <span class="user_name_avis" style="margin: auto .5rem">{{ avi.user.name|capitalize }}</span>
                         </div>
                         <div>
                             {% for i in 1..5 %}
@@ -28,32 +29,35 @@
                                     <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
                                 {% endif %}
                             {% endfor %}
-                            <span>{{ avi.title }}</span>
+                            <span><strong>&nbsp&nbsp{{ avi.title }}</strong></span>
+                            <p style="margin-bottom: 0;"><i>Avis émis le {{ avi.createdAt|date('d/m/Y') }}</i></p>
                         </div>
-                        <div><i>Avis émis le {{ avi.createdAt|date('d m Y')  }}</i> </div>
                         <div> {{ avi.commentaire  }} </div>
                         <div class="block_buttons avis">
-                            <div class="bloc_form btn-custom btq avis">
-                                <span class="hover-effect btq avis">
+                            <div class="bloc_form btn-custom avis">
+                                <span class="hover-effect avis">
                                 <a class="" href="{{ path('profil_avis_edit', {id: avi.id}) }}">Modifier</a>
                                 </span>
                             </div>
-                            <span class="avis" title="Supprimer l'avis" style="display: block;">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
+                            <span class="avis" title="Supprimer l'avis">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
                         </div>
                     </div>
-                    <div class="separator"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="separator right user"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="separator down user"><i class="fa-solid fa-arrow-down"></i></div>
+
                     <div class="block_boutique">
                         <div>
-                            <div>
                                 {% if avi.boutique.user.image %}
-                                    <img src="{{ asset('uploads/profile/')~avi.boutique.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                                    <img class="avatar_avis" src="{{ asset('uploads/profile/')~avi.boutique.user.image }}" alt="photo de profil">
                                 {% else %}
-                                    <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                                    <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                                 {% endif %}
-                                <span style="margin: auto .5rem">{{ avi.boutique.user.name|capitalize }}</span>
+                                <span class="user_name_avis">{{ avi.boutique.user.name|capitalize }}</span>
                             </div>
-                            <h3>{{ avi.boutique.title }}</h3>
-                            <p>Boutique en ligne depuis le : {{ avi.boutique.createdAt|date('d/m/Y') }}</p>
+                            <div>
+                            <p><strong>{{ avi.boutique.title }}</strong></p>
+                            <span><i>Boutique en ligne depuis le : {{ avi.boutique.createdAt|date('d/m/Y') }}</i></span>
+                            </div>
                             <div>
                                 {% for key, globalRating in totalGlobalRating %}
                                     {% if key == avi.boutique.id %}
@@ -75,22 +79,23 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        <div class="bloc_form btn-custom btq avis">
-                            <span class="hover-effect btq">
+                        <div class="bloc_form btn-custom avis">
+                            <span class="hover-effect">
                                 <a class="" href="{{ path('view_boutique', {id: avi.boutique.id}) }}">Voir la boutique</a>
                             </span>
                         </div>
                     </div>
                 </li>
+                <div class="separator_btq"></div>
             {% endfor %}
         </ul>
         <div class="js-filter-pagination" id="pagination_box">
             {{ knp_pagination_render(mesAvis) }}
         </div>
     {% else %}
-        <h1>Vous n'avez pas émis d'avis.</h1>        
+    <h1>Vous n'avez pas émis d'avis.</h1>        
     {% endif %}
-</div>
-</div>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -20,6 +20,8 @@ import "./styles/boutique_public/rating.js";
 import "./styles/annonce_public/annonce_public.css";
 // css, js profil
 import "./styles/profil/profil.css";
+import "./styles/notification/notification.css";
+
 
 // Affichage du header quand scroll up sur front
 var lastScrollTop = 0;

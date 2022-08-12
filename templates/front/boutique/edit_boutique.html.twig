@@ -5,9 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h3 class="annonce_title" style="margin: 0">Modifier ma boutique</h3>
-    </div>
+        <h1 class="title_top" style="margin: 0">Modifier ma boutique</h1>
+    {# </div> #}
     <div class="card-body">
         {{ include('front/boutique/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
     </div>

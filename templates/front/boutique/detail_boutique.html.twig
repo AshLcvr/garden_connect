@@ -5,19 +5,11 @@
 {% endblock %}
 
 {% block body %}
-{# <div class="card shadow mb-4 boutique_detail">
-    <div class="card-header py-3  d-flex justify-content-between align-items-center">
-        <h4 class="annonce_title">{{ boutique.title }}</h4> #}
-
 <div class="boutique_accueil">
     <div>
         <h1 class="title_top">  {{ boutique.title }} </h1>
 
         <div class="block_buttons">
-        {# Bouton d'origine #}
-            {# <a title="Modifier ma boutique" class="btn btn-primary" href="{{ path('app_boutique_edit', {'id' : boutique.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a> #}
-
-        {# Test bouton custom #}
             <div class="block_btn_modify">
                 <div class="bloc_form btn-custom modify btq">
                     <span class="hover-effect modify btq">
@@ -26,7 +18,6 @@
                 </div>
             </div>
             {% if boutique.actif == 1 %}
-                {# <a title="Désactiver la boutique" class="btn btn-primary" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}" onclick="return confirm('Voulez vous vraiment désactiver votre boutique?')"><i class="fa-regular fa-eye"></i></a> #}
                 <div class="block_btn_modify">
                 <div class="bloc_form btn-custom modify btq">
                     <span class="hover-effect modify btq">
@@ -35,7 +26,6 @@
                 </div>
             </div>
             {% else %}
-                {# <a title="Activer la boutique" class="btn btn-warning" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-regular fa-eye-slash"></i></a> #}
                 <div class="block_btn_inactive">
                     <div class="bloc_form btn-custom inactive">
                         <span class="hover-effect inactive">
@@ -50,24 +40,24 @@
     </div>
     <div class="card-body boutique_infos">
         <div class="d-flex flex-column">
-            <h6 class="annonce_title">Photo : </h6>
+            <h6 class="detail_btq_title">Photo : </h6>
             {%  for imageboutique in boutique.imagesBoutiques %}
                     <img src="{{ asset('uploads/boutique/imageBoutiqueDefault.jpg') }}" alt="Images boutique">
             {% endfor %}
         </div>
         <hr>
         <div class="d-flex flex-column">
-            <h6 class="annonce_title">Description :</h6>
+            <h6 class="detail_btq_title">Description :</h6>
             {{ boutique.description  }}
         </div>
         <hr>
         <div class="d-flex flex-column">
-            <h6 class="annonce_title">Téléphone :</h6>
+            <h6 class="detail_btq_title">Téléphone :</h6>
             {{ boutique.telephone }}
         </div>
         <hr>
         <div class="d-flex flex-column">
-            <h6 class="annonce_title">Adresse:</h6>
+            <h6 class="detail_btq_title">Adresse:</h6>
             <div class="d-flex flex-column">
                 <ul class="text-align-center">
                     <li>{{ boutique.adress }}</li>

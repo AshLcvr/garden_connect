@@ -17,9 +17,7 @@
                     <li class="main_li"><a href="{{ path('app_annonce_recherche') }}">Annonces</a></li>
                 {% endif %}
                 {% if app.user %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li class="main_li"><a href="{{ path('app_conversation_index', {id: app.user.id}) }}" class="notif">Messages <i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
-                    {% elseif is_granted('ROLE_VENDEUR') %}
+                    {% if is_granted('ROLE_VENDEUR') %}
                         <li class="main_li"><a href="{{ path('boutique_messagerie') }}" class="notif">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% else %}
                         <li class="main_li"><a href="{{ path('app_conversation_index', {id : app.user.id}) }}" class="notif">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>

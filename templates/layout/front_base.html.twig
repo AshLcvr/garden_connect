@@ -18,29 +18,29 @@
         {% endblock %}
     </head>
     <body>
-      {{ include('_partials/_header-front.html.twig') }}
+        {{ include('_partials/_header-front.html.twig') }}
 
-      {% for label, messages in app.flashes %}
-          {% for message in messages %}
-              <div class="flash-{{ label }}">
-                  {{ message }}
-              </div>
-          {% endfor %}
-      {% endfor %}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
 
-      {% block body %}
-      {% endblock %}
+        {% block body %}
+        {% endblock %}
 
-      {{ include('_partials/_footer-front.html.twig') }}
+        {{ include('_partials/_footer-front.html.twig') }}
 
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js" integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k=" crossorigin="anonymous"></script>
-      <script src="https://unpkg.com/scrollreveal"></script>
-      <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
-      <script src=" https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"> </script>
-      {{ encore_entry_script_tags('app') }}
-      {% block javascripts %}
-      {% endblock %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js" integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+        <script src=" https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"> </script>
+        {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}
+        {% endblock %}
 
     </body>
 </html>

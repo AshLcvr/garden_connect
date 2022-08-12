@@ -1,30 +1,29 @@
-{% for annonce in annonces %}
-    <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
-        <div id="annonce_card" class="wrap">
-            <div class="card">
-                <h3 class="title_annonce">{{ annonce.title }}</h3>
-                <div class="content-card ">
-                    <div class="image-card flexslider slider-annonce">
-                        <ul class="slides">
-                            {% for image in annonce.imagesAnnonces %}
-                                <li>
-                                    <img src="{{ asset('uploads/annonce/'~image.title) }}" alt="Image Annonce"  style="max-height: 200px"/>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="description-card">
-                        {% if annonce.description|length < 30 %}
-                            <p><span>Description : </span>{{ annonce.description }}</p>
-                        {% else %}
-                            <p><span>Description : </span>{{ annonce.description|slice(0,150) }}...</p>
-                        {% endif %}
-                        <p><span>Prix : </span>{{ annonce.price }} €</p>
-                        <p><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
-                        <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
-                    </div>
-                </div>
-            </div>
+<section id="annonces" class="wrap">
+    {% for annonce in annonces %}
+    <div class="annonce_box">
+        <div class="annonce_img image-card flexslider slider-annonce">
+            <ul class="slides">
+                {% for image in annonce.imagesAnnonces %}
+                <li class="li_annonce_img">
+                    <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
+                        <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
-    </a>
-{% endfor %}
+        <div class="annonce_text">
+            <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
+                <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
+                <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
+                {% if annonce.description|length < 30 %}
+                    <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
+                {% else %}
+                    <p class="annonce_description"><span>Description : </span>{{ annonce.description|slice(0,150) }}...</p>
+                {% endif %}
+                <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</section>

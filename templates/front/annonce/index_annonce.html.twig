@@ -1,23 +1,12 @@
 {% extends 'layout/boutique_base.html.twig' %}
 
 {% block title %}
-<title>Mes annonces</title>
+    <title>Mes annonces</title>
 {% endblock %}
 
 {% block body %}
-{# {# <div class="card-header py-3 d-flex justify-content-between align-items-center"> #}
-    {# <h3 class="annonce_title" style="margin: 0">Mes annonces</h3> #}
-{# <div class="wrap2"> #}
-    <h1 class="title_top" style="margin: 0">Mes annonces</h1>
-    {# <div class="block_btn_modify plus">
-        <div class="bloc_form btn-custom modify btq plus" style="">
-            <span class="hover-effect modify btq">
-                <a title="Créer une annonce" class="" href="{{ path('app_annonce_new') }}"><i class="fa-solid fa-plus"></i></a>
-            </span>
-        </div>
-    </div> #}
-{# <div class="card-body"> #}
-<div class="">
+<h1 class="title_top" style="margin: 0">Mes annonces</h1>
+<div>
     <div class="block_btn_modify plus">
         <div class="bloc_form btn-custom modify btq plus" style="">
             <span class="hover-effect modify btq">
@@ -28,14 +17,14 @@
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
-            <tr>
-                <th>Titre</th>
-                <th>Catégories</th>
-                <th>Prix</th>
-                <th>Créée le</th>
-                <th>Actif</th>
-                <th>Actions</th>
-            </tr>
+                <tr>
+                    <th>Titre</th>
+                    <th>Catégories</th>
+                    <th>Prix</th>
+                    <th>Créée le</th>
+                    <th>Actif</th>
+                    <th>Actions</th>
+                </tr>
             </thead>
             <tbody>
             {% if annonces is empty %}
@@ -85,6 +74,5 @@
             </tbody>
         </table>
     </div>
-</div>
 </div>
 {% endblock %}

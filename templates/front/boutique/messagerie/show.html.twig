@@ -1,11 +1,11 @@
 {% extends 'layout/boutique_base.html.twig' %}
 
 {% block title %}
- <title>Messagerie</title>
+    <title>Messagerie</title>
 {% endblock %}
 
 {% block body %}
-    <h2 class="title">Conversation</h2>
+    <h1 class="title_top">Conversation</h1>
     <div class="chatbox-holder">
         <div class="chatbox">
             <div class="chatbox-top">
@@ -43,5 +43,9 @@
             </div>
         </div>
     </div>
-    <a href="{{ path('boutique_messagerie') }}" class="width-100 btn btn-primary m-t-20">Retour conversations</a>
+    <div class="bloc_form btn-custom btq">
+        <span class="hover-effect btq">
+                <a href="{{ path('boutique_messagerie') }}">Retour conversations</a>
+        </span>
+    </div>
 {% endblock %}
