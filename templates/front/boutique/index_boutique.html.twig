@@ -23,15 +23,14 @@
                     </div>
                 </div>
                 <div class="txt_bottom_boutique">
-                        <div class="button_boutique">
-                            <div class="bloc_form btn-custom btq">
-                                <span class="hover-effect btq">
-                                    {# <button type="submit">Voir ma boutique</button> #}
-                                    <a class="" href="{{ path('view_boutique', {'id' : boutique.id }) }}">Voir ma boutique</a>
-                                </span>
-                            </div>
+                    {# <div class="button_boutique" style="border: 1px solid purple;"> #}
+                        <div class="bloc_form btn-custom btq">
+                            <span class="hover-effect btq">
+                                <a class="" href="{{ path('view_boutique', {'id' : boutique.id }) }}">Voir ma boutique</a>
+                            </span>
                         </div>
-                    </div>
+                    {# </div> #}
+                </div>
             </div>
         </div>
     </section>

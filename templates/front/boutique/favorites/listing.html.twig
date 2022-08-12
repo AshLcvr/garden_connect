@@ -1,21 +1,19 @@
 {% extends 'layout/boutique_base.html.twig' %}
+
 {% block title %}
     <title>Boutiques favorites</title>
 {% endblock %}
 
 {% block body %}
 <div id="container_profil">
-    {# <div class="card-header py-3 d-flex justify-content-between align-items-center"> #}
-        {# <h3 class="annonce_title" style="margin: 0">Mes boutiques favorites</h3> #}
-        <h1 class="title_top" style="margin: 0">Mes boutiques favorites</h1>
-    {# </div> #}
+    <h1 class="title_top">Mes boutiques favorites</h1>
     <div class="container_favory">
         <ul>
             {% for fav in favories %}
                 <li>
                     <div class="block_favory">
-                        <h4>{{ fav.boutique.title }}</h4>
-                        <p>La boutique de {{ fav.boutique.user.name|capitalize }}</p>
+                        <h3>{{ fav.boutique.title }}</h3>
+                        <span>{{ fav.boutique.user.name|capitalize }}</span>
                         <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
                         <div class="block_rating">
                             {% for key, globalRating in totalGlobalRating %}
@@ -41,28 +39,15 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <div class="block_buttons">
-                        <div class="btn_favory">
-                            {# <a class="btn btn-primary" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a> #}
-
-                            <div class="bloc_form btn-custom btq">
+                        <div class="block_buttons btn_favory">
+                            <div class="bloc_form btn-custom btq favory">
                                 <span class="hover-effect btq">
-                                    {# <button type="submit">Voir ma boutique</button> #}
                                     <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
                                 </span>
                             </div>
-
-                            {# <div class="bloc_form btn-custom supp">
-                                <span class="hover_effect supp">
-                                    <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">X</a>
-                                </span>
-                            </div> #}
-
-                            <span class="delete_favory" title="Retirer des favoris">
+                            <span title="Retirer des favoris">
                             {{ include('front/boutique/favorites/_delete_form.html.twig') }}
                             </span>
-
-                        </div>
                     </div>
                 </li>
             {% endfor %}

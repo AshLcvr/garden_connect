@@ -1,5 +1,5 @@
 /* Layout boutique */
-.fa-envelope{
+.fa-envelope.btq {
     color: white;
 }
 /** SB2 **/
@@ -9,17 +9,16 @@
     display: none;
 }
 #sidebarToggleTop.custom {
-    /* margin: 0 auto; */
     color: var(--vertfonce);
+}
+#sidebarToggleTop.custom_user {
+    color: var(--vertclair);
 }
 /* Annule le shadow autour du bouton ouverture du menu */
 .btn:focus, .btn.focus {
     box-shadow: unset;
 }
 /* Menu sidebar */
-/* .navbar-nav.custom {
-    margin-top: 3rem
-} */
 .bg-gradient-primary.custom {
     background-color: whitesmoke;
     background-image: unset;
@@ -28,17 +27,27 @@
     padding-top: 1rem;
 }
 /* Liens sidebar */
-.sidebar-dark .nav-item .nav-link.custom {
+.sidebar-dark .nav-item .nav-link.custom,
+.sidebar-dark .nav-item .nav-link.custom_user {
     color: dimgray;
 }
-.sidebar-dark .nav-item .nav-link i.custom {
+.sidebar-dark .nav-item .nav-link i.custom,
+.sidebar-dark .nav-item .nav-link i.custom_user {
     color: dimgray;
 }
+/* Espace vendeur */
 .sidebar-dark .nav-item .nav-link.custom:hover,
 .sidebar-dark .nav-item .nav-link.custom:focus,
 .sidebar-dark .nav-item .nav-link.custom:hover i.custom,
 .sidebar-dark .nav-item .nav-link.custom:focus i.custom { 
     color: var(--vertfonce);
+}
+/* Espace user */
+.sidebar-dark .nav-item .nav-link.custom_user:hover,
+.sidebar-dark .nav-item .nav-link.custom_user:focus,
+.sidebar-dark .nav-item .nav-link.custom_user:hover i.custom_user,
+.sidebar-dark .nav-item .nav-link.custom_user:focus i.custom_user { 
+    color: var(--vertclair);
 }
 /* Chevrons */
 .sidebar-dark .nav-item .nav-link.custom[data-toggle="collapse"]::after {
@@ -47,6 +56,11 @@
 /* "INTERFACE" */
 .sidebar-dark .sidebar-heading.custom {
     color: var(--vertfonce);
+}
+/* "INTERFACE" user */
+.sidebar-dark .sidebar-heading.custom_user {
+    color: var(--orange);
+    color: var(--vertclair);
 }
 /* Séparateurs */
 .sidebar-dark hr.sidebar-divider.custom {
@@ -59,7 +73,11 @@
     background-color: dimgray;
 }
 .sidebar-dark.custom #sidebarToggle:hover {
-    background-color: #41b04f;
+    background-color: var(--vertfonce);
+}
+/* user */
+.sidebar-dark.custom_user #sidebarToggle:hover {
+    background-color: var(--vertclair);
 }
 /* Container */
 .container-fluid.custom {
@@ -70,15 +88,20 @@
 /*  */
 
 /* Accueil Ma boutique */
-/* Index boutique */
-.title_top {
-    text-align: center;
-    /* padding: 2rem 0 .5rem; */
-}
-
 .boutique_accueil .wrap2{
     max-width: 1100px;
     width: 100%;
+}
+/* Titres */
+.title_top {
+    text-align: center;
+    padding: 1rem 0;
+}
+.title_top.with_sub {
+    padding: 1rem 0 0;
+}
+.subtitle {
+    text-align: center;
 }
 .txt_top_boutique {
     width: 100%;
@@ -116,250 +139,45 @@
 .modif_psd.btq:hover {
     color: var(--orange);
 }
-
-
-
-/* button.css */
-/* .button_boutique {
-    margin: 0 auto;
-} */
-
-/* Bouton */
-/* .button_boutique .btn-custom {
-    width: 20%;
-    margin: 0 auto;
-} */
-/* .button_boutique .hover_effect a {
-    font-size: 18px;
-    color: white;
-    padding: .6rem;
-    width: 100%;
-    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
-    background-size: 200% 100%;
-    background-position: right;
-    transition: 500ms ease all;
-    text-align: center;
-} */
-/* .hover_effect a:hover {
-    color: var(--vertfonce);
-    background-position: left;
-    background-color: white;
-} */
-/* .btn-custom span {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-} */
-/* .btn-custom a:before,
-.btn-custom a:after {
-    position: absolute;
-    content: "";
-    right: 0;
-    top: 0;
-    background: var(--vertfonce);
-    transition: 500ms ease all;
+/* Page profil user */
+.modif_psd.user {
+    color: var(--vertclair);
 }
-.btn-custom a:before {
-    height: 0%;
-    width: 2px;
-}
-.btn-custom a:after {
-    width: 0%;
-    height: 2px;
-}
-.btn-custom a:hover:before {
-    height: 100%;
-}
-.btn-custom a:hover:after {
-    width: 100%;
-}
-.btn-custom span:before,
-.btn-custom span:after {
-    position: absolute;
-    content: "";
-    left: 0;
-    bottom: 0;
-    background: var(--vertfonce);
-    transition: 500ms ease all;
-}
-.btn-custom span:before {
-    width: 2px;
-    height: 0%;
-}
-.btn-custom span:after {
-    width: 0%;
-    height: 2px;
-}
-.btn-custom span:hover:before {
-    height: 100%;
-}
-.btn-custom span:hover:after {
-    width: 100%;
-} */
-/* Detail boutique */
-/* Boutons custom */
-/* .block_buttons {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: baseline;
-    gap: .5rem;
-}
-button.block_btn_delete {
-    border: none;
-}
-.btn-custom.delete {
-    cursor: pointer;
-} */
-/* Bouton "Modifier boutique" */
-/* .block_btn_modify,
-.block_btn_inactive,
-.block_btn_delete {
-    display: inline-block;
-}
-.btn-custom.modify,
-.btn-custom.inactive,
-.btn-custom.delete {
-    width: unset;
-}
-.hover-effect.modify a {
-    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
-}
-.hover-effect.inactive a {
-    background: linear-gradient(to right, transparent 50%, var(--orange) 50%);
-}
-.hover-effect.delete a {
-    background: linear-gradient(to right, transparent 50%, var(--rouge_supp) 50%);
-}
-.hover-effect.delete a.delete_xmark {
-    padding: .95rem;
-}
-
-.hover-effect.modify a,
-.hover-effect.inactive a,
-.hover-effect.delete a {
-    width: 100%;
-    background-size: 200% 100%;
-    background-position: right;
-    color: #f8f9fc;
-    display: flex;
-    justify-content: center;
-}
-.hover-effect.modify a:hover,
-.hover-effect.inactive a:hover,
-.hover-effect.delete a:hover {
-    background-position: left;
-    background-color: #f8f9fc;
-}
-.hover-effect.modify a:hover {
-    color: var(--vertfonce);
-}
-.hover-effect.inactive a:hover {
+.modif_psd.user:hover {
     color: var(--orange);
 }
-.hover-effect.delete a:hover {
-    color: var(--rouge_supp);
-}
-.hover-effect.modify i,
-.hover-effect.inactive i,
-.hover-effect.delete i {
-    width: 25px;
-}
-.btn-custom.inactive span:before, .btn-custom.inactive span:after {
-    background: var(--orange);
-}
-.btn-custom.inactive a:before, .btn-custom.inactive a:after {
-    background: var(--orange);
-}
-.btn-custom.delete span:before, .btn-custom.delete span:after {
-    background: var(--rouge_supp);
-}
-.btn-custom.delete a:before, .btn-custom.delete a:after {
-    background: var(--rouge_supp);
-} */
 
 /* Tableaux boutique */
-.card-body table th,.card-body table td{
+.card-body table th,
+.card-body table td {
     text-align: center;
     margin: auto 0;
     vertical-align: baseline;
 }
-.card-body table th p,.card-body table td p{
+.card-body table tr.list_line td {
+    padding: .3rem 0;
+}
+.card-body table th p,
+.card-body table td p {
     margin: 0;
 }
 .card-body table .table_actions{
     width: 20%;
-}
-/* Formulaires annonce */
-.annonce_form .bloc_form{
-    margin-bottom: 2rem;
-}
-.annonce_form .bloc_form textarea{
-    height: 15rem;
-    resize: none;
-}
-.annonce_form .bloc_submit{
-    display: flex;
-    justify-content: center;
-}
-.annonce_form .bloc_submit button{
-    width: 40%;
-    margin-top: 2rem;
 }
 /* Détail boutique */
 div.boutique_infos {
     /* margin: 1rem 0; */
     border: 1px solid rgb(222, 222, 222);
 }
-h6.annonce_title {
+h6.detail_btq_title {
     font-weight: bold;
 }
-/* Formulaires boutique */
-.boutique_form p{
-    margin: 0;
-}
-.boutique_form span {
-    color: red;
-}
-.boutique_form .bloc_form{
-    margin-bottom: 2rem;
-}
-.boutique_form .bloc_form textarea{
-    height: 15rem;
-    resize: none;
-}
-.boutique_form .bloc_form .adress_form {
-    width: 49%;
-}
-.boutique_form .bloc_form .city_search{
-    position: relative;
-    width: 49%;
-}
-#city_suggest{
-    margin-top: 0 ;
-}
-.boutique_form .bloc_submit{
-    display: flex;
-    justify-content: center;
-}
-.boutique_form .bloc_submit button{
-    width: 40%;
-    margin-top: 2rem;
+/* Messagerie */
+.chatbox-holder {
+    width: 70%;
+    margin: 1rem auto 2rem;
 }
 
-@media (max-width: 1100px){
-    .bloc_form.btn-custom {
-        width: 40%;
-    }
-    .bloc_form.btn-custom.modify,
-    .bloc_form.btn-custom.inactive,
-    .bloc_form.btn-custom.delete {
-        width: unset;
-    }
-}
 @media (max-width: 850px){
     .title_top {
         font-size: 2.2rem;
@@ -384,6 +202,7 @@ h6.annonce_title {
     .wrapper_text_boutique {
         align-items: center;
     }
+    /* Titres */
     .title_top {
         font-size: 1.8rem;
     }
@@ -393,14 +212,9 @@ h6.annonce_title {
     .boutique_accueil ul li, .boutique_accueil p {
         font-size: 1rem;
     }
-    .bloc_form.btn-custom {
-        width: 50%;
-    }
-    /* .btn-custom.delete {
-        width: unset;
-    } */
 }
 @media (max-width: 500px){
+    /* Titres */
     .title_top {
         font-size: 1.5rem;
     }
@@ -410,11 +224,9 @@ h6.annonce_title {
     .boutique_accueil ul li, .boutique_accueil p {
         font-size: .9rem;
     }
-    .bloc_form.btn-custom {
-        width: 60%;
-    }
 }
 @media (max-width: 350px){
+    /* Titres */
     .title_top {
         font-size: 1.4rem;
     }
@@ -433,12 +245,5 @@ h6.annonce_title {
     }
     .boutique_accueil ul li, .boutique_accueil p {
         font-size: .9rem;
-    }
-    .bloc_form.btn-custom {
-        width: 80%;
-    }
-    .hover_effect a {
-        font-size: .8rem;
-        padding: .5rem;
     }
 }

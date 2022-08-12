@@ -9,23 +9,29 @@
 {% endblock %}
 
 {% block body %}
-    <div class="wrap d-flex flex-column">
+    <div class="d-flex flex-column">
         <div class="js-filter">
-            <div class="box-shadow" id="filter_form">
-                <h3 class="title">Filtres</h3>
+            <div id="filter_form">
+                <h3 class="title_section_home">Filtres</h3>
                 {% include 'front/annonce/_filter.html.twig' with {form : recherche, min : min, max : max} only %}
             </div>
 
             <div>
-                <p class="title">Résultats</p>
+                <p class="title_section_home">Résultats</p>
             </div>
+            <div class="wrap_sort">
             <div class="recherche-tri js-filter-sort">
-                <p style="">Trier par :</p>
-                {% include 'front/annonce/_sort.html.twig' %}
+                {# <div class="wrap_sort"> #}
+                    <p style="">Trier par :</p>
+                    {% include 'front/annonce/_sort.html.twig' %}
+                </div>
             </div>
 
+
             <div class="js-filter-content">
+                {# <section id="annonces" class="wrap"> #}
                 {% include 'front/annonce/_annonces.html.twig' %}
+                {# </section> #}
             </div>
 
             <div class="js-filter-pagination" id="pagination_box">

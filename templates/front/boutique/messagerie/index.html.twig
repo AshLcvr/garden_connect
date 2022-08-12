@@ -5,23 +5,21 @@
 {% endblock %}
 
 {% block body %}
-<div class="card-header py-3 d-flex justify-content-between align-items-center">
-    <h3 class="annonce_title" style="margin: 0">Mes Conversations</h3>
-</div>
+<h1 class="title_top">Mes Conversations</h1>
 <div class="card-body">
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th>Initiateur</th>
-                    <th>Modifier le</th>
+                    <th>Modifié le</th>
                     <th>Messages non lus</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
             {% for conv in conversations %}
-                <tr>
+                <tr class="list_line">
                     {% if conv.user.name == app.user.name %}
                         <td>Moi-même</td>
                     {% else %}
@@ -38,7 +36,11 @@
                         {% endif %}
                     {% endfor %}
                     <td class="table_actions">
-                        <a title="Editer l'annonce" class="btn btn-primary" href="{{ path('boutique_messagerie_message', {'id' : conv.id}) }}">Voir</a>
+                        <div class="bloc_form btn-custom btq avis">
+                            <span class="hover-effect btq">
+                                <a title="Éditer l'annonce" class="conv" href="{{ path('boutique_messagerie_message', {'id' : conv.id}) }}">Voir</a>
+                            </span>
+                        </div>
                     </td>
                 </tr>
             {% else %}
@@ -48,7 +50,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <div class="js-filter-pagination" id="pagination_box">
+        <div class="js-filter-pagination btq" id="pagination_box">
             {{ knp_pagination_render(conversations) }}
         </div>
     </div>

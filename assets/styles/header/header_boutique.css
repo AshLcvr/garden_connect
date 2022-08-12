@@ -2,25 +2,18 @@
     background-color: rgb(65, 176, 80);
     background-color: var(--vertfonce);
 }
-/* #header_user {
-    background-color: var(--orange);
-    background-color: rgb(247, 148, 29);
-    background-color: rgb(255, 140, 0);
-
-} */
-#header_boutique .header_wrap
-/* ,
-#header_user .header_wrap  */
-{
+#header_user {
+    background-color: var(--vertclair);
+}
+#header_boutique .header_wrap,
+#header_user .header_wrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
 }
-#header_boutique .logo
-/* ,
-#header_user .logo  */
-{
+#header_boutique .logo,
+#header_user .logo {
     width: 75px;
     height: 75px;
     background-color: white;
@@ -33,33 +26,18 @@
 }
 /* SB2 */
 .topbar .dropdown-list .dropdown-header.custom {
-    background-color: #F7941D;
-    border: 1px solid #F7941D;
+    background-color: var(--orange);
+    border: 1px solid var(--orange);
 }
-/* .topbar .dropdown-list .dropdown-header.custom_user {
-    background-color: var(--vertfonce);
-    border: 1px solid var(--vertfonce);
-} */
-
 .topbar .dropdown .dropdown-menu {
     top: 80%;
     right: 0;
 }
-/* .topbar.navbar-light .navbar-nav .nav-item .nav-link.custom {
-    color: white;
-} */
-/* .topbar.navbar-light .navbar-nav .nav-item .nav-link.custom:hover {
-    color: var(--orange);
-} */
-/*  */
-
-/* i.fa-envelope:hover {
-    color: var(--orange);
-} */
 
 /* RESPONSIVE */
 @media all and (max-width: 850px) {
-    #header_boutique .logo {
+    #header_boutique .logo,
+    #header_user .logo {
     width: 70px;
     height: 70px;
     }
@@ -71,7 +49,8 @@
     } 
 }
 @media all and (max-width: 650px) {
-    #header_boutique .logo {
+    #header_boutique .logo,
+    #header_user .logo {
     width: 60px;
     height: 60px;
     }
@@ -86,12 +65,14 @@
 }
 
 @media all and (max-width: 450px) {
-    #header_boutique .header_wrap {
+    #header_boutique .header_wrap,
+    #header_user .header_wrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
     }
-    #header_boutique .logo {
+    #header_boutique .logo,
+    #header_user .logo {
     width: 50px;
     height: 50px;
     }

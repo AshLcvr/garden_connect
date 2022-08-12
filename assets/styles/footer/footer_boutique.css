@@ -28,7 +28,6 @@
 .footer_boutique_legals {
     display: flex;
     flex-flow: row nowrap;
-    color: rgb(192, 192, 192);
     color: white;
     gap: .2rem;
 }
@@ -42,7 +41,6 @@ p.brand_boutique {
     margin-bottom: 0;
     width: 33%;
     text-align: right;
-    color: rgb(192, 192, 192);
     color: white;
     font-size: .9rem;
     vertical-align: baseline;
@@ -56,8 +54,7 @@ p.brand_boutique {
 }
 @media all and (max-width: 1100px){
     .footer_boutique_box {
-        padding: .5rem;
-        padding-top: 7rem;
+        padding: 7rem .5rem .5rem;
     }
     #footer_boutique ul {
         margin: 0;
@@ -68,7 +65,6 @@ p.brand_boutique {
     }
     .footer_boutique_legals {
         flex-flow: row wrap;
-        /* justify-content: center; */
     }
     .footer_boutique_legals li {
         padding: .2rem .2rem;
@@ -90,9 +86,7 @@ p.brand_boutique {
         width: 100%;
     }
     #footer_boutique ul {
-    /* margin: 0; */
     width: 100%;
-    /* flex: unset; */
     }
     .footer_boutique_top {
         gap: 1.5rem;
@@ -126,7 +120,7 @@ p.brand_boutique {
         font-size: .7rem;
     }
     .footer_boutique_legals li {
-    font-size: .6rem;
+        font-size: .6rem;
     }
     p.brand_boutique {
         font-size: .7rem;

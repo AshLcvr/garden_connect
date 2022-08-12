@@ -20,5 +20,6 @@ import "./styles/footer/footer_boutique.css";
 // css, js profil
 import "./styles/profil/profil.css";
 // pagination
-// import './styles/filter_annonce/filter.css';
-// import './styles/filter_annonce/filter.js';
+import "./styles/filter_annonce/filter.css";
+import "./styles/filter_annonce/filter.js";
+import "./styles/notification/notification.css";

@@ -1,68 +1,57 @@
 {% extends 'layout/front_profil_base.html.twig' %}
 
+{% block title %}
+    <title>Boutiques favorites</title>
+{% endblock %}
+
 {% block container %}
 <div id="container_profil">
-        <h1 class="title_top" style="margin: 0">Mes boutiques favorites</h1>
-
-<div class="container_favory">
-    {# <h2>Mes boutiques favorites</h2> #}
-    <ul>
-        {% for fav in favories %}
-            <li>
-                <div class="block_favory">
-                    <h3>{{ fav.boutique.title }}</h3>
-                    <span style="margin: auto .5rem">{{ fav.boutique.user.name|capitalize }}</span>
-                    <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
-                    <div>
-                        {% for key, globalRating in totalGlobalRating %}
-                            {% if key == fav.boutique.id %}
-                                <span class="rating" data-rating="{{ globalRating }}">
-                                    {% for i in 1..5 %}
-                                        {% if i <= globalRating %}
-                                            <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                                        {% else %}
-                                            <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+        <h1 class="title_top">Mes boutiques favorites</h1>
+    <div class="container_favory">
+        <ul>
+            {% for fav in favories %}
+                <li>
+                    <div class="block_favory">
+                        <h3>{{ fav.boutique.title }}</h3>
+                        <span>{{ fav.boutique.user.name|capitalize }}</span>
+                        <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
+                        <div class="block_rating">
+                            {% for key, globalRating in totalGlobalRating %}
+                                {% if key == fav.boutique.id %}
+                                    <span class="rating" data-rating="{{ globalRating }}">
+                                        {% for i in 1..5 %}
+                                            {% if i <= globalRating %}
+                                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                            {% else %}
+                                                <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                    {% for key, nbr in totalNumberAvis %}
+                                        {% if key == fav.boutique.id %}
+                                            <span>({{ nbr }} avis)</span>
                                         {% endif %}
                                     {% endfor %}
-                                </span>
-                                {% for key, nbr in totalNumberAvis %}
-                                    {% if key == fav.boutique.id %}
-                                        <span>({{ nbr }} avis)</span>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div class="block_buttons">
-                        <div class="btn_favory">
-                            {# <a class="btn btn-primary" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a> #}
-
-                            <div class="bloc_form btn-custom btq">
-                                <span class="hover-effect btq">
-                                    {# <button type="submit">Voir ma boutique</button> #}
-                                    <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
-                                </span>
-                            </div>
-
-                                    {# <a href="{{ path('view_boutique', {id: fav.boutique.id}) }}">X</a> #}
-                                    
-
-                            <span class="delete_favory" title="Retirer des favoris">
-                            {{ include('front/boutique/favorites/_delete_form.html.twig') }}
-                            </span>
-
+                                {% endif %}
+                            {% endfor %}
                         </div>
-                    {# <div>
-                        <a class="btn btn-primary" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
-                        <span title="Retirer des favoris">{{ include('front/profil/favories/_delete_form.html.twig') }}</span>
-                    </div> #}
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
-    <div class="js-filter-pagination" id="pagination_box">
-        {{ knp_pagination_render(favories) }}
+
+                        <div class="block_buttons btn_favory">
+                        <div class="bloc_form btn-custom favory">
+                            <span class="hover-effect">
+                                <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
+                            </span>
+                        </div>
+                        <span title="Retirer des favoris">
+                        {{ include('front/boutique/favorites/_delete_form.html.twig') }}
+                        </span>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="js-filter-pagination" id="pagination_box">
+            {{ knp_pagination_render(favories) }}
+        </div>
     </div>
-</div>
 </div>
 {% endblock %}

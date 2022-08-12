@@ -2,7 +2,7 @@
     <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
 {% endblock %}
 <div class="body">
-    <div class="wrap boutique_form" style="text-align: center">
+    <div class="wrap boutique_form" style="border: 1px solid red;">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
             <div class="bloc_form">
                 {{ form_label(form.rating) }}
@@ -37,8 +37,12 @@
                 </div>
             </div>
             <div class="bloc_submit">
-                <button class="btn btn-primary width-100 m-t-20">{{ button_label|default('Envoyer') }}</button>
+            <div class="bloc_form btn-custom">
+                <span class="hover-effect">
+                    <button>{{ button_label|default('Envoyer') }}</button>
+                </span>
             </div>
+        </div>
         {{ form_end(form) }}
     </div>
 </div>

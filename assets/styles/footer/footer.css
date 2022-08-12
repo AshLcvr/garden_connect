@@ -74,7 +74,6 @@
     }
     .footer_infos li {
         font-size: .8rem;
-        /* padding: .3rem .3rem; */
         padding: .1rem 0;
     }
     #footer hr {
@@ -87,7 +86,7 @@
         text-align: center;
     }
     .footer_legals li {
-    font-size: .7rem;
+        font-size: .7rem;
     }
     .separator_legals {
         display: none;
@@ -98,10 +97,4 @@
         text-align: center;
         width: 100%;
     }
-    /* .slash {
-        display: none;
-    } */
-    /* #footer br { */
-        /* display: block; */
-    /* } */
 }
