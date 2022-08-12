@@ -28,7 +28,11 @@
         </div>
     </div>
     <div class="m-t-20">
-        <a href="{{ path('all-annonces') }}" class="action width-100 text-align-center inline-block">Retour listing Annonces</a>
+        {% if annonce.Actif %}
+            <a href="{{ path('all_annonces_actives') }}" class="action width-100 text-align-center inline-block">Retour listing Annonces</a>
+        {% else %}
+            <a href="{{ path('all_annonces_inactives') }}" class="action width-100 text-align-center inline-block">Retour listing Annonces</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
