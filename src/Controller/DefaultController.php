@@ -5,23 +5,24 @@ namespace App\Controller;
 use App\Data\SearchData;
 use App\Entity\Boutique;
 use App\Form\SearchType;
+use Faker\Provider\Lorem;
 use App\Repository\FavoryRepository;
+use App\Repository\MesureRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\BoutiqueRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ImagesHeroRepository;
 use App\Repository\SubcategoryRepository;
-use Faker\Provider\Lorem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use function Symfony\Config\Security\FirewallConfig\name;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
+    public function index(BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository, MesureRepository $mesureRepository): Response
     {
         $categories     = $categoryRepository->findAll();
         $annonces       = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);
@@ -32,6 +33,8 @@ class DefaultController extends AbstractController
         foreach ($allBoutiques as $boutique){
             $boutiquesInfos[] = [ $boutique->getTitle() , $boutique->getLat() , $boutique->getLng() , $boutique->getId() ];
         }
+
+        // dd($annonces);
 
         return $this->render('front/homepage.html.twig', [
             'categories'   => $categories,

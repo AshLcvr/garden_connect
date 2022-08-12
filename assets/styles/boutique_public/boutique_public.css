@@ -7,11 +7,11 @@
 .rating{
     cursor: pointer;
 }
-#slider-home {
-    margin-bottom: 20px;
+/* Hero */
+#slider-home_boutique {
     position: relative;
 }
-#slider-home .photo_profile {
+#slider-home_boutique .photo_profile {
     width: 12%;
     position: absolute;
     bottom: -15%;
@@ -21,7 +21,7 @@
     background-color: white;
     z-index: 999;
 }
-#slider-home .photo_profile img {
+#slider-home_boutique .photo_profile img {
     border-radius: 50%;
 }
 .infos_vendeur {
@@ -47,121 +47,41 @@
 .contact_vendeur {
     border-left: 1px solid rgb(241, 241, 241);
     border-top: 1px solid rgb(241, 241, 241);
-    text-align: center;
-    width: 22%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-content: center;
     gap: 1rem;
+    padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    width: 25%;
+    text-align: center;
 }
-.contact_vendeur .message_visiteur{
+.contact_vendeur .message_visiteur {
+    color: var(--vertclair);
+}
+.contact_vendeur .message_visiteur:hover {
     color: var(--orange);
 }
-#boutique .contact {
-}
-#boutique .contact {
+.contact {
     font-size: 1.1rem;
 }
-#boutique .telephone {
+.telephone {
     text-align: center;
     letter-spacing: .1rem;
 }
-#boutique .message_link {
+.message_link {
     padding: .8rem 1rem;
     border-radius: 5px;
     text-align: center;
     background: var(--vertclair);
     color: white;
 }
-#boutique .message_link:hover {
+.message_link:hover {
     filter: brightness(.8);
 }
-
-#focus_annonce{
-    padding: 0 1rem;
-}
-
-#listing_annonces_public ul {
+.description_top {
     display: flex;
-    flex-flow: row wrap;
+    align-items: center;
     justify-content: space-between;
-}
-
-#listing_annonces_public .annonces_card:hover{
-    transform: scale(1.01);
-    transition: all .4s;
-    box-shadow: 5px 5px 10px grey;
-}
-
-#listing_annonces_public .annonces_card{
-    width: 48%;
-    margin: 1rem 0;
-    box-shadow: 2px 2px 5px lightgrey;
-}
-#listing_annonces_public .annonces_card span{
-    color: var(--orange);
-}
-#listing_annonces_public .annonces_card .content_card_public{
-    display: flex;
-    flex-flow: row nowrap;
-}
-#listing_annonces_public .annonces_card .content_card_public .image_card_public{
-    width: 30%;
-}
-#listing_annonces_public .annonces_card .content_card_public .description_card_public{
-    padding: 1rem 1rem 0 1rem;
-    width: 70%;
-}
-#listing_annonces_public .annonces_card .content_card_public .description_card_public >*{
-    margin-bottom: 1rem;
-}
-#listing_annonces_public .annonces_card .content_card_public .description_card_public .description_title{
-    font-family: 'Unkempt';
-}
-#listing_annonces_public .annonces_card .content_card_public .description_card_public .category_public{
-    font-size: .9rem;
-    color: black;
-}
-/* Avis Boutique */
-#avis_boutique .connect-link{
-    color: var(--orange);
-}
-#avis_boutique ul{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-}
-#avis_boutique .avis_box{
-    width: 48%;
-    border: solid 2px var(--vertclair);
-    border-radius: 5px;
-    margin:1rem 0;
-    padding: 1rem;
-}
-#avis_boutique .avis_form{
-    border: solid 2px var(--vertclair);
-    margin-bottom: 3rem;
-    padding: 1rem;
-}
-#avis_boutique .avis_form .bloc_form{
-    margin-bottom: 1rem;
-}
-#avis_boutique .avis_form textarea{
-    height: 8rem;
-    resize: none;
-}
-/* #avis_boutique .avis_form button{
-    width: 50%;
-} */
-
-@media (max-width: 800px){
-    #listing_annonces_public ul, #avis_boutique ul{
-        flex-flow: column nowrap;
-        align-items: center !important;
-    }
-    #listing_annonces_public .annonces_card, #avis_boutique .avis_box{
-        width: 80%;
-    }
 }

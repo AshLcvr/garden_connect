@@ -1,12 +1,12 @@
 :root{
-  --vertfonce:#41b04f;
-  --vertclair:#8fc642;
-  --orange:#f7941d;
-  --marron:#AB7B52;
-  --rouge_supp: #E74A3b;
-  --text-font: 400 14px/1.4 'Roboto', 'Arial', sans-serif;
-  --title-font: 700 28px/2.8 'Unkempt', 'Arial', cursive, sans-serif;
-  --menu_link: 18px 'Roboto', 'Arial', sana-serif;
+    --vertfonce:#41b04f;
+    --vertclair:#8fc642;
+    --orange:#f7941d;
+    --marron:#AB7B52;
+    --rouge_supp: #E74A3b;
+    --text-font: 400 14px/1.4 'Roboto', 'Arial', sans-serif;
+    --title-font: 700 28px/2.8 'Unkempt', 'Arial', cursive, sans-serif;
+    --menu_link: 18px 'Roboto', 'Arial', sana-serif;
 }
 /* RESET */
 *{
@@ -25,27 +25,27 @@ body {
 ul, ol{
     list-style: none;
 }
-a{
+a {
     text-decoration: none;
     color: rgb(70, 70, 70);
 }
-img{
+img {
     width: 100%;
     vertical-align: bottom;
 }
-.wrap{
+.wrap {
     max-width: 1100px ;
     width: 100%;
     margin: 0 auto;
     padding: 0 1rem;
 }
-.relative{
+.relative {
     position: relative;
 }
-.absolute{
+.absolute {
     position: absolute;
 }
-.padding-10{
+.padding-10 {
     padding: 10px;
 }
 .d-flex{
@@ -66,9 +66,6 @@ img{
 .flex-column{
     flex-flow: column;
 }
-/* .box-shadow{
-    box-shadow: 15px 15px 15px lightgrey;
-} */
 .width-100{
     width: 100%;
 }
@@ -82,15 +79,7 @@ img{
     text-align: center;
 }
 .big-margin{
-    /* margin: 7rem 0; */
     margin: 3rem 0;
-}
-.flash-register_vendeur{
-    background-color: var(--vertfonce);
-    text-align: center;
-    font-size: 1.2rem;
-    width: 80%;
-    color: white;
 }
 .m-t-20{
     margin-top: 20px;
@@ -100,9 +89,6 @@ img{
 }
 .favory_active{
     color: red;
-}
-.title_front{
-    text-align: center;
 }
 .hidden{
     display: none;
@@ -139,4 +125,17 @@ img{
     cursor: pointer;
 }
 
-/* CSS global boutons */
+/* Message flash register user et vendeur */
+.flash-register_user,
+.flash-register_vendeur {
+    width: 100%;
+    text-align: center;
+    line-height: 2;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Unkempt';
+    background: var(--vertclair);
+    color: white;
+    margin: 1.5rem 0;
+    padding: 0 5rem;
+}

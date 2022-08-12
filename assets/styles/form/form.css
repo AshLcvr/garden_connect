@@ -9,56 +9,17 @@
 #contener_form form {
     width: 80%;
 }
-#contener_form h1 {
-    /* color: darkgrey;
-    font-family: sans-serif; */
-    margin-bottom: 10px;
-    text-align: center;
-    font-size: 2.5rem;
-}
 #contener_form .bloc_form {
     display: flex;
     flex-flow: column;
-    gap: 0.7rem;
+    gap: 0.3rem;
+    justify-content: center;
 }
 
 /* Formulaire login */
 #contener_form .bloc_form.login {
     margin: 1rem auto;
 }
-/* Formulaire register */
-#contener_form .bloc_form.register {
-    margin: 0 auto;
-}
-/* Formulaire search */
-.hover-effect.search .btn {
-    border-radius: unset;
-    padding: .5rem;
-}
-/* Supprimer les filtres */
-/* #filter_form .hover-effect.del_filters {
-    display: inline-block;
-    width: 100%;
-}
-#filter_form .hover-effect.del_filters a {
-    display: inline-block;
-    padding: .5rem;
-    text-align: center;
-    background: linear-gradient(to right, transparent 50%, var(--orange) 50%);
-    background-size: 200% 100%;
-    background-position: right;
-}
-#filter_form .hover-effect.del_filters a:hover {
-    background-position: left;
-    color: var(--vertclair);
-
-}
-#filter_form .hover-effect.del_filters a:before,
-#filter_form .hover-effect.del_filters:before,
-#filter_form .hover-effect.del_filters a:after,
-#filter_form .hover-effect.del_filters:after {
-    background: var(--vertclair);
-} */
 /* Toutes les div champs */
 #filter_form form .bloc_form div {
     width: 48%;
@@ -67,7 +28,6 @@
 #filter_form form .bloc_form .hover-effect.search > div.form-group {
     width: 100%;
 }
-
 #contener_form input {
     background-color: rgb(235, 235, 235);
     border-radius: 12px;
@@ -79,7 +39,7 @@
 #contener_form input:focus {
     outline: 2px solid var(--orange);
 }
-/* Page Modifier mon profil boutique / Modifier mon mot de passe */
+/* Formulaire Modifier mon profil boutique / Modifier mon mot de passe */
 label.modif_profile,
 label.modif_password {
     margin-bottom: 0;
@@ -89,16 +49,48 @@ label.modif_password {
 #contener_form input.modif_password {
     margin-bottom: 1rem;
 }
-#contener_form.edit_profile .bloc_form {
-    gap: 0;
+
+/* Formulaires annonce */
+.annonce_form .bloc_form{
+    margin-bottom: 2rem;
 }
-.btn-custom.btq.modif_profile {
+.annonce_form .bloc_form textarea{
+    height: 15rem;
+    resize: none;
+}
+.annonce_form .bloc_submit{
+    display: flex;
+    justify-content: center;
+}
+.annonce_form .bloc_submit button{
     width: 40%;
-    margin: 1rem auto;
+    margin-top: 2rem;
 }
-.btn-custom.btq.modif_profile .btn {
-    border-radius: unset;
+/* Formulaires boutique */
+.boutique_form p {
+    margin: 0;
 }
+.boutique_form span {
+    color: red;
+}
+.boutique_form .bloc_form {
+    margin-bottom: 2rem;
+}
+.boutique_form .bloc_form textarea{
+    height: 15rem;
+    resize: none;
+}
+.boutique_form .bloc_form .adress_form {
+    width: 49%;
+}
+.boutique_form .bloc_form .city_search{
+    position: relative;
+    width: 49%;
+}
+#city_suggest{
+    margin-top: 0 ;
+}
+/* Inscription boutons radio */
 .radio_box{
     margin: 1rem auto;
     display: flex;
@@ -125,89 +117,7 @@ label.modif_password {
 .form-error {
     color: red;
 }
-/* Bouton */
-/* .btn-custom {
-    width: 40%;
-}
-.btn-custom .hover-effect {
-    position: relative;
-}
-.btn-custom .hover-effect:before,
-.btn-custom .hover-effect:after {
-    position: absolute;
-    content: "";
-    left: 0;
-    bottom: 0;
-    background: var(--orange);
-    transition: 500ms ease all;
-}
-.btn-custom .hover-effect:before {
-    width: 2px;
-    height: 0%;
-}
-.btn-custom .hover-effect:after {
-    width: 0%;
-    height: 2px;
-}
-.btn-custom .hover-effect:hover:before {
-    height: 100%;
-}
-.btn-custom .hover-effect:hover:after {
-    width: 100%;
-}
-.btn-custom button,
-.btn-custom a
- {
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: white;
-    padding: .7rem;
-    width: 100%;
-    background: linear-gradient(to right, transparent 50%, var(--vertclair) 50%);
-    background-size: 200% 100%;
-    background-position: right;
-    transition: 500ms ease all;
-}
-.btn-custom button:hover,
-.btn-custom a:hover {
-    color: var(--orange);
-    background-position: left;
-}
-.btn-custom button:before,
-.btn-custom button:after,
-.btn-custom a:before,
-.btn-custom a:after {
-    position: absolute;
-    content: "";
-    right: 0;
-    top: 0;
-    background: var(--orange);
-    transition: 500ms ease all;
-}
-.btn-custom button:before,
-.btn-custom a:before {
-    height: 0%;
-    width: 2px;
-}
-.btn-custom button:after,
-.btn-custom a:after {
-    width: 0%;
-    height: 2px;
-}
-.btn-custom:hover{
-    background: white;
-    color: var(--orange);
-    background-position: left;
-}
-.btn-custom button:hover:before,
-.btn-custom a:hover:before {
-    height: 100%;
-}
-.btn-custom button:hover:after,
-.btn-custom a:hover:after {
-    width: 100%;
-} */
+
 /* Retour à l'accueil */
 .back_home {
     color: var(--vertclair);
@@ -233,9 +143,9 @@ label.modif_password {
     }
 }
 @media all and (max-width: 375px){
-    #contener_form h1 {
+    /* #contener_form h1 {
         font-size: 1.7rem;
-    }
+    } */
     #contener_form label {
         font-size: .9rem;
     }

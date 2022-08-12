@@ -110,9 +110,16 @@
             </div>
         </div>
 
-        <div class="bloc_submit mb-5">
-            <button class="btn btn-primary">{{ button_label|default('C\'est parti !') }}</button>
-        </div>
+        {# <div class="bloc_submit mb-5">
+            <button class="btn btn-primary" style="border: 1px solid red;">{{ button_label|default('C\'est parti !') }}</button>
+        </div> #}
+        {# <div class="button_boutique" style="border: 1px solid purple;"> #}
+            <div class="bloc_form btn-custom btq">
+                <span class="hover-effect btq">
+                    <button>{{ button_label|default('C\'est parti !') }}</button>
+                </span>
+            </div>
+        {# </div> #}
         {{ form_end(form) }}
     </div>
 </div>

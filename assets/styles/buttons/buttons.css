@@ -1,4 +1,15 @@
 /* Style des boutons */
+button {
+    background: transparent;
+    border: unset;
+    border: none;
+}
+button.btn {
+    border-radius: unset !important; 
+}
+.hover-effect a {
+    display:block;
+}
 /* 
 FRONT Pages Inscription / Connexion / Annonces / Boutique publique (Laisser un avis)
 BACK BOUTIQUE Pages Espace boutique / Ajouter une annonce
@@ -12,7 +23,6 @@ http://localhost:3000/recherche
 /* BTQ */
 .btn-custom.btq {
     width: 20%;
-    margin: 0 auto;
 }
 .btn-custom .hover-effect {
     position: relative;
@@ -49,7 +59,6 @@ http://localhost:3000/recherche
 }
 .btn-custom button,
 .btn-custom a {
-    border: none;
     cursor: pointer;
     font-size: 18px;
     color: white;
@@ -65,10 +74,9 @@ http://localhost:3000/recherche
 /* BTQ */
 .btn-custom.btq button,
 .btn-custom.btq a {
-    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
+    background: linear-gradient(to right, white 50%, var(--vertfonce) 50%);
     background-size: 200% 100%;
     background-position: right;
-    /* text-align: center; */
 }
 /*  */
 .btn-custom button:hover,
@@ -148,9 +156,6 @@ http://localhost:3000/recherche
 Pages Détails boutique / Gérer mes annonces / Boutiques favorites
 http://localhost:3000/boutique/detail
 */
-.button_boutique {
-    margin: 0 auto;
-}
 .block_buttons {
     display: flex;
     flex-flow: row nowrap;
@@ -159,36 +164,25 @@ http://localhost:3000/boutique/detail
     gap: .5rem;
     margin: .5rem auto;
 }
-.block_buttons.avis {
-    justify-content: unset;
-    align-items: center;
-    gap: .5rem;
-    margin: unset;
-    /* width: 70%; */
-}
+
 /* Page Modifier mon mot de passe */
-.btn-custom.modif_password {
-    width: unset;
-}
-.btn-custom.modif_password button {
-    padding: .7rem 2rem;
+/* Boutons favoris (user/boutique) */
+.block_buttons.btn_favory {
+    justify-content: center;
 }
 /* Page Avis émis */
+.block_buttons.avis {
+    justify-content: unset;
+    margin: unset; 
+    width: 100%;
+}
+span.avis {
+    flex:2;
+}
 .btn-custom.avis {
-    /* width: 80%;
-    margin: unset; */
-    display: contents;
-    padding: .5rem;
+    width: 50%;
 }
-.hover-effect.delete a.avis {
-    color: white;
-}
-.hover-effect.delete a.avis:hover {
-    background-color: white;
-}
-button.block_btn_delete {
-    border: none;
-}
+/* Gérer mes annonces */
 .block_btn_modify,
 .block_btn_inactive,
 .block_btn_delete {
@@ -196,40 +190,32 @@ button.block_btn_delete {
 }
 .btn-custom.modify,
 .btn-custom.inactive,
-.btn-custom.delete {
+.btn-custom.delete,
+.btn-custom.favory {
     width: unset;
-}
-.hover-effect.modify a {
-    background: linear-gradient(to right, transparent 50%, var(--vertfonce) 50%);
+    margin: unset;
 }
 .hover-effect.inactive a {
     background: linear-gradient(to right, transparent 50%, var(--orange) 50%);
+    background-size: 200% 100%;
+    background-position: right;
 }
 .hover-effect.delete a {
     background: linear-gradient(to right, transparent 50%, var(--rouge_supp) 50%);
-}
-.hover-effect.delete a.delete_xmark {
-    /* padding: .95rem; */
-    display: block;
+    background-size: 200% 100%;
+    background-position: right;
 }
 .hover-effect.modify a,
 .hover-effect.inactive a,
 .hover-effect.delete a {
     width: 100%;
-    background-size: 200% 100%;
-    background-position: right;
-    color: #f8f9fc;
-    display: flex;
-    justify-content: center;
 }
-.hover-effect.modify a:hover,
 .hover-effect.inactive a:hover,
 .hover-effect.delete a:hover {
     background-position: left;
-    background-color: #f8f9fc;
 }
-.hover-effect.modify a:hover {
-    color: var(--vertfonce);
+.hover-effect.modify a.modif_user:hover {
+    color: var(--vertclair);
 }
 .hover-effect.inactive a:hover {
     color: var(--orange);
@@ -241,6 +227,17 @@ button.block_btn_delete {
 .hover-effect.inactive i,
 .hover-effect.delete i {
     width: 25px;
+    color:white;
+}
+.hover-effect.modify:hover i {
+    color:var(--vertfonce);
+}
+.hover-effect.modify a.modif_user:hover i,
+.hover-effect.inactive:hover i {
+    color:var(--orange);
+}
+.hover-effect.delete:hover i {
+    color: var(--rouge_supp);
 }
 .btn-custom.inactive span:before, .btn-custom.inactive span:after {
     background: var(--orange);
@@ -256,7 +253,6 @@ button.block_btn_delete {
 }
 /* Page Mes annonces */
 .block_btn_modify.plus {
-    /* border: 1px solid red; */
     width: 100%;
     padding: .5rem 0;
 }
@@ -266,16 +262,85 @@ button.block_btn_delete {
 }
 /* Page Modifier une annonce */
 .block_btn_modify.back {
-    /* border: 1px solid red; */
-    /* width: 100%; */
     padding: 0 1rem;
     justify-content: flex-end;
     display: flex;
     gap: .5rem;
+}
+/* Formulaire search */
+.hover-effect.search .btn {
+    padding: .5rem;
+}
+.btn-custom.btq.modif_profile {
+    width: 40%;
+    margin: 1rem auto;
+}
+/* Bouton tableau Mes Conversations Espace Boutique */
+.table_actions .btn-custom a.conv {
+    padding: .3rem;
+}
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+    .bloc_form.btn-custom {
+        width: 40%;
+    }
+    .btn-custom.avis {
+        width: 60%;
+    }
+    .bloc_form.btn-custom.modify,
+    .bloc_form.btn-custom.inactive,
+    .bloc_form.btn-custom.delete {
+        width: unset;
+    }
+}
+@media (max-width: 900px) {
+    .btn-custom.avis {
+        width: 80%;
+    }
+}
+@media (max-width: 800px) {
+    .btn-custom.avis {
+        /* width: unset; */
+        flex: 1;
+    }
+    span.avis {
+        /* flex: 1; */
+        display: contents;
+    }
+        .btn-custom a {
+        padding: .5rem;
+    }
 
 }
-.btn-custom.modify.back {
-    /* border: 1px solid red; */
-    display: flex;
-    margin: unset;
+@media (max-width: 767px) {
+    .bloc_form.btn-custom {
+        width: 50%;
+    }
 }
+@media (max-width: 600px){
+    .bloc_form.btn-custom.avis {
+        width: 80%;
+    }
+}
+@media (max-width: 500px){
+    .bloc_form.btn-custom {
+        width: 60%;
+    }
+    .bloc_form.btn-custom.avis {
+        width: 100%;
+    }
+    .btn-custom a {
+        font-size: 1rem;
+        padding: .5rem;
+    }
+}
+@media (max-width: 350px){
+    .bloc_form.btn-custom {
+        width: 80%;
+    }
+    .btn-custom a {
+        font-size: .9rem;
+        padding: .5rem;
+    }
+}
+
