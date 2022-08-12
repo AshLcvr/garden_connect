@@ -32,7 +32,10 @@ class RegistrationController extends AbstractController
     private EmailVerifier $emailVerifier;
     private FormLoginAuthenticator $authenticator;
 
-    public function __construct(EmailVerifier $emailVerifier, FormLoginAuthenticator $authenticator)
+    public function __construct(EmailVerifier $emailVerifier
+,
+                                FormLoginAuthenticator $authenticator
+    )
     {
         $this->emailVerifier = $emailVerifier;
         $this->authenticator = $authenticator;
@@ -74,7 +77,6 @@ class RegistrationController extends AbstractController
     #[Route('/nouvelleboutique', name: 'app_boutique_new', methods: ['GET', 'POST'])]
     public function newBoutique(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, ImagesBoutiqueRepository $imagesBoutiqueRepository, UserRepository $userRepository, FormLoginAuthenticator $formLoginAuthenticator, UserAuthenticatorInterface $userAuthenticator, CallApi $callApi): Response
     {
-
         $user = $this->getUser();
         $boutique = new Boutique();
         $form = $this->createForm(BoutiqueType::class, $boutique);
@@ -82,10 +84,8 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $boutique->setUser($user);
-            $formatedTel =  $form->get('indicatif')->getData() . $form->get('telephone')->getData();
-            $boutique->setTelephone($formatedTel);
             $boutique->setCity($form->get('city')->getData());
-            $callApi->getBoutiqueAdressCoordinates($boutique, $form->get('citycode')->getData(), $form->get('city')->getData(), $form->get('adress')->getData());
+            $callApi->getBoutiqueAdressCoordinates($boutique,$form->get('city')->getData(),$form->get('citycode')->getData(),$form->get('adress')->getData());
             $boutique->setCardActive(true);
             $boutique->setActif(true);
             $boutique->setCreatedAt(new \DateTimeImmutable());

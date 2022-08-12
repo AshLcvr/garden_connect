@@ -19,7 +19,7 @@
     border-radius: 50%;
     border: 2px solid white;
     background-color: white;
-    z-index: 999;
+    z-index: 5;
 }
 #slider-home_boutique .photo_profile img {
     border-radius: 50%;

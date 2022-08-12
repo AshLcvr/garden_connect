@@ -5,13 +5,49 @@
 {% endblock %}
 
 {% block body %}
+    <div class="title_top">Mes préférences</div>
     <div class="card shadow mb-4 boutique_detail">
+        <h6 class="annonce_title">Mes informations personnelles</h6>
+        <div class="card-header py-3  d-flex justify-content-between align-items-center">
+            <div class="pref_card">
+                <p>Afficher mon numéro de téléphone</p>
+                <label class="switch">
+                    <a href="#">
+                        <input id="card_checkbox" type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </a>
+                </label>
+            </div>
+        </div>
         <div class="card-header py-3  d-flex justify-content-between align-items-center">
             <div class="pref_card">
                 <p>Afficher la carte sur ma page publique</p>
                 <label class="switch">
                     <a href="{{ path('app_toggle_Cardactive') }}">
                         <input id="card_checkbox" type="checkbox"  {% if boutique.cardActive  %} checked {% endif %}>
+                        <span class="slider round"></span>
+                    </a>
+                </label>
+            </div>
+        </div>
+        <h6 class="annonce_title">Mes notifications</h6>
+        <div class="card-header py-3  d-flex justify-content-between align-items-center">
+            <div class="pref_card">
+                <p>Recevoir un mail si j'ai reçu un message</p>
+                <label class="switch">
+                    <a href="#">
+                        <input id="card_checkbox" type="checkbox" checked >
+                        <span class="slider round"></span>
+                    </a>
+                </label>
+            </div>
+        </div>
+        <div class="card-header py-3  d-flex justify-content-between align-items-center">
+            <div class="pref_card">
+                <p>Recevoir un mail lorsqu'une boutique favorite publie une annonce</p>
+                <label class="switch">
+                    <a href="#">
+                        <input id="card_checkbox" type="checkbox">
                         <span class="slider round"></span>
                     </a>
                 </label>

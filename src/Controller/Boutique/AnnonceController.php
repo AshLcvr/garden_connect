@@ -72,7 +72,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/detail', name: 'app_annonce_show', methods: ['GET'])]
-    public function show(Annonce $annonce): Response
+    public function showAnnonce(Annonce $annonce): Response
     {
         $user = $this->getUser();
         $annonces = $user->getannonces();
@@ -116,9 +116,13 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_annonce_delete', methods: ['POST', 'GET'])]
-    public function delete(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository): Response
+    public function deleteAnnonce($id, Request $request, Annonce $annonce, AnnonceRepository $annonceRepository, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $annonce->getId(), $request->request->get('_token'))) {
+            $imagesAnnonce = $imagesAnnoncesRepository->findImagesbyAnnonceId($id);
+            foreach ($imagesAnnonce as $image) {
+                $imagesAnnoncesRepository->remove($image, true);
+            }
             $annonceRepository->remove($annonce, true);
         }
 

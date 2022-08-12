@@ -9,6 +9,7 @@ use App\Form\BoutiqueType;
 use App\Form\EditProfilType;
 use App\Repository\AvisRepository;
 use App\Repository\FavoryRepository;
+use App\Service\Security;
 use App\Service\UploadImage;
 use App\Service\CallApi;
 use App\Entity\ImagesBoutique;
@@ -53,10 +54,15 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
-    public function editBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, CallApi $callApi): Response
+    public function editBoutique(Security $security,Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, CallApi $callApi): Response
     {
-        $security = $this->security($boutique, $this->getUser()->getBoutiques());
-        $form = $this->createForm(BoutiqueType::class, $boutique);
+//        $security = $this->security($boutique, $this->getUser()->getBoutiques());
+        $secur = $security->security($boutique, $this->getUser()->getBoutiques());
+        if ($security === false){
+//            dd('gg');
+            return $this->redirectToRoute('403',[], Response::HTTP_SEE_OTHER);
+        }
+        $form     = $this->createForm(BoutiqueType::class, $boutique);
         $form->get('search')->setData($boutique->getCity().' ('.$boutique->getPostcode().')');
         $form->get('city')->setData($boutique->getCity());
         $form->handleRequest($request);
@@ -84,9 +90,13 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/boutique-delete/{id}', name: 'app_boutique_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
-    public function deleteBoutique(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
+    public function deleteBoutique($id,Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, ImagesBoutiqueRepository $imagesBoutiqueRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
+            $imagesBoutique = $imagesBoutiqueRepository->findImagesbyBoutiqueId($id);
+            foreach ($imagesBoutique as $image) {
+                $imagesBoutiqueRepository->remove($image, true);
+            }
             $boutiqueRepository->remove($boutique, true);
         }
 

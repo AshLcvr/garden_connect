@@ -28,20 +28,23 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $allBoutiques = $this->boutiqueRepository->findAll();
         foreach ($allBoutiques as $boutique){
             for($i = 0; $i < 2 ; $i++) {
-                $imageAnnonce = (new ImagesAnnonces())
-                    ->setTitle('20-seigle-62a9ba95f2a43.jpg');
                 $randSubcat = $this->subcategoryRepository->randomSubcategory()[0];
+                $randCat = $randSubcat->getParentCategory();
+
+                $imageAnnonce = (new ImagesAnnonces())
+                    ->setTitle($randCat->getImage());
 
                 $annonce = new Annonce();
                 $annonce->setTitle($randSubcat->getTitle());
-                $annonce->setDescription(simplexml_load_file('http://www.lipsum.com/feed/xml?amount=1&what=paras&start=0')->lipsum);
-                $annonce->setPrice(random_int(1, 10));
-                $annonce->setMesure($this->getReference('Kg'));
-                $annonce->setSubcategory($randSubcat);
-                $annonce->setBoutique($boutique);
-                $annonce->setActif(true);
-                $annonce->addImagesAnnonce($imageAnnonce);
-                $annonce->setCreatedAt(new DateTimeImmutable('-2 weeks'));
+                $randText = json_decode(file_get_contents('http://asdfast.beobit.net/api/?length='.random_int(6,50).'&type=word'));
+                $annonce->setDescription($randText->text)
+                ->setPrice(random_int(1, 10))
+                ->setMesure($this->getReference('Kg'))
+                ->setSubcategory($randSubcat)
+                ->setBoutique($boutique)
+                ->setActif(true)
+                ->addImagesAnnonce($imageAnnonce)
+                ->setCreatedAt(new DateTimeImmutable('-2 weeks'));
                 $manager->persist($annonce);
                 $manager->persist($imageAnnonce);
             }

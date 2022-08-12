@@ -99,7 +99,11 @@ label.modif_password {
     justify-content: space-around;
     width: 50%;
 }
-/* Mot de passe oublié */
+/* Pages Login, Register , Mot de passe oublié */
+.security{
+    margin-top: 8rem ;
+    margin-bottom: 8rem ;
+}
 .forgot {
     text-align: center;
     margin: 0 auto;
