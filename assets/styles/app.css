@@ -91,16 +91,16 @@ img {
     color: red;
 }
 .hidden{
-    display: none;
-    height: 0px;
+    visibility: hidden;
+    transform: translateY(-100px);
 }
 .fixed{
     position: fixed;
-    /* transform: translateY(1); */
-    /* transition: visibility 5s , transform 5s ease; */
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    transform: translateY(0px);
+    transition: transform .5s;
     width: 100%;
-    z-index: 9999;
-    /* transition-duration: 10s; */
+    z-index: 10;
 }
 .gap1 {
     gap: 1rem;

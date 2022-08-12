@@ -78,8 +78,10 @@ class UserFixtures extends Fixture
             ->setName($faker->lastName)
             ->setSurname($faker->firstName)
             ->setEmail($faker->email)
-            ->setActif(true)
-            ->setCreatedAt(new \DateTimeImmutable());
+            ->setActif(true);
+            $randomWeek = random_int(-10,-1);
+            $user
+            ->setCreatedAt(new \DateTimeImmutable($randomWeek.' week'));
             $password = $this->hasher->hashPassword($user, $faker->password);
             $user->setPassword($password);
             // Attribution d'un rôle aléatoire

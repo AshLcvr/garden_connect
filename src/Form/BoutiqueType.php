@@ -52,12 +52,6 @@ class BoutiqueType extends AbstractType
                     ])
                 ],
             ])
-            ->add('indicatif',ChoiceType::class,[
-                'mapped'  => false,
-                'choices' => [
-                    '+33' => '+33'
-                ]
-            ])
             ->add('telephone',TelType::class,[
                 'required' => false,
                 'trim'     => false,

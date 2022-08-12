@@ -1,5 +1,9 @@
 {% extends 'layout/front_base.html.twig' %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('register') }}
+{% endblock %}
+
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
@@ -89,4 +93,8 @@
             {{ form_end(registrationForm) }}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('register') }}
 {% endblock %}
