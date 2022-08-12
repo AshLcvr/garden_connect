@@ -36,11 +36,12 @@
                 {% if app.user %}
                     <nav class="dropdown_front">
                         <div id="button_dropdown" class="button_dropdown">
-                            {# <a id="link_menu_drop" class="link_menu_drop">Click on me!</a> #}
                             <a id="link_menu_drop" class="link_menu_drop">
-                                {# À garder #}
-                                {# <img src="{{ asset('uploads/profile/'~user.image) }}"> #}
-                                <img class="img_profile" src="{{ asset('images/default-profile-picture.jpg') }}">
+                                {% if app.user.image %}
+                                    <img src="{{ asset('uploads/profile/'~user.image) }}">
+                                {% else %}
+                                    <img class="img_profile" src="{{ asset('images/default-profile-picture.jpg') }}">
+                                {% endif %}
                             </a>
                         </div>
 

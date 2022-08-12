@@ -52,6 +52,9 @@
 .link_menu_drop:active {
     filter: brightness(75%); 
 }
+.link_menu_drop img {
+    border-radius: 50%;
+}
 .dropdown_front {
     position: relative;
     padding: 10px;
