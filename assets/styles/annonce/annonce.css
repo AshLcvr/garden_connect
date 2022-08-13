@@ -15,6 +15,7 @@
     margin-bottom: 3rem;
     display: flex;
     width: 80%;
+    line-height: 1.2rem;
 }
 .annonce_box:nth-child(2n+1) {
     flex-flow: row-reverse;
@@ -26,12 +27,15 @@
 .annonce_img {
     width: 30%;
 }
+.annonce_img img {
+    object-fit: cover;
+}
 .annonce_img.flexslider {
     border: none;
     margin: 0;
 }
 .annonce_text {
-    width: 67%;
+    width: 70%;
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -42,10 +46,10 @@
     font-size: .9rem;
 }
 .annonce_text p.annonce_description {
-    padding: 1rem 0 0;
+    margin: 1rem 0;
 }
 .annonce_text a {
-    padding: 1rem 1.5rem;
+    padding: 1rem 1.5rem 1.5rem;
 }
 .annonce_text span {
     font-weight: bold;
@@ -66,7 +70,7 @@
     color: var(--vertclair);
     font-weight: bold;
     position: absolute;
-    bottom: 20px;
+    bottom: 15px;
 }
 .annonce_text p:nth-last-child(n) {
     margin-bottom: 0;
@@ -74,55 +78,20 @@
 
 /* Page Boutique publique */
 /* Focus */
-#focus_annonce{
+#focus_annonce {
     padding: 0 1rem;
-}#annonce_card_public {
-    margin-bottom: 40px;
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-start;
     justify-content: space-between;
-}
-#annonce_card_public .card_public {
-    width: 72%;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-#annonce_card_public .title_public {
-    font-family: 'Unkempt';
-    font-size: 1.7rem;
-    padding-top: .5rem;
-}
-#annonce_card_public .content_card_public {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
     gap: 1rem;
 }
-#annonce_card_public .card_public .image_card_public {
-    width: 35%;
+#focus_annonce .annonce_box {
+    /* width: 60%; */
+    flex: 2;
 }
-#annonce_card_public .card_public .description_card_public{
-    width: 60%;
-    display: flex;
-    flex-flow: column;
-    margin: auto 0;
-    gap: 2rem;
-}
-#annonce_card_public .card_public .description_card_public p {
-    padding-bottom: 1rem;
-}
-#annonce_card_public .card_public .description_card_public span {
-    font-weight: bold;
-    color: #F7941D;
-}
-#annonce_card_public .infos_vendeur {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    gap: 1rem;
-    width: 60%;
-    margin: 0 auto 30px;
-    padding: 1rem;
+#focus_annonce .annonce_box:nth-child(2n+1) {
+    flex-flow: unset;
 }
 /* Listing */
 #listing_annonces_public ul {
@@ -170,34 +139,32 @@
 @media (min-width: 750px) {
     .annonce_box,
     .annonce_box img {
-        max-height: 270px;
+        max-height: 212px;
+    }
+    #focus_annonce .annonce_box,
+    #focus_annonce .annonce_box img {
+        max-height: unset;
     }
 }
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
     .annonce_box,
     .annonce_box img {
-        max-height: 250px;
-    }
-}
-@media (min-width: 1050px) {
-    .annonce_box,
-    .annonce_box img {
-        max-height: 222px;
+        max-height: 190px;
     }
 }
 @media (max-width: 1050px) {
-    /* .annonce_box {
-        max-height: 250px;
-    } */
     .annonce_img {
         width: 40%;
     }
     .annonce_text {
-        width: 57%;
+        width: 60%;
     }
-    .annonce_text p {
+    .annonce_text p.annonce_description {
+        margin: .5rem 0; 
+    }
+    /* .annonce_text p {
         padding: .2rem 0;
-    }
+    } */
 }
 @media (max-width: 900px){
     .annonce_box {
@@ -207,9 +174,9 @@
     .annonce_img {
         width: 45%;
     }
-    .annonce_text {
+    /* .annonce_text {
         width: 52%;
-    }
+    } */
 }
 @media (max-width: 800px){
     #listing_annonces_public ul, #avis_boutique ul{

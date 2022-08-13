@@ -30,9 +30,9 @@
                                 {% endif %}
                             {% endfor %}
                         <span><strong>&nbsp&nbsp{{ avi.title }}</strong></span>
-                        <p style="margin-bottom: 0;"><i>Avis émis le {{ avi.createdAt|date('d/m/Y') }}</i></p>
+                        <p class="p_avis"><i>Avis émis le {{ avi.createdAt|date('d/m/Y') }}</i></p>
                         </div>
-                        <div> {{ avi.commentaire  }} </div>
+                        <div> {{ avi.commentaire }} </div>
                         <div class="block_buttons avis">
                         <div class="bloc_form btn-custom btq avis">
                             <span class="hover-effect btq avis">

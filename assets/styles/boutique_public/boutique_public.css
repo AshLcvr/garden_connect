@@ -1,9 +1,16 @@
 .title_boutique {
-    margin: 2rem 0;
+    text-align: center;
+    font: var(--title-font);
+    font-size: 2rem;
+    line-height: 1.5;
+    color: var(--marron);
 }
-.hover {
+.title_boutique a {
+    color: var(--marron);
+}
+/* .hover {
     color: orange;
-}
+} */
 .rating{
     cursor: pointer;
 }
@@ -12,17 +19,30 @@
     position: relative;
 }
 #slider-home_boutique .photo_profile {
-    width: 12%;
+    /* width: 12%; */
+    width: 150px;
+    height: 150px;
     position: absolute;
-    bottom: -15%;
+    bottom: -25%;
     left: 15%;
     border-radius: 50%;
     border: 2px solid white;
     background-color: white;
     z-index: 5;
 }
-#slider-home_boutique .photo_profile img {
+#slider-home_boutique .photo_profile a {
+    display: block;
+}
+/* #slider-home_boutique .photo_profile img {
     border-radius: 50%;
+} */
+.head_boutique {
+    padding-bottom: 1rem;
+}
+.head_btq_line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .infos_vendeur {
     display: flex;
@@ -41,9 +61,9 @@
 #boutique .rating_boutique {
     margin: 1rem 0;
 }
-#boutique .description_boutique {
+/* #boutique .description_boutique {
     padding: 1rem 0;
-}
+} */
 .contact_vendeur {
     border-left: 1px solid rgb(241, 241, 241);
     border-top: 1px solid rgb(241, 241, 241);
@@ -84,4 +104,46 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+/* RESPONSIVE */
+@media all and (max-width: 1050px){
+    .title_boutique {
+        padding: .5rem;
+    }
+    #slider-home_boutique .photo_profile {
+        width: 120px;
+        height: 120px;
+    }
+}
+@media all and (max-width: 750px){
+    .title_boutique {
+        font-size: 1.5rem;
+    }
+    #slider-home_boutique .photo_profile {
+        width: 100px;
+        height: 100px;
+        left: 10%;
+    }
+}
+@media (max-width: 700px) {
+    .infos_vendeur {
+        width: 90%;
+        margin: unset;
+    }
+}
+@media (max-width: 500px) {
+    #slider-home_boutique .photo_profile {
+        width: 80px;
+        height: 80px;
+        left: 10%;
+    }
+    .infos_vendeur p {
+        font-size: .8rem;
+    }
+}
+@media all and (max-width: 450px){
+    .title_boutique {
+        font-size: 1.2rem;
+    }
 }

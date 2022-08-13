@@ -164,7 +164,9 @@ http://localhost:3000/boutique/detail
     gap: .5rem;
     margin: .5rem auto;
 }
-
+.block_submit {
+    margin: 1rem 0;
+}
 /* Page Modifier mon mot de passe */
 /* Boutons favoris (user/boutique) */
 .block_buttons.btn_favory {
@@ -262,7 +264,6 @@ span.avis {
 }
 /* Page Modifier une annonce */
 .block_btn_modify.back {
-    padding: 0 1rem;
     justify-content: flex-end;
     display: flex;
     gap: .5rem;
@@ -279,10 +280,17 @@ span.avis {
 .table_actions .btn-custom a.conv {
     padding: .3rem;
 }
+
+    .block_buttons.btn_favory {
+        margin: 0;
+    }
 /* RESPONSIVE */
 @media (max-width: 1100px) {
     .bloc_form.btn-custom {
         width: 40%;
+    }
+    .bloc_form.btn-custom.favory {
+        width: unset;
     }
     .btn-custom.avis {
         width: 60%;
@@ -321,10 +329,13 @@ span.avis {
     .bloc_form.btn-custom.avis {
         width: 80%;
     }
+    .bloc_form.btn-custom {
+        width: 60%;
+    }
 }
 @media (max-width: 500px){
     .bloc_form.btn-custom {
-        width: 60%;
+        width: 80%;
     }
     .bloc_form.btn-custom.avis {
         width: 100%;
@@ -334,10 +345,12 @@ span.avis {
         padding: .5rem;
     }
 }
-@media (max-width: 350px){
+@media (max-width: 450px){
     .bloc_form.btn-custom {
-        width: 80%;
+        width: 100%;
     }
+}
+@media (max-width: 350px){
     .btn-custom a {
         font-size: .9rem;
         padding: .5rem;

@@ -68,6 +68,9 @@
     }
 }
 @media all and (max-width: 375px){
+    #footer ul {
+        margin-bottom: 0;
+    }
     .footer_infos {
         flex-flow: column;
         text-align: center;
