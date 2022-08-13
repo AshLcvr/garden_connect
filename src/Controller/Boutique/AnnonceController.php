@@ -33,11 +33,9 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function newAnnonce(Request $request, AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
+    public function newAnnonce(Request $request, BoutiqueController $boutiqueController,AnnonceRepository $annonceRepository, UploadImage $uploadImage, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
     {
-        $user = $this->getUser();
-        $boutiques = $user->getBoutiques();
-        $boutique = $boutiques[0];
+        $boutique = $boutiqueController->getUserBoutique();
 
         $annonce = new Annonce();
         $form = $this->createForm(AnnonceType::class, $annonce);
@@ -71,28 +69,16 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/detail', name: 'app_annonce_show', methods: ['GET'])]
-    public function showAnnonce(Annonce $annonce): Response
+    #[Route('/edit/{id}', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
+    public function editAnnonce(Request $request, BoutiqueController $boutiqueController,Annonce $annonce, AnnonceRepository $annonceRepository, UploadImage $uploadImage): Response
     {
-        $user = $this->getUser();
-        $annonces = $user->getannonces();
-        $annonce = $annonces[0];
-        $annonces = $annonce->getAnnonces();
+        $boutique = $boutiqueController->getUserBoutique();
 
-        return $this->render('front/annonce/detail_annonce.html.twig', [
-            'annonce' => $annonce,
-            'annonces' => $annonces,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
-    public function editAnnonce(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository, UploadImage $uploadImage): Response
-    {
-        $boutique = $this->getUser()->getBoutiques();
-        foreach ($boutique as $key => $value) {
-            $annonces = $value->getAnnonces();
+        // L'annnonce est elle bien associée à la boutique?
+        if ($annonce->getBoutique() !== $boutique) {
+            return $this->redirectToRoute('403', [], Response::HTTP_SEE_OTHER);
         }
-        $security = $this->security($annonce, $annonces);
+
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 
@@ -115,7 +101,7 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_annonce_delete', methods: ['POST', 'GET'])]
+    #[Route('/delete/{id}', name: 'app_annonce_delete', methods: ['POST', 'GET'])]
     public function deleteAnnonce($id, Request $request, Annonce $annonce, AnnonceRepository $annonceRepository, ImagesAnnoncesRepository $imagesAnnoncesRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $annonce->getId(), $request->request->get('_token'))) {
@@ -129,7 +115,7 @@ class AnnonceController extends AbstractController
         return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/actif', name: 'app_annonce_actif', methods: ['POST', 'GET'])]
+    #[Route('/actif/{id}', name: 'app_annonce_actif', methods: ['POST', 'GET'])]
     public function toggleActif(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
         if ($annonce->isActif()) {
