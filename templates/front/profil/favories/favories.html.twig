@@ -12,9 +12,9 @@
             {% for fav in favories %}
                 <li>
                     <div class="block_favory">
-                        <h3>{{ fav.boutique.title }}</h3>
+                        <h3 class="favory_title">{{ fav.boutique.title }}</h3>
                         <span>{{ fav.boutique.user.name|capitalize }}</span>
-                        <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
+                        <p>Boutique en ligne depuis le {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
                         <div class="block_rating">
                             {% for key, globalRating in totalGlobalRating %}
                                 {% if key == fav.boutique.id %}

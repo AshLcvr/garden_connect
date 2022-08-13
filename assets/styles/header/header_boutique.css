@@ -55,7 +55,7 @@
     height: 60px;
     }
 }
-@media all and (max-width: 550px) {
+@media all and (max-width: 575px) {
     .mess_header {
         display: none;
     }

@@ -44,11 +44,12 @@
 
   <div class="separator_home"></div>
 
-  <section id="annonces" class="wrap">
+  {# <section id="annonces" class="wrap"> #}
     <a href="{{ path('app_annonce_recherche') }}" >
       <h2 class="title_section_home derniere_annonce">Les dernières annonces</h2>
     </a>
-    {% for annonce in annonces %}
+    {{ include('front/annonce/_annonces.html.twig') }}
+    {# {% for annonce in annonces %}
         <div class="annonce_box">
           <div class="annonce_img">
               <ul class="slides">
@@ -79,8 +80,8 @@
             </a>
           </div>
         </div>
-    {% endfor %}
-  </section>
+    {% endfor %} #}
+  {# </section> #}
 
   <div class="separator_home"></div>
 

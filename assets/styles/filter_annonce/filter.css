@@ -59,7 +59,6 @@
 
 #filter_form .bloc_form input.form-control,
 #filter_form .bloc_form select.form-control {
-    border: 1px solid rgba(247, 148, 29, 20%);
     border: 1px solid rgba(143, 198, 66, 20%);
 }
 #filter_form .bloc_form input.form-control:focus,

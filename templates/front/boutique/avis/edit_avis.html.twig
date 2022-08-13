@@ -5,6 +5,7 @@
 
 {% block body %}
     <h1 class="title_top">Modifier mon avis</h1>
+    <div class="card-body wrap">
         <div class="block_btn_modify back">
             <div class="bloc_form btn-custom modify btq back">
                 <span class="hover-effect modify btq back">
@@ -13,7 +14,6 @@
             </div>
             {{ include('front/boutique/avis/_delete_form.html.twig') }}
         </div>
-    <div class="card-body">
         {{ include('front/boutique/avis/_form.html.twig', {'button_label': 'Modifier mon avis'}) }}
     </div>
 {% endblock %}

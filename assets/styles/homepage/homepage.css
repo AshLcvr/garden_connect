@@ -1,13 +1,5 @@
 /* Page d'accueil */
 /* Titres */
-.title_section_home {
-    text-align: center;
-    font: var(--title-font);
-    color: #AB7B52;
-    font-size: 2rem;
-    line-height: 1.5;
-    padding: 1rem;
-}
 /* Effet titre "Les dernières annonces" */
 .derniere_annonce {
     text-decoration: underline;
@@ -25,7 +17,7 @@
 }
 
 /* RESPONSIVE */
-@media all and (max-width: 1050px){
+/* @media all and (max-width: 1050px){
     .title_section_home {
         padding: .5rem;
     }
@@ -33,11 +25,10 @@
 @media all and (max-width: 750px){
     .title_section_home {
         font-size: 1.5rem;
-        /* padding: 0; */
     }
 }
 @media all and (max-width: 450px){
     .title_section_home {
         font-size: 1.2rem;
     }
-}
+} */

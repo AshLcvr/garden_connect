@@ -1,10 +1,31 @@
+.wrap.border_form {
+    border: 1px solid rgb(222, 222, 222);
+    padding: 1.2rem;
+    margin: 1rem auto 0;
+}
+label {
+    font: var(--text-font);
+    font-size: 1rem;
+    color: black;
+}
+.bloc_form input.form-control:focus,
+.bloc_form select.form-control:focus,
+.bloc_form textarea.form-control:focus {
+    box-shadow: unset;
+    border: 1px solid var(--orange);
+} 
+.bloc_form input.form-control:focus::placeholder,
+.bloc_form select.form-control::placeholder {
+    color: #d2d2d2;
+}
+/*  */
 .wrapform{
     max-width: 700px ; width: 100%; margin: 0 auto;
 }
 #contener_form {
     display: flex;
     justify-content: center;
-    padding: 1.5rem 0;
+    padding: 1rem 0;
 }
 #contener_form form {
     width: 80%;
@@ -14,8 +35,44 @@
     flex-flow: column;
     gap: 0.3rem;
     justify-content: center;
+    font: var(--text-font);
 }
-
+/* Formulaire Création de boutique */
+.boutique_form .bloc_form.create {
+    margin-bottom: 0;
+}
+.boutique_form .bloc_form.create .required {
+    display: flex;
+}
+#contener_form .bloc_form.bloc_adresse {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 2rem;
+}
+#contener_form .bloc_form.create.explain {
+    margin-bottom: 1rem;
+}
+/* Formulaire Laissez un avis Page Boutique publique */
+.avis_form .wrap.border_form {
+    border: none;
+    padding: 0;
+}
+#avis_boutique .avis_form {
+    border: solid 2px var(--vertclair);
+    margin-bottom: 3rem;
+    padding: 1rem;
+}
+#avis_boutique .avis_form .bloc_form {
+    margin-bottom: 1rem;
+}
+#avis_boutique .avis_form textarea {
+    height: 8rem;
+    resize: none;
+}
+/* Étoiles avis */
+.bloc_form.rating {
+    font-size: 2rem;
+}
 /* Formulaire login */
 #contener_form .bloc_form.login {
     margin: 1rem auto;
@@ -54,7 +111,7 @@ label.modif_password {
 .annonce_form .bloc_form{
     margin-bottom: 2rem;
 }
-.annonce_form .bloc_form textarea{
+.annonce_form .bloc_form textarea {
     height: 15rem;
     resize: none;
 }
@@ -62,7 +119,7 @@ label.modif_password {
     display: flex;
     justify-content: center;
 }
-.annonce_form .bloc_submit button{
+.annonce_form .bloc_submit button {
     width: 40%;
     margin-top: 2rem;
 }
@@ -76,14 +133,14 @@ label.modif_password {
 .boutique_form .bloc_form {
     margin-bottom: 2rem;
 }
-.boutique_form .bloc_form textarea{
+.boutique_form .bloc_form textarea {
     height: 15rem;
     resize: none;
 }
 .boutique_form .bloc_form .adress_form {
     width: 49%;
 }
-.boutique_form .bloc_form .city_search{
+.boutique_form .bloc_form .city_search {
     position: relative;
     width: 49%;
 }
@@ -91,7 +148,7 @@ label.modif_password {
     margin-top: 0 ;
 }
 /* Inscription boutons radio */
-.radio_box{
+.radio_box {
     margin: 1rem auto;
     display: flex;
     flex-direction: row;
@@ -100,7 +157,7 @@ label.modif_password {
     width: 50%;
 }
 /* Pages Login, Register , Mot de passe oublié */
-.security{
+.security {
     margin-top: 8rem ;
     margin-bottom: 8rem ;
 }
@@ -131,8 +188,27 @@ label.modif_password {
 }
 /* RESPONSIVE */
 @media all and (max-width: 750px){
+    .wrap.border_form {
+    padding: 1rem;
+    }
     #contener_form button {
         font-size: 1rem;
+    }
+    .bloc_form.rating {
+        font-size: 1.5rem;
+    }
+    .boutique_form .bloc_form {
+        margin-bottom: 1rem;
+    }
+}
+@media all and (max-width: 500px){
+    #contener_form .bloc_form.bloc_adresse {
+        flex-flow: row wrap;
+        gap: 1rem;
+    }
+    #contener_form .bloc_form.bloc_adresse .adress_form, 
+    #contener_form .bloc_form.bloc_adresse .city_search {
+        width: 100%;
     }
 }
 @media all and (max-width: 450px){
@@ -142,14 +218,8 @@ label.modif_password {
     #contener_form input {
         font-size: 1.2rem;
     }
-    .btn-custom {
-        width: 80%;
-    }
 }
 @media all and (max-width: 375px){
-    /* #contener_form h1 {
-        font-size: 1.7rem;
-    } */
     #contener_form label {
         font-size: .9rem;
     }
@@ -161,5 +231,8 @@ label.modif_password {
     }
     #contener_form button {
         font-size: .9rem;
+    }
+    .bloc_form.rating {
+        font-size: 1rem;
     }
 }
