@@ -22,8 +22,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
-use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 #[Route('/boutique')]
 class BoutiqueController extends AbstractController
@@ -53,15 +51,13 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique/{id}/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
-    public function editBoutique(Security $security,Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, CallApi $callApi): Response
+    #[Route('/boutique/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
+    public function editBoutique(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, CallApi $callApi): Response
     {
-//        $security = $this->security($boutique, $this->getUser()->getBoutiques());
-        $secur = $security->security($boutique, $this->getUser()->getBoutiques());
-        if ($security === false){
-//            dd('gg');
-            return $this->redirectToRoute('403',[], Response::HTTP_SEE_OTHER);
-        }
+        $user = $this->getUser();
+        $boutiques = $user->getBoutiques();
+        $boutique = $boutiques[0];
+
         $form     = $this->createForm(BoutiqueType::class, $boutique);
         $form->get('search')->setData($boutique->getCity().' ('.$boutique->getPostcode().')');
         $form->get('city')->setData($boutique->getCity());
@@ -89,9 +85,13 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique-delete/{id}', name: 'app_boutique_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
-    public function deleteBoutique($id,Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository, ImagesBoutiqueRepository $imagesBoutiqueRepository): Response
+    #[Route('/boutique-delete', name: 'app_boutique_delete', methods: ['POST'])]
+    public function deleteBoutique($id,Request $request, BoutiqueRepository $boutiqueRepository, ImagesBoutiqueRepository $imagesBoutiqueRepository): Response
     {
+        $user = $this->getUser();
+        $boutiques = $user->getBoutiques();
+        $boutique = $boutiques[0];
+
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
             $imagesBoutique = $imagesBoutiqueRepository->findImagesbyBoutiqueId($id);
             foreach ($imagesBoutique as $image) {

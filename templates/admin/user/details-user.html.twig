@@ -3,17 +3,22 @@
 {% block title %}Utilisateur détails{% endblock %}
 
 {% block body %}
-<div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
-    <div class="card">
-        <h3 class="title">{{ user.email }}</h3>
-        <div class="image-card">
-            <img src="{{ asset('asset/images/logo-paul.svg') }}"/>
+<div class="card mb-4">
+    <div class="card-header d-flex"><p class="m-0 font-weight-bold text-primary">E-mail :&nbsp;</p><p>{{ user.email }}</p></div>
+    <div class="card-body">
+        <div class="image_card">
+            <div><h6 class="m-0 font-weight-bold text-primary">Photo de profil : </h6></div>
+            {% if user.image %}
+                <img style="width: 200px;" src="{{ asset('../uploads/profile/'~user.image) }}"/>
+            {% else %}
+                <img style="width: 200px;" src="{{ asset('asset/images/logo-paul.svg') }}"/>
+            {% endif %}
         </div>
-        <div class="description-card">
-            <p><span>Nom : </span>{{ user.name }}</p>
-            <p><span>Prénom : </span>{{ user.surname }}</p>
+        <div class="description_card">
+            <div><h6 class="m-0 font-weight-bold text-primary">Nom : </h6><p>{{ user.surname }}</p></div>
+            <div><h6 class="m-0 font-weight-bold text-primary">Prénom : </h6><p>{{ user.name }} €</p></div>
             <div>
-                <span>Rôle : </span>
+                <h6 class="m-0 font-weight-bold text-primary">Rôles : </h6>
                 <ul>
                     {% for role in user.roles %}
                         <li>- {{ role }}</li>
@@ -21,29 +26,29 @@
                 </ul>
             </div>
             {% if user.isVerified == true %}
-                <p><span>Statut : </span>Vérifié</p>
+                <div><h6 class="m-0 font-weight-bold text-primary">Statut : </h6><p>Vérifié</p></div>
             {% else %}
-                <p><span>Statut : </span>Non vérifié</td>
+                <div><h6 class="m-0 font-weight-bold text-primary">Statut : </h6><p>Non vérifié</p></div>
             {% endif %}
             {% if user.actif %}
-                <p><span>Statut : </span>Actif</p>
+                <div class="m-b-10"><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Actif</div>
                 <div>
-                    <a href="{{ path('toggle_active_user', {id: user.id}) }}" class="action">Rendre inactif</a>
+                    <a href="{{ path('toggle_active_user', {id: user.id}) }}" class="btn btn-primary">Rendre inactif</a>
             {% else %}
-                <p><span>Statut : </span>Inactif</p>
+                <div><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Inactif</div>
                 <div>
-                    <a href="{{ path('toggle_active_user', {id: user.id}) }}" class="action">Rendre actif</a>
+                    <a href="{{ path('toggle_active_user', {id: user.id}) }}" class="btn btn-primary">Rendre actif</a>
             {% endif %}
-                <a href="{{ path('new_conversation', {id: user.id}) }}" class="action">Envoyer message</a>
+                <a href="{{ path('new_conversation', {id: user.id}) }}" class="btn btn-primary">Demander une modification</a>
             </div>
         </div>
     </div>
-    <div class="m-t-20">
-        {% if user.actif %}
-            <a href="{{ path('all_users_actifs') }}" class="action width-100 text-align-center inline-block">Retour liste utilisateurs</a>
-        {% else %}
-            <a href="{{ path('all_users_inactifs') }}" class="action width-100 text-align-center inline-block">Retour liste utilisateurs</a>
-        {% endif %}
-    <div>
+</div>
+<div class="m-t-20 m-b-20">
+    {% if user.actif %}
+        <a href="{{ path('all_users_actifs') }}" class="btn btn-primary width-100">Retour listing utilisateurs</a>
+    {% else %}
+        <a href="{{ path('all_users_inactifs') }}" class="btn btn-primary width-100">Retour listing utilisateurs</a>
+    {% endif %}
 </div>
 {% endblock %}

@@ -3,36 +3,44 @@
 {% block title %}Annonce détails{% endblock %}
 
 {% block body %}
-<div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
-    <div class="card_annonce">
-        <h3 class="title">{{ annonce.title }}</h3>
-        <div class="image-card">
-            <img src="{{ asset('asset/images/logo-paul.svg') }}"/>
-        </div>
-        <div class="description-card">
-            <p><span>Description : </span>{{ annonce.description }}</p>
-            <p><span>Prix : </span>{{ annonce.price }} €</p>
-            <p><span>Mis en ligne le : </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
-            {% if annonce.actif %}
-                <p><span>Status : </span>Actif</p>
-                <div>
-                    <a href="{{ path('toggle_active_annonce', {id: annonce.id}) }}" class="action">Rendre inactif</a>
+<div class="card mb-4">
+    <div class="card-header d-flex"><p class="m-0 font-weight-bold text-primary">Titre de l'annonce :&nbsp;</p><p>{{ annonce.title }}</p></div>
+    <div class="card-body">
+        <div class="image_card">
+            {% if annonce.imagesAnnonces %}
+                    <ul style="list-style:none;" class="d-flex gap-1">
+                        {% for image in annonce.imagesAnnonces %}
+                                <li><img style="width: 200px;" src="{{ asset('../uploads/annonce/'~image.title) }}"/></li>
+                        {% endfor %}
+                    </ul>
             {% else %}
-                <p><span>Status : </span>Inactif</p>
-                <div>
-                    <a href="{{ path('toggle_active_annonce', {id: annonce.id}) }}" class="action">Rendre actif</a>
+                <img style="width: 200px;" src="{{ asset('asset/images/logo-paul.svg') }}"/>
             {% endif %}
-                <a href="{{ path('new_conversation_with_id_annonce', {id: annonce.boutique.user.id, id_annonce: annonce.id}) }}" class="action">Demander une modification</a>
-                <a href="{{ path('details-user', {id: annonce.boutique.user.id}) }}" class="action">Voir l'utilisateur</a>
+        </div>
+        <div class="description_card">
+            <p><h6 class="m-0 font-weight-bold text-primary">Description : </h6>{{ annonce.description }}</p>
+            <p><h6 class="m-0 font-weight-bold text-primary">Prix : </h6>{{ annonce.price }} €</p>
+            <p><h6 class="m-0 font-weight-bold text-primary">Mis en ligne le : </h6>{{ annonce.createdAt|date('d/m/Y') }}</p>
+            {% if annonce.actif %}
+                <p><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Actif</p>
+                <div>
+                    <a href="{{ path('toggle_active_annonce', {id: annonce.id}) }}" class="btn btn-primary">Rendre inactive</a>
+            {% else %}
+                <p><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Inactif</p>
+                <div>
+                    <a href="{{ path('toggle_active_annonce', {id: annonce.id}) }}" class="btn btn-primary">Rendre active</a>
+            {% endif %}
+                <a href="{{ path('new_conversation_with_id_annonce', {id: annonce.boutique.user.id, id_annonce: annonce.id}) }}" class="btn btn-primary">Demander une modification</a>
+                <a href="{{ path('details-user', {id: annonce.boutique.user.id}) }}" class="btn btn-primary">Voir l'utilisateur</a>
             </div>
         </div>
     </div>
-    <div class="m-t-20">
-        {% if annonce.Actif %}
-            <a href="{{ path('all_annonces_actives') }}" class="action width-100 text-align-center inline-block">Retour listing Annonces</a>
-        {% else %}
-            <a href="{{ path('all_annonces_inactives') }}" class="action width-100 text-align-center inline-block">Retour listing Annonces</a>
-        {% endif %}
-    </div>
+</div>
+<div class="m-t-20 m-b-20">
+    {% if annonce.actif %}
+        <a href="{{ path('all_annonces_actives') }}" class="btn btn-primary width-100">Retour listing annonces</a>
+    {% else %}
+        <a href="{{ path('all_annonces_inactives') }}" class="btn btn-primary width-100">Retour listing annonces</a>
+    {% endif %}
 </div>
 {% endblock %}

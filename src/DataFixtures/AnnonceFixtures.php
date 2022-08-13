@@ -33,6 +33,8 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
 
                 $imageAnnonce = (new ImagesAnnonces())
                     ->setTitle($randCat->getImage());
+                $imageAnnonce2 = (new ImagesAnnonces())
+                    ->setTitle($randCat->getImage());
 
                 $annonce = new Annonce();
                 $annonce->setTitle($randSubcat->getTitle());
@@ -44,9 +46,11 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
                 ->setBoutique($boutique)
                 ->setActif(true)
                 ->addImagesAnnonce($imageAnnonce)
+                ->addImagesAnnonce($imageAnnonce2)
                 ->setCreatedAt(new DateTimeImmutable('-2 weeks'));
                 $manager->persist($annonce);
                 $manager->persist($imageAnnonce);
+                $manager->persist($imageAnnonce2);
             }
         }
         $manager->flush();

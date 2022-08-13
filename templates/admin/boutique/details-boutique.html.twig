@@ -1,39 +1,36 @@
 {% extends 'layout/admin_base.html.twig' %}
 
-{% block title %}Annonce détails{% endblock %}
+{% block title %}Boutique détail{% endblock %}
 
 {% block body %}
-<div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
-    <div class="card">
-        <h3 class="title">{{ boutique.title }}</h3>
-        <div class="image-card">
-            <img src="{{ asset('asset/images/logo-paul.svg') }}"/>
-        </div>
-        <div class="description-card">
-            <p><span>Description : </span>{{ boutique.description }}</p>
-            <p><span>Téléphone : </span>{{ boutique.telephone }}</p>
-            <p><span>Adresse : </span>{{ boutique.adress }}</p>
-            <p><span>Mis en ligne le : </span>{{ boutique.createdAt|date('d/m/Y') }}</p>
+<div class="card mb-4">
+    <div class="card-header d-flex"><p class="m-0 font-weight-bold text-primary">Titre de la boutique :&nbsp;</p><p>{{ boutique.title }}</p></div>
+    <div class="card-body">
+        <div class="description_card">
+            <p><h6 class="m-0 font-weight-bold text-primary">Description : </h6>{{ boutique.description }}</p>
+            <p><h6 class="m-0 font-weight-bold text-primary">Téléphone : </h6>{{ boutique.telephone }}</p>
+            <p><h6 class="m-0 font-weight-bold text-primary">Adresse : </h6>{{ boutique.adress }}</p>
+            <p><h6 class="m-0 font-weight-bold text-primary">Mise en ligne le : </h6>{{ boutique.createdAt|date('d/m/Y') }}</p>
             {% if boutique.actif %}
-                <p><span>Status : </span>Actif</p>
+                <p><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Actif</p>
                 <div>
-                    <a href="{{ path('toggle_active_boutique', {id: boutique.id}) }}" class="action">Rendre inactif</a>
+                    <a href="{{ path('toggle_active_boutique', {id: boutique.id}) }}" class="btn btn-primary">Rendre inactive</a>
             {% else %}
-                <p><span>Status : </span>Inactif</p>
+                <p><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Inactif</p>
                 <div>
-                    <a href="{{ path('toggle_active_boutique', {id: boutique.id}) }}" class="action">Rendre actif</a>
+                    <a href="{{ path('toggle_active_boutique', {id: boutique.id}) }}" class="btn btn-primary">Rendre active</a>
             {% endif %}
-                <a href="{{ path('new_conversation_with_id_boutique', {id: boutique.user.id, id_boutique: boutique.id}) }}" class="action">Demander une modification</a>
-                <a href="{{ path('details-user', {id: boutique.user.id}) }}" class="action">Voir l'utilisateur</a>
+                <a href="{{ path('new_conversation_with_id_avis', {id: boutique.user.id, id_avis: boutique.id}) }}" class="btn btn-primary">Demander une modification</a>
+                <a href="{{ path('details-user', {id: boutique.user.id}) }}" class="btn btn-primary">Voir l'utilisateur</a>
             </div>
         </div>
     </div>
-    <div class="m-t-20">
+</div>
+<div class="m-t-20 m-b-20">
     {% if boutique.actif %}
-        <a href="{{ path('all_boutiques_actives') }}" class="action width-100 text-align-center inline-block">Retour listing Boutiques</a>
+        <a href="{{ path('all_boutiques_actives') }}" class="btn btn-primary width-100">Retour listing boutiques</a>
     {% else %}
-        <a href="{{ path('all_boutiques_inactives') }}" class="action width-100 text-align-center inline-block">Retour listing Boutiques</a>
+        <a href="{{ path('all_boutiques_inactives') }}" class="btn btn-primary width-100">Retour listing boutiques</a>
     {% endif %}
-    <div>
 </div>
 {% endblock %}

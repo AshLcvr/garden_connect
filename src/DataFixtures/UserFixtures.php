@@ -31,8 +31,8 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $adminPolo = new User();
-        $adminPolo->setName('Joret');
-        $adminPolo->setSurname('Paul');
+        $adminPolo->setName('Paul');
+        $adminPolo->setSurname('Joret');
         $adminPolo->isIsVerified();
         $adminPolo->setEmail('paul.joret@hotmail.fr');
         $adminPolo->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
@@ -44,8 +44,8 @@ class UserFixtures extends Fixture
         $manager->persist($adminPolo);
 
         $adminSacha = new User();
-        $adminSacha->setName('Lechevallier');
-        $adminSacha->setSurname('Sacha');
+        $adminSacha->setName('Sacha');
+        $adminSacha->setSurname('Lechevallier');
         $adminSacha->isIsVerified();
         $adminSacha->setEmail('sacha.lcvr@gmail.com');
         $adminSacha->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
@@ -57,8 +57,8 @@ class UserFixtures extends Fixture
         $manager->persist($adminSacha);
 
         $adminOrianne = new User();
-        $adminOrianne->setName('Cielat');
-        $adminOrianne->setSurname('Orianne');
+        $adminOrianne->setName('Orianne');
+        $adminOrianne->setSurname('Cielat');
         $adminOrianne->isIsVerified();
         $adminOrianne->setEmail('orianne.cielat@gmail.com');
         $adminOrianne->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
@@ -73,7 +73,7 @@ class UserFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
         $countVendeur =  0;
         $countUser    =  0;
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $user = (new User())
             ->setName($faker->lastName)
             ->setSurname($faker->firstName)
@@ -85,7 +85,7 @@ class UserFixtures extends Fixture
             $password = $this->hasher->hashPassword($user, $faker->password);
             $user->setPassword($password);
             // Attribution d'un rôle aléatoire
-            $roles = [['ROLE_USER','ROLE_VENDEUR'],['ROLE_USER']];
+            $roles = [['ROLE_VENDEUR'],['ROLE_USER']];
             $indexRandRoles = array_rand($roles);
             $user->setRoles($roles[$indexRandRoles]);
             if ($indexRandRoles === 0){

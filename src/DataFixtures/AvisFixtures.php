@@ -110,15 +110,15 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             ->setActif(1);
         $manager->persist($avis9);
 
-        $avis10 = (new Avis())
-            ->setTitle('Excellent')
-            ->setCommentaire('Des produits frais et avec du goût !')
-            ->setRating(3)
-            ->setUser($this->getReference('orianne'))
-            ->setBoutique($this->getReference('boutique_2'))
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->setActif(1);
-        $manager->persist($avis10);
+        // $avis10 = (new Avis())
+        //     ->setTitle('Excellent')
+        //     ->setCommentaire('Des produits frais et avec du goût !')
+        //     ->setRating(3)
+        //     ->setUser($this->getReference('orianne'))
+        //     ->setBoutique($this->getReference('boutique_2'))
+        //     ->setCreatedAt(new \DateTimeImmutable())
+        //     ->setActif(1);
+        // $manager->persist($avis10);
 
         $manager->flush();
     }
