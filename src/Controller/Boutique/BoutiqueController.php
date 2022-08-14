@@ -9,10 +9,8 @@ use App\Form\BoutiqueType;
 use App\Form\EditProfilType;
 use App\Repository\AvisRepository;
 use App\Repository\FavoryRepository;
-use App\Service\Security;
 use App\Service\UploadImage;
 use App\Service\CallApi;
-use App\Entity\ImagesBoutique;
 use App\Repository\UserRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\BoutiqueRepository;
@@ -42,9 +40,7 @@ class BoutiqueController extends AbstractController
     #[Route('/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
     public function detailBoutique(): Response
     {
-        $user = $this->getUser();
-        $boutiques = $user->getBoutiques();
-        $boutique = $boutiques[0];
+        $boutique = $this->getUserBoutique();
 
         return $this->render('front/boutique/detail_boutique.html.twig', [
             'boutique' => $boutique,

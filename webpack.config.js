@@ -29,14 +29,20 @@ Encore
     .addEntry('flexslider', './assets/flexslider.js')
     .addEntry('leaflet', './assets/leaflet.js')
 
+    //front
     .addEntry('homepage', './assets/homepage.js')
+    .addEntry('recherche_annonce', './assets/templates/front/annonces/recherche_annonce.js')
+    .addEntry('focus_annonce', './assets/templates/front/annonces/focus_annonce.js')
+    .addEntry('public_boutique', './assets/templates/front/boutique/public_boutique.js')
     // a voir
     .addEntry('register', './assets/templates/front/security/register.js')
     .addEntry('login', './assets/templates/front/security/login.js')
     //
-    .addEntry('recherche_annonce', './assets/templates/front/annonces/recherche_annonce.js')
-    .addEntry('focus_annonce', './assets/templates/front/annonces/focus_annonce.js')
-    .addEntry('public_boutique', './assets/templates/front/boutique/public_boutique.js')
+    //back_boutique
+    .addEntry('index_boutique', './assets/templates/front/boutique/index_boutique.js')
+    .addEntry('detail_boutique', './assets/templates/front/boutique/detail_boutique.js')
+    .addEntry('edit_boutique', './assets/templates/front/boutique/edit_boutique.js')
+
     // Pages Erreurs, 404 & 403
     .addEntry('error404', './assets/templates/bundles/TwigBundle/Exception/error404.js')
 
