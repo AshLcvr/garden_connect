@@ -8,10 +8,10 @@
 .title_boutique a {
     color: var(--marron);
 }
-/* .hover {
-    color: orange;
-} */
-.rating{
+.favory {
+    color: var(--orange);
+}
+.rating {
     cursor: pointer;
 }
 /* Hero */
@@ -19,7 +19,6 @@
     position: relative;
 }
 #slider-home_boutique .photo_profile {
-    /* width: 12%; */
     width: 150px;
     height: 150px;
     position: absolute;
@@ -33,16 +32,13 @@
 #slider-home_boutique .photo_profile a {
     display: block;
 }
-/* #slider-home_boutique .photo_profile img {
-    border-radius: 50%;
-} */
 .head_boutique {
     padding-bottom: 1rem;
 }
 .head_btq_line {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
 }
 .infos_vendeur {
     display: flex;
@@ -52,18 +48,21 @@
     width: 65%;
     margin: 0 auto 30px;
 }
-#boutique .favory_icon {
+.favory_icon {
     font-size: 1.5rem;
     padding:.7rem;
     border: 1px solid grey;
     border-radius: 50%
 }
+.favory_active {
+    color: red;
+}
+.favory_active .favory_icon {
+    border: 1px solid red;
+}
 #boutique .rating_boutique {
     margin: 1rem 0;
 }
-/* #boutique .description_boutique {
-    padding: 1rem 0;
-} */
 .contact_vendeur {
     border-left: 1px solid rgb(241, 241, 241);
     border-top: 1px solid rgb(241, 241, 241);
@@ -105,7 +104,15 @@
     align-items: center;
     justify-content: space-between;
 }
-
+.resp_contact {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.resp_contact p,
+.contact_vendeur p {
+    margin-bottom: 0;
+}
 /* RESPONSIVE */
 @media all and (max-width: 1050px){
     .title_boutique {
@@ -114,6 +121,23 @@
     #slider-home_boutique .photo_profile {
         width: 120px;
         height: 120px;
+    }
+}
+@media all and (max-width: 800px){
+    .contact_vendeur {
+        width: 100%;
+        align-items: center;
+        margin-bottom: 1rem;
+        gap: 0;
+    }
+    .resp_contact {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 1.5rem;
+    }
+    .message_link {
+        padding: .5rem 1rem;
     }
 }
 @media all and (max-width: 750px){
@@ -127,9 +151,17 @@
     }
 }
 @media (max-width: 700px) {
+    .head_boutique {
+        padding-bottom: 0;
+    }
     .infos_vendeur {
         width: 90%;
         margin: unset;
+        gap: .3rem;
+    }
+    #boutique .favory_icon {
+        font-size: unset;
+        padding: .5rem;
     }
 }
 @media (max-width: 500px) {
@@ -141,9 +173,28 @@
     .infos_vendeur p {
         font-size: .8rem;
     }
+    .resp_contact {
+        flex-direction: column;
+        gap: .5rem;
+    }
+    .contact_vendeur {
+        gap: .5rem;
+    }
+    .resp_contact p,
+    .contact_vendeur p {
+        margin-bottom: 0;
+    }
 }
-@media all and (max-width: 450px){
+@media all and (max-width: 450px) {
     .title_boutique {
         font-size: 1.2rem;
+    }
+}
+@media all and (max-width: 350px) {
+    .infos_vendeur {
+        width: 95%;
+    }
+    .infos_vendeur p {
+        font-size: .6rem;
     }
 }

@@ -4,9 +4,17 @@
     margin: 1rem auto 0;
 }
 label {
-    font: var(--text-font);
+    /* font: var(--text-font); */
+    font-family: 'Roboto', 'Arial', sans-serif;
     font-size: 1rem;
     color: black;
+    font-weight: 500;
+}
+input:focus,
+textarea:focus {
+    box-shadow: unset;
+    border: 1px solid var(--orange);
+    outline: 1px solid var(--orange);
 }
 .bloc_form input.form-control:focus,
 .bloc_form select.form-control:focus,
@@ -27,6 +35,9 @@ label {
     justify-content: center;
     padding: 1rem 0;
 }
+#contener_fotm.login {
+    padding: 0;
+}
 #contener_form form {
     width: 80%;
 }
@@ -36,6 +47,9 @@ label {
     gap: 0.3rem;
     justify-content: center;
     font: var(--text-font);
+    color: black;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-weight: 500;   
 }
 /* Formulaire Création de boutique */
 .boutique_form .bloc_form.create {

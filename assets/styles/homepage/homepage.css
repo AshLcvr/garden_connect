@@ -1,5 +1,4 @@
 /* Page d'accueil */
-/* Titres */
 /* Effet titre "Les dernières annonces" */
 .derniere_annonce {
     text-decoration: underline;
@@ -13,22 +12,13 @@
 .separator_home {
     border-top: 1px solid var(--vertfonce);
     width: 50%;
-    margin: .5rem auto;
+    margin: 0 auto .5rem;
 }
 
 /* RESPONSIVE */
-/* @media all and (max-width: 1050px){
-    .title_section_home {
-        padding: .5rem;
-    }
-}
 @media all and (max-width: 750px){
-    .title_section_home {
-        font-size: 1.5rem;
+    .separator_home {
+        margin: 0 auto 1rem;
     }
 }
-@media all and (max-width: 450px){
-    .title_section_home {
-        font-size: 1.2rem;
-    }
-} */
+

@@ -9,12 +9,13 @@
 {% endblock %}
 
 {% block stylesheets %}
-    {% if annonce == null %}
+    {% if annonce != null %}
         {{ encore_entry_link_tags('public_boutique') }}
     {% else %}
         {{ encore_entry_link_tags('focus_annonce') }}
     {% endif %}
     {{ encore_entry_link_tags('flexslider') }}
+    <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -89,64 +90,42 @@
             <div id="boutique_coordinates" style="height: 400px; width: 80%; margin: 1rem auto;" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
         </section>
     {% endif %}
+
     {% if annonce != null %}
         <section id="focus_annonce" class="wrap">
-            {# <div id="annonce_card_public">
-                <div class="card_public">
-                    <div class="content_card_public">
-                        <div class="image_card_public">
-                            {% for image in annonce.imagesAnnonces %}
-                                <img src="{{ asset('uploads/mini/'~image.title) }}"/>
-                            {% endfor %}
-                        </div>
-                        <div class="description_card_public">
-                            <div class="description_top">
-                                <div>
-                                    <h3 class="title_public">{{ annonce.title }}</h3>
-                                    <p>dans la catégorie <span>{{ annonce.subcategory.parentCategory.title }}</span></p>
-                                </div>
-                                <p><span>Prix : </span>{{ annonce.price }} €</p>
-                            </div>
-                            <div class="description_bottom">
-                                <p><span>Description : </span>{{ annonce.description }}</p>
-                                <div class="price_date">
-                                    <p><span>Mis en ligne le </span>{{ annonce.createdAt|date('d/m/Y') }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> #}
-
-
-                <div class="annonce_box">
-        <div class="annonce_img image-card flexslider slider-annonce">
-            <ul class="slides">
-                {% for image in annonce.imagesAnnonces %}
-                <li class="li_annonce_img">
+            <div class="annonce_box">
+                <div class="annonce_img image-card flexslider slider-annonce">
+                    <ul class="slides">
+                        {% for image in annonce.imagesAnnonces %}
+                        <li class="li_annonce_img">
+                            <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
+                                <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="annonce_text">
                     <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                        <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
+                        <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
+                        <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
+                        <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
+                        {% if annonce.description|length < 30 %}
+                            <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
+                        {% else %}
+                            <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
+                        {% endif %}
+                        <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
                     </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="annonce_text">
-            <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
-                <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
-                {% if annonce.description|length < 30 %}
-                    <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
-                {% else %}
-                    <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
-                {% endif %}
-                <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
-            </a>
-        </div>
-    </div>
-                {% if notMyboutique %}
-                    <div class="contact_vendeur">
-                        {% if app.user %}
+                </div>
+            </div>
+            {% if notMyboutique %}
+                <div class="contact_vendeur">
+                    {% if app.user %}
+                        <div>
                             <p class="contact">Contacter le vendeur</p>
+                        </div>
+                        <div class="resp_contact">
                             {% if boutique.telephone %}
                                 <p class="telephone">{{ boutique.telephone }}</p>
                             {% endif %}
@@ -158,13 +137,18 @@
                             {% else %}
                                 <a href="{{ path('new_conversation_user', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
                             {% endif %}
-                        {% else %}
+                        </div>
+                    {% else %}
+                        <div>
                             <p class="contact">Contacter le vendeur</p>
+                        </div>
+                        <div class="resp_contact">
                             <a class="message_visiteur" href="{{ path('app_login') }}">Connectez vous</a>
                             <p>ou</p>
                             <a class="message_visiteur"  href="{{ path('app_register') }}">Inscrivez-vous</a>
-                        {% endif %}
-                    </div>
+                        </div>
+                    {% endif %}
+                </div>
                 {% endif %}
             </div>
         </section>
@@ -185,13 +169,15 @@
                             </div>
                             <div class="description_card_public">
                                 <div class="description_title">
-                                    <h3>{{ annonce.title }}</h3>
+                                    {# <h3>{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le 30/07/2022</span></h3> #}
+                                    <p class="annonce_title listing">{{ annonce.title }}&nbsp&nbsp</p><span class="span_created">Mis en ligne le 30/07/2022</span>
                                 </div>
                                 <div class="description_category">
-                                    <span >Catégorie :</span> <span class="category_public">{{ annonce.subcategory.parentCategory.title }}</span>
+                                    <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
+                                    <p class="annonce_type"><strong>Type de produit : </strong>{{ annonce.subcategory.title }}</p>
                                 </div>
                                 <div class="description_down">
-                                    <p><span>Prix : </span>{{ annonce.price }} €</p>
+                                    <p class="annonce_price listing">{{ annonce.price }} €</p>
                                 </div>
                             </div>
                         </div>

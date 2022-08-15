@@ -13,11 +13,8 @@
 
         <div id="form_upload" class="bloc_form create">
             {{ form_label(form.upload) }}
-            {# <br> #}
             {{ form_widget(form.upload) }}
-            {# <br> #}
             <small>{{ form_help(form.upload) }}</small>
-            {# <br> #}
             <div class="form-error">
                 {% for label, messages in app.flashes %}
                     {% for message in messages %}
