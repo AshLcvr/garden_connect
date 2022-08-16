@@ -5,19 +5,25 @@
 {% endblock %}
 
 {% block body %}
-    <div id="container_profil">
-        <h1 class="title_top">Mes boutiques favorites</h1>
-        <div class="container_favory">
-            <ul>
-                {% for fav in favories %}
-                    <li>
-                        <div class="block_favory">
-                            <h3 class="favory_title">{{ fav.boutique.title }}</h3>
-                            <span>{{ fav.boutique.user.name|capitalize }}</span>
-                            <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
-                            <div class="block_rating">
+<div id="container_profil">
+    <h1 class="title_top">Mes boutiques favorites</h1>
+    <div class="container_favory">
+        <ul>
+            {% for fav in favories %}
+                <li>
+                    <div class="block_favory">
+                        <h3 class="favory_title">{{ fav.boutique.title }}</h3>
+                        <span>{{ fav.boutique.user.name|capitalize }}</span>
+                        <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
+                        <div class="block_rating">
+                            {% if fav.boutique.avis|length == 0 %}
+                                    {% for i in 1..5 %}
+                                        <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                    {% endfor %}
+                                    <span>({{ fav.boutique.avis|length }} avis)</span>
+                            {% else %}
                                 {% for key, globalRating in totalGlobalRating %}
-                                    {# {% if key == fav.boutique.id %} #}
+                                    {% if key == fav.boutique.id %}
                                         <span class="rating" data-rating="{{ globalRating }}">
                                             {% for i in 1..5 %}
                                                 {% if i <= globalRating|round %}
@@ -31,30 +37,28 @@
                                                 {% endif %}
                                             {% endfor %}
                                         </span>
-                                        {% for key, nbr in totalNumberAvis %}
-                                            {% if key == fav.boutique.id %}
-                                                <span>({{ nbr }} avis)</span>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {# {% endif %} #}
+                                        <span>({{ fav.boutique.avis|length }} avis)</span>
+                                    {% endif %}
                                 {% endfor %}
-                            </div>
-                            <div class="block_buttons btn_favory">
-                                <div class="bloc_form btn-custom btq favory">
-                                    <span class="hover-effect btq">
-                                        <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
-                                    </span>
-                                </div>
-                                <span title="Retirer des favoris">
-                                {{ include('front/boutique/favorites/_delete_form.html.twig') }}
-                                </span>
+                            {% endif %}
                         </div>
-                    </li>
-                {% endfor %}
-            </ul>
-            <div class="js-filter-pagination" id="pagination_box">
-                {{ knp_pagination_render(favories) }}
-            </div>
+                        <div class="block_buttons btn_favory">
+                            <div class="bloc_form btn-custom btq favory">
+                                <span class="hover-effect btq">
+                                    <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
+                                </span>
+                            </div>
+                            <span title="Retirer des favoris">
+                            {{ include('front/boutique/favorites/_delete_form.html.twig') }}
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="js-filter-pagination" id="pagination_box">
+            {{ knp_pagination_render(favories) }}
         </div>
     </div>
+</div>
 {% endblock %}

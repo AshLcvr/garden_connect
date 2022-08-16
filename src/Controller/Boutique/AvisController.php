@@ -60,14 +60,13 @@ class AvisController extends AbstractController
     #[Route('/avis-emis', name: 'app_avis_sent', methods: ['GET', 'POST'])]
     public function sentAvis(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
     {
-        $user = $this->getUser();
+        $user     = $this->getUser();
         $sentAvis = $avisRepository->findBy(['user' => $user]);
 
-        $globalRating = [];
+        $globalRating      = [];
         $totalGlobalRating = [];
-        $numberAvis = [];
-        $totalNumberAvis = [];
-        $mesAvis = [];
+        $totalNumberAvis   = [];
+        $mesAvis           = [];
 
         if ($sentAvis){
             foreach ($sentAvis as $key => $avi) {
@@ -97,10 +96,13 @@ class AvisController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'app_avis_edit', methods: ['GET', 'POST'])]
-    public function editAvis(Request $request, Avis $avis, AvisRepository $avisRepository): Response
+    public function editAvis( Avis $avis,Request $request, AvisRepository $avisRepository): Response
     {
-        $security = $this->security($avis, $this->getUser()->getAvis());
-        
+        $user = $this->getUser();
+        if ($avis->getUser() !== $user) {
+            return $this->redirectToRoute('403', [], Response::HTTP_SEE_OTHER);
+        }
+
         $form = $this->createForm(AvisFormType::class, $avis);
         $form->handleRequest($request);
 

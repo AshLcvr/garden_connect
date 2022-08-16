@@ -7,12 +7,27 @@
 {% block body %}
     <div>
         <h1 class="title_top">  {{ boutique.title }} </h1>
-
-        <div class="block_buttons">
+    <div class="block_buttons">
+        <div class="block_btn_modify">
+            <div class="bloc_form btn-custom modify btq">
+                <span class="hover-effect modify btq">
+                    <a title="Modifier ma boutique" class="" href="{{ path('app_boutique_edit') }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                </span>
+            </div>
+        </div>
+        {% if boutique.actif == 1 %}
             <div class="block_btn_modify">
-                <div class="bloc_form btn-custom modify btq">
-                    <span class="hover-effect modify btq">
-                        <a title="Modifier ma boutique" class="" href="{{ path('app_boutique_edit', {'id' : boutique.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+            <div class="bloc_form btn-custom modify btq">
+                <span class="hover-effect modify btq">
+                    <a title="Désactiver la boutique" class="" href="{{ path('app_boutique_actif') }}" onclick="return confirm('Voulez-vous vraiment désactiver votre boutique ?')"><i class="fa-regular fa-eye"></i></a>
+                </span>
+            </div>
+        </div>
+        {% else %}
+            <div class="block_btn_inactive">
+                <div class="bloc_form btn-custom inactive">
+                    <span class="hover-effect inactive">
+                        <a title="Activer la boutique" class="" href="{{ path('app_boutique_actif') }}"><i class="fa-solid fa-eye-slash"></i></a>
                     </span>
                 </div>
             </div>

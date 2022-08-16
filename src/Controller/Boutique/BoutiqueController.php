@@ -9,10 +9,8 @@ use App\Form\BoutiqueType;
 use App\Form\EditProfilType;
 use App\Repository\AvisRepository;
 use App\Repository\FavoryRepository;
-use App\Service\Security;
 use App\Service\UploadImage;
 use App\Service\CallApi;
-use App\Entity\ImagesBoutique;
 use App\Repository\UserRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\BoutiqueRepository;
@@ -42,21 +40,17 @@ class BoutiqueController extends AbstractController
     #[Route('/detail', name: 'app_boutique_detail', methods: ['GET', 'POST'])]
     public function detailBoutique(): Response
     {
-        $user = $this->getUser();
-        $boutiques = $user->getBoutiques();
-        $boutique = $boutiques[0];
+        $boutique = $this->getUserBoutique();
 
         return $this->render('front/boutique/detail_boutique.html.twig', [
             'boutique' => $boutique,
         ]);
     }
 
-    #[Route('/boutique/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
     public function editBoutique(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, CallApi $callApi): Response
     {
-        $user = $this->getUser();
-        $boutiques = $user->getBoutiques();
-        $boutique = $boutiques[0];
+        $boutique = $this->getUserBoutique();
 
         $form     = $this->createForm(BoutiqueType::class, $boutique);
         $form->get('search')->setData($boutique->getCity().' ('.$boutique->getPostcode().')');
@@ -85,12 +79,10 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    #[Route('/boutique-delete', name: 'app_boutique_delete', methods: ['POST'])]
+    #[Route('/delete', name: 'app_boutique_delete', methods: ['POST'])]
     public function deleteBoutique($id,Request $request, BoutiqueRepository $boutiqueRepository, ImagesBoutiqueRepository $imagesBoutiqueRepository): Response
     {
-        $user = $this->getUser();
-        $boutiques = $user->getBoutiques();
-        $boutique = $boutiques[0];
+        $boutique = $this->getUserBoutique();
 
         if ($this->isCsrfTokenValid('delete'.$boutique->getId(), $request->request->get('_token'))) {
             $imagesBoutique = $imagesBoutiqueRepository->findImagesbyBoutiqueId($id);
@@ -103,9 +95,11 @@ class BoutiqueController extends AbstractController
         return $this->redirectToRoute('app_boutique_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/actif', name: 'app_boutique_actif', methods: ['POST', 'GET'])]
+    #[Route('/actif', name: 'app_boutique_actif', methods: ['POST', 'GET'])]
     public function toggleActif(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
+        $boutique = $this->getUserBoutique();
+
         if ($boutique->isActif()) {
             $boutique->setActif(false);
         }else{
@@ -221,5 +215,14 @@ class BoutiqueController extends AbstractController
             'user' => $user,
             'form' => $form,
         ]);
+    }
+
+    public function getUserBoutique()
+    {
+        $user = $this->getUser();
+        $boutiques = $user->getBoutiques();
+        $boutique = $boutiques[0];
+
+        return $boutique;
     }
 }
