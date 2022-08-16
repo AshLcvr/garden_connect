@@ -1,7 +1,7 @@
 {% if is_granted('ROLE_VENDEUR') %}
-<header id="header_boutique" class="">
+    <header id="header_boutique">
 {% else %}
-<header id="header_user">
+    <header id="header_user">
 {% endif %}
     <div class="header_wrap">
         <div class="pad_logo">
@@ -48,11 +48,13 @@
                     <a class="nav-link dropdown-toggle custom" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {% block user_avatar %}
-                            {# <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span style="color: white">Bonjour {{app.user.name}}</span></span> #}
+                            <span class="span_header_user small">
+                            Bonjour {{app.user.surname}}
+                            </span>
                             {% if app.user.image %}
-                            <img class="img-profile rounded-circle" src="{{ asset('uploads/profile/'~app.user.image) }}">
+                                <img class="img-profile rounded-circle" src="{{ asset('uploads/profile/'~app.user.image) }}">
                             {% else %}
-                            <img class="img-profile rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}">
+                                <img class="img-profile rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}">
                             {% endif %}
                         {% endblock %}
                     </a>
@@ -75,7 +77,6 @@
                         </a>
                     {% endif %}
                     </div>
-
                 </li>
             </ul>
         </nav>

@@ -56,25 +56,25 @@
                 {% endif %}
             </div>
             {% if annonce == null %}
-            <div class="rating_boutique">
-                <a href="#avis_listing">
-                    <span class="rating" data-rating="{{ globalRating }}">
-                        {% for i in 1..5 %}
-                            {% if i <= globalRating|round %}
-                                {% if (i - globalRating) > 0  %}
-                                    <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+                <div class="rating_boutique">
+                    <a href="#avis_listing">
+                        <span class="rating" data-rating="{{ globalRating }}">
+                            {% for i in 1..5 %}
+                                {% if i <= globalRating|round %}
+                                    {% if (i - globalRating) > 0  %}
+                                        <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+                                    {% else %}
+                                        <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                    {% endif %}
                                 {% else %}
-                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                    <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                 {% endif %}
-                            {% else %}
-                                <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                            {% endif %}
-                        {% endfor %}
-                    </span>
-                </a>
-                <span>({{ avis|length }} avis)</span>
-            </div>
-            <p class="description_boutique">{{ boutique.description }}</p>
+                            {% endfor %}
+                        </span>
+                    </a>
+                    <span>({{ avis|length }} avis)</span>
+                </div>
+                <p class="description_boutique">{{ boutique.description }}</p>
             {% endif %}
         </div>
     </section>
@@ -97,11 +97,11 @@
                 <div class="annonce_img image-card flexslider slider-annonce">
                     <ul class="slides">
                         {% for image in annonce.imagesAnnonces %}
-                        <li class="li_annonce_img">
-                            <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                                <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
-                            </a>
-                        </li>
+                            <li class="li_annonce_img">
+                                <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
+                                    <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
+                                </a>
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>

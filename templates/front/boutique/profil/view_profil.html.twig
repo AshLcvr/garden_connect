@@ -7,46 +7,46 @@
     <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
 {% endblock %}
 {% block body %}
-<div class="wrap2">
-    <h1 class="title_top with_sub">Profil</h1>
-    <h4 class="subtitle">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
-    <div class="block_btn_modify plus">
-        <div class="bloc_form btn-custom modify btq plus" style="">
-            <span class="hover-effect modify btq">
-                <a name="Modifier mon profil" class="" href="{{ path('boutique_edit_profil') }}"><i class="fa-solid fa-pen-to-square"></i></a>
-            </span>
+    <div class="wrap2">
+        <h1 class="title_top with_sub">Profil</h1>
+        <h4 class="subtitle">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
+        <div class="block_btn_modify plus">
+            <div class="bloc_form btn-custom modify btq plus">
+                <span class="hover-effect modify btq">
+                    <a name="Modifier mon profil" href="{{ path('boutique_edit_profil') }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                </span>
+            </div>
         </div>
     </div>
-</div>
-<div class="card-body boutique_infos">
-    <div class="d-flex flex-column">
-        <div class="card-body user_infos">
-            <div>
-                <h6 class="detail_btq_title">Photo : </h6>
+    <div class="card-body boutique_infos">
+        <div class="d-flex flex-column">
+            <div class="card-body user_infos">
                 <div>
-                    {% if user.image %}
-                    <img src="{{ asset('uploads/profile/'~user.image) }}" alt="Images user" style=" width: 10%; border-radius: 50%">
-                    {% endif %}
+                    <h6 class="detail_btq_title">Photo : </h6>
+                    <div>
+                        {% if user.image %}
+                        <img src="{{ asset('uploads/profile/'~user.image) }}" alt="Images user" style=" width: 10%; border-radius: 50%">
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            <hr>
-            <div>
-                <h6 class="detail_btq_title">Email :</h6>
-                {{ user.email  }}
-            </div>
-            <hr>
-            <div>
-                <h6 class="detail_btq_title">Prénom :</h6>
-                {{ user.name }}
-            </div>
-            <hr>
-            <div>
-                <h6 class="detail_btq_title">Nom :</h6>
+                <hr>
+                <div>
+                    <h6 class="detail_btq_title">Email :</h6>
+                    {{ user.email  }}
+                </div>
+                <hr>
+                <div>
+                    <h6 class="detail_btq_title">Prénom :</h6>
+                    {{ user.name }}
+                </div>
+                <hr>
+                <div>
+                    <h6 class="detail_btq_title">Nom :</h6>
                     {{ user.surname }}
+                </div>
+                <hr>
+                <a class="modif_psd btq" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>
             </div>
-            <hr>
-            <a class="modif_psd btq" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>
         </div>
     </div>
-</div>
 {% endblock %}

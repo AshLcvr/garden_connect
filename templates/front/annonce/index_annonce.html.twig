@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="title_top" style="margin: 0">Mes annonces</h1>
+<h1 class="title_top">Mes annonces</h1>
 <div>
     <div class="block_btn_modify plus">
-        <div class="bloc_form btn-custom modify btq plus" style="">
+        <div class="bloc_form btn-custom modify btq plus">
             <span class="hover-effect modify btq">
-                <a title="Créer une annonce" class="" href="{{ path('app_annonce_new') }}"><i class="fa-solid fa-plus"></i></a>
+                <a title="Créer une annonce" href="{{ path('app_annonce_new') }}"><i class="fa-solid fa-plus"></i></a>
             </span>
         </div>
     </div>
@@ -39,24 +39,24 @@
                     <td>{{ annonce.title }}</td>
                     <td>{{ annonce.subcategory.title }}</td>
                     <td>{{ annonce.price }} €</td>
-                    <td>{{ annonce.createdAt|date('Y-m-d') }}</td>
+                    <td>{{ annonce.createdAt|date('d/m/Y') }}</td>
                     <td>
                         {% if annonce.actif == 1 %}
-                        <div class="block_btn_modify">
-                            <div class="bloc_form btn-custom modify btq">
-                                <span class="hover-effect modify btq">
-                                    <a title="Désactiver l'annonce" class="" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}" onclick="return confirm('Voulez-vous vraiment désactiver votre annonce ?')"><i class="fa-regular fa-eye"></i></a>
-                                </span>
+                            <div class="block_btn_modify">
+                                <div class="bloc_form btn-custom modify btq">
+                                    <span class="hover-effect modify btq">
+                                        <a title="Désactiver l'annonce" class="" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}" onclick="return confirm('Voulez-vous vraiment désactiver votre annonce ?')"><i class="fa-regular fa-eye"></i></a>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
                         {% else %}
-                        <div class="block_btn_inactive">
-                            <div class="bloc_form btn-custom inactive">
-                                <span class="hover-effect inactive">
-                                    <a title="Activer l'annonce" class="" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
-                                </span>
+                            <div class="block_btn_inactive">
+                                <div class="bloc_form btn-custom inactive">
+                                    <span class="hover-effect inactive">
+                                        <a title="Activer l'annonce" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
                         {% endif %}
                     </td>
                     <td class="table_actions" >

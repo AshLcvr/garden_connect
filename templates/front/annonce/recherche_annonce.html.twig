@@ -21,17 +21,17 @@
                     <p class="title_section_home">Résultats</p>
                 </div>
                 <div class="wrap">
-                <div class="recherche-tri js-filter-sort">
-                    <p>Trier par :</p>
-                    {% include 'front/annonce/_sort.html.twig' %}
-                </div>
+                    <div class="recherche-tri js-filter-sort">
+                        <p>Trier par :</p>
+                        {% include 'front/annonce/_sort.html.twig' %}
+                    </div>
                 </div>
 
                 <div class="js-filter-content">
                     {% include 'front/annonce/_annonces.html.twig' %}
                 </div>
             {% else %}
-                <div class="no_result_annonces" style="text-align: center; padding: 5rem 0">
+                <div class="no_result_annonces">
                     <h1>Oups..! :(</h1>
                     <p>Nous n'avons pas trouvé d'annonces respectant vos critères !</p>
                 </div>

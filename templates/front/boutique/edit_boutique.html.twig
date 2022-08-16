@@ -5,8 +5,6 @@
 {% endblock %}
 
 {% block body %}
-        <h1 class="title_top" style="margin: 0">Modifier ma boutique</h1>
-    <div class="card-body">
-        {{ include('front/boutique/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-    </div>
+    <h1 class="title_top">Modifier ma boutique</h1>
+    {{ include('front/boutique/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 {% endblock %}

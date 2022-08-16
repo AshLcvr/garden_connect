@@ -3,33 +3,33 @@
 {% block title %}<title>Nouveau message</title>{% endblock %}
 
 {% block body %}
-<div id="main">
-    <h2 class="title_top">Démarrer une conversation</h2>
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-    <div class="body">
-        <div id="contener_form">
-            {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
-                <div class="bloc_form">
-                    {{ form_label(form.premier_message) }}
-                    {{ form_widget(form.premier_message) }}
+    <div id="main">
+        <h2 class="title_top">Démarrer une conversation</h2>
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+        <div class="body">
+            <div id="contener_form">
+                {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+                    <div class="bloc_form">
+                        {{ form_label(form.premier_message) }}
+                        {{ form_widget(form.premier_message) }}
 
-                    <small>{{ form_help(form.premier_message) }}</small>
+                        <small>{{ form_help(form.premier_message) }}</small>
 
-                    <div class="form-error">
-                        {{ form_errors(form.premier_message) }}
+                        <div class="form-error">
+                            {{ form_errors(form.premier_message) }}
+                        </div>
                     </div>
-                </div>
-                <div class="block_submit">
-                    <div class="bloc_form btn-custom btq">
-                        <span class="hover-effect btq">
-                        {{ form_widget(form.submit) }}
-                        </span>
+                    <div class="block_submit">
+                        <div class="bloc_form btn-custom btq">
+                            <span class="hover-effect btq">
+                            {{ form_widget(form.submit) }}
+                            </span>
+                        </div>
                     </div>
-                </div>
-            {{ form_end(form) }}
+                {{ form_end(form) }}
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

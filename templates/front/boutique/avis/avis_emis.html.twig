@@ -10,84 +10,83 @@
         <div class="container_avis">
         {% if mesAvis %}
             <ul>
-            {% for avi in mesAvis %}
-                <li>
-                    <div class="block_avis">
-                        <div>
-                            {% if avi.user.image %}
-                                <img class="avatar_avis" src="{{ asset('uploads/profile/')~avi.user.image }}" alt="photo de profil">
-                            {% else %}
-                                <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
-                            {% endif %}
-                            <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
-                        </div>
-                        <div>
-                            {% for i in 1..5 %}
-                                {% if i <= avi.rating %}
-                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                {% for avi in mesAvis %}
+                    <li>
+                        <div class="block_avis">
+                            <div>
+                                {% if avi.user.image %}
+                                    <img class="avatar_avis" src="{{ asset('uploads/profile/')~avi.user.image }}" alt="photo de profil">
                                 {% else %}
-                                    <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                    <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                                 {% endif %}
-                            {% endfor %}
-                        <span><strong>&nbsp&nbsp{{ avi.title }}</strong></span>
-                        <p class="p_avis"><i>Avis émis le {{ avi.createdAt|date('d/m/Y') }}</i></p>
+                                <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
+                            </div>
+                            <div>
+                                {% for i in 1..5 %}
+                                    {% if i <= avi.rating %}
+                                        <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                    {% else %}
+                                        <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                    {% endif %}
+                                {% endfor %}
+                                <span><strong>&nbsp&nbsp{{ avi.title }}</strong></span>
+                                <p class="p_avis"><i>Avis émis le {{ avi.createdAt|date('d/m/Y') }}</i></p>
+                            </div>
+                            <div> {{ avi.commentaire }} </div>
+                            <div class="block_buttons avis">
+                                <div class="bloc_form btn-custom btq avis">
+                                    <span class="hover-effect btq avis">
+                                        <a href="{{ path('app_avis_edit', {id: avi.id}) }}">Modifier</a>
+                                    </span>
+                                </div>
+                                <span class="avis" title="Supprimer l'avis">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
+                            </div>
                         </div>
-                        <div> {{ avi.commentaire }} </div>
-                        <div class="block_buttons avis">
-                        <div class="bloc_form btn-custom btq avis">
-                            <span class="hover-effect btq avis">
-                                <a href="{{ path('app_avis_edit', {id: avi.id}) }}">Modifier</a>
-                            </span>
-                        </div>
-                            <span class="avis" title="Supprimer l'avis">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
-                        </div>
-                    </div>
 
-                    <div class="separator right"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="separator down"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="separator right"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="separator down"><i class="fa-solid fa-arrow-down"></i></div>
 
-                    <div class="block_boutique">
-                        <div>
-                            {% if avi.boutique.user.image %}
-                                <img class="avatar_avis" src="{{ asset('uploads/profile/')~avi.boutique.user.image }}" alt="photo de profil">
-                            {% else %}
-                                <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
-                            {% endif %}
-                            <span class="user_name_avis">{{ avi.boutique.user.name|capitalize }}</span>
-                        </div>
-                        <div>
-                            <p><strong>{{ avi.boutique.title }}</strong></p>
-                            <span><i>Boutique en ligne depuis le : {{ avi.boutique.createdAt|date('d/m/Y') }}</i></span>
-                        </div>
-                        <div>
-                            {% for key, globalRating in totalGlobalRating %}
-                                {% if key == avi.boutique.id %}
-                                    <span class="rating" data-rating="{{ globalRating }}">
-                                        {% for i in 1..5 %}
-                                            {% if i <= globalRating %}
-                                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                                            {% else %}
-                                                <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                        <div class="block_boutique">
+                            <div>
+                                {% if avi.boutique.user.image %}
+                                    <img class="avatar_avis" src="{{ asset('uploads/profile/')~avi.boutique.user.image }}" alt="photo de profil">
+                                {% else %}
+                                    <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
+                                {% endif %}
+                                <span class="user_name_avis">{{ avi.boutique.user.name|capitalize }}</span>
+                            </div>
+                            <div>
+                                <p><strong>{{ avi.boutique.title }}</strong></p>
+                                <span><i>Boutique en ligne depuis le : {{ avi.boutique.createdAt|date('d/m/Y') }}</i></span>
+                            </div>
+                            <div>
+                                {% for key, globalRating in totalGlobalRating %}
+                                    {% if key == avi.boutique.id %}
+                                        <span class="rating" data-rating="{{ globalRating }}">
+                                            {% for i in 1..5 %}
+                                                {% if i <= globalRating %}
+                                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                                {% else %}
+                                                    <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </span>
+                                        {% for key, nbr in totalNumberAvis %}
+                                            {% if key == avi.boutique.id %}
+                                                <span>({{ nbr }} avis)</span>
                                             {% endif %}
                                         {% endfor %}
-                                    </span>
-                                    {% for key, nbr in totalNumberAvis %}
-                                        {% if key == avi.boutique.id %}
-                                            <span>({{ nbr }} avis)</span>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="bloc_form btn-custom btq avis">
+                                <span class="hover-effect btq">
+                                    <a class="" href="{{ path('view_boutique', {id: avi.boutique.id}) }}">Voir la boutique</a>
+                                </span>
+                            </div>
                         </div>
-                        <div class="bloc_form btn-custom btq avis">
-                            <span class="hover-effect btq">
-                                <a class="" href="{{ path('view_boutique', {id: avi.boutique.id}) }}">Voir la boutique</a>
-                            </span>
-                        </div>
-                    </div>
-                </li>
-                <div class="separator_btq"></div>
-
+                    </li>
+                    <div class="separator_btq"></div>
                 {% endfor %}
             </ul>
             <div class="js-filter-pagination" id="pagination_box">

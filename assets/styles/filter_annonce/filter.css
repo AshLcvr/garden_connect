@@ -1,33 +1,33 @@
 /* Filtres de recherche */
-.js-filter-content{
+.js-filter-content {
     min-height: 105vh;
 }
-#filter_form{
+#filter_form {
     box-shadow: grey 0px 7px 29px 0px;
     width: 55%;
     margin: 2rem auto 4rem;
     padding: 1rem 2rem;
 }
-#filter_form form > *{
+#filter_form form > * {
     margin-bottom: 1rem;
 }
-#filter_form .form-group, #filter_form .d-flex.justify-content-center{
-    margin: 0
+#filter_form .form-group, #filter_form .d-flex.justify-content-center {
+    margin: 0;
 }
-#filter_form form .bloc_form{
+#filter_form form .bloc_form {
     justify-content: space-between;
 }
-#filter_form form .bloc_form div{
+#filter_form form .bloc_form div {
     width: 48%;
 }
-.bloc_form .location_box{
+.bloc_form .location_box {
     position: relative;
     width: 60% !important;
 }
-.bloc_form .distance_box{
+.bloc_form .distance_box {
     width: 38% !important;
 }
-#filter_form form #city_suggest{
+#filter_form form #city_suggest {
     width: 32%;
 }
 #filter_form .noUi-connect {
@@ -71,28 +71,38 @@
 #filter_form .bloc_form select.form-control::placeholder {
     color: #d2d2d2;
 }
-
+/* Toutes les div champs */
+#filter_form form .bloc_form div {
+    width: 48%;
+}
+/* Div spécifique au bouton */
+#filter_form form .bloc_form .hover-effect.search > div.form-group {
+    width: 100%;
+}
+.no_result_annonces {
+    text-align: center;
+    padding: 5rem 0;
+}
 /* Tri prix / date */
 .wrap_sort {
     max-width: 1100px ;
     margin: 0 auto;
     padding: 0 1rem;
 }
-.recherche-tri{
+.recherche-tri {
     width: 80%;
     margin: 0 auto;
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
     gap: .5rem;
-    /* padding: 1rem 0; */
 }
-.recherche-tri p{
+.recherche-tri p {
     text-align: center;
     margin-bottom: 0;
     vertical-align: baseline;
 }
-.recherche-tri a{
+.recherche-tri a {
     color: white;
 }
 .btn-primary.btn {
@@ -101,16 +111,20 @@
     border-radius: unset;
 }
 .btn-primary.btn:hover {
-    background-color: var(--orange);
-    border: var(--orange);
     filter: brightness(.9);
 }
 
 /* Pagination */
-#pagination_box{
-    margin: 2rem auto;
+#pagination_box {
+    margin: 0 auto 2rem;
     display: flex;
     justify-content: center;
+}
+#pagination_box .pagination {
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    justify-content: center;
+    width: 80%;
 }
 #pagination_box span {
     margin-right: .5rem;
@@ -121,39 +135,78 @@
     align-items: center;
     color: white;
     background-color: var(--vertclair);
+    padding: 1rem;
 }
 #pagination_box.btq span {
     background-color: var(--vertfonce);
 }
 
-#pagination_box span:hover{
+#pagination_box span:hover {
     filter: brightness(.9);
 }
-#pagination_box .pagination .current{
+#pagination_box .pagination .current {
     background-color: var(--orange);
 }
-#pagination_box .pagination .current:hover{
+#pagination_box .pagination .current:hover {
     background-color: var(--orange);
 }
-#pagination_box span a{
+#pagination_box span a {
     color: white;
-    padding: .4rem 1rem;
-    margin: auto;
 }
 
 /* RESPONSIVE */
-@media (max-width: 1000px){
-    #filter_form{
+@media (max-width: 1000px) {
+    #filter_form {
         width: 65%;
     }
 }
-@media (max-width: 850px){
-    #filter_form{
+@media (max-width: 900px) {
+    .recherche-tri {
+        width: 85%;
+    }
+}
+@media (max-width: 850px) {
+    #filter_form {
         width: 75%;
     }
     /* Pagination */
     #pagination_box span {
     width: 30px;
     height: 30px;
+    }
+}
+@media (max-width: 750px) {
+    .recherche-tri {
+        width: 80%;
+    }
+}
+@media (max-width: 680px) {
+    .recherche-tri {
+        width: 90%;
+    }
+    #filter_form form .bloc_form {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    #filter_form form .bloc_form input {
+        width: 100%;
+    }
+    #filter_form form .bloc_form div {
+        width: 100%;
+    }
+    .bloc_form .location_box,
+    .bloc_form .distance_box {
+        width: 100% !important;
+    }
+}
+@media (max-width: 550px) {
+    #filter_form {
+        width: 85%;
+        padding: 1rem;
+    }
+}
+@media (max-width: 450px) {
+    .recherche-tri {
+        width: 95%;
     }
 }

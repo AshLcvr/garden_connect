@@ -1,19 +1,20 @@
-.wrap.border_form {
+.wrap.border_form,
+.wrapform.border_form {
     border: 1px solid rgb(222, 222, 222);
     padding: 1.2rem;
-    margin: 1rem auto 0;
+    /* margin: 1rem auto 0; */
 }
 label {
-    /* font: var(--text-font); */
     font-family: 'Roboto', 'Arial', sans-serif;
     font-size: 1rem;
-    color: black;
+    /* color: black; */
+    color: rgb(70, 70, 70);
     font-weight: 500;
 }
 input:focus,
 textarea:focus {
     box-shadow: unset;
-    border: 1px solid var(--orange);
+    /* border: 1px solid var(--orange); */
     outline: 1px solid var(--orange);
 }
 .bloc_form input.form-control:focus,
@@ -23,10 +24,38 @@ textarea:focus {
     border: 1px solid var(--orange);
 } 
 .bloc_form input.form-control:focus::placeholder,
-.bloc_form select.form-control::placeholder {
+.bloc_form select.form-control::placeholder,
+input:focus,
+textarea:focus {
     color: #d2d2d2;
 }
-/*  */
+
+/* #contener_form */
+input,
+input.form-control,
+textarea,
+textarea.form-control,
+select,
+select.form-control {
+    background-color: rgb(245, 245, 245);
+    border-radius: 12px;
+    border: none;
+    color: rgb(70, 70, 70);
+    font-size: 18px;
+    padding: 10px 20px;
+    height: auto;
+}
+textarea,
+textarea.form-control {
+    border: none;;
+    background-color: rgb(245, 245, 245);
+}
+.help-block ul {
+    margin-bottom: 0;
+}
+/* #contener_form input:focus {
+    outline: 2px solid var(--orange);
+} */
 .wrapform{
     max-width: 700px ; width: 100%; margin: 0 auto;
 }
@@ -40,6 +69,11 @@ textarea:focus {
 }
 #contener_form form {
     width: 80%;
+    margin: 0 auto;
+}
+#contener_form.custom form {
+    width: 100%;
+    margin: 0 auto;
 }
 #contener_form .bloc_form {
     display: flex;
@@ -47,7 +81,8 @@ textarea:focus {
     gap: 0.3rem;
     justify-content: center;
     font: var(--text-font);
-    color: black;
+    /* color: black; */
+    color: rgb(70, 70, 70);
     font-family: 'Roboto', 'Arial', sans-serif;
     font-weight: 500;   
 }
@@ -58,11 +93,14 @@ textarea:focus {
 .boutique_form .bloc_form.create .required {
     display: flex;
 }
-#contener_form .bloc_form.bloc_adresse {
+.boutique_form .bloc_form.create.tel {
+    width: 50%;
+}
+/* #contener_form .bloc_form.bloc_adresse {
     display: flex;
     flex-flow: row nowrap;
     gap: 2rem;
-}
+} */
 #contener_form .bloc_form.create.explain {
     margin-bottom: 1rem;
 }
@@ -91,39 +129,21 @@ textarea:focus {
 #contener_form .bloc_form.login {
     margin: 1rem auto;
 }
-/* Toutes les div champs */
-#filter_form form .bloc_form div {
-    width: 48%;
-}
-/* Div spécifique au bouton */
-#filter_form form .bloc_form .hover-effect.search > div.form-group {
-    width: 100%;
-}
-#contener_form input {
-    background-color: rgb(235, 235, 235);
-    border-radius: 12px;
-    border: none;
-    color: rgb(70, 70, 70);
-    font-size: 18px;
-    padding: 10px 20px;
-}
-#contener_form input:focus {
-    outline: 2px solid var(--orange);
-}
+
 /* Formulaire Modifier mon profil boutique / Modifier mon mot de passe */
-label.modif_profile,
+/* label.modif_profile, */
 label.modif_password {
     margin-bottom: 0;
     padding: .1rem .2rem;
 }
-#contener_form input.modif_profile,
+/* #contener_form input.modif_profile, */
 #contener_form input.modif_password {
     margin-bottom: 1rem;
 }
 
 /* Formulaires annonce */
-.annonce_form .bloc_form{
-    margin-bottom: 2rem;
+.annonce_form .bloc_form {
+    margin-bottom: 1rem;
 }
 .annonce_form .bloc_form textarea {
     height: 15rem;
@@ -141,9 +161,6 @@ label.modif_password {
 .boutique_form p {
     margin: 0;
 }
-.boutique_form span {
-    color: red;
-}
 .boutique_form .bloc_form {
     margin-bottom: 2rem;
 }
@@ -151,14 +168,14 @@ label.modif_password {
     height: 15rem;
     resize: none;
 }
-.boutique_form .bloc_form .adress_form {
+.boutique_form .bloc_form.create.adress_form {
     width: 49%;
 }
-.boutique_form .bloc_form .city_search {
+.boutique_form .bloc_form.create.city_search {
     position: relative;
     width: 49%;
 }
-#city_suggest{
+#city_suggest {
     margin-top: 0 ;
 }
 /* Inscription boutons radio */
@@ -190,9 +207,13 @@ label.modif_password {
 }
 /* Messages d'erreur */
 .form-error {
+    /* border: 1px solid red; */
+    /* min-height: 22px; */
     color: red;
 }
-
+h5.subtitle {
+    text-align: left;
+}
 /* Retour à l'accueil */
 .back_home {
     color: var(--vertclair);
@@ -201,8 +222,16 @@ label.modif_password {
     color: var(--vertfonce);
 }
 /* RESPONSIVE */
-@media all and (max-width: 750px){
-    .wrap.border_form {
+@media all and (max-width: 850px) {
+    .boutique_form .bloc_form.create.tel,
+    .boutique_form .bloc_form.create.adress_form,
+    .boutique_form .bloc_form.create.city_search {
+        width: 60%;
+    }
+}
+@media all and (max-width: 750px) {
+    .wrap.border_form,
+    .wrapform.border_form {
     padding: 1rem;
     }
     #contener_form button {
@@ -213,6 +242,22 @@ label.modif_password {
     }
     .boutique_form .bloc_form {
         margin-bottom: 1rem;
+    }
+    label {
+        font-size: .9rem;
+    }
+    #contener_form input,
+    input, input.form-control,
+    select {
+        font-size: 1rem;
+    }
+
+}
+@media all and (max-width: 700px) {
+    .boutique_form .bloc_form.create.tel,
+    .boutique_form .bloc_form.create.adress_form,
+    .boutique_form .bloc_form.create.city_search {
+        width: 100%;
     }
 }
 @media all and (max-width: 500px){
@@ -225,12 +270,9 @@ label.modif_password {
         width: 100%;
     }
 }
-@media all and (max-width: 450px){
+@media all and (max-width: 450px) {
     #contener_form {
         padding: 1.5rem 0;
-    }
-    #contener_form input {
-        font-size: 1.2rem;
     }
 }
 @media all and (max-width: 375px){

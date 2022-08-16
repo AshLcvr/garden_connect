@@ -34,7 +34,6 @@
 
     <h2 class="title_boutique">Laissez votre avis</h2>
     <div class="avis_form">
-    {# <div> #}
         {% if app.user %}
             {% for av in avis %}
                 {% if av.user.id == app.user.id %}

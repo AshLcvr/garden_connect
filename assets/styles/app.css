@@ -1,7 +1,7 @@
 :root{
-    --vertfonce:#41b04f;
-    --vertclair:#8fc642;
-    --orange:#f7941d;
+    --vertfonce:#41B04F;
+    --vertclair:#8FC642;
+    --orange:#F7941D;
     --marron:#AB7B52;
     --rouge_supp: #E74A3b;
     --text-font: 400 14px/1.4 'Roboto', 'Arial', sans-serif;
@@ -95,6 +95,13 @@ img {
 .gap1 {
     gap: 1rem;
 }
+.inline-block {
+    display: inline-block;
+}
+
+.favory {
+    color: var(--orange);
+}
 
 /* CSS Global input search location */
 #city_suggest{
@@ -130,10 +137,11 @@ img {
     padding: 0 5rem;
 }
 
+/* Titres Front */
 .title_section_home {
     text-align: center;
     font: var(--title-font);
-    color: #AB7B52;
+    color: var(--marron);
     font-size: 2rem;
     line-height: 1.5;
     padding: 1rem;

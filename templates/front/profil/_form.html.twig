@@ -2,8 +2,8 @@
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-    <div class="wrapform">
-        <div id="contener_form">
+    <div class="wrapform border_form">
+        <div id="contener_form" class="custom">
             {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
                 <div class="bloc_form">
                     {{ form_label(form.image) }}
@@ -46,16 +46,11 @@
                     </div>
                 </div>
 
-                <div class="bloc_form">
-                    {# {{ form_widget(form.submit) }} #}
+                <div class="bloc_form btn-custom modif_profile">
+                    <span class="hover-effect">
+                    {{ form_widget(form.submit) }}
+                    </span>
                 </div>
-                {# <div class="button_boutique" style="border: 1px solid purple;"> #}
-                    <div class="bloc_form btn-custom">
-                        <span class="hover-effect">
-                        {{ form_widget(form.submit) }}
-                        </span>
-                    </div>
-                {# </div> #}
             {{ form_end(form) }}
         </div>
     </div>

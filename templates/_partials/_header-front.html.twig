@@ -17,9 +17,9 @@
                 {% endif %}
                 {% if app.user %}
                     {% if is_granted('ROLE_VENDEUR') %}
-                        <li class="main_li"><a href="{{ path('boutique_messagerie') }}" class="notif">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('boutique_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% else %}
-                        <li class="main_li"><a href="{{ path('app_conversation_index', {id : app.user.id}) }}" class="notif">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        {# <li class="main_li"><a href="{{ path('app_conversation_index', {id : app.user.id}) }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li> #}
                     {% endif %}
                 {% else %}
                     {% if app.request.attributes.get('_route')  == 'app_login' %}
@@ -64,7 +64,6 @@
                             <div class="dropdown_separator"></div>
                         {% endif %}
                         <li class="li_dropdown"><a href="{{ path('app_logout') }}">Déconnexion</a></li>
-
                         </ul>
                     </nav>
                 {% endif %}

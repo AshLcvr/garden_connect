@@ -20,6 +20,6 @@
 
 @media all and (max-width: 550px) {
     .span_notif {
-        right: 7px;
+        right: 0;
     }
 }
