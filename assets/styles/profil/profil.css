@@ -5,7 +5,8 @@
 #container_profil .container_avis {
     padding: 0.75rem 0;
 }
-#container_profil .container_avis ul {
+#container_profil .container_avis ul,
+#container_profil .container_favory ul {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -15,13 +16,9 @@
     display: flex;
     width: 100%;
 }
-/* Avis reçus */
-#container_profil .container_avis ul li.recus {
-    width: 45%;
-}
-/*  */
 #container_profil .container_avis ul li .block_avis,
-#container_profil .container_avis ul li .block_boutique {
+#container_profil .container_avis ul li .block_boutique,
+.block_avis {
     width: 50%;
     display: flex;
     flex-flow: column;
@@ -31,19 +28,17 @@
     justify-content: space-between;
     width: 45%;
 }
-/* Avis reçus */
-#container_profil .container_avis ul li .block_avis.recus {
-    width: 100%;
-}
-/*  */
-#container_profil .container_avis ul li img.avatar_avis {
+/* #container_profil .container_avis ul li  */
+img.avatar_avis {
     width: 33px;
     height: 33px;
     border-radius: 50%;
 }
-#container_profil .container_avis ul li .user_name_avis {
+/* #container_profil .container_avis ul li  */
+span.user_name_avis {
     margin: auto .5rem;
 }
+
 #container_profil .container_avis ul li .separator {
     margin: auto;
     font-size: 2rem;
@@ -56,47 +51,46 @@
 #container_profil .container_avis ul li .separator.down {
     display: none;
 }
-#container_profil .container_avis ul li .block_boutique p{
+#container_profil .container_avis ul li .block_boutique p {
     margin: 0;
 }
+/* Avis reçus */
+#container_profil .container_avis ul li .block_avis.recus {
+    width: 100%;
+}
+#container_profil .container_avis ul li.recus {
+    width: 45%;
+}
+/*  */
 
 /* Avis Boutique publique */
-#avis_boutique .connect-link{
+#avis_boutique .connect-link {
     color: var(--orange);
 }
-#avis_boutique ul{
+#avis_boutique ul {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
 }
-#avis_boutique .avis_box{
+#avis_boutique .avis_box {
     width: 48%;
     border: solid 2px var(--vertclair);
     border-radius: 5px;
-    margin:1rem 0;
+    margin: 1rem 0;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-#avis_boutique .avis_form{
-    border: solid 2px var(--vertclair);
-    margin-bottom: 3rem;
-    padding: 1rem;
+.avis_box .avis_box_user {
+    margin-bottom: .5rem;
 }
-#avis_boutique .avis_form .bloc_form{
-    margin-bottom: 1rem;
-}
-#avis_boutique .avis_form textarea{
-    height: 8rem;
-    resize: none;
+.avis_box .avis_comm {
+    margin-top: .5rem;
+    height: 30px;
 }
 
-/* favory */
-#container_profil .container_favory ul {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
-    /* padding: 1rem; */
-    gap: 1rem;
-}
+/* Favory */
 #container_profil .container_favory ul li {
     width: 31%;
     padding: 1rem;
@@ -115,10 +109,18 @@
     display: none;
 }
 
-
 /* RESPONSIVE */
+@media (max-width: 1100px) {
+    #container_profil .container_favory ul li {
+        width: 45%;
+    }
+}
+@media (max-width: 850px) {
+    #container_profil .container_avis ul li.recus {
+        width: 90%;
+    }
+}
 @media (max-width: 800px) {
-    /* Avis */
     .separator_btq {
         border-top: 1px solid var(--orange);
         width: 50%;
@@ -131,9 +133,19 @@
     #container_profil .container_avis ul {
         gap: 2rem;
     }
-    #container_profil .container_avis ul li {
+    #container_profil .container_avis ul li,
+    #container_profil .container_favory ul li {
         flex-direction: column;
+    }
+    #container_profil .container_avis ul li {
         width: 70%;
+    }
+    #container_profil .container_favory ul li {
+        width: 80%; 
+    }
+    #container_profil .container_favory ul li .favory_title {
+        text-align: center;
+        font-size: 1.5rem;
     }
     #container_profil .container_avis ul li .block_avis, #container_profil .container_avis ul li .block_boutique {
         width: 100%;
@@ -145,21 +157,41 @@
     #container_profil .container_avis ul li .separator.right {
     display: none;
     }
-    /* Favoris */
-
 }
 @media (max-width: 600px) {
-    /* Avis */
-    #container_profil .container_avis ul li {
+    #container_profil .container_avis ul li,
+    #container_profil .container_favory ul li {
         flex-direction: column;
         width: 80%;
     }
+    #avis_boutique ul {
+        justify-content: center;
+    }
+    #avis_boutique .avis_box {
+        width: 90%;
+    }
+    .avis_box .avis_comm {
+        height: 20px;
+        margin: .5rem 0;
+    }
 }
 @media (max-width: 500px) {
-    /* Avis */
-    #container_profil .container_avis ul li {
+    #container_profil .container_avis ul li,
+    #container_profil .container_favory ul li {
         flex-direction: column;
         width: 100%;
+    }
+    #container_profil .container_favory ul li .favory_title {
+        font-size: 1.2rem;
+    }
+    #container_profil .container_favory ul li span,
+    #container_profil .container_favory ul li p {
+        font-size: .8rem;
+    }
+}
+@media (max-width: 400px) {
+    .avis_box .avis_comm {
+        height: 30px;
     }
 }
 

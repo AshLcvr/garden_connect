@@ -100,6 +100,10 @@
 .title_top {
     text-align: center;
     padding: 1rem 0;
+    color: black;
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.2;
 }
 .title_top.with_sub {
     padding: 1rem 0 0;
@@ -215,6 +219,9 @@ h6.detail_btq_title {
     }
     .boutique_accueil ul li, .boutique_accueil p {
         font-size: 1rem;
+    }
+    .title_top {
+    padding: 1.5rem 0 .5rem;
     }
 }
 @media (max-width: 500px){

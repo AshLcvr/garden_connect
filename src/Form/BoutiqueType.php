@@ -42,10 +42,10 @@ class BoutiqueType extends AbstractType
                                 'image/png',
                                 'image/gif',
                             ],
-                            'mimeTypesMessage' => 'Seuls les formats PNG, JPEG ou GIF sont acceptés !)',
+                            'mimeTypesMessage' => 'Seuls les formats PNG, JPEG ou GIF sont acceptés !',
                             'uploadIniSizeErrorMessage' => 'Votre fichier est trop volumineux !',
                             'uploadErrorMessage' => 'Erreur dans l \'ajout du fichier!',
-                            'uploadExtensionErrorMessage' => 'Mauvaise Extension !',
+                            'uploadExtensionErrorMessage' => 'Mauvaise extension !',
                             'uploadFormSizeErrorMessage' => 'Votre fichier est trop volumineux !',
                             'uploadNoFileErrorMessage' => 'Aucun fichier n\a été enregistré !',
                         ])

@@ -11,10 +11,11 @@
 }
 .annonce_box {
     background-color: #FFFFFF;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin-bottom: 3rem;
     display: flex;
     width: 80%;
+    line-height: 1.2rem;
 }
 .annonce_box:nth-child(2n+1) {
     flex-flow: row-reverse;
@@ -26,31 +27,35 @@
 .annonce_img {
     width: 30%;
 }
+.annonce_img img {
+    object-fit: cover;
+}
 .annonce_img.flexslider {
     border: none;
     margin: 0;
 }
 .annonce_text {
-    width: 67%;
+    width: 70%;
     display: flex;
     flex-flow: column;
     justify-content: center;
     justify-content: flex-start;
     position: relative;
 }
-.annonce_text p.annonce_type {
-    font-size: .9rem;
+p.annonce_type {
+    font-size: .8rem;
+    margin-bottom: 0;
 }
 .annonce_text p.annonce_description {
-    padding: 1rem 0 0;
+    margin: 1rem 0;
 }
 .annonce_text a {
-    padding: 1rem 1.5rem;
+    padding: 1rem 1.5rem 1.5rem;
 }
 .annonce_text span {
     font-weight: bold;
 }
-.annonce_text span.span_created {
+span.span_created {
     font-weight: normal;
     font-size: .8rem;
     color: dimgray;
@@ -62,11 +67,18 @@
     line-height: 1.5;
     margin-bottom: 0;
 }
+.annonce_title.listing {
+    line-height: unset;
+}
 .annonce_price {
     color: var(--vertclair);
     font-weight: bold;
     position: absolute;
-    bottom: 20px;
+    bottom: 15px;
+}
+#listing_annonces_public .annonce_price.listing  {
+    bottom: -10px;
+    position: absolute;
 }
 .annonce_text p:nth-last-child(n) {
     margin-bottom: 0;
@@ -74,55 +86,19 @@
 
 /* Page Boutique publique */
 /* Focus */
-#focus_annonce{
+#focus_annonce {
     padding: 0 1rem;
-}#annonce_card_public {
-    margin-bottom: 40px;
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-start;
     justify-content: space-between;
-}
-#annonce_card_public .card_public {
-    width: 72%;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-#annonce_card_public .title_public {
-    font-family: 'Unkempt';
-    font-size: 1.7rem;
-    padding-top: .5rem;
-}
-#annonce_card_public .content_card_public {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
     gap: 1rem;
 }
-#annonce_card_public .card_public .image_card_public {
-    width: 35%;
+#focus_annonce .annonce_box {
+    flex: 2;
 }
-#annonce_card_public .card_public .description_card_public{
-    width: 60%;
-    display: flex;
-    flex-flow: column;
-    margin: auto 0;
-    gap: 2rem;
-}
-#annonce_card_public .card_public .description_card_public p {
-    padding-bottom: 1rem;
-}
-#annonce_card_public .card_public .description_card_public span {
-    font-weight: bold;
-    color: #F7941D;
-}
-#annonce_card_public .infos_vendeur {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    gap: 1rem;
-    width: 60%;
-    margin: 0 auto 30px;
-    padding: 1rem;
+#focus_annonce .annonce_box:nth-child(2n+1) {
+    flex-flow: unset;
 }
 /* Listing */
 #listing_annonces_public ul {
@@ -130,73 +106,76 @@
     flex-flow: row wrap;
     justify-content: space-between;
 }
-#listing_annonces_public .annonces_card:hover{
-    transform: scale(1.01);
-    transition: all .4s;
-    box-shadow: 5px 5px 10px grey;
-}
-#listing_annonces_public .annonces_card{
+#listing_annonces_public .annonces_card {
     width: 48%;
     margin: 1rem 0;
     box-shadow: 2px 2px 5px lightgrey;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-#listing_annonces_public .annonces_card span{
+#listing_annonces_public .annonces_card:hover {
+    transform: scale(1.01);
+    transition: all .4s;
+    box-shadow: 5px 5px 10px grey;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}   
+#listing_annonces_public .description_title {
     color: var(--orange);
 }
-#listing_annonces_public .annonces_card .content_card_public{
+#listing_annonces_public .annonces_card .content_card_public {
     display: flex;
     flex-flow: row nowrap;
 }
-#listing_annonces_public .annonces_card .content_card_public .image_card_public{
-    width: 30%;
+#listing_annonces_public .annonces_card .content_card_public .image_card_public {
+    width: 40%;
 }
-#listing_annonces_public .annonces_card .content_card_public .description_card_public{
+#listing_annonces_public .annonces_card .content_card_public .description_card_public {
     padding: 1rem 1rem 0 1rem;
-    width: 70%;
+    width: 62%;
 }
-#listing_annonces_public .annonces_card .content_card_public .description_card_public >*{
+#listing_annonces_public .annonces_card .content_card_public .description_card_public > * {
     margin-bottom: 1rem;
 }
-#listing_annonces_public .annonces_card .content_card_public .description_card_public .description_title{
-    font-family: 'Unkempt';
-}
-#listing_annonces_public .annonces_card .content_card_public .description_card_public .category_public{
+#listing_annonces_public .annonces_card .content_card_public .description_card_public .category_public {
     font-size: .9rem;
     color: black;
 }
-
+#listing_annonces_public .description_card_public {
+    position: relative;
+}
 /* RESPONSIVE */
-/* Page d'accueil / Page Annonces */
 @media (min-width: 750px) {
-    .annonce_box,
-    .annonce_box img {
-        max-height: 270px;
-    }
-}
-@media (min-width: 900px) {
-    .annonce_box,
-    .annonce_box img {
-        max-height: 250px;
-    }
-}
-@media (min-width: 1050px) {
     .annonce_box,
     .annonce_box img {
         max-height: 222px;
     }
+    #focus_annonce .annonce_box,
+    #focus_annonce .annonce_box img {
+        max-height: unset;
+    }
+}
+@media (min-width: 1000px) {
+    .annonce_box,
+    .annonce_box img {
+        max-height: 212px;
+    }
 }
 @media (max-width: 1050px) {
-    /* .annonce_box {
-        max-height: 250px;
-    } */
     .annonce_img {
         width: 40%;
     }
     .annonce_text {
-        width: 57%;
+        width: 60%;
     }
-    .annonce_text p {
-        padding: .2rem 0;
+    .annonce_text p.annonce_description {
+        margin: .5rem 0; 
+    }
+}
+@media (max-width: 950px){
+    p.annonce_type:nth-last-child(1) {
+        padding-bottom: 1rem;
+    }
+    .annonce_price.listing {
+        bottom: 10px;
     }
 }
 @media (max-width: 900px){
@@ -207,20 +186,82 @@
     .annonce_img {
         width: 45%;
     }
-    .annonce_text {
-        width: 52%;
+    #listing_annonces_public .annonces_card .content_card_public .image_card_public {
+        width: 45%;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .description_card_public {
+        width: 55%;
+    }
+    p.annonce_title.listing {
+        line-height: 1.5;
+        font-size: 1.3rem;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .description_card_public > * {
+        margin-bottom: .1rem;
     }
 }
 @media (max-width: 800px){
-    #listing_annonces_public ul, #avis_boutique ul{
+    /* Focus */
+    #focus_annonce {
+        width: 90%;
+        flex-flow: column wrap;
+        gap: 0;
+    }
+    #focus_annonce .annonce_img {
+        width: 100%;
+    }
+    #focus_annonce .annonce_img img {
+    max-height: 200px;
+    height: 100%;
+    object-fit: cover;
+    }
+    #focus_annonce .annonce_text {
+        padding: 0.5rem;
+        margin: 0 auto;
+        width: 100%;
+    }
+    #focus_annonce .annonce_box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    #focus_annonce .annonce_box:nth-child(2n+1) {
+        flex-flow: column wrap;
+    }
+    #focus_annonce .annonce_box {
+    max-height: unset;
+    }
+    /* Listing */
+    #listing_annonces_public ul, #avis_boutique ul {
         flex-flow: column nowrap;
         align-items: center !important;
     }
-    #listing_annonces_public .annonces_card, #avis_boutique .avis_box{
-        width: 80%;
+    #listing_annonces_public .annonces_card, #avis_boutique .avis_box {
+        width: 70%;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .description_card_public > * {
+        margin-bottom: unset;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .description_card_public {
+        padding: .5rem;
+    }
+    #listing_annonces_public p.annonce_type {
+        font-size: .8rem;
+    }
+    .annonce_price.listing {
+        bottom: 5px;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .image_card_public {
+        width: 25%;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .description_card_public {
+        width: 75%;
     }
 }
 @media (max-width: 750px){
+    #annonces {
+        margin: .5rem;
+    }
     .annonce_box {
     max-height: unset;
     }
@@ -271,12 +312,61 @@
     .annonce_text div{
         margin-bottom: 1rem;
     }
+    /* Listing */
+    #listing_annonces_public .annonces_card, #avis_boutique .avis_box {
+        width: 80%;
+    }
+}
+@media all and (max-width: 680px) {
+    .annonce_box {
+        width: 90%;
+    }
+    #listing_annonces_public .annonces_card, #avis_boutique .avis_box {
+        width: 95%;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .image_card_public {
+        width: 30%;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .description_card_public {
+        width: 70%;
+    }
+}
+@media (max-width: 500px) {   
+    #listing_annonces_public .annonces_card .content_card_public .image_card_public {
+        width: 40%;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .description_card_public {
+        width: 60%;
+    }
 }
 @media (max-width: 450px){
     #annonces {
         margin: 0 auto;
     }
+    .annonce_box {
+        width: 95%;
+    }
     .annonce_text a {
         padding: .5rem;
+    }
+}
+@media (max-width: 400px){
+    #listing_annonces_public .annonces_card .content_card_public {
+        flex-flow: column nowrap ;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .image_card_public,
+    #listing_annonces_public .annonces_card .content_card_public .description_card_public {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    p.annonce_type:nth-last-child(1) {
+        padding-bottom: 1.5rem;
+    }
+    #listing_annonces_public .annonces_card .content_card_public .image_card_public img {
+        max-height: 120px;
+        height: 100%;
+        object-fit: cover;
     }
 }

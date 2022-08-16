@@ -1,7 +1,9 @@
 #footer {
     background-image: url("../../../public/asset/images/meadow-3375052_1920.jpg");
 }
-#footer a {
+#footer a,
+#footer p,
+#footer span {
     color: lightgrey;
 }
 #footer a:hover {
@@ -29,7 +31,7 @@
 .footer_legals {
     display: flex;
     flex-flow: row nowrap;
-    color: rgb(192, 192, 192);
+    align-items: center;
 }
 .footer_legals li {
     font-size: .8rem;
@@ -37,10 +39,6 @@
 }
 .separator_legals {
     padding: .2rem .2rem;
-}
-.brand {
-    color: rgb(192, 192, 192);
-    /* padding: .5rem 0 .3rem; */
 }
 @media all and (max-width: 750px){
     .footer_box {
@@ -68,9 +66,8 @@
     }
 }
 @media all and (max-width: 375px){
-    .footer_infos {
-        flex-flow: column;
-        text-align: center;
+    #footer ul {
+        margin-bottom: 0;
     }
     .footer_infos li {
         font-size: .8rem;
@@ -80,8 +77,12 @@
         display: block;
         width: 10%;
         margin: .5rem 0;
+        background-color: lightgrey;
+        height: 1px;
+        border: none;
     }
-    .footer_legals {
+    .footer_legals,
+    .footer_infos {
         flex-flow: column wrap;
         text-align: center;
     }

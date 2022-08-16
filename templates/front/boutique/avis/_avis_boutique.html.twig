@@ -1,18 +1,20 @@
+{% block stylesheets %}
+    <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
+{% endblock %}
 <section id="avis_boutique" class="wrap">
     {% if avis %}
-        <h1  id="avis_listing" class="boutique_title title">Les avis</h1>
+        <h1 id="avis_listing" class="title_boutique">Les avis</h1>
         <ul>
             {% for av in avis %}
                 <li class="avis_box">
-                    <div class="avis_image d-flex ">
+                    <div class="avis_box_user">
                         {% if av.user.image %}
-                            <img src="{{ asset('uploads/profile/')~av.user.image }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                            <img class="avatar_avis" src="{{ asset('uploads/profile/')~av.user.image }}" alt="photo de profil">
                         {% else %}
-                            <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="" style="width: 33px;height: 33px;border-radius: 50%">
+                            <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                         {% endif %}
-                        <span style="margin: auto .5rem">{{ av.user.name|capitalize }}</span>
+                        <span class="user_name_avis">{{ av.user.name|capitalize }}</span>
                     </div>
-                    <br>
                     <div data-rating="{{ globalRating }}">
                         {% for i in 1..5 %}
                             {% if i <= av.rating %}
@@ -21,24 +23,24 @@
                                 <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                             {% endif %}
                         {% endfor %}
-                        <span>{{ av.title }}</span>
+                        <span><strong>{{ av.title }}</strong></span>
                     </div>
-                    <div><i>Avis émis le {{ av.createdAt|date('d m Y')  }}</i> </div>
-                    <br>
-                    <div> {{ av.commentaire  }} </div>
+                    <div><i>Avis émis le {{ av.createdAt|date('d/m/Y')  }}</i> </div>
+                    <div class="avis_comm">{{ av.commentaire }}</div>
                 </li>
             {% endfor %}
         </ul>
     {% endif %}
 
-    <h2 class="boutique_title title"> Laissez votre avis</h2>
+    <h2 class="title_boutique">Laissez votre avis</h2>
     <div class="avis_form">
+    {# <div> #}
         {% if app.user %}
             {% for av in avis %}
                 {% if av.user.id == app.user.id %}
                     {% set avisAlreadyExist = true %}
-                    <div style="text-align: center">
-                        <p>Vous avez déja donné votre avis sur cette boutique! </p>
+                    <div class="text-center">
+                        <p>Vous avez déja donné votre avis sur cette boutique !</p>
                         <p>Vous pouvez le modifier dans la section 'Avis' de votre profil.</p>
                     </div>
                 {% endif %}
@@ -46,15 +48,15 @@
 
             {% if avisAlreadyExist == false and app.user.id != boutique.user.id %}
                 <div>
-                    {% include 'front/boutique/avis/_form.html.twig' %}
+                    {% include 'front/profil/avis/_form.html.twig' %}
                 </div>
             {% elseif app.user.id == boutique.user.id %}
-                <div style="text-align: center">
+                <div class="text-center">
                     <p>Vous ne pouvez pas donner un avis sur votre propre boutique.</p>
                 </div>
             {% endif %}
         {% else %}
-            <div style="text-align: center">
+            <div class="text-center">
                 <a class="connect-link" href="{{ path('app_login') }}">Connectez-vous</a><span> pour donner votre avis !</span>
             </div>
         {% endif %}

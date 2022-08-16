@@ -11,6 +11,14 @@
 #header .logo {
     width: 10%;
 }
+.fixed {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    transform: translateY(0px);
+    transition: transform .5s;
+    width: 100%;
+    z-index: 10;
+}
 .main_nav {
     width: 70%; 
 }

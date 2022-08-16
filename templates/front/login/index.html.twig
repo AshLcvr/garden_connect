@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block body %}
-    <div class="wrapform security">
-        <div id="contener_form" class="">
+    <div class="wrapform">
+        <div id="contener_form">
             <form action="{{ path('app_login') }}" method="post">
                 <h1 class="title_section_home">Connexion</h1>
 
                 {% if error %}
                     <div class="bloc_form login">
-                        <div class="form-error" style="text-align: center">
+                        <div class="form-error">
                             <p>L'email ou le mot de passe sont invalides.</p>
                         </div>
                     </div>
@@ -23,8 +23,6 @@
                     <input type="text" id="username" name="_username" value="{{ last_username }}"/>
                 </div>
 
-
-
                 <div class="bloc_form login">
                     <label for="password">Mot de passe :</label>
                     <input type="password" id="password" name="_password"/>
@@ -33,8 +31,6 @@
                 <div class="forgot">
                     <a href="{{ path('app_reset_password') }}">Mot de passe oublié ?</a>
                 </div>
-
-
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="bloc_form btn-custom login">

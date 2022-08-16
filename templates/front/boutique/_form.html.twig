@@ -3,6 +3,7 @@
 {% endblock %}
 <div class="body">
     <div class="wrap boutique_form">
+    <div id="contener_form">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
 
         <div class="bloc_form">
@@ -10,13 +11,10 @@
             <p>Seuls les champs marqués d'un <span> *</span> sont obligatoires.</p>
         </div>
 
-        <div id="form_upload" class="bloc_form">
+        <div id="form_upload" class="bloc_form create">
             {{ form_label(form.upload) }}
-            <br>
             {{ form_widget(form.upload) }}
-            <br>
             <small>{{ form_help(form.upload) }}</small>
-            <br>
             <div class="form-error">
                 {% for label, messages in app.flashes %}
                     {% for message in messages %}
@@ -28,15 +26,17 @@
             </div>
         </div>
 
-        <div class="bloc_form">
-            {{ form_label(form.title) }}<span> *</span>
+        <div class="bloc_form create">
+            <div class="required">
+                {{ form_label(form.title) }}<span>&nbsp*</span>
+            </div>
             {{ form_widget(form.title) }}
             <small>{{ form_help(form.title) }}</small>
             <div class="form-error">
                 {{ form_errors(form.title) }}
             </div>
         </div>
-        <div class="bloc_form">
+        <div class="bloc_form create">
             {{ form_label(form.description) }}
             {{ form_widget(form.description) }}
             <small>{{ form_help(form.description) }}</small>
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="bloc_form" style="width: 48%">
+        <div class="bloc_form create" style="width: 48%">
             {{ form_label(form.telephone) }}
             {{ form_widget(form.telephone) }}
             <small>{{ form_help(form.telephone) }}</small>
@@ -54,15 +54,15 @@
             </div>
         </div>
 
-        <div class="bloc_form">
-            <h3>Votre addresse</h3>
+        <div class="bloc_form create explain">
+            <h3>Votre adresse</h3>
             <p>Une adresse complète permet une meilleure visibilité pour vos annonces.</p>
             <p>Votre adresse permet aux utilisateurs de situer votre boutique sur votre page publique.</p>
             <p>Vous pouvez désactiver la carte de votre page dans l'onglet <i>'Gérer ma boutique'</i> puis <i>'Mes préférences'</i>.</p>
         </div>
 
-        <div class="bloc_form d-flex" style="gap: 2rem; ">
-            <div class="bloc_form adress_form">
+        <div class="bloc_form bloc_adresse">
+            <div class="bloc_form create adress_form">
                 {{ form_label(form.adress) }}
                 {{ form_widget(form.adress) }}
                 <small>{{ form_help(form.adress) }}</small>
@@ -71,8 +71,10 @@
                 </div>
             </div>
 
-            <div class="bloc_form city_search">
-                {{ form_label(form.search) }}<span> *</span>
+            <div class="bloc_form create city_search">
+                <div class="required">
+                    {{ form_label(form.search) }}<span>&nbsp*</span>
+                </div>
                 {{ form_widget(form.search) }}
                 <small>{{ form_help(form.search) }}</small>
                 <div class="form-error">
@@ -83,17 +85,12 @@
                 <ul id="city_suggest" class="hidden"></ul>
             </div>
         </div>
-
-        {# <div class="bloc_submit mb-5">
-            <button class="btn btn-primary" style="border: 1px solid red;">{{ button_label|default('C\'est parti !') }}</button>
-        </div> #}
-        {# <div class="button_boutique" style="border: 1px solid purple;"> #}
             <div class="bloc_form btn-custom btq">
                 <span class="hover-effect btq">
                     <button>{{ button_label|default('C\'est parti !') }}</button>
                 </span>
             </div>
-        {# </div> #}
+        </div>
         {{ form_end(form) }}
     </div>
 </div>

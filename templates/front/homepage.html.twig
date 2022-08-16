@@ -11,11 +11,11 @@
           {%  for imageHero in imagesHero %}
             <li>
               <div class="hero_text">
-                <p class="hero_line1">Bienvenue sur Garden Connect !</p>
+                <p class="hero_line1">Bienvenue sur Garden Connect&nbsp!</p>
                 <p>Achetez ou vendez</p>
                 <p>des produits frais autour de chez vous</p>
               </div>
-              <img src="{{ asset('uploads/hero/'~imageHero.title) }}" alt="">
+              <img src="{{ asset('uploads/hero/'~imageHero.title) }}" alt="images d'illustrations">
             </li>
           {% endfor %}
       </ul>
@@ -26,7 +26,7 @@
     <div class="contener carousel">
       <h2 class="title_section_home">Que cherchez-vous ?</h2>
       <div class="flexslider" id="slider-category">
-        <ul class="slides relative">
+        <ul class="slides relative custom">
           {% for cat in categories %}
             <li class="card_cat">
               <img src="{{ asset('uploads/category/' ~ cat.image) }}" />
@@ -44,43 +44,10 @@
 
   <div class="separator_home"></div>
 
-  <section id="annonces" class="wrap">
     <a href="{{ path('app_annonce_recherche') }}" >
       <h2 class="title_section_home derniere_annonce">Les dernières annonces</h2>
     </a>
-    {% for annonce in annonces %}
-        <div class="annonce_box">
-          <div class="annonce_img">
-              <ul class="slides">
-                {% for image in annonce.imagesAnnonces %}
-                    <li class="li_annonce_img">
-                      <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                        <img src="{{ asset('uploads/mini/'~ image.title) }}" />
-                      </a>
-                    </li>
-                  {% endfor %}
-              </ul>
-          </div>
-          <div class="annonce_text">
-            <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link" >
-              <div>
-                <p class="annonce_title">{{ annonce.title }}</p>
-              </div>
-              <div class="annonce_description_box">
-                {% if annonce.description|length < 30 %}
-                  <p><span>Description : </span>{{ annonce.description }}</p>
-                {% else %}
-                  <p><span>Description : </span>{{ annonce.description|slice(0,150) }}...</p>
-                {% endif %}
-              </div>
-              <div class="annonce_price_box">
-                <p class="annonce_price">{{ annonce.price }}€/{{annonce.mesure.title}}</p>
-              </div>
-            </a>
-          </div>
-        </div>
-    {% endfor %}
-  </section>
+    {{ include('front/annonce/_annonces.html.twig') }}
 
   <div class="separator_home"></div>
 
@@ -89,7 +56,6 @@
     <div id="card_box" style="height: 400px"></div>
     <br>
   </section>
-
 {% endblock %}
 
 {% block javascripts %}

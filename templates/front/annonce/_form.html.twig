@@ -1,5 +1,5 @@
 <div class="body">
-    <div class="wrap annonce_form">
+    <div class="wrap annonce_form border_form">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
         <div class="bloc_form">
             {{ form_label(form.title) }}
@@ -11,10 +11,8 @@
         </div>
 
         <div class="bloc_form">
-
                 {{ form_label(form.description) }}
                 {{ form_widget(form.description) }}
-
             <small>{{ form_help(form.description) }}</small>
             <div class="form-error">
                 {{ form_errors(form.description) }}
@@ -71,18 +69,11 @@
                 {{ form_errors(form.upload) }}
             </div>
         </div>
-
-        {# <div class="bloc_submit"> #}
-            {# <button class="btn btn-primary">{{ button_label|default('C\'est parti !') }}</button> #}
-            {# <div class="button_boutique"> #}
-            <div class="bloc_form btn-custom btq">
-                <span class="hover-effect btq">
-                    <button>{{ button_label|default('C\'est parti !') }}</button>
-                </span>
-            </div>
-            {# </div> #}
-            {# </div> #}
-        {# </div> #}
+        <div class="bloc_form btn-custom btq">
+            <span class="hover-effect btq">
+                <button>{{ button_label|default('C\'est parti !') }}</button>
+            </span>
+        </div>
         {{ form_end(form) }}
     </div>
 </div>
