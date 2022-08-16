@@ -1,42 +1,31 @@
+.wrapform{
+    max-width: 700px ; width: 100%; margin: 0 auto;
+}
 .wrap.border_form,
 .wrapform.border_form {
     border: 1px solid rgb(222, 222, 222);
     padding: 1.2rem;
-    /* margin: 1rem auto 0; */
+}
+form {
+    margin: 0 auto;
 }
 label {
     font-family: 'Roboto', 'Arial', sans-serif;
     font-size: 1rem;
-    /* color: black; */
     color: rgb(70, 70, 70);
     font-weight: 500;
 }
-input:focus,
-textarea:focus {
-    box-shadow: unset;
-    /* border: 1px solid var(--orange); */
-    outline: 1px solid var(--orange);
+textarea {
+    resize: none !important;
 }
-.bloc_form input.form-control:focus,
-.bloc_form select.form-control:focus,
-.bloc_form textarea.form-control:focus {
-    box-shadow: unset;
-    border: 1px solid var(--orange);
-} 
-.bloc_form input.form-control:focus::placeholder,
-.bloc_form select.form-control::placeholder,
-input:focus,
-textarea:focus {
-    color: #d2d2d2;
-}
-
-/* #contener_form */
 input,
 input.form-control,
 textarea,
 textarea.form-control,
 select,
-select.form-control {
+select.form-control,
+textarea,
+textarea.form-control {
     background-color: rgb(245, 245, 245);
     border-radius: 12px;
     border: none;
@@ -45,35 +34,37 @@ select.form-control {
     padding: 10px 20px;
     height: auto;
 }
-textarea,
-textarea.form-control {
-    border: none;;
-    background-color: rgb(245, 245, 245);
+input:focus,
+textarea:focus,
+.bloc_form input.form-control:focus,
+.bloc_form select.form-control:focus,
+.bloc_form textarea.form-control:focus {
+    box-shadow: unset;
+    outline: unset;
+    border: 1px solid var(--orange);
 }
-.help-block ul {
+.bloc_form input.form-control:focus::placeholder,
+.bloc_form select.form-control:focus::placeholder,
+.bloc_form textarea.form-control:focus::placeholder,
+input:focus::placeholder,
+textarea:focus::placeholder {
+    color: #d2d2d2;
+}
+.help-block ul,
+.boutique_form .bloc_form.create,
+label.modif_password {
     margin-bottom: 0;
-}
-/* #contener_form input:focus {
-    outline: 2px solid var(--orange);
-} */
-.wrapform{
-    max-width: 700px ; width: 100%; margin: 0 auto;
 }
 #contener_form {
     display: flex;
     justify-content: center;
     padding: 1rem 0;
 }
-#contener_fotm.login {
-    padding: 0;
-}
 #contener_form form {
     width: 80%;
-    margin: 0 auto;
 }
 #contener_form.custom form {
     width: 100%;
-    margin: 0 auto;
 }
 #contener_form .bloc_form {
     display: flex;
@@ -81,92 +72,15 @@ textarea.form-control {
     gap: 0.3rem;
     justify-content: center;
     font: var(--text-font);
-    /* color: black; */
     color: rgb(70, 70, 70);
     font-family: 'Roboto', 'Arial', sans-serif;
     font-weight: 500;   
-}
-/* Formulaire Création de boutique */
-.boutique_form .bloc_form.create {
-    margin-bottom: 0;
 }
 .boutique_form .bloc_form.create .required {
     display: flex;
 }
 .boutique_form .bloc_form.create.tel {
     width: 50%;
-}
-/* #contener_form .bloc_form.bloc_adresse {
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 2rem;
-} */
-#contener_form .bloc_form.create.explain {
-    margin-bottom: 1rem;
-}
-/* Formulaire Laissez un avis Page Boutique publique */
-.avis_form .wrap.border_form {
-    border: none;
-    padding: 0;
-}
-#avis_boutique .avis_form {
-    border: solid 2px var(--vertclair);
-    margin-bottom: 3rem;
-    padding: 1rem;
-}
-#avis_boutique .avis_form .bloc_form {
-    margin-bottom: 1rem;
-}
-#avis_boutique .avis_form textarea {
-    height: 8rem;
-    resize: none;
-}
-/* Étoiles avis */
-.bloc_form.rating {
-    font-size: 2rem;
-}
-/* Formulaire login */
-#contener_form .bloc_form.login {
-    margin: 1rem auto;
-}
-
-/* Formulaire Modifier mon profil boutique / Modifier mon mot de passe */
-/* label.modif_profile, */
-label.modif_password {
-    margin-bottom: 0;
-    padding: .1rem .2rem;
-}
-/* #contener_form input.modif_profile, */
-#contener_form input.modif_password {
-    margin-bottom: 1rem;
-}
-
-/* Formulaires annonce */
-.annonce_form .bloc_form {
-    margin-bottom: 1rem;
-}
-.annonce_form .bloc_form textarea {
-    height: 15rem;
-    resize: none;
-}
-.annonce_form .bloc_submit{
-    display: flex;
-    justify-content: center;
-}
-.annonce_form .bloc_submit button {
-    width: 40%;
-    margin-top: 2rem;
-}
-/* Formulaires boutique */
-.boutique_form p {
-    margin: 0;
-}
-.boutique_form .bloc_form {
-    margin-bottom: 2rem;
-}
-.boutique_form .bloc_form textarea {
-    height: 15rem;
-    resize: none;
 }
 .boutique_form .bloc_form.create.adress_form {
     width: 49%;
@@ -176,7 +90,39 @@ label.modif_password {
     width: 49%;
 }
 #city_suggest {
-    margin-top: 0 ;
+    margin-top: 0;
+}
+#contener_form .bloc_form.create.explain,
+#avis_boutique .avis_form .bloc_form,
+#contener_form input.modif_password,
+.annonce_form .bloc_form,
+.boutique_form .bloc_form {
+    margin-bottom: 1rem;
+}
+/* Formulaire login */
+#contener_form .bloc_form.login {
+    margin: 1rem;
+}
+/* Formulaire Laissez un avis Page Boutique publique */
+.avis_form .wrap.border_form {
+    border: none;
+    padding: 1rem;
+}
+#avis_boutique .avis_form {
+    border: solid 2px var(--vertclair);
+    margin-bottom: 3rem;
+}
+#avis_boutique .avis_form textarea,
+.annonce_form .bloc_form textarea,
+.boutique_form .bloc_form textarea {
+    height: 8rem;
+}
+/* Étoiles avis */
+.bloc_form.rating {
+    font-size: 2rem;
+}
+.boutique_form p {
+    margin: 0;
 }
 /* Inscription boutons radio */
 .radio_box {
@@ -189,8 +135,8 @@ label.modif_password {
 }
 /* Pages Login, Register , Mot de passe oublié */
 .security {
-    margin-top: 8rem ;
-    margin-bottom: 8rem ;
+    margin-top: 8rem;
+    margin-bottom: 8rem;
 }
 .forgot {
     text-align: center;
@@ -207,8 +153,6 @@ label.modif_password {
 }
 /* Messages d'erreur */
 .form-error {
-    /* border: 1px solid red; */
-    /* min-height: 22px; */
     color: red;
 }
 h5.subtitle {
@@ -234,26 +178,23 @@ h5.subtitle {
     .wrapform.border_form {
     padding: 1rem;
     }
-    #contener_form button {
+    /* #contener_form button {
         font-size: 1rem;
-    }
-    .bloc_form.rating {
-        font-size: 1.5rem;
-    }
-    .boutique_form .bloc_form {
-        margin-bottom: 1rem;
+    } */
+    input,
+    input.form-control,
+    select {
+        font-size: 1rem;
     }
     label {
         font-size: .9rem;
     }
-    #contener_form input,
-    input, input.form-control,
-    select {
-        font-size: 1rem;
+    .bloc_form.rating {
+        font-size: 1.5rem;
     }
-
 }
 @media all and (max-width: 700px) {
+    /* Formulaire boutique base */
     .boutique_form .bloc_form.create.tel,
     .boutique_form .bloc_form.create.adress_form,
     .boutique_form .bloc_form.create.city_search {
@@ -276,19 +217,21 @@ h5.subtitle {
     }
 }
 @media all and (max-width: 375px){
-    #contener_form label {
+    /* #contener_form label, */
+    label {
         font-size: .9rem;
     }
-    #contener_form input {
+    /* #contener_form input, */
+    input {
+        font-size: 1rem;
+    }
+    .bloc_form.rating {
         font-size: 1rem;
     }
     .forgot {
         font-size: .8rem;
     }
-    #contener_form button {
+    /* #contener_form button {
         font-size: .9rem;
-    }
-    .bloc_form.rating {
-        font-size: 1rem;
-    }
+    } */
 }
