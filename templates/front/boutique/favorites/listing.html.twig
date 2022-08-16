@@ -16,28 +16,31 @@
                         <span>{{ fav.boutique.user.name|capitalize }}</span>
                         <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
                         <div class="block_rating">
-                            {% for key, globalRating in totalGlobalRating %}
-                                {% if key == fav.boutique.id %}
-                                    <span class="rating" data-rating="{{ globalRating }}">
-                                        {% for i in 1..5 %}
-                                            {% if i <= globalRating|round %}
-                                                {% if (i - globalRating) > 0  %}
-                                                    <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
-                                                {% else %}
-                                                    <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                                                {% endif %}
-                                            {% else %}
-                                                <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </span>
-                                    {% for key, nbr in totalNumberAvis %}
-                                        {% if key == fav.boutique.id %}
-                                            <span>({{ nbr }} avis)</span>
-                                        {% endif %}
+                            {% if fav.boutique.avis|length == 0 %}
+                                    {% for i in 1..5 %}
+                                        <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                     {% endfor %}
-                                {% endif %}
-                            {% endfor %}
+                                    <span>({{ fav.boutique.avis|length }} avis)</span>
+                            {% else %}
+                                {% for key, globalRating in totalGlobalRating %}
+                                    {% if key == fav.boutique.id %}
+                                        <span class="rating" data-rating="{{ globalRating }}">
+                                            {% for i in 1..5 %}
+                                                {% if i <= globalRating|round %}
+                                                    {% if (i - globalRating) > 0  %}
+                                                        <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+                                                    {% else %}
+                                                        <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </span>
+                                        <span>({{ fav.boutique.avis|length }} avis)</span>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         </div>
                         <div class="block_buttons btn_favory">
                             <div class="bloc_form btn-custom btq favory">
@@ -48,6 +51,7 @@
                             <span title="Retirer des favoris">
                             {{ include('front/boutique/favorites/_delete_form.html.twig') }}
                             </span>
+                        </div>
                     </div>
                 </li>
             {% endfor %}

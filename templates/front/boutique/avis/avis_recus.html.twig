@@ -8,7 +8,7 @@
     <div class="wrap2">
     <h1 class="title_top">Avis reçus</h1>
         <div class="container_avis">
-            {% if mesAvis %}
+            {% if mesAvis|length > 0 %}
                 <ul>
                     {% for avi in mesAvis %}
                         <li class="recus">

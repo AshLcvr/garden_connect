@@ -35,7 +35,7 @@ class FavoryController extends AbstractController
     #[Route('/favorites/listing', name: 'app_listing_favory')]
     public function listingFavorites(Request $request, PaginatorInterface $paginator): Response
     {
-        $user = $this->getUser();
+        $user     = $this->getUser();
         $favories = $user->getFavories();
 
         $globalRating = [];
@@ -66,7 +66,7 @@ class FavoryController extends AbstractController
         return $this->render('front/boutique/favorites/listing.html.twig',[
             'favories' => $favories,
             'totalGlobalRating' => $totalGlobalRating,
-            'totalNumberAvis' => $totalNumberAvis
+            'totalNumberAvis' => $totalNumberAvis,
         ]);
     }
 
