@@ -8,7 +8,7 @@ button.btn {
     border-radius: unset !important; 
 }
 .hover-effect a {
-    display:block;
+    display: block;
 }
 /* 
 FRONT Pages Inscription / Connexion / Annonces / Boutique publique (Laisser un avis)
@@ -315,7 +315,7 @@ span.avis {
         /* flex: 1; */
         display: contents;
     }
-        .btn-custom a {
+    .btn-custom a {
         padding: .5rem;
     }
 
@@ -325,7 +325,7 @@ span.avis {
         width: 50%;
     }
 }
-@media (max-width: 600px){
+@media (max-width: 600px) {
     .bloc_form.btn-custom.avis {
         width: 80%;
     }
@@ -333,7 +333,7 @@ span.avis {
         width: 60%;
     }
 }
-@media (max-width: 500px){
+@media (max-width: 500px) {
     .bloc_form.btn-custom {
         width: 80%;
     }
@@ -345,15 +345,15 @@ span.avis {
         padding: .5rem;
     }
 }
-@media (max-width: 450px){
+@media (max-width: 450px) {
     .bloc_form.btn-custom {
         width: 100%;
     }
 }
-@media (max-width: 350px){
+@media (max-width: 350px) {
     .btn-custom a {
         font-size: .9rem;
-        padding: .5rem;
+        /* padding: .5rem; */
     }
 }
 
