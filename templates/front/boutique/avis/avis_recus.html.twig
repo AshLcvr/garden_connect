@@ -3,6 +3,10 @@
     <title>Avis reçus</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('avis_boutique') }}
+{% endblock %}
+
 {% block body %}
 <div id="container_profil">
     <div class="wrap2">
@@ -19,40 +23,35 @@
                                     {% else %}
                                         <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                                     {% endif %}
-                                    <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
+                                    <span class="user_name_avis">{{ avi.user.surname|capitalize }}</span>
                                 </div>
                                 <div>
                                     {% for i in 1..5 %}
                                         {% if i <= avi.rating %}
                                             <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                         {% else %}
-                                            <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
+                                            <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                         {% endif %}
-                                        <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
-                                    </div>
-                                    <div>
-                                        {% for i in 1..5 %}
-                                            {% if i <= avi.rating %}
-                                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                                            {% else %}
-                                                <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                                            {% endif %}
-                                        {% endfor %}
-                                        <span><strong>&nbsp&nbsp{{ avi.title }}</strong></span>
-                                    </div>
-                                    <div> {{ avi.commentaire  }} </div>
-                                    <div><i>Avis émis le {{ avi.createdAt|date('d/m/Y')  }}</i> </div>
+                                    {% endfor %}
+                                    <span><strong>&nbsp&nbsp{{ avi.title }}</strong></span>
                                 </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <div class="js-filter-pagination" id="pagination_box" style="border: 1px solid">
-                        {{ knp_pagination_render(mesAvis) }}
-                    </div>
-                {% else %}
-                    <h2 style="border: 10px solid black;">Vous n'avez pas reçu d'avis.</h2>        
-                {% endif %}
+                                <div> {{ avi.commentaire  }} </div>
+                                <div><i>Avis émis le {{ avi.createdAt|date('d/m/Y')  }}</i> </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                 </ul>
+                <div class="js-filter-pagination" id="pagination_box">
+                    {{ knp_pagination_render(mesAvis) }}
+                </div>
+            {% else %}
+                <h2>Vous n'avez pas reçu d'avis.</h2>
+            {% endif %}
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ encore_entry_script_tags('avis_boutique') }}
 {% endblock %}

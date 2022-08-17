@@ -3,6 +3,10 @@
     <title>Avis émis</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('avis_boutique') }}
+{% endblock %}
+
 {% block body %}
 <div id="container_profil">
     <div class="wrap wrap_avis">
@@ -98,4 +102,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('avis_boutique') }}
 {% endblock %}

@@ -4,6 +4,10 @@
     <title>Boutique index</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('index_boutique') }}
+{% endblock %}
+
 {% block body %}
     <section class="boutique_accueil">
         <div class="wrap2">
@@ -14,11 +18,11 @@
                     <div class="message_info">
                         <p>D'ici, vous pouvez :</p>
                         <ul>
-                            <li>voir et gérer vos boutiques favorites,</li>
-                            <li>accéder aux informations de votre boutique et les modifier (photo, description, coordonnées),</li>
-                            <li>ajouter vos annonces, les modifer, les supprimer ou les désactiver temporairement...,</li>
-                            <li>voir les avis que vous avez reçus, gérer ceux que vous avez émis (les modifier ou les supprimer), </li>
-                            <li>accéder à vos messages </li>
+                            <li>- voir et gérer vos boutiques favorites,</li>
+                            <li>- accéder aux informations de votre boutique et les modifier (photo, description, coordonnées),</li>
+                            <li>- ajouter vos annonces, les modifer, les supprimer ou les désactiver temporairement...,</li>
+                            <li>- voir les avis que vous avez reçus, gérer ceux que vous avez émis (les modifier ou les supprimer), </li>
+                            <li>- accéder à vos messages </li>
                         </ul>
                     </div>
                 </div>
@@ -32,4 +36,9 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('index_boutique') }}
 {% endblock %}

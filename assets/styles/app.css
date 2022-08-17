@@ -23,7 +23,7 @@ body {
     color: rgb(70, 70, 70);
     font-family: 'Roboto', sans-serif;
 }
-ul, ol{
+ul, ol, li{
     list-style: none;
 }
 a {
@@ -98,7 +98,6 @@ img {
 .inline-block {
     display: inline-block;
 }
-
 .favory {
     color: var(--orange);
 }

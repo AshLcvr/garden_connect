@@ -4,6 +4,10 @@
     <title>Modifier une annonce</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('Formulaires') }}
+{% endblock %}
+
 {% block body %}
 <h1 class="title_top">Modifier mon annonce</h1>
 <div class="card-body wrap">
@@ -19,4 +23,8 @@
     </div>
     {{ include('front/annonce/_form.html.twig', {'button_label': 'Modifier'}) }}
 </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ encore_entry_script_tags('Formulaires') }}
 {% endblock %}

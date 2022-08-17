@@ -1,6 +1,3 @@
-{% block stylesheets %}
-    <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
-{% endblock %}
 <div class="body">
     <div class="wrap boutique_form border_form">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
@@ -37,9 +34,6 @@
                     </span>
                 </div>
             </div>
-            {{ form_end(form) }}
-        </div>
+        {{ form_end(form) }}
     </div>
-{% block javascripts %}
-    {{ encore_entry_script_tags('back_boutique') }}
-{% endblock %}
+</div>

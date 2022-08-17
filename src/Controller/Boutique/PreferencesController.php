@@ -21,7 +21,7 @@ class PreferencesController extends AbstractController
         ]);
     }
 
-    #[Route('/mespreferences/card', name: 'app_toggle_Cardactive')]
+    #[Route('/mespreferences/card', name: 'app_toggle_cardActive')]
     public function toggleCardActive(BoutiqueRepository $boutiqueRepository): Response
     {
         $user = $this->getUser();

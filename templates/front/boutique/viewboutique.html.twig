@@ -14,7 +14,7 @@
     {% else %}
         {{ encore_entry_link_tags('focus_annonce') }}
     {% endif %}
-    {{ encore_entry_link_tags('flexslider') }}
+{#    {{ encore_entry_link_tags('flexslider') }}#}
     <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
 {% endblock %}
 
@@ -87,7 +87,7 @@
         {% endif %}
         <section class="wrap">
             <h1 class="title_boutique">Où me trouver ?</h1>
-            <div id="boutique_coordinates" style="height: 400px; width: 80%; margin: 1rem auto;" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
+            <div id="boutique_coordinates" style="height: 400px; width: 80%; margin: 1rem auto;z-index: 3;" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
         </section>
     {% endif %}
 
@@ -169,7 +169,6 @@
                             </div>
                             <div class="description_card_public">
                                 <div class="description_title">
-                                    {# <h3>{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le 30/07/2022</span></h3> #}
                                     <p class="annonce_title listing">{{ annonce.title }}&nbsp&nbsp</p><span class="span_created">Mis en ligne le 30/07/2022</span>
                                 </div>
                                 <div class="description_category">
@@ -195,13 +194,10 @@
 
 {% block javascripts %}
     {% if annonce == null %}
-        {{ encore_entry_script_tags('leaflet') }}
         {{ encore_entry_script_tags('public_boutique') }}
     {% else %}
         {{ encore_entry_script_tags('focus_annonce') }}
     {% endif %}
-    {{ encore_entry_script_tags('flexslider') }}
-
     <script>
         $(document).ready(function () {
             const boutton_favory =    $('.favory_button')

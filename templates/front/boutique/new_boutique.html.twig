@@ -1,12 +1,11 @@
 {% extends 'layout/front_base.html.twig' %}
-{# {% extends 'layout/boutique_base.html.twig' %} #}
-
 
 {% block title %}
-    Création de boutique
+    Création de la boutique
 {% endblock %}
 
 {% block stylesheets %}
+    {{ encore_entry_link_tags('Formulaires') }}
     {{ encore_entry_link_tags('back_boutique') }}
 {% endblock %}
 
@@ -15,4 +14,10 @@
         <h1 class="title_top">Création de la boutique</h1>
         {{ include('front/boutique/_form.html.twig') }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('Formulaires') }}
+    {{ encore_entry_script_tags('back_boutique') }}
+    <script></script>
 {% endblock %}
