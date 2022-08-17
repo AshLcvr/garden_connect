@@ -4,6 +4,10 @@
     <title>Messagerie</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('Messagerie') }}
+{% endblock %}
+
 {% block body %}
     <h1 class="title_top">Conversation</h1>
     <div class="chatbox-holder">
@@ -45,7 +49,7 @@
     </div>
     <div class="bloc_form btn-custom btq">
         <span class="hover-effect btq">
-                <a href="{{ path('boutique_messagerie') }}">Retour conversations</a>
+                <a href="{{ path('boutique_messagerie') }}">Retour</a>
         </span>
     </div>
 {% endblock %}

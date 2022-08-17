@@ -29,8 +29,9 @@ Encore
 
     // Modules
     .addEntry('Flexslider', './assets/modules/Flexslider.js')
-    .addEntry('Leaflet', './assets/modules/Leaflet.js')
     .addEntry('Formulaires', './assets/modules/Formulaires.js')
+    .addEntry('Leaflet', './assets/modules/Leaflet.js')
+    .addEntry('Messagerie', './assets/modules/Messagerie.js')
 
     //Front
     .addEntry('homepage', './assets/templates/front/homepage.js')
@@ -38,9 +39,13 @@ Encore
     .addEntry('focus_annonce', './assets/templates/front/annonces/focus_annonce.js')
     .addEntry('public_boutique', './assets/templates/front/boutique/public_boutique.js')
 
-    // back_boutique
+    // Back_boutique
     .addEntry('preferences_boutique', './assets/templates/front/boutique/preferences_boutique.js')
     .addEntry('avis_boutique', './assets/templates/front/boutique/avis_boutique.js')
+
+    // Back_user
+
+    // Admin
 
     // Pages Erreurs, 404 & 403
     .addEntry('error404', './assets/templates/bundles/TwigBundle/Exception/error404.js')

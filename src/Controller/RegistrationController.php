@@ -32,10 +32,7 @@ class RegistrationController extends AbstractController
     private EmailVerifier $emailVerifier;
     private FormLoginAuthenticator $authenticator;
 
-    public function __construct(EmailVerifier $emailVerifier
-,
-                                FormLoginAuthenticator $authenticator
-    )
+    public function __construct(EmailVerifier $emailVerifier, FormLoginAuthenticator $authenticator)
     {
         $this->emailVerifier = $emailVerifier;
         $this->authenticator = $authenticator;
@@ -61,8 +58,7 @@ class RegistrationController extends AbstractController
 
             $authenticatorManager->authenticateUser($user, $this->authenticator, $request);
             if($form->get('role')->getData() === 'vendeur' ){
-                $this->addFlash('register_vendeur', 'Bienvenue sur Garden Connect !
-                Votre inscription a bien été prise en compte. Un email de validation vous a été envoyé. Vous pouvez maintenant créer votre boutique !');
+                $this->addFlash('register_vendeur', 'Bienvenue sur Garden Connect ! Votre inscription a bien été prise en compte. Un email de validation vous a été envoyé. Vous pouvez maintenant créer votre boutique !');
                  return $this->redirectToRoute('app_boutique_new');
             }else{
                 $this->addFlash('register_user', 'Bienvenue sur Garden Connect ! Votre inscription a bien été prise en compte. Un email de validation vous a été envoyé.');
