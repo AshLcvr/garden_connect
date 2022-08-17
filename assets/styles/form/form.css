@@ -1,4 +1,4 @@
-.wrapform{
+.wrapform {
     max-width: 700px ; width: 100%; margin: 0 auto;
 }
 .wrap.border_form,
@@ -8,6 +8,9 @@
 }
 form {
     margin: 0 auto;
+}
+form.inline-block {
+    margin: unset;
 }
 label {
     font-family: 'Roboto', 'Arial', sans-serif;
@@ -101,7 +104,7 @@ label.modif_password {
 }
 /* Formulaire login */
 #contener_form .bloc_form.login {
-    margin: 1rem;
+    margin: 1rem auto;
 }
 /* Formulaire Laissez un avis Page Boutique publique */
 .avis_form .wrap.border_form {

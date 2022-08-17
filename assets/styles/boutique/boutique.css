@@ -26,40 +26,32 @@
 .bg-gradient-primary.custom:nth-child(1) {
     padding-top: 1rem;
 }
+/* Chevrons */
 /* Liens sidebar */
 .sidebar-dark .nav-item .nav-link.custom,
-.sidebar-dark .nav-item .nav-link.custom_user {
-    color: dimgray;
-}
+.sidebar-dark .nav-item .nav-link.custom_user,
 .sidebar-dark .nav-item .nav-link i.custom,
-.sidebar-dark .nav-item .nav-link i.custom_user {
+.sidebar-dark .nav-item .nav-link i.custom_user,
+.sidebar-dark .nav-item .nav-link.custom[data-toggle="collapse"]::after,
+.sidebar-dark .nav-item .nav-link.custom_user[data-toggle="collapse"]::after {
     color: dimgray;
 }
+/* "INTERFACE" */
 /* Espace vendeur */
 .sidebar-dark .nav-item .nav-link.custom:hover,
 .sidebar-dark .nav-item .nav-link.custom:focus,
 .sidebar-dark .nav-item .nav-link.custom:hover i.custom,
-.sidebar-dark .nav-item .nav-link.custom:focus i.custom { 
+.sidebar-dark .nav-item .nav-link.custom:focus i.custom,
+.sidebar-dark .sidebar-heading.custom { 
     color: var(--vertfonce);
 }
+/* "INTERFACE" user */
 /* Espace user */
 .sidebar-dark .nav-item .nav-link.custom_user:hover,
 .sidebar-dark .nav-item .nav-link.custom_user:focus,
 .sidebar-dark .nav-item .nav-link.custom_user:hover i.custom_user,
-.sidebar-dark .nav-item .nav-link.custom_user:focus i.custom_user { 
-    color: var(--vertclair);
-}
-/* Chevrons */
-.sidebar-dark .nav-item .nav-link.custom[data-toggle="collapse"]::after {
-    color: dimgray;
-}
-/* "INTERFACE" */
-.sidebar-dark .sidebar-heading.custom {
-    color: var(--vertfonce);
-}
-/* "INTERFACE" user */
-.sidebar-dark .sidebar-heading.custom_user {
-    color: var(--orange);
+.sidebar-dark .nav-item .nav-link.custom_user:focus i.custom_user,
+.sidebar-dark .sidebar-heading.custom_user { 
     color: var(--vertclair);
 }
 /* Séparateurs */
@@ -82,25 +74,16 @@
 /* Container */
 .container-fluid.custom {
     padding: 2rem 1rem;
-    /* padding: 0; */
 }
-/**  **/
-/*  */
 
 /* Accueil Ma boutique */
 .boutique_accueil{
     display: flex;
     justify-content: center;
 }
-.boutique_accueil .wrap2{
-    max-width: 1100px;
-    width: 100%;
-}
-/* Titres */
 .title_top {
     text-align: center;
     padding: 1rem 0;
-    /* color: black; */
     color: rgb(70, 70, 70);
     font-size: 2.5rem;
     font-weight: 400;
@@ -111,7 +94,8 @@
 .title_top.with_sub {
     padding: 1rem 0 0;
 }
-.subtitle {
+.subtitle,
+.welcome {
     text-align: center;
 }
 .txt_top_boutique {
@@ -127,7 +111,6 @@
     border: 1px solid grey;
 }
 .welcome {
-    text-align: center;
     font-size: 1.7rem;
 }
 .message_info p {
@@ -139,25 +122,10 @@
 .boutique_accueil ul li{
     list-style: initial;
 }
-.boutique_accueil ul li, .boutique_accueil p{
+.boutique_accueil ul li,
+.boutique_accueil p {
     font-size: 1.2rem;
 }
-
-/* Page profil boutique */
-.modif_psd.btq {
-    color: var(--vertfonce);
-}
-.modif_psd.btq:hover {
-    color: var(--orange);
-}
-/* Page profil user */
-.modif_psd.user {
-    color: var(--vertclair);
-}
-.modif_psd.user:hover {
-    color: var(--orange);
-}
-
 /* Tableaux boutique */
 .card-body table th,
 .card-body table td {
@@ -172,16 +140,8 @@
 .card-body table td p {
     margin: 0;
 }
-.card-body table .table_actions{
+.card-body table .table_actions {
     width: 20%;
-}
-/* Détail boutique */
-div.boutique_infos {
-    /* margin: 1rem 0; */
-    border: 1px solid rgb(222, 222, 222);
-}
-h6.detail_btq_title {
-    font-weight: bold;
 }
 /* Messagerie */
 .chatbox-holder {
@@ -213,18 +173,12 @@ h6.detail_btq_title {
     .wrapper_text_boutique {
         align-items: center;
     }
-    /* Titres */
     .title_top {
         font-size: 1.8rem;
+        padding: 1.5rem 0 .5rem;
     }
     .welcome {
         font-size: 1.3rem;
-    }
-    .boutique_accueil ul li, .boutique_accueil p {
-        font-size: 1rem;
-    }
-    .title_top {
-    padding: 1.5rem 0 .5rem;
     }
 }
 @media (max-width: 600px){
@@ -233,7 +187,6 @@ h6.detail_btq_title {
     }
 }
 @media (max-width: 500px){
-    /* Titres */
     .title_top {
         font-size: 1.5rem;
     }
@@ -253,16 +206,10 @@ h6.detail_btq_title {
         border: none;
         margin: 0;
     }
-    .welcome {
-        font-size: 1.2rem;
-    }
     .message_info {
         padding: 0;
     }
     .boutique_accueil ul {
         margin-left: 0;
-    }
-    .boutique_accueil ul li, .boutique_accueil p {
-        font-size: .9rem;
     }
 }

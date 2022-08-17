@@ -83,6 +83,25 @@
     text-align: center;
     padding: 5rem 0;
 }
+/* Boutons */
+#filter_form .hover-effect.del_filters a {
+    display: inline-block;
+    padding: .5rem;
+    text-align: center;
+    background: linear-gradient(to right, transparent 50%, var(--orange) 50%);
+    background-size: 200% 100%;
+    background-position: right;
+}
+#filter_form .hover-effect.del_filters a:hover {
+    background-position: left;
+    color: var(--vertclair);
+}
+#filter_form .hover-effect.del_filters a:before,
+#filter_form .hover-effect.del_filters:before,
+#filter_form .hover-effect.del_filters a:after,
+#filter_form .hover-effect.del_filters:after {
+    background: var(--vertclair);
+}
 /* Tri prix / date */
 .wrap.sort {
     /* max-width: 1100px ; */
@@ -98,9 +117,6 @@
     gap: .5rem;
     /* margin: .5rem 0; */
 }
-/* .wrap.sort {
-    margin: .5rem 0;
-} */
 .recherche-tri p {
     text-align: center;
     margin-bottom: 0;

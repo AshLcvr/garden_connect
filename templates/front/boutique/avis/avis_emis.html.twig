@@ -42,10 +42,8 @@
                                 <span class="avis" title="Supprimer l'avis">{{ include('front/boutique/avis/_delete_form.html.twig') }}</span>
                             </div>
                         </div>
-
                         <div class="separator right"><i class="fa-solid fa-arrow-right"></i></div>
                         <div class="separator down"><i class="fa-solid fa-arrow-down"></i></div>
-
                         <div class="block_boutique">
                             <div>
                                 {% if avi.boutique.user.image %}
@@ -57,7 +55,7 @@
                             </div>
                             <div>
                                 <p><strong>{{ avi.boutique.title }}</strong></p>
-                                <span><i>Boutique en ligne depuis le : {{ avi.boutique.createdAt|date('d/m/Y') }}</i></span>
+                                <span><i>Boutique en ligne depuis le {{ avi.boutique.createdAt|date('d/m/Y') }}</i></span>
                             </div>
                             <div>
                                 {% for key, globalRating in totalGlobalRating %}
@@ -85,7 +83,7 @@
                             </div>
                             <div class="bloc_form btn-custom btq avis">
                                 <span class="hover-effect btq">
-                                    <a class="" href="{{ path('view_boutique', {id: avi.boutique.id}) }}">Voir la boutique</a>
+                                    <a href="{{ path('view_boutique', {id: avi.boutique.id}) }}">Voir la boutique</a>
                                 </span>
                             </div>
                         </div>
@@ -97,7 +95,7 @@
                 {{ knp_pagination_render(mesAvis) }}
             </div>
         {% else %}
-            <h1>Vous n'avez pas émis d'avis.</h1>        
+            <h3 class="text-center mess">Vous n'avez pas encore émis d'avis.</h3>        
         {% endif %}
         </div>
     </div>

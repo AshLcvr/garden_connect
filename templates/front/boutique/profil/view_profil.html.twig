@@ -3,11 +3,13 @@
 {% block name %}
     <name>{{app.user.name}}</name>
 {% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
 {% endblock %}
+
 {% block body %}
-    <div class="wrap2">
+    <div class="wrap">
         <h1 class="title_top with_sub">Profil</h1>
         <h4 class="subtitle">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
         <div class="block_btn_modify plus">
@@ -18,30 +20,30 @@
             </div>
         </div>
     </div>
-    <div class="card-body boutique_infos">
+    <div class="wrap border_form card-body">
         <div class="d-flex flex-column">
-            <div class="card-body user_infos">
+            <div class="card-body">
                 <div>
-                    <h6 class="detail_btq_title">Photo : </h6>
+                    <h6 class="bold">Photo : </h6>
                     <div>
                         {% if user.image %}
-                        <img src="{{ asset('uploads/profile/'~user.image) }}" alt="Images user" style=" width: 10%; border-radius: 50%">
+                        <img class="user_img_profile" src="{{ asset('uploads/profile/'~user.image) }}" alt="Image utilisateur">
                         {% endif %}
                     </div>
                 </div>
                 <hr>
                 <div>
-                    <h6 class="detail_btq_title">Email :</h6>
-                    {{ user.email  }}
+                    <h6 class="bold">Email :</h6>
+                    {{ user.email }}
                 </div>
                 <hr>
                 <div>
-                    <h6 class="detail_btq_title">Prénom :</h6>
+                    <h6 class="bold">Prénom :</h6>
                     {{ user.name }}
                 </div>
                 <hr>
                 <div>
-                    <h6 class="detail_btq_title">Nom :</h6>
+                    <h6 class="bold">Nom :</h6>
                     {{ user.surname }}
                 </div>
                 <hr>

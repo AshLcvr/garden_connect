@@ -1,46 +1,46 @@
 {% extends 'layout/front_profil_base.html.twig' %}
 
 {% block container %}
-<div class="wrap2">
-    <h1 class="title_top with_sub">Profil</h1>
-    <h4 class="subtitle">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
-    <div class="block_btn_modify plus">
-        <div class="bloc_form btn-custom modify plus">
-            <span class="hover-effect modify">
-                <a class="modif_user" name="Modifier mon profil" class="" href="{{ path('edit_profil') }}"><i class="fa-solid fa-pen-to-square"></i></a>
-            </span>
+    <div class="wrap">
+        <h1 class="title_top with_sub">Profil</h1>
+        <h4 class="subtitle">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
+        <div class="block_btn_modify plus">
+            <div class="bloc_form btn-custom modify plus">
+                <span class="hover-effect modify">
+                    <a class="modif_user" name="Modifier mon profil" href="{{ path('edit_profil') }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                </span>
+            </div>
         </div>
     </div>
-</div>
-<div class="card-body boutique_infos">
-    <div class="d-flex flex-column">
-        <div class="card-body user_infos">
-            <div>
-                <h6 class="detail_btq_title">Photo : </h6>
+    <div class="wrap border_form card-body">
+        <div class="d-flex flex-column">
+            <div class="card-body">
                 <div>
-                {% if user.image %}
-                <img src="{{ asset('uploads/profile/'~user.image) }}" alt="Image user" style=" width: 10%; border-radius: 50%">
-                {% endif %}
+                    <h6 class="bold">Photo : </h6>
+                    <div>
+                    {% if user.image %}
+                        <img class="user_img_profile" src="{{ asset('uploads/profile/'~user.image) }}" alt="Image utilisateur" style=" width: 10%; border-radius: 50%">
+                    {% endif %}
+                    </div>
                 </div>
+                <hr>
+                <div>
+                    <h6 class="bold">Email :</h6>
+                    {{ user.email }}
+                </div>
+                <hr>
+                <div>
+                    <h6 class="bold">Prénom :</h6>
+                    {{ user.name }}
+                </div>
+                <hr>
+                <div>
+                    <h6 class="bold">Nom :</h6>
+                        {{ user.surname }}
+                </div>
+                <hr>
+                <a class="modif_psd user" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>
             </div>
-            <hr>
-            <div>
-                <h6 class="detail_btq_title">Email :</h6>
-                {{ user.email  }}
-            </div>
-            <hr>
-            <div>
-                <h6 class="detail_btq_title">Prénom :</h6>
-                {{ user.name }}
-            </div>
-            <hr>
-            <div>
-                <h6 class="detail_btq_title">Nom :</h6>
-                    {{ user.surname }}
-            </div>
-            <hr>
-            <a class="modif_psd user" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>
         </div>
     </div>
-</div>
 {% endblock %}

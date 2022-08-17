@@ -53,26 +53,26 @@
     </div>
 
     <div class="boutique_accueil">
-        <div class="card-body boutique_infos">
+        <div class="wrap border_form card-body">
             <div class="d-flex flex-column">
-                <h6 class="detail_btq_title">Photo : </h6>
+                <h6 class="bold">Photo : </h6>
                 {%  for imageboutique in boutique.imagesBoutiques %}
                         <img src="{{ asset('uploads/boutique/imageBoutiqueDefault.jpg') }}" alt="Images boutique">
                 {% endfor %}
             </div>
             <hr>
             <div class="d-flex flex-column">
-                <h6 class="detail_btq_title">Description :</h6>
+                <h6 class="bold">Description :</h6>
                 {{ boutique.description  }}
             </div>
             <hr>
             <div class="d-flex flex-column">
-                <h6 class="detail_btq_title">Téléphone :</h6>
+                <h6 class="bold">Téléphone :</h6>
                 {{ boutique.telephone }}
             </div>
             <hr>
             <div class="d-flex flex-column">
-                <h6 class="detail_btq_title">Adresse:</h6>
+                <h6 class="bold">Adresse:</h6>
                 <div class="d-flex flex-column">
                     <ul class="text-align-center">
                         <li>{{ boutique.adress }}</li>

@@ -1,20 +1,54 @@
-/* Style des boutons */
 button {
     background: transparent;
     border: unset;
     border: none;
+    width: 100%;
 }
 button.btn {
     border-radius: unset !important; 
 }
+.hover-effect,
 .hover-effect a {
     display: block;
+    width: 100%;
 }
-/* 
-FRONT Pages Inscription / Connexion / Annonces / Boutique publique (Laisser un avis)
-BACK BOUTIQUE Pages Espace boutique / Ajouter une annonce
-http://localhost:3000/recherche
-*/
+/* Block */
+.block_btn_modify.back {
+    justify-content: flex-end;
+    display: flex;
+    gap: .5rem;
+    margin-bottom: .5rem;
+}
+.block_buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: .5rem;
+    margin: .5rem auto;
+}
+.block_buttons.btn_favory {
+    justify-content: center;
+    margin-bottom: 0;
+}
+.block_buttons.avis {
+    justify-content: unset;
+    margin: unset; 
+    width: 100%;
+}
+.block_submit {
+    margin: 1rem 0;
+}
+/* Gérer mes annonces */
+.block_btn_modify,
+.block_btn_inactive,
+.block_btn_delete {
+    display: inline-block;
+}
+.block_btn_modify.plus {
+    width: 100%;
+    padding: .5rem 0;
+}
 /* Boutons par défaut */
 .btn-custom {
     width: 40%;
@@ -26,7 +60,6 @@ http://localhost:3000/recherche
 }
 .btn-custom .hover-effect {
     position: relative;
-    display: block;
 }
 .btn-custom .hover-effect:before {
     width: 2px;
@@ -45,16 +78,13 @@ http://localhost:3000/recherche
     background: var(--orange);
     transition: 500ms ease all;
 }
-/*  */
-.btn-custom.btq .hover-effect:before,
-.btn-custom.btq .hover-effect:after {
-    background: var(--vertfonce);
-}
-/*  */
 .btn-custom .hover-effect:hover:before {
     height: 100%;
 }
-.btn-custom .hover-effect:hover:after {
+.btn-custom .hover-effect:hover:after,
+.btn-custom button:hover:after,
+.btn-custom a:hover:after
+{
     width: 100%;
 }
 .btn-custom button,
@@ -71,26 +101,28 @@ http://localhost:3000/recherche
     display: block; 
     text-align: center;
 }
-/* BTQ */
 .btn-custom.btq button,
 .btn-custom.btq a {
     background: linear-gradient(to right, white 50%, var(--vertfonce) 50%);
     background-size: 200% 100%;
     background-position: right;
 }
-/*  */
+.btn-custom button:hover,
+.btn-custom a:hover,
+.btn-custom.btq button:hover,
+.btn-custom.btq a:hover,
+.hover-effect.inactive a:hover,
+.hover-effect.delete a:hover {
+    background-position: left;
+}
 .btn-custom button:hover,
 .btn-custom a:hover {
     color: var(--orange);
-    background-position: left;
 }
-/* BTQ */
 .btn-custom.btq button:hover,
 .btn-custom.btq a:hover {
     color: var(--vertfonce);
-    background-position: left;
 }
-/*  */
 .btn-custom button:before,
 .btn-custom button:after,
 .btn-custom a:before,
@@ -102,14 +134,14 @@ http://localhost:3000/recherche
     background: var(--orange);
     transition: 500ms ease all;
 }
-/* BTQ */
 .btn-custom.btq button:before,
 .btn-custom.btq button:after,
+.btn-custom.btq span:before,
+.btn-custom.btq span:after,
 .btn-custom.btq a:before,
 .btn-custom.btq a:after {
     background: var(--vertfonce);
 }
-/*  */
 .btn-custom button:before,
 .btn-custom a:before {
     height: 0%;
@@ -124,78 +156,25 @@ http://localhost:3000/recherche
 .btn-custom a:hover:before {
     height: 100%;
 }
-.btn-custom button:hover:after,
-.btn-custom a:hover:after {
-    width: 100%;
-}
-/* Page Annonces */
-/* Supprimer les filtres */
-#filter_form .hover-effect.del_filters {
-    display: inline-block;
-    width: 100%;
-}
-#filter_form .hover-effect.del_filters a {
-    display: inline-block;
-    padding: .5rem;
-    text-align: center;
-    background: linear-gradient(to right, transparent 50%, var(--orange) 50%);
-    background-size: 200% 100%;
-    background-position: right;
-}
-#filter_form .hover-effect.del_filters a:hover {
-    background-position: left;
-    color: var(--vertclair);
-}
-#filter_form .hover-effect.del_filters a:before,
-#filter_form .hover-effect.del_filters:before,
-#filter_form .hover-effect.del_filters a:after,
-#filter_form .hover-effect.del_filters:after {
-    background: var(--vertclair);
-}
-/*
-Pages Détails boutique / Gérer mes annonces / Boutiques favorites
-http://localhost:3000/boutique/detail
-*/
-.block_buttons {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-end;
-    align-items: baseline;
-    gap: .5rem;
-    margin: .5rem auto;
-}
-.block_submit {
-    margin: 1rem 0;
-}
-/* Page Modifier mon mot de passe */
-/* Boutons favoris (user/boutique) */
-.block_buttons.btn_favory {
-    justify-content: center;
-}
-/* Page Avis émis */
-.block_buttons.avis {
-    justify-content: unset;
-    margin: unset; 
-    width: 100%;
-}
 span.avis {
     flex:2;
 }
 .btn-custom.avis {
     width: 50%;
 }
-/* Gérer mes annonces */
-.block_btn_modify,
-.block_btn_inactive,
-.block_btn_delete {
-    display: inline-block;
-}
 .btn-custom.modify,
 .btn-custom.inactive,
 .btn-custom.delete,
-.btn-custom.favory {
+.btn-custom.favory,
+.hover-effect.modify {
     width: unset;
     margin: unset;
+}
+.hover-effect.modify i,
+.hover-effect.inactive i,
+.hover-effect.delete i {
+    width: 25px;
+    color:white;
 }
 .hover-effect.inactive a {
     background: linear-gradient(to right, transparent 50%, var(--orange) 50%);
@@ -207,67 +186,39 @@ span.avis {
     background-size: 200% 100%;
     background-position: right;
 }
-.hover-effect.modify a,
-.hover-effect.inactive a,
-.hover-effect.delete a {
-    width: 100%;
+.btn-custom .hover-effect.delete:before,
+.btn-custom .hover-effect.delete:after,
+.btn-custom.delete button:before,
+.btn-custom.delete button:after,
+.btn-custom.delete span:before,
+.btn-custom.delete span:after,
+.btn-custom.delete a:before,
+.btn-custom.delete a:after {
+    background: var(--rouge_supp);
+}
+.hover-effect.delete a:hover,
+.hover-effect.delete:hover i
+{
+    color: var(--rouge_supp);
+}
+.hover-effect.modify.btq:hover i {
+    color: var(--vertfonce);
 }
 .hover-effect.inactive a:hover,
-.hover-effect.delete a:hover {
-    background-position: left;
-}
-.hover-effect.modify a.modif_user:hover {
-    color: var(--vertclair);
-}
-.hover-effect.inactive a:hover {
-    color: var(--orange);
-}
-.hover-effect.delete a:hover {
-    color: var(--rouge_supp);
-}
-.hover-effect.modify i,
-.hover-effect.inactive i,
-.hover-effect.delete i {
-    width: 25px;
-    color:white;
-}
-.hover-effect.modify:hover i {
-    color:var(--vertfonce);
-}
 .hover-effect.modify a.modif_user:hover i,
 .hover-effect.inactive:hover i {
-    color:var(--orange);
+    color: var(--orange);
 }
-.hover-effect.delete:hover i {
-    color: var(--rouge_supp);
-}
-.btn-custom.inactive span:before, .btn-custom.inactive span:after {
+.btn-custom.inactive span:before,
+.btn-custom.inactive span:after,
+.btn-custom.inactive a:before,
+.btn-custom.inactive a:after 
+{
     background: var(--orange);
-}
-.btn-custom.inactive a:before, .btn-custom.inactive a:after {
-    background: var(--orange);
-}
-.btn-custom.delete span:before, .btn-custom.delete span:after {
-    background: var(--rouge_supp);
-}
-.btn-custom.delete a:before, .btn-custom.delete a:after {
-    background: var(--rouge_supp);
-}
-/* Page Mes annonces */
-.block_btn_modify.plus {
-    width: 100%;
-    padding: .5rem 0;
 }
 .btn-custom.modify.plus {
     display: flex;
     justify-content: flex-end;
-}
-/* Page Modifier une annonce */
-.block_btn_modify.back {
-    justify-content: flex-end;
-    display: flex;
-    gap: .5rem;
-    margin-bottom: .5rem;
 }
 /* Formulaire search */
 .hover-effect.search .btn {
@@ -281,23 +232,18 @@ span.avis {
 .table_actions .btn-custom a.conv {
     padding: .3rem;
 }
-.block_buttons.btn_favory {
-    margin-bottom: 0;
-}
 /* RESPONSIVE */
 @media (max-width: 1100px) {
     .bloc_form.btn-custom {
         width: 40%;
-    }
-    .bloc_form.btn-custom.favory {
-        width: unset;
     }
     .btn-custom.avis {
         width: 60%;
     }
     .bloc_form.btn-custom.modify,
     .bloc_form.btn-custom.inactive,
-    .bloc_form.btn-custom.delete {
+    .bloc_form.btn-custom.delete,
+    .bloc_form.btn-custom.favory {
         width: unset;
     }
 }
@@ -308,17 +254,14 @@ span.avis {
 }
 @media (max-width: 800px) {
     .btn-custom.avis {
-        /* width: unset; */
         flex: 1;
     }
     span.avis {
-        /* flex: 1; */
         display: contents;
     }
     .btn-custom a {
         padding: .5rem;
     }
-
 }
 @media (max-width: 767px) {
     .bloc_form.btn-custom {
@@ -353,7 +296,6 @@ span.avis {
 @media (max-width: 350px) {
     .btn-custom a {
         font-size: .9rem;
-        /* padding: .5rem; */
     }
 }
 
