@@ -5,10 +5,18 @@
 {% block body %}
 <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5 p-20">
     <div style="display:flex;gap:1rem;margin-bottom:1rem;">
+        <div style="display:flex;align-items:center;gap:1rem;">
+            <h4 style="margin:0;">{{ conversation.user.name }}</h4>
+            {% if conversation.user.roles != app.user.roles %}
+                <a href="{{ path('details-user', {id: conversation.user.id}) }}" class="btn btn-primary">Voir l'utilisateur</a>
+            {% endif %}
+        </div>
         <div><i class="fa-solid fa-arrow-right" style="font-size:2rem;"></i></div>
         <div style="display:flex;align-items:center;gap:1rem;">
             <h4 style="margin:0;">{{ conversation.correspondant.name }}</h4>
-            <a href="{{ path('details-user', {id: conversation.correspondant.id}) }}" class="btn btn-primary">Voir l'utilisateur</a>
+            {% if conversation.correspondant.roles != app.user.roles %}
+                <a href="{{ path('details-user', {id: conversation.correspondant.id}) }}" class="btn btn-primary">Voir l'utilisateur</a>
+            {% endif %}
         </div>
     </div>
     <div class="chatbox-holder">

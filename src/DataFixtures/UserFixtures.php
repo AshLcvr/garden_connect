@@ -43,6 +43,18 @@ class UserFixtures extends Fixture
         $this->addReference('polo', $adminPolo);
         $manager->persist($adminPolo);
 
+        $userPolo = new User();
+        $userPolo->setName('Paul');
+        $userPolo->setSurname('Joret');
+        $userPolo->isIsVerified();
+        $userPolo->setEmail('paul2.joret@hotmail.fr');
+        $userPolo->setRoles(['ROLE_USER']);
+        $userPolo->setActif(true);
+        $userPolo->setCreatedAt(new \DateTimeImmutable('-2 week'));
+        $password = $this->hasher->hashPassword($userPolo, 'michel');
+        $userPolo->setPassword($password);
+        $manager->persist($userPolo);
+
         $adminSacha = new User();
         $adminSacha->setName('Sacha');
         $adminSacha->setSurname('Lechevallier');

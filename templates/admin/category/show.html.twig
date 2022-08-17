@@ -8,6 +8,7 @@
         <h3 class="title">{{ category.title }}</h3>
         <p><span class="m-0 font-weight-bold text-primary">Id : </span>{{ category.id }}</p>
         <div class="m-b-10">
+            <p class="m-0 font-weight-bold text-primary">Image : </p>
             {% if category.image %}
                 <img src="{{ asset('uploads/category/' ~ category.image) }}"/>
             {% else %}

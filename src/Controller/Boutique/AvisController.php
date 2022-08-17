@@ -63,21 +63,27 @@ class AvisController extends AbstractController
         $user     = $this->getUser();
         $sentAvis = $avisRepository->findBy(['user' => $user]);
 
-        $globalRating      = [];
-        $totalGlobalRating = [];
-        $totalNumberAvis   = [];
         $mesAvis           = [];
+        $globalRating = [];
+        $totalGlobalRating = [];
+        $numberAvis = [];
+        $totalNumberAvis = [];
+        $total = [];
 
         if ($sentAvis){
             foreach ($sentAvis as $key => $avi) {
                 $mesAvis[] = $avi;
                 $numberAvis = count($avi->getBoutique()->getAvis());
-                $totalNumberAvis[$avi->getBoutique()->getId()] = count($avi->getBoutique()->getAvis());
+                $totalNumberAvis[$avi->getBoutique()->getId()] = $numberAvis;
                 foreach ($avi->getBoutique()->getAvis() as $key => $value) {
-                    $globalRating[] = $value->getRating();
+                    $total[] = $value->getRating();
                 }
-                $totalGlobalRating[$avi->getBoutique()->getId()] = round(array_sum($globalRating)/$numberAvis);
-                $globalRating = [];
+                if ($numberAvis) {
+                    $globalRating[$avi->getBoutique()->getId()] = array_sum($total)/$numberAvis;
+                    $total = [];
+                    $totalGlobalRating[$avi->getBoutique()->getId()] = $globalRating[$avi->getBoutique()->getId()];
+                    $globalRating = [];
+                }
             }
         }else{
             $totalGlobalRating = 0;

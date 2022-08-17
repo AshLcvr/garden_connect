@@ -10,7 +10,7 @@
     </div>
     {{ include('admin/category/_form.html.twig', {'button_label': 'Modifier'}) }}
     <div class="m-t-20">
-        <a href="{{ path('app_category_index') }}" class="btn btn-primary">Retour à la liste</a>
+        <a href="{{ path('app_category_show', {id: category.id}) }}" class="btn btn-primary">Retour aux détails</a>
     </div>
 </div>
 {% endblock %}

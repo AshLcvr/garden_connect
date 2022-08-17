@@ -289,9 +289,11 @@ class AdminDefaultController extends AbstractController
         ]);
     }
     #[Route('/hero/delete/{id}', name: 'delete_images_hero', methods: ['POST'])]
-    public function deleteImagesHero(ImagesHero $imageHero, ImagesHeroRepository $imagesHeroRepository): Response
+    public function deleteImagesHero(Request $request, ImagesHero $imageHero, ImagesHeroRepository $imagesHeroRepository): Response
     {
-        $imagesHeroRepository->remove($imageHero, true);
+        if ($this->isCsrfTokenValid('delete'.$imageHero->getId(), $request->request->get('_token'))) {
+            $imagesHeroRepository->remove($imageHero, true);
+        }
 
         return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
     }

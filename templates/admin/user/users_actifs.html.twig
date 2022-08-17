@@ -40,11 +40,7 @@
                             <tr>
                                 <td>{{ user.id }}</td>
                                 <td>{{ user.email|length > 20 ? user.email|striptags|slice(0, 20) ~ '...' : user.email }}</td>
-                                {% if user.roles[1] is defined %}
-                                    <td>Vendeur</td>
-                                {% else %}
-                                        <td>Acheteur</td> 
-                                {% endif %}
+                                <td><p>{{user.roles[user.roles|length - 1]}}</p></td>
                                 {% if user.isVerified == true %}
                                     <td>Vérifié</td>
                                 {% else %}

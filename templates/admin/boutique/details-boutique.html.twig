@@ -20,7 +20,7 @@
                 <div>
                     <a href="{{ path('toggle_active_boutique', {id: boutique.id}) }}" class="btn btn-primary">Rendre active</a>
             {% endif %}
-                <a href="{{ path('new_conversation_with_id_avis', {id: boutique.user.id, id_avis: boutique.id}) }}" class="btn btn-primary">Demander une modification</a>
+                <a href="{{ path('new_conversation_with_id_boutique', {id: boutique.user.id, id_boutique: boutique.id}) }}" class="btn btn-primary">Demander une modification</a>
                 <a href="{{ path('details-user', {id: boutique.user.id}) }}" class="btn btn-primary">Voir l'utilisateur</a>
             </div>
         </div>

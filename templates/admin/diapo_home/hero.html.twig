@@ -46,7 +46,7 @@
                                 <td>{{ image.position }}</td>
                                 <td>
                                     <a href="{{ path('edit_images_hero', {id: image.id}) }}" class="btn btn-primary">Modifier</a>
-                                    <a href="{{ path('delete_images_hero', {id: image.id}) }}" class="btn btn-primary">Supprimer</a>
+                                    {{ include('admin/diapo_home/_delete_form.html.twig') }}
                                 </td>
                             </tr>
                         {% else %}

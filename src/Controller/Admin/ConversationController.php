@@ -101,7 +101,7 @@ class ConversationController extends AbstractController
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
 
-            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('details-user', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/conversation/new.html.twig', [
@@ -126,7 +126,7 @@ class ConversationController extends AbstractController
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
 
-            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('details-annonce', ['id' => $id_annonce], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/conversation/new.html.twig', [
@@ -152,7 +152,7 @@ class ConversationController extends AbstractController
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
 
-            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('details-boutique', ['id' => $id_boutique], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/conversation/new.html.twig', [
@@ -184,7 +184,7 @@ class ConversationController extends AbstractController
             $conversation->setCorrespondant($user);
             $conversationRepository->add($conversation, true);
 
-            return $this->redirectToRoute('app_conversation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('details-avis', ['id' => $id_avis], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/conversation/new.html.twig', [
