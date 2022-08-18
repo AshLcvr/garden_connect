@@ -33,9 +33,16 @@ textarea.form-control {
     border-radius: 12px;
     border: none;
     color: rgb(70, 70, 70);
-    font-size: 18px;
+    font-size: 16px;
     padding: 10px 20px;
     height: auto;
+}
+.annonce_price_form input {
+    padding: 7px 20px;
+    width: 30%;
+}
+.annonce_mesure_form {
+    width: 20%;
 }
 input:focus,
 textarea:focus,

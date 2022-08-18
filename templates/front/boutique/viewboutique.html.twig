@@ -34,14 +34,12 @@
             </a>
         </div>
     </section>
-
     <section id="profile" class="wrap">
         <div class="infos_vendeur">
             <p>{{ boutique.user.name|capitalize }}  |</p>
             <p>Boutique en ligne depuis le {{ boutique.createdAt|date('d/m/Y') }}</p>
         </div>
     </section>
-
     <section id="boutique" class="wrap">
         <div class="head_boutique">
             <div class="head_btq_line">
@@ -77,7 +75,6 @@
             {% endif %}
         </div>
     </section>
-
     {% if annonce == null and boutique.cardActive %}
         {% if boutique.adress == '' %}
             {% set fullAdress = 'false' %}
@@ -89,7 +86,6 @@
             <div id="boutique_coordinates" style="height: 400px; width: 80%; margin: 1rem auto;z-index: 3;" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
         </section>
     {% endif %}
-
     {% if annonce != null %}
         <section id="focus_annonce" class="wrap">
             <div class="annonce_box">
@@ -148,7 +144,6 @@
                 {% endif %}
         </section>
     {% endif %}
-
     {% if boutique.annonces|length > 0 %}
     <section id="listing_annonces_public" class="wrap">
         <h1 class="title_boutique">Les annonces de {{  boutique.user.surname|capitalize }}</h1>
@@ -181,7 +176,6 @@
         </ul>
     </section>
     {% endif %}
-
     {% if annonce == null %}
         {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
     {% endif %}

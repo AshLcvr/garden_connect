@@ -9,7 +9,6 @@
                     {{ form_errors(form.title) }}
                 </div>
             </div>
-
             <div class="bloc_form">
                     {{ form_label(form.description) }}
                     {{ form_widget(form.description) }}
@@ -18,7 +17,6 @@
                     {{ form_errors(form.description) }}
                 </div>
             </div>
-
             <div class="bloc_form">
                 {{ form_label(form.category) }}
                 {{ form_widget(form.category, { 'attr' : {'class' : 'annonce_category' }}) }}
@@ -27,7 +25,6 @@
                     {{ form_errors(form.category) }}
                 </div>
             </div>
-
             <div class="bloc_form">
                 {{ form_label(form.subcategory) }}
                 {{ form_widget(form.subcategory, { 'attr' : {'class' : 'annonce_subcategory' }}) }}
@@ -36,10 +33,9 @@
                     {{ form_errors(form.subcategory) }}
                 </div>
             </div>
-
-            <div class=" bloc_form d-flex" style="gap : 1rem">
+            <div class=" bloc_form d-flex gap1">
                 <div class="d-flex flex-column">
-                    <div class="d-flex flex-column" style="width: 30%">
+                    <div class="annonce_price_form d-flex flex-column">
                         {{ form_label(form.price) }}
                         {{ form_widget(form.price) }}
                     </div>
@@ -48,8 +44,7 @@
                         {{ form_errors(form.price) }}
                     </div>
                 </div>
-
-                <div class="d-flex flex-column" style="width: 20%">
+                <div class="annonce_mesure_form d-flex flex-column">
                     {{ form_label(form.mesure) }}
                     {{ form_widget(form.mesure) }}
                 </div>
@@ -58,7 +53,6 @@
                     {{ form_errors(form.mesure) }}
                 </div>
             </div>
-
             <div class="bloc_form">
                 <div class="d-flex flex-column">
                 {{ form_label(form.upload) }}

@@ -1,7 +1,7 @@
 {% extends 'layout/boutique_base.html.twig' %}
 
 {% block title %}
-<title>Boutique</title>
+    <title>Boutique</title>
 {% endblock %}
 
 {% block stylesheets %}
@@ -15,23 +15,27 @@
             <div class="block_btn_modify">
                 <div class="bloc_form btn-custom modify btq">
                     <span class="hover-effect modify btq">
+{# <<<<<<< HEAD
                         <a title="Modifier ma boutique" class="" href="{{ path('app_boutique_edit') }}"><i class="fa-solid fa-pen-to-square"></i></a>
+======= #}
+                        <a title="Modifier ma boutique" href="{{ path('app_boutique_edit') }}"><i class="fa-solid fa-pen-to-square"></i></a>
+{# >>>>>>> orianne2806 #}
                     </span>
                 </div>
             </div>
             {% if boutique.actif == 1 %}
                 <div class="block_btn_modify">
-                <div class="bloc_form btn-custom modify btq">
-                    <span class="hover-effect modify btq">
-                        <a title="Désactiver la boutique" class="" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}" onclick="return confirm('Voulez-vous vraiment désactiver votre boutique ?')"><i class="fa-regular fa-eye"></i></a>
-                    </span>
+                    <div class="bloc_form btn-custom modify btq">
+                        <span class="hover-effect modify btq">
+                            <a title="Désactiver la boutique" class="" href="{{ path('app_boutique_actif') }}" onclick="return confirm('Voulez-vous vraiment désactiver votre boutique ?')"><i class="fa-regular fa-eye"></i></a>
+                        </span>
+                    </div>
                 </div>
-            </div>
             {% else %}
                 <div class="block_btn_inactive">
                     <div class="bloc_form btn-custom inactive">
                         <span class="hover-effect inactive">
-                            <a title="Activer la boutique" class="" href="{{ path('app_boutique_actif', {'id' : boutique.id}) }}"><i class="fa-solid fa-eye-slash"></i></a>
+                            <a title="Activer la boutique" href="{{ path('app_boutique_actif') }}"><i class="fa-solid fa-eye-slash"></i></a>
                         </span>
                     </div>
                 </div>
@@ -43,7 +47,8 @@
     <div class="boutique_accueil">
         <div class="wrap border_form card-body">
             <div class="d-flex flex-column">
-                <h6 class="detail_btq_title">Photos : </h6>
+{# <<<<<<< HEAD #}
+                <h6 class="bold">Photos : </h6>
                 <div class="flexslider" id="slider">
                     <ul class="slides relative">
                     {%  for imageboutique in boutique.imagesBoutiques %}
@@ -53,6 +58,12 @@
                     {% endfor %}
                     </ul>
                 </div>
+{# =======
+                <h6 class="bold">Photo : </h6>
+                {%  for imageboutique in boutique.imagesBoutiques %}
+                    <img src="{{ asset('uploads/boutique/imageBoutiqueDefault.jpg') }}" alt="Images boutique">
+                {% endfor %}
+>>>>>>> orianne2806 #}
             </div>
             <hr>
             <div class="d-flex flex-column">

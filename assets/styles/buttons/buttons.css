@@ -2,13 +2,16 @@ button {
     background: transparent;
     border: unset;
     border: none;
-    width: 100%;
 }
 button.btn {
     border-radius: unset !important; 
 }
+.btn:focus {
+    box-shadow: unset !important;
+}
 .hover-effect,
-.hover-effect a {
+.hover-effect a,
+.hover-effect button {
     display: block;
     width: 100%;
 }
@@ -69,15 +72,6 @@ button.btn {
     width: 0%;
     height: 2px;
 }
-.btn-custom .hover-effect:before,
-.btn-custom .hover-effect:after {
-    position: absolute;
-    content: "";
-    left: 0;
-    bottom: 0;
-    background: var(--orange);
-    transition: 500ms ease all;
-}
 .btn-custom .hover-effect:hover:before {
     height: 100%;
 }
@@ -98,14 +92,41 @@ button.btn {
     background-size: 200% 100%;
     background-position: right;
     transition: 500ms ease all;
-    display: block; 
     text-align: center;
+}
+.btn-custom .hover-effect:before,
+.btn-custom .hover-effect:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    background: var(--orange);
+    transition: 500ms ease all;
+}
+.btn-custom button:before,
+.btn-custom button:after,
+.btn-custom a:before,
+.btn-custom a:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    background: var(--orange);
+    transition: 500ms ease all;
 }
 .btn-custom.btq button,
 .btn-custom.btq a {
     background: linear-gradient(to right, white 50%, var(--vertfonce) 50%);
     background-size: 200% 100%;
     background-position: right;
+}
+.btn-custom.btq button:before,
+.btn-custom.btq button:after,
+.btn-custom.btq span:before,
+.btn-custom.btq span:after,
+.btn-custom.btq a:before,
+.btn-custom.btq a:after {
+    background: var(--vertfonce);
 }
 .btn-custom button:hover,
 .btn-custom a:hover,
@@ -122,25 +143,6 @@ button.btn {
 .btn-custom.btq button:hover,
 .btn-custom.btq a:hover {
     color: var(--vertfonce);
-}
-.btn-custom button:before,
-.btn-custom button:after,
-.btn-custom a:before,
-.btn-custom a:after {
-    position: absolute;
-    content: "";
-    right: 0;
-    top: 0;
-    background: var(--orange);
-    transition: 500ms ease all;
-}
-.btn-custom.btq button:before,
-.btn-custom.btq button:after,
-.btn-custom.btq span:before,
-.btn-custom.btq span:after,
-.btn-custom.btq a:before,
-.btn-custom.btq a:after {
-    background: var(--vertfonce);
 }
 .btn-custom button:before,
 .btn-custom a:before {
@@ -190,8 +192,8 @@ span.avis {
 .btn-custom .hover-effect.delete:after,
 .btn-custom.delete button:before,
 .btn-custom.delete button:after,
-.btn-custom.delete span:before,
-.btn-custom.delete span:after,
+/* .btn-custom.delete span:before,
+.btn-custom.delete span:after, */
 .btn-custom.delete a:before,
 .btn-custom.delete a:after {
     background: var(--rouge_supp);
@@ -209,6 +211,8 @@ span.avis {
 .hover-effect.inactive:hover i {
     color: var(--orange);
 }
+.btn-custom.inactive button:before,
+.btn-custom.inactive button:after,
 .btn-custom.inactive span:before,
 .btn-custom.inactive span:after,
 .btn-custom.inactive a:before,
