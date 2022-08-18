@@ -1,3 +1,18 @@
+/* Profil boutique... ici ou boutique.css ?? */
+.user_img_profile {
+    width: 10%;
+    border-radius: 50%
+}
+.modif_psd.btq {
+    color: var(--vertfonce);
+}
+.modif_psd.user {
+    color: var(--vertclair);
+}
+.modif_psd.btq:hover,
+.modif_psd.user:hover {
+    color: var(--orange);
+}
 /* Avis émis */
 .wrap_avis {
     max-width: 800px;
@@ -15,9 +30,12 @@
     justify-content: center;
     gap: 1.5rem;
 }
-#container_profil .container_avis ul li{
+#container_profil .container_avis ul li {
     display: flex;
     width: 100%;
+}
+#container_profil .container_avis ul li.recus {
+    width: 45%;
 }
 #container_profil .container_avis ul li .block_avis,
 #container_profil .container_avis ul li .block_boutique,
@@ -31,13 +49,14 @@
     justify-content: space-between;
     width: 45%;
 }
-/* #container_profil .container_avis ul li  */
+#container_profil .container_avis ul li .block_boutique p {
+    margin: 0;
+}
 img.avatar_avis {
     width: 33px;
     height: 33px;
     border-radius: 50%;
 }
-/* #container_profil .container_avis ul li  */
 span.user_name_avis {
     margin: auto .5rem;
 }
@@ -54,15 +73,9 @@ span.user_name_avis {
 #container_profil .container_avis ul li .separator.down {
     display: none;
 }
-#container_profil .container_avis ul li .block_boutique p {
-    margin: 0;
-}
 /* Avis reçus */
 #container_profil .container_avis ul li .block_avis.recus {
     width: 100%;
-}
-#container_profil .container_avis ul li.recus {
-    width: 45%;
 }
 /*  */
 
@@ -92,7 +105,9 @@ span.user_name_avis {
     margin-top: .5rem;
     height: 30px;
 }
-
+.mess {
+    color: rgb(186, 186, 186);
+}
 /* Favory */
 #container_profil .container_favory ul li {
     width: 31%;
@@ -101,7 +116,7 @@ span.user_name_avis {
     border: 1px solid #e3e6f0;
     display: flex;
 }
-#container_profil .container_favory ul li .block_favory{
+#container_profil .container_favory ul li .block_favory {
     width: 100%;
     display: flex;
     flex-flow: column;
@@ -110,7 +125,6 @@ span.user_name_avis {
 .separator_btq {
     display: none;
 }
-
 /* RESPONSIVE */
 @media (max-width: 1100px) {
     #container_profil .container_favory ul li {

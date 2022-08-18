@@ -4,9 +4,13 @@
     <title>Boutique index</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('index_boutique') }}
+{% endblock %}
+
 {% block body %}
     <section class="boutique_accueil">
-        <div class="wrap2">
+        <div class="wrap">
             <h1 class="title_top">  {{ boutique.title }} </h1>
             <div class="wrapper_text_boutique">
                 <div class="txt_top_boutique">
@@ -32,4 +36,9 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('index_boutique') }}
 {% endblock %}

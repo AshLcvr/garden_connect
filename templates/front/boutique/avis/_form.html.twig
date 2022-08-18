@@ -1,6 +1,3 @@
-{% block stylesheets %}
-    <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
-{% endblock %}
 <div class="body">
     <div class="wrap boutique_form border_form">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
@@ -13,33 +10,30 @@
                     <i class="star fa-solid fa-star" data-checked="false" data-note="4"></i>
                     <i class="star fa-solid fa-star" data-checked="false" data-note="5"></i>
                 </div>
-            </div>
-            <div class="bloc_form">
-                {{ form_label(form.title) }}
-                {{ form_widget(form.title) }}
-                <small>{{ form_help(form.title) }}</small>
-                <div class="form-error">
-                    {{ form_errors(form.title) }}
+                <div class="bloc_form">
+                    {{ form_label(form.title) }}
+                    {{ form_widget(form.title) }}
+                    <small>{{ form_help(form.title) }}</small>
+                    <div class="form-error">
+                        {{ form_errors(form.title) }}
+                    </div>
+                </div>
+                <div class="bloc_form">
+                    {{ form_label(form.commentaire) }}
+                    {{ form_widget(form.commentaire) }}
+                    <small>{{ form_help(form.commentaire) }}</small>
+                    <div class="form-error">
+                        {{ form_errors(form.commentaire) }}
+                    </div>
+                </div>
+                <div class="bloc_submit">
+                    <div class="bloc_form btn-custom btq">
+                        <span class="hover-effect btq">
+                            <button>{{ button_label|default('Envoyer') }}</button>
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="bloc_form">
-                {{ form_label(form.commentaire) }}
-                {{ form_widget(form.commentaire) }}
-                <small>{{ form_help(form.commentaire) }}</small>
-                <div class="form-error">
-                    {{ form_errors(form.commentaire) }}
-                </div>
-            </div>
-            <div class="bloc_submit">
-                <div class="bloc_form btn-custom btq">
-                    <span class="hover-effect btq">
-                        <button>{{ button_label|default('Envoyer') }}</button>
-                    </span>
-                </div>
-            </div>
-            {{ form_end(form) }}
-        </div>
+        {{ form_end(form) }}
     </div>
-{% block javascripts %}
-    {{ encore_entry_script_tags('back_boutique') }}
-{% endblock %}
+</div>

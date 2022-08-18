@@ -64,22 +64,10 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                    {% if is_granted('ROLE_VENDEUR') %}
-                        <a class="dropdown-item" href="{{ path('boutique_view_profil') }}">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Mon profil
-                        </a>
-                    <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ path('app_logout') }}">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Déconnexion
                         </a>
-                    {% else %}
-                        <a class="dropdown-item" href="{{ path('app_logout') }}">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Déconnexion
-                        </a>
-                    {% endif %}
                     </div>
                 </li>
             </ul>

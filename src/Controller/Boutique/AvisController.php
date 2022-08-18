@@ -48,7 +48,7 @@ class AvisController extends AbstractController
             return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
         });
         
-        $mesAvis = $this->maPagination($mesAvis, $paginator, $request, 5);
+        $mesAvis = $this->maPagination($mesAvis, $paginator, $request, 6);
 
         return $this->render('front/boutique/avis/avis_recus.html.twig', [
             'mesAvis' => $mesAvis,

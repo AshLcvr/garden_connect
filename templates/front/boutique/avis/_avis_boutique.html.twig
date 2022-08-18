@@ -13,7 +13,7 @@
                         {% else %}
                             <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                         {% endif %}
-                        <span class="user_name_avis">{{ av.user.name|capitalize }}</span>
+                        <span class="user_name_avis">{{ av.user.surname|capitalize }}</span>
                     </div>
                     <div data-rating="{{ globalRating }}">
                         {% for i in 1..5 %}
@@ -31,7 +31,6 @@
             {% endfor %}
         </ul>
     {% endif %}
-
     <h2 class="title_boutique">Laissez votre avis</h2>
     <div class="avis_form">
         {% if app.user %}
@@ -44,10 +43,9 @@
                     </div>
                 {% endif %}
             {% endfor %}
-
             {% if avisAlreadyExist == false and app.user.id != boutique.user.id %}
                 <div>
-                    {% include 'front/profil/avis/_form.html.twig' %}
+                    {% include 'front/boutique/avis/_form.html.twig' %}
                 </div>
             {% elseif app.user.id == boutique.user.id %}
                 <div class="text-center">

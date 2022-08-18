@@ -14,35 +14,29 @@
                         <i class="star fa-solid fa-star" data-checked="false" data-note="5"></i>
                     </div>
                 </div>
-
                 <div class="bloc_form">
                     {{ form_label(form.title) }}
                     {{ form_widget(form.title) }}
-
                     <small>{{ form_help(form.title) }}</small>
-
                     <div class="form-error">
                         {{ form_errors(form.title) }}
                     </div>
                 </div>
-
                 <div class="bloc_form">
                     {{ form_label(form.commentaire) }}
                     {{ form_widget(form.commentaire) }}
-
                     <small>{{ form_help(form.commentaire) }}</small>
-
                     <div class="form-error">
                         {{ form_errors(form.commentaire) }}
                     </div>
                 </div>
                 <div class="bloc_submit">
-                <div class="bloc_form btn-custom">
-                    <span class="hover-effect">
-                        <button>{{ button_label|default('Envoyer') }}</button>
-                    </span>
+                    <div class="bloc_form btn-custom">
+                        <span class="hover-effect">
+                            <button>{{ button_label|default('Envoyer') }}</button>
+                        </span>
+                    </div>
                 </div>
-            </div>
             {{ form_end(form) }}
         </div>
     </div>

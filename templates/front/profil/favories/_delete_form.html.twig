@@ -1,4 +1,10 @@
-<form class="inline-block" method="post" action="{{ path('profil_favory_delete', {'id': fav.id}) }}" onsubmit="return confirm('Voulez vous vraiment retirer cette boutique de vos favoris?');">
+<form class="inline-block" method="post" action="{{ path('profil_favory_delete', {'id': fav.id}) }}" onsubmit="return confirm('Voulez vous vraiment retirer cette boutique de vos favoris ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fav.id) }}">
-    <button class="btn btn-danger"><i class="fa-solid fa-xmark"></i></button>
+    <button class="block_btn_delete" style="">
+        <div class="bloc_form btn-custom delete">
+            <span class="hover-effect delete">
+                <a title="Supprimer cette boutique" class="delete_xmark"><i class="fa-solid fa-xmark"></i></a>
+            </span>
+        </div>
+    </button>
 </form>

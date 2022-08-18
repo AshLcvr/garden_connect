@@ -1,3 +1,6 @@
+import '../styles/form/form.css'
+import '../styles/buttons/buttons.css'
+
 // Ajax categories select
 
 $(document).on('change', '.annonce_category', function () {
@@ -10,9 +13,9 @@ $(document).on('change', '.annonce_category', function () {
         type: $form.attr('method'),
         data : data,
         complete: function(html) {
-             // Erreur 500?
+            // Erreur 500?
             $('.annonce_subcategory').replaceWith(
-               $(html.responseText).find('.annonce_subcategory')
+                $(html.responseText).find('.annonce_subcategory')
             );
         }
     });
@@ -30,8 +33,7 @@ const citycode_input  = $('#boutique_citycode');
 
 citySearch(search_input, city_ul)
 
-
-///
+//
 
 const location_input = $('#location');
 
@@ -42,9 +44,10 @@ function citySearch($input, $ul)
     $input.on('keyup', function () {
         let city = $input.val();
         let citySuggest = [];
-        city_input.val('')
+        city_input.val('');
         $ul.empty();
-        $ul.addClass('hidden')
+        $ul.addClass('hidden');
+        let search = '';
         isNaN(city)? search = 'nom' : search = 'codePostal';
         if (isNaN(city) && city.length >= 3 || !isNaN(city) && city.length === 5){
             $.ajax({

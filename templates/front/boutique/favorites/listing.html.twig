@@ -5,60 +5,87 @@
 {% endblock %}
 
 {% block body %}
+{# <<<<<<< HEAD #}
 <div id="container_profil">
     <h1 class="title_top">Mes boutiques favorites</h1>
     <div class="container_favory">
-        <ul>
-            {% for fav in favories %}
-                <li>
-                    <div class="block_favory">
-                        <h3 class="favory_title">{{ fav.boutique.title }}</h3>
-                        <span>{{ fav.boutique.user.name|capitalize }}</span>
-                        <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
-                        <div class="block_rating">
-                            {% if fav.boutique.avis|length == 0 %}
+        {% if favories|length < 0 %}
+{# =======
+    <div id="container_profil">
+        <h1 class="title_top">Mes boutiques favorites</h1>
+        <div class="container_favory">
+>>>>>>> orianne2806 #}
+            <ul>
+                {% for fav in favories %}
+                    <li>
+                        <div class="block_favory">
+{# <<<<<<< HEAD
+                            <h3 class="favory_title">{{ fav.boutique.title }}</h3>
+                            <span>{{ fav.boutique.user.name|capitalize }}</span>
+                            <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
+                            <div class="block_rating">
+                                {% if fav.boutique.avis|length == 0 %}
+                                        {% for i in 1..5 %}
+                                            <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                        {% endfor %}
+                                        <span>({{ fav.boutique.avis|length }} avis)</span>
+======= #}
+                            <h4 class="favory_title text-center">La boutique de<br>{{ fav.boutique.user.surname|capitalize }}</h4>
+                            <span>{{ fav.boutique.user.name|capitalize }}</span>
+                            <p>Boutique en ligne depuis le {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
+                            <div class="block_rating">
+                                {% if fav.boutique.avis|length == 0 %}
                                     {% for i in 1..5 %}
                                         <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                     {% endfor %}
                                     <span>({{ fav.boutique.avis|length }} avis)</span>
-                            {% else %}
-                                {% for key, globalRating in totalGlobalRating %}
-                                    {% if key == fav.boutique.id %}
-                                        <span class="rating" data-rating="{{ globalRating }}">
-                                            {% for i in 1..5 %}
-                                                {% if i <= globalRating|round %}
-                                                    {% if (i - globalRating) > 0  %}
-                                                        <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+{# >>>>>>> orianne2806 #}
+                                {% else %}
+                                    {% for key, globalRating in totalGlobalRating %}
+                                        {% if key == fav.boutique.id %}
+                                            <span class="rating" data-rating="{{ globalRating }}">
+                                                {% for i in 1..5 %}
+                                                    {% if i <= globalRating|round %}
+                                                        {% if (i - globalRating) > 0  %}
+                                                            <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+                                                        {% else %}
+                                                            <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                                        {% endif %}
                                                     {% else %}
-                                                        <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                                        <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                                     {% endif %}
-                                                {% else %}
-                                                    <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </span>
-                                        <span>({{ fav.boutique.avis|length }} avis)</span>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="block_buttons btn_favory">
-                            <div class="bloc_form btn-custom btq favory">
-                                <span class="hover-effect btq">
-                                    <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
+                                                {% endfor %}
+                                            </span>
+                                            <span>({{ fav.boutique.avis|length }} avis)</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="block_buttons btn_favory">
+                                <div class="bloc_form btn-custom btq favory">
+                                    <span class="hover-effect btq">
+                                        <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
+                                    </span>
+                                </div>
+                                <span title="Retirer des favoris">
+                                {{ include('front/boutique/favorites/_delete_form.html.twig') }}
                                 </span>
                             </div>
-                            <span title="Retirer des favoris">
-                            {{ include('front/boutique/favorites/_delete_form.html.twig') }}
-                            </span>
                         </div>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+{# <<<<<<< HEAD #}
+        {% else %}
+            <h4>Vous n'avez pas de boutiques favorites.</h4>
+        {% endif %}
         <div class="js-filter-pagination" id="pagination_box">
             {{ knp_pagination_render(favories) }}
+{# =======
+            <div class="js-filter-pagination" id="pagination_box">
+                {{ knp_pagination_render(favories) }} #}
+            </div>
+{# >>>>>>> orianne2806 #}
         </div>
     </div>
-</div>
 {% endblock %}

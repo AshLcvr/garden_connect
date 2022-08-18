@@ -15,7 +15,6 @@
                 <h3 class="title_section_home">Filtres</h3>
                 {% include 'front/annonce/_filter.html.twig' with {form : recherche, min : min, max : max} only %}
             </div>
-
             {% if annonces|length > 0 %}
                 <div>
                     <p class="title_section_home">Résultats</p>
@@ -26,7 +25,6 @@
                         {% include 'front/annonce/_sort.html.twig' %}
                     </div>
                 </div>
-
                 <div class="js-filter-content">
                     {% include 'front/annonce/_annonces.html.twig' %}
                 </div>
@@ -36,7 +34,6 @@
                     <p>Nous n'avons pas trouvé d'annonces respectant vos critères !</p>
                 </div>
             {% endif %}
-
             <div class="js-filter-pagination" id="pagination_box">
                 {{ knp_pagination_render(annonces) }}
             </div>

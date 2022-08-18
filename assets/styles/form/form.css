@@ -1,4 +1,4 @@
-.wrapform{
+.wrapform {
     max-width: 700px ; width: 100%; margin: 0 auto;
 }
 .wrap.border_form,
@@ -8,6 +8,9 @@
 }
 form {
     margin: 0 auto;
+}
+form.inline-block {
+    margin: unset;
 }
 label {
     font-family: 'Roboto', 'Arial', sans-serif;
@@ -30,9 +33,16 @@ textarea.form-control {
     border-radius: 12px;
     border: none;
     color: rgb(70, 70, 70);
-    font-size: 18px;
+    font-size: 16px;
     padding: 10px 20px;
     height: auto;
+}
+.annonce_price_form input {
+    padding: 7px 20px;
+    width: 30%;
+}
+.annonce_mesure_form {
+    width: 20%;
 }
 input:focus,
 textarea:focus,
@@ -101,17 +111,20 @@ label.modif_password {
 }
 /* Formulaire login */
 #contener_form .bloc_form.login {
-    margin: 1rem;
+    margin: 1rem auto;
 }
 /* Formulaire Laissez un avis Page Boutique publique */
-.avis_form .wrap.border_form {
+.wrap.border_form .avis_form {
     border: none;
     padding: 1rem;
 }
-#avis_boutique .avis_form {
-    border: solid 2px var(--vertclair);
-    margin-bottom: 3rem;
+.body{
+    background-color: lime;
 }
+/*#avis_boutique .avis_form {*/
+/*    border: solid 2px var(--vertclair);*/
+/*    margin-bottom: 3rem;*/
+/*}*/
 #avis_boutique .avis_form textarea,
 .annonce_form .bloc_form textarea,
 .boutique_form .bloc_form textarea {

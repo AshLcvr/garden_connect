@@ -11,11 +11,10 @@
 {% block stylesheets %}
     {% if annonce != null %}
         {{ encore_entry_link_tags('public_boutique') }}
+        {{ encore_entry_link_tags('Formulaires') }}
     {% else %}
         {{ encore_entry_link_tags('focus_annonce') }}
     {% endif %}
-    {{ encore_entry_link_tags('flexslider') }}
-    <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -35,14 +34,12 @@
             </a>
         </div>
     </section>
-
     <section id="profile" class="wrap">
         <div class="infos_vendeur">
             <p>{{ boutique.user.name|capitalize }}  |</p>
             <p>Boutique en ligne depuis le {{ boutique.createdAt|date('d/m/Y') }}</p>
         </div>
     </section>
-
     <section id="boutique" class="wrap">
         <div class="head_boutique">
             <div class="head_btq_line">
@@ -78,7 +75,6 @@
             {% endif %}
         </div>
     </section>
-
     {% if annonce == null and boutique.cardActive %}
         {% if boutique.adress == '' %}
             {% set fullAdress = 'false' %}
@@ -87,10 +83,9 @@
         {% endif %}
         <section class="wrap">
             <h1 class="title_boutique">Où me trouver ?</h1>
-            <div id="boutique_coordinates" style="height: 400px; width: 80%; margin: 1rem auto;" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
+            <div id="boutique_coordinates" style="height: 400px; width: 80%; margin: 1rem auto;z-index: 3;" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
         </section>
     {% endif %}
-
     {% if annonce != null %}
         <section id="focus_annonce" class="wrap">
             <div class="annonce_box">
@@ -147,10 +142,8 @@
                     {% endif %}
                 </div>
                 {% endif %}
-            </div>
         </section>
     {% endif %}
-
     {% if boutique.annonces|length > 0 %}
     <section id="listing_annonces_public" class="wrap">
         <h1 class="title_boutique">Les annonces de {{  boutique.user.surname|capitalize }}</h1>
@@ -161,12 +154,11 @@
                         <div class="content_card_public">
                             <div class="image_card_public">
                                 {% for image in annonce.imagesAnnonces %}
-                                    <img src="{{ asset('uploads/mini/'~image.title) }}"/>
+                                    <img src="{{ asset('uploads/mini/'~image.title) }}" alt="Miniature des annonces"/>
                                 {% endfor %}
                             </div>
                             <div class="description_card_public">
                                 <div class="description_title">
-                                    {# <h3>{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le 30/07/2022</span></h3> #}
                                     <p class="annonce_title listing">{{ annonce.title }}&nbsp&nbsp</p><span class="span_created">Mis en ligne le 30/07/2022</span>
                                 </div>
                                 <div class="description_category">
@@ -184,7 +176,6 @@
         </ul>
     </section>
     {% endif %}
-
     {% if annonce == null %}
         {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
     {% endif %}
@@ -192,13 +183,11 @@
 
 {% block javascripts %}
     {% if annonce == null %}
-        {{ encore_entry_script_tags('leaflet') }}
         {{ encore_entry_script_tags('public_boutique') }}
+        {{ encore_entry_script_tags('Formulaires') }}
     {% else %}
         {{ encore_entry_script_tags('focus_annonce') }}
     {% endif %}
-    {{ encore_entry_script_tags('flexslider') }}
-
     <script>
         $(document).ready(function () {
             const boutton_favory =    $('.favory_button')

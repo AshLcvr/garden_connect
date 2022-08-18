@@ -3,10 +3,14 @@
     <title>Avis reçus</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('avis_boutique') }}
+{% endblock %}
+
 {% block body %}
 <div id="container_profil">
     <div class="wrap2">
-        <h1 class="title_top">Avis reçus</h1>
+    <h1 class="title_top">Avis reçus</h1>
         <div class="container_avis">
             {% if mesAvis|length > 0 %}
                 <ul>
@@ -19,17 +23,7 @@
                                     {% else %}
                                         <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                                     {% endif %}
-                                    <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
-                                </div>
-                                <div>
-                                    {% for i in 1..5 %}
-                                        {% if i <= avi.rating %}
-                                            <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                                        {% else %}
-                                            <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
-                                        {% endif %}
-                                        <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
-                                    {% endfor %}
+                                    <span class="user_name_avis">{{ avi.user.surname|capitalize }}</span>
                                 </div>
                                 <div>
                                     {% for i in 1..5 %}
@@ -46,14 +40,18 @@
                             </div>
                         </li>
                     {% endfor %}
-                </ul>
-                <div class="js-filter-pagination" id="pagination_box" style="border: 1px solid">
+                 </ul>
+                <div class="js-filter-pagination" id="pagination_box">
                     {{ knp_pagination_render(mesAvis) }}
                 </div>
             {% else %}
-                <h2 style="border: 10px solid black;">Vous n'avez pas reçu d'avis.</h2>        
+                <h2>Vous n'avez pas reçu d'avis.</h2>
             {% endif %}
+            </div>
         </div>
     </div>
-</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('avis_boutique') }}
 {% endblock %}

@@ -27,10 +27,8 @@ if (slider){
 }
 
 // const price_slider_color = document.querySelector(".noUi-connect");
-const handle = document.querySelector(".noUi-handle");
+const handle     = document.querySelector(".noUi-handle");
 const aria_value = handle.getAttribute("aria-valuenow");
-console.log(aria_value);
-
 
 // let psc_style = price_slider_color.style;
 // const transform = price_slider_color.style.transform;
