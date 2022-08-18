@@ -36,13 +36,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(message: 'Veuillez renseigner votre Prénom')]
-    #[Assert\Length(min: 3 ,max: 150, minMessage: 'Votre Prénom doit comporter au moin {{ limit }} caractères', maxMessage: "Votre Prénom ne pas exceder {{ limit }} caractères")]
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre prénom')]
+    #[Assert\Length(min: 3 ,max: 150, minMessage: 'Votre prénom doit comporter au moins {{ limit }} caractères', maxMessage: "Votre prénom ne pas excéder {{ limit }} caractères")]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(message: 'Veuillez renseigner votre Nom')]
-    #[Assert\Length(min: 3 ,max: 150, minMessage: 'Votre Nom doit comporter au moin {{ limit }} caractères', maxMessage: "Votre Nom ne pas exceder {{ limit }} caractères")]
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre nom')]
+    #[Assert\Length(min: 3 ,max: 150, minMessage: 'Votre nom doit comporter au moins {{ limit }} caractères', maxMessage: "Votre nom ne pas excéder {{ limit }} caractères")]
     private $surname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

@@ -38,9 +38,9 @@
                         <div id="button_dropdown" class="button_dropdown">
                             <a id="link_menu_drop" class="link_menu_drop">
                                 {% if app.user.image %}
-                                    <img src="{{ asset('uploads/profile/'~app.user.image) }}">
+                                    <img class="img_profile" src="{{ asset('uploads/profile/'~app.user.image) }}" alt="Image de profil">
                                 {% else %}
-                                    <img class="img_profile" src="{{ asset('images/default-profile-picture.jpg') }}">
+                                    <img class="img_profile" src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
                                 {% endif %}
                             </a>
                         </div>
