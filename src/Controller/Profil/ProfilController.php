@@ -49,7 +49,6 @@ class ProfilController extends AbstractController
             return $this->redirectToRoute('profil', [], Response::HTTP_SEE_OTHER);
         }
 
-
         return $this->renderForm('front/profil/edit_profil.html.twig', [
             'user' => $user,
             'form' => $form,
@@ -129,8 +128,6 @@ class ProfilController extends AbstractController
     public function profil_favory(Request $request, PaginatorInterface $paginator): Response
     {
         $favories = $this->getUser()->getFavories();
-
-        
         $globalRating = [];
         $totalGlobalRating = [];
         $numberAvis = [];
@@ -159,6 +156,7 @@ class ProfilController extends AbstractController
             'totalNumberAvis' => $totalNumberAvis
         ]);
     }
+
     #[Route('/favory/{id}', name: 'profil_favory_delete', methods: ['POST'])]
     public function delete_favory(Request $request, Favory $favory, FavoryRepository $favoryRepository): Response
     {

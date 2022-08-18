@@ -1,8 +1,6 @@
 // css, js annonces
 import "../../../styles/annonce/annonce.css";
-import "../../../flexslider";
+import "../../../modules/Flexslider";
 
-// css, boutique publique
+// css boutique publique
 import "../../../styles/boutique_public/boutique_public.css";
-import "../../../styles/boutique_public/rating.js";
-

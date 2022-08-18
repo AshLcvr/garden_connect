@@ -4,9 +4,17 @@
     <title>Nouvelle annonce</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('Formulaires') }}
+{% endblock %}
+
 {% block body %}
     <h1 class="title_top">Créer une annonce</h1>
     <div class="card-body">
         {{ include('front/annonce/_form.html.twig') }}
     </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ encore_entry_script_tags('Formulaires') }}
 {% endblock %}

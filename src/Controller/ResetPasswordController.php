@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Form\ModifyPasswordType;
 use App\Form\ResetPasswordFormType;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,11 +23,11 @@ class ResetPasswordController extends AbstractController
     public function resetPassword(Request $request, UserRepository $userRepository, TokenGeneratorInterface $tokenGenerator, MailerInterface $mailer): Response
     {
         $success = false;
-        $form = $this->createForm(ResetPasswordFormType::class);
+        $form    = $this->createForm(ResetPasswordFormType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $email = $form->get('email')->getData();
-            $user = $userRepository->findOneBy(['email'=>$email]);
+            $user  = $userRepository->findOneBy(['email'=>$email]);
             if (empty($user)){
                 $this->addFlash('failure','L\'email n\'existe pas !');
                 return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
@@ -39,7 +38,7 @@ class ResetPasswordController extends AbstractController
                 $url = $this->generateUrl('app_modif_password', ['token'=>urlencode($user->getToken()), 'id' => urlencode($user->getId())], UrlGeneratorInterface::ABSOLUTE_URL);
 
                 $emailReset = (new TemplatedEmail())
-                    ->from('fabien@example.com')
+                    ->from('reset_password@garden-connect.com')
                     ->to($email)
                     ->subject('Réinitialisation du mot de passe')
                     ->htmlTemplate('admin/emails/reset_password.html.twig')
@@ -47,13 +46,12 @@ class ResetPasswordController extends AbstractController
                         'username' => $user->getName(),
                         'url'      => $url
                     ]);
-
                     $mailer->send($emailReset);
                     $success = true;
             }
         }
         return $this->render('front/login/reset_password.html.twig', [
-            'form' => $form->createView(),
+            'form'    => $form->createView(),
             'success' => $success
         ]);
     }
@@ -75,6 +73,7 @@ class ResetPasswordController extends AbstractController
         }else{
             throw $this->createNotFoundException('error');
         }
+
         return $this->render('front/login/modif_password.html.twig', [
             'form' => $form->createView()
         ]);

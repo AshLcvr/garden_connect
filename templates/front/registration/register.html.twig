@@ -1,7 +1,7 @@
 {% extends 'layout/front_base.html.twig' %}
 
 {% block stylesheets %}
-    {{ encore_entry_link_tags('register') }}
+    {{ encore_entry_link_tags('Formulaires') }}
 {% endblock %}
 
 {% block body %}
@@ -52,7 +52,6 @@
                         {{ form_errors(registrationForm.plainPassword.first) }}
                     </div>
                 </div>
-                {# <div class="bloc_form register"> #}
                 <div class="bloc_form register">
                     {{ form_label(registrationForm.plainPassword.second) }}
                     {{ form_widget(registrationForm.plainPassword.second) }}
@@ -96,5 +95,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('register') }}
+    {{ encore_entry_script_tags('Formulaires') }}
 {% endblock %}

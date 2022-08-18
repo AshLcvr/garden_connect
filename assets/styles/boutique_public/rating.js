@@ -15,10 +15,10 @@ function ratingHandler(e) {
     for(let i = 0; i < childStars.length; i++) {
         const star = childStars.item(i)
         if (star.dataset.checked === "true") {
-            star.classList.add('hover');
+            star.classList.add('rating_stars_hover');
         }
         else {
-            star.classList.remove('hover');
+            star.classList.remove('rating_stars_hover');
         }
     }
 }
@@ -27,13 +27,13 @@ function starSelection(e) {
     const parent = e.target.parentElement
     const childStars = parent.children;
     const dataset = e.target.dataset;
-    const note = +dataset.note; // Convert note (string) to note (number)
+    const note = +dataset.note;
     for (let i = 0; i < childStars.length; i++) {
         const star = childStars.item(i)
         if (+star.dataset.note > note) {
-            star.classList.remove('hover');
+            star.classList.remove('rating_stars_hover');
         } else {
-            star.classList.add('hover');
+            star.classList.add('rating_stars_hover');
         }
     }
 }
@@ -46,10 +46,10 @@ function activeSelect(e) {
     for (let i = 0; i < childStars.length; i++) {
         const star = childStars.item(i)
         if (+star.dataset.note > note) {
-            star.classList.remove('hover');
+            star.classList.remove('rating_stars_hover');
             star.dataset.checked = "false";
         } else {
-            star.classList.add('hover');
+            star.classList.add('rating_stars_hover');
             star.dataset.checked = "true";
         }
     }

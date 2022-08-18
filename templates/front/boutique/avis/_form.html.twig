@@ -1,18 +1,14 @@
-{% block stylesheets %}
-    <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
-{% endblock %}
-    <div class="body">
-        <div class="wrap boutique_form border_form">
-            {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
-                <div class="bloc_form rating">
-                    {{ form_label(form.rating) }}
-                    <div class="rating" data-rating="0">
-                        <i class="star fa-solid fa-star" data-checked="false" data-note="1"></i>
-                        <i class="star fa-solid fa-star" data-checked="false" data-note="2"></i>
-                        <i class="star fa-solid fa-star" data-checked="false" data-note="3"></i>
-                        <i class="star fa-solid fa-star" data-checked="false" data-note="4"></i>
-                        <i class="star fa-solid fa-star" data-checked="false" data-note="5"></i>
-                    </div>
+<div class="body">
+    <div class="wrap boutique_form border_form">
+        {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+            <div class="bloc_form rating">
+                {{ form_label(form.rating) }}
+                <div class="rating" data-rating="0">
+                    <i class="star fa-solid fa-star" data-checked="false" data-note="1"></i>
+                    <i class="star fa-solid fa-star" data-checked="false" data-note="2"></i>
+                    <i class="star fa-solid fa-star" data-checked="false" data-note="3"></i>
+                    <i class="star fa-solid fa-star" data-checked="false" data-note="4"></i>
+                    <i class="star fa-solid fa-star" data-checked="false" data-note="5"></i>
                 </div>
                 <div class="bloc_form">
                     {{ form_label(form.title) }}
@@ -37,9 +33,7 @@
                         </span>
                     </div>
                 </div>
-            {{ form_end(form) }}
-        </div>
+            </div>
+        {{ form_end(form) }}
     </div>
-{% block javascripts %}
-    {{ encore_entry_script_tags('back_boutique') }}
-{% endblock %}
+</div>

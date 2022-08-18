@@ -23,25 +23,29 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
 
-
+    // Bases
     .addEntry('app', './assets/app.js')
     .addEntry('back_boutique', './assets/back_boutique.js')
-    .addEntry('flexslider', './assets/flexslider.js')
-    .addEntry('leaflet', './assets/leaflet.js')
 
-    //front
-    .addEntry('homepage', './assets/homepage.js')
+    // Modules
+    .addEntry('Flexslider', './assets/modules/Flexslider.js')
+    .addEntry('Formulaires', './assets/modules/Formulaires.js')
+    .addEntry('Leaflet', './assets/modules/Leaflet.js')
+    .addEntry('Messagerie', './assets/modules/Messagerie.js')
+
+    //Front
+    .addEntry('homepage', './assets/templates/front/homepage.js')
     .addEntry('recherche_annonce', './assets/templates/front/annonces/recherche_annonce.js')
     .addEntry('focus_annonce', './assets/templates/front/annonces/focus_annonce.js')
     .addEntry('public_boutique', './assets/templates/front/boutique/public_boutique.js')
-    // a voir
-    .addEntry('register', './assets/templates/front/security/register.js')
-    .addEntry('login', './assets/templates/front/security/login.js')
-    //
-    //back_boutique
-    .addEntry('index_boutique', './assets/templates/front/boutique/index_boutique.js')
-    .addEntry('detail_boutique', './assets/templates/front/boutique/detail_boutique.js')
-    .addEntry('edit_boutique', './assets/templates/front/boutique/edit_boutique.js')
+
+    // Back_boutique
+    .addEntry('preferences_boutique', './assets/templates/front/boutique/preferences_boutique.js')
+    .addEntry('avis_boutique', './assets/templates/front/boutique/avis_boutique.js')
+
+    // Back_user
+
+    // Admin
 
     // Pages Erreurs, 404 & 403
     .addEntry('error404', './assets/templates/bundles/TwigBundle/Exception/error404.js')

@@ -3,6 +3,10 @@
     <title>Avis émis</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('avis_boutique') }}
+{% endblock %}
+
 {% block body %}
 <div id="container_profil">
     <div class="wrap wrap_avis">
@@ -19,7 +23,7 @@
                                 {% else %}
                                     <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                                 {% endif %}
-                                <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
+                                <span class="user_name_avis">{{ avi.user.surname|capitalize }}</span>
                             </div>
                             <div>
                                 {% for i in 1..5 %}
@@ -51,7 +55,7 @@
                                 {% else %}
                                     <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                                 {% endif %}
-                                <span class="user_name_avis">{{ avi.boutique.user.name|capitalize }}</span>
+                                <span class="user_name_avis">{{ avi.boutique.user.surname|capitalize }}</span>
                             </div>
                             <div>
                                 <p><strong>{{ avi.boutique.title }}</strong></p>
@@ -100,4 +104,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('avis_boutique') }}
 {% endblock %}

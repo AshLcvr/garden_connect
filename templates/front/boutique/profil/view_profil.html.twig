@@ -1,21 +1,17 @@
 {% extends 'layout/boutique_base.html.twig' %}
 
-{% block name %}
-    <name>{{app.user.name}}</name>
-{% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
+{% block title %}
+    <title>Mon profil</title>
 {% endblock %}
 
 {% block body %}
     <div class="wrap">
         <h1 class="title_top with_sub">Profil</h1>
-        <h4 class="subtitle">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
+        <h4 class="subtitle">{{ user.surname|capitalize }} {{ user.name|capitalize }}</h4>
         <div class="block_btn_modify plus">
             <div class="bloc_form btn-custom modify btq plus">
                 <span class="hover-effect modify btq">
-                    <a name="Modifier mon profil" href="{{ path('boutique_edit_profil') }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a title="Modifier mon profil" href="{{ path('boutique_edit_profil') }}"><i class="fa-solid fa-pen-to-square"></i></a>
                 </span>
             </div>
         </div>
@@ -27,7 +23,7 @@
                     <h6 class="bold">Photo : </h6>
                     <div>
                         {% if user.image %}
-                        <img class="user_img_profile" src="{{ asset('uploads/profile/'~user.image) }}" alt="Image utilisateur">
+                            <img class="user_img_profile" src="{{ asset('uploads/profile/'~user.image) }}" alt="Image utilisateur">
                         {% endif %}
                     </div>
                 </div>
@@ -38,13 +34,13 @@
                 </div>
                 <hr>
                 <div>
-                    <h6 class="bold">Prénom :</h6>
-                    {{ user.name }}
+                    <h6 class="detail_btq_title">Prénom :</h6>
+                    {{ user.surname }}
                 </div>
                 <hr>
                 <div>
-                    <h6 class="bold">Nom :</h6>
-                    {{ user.surname }}
+                    <h6 class="detail_btq_title">Nom :</h6>
+                    {{ user.name }}
                 </div>
                 <hr>
                 <a class="modif_psd btq" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>

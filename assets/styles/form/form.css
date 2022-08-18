@@ -107,14 +107,17 @@ label.modif_password {
     margin: 1rem auto;
 }
 /* Formulaire Laissez un avis Page Boutique publique */
-.avis_form .wrap.border_form {
+.wrap.border_form .avis_form {
     border: none;
     padding: 1rem;
 }
-#avis_boutique .avis_form {
-    border: solid 2px var(--vertclair);
-    margin-bottom: 3rem;
+.body{
+    background-color: lime;
 }
+/*#avis_boutique .avis_form {*/
+/*    border: solid 2px var(--vertclair);*/
+/*    margin-bottom: 3rem;*/
+/*}*/
 #avis_boutique .avis_form textarea,
 .annonce_form .bloc_form textarea,
 .boutique_form .bloc_form textarea {

@@ -4,6 +4,10 @@
     <title>Boutique index</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('index_boutique') }}
+{% endblock %}
+
 {% block body %}
     <section class="boutique_accueil">
         <div class="wrap">
@@ -32,4 +36,9 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('index_boutique') }}
 {% endblock %}
