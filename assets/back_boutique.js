@@ -14,3 +14,5 @@ import "./styles/footer/footer_boutique.css";
 
 // pagination
 import "./styles/filter_annonce/filter.css";
+
+import "./styles/form/form.css";
