@@ -38,7 +38,11 @@
                     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in custom" aria-labelledby="messagesDropdown">
                         <h6 class="dropdown-header custom">Messages non lus</h6>
                         {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
-                        <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
+                        {% if is_granted('ROLE_VENDEUR') %}
+                            <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
+                        {% else %}
+                            <a class="dropdown-item text-center small text-gray-500" href="{{ path('user_messagerie') }}">Messagerie</a>
+                        {% endif %}
                     </div>
                 </li>
 

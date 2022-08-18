@@ -9,7 +9,7 @@
                 <div class="block_conversation_profil" style="background-color:grey;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem 1rem 2rem">
                     <div style="display:flex;gap:1rem;">
                         <div style="display:flex;align-items:center;">
-                            {% if app.user.name ==  conv.user.name %}
+                            {% if app.user.id ==  conv.user.id %}
                                 <p style="margin:0;">Moi-même</p>
                             {% else %}
                                 <p style="margin:0;">{{ conv.user.name }}</p>
@@ -17,7 +17,7 @@
                         </div>
                         <div style="display:flex;align-items:center;"><i class="fa-solid fa-arrow-right"></i></div>
                         <div style="display:flex;align-items:center;">
-                            {% if app.user.name ==  conv.correspondant.name %}
+                            {% if app.user.id ==  conv.correspondant.id %}
                                 <p style="margin:0;">Moi-même</p>
                             {% else %}
                                 <p style="margin:0;">{{ conv.correspondant.name }}</p>
