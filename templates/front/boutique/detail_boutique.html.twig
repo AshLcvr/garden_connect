@@ -9,17 +9,13 @@
 {% endblock %}
 
 {% block body %}
-    <div>
+    <div class="wrap">
         <h1 class="title_top">  {{ boutique.title }} </h1>
         <div class="block_buttons">
             <div class="block_btn_modify">
                 <div class="bloc_form btn-custom modify btq">
                     <span class="hover-effect modify btq">
-{# <<<<<<< HEAD
-                        <a title="Modifier ma boutique" class="" href="{{ path('app_boutique_edit') }}"><i class="fa-solid fa-pen-to-square"></i></a>
-======= #}
                         <a title="Modifier ma boutique" href="{{ path('app_boutique_edit') }}"><i class="fa-solid fa-pen-to-square"></i></a>
-{# >>>>>>> orianne2806 #}
                     </span>
                 </div>
             </div>
@@ -47,7 +43,6 @@
     <div class="boutique_accueil">
         <div class="wrap border_form card-body">
             <div class="d-flex flex-column">
-{# <<<<<<< HEAD #}
                 <h6 class="bold">Photos : </h6>
                 <div class="flexslider" id="slider">
                     <ul class="slides relative">
@@ -58,12 +53,6 @@
                     {% endfor %}
                     </ul>
                 </div>
-{# =======
-                <h6 class="bold">Photo : </h6>
-                {%  for imageboutique in boutique.imagesBoutiques %}
-                    <img src="{{ asset('uploads/boutique/imageBoutiqueDefault.jpg') }}" alt="Images boutique">
-                {% endfor %}
->>>>>>> orianne2806 #}
             </div>
             <hr>
             <div class="d-flex flex-column">
@@ -80,7 +69,9 @@
                 <h6 class="bold">Adresse:</h6>
                 <div class="d-flex flex-column">
                     <ul class="text-align-center">
-                        <li>{{ boutique.adress }}</li>
+                        {% if boutique.adress %}
+                            <li>{{ boutique.adress }}</li>
+                        {% endif %}
                         <li>{{ boutique.postcode }} {{ boutique.city }}</li>
                     </ul>
                 </div>

@@ -132,6 +132,7 @@ class ProfilController extends AbstractController
     public function profil_favory(Request $request, PaginatorInterface $paginator): Response
     {
         $favories = $this->getUser()->getFavories();
+
         $globalRating = [];
         $totalGlobalRating = [];
         $numberAvis = [];
@@ -140,7 +141,7 @@ class ProfilController extends AbstractController
         if ($favories){
             foreach ($favories as $key => $fav) {
                 $numberAvis = count($fav->getBoutique()->getAvis());
-                $totalNumberAvis[$fav->getBoutique()->getId()] = count($fav->getBoutique()->getAvis());
+                $totalNumberAvis[$fav->getBoutique()->getId()] = $numberAvis;
                 foreach ($fav->getBoutique()->getAvis() as $key => $value) {
                     $globalRating[] = $value->getRating();
                 }
