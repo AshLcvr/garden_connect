@@ -54,28 +54,34 @@ class ProfilController extends AbstractController
             'form' => $form,
         ]);
     }
+
     #[Route('/avis', name: 'profil_avis')]
     public function avis_profil(Request $request, PaginatorInterface $paginator)
     {
         $user = $this->getUser();
         $avis = $user->getAvis();
+
         $mesAvis = [];
-        
         $globalRating = [];
         $totalGlobalRating = [];
         $numberAvis = [];
         $totalNumberAvis = [];
+        $total = [];
 
         if ($avis){
             foreach ($avis as $key => $avi) {
                 $mesAvis[] = $avi;
                 $numberAvis = count($avi->getBoutique()->getAvis());
-                $totalNumberAvis[$avi->getBoutique()->getId()] = count($avi->getBoutique()->getAvis());
+                $totalNumberAvis[$avi->getBoutique()->getId()] = $numberAvis;
                 foreach ($avi->getBoutique()->getAvis() as $key => $value) {
-                    $globalRating[] = $value->getRating();
+                    $total[] = $value->getRating();
                 }
-                $totalGlobalRating[$avi->getBoutique()->getId()] = round(array_sum($globalRating)/$numberAvis);
-                $globalRating = [];
+                if ($numberAvis) {
+                    $globalRating[$avi->getBoutique()->getId()] = array_sum($total)/$numberAvis;
+                    $total = [];
+                    $totalGlobalRating[$avi->getBoutique()->getId()] = $globalRating[$avi->getBoutique()->getId()];
+                    $globalRating = [];
+                }
             }
         }else{
             $totalGlobalRating = 0;

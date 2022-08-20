@@ -29,7 +29,7 @@
                         </li>
                     {% else %}
                         <li>
-                            <img style="width: 1400px;height: 400px;object-fit: cover" src="{{ imageBoutique.title }}" />
+                            <img style="width: 100%;height: 400px;object-fit: cover" src="{{ imageBoutique.title }}" />
                         </li>
                     {% endif %}
                 {% endfor %}
@@ -113,15 +113,11 @@
                 </div>
                 <div class="annonce_text">
                     <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                        <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
-                        <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
-                        <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
-                        {% if annonce.description|length < 30 %}
-                            <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
-                        {% else %}
-                            <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
-                        {% endif %}
-                        <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
+                      <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
+                      <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
+                      <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
+                      <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
+                      <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
                     </a>
                 </div>
             </div>

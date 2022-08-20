@@ -45,7 +45,7 @@
             {% endfor %}
             {% if avisAlreadyExist == false and app.user.id != boutique.user.id %}
                 <div>
-                    {% include 'front/boutique/avis/_form.html.twig' %}
+                    {% include 'front/profil/avis/_form.html.twig' %}
                 </div>
             {% elseif app.user.id == boutique.user.id %}
                 <div class="text-center">

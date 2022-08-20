@@ -163,6 +163,9 @@ img {
     .title_section_home {
         font-size: 1.2rem;
     }
+    .security{
+        margin: 2rem 0;
+    }
 }
 @media all and (max-width: 250px){
     .title_section_home {

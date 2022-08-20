@@ -141,8 +141,8 @@ label.modif_password {
 }
 /* Pages Login, Register , Mot de passe oublié */
 .security {
-    margin-top: 8rem;
-    margin-bottom: 8rem;
+    margin-top: 6rem;
+    margin-bottom: 6rem;
 }
 .forgot {
     text-align: center;
@@ -172,6 +172,11 @@ h5.subtitle {
     color: var(--vertfonce);
 }
 /* RESPONSIVE */
+@media all and (min-width: 1400px) {
+    .security{
+        margin: 16rem 0;
+    }
+}
 @media all and (max-width: 850px) {
     .boutique_form .bloc_form.create.tel,
     .boutique_form .bloc_form.create.adress_form,
