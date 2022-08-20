@@ -22,7 +22,7 @@
                         {% else %}
                             <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
                         {% endif %}
-                        <div class="chat-name">{{ conversation.user.name }}</div>
+                        <div class="chat-name">{{ conversation.user.surname }}</div>
                     </div>
                     <div class="chat-text">{{ conversation.premierMessage }}</div>
                     <div class="chat-hour">{{ conversation.createdAt|date('H:i') }}<span class="fa fa-check-circle"></span></div>
@@ -36,7 +36,7 @@
                         {% else %}
                             <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
                         {% endif %}
-                        <div class="chat-name">{{ conversation.user.name }}</div>
+                        <div class="chat-name">{{ conversation.user.surname }}</div>
                     </div>
                     <div class="chat-text">{{ conversation.premierMessage }}</div>
                     <div class="chat-hour">{{ conversation.createdAt|date('H:i') }}<span class="fa fa-check-circle"></span></div>
@@ -53,7 +53,7 @@
                                 {% else %}
                                     <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
                                 {% endif %}
-                            <div class="chat-name">{{ conversation.user.name }}</div>
+                            <div class="chat-name">{{ conversation.user.surname }}</div>
                         </div>
                         <div class="chat-text">{{ message.message }}</div>
                         <div class="chat-hour">{{ message.createdAt|date('H:i') }}<span class="fa fa-check-circle"></span></div>
@@ -69,7 +69,7 @@
                             {% else %}
                                 <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
                             {% endif %}
-                            <div class="chat-name">{{ conversation.correspondant.name }}</div>
+                            <div class="chat-name">{{ conversation.correspondant.surname }}</div>
                         </div>
                     </li>
                 {% endif %}
