@@ -13,15 +13,15 @@
                 {% for fav in favories %}
                     <li>
                         <div class="block_favory">
-                            <h3 class="favory_title">{{ fav.boutique.title }}</h3>
+                            <h4 class="favory_title text-center">La boutique de<br>{{ fav.boutique.user.surname|capitalize }}</h4>
                             <span>{{ fav.boutique.user.name|capitalize }}</span>
-                            <p>Boutique en ligne depuis le : {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
+                            <p>Boutique en ligne depuis le {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
                             <div class="block_rating">
                                 {% if fav.boutique.avis|length == 0 %}
-                                        {% for i in 1..5 %}
-                                            <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                                        {% endfor %}
-                                        <span>({{ fav.boutique.avis|length }} avis)</span>
+                                    {% for i in 1..5 %}
+                                        <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                    {% endfor %}
+                                    <span>({{ fav.boutique.avis|length }} avis)</span>
                                 {% else %}
                                     {% for key, globalRating in totalGlobalRating %}
                                         {% if key == fav.boutique.id %}
@@ -58,11 +58,10 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <h4>Vous n'avez pas de boutiques favorites.</h4>
+            <h3 class="text-center mess">Vous n'avez pas de boutiques favorites</h3>
         {% endif %}
         <div class="js-filter-pagination" id="pagination_box">
             {{ knp_pagination_render(favories) }}
         </div>
-    </div>
 </div>
 {% endblock %}

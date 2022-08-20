@@ -15,9 +15,7 @@
                 <div class="bloc_form register">
                     {{ form_label(registrationForm.surname) }}
                     {{ form_widget(registrationForm.surname) }}
-
                     <small>{{ form_help(registrationForm.surname) }}</small>
-
                     <div class="form-error">
                         {{ form_errors(registrationForm.surname) }}
                     </div>
@@ -25,9 +23,7 @@
                 <div class="bloc_form register">
                     {{ form_label(registrationForm.name) }}
                     {{ form_widget(registrationForm.name) }}
-
                     <small>{{ form_help(registrationForm.name) }}</small>
-
                     <div class="form-error">
                         {{ form_errors(registrationForm.name) }}
                     </div>
@@ -35,14 +31,11 @@
                 <div class="bloc_form register">
                     {{ form_label(registrationForm.email) }}
                     {{ form_widget(registrationForm.email) }}
-
                     <small>{{ form_help(registrationForm.email) }}</small>
-
                     <div class="form-error">
                         {{ form_errors(registrationForm.email) }}
                     </div>
                 </div>
-
                 <div class="bloc_form register">
                     {{ form_label(registrationForm.plainPassword.first) }}
                     {{ form_widget(registrationForm.plainPassword.first) }}
@@ -61,29 +54,22 @@
                         {{ form_errors(registrationForm.plainPassword.second) }}
                     </div>
                 </div>
-
                 <div class="bloc_form register">
                     {{ form_label(registrationForm.role) }}
                     {{ form_widget(registrationForm.role, {attr : {class :  'radio_box '}}) }}
-
                     <small>{{ form_help(registrationForm.role) }}</small>
-
                     <div class="form-error">
                         {{ form_errors(registrationForm.role) }}
                     </div>
                 </div>
-
                 <div class="bloc_form register">
                     {{ form_label(registrationForm.agreeTerms) }}
                     {{ form_widget(registrationForm.agreeTerms) }}
-
                     <small>{{ form_help(registrationForm.agreeTerms) }}</small>
-
                     <div class="form-error">
                         {{ form_errors(registrationForm.agreeTerms) }}
                     </div>
                 </div>
-
                 <div class="bloc_form btn-custom">
                     <span class="hover-effect">
                         {{ form_widget(registrationForm.submit) }}

@@ -335,8 +335,10 @@ class ConversationController extends AbstractController
 
             $newListing = [];
 
-            for ($i = 0; $i <= 4 ; $i++) { 
-                $newListing[] = $listing[$i];
+            if ($countListing > 4) {
+                for ($i = 0; $i <= 4 ; $i++) { 
+                    $newListing[] = $listing[$i];
+                }
             }
             
 

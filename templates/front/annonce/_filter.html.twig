@@ -3,7 +3,6 @@
 {% endblock %}
 
 {{ form_start(form, {attr : {novalidate: 'novalidate', class : 'js-filter-form'}}) }}
-
     <div class="bloc_form d-flex">
             <div class="bloc_form location_box">
             {{ form_label(form.location) }}
@@ -23,7 +22,6 @@
         </div>
     </div>
     <ul id="city_suggest" class="hidden recherche_module"></ul>
-
     <div class="bloc_form">
         {{ form_label(form.q) }}
         {{ form_widget(form.q) }}
@@ -32,7 +30,6 @@
             {{ form_errors(form.q) }}
         </div>
     </div>
-
     <div class="bloc_form d-flex">
         <div>
             {{ form_label(form.category) }}
@@ -51,7 +48,6 @@
             </div>
         </div>
     </div>
-
     <div class="bloc_form d-flex">
         <div>
             {{ form_label(form.min) }}
@@ -70,9 +66,7 @@
             </div>
         </div>
     </div>
-
     <div id="price-slider" class="m-3" data-min="{{ min }}" data-max=" {{ max }}"></div>
-
     <div class="bloc_form d-flex justify-content-center align-items-center gap1">
         <div class="bloc_form btn-custom search">
             <span class="hover-effect search">
@@ -82,7 +76,7 @@
         {% if app.request.query.get('q') is not null %}
         <div class="bloc_form btn-custom search">
             <span class="hover-effect del_filters">
-                <a class="" href="{{ path('app_annonce_recherche') }}" style="">Supprimer les filtres</a>
+                <a class="" href="{{ path('app_annonce_recherche') }}">Supprimer les filtres</a>
             </span>
         </div>
         {% endif %}

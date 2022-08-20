@@ -1,5 +1,9 @@
 {% extends 'layout/front_profil_base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
+{% endblock %}
+
 {% block container %}
 <div class="wrap2">
     <h1 class="title_top with_sub">Profil</h1>
@@ -17,9 +21,9 @@
                 <div>
                     <h6 class="bold">Photo : </h6>
                     <div>
-                    {% if user.image %}
-                        <img class="user_img_profile" src="{{ asset('uploads/profile/'~user.image) }}" alt="Image utilisateur" style=" width: 10%; border-radius: 50%">
-                    {% endif %}
+                        {% if user.image %}
+                            <img class="user_img_profile" src="{{ asset('uploads/profile/'~user.image) }}" alt="Image utilisateur">
+                        {% endif %}
                     </div>
                 </div>
             <hr>

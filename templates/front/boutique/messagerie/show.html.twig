@@ -1,7 +1,7 @@
 {% extends 'layout/boutique_base.html.twig' %}
 
 {% block title %}
-    <title>Messagerie</title>
+    <title>Conversation</title>
 {% endblock %}
 
 {% block stylesheets %}
@@ -10,44 +10,88 @@
 
 {% block body %}
     <h1 class="title_top">Conversation</h1>
-    <div class="chatbox-holder">
-        <div class="chatbox">
-            <div class="chatbox-top">
-                {% if conversation.user.email == app.user.email %}
-                    <div class="message-box-holder background-white-plus">
-                        <div class="message-box">{{ conversation.premierMessage }}</div>
+    <div class="chat-container" style="background: #eee;">
+        <ul class="chat-box chatContainerScroll">
+            {# Première bulle #}
+            {% if conversation.user.email == app.user.email %}
+                <p class="chat_date">{{ conversation.createdAt|date('d/m/y') }}</p>
+                <li class="chat-left">
+                    <div class="chat-avatar">
+                        {% if app.user.image %}
+                            <img src="{{ asset('uploads/profile/'~app.user.image) }}" alt="Image de profil">
+                        {% else %}
+                            <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
+                        {% endif %}
+                        <div class="chat-name">{{ conversation.user.surname }}</div>
                     </div>
-                {% else %}
-                    <div class="message-box-holder background-lightgrey">
-                        <div class="message-sender">{{ conversation.user.name }}</div>
-                        <div class="message-box message-partner">{{ conversation.premierMessage }}</div>
+                    <div class="chat-text">{{ conversation.premierMessage }}</div>
+                    <div class="chat-hour">{{ conversation.createdAt|date('H:i') }}<span class="fa fa-check-circle btq"></span></div>
+                </li>
+            {% else %}
+                <p class="chat_date">{{ conversation.createdAt|date('d/m/y') }}</p>
+                <li class="chat-left">
+                    <div class="chat-avatar">
+                        {% if conversation.user.image %}
+                            <img src="{{ asset('uploads/profile/'~conversation.user.image) }}" alt="Image de profil">
+                        {% else %}
+                            <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
+                        {% endif %}
+                        <div class="chat-name">{{ conversation.user.surname }}</div>
                     </div>
+                    <div class="chat-text">{{ conversation.premierMessage }}</div>
+                    <div class="chat-hour">{{ conversation.createdAt|date('H:i') }}<span class="fa fa-check-circle btq"></span></div>
+                </li>
+            {% endif %}
+            {# Deuxième bulle et suite #}
+            {% for message in conversation.messages %}
+                {% if message.expediteur.email == conversation.user.email %}
+                    <p class="chat_date">{{ message.createdAt|date('d/m/y') }}</p>
+                    <li class="chat-left">
+                        <div class="chat-avatar">
+                            {% if conversation.user.image %}
+                                <img class="message-sender custom" src="{{ asset('uploads/profile/'~conversation.user.image) }}" style="
+                                " alt="Image de profil">
+                            {% else %}
+                                <img class="message-sender" src="{{ asset('images/default-profile-picture.jpg') }}" style="" alt="Image de profil par défaut">
+                            {% endif %}
+                            <div class="chat-name">{{ conversation.user.surname }}</div>
+                        </div>
+                        <div class="chat-text">{{ message.message }}</div>
+                        <div class="chat-hour">{{ message.createdAt|date('H:i') }}<span class="fa fa-check-circle btq"></span></div>
+                    </li>
+                {% elseif message.expediteur.email == conversation.correspondant.email %}
+                    <p class="chat_date chat-right">{{ message.createdAt|date('d/m/y') }}</p>
+                    <li class="chat-right">
+                        <div class="chat-hour">{{ message.createdAt|date('H:i') }}<span class="fa fa-check-circle btq"></span></div>
+                        <div class="chat-text">{{ message.message }}</div>
+                        <div class="chat-avatar">
+                            {% if conversation.correspondant.image %}
+                                <img class="message-sender custom" src="{{ asset('uploads/profile/'~conversation.correspondant.image) }}" style="
+                            " alt="Image de profil">
+                            {% else %}
+                                <img class="message-sender" src="{{ asset('images/default-profile-picture.jpg') }}" style="" alt="Image de profil par défaut">
+                            {% endif %}
+                            <div class="chat-name">{{ conversation.correspondant.surname }}</div>
+                        </div>
+                    </li>
                 {% endif %}
-                {% for message in conversation.messages %}
-                    {% if message.expediteur.email == app.user.email %}
-                        <div class="message-box-holder background-white-plus">
-                            <div class="message-box">{{ message.message }}</div>
-                        </div>
-                    {% else %}
-                        <div class="message-box-holder background-lightgrey">
-                            <div class="message-sender">{{ message.expediteur.name }}</div>
-                            <div class="message-box message-partner">{{ message.message }}</div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
-            <div class="chat-input-holder">
-                {{ form_start(form, {attr : {novalidate: 'novalidate', class: 'width-100 d-flex row-wrap'}}) }}
-                    {{ form_widget(form.message) }}
+            {% endfor %}
+        </ul>
+        <div class="form-outline custom">
+        {{ form_start(form, {attr : {novalidate: 'novalidate', class: 'width-100 d-flex row-wrap'}}) }}
+            {{ form_widget(form.message) }}
+            <div class="align_button">
+                <div class="block_buttons chat">
                     {{ form_widget(form.submit) }}
                     <div class="form-error width-100">
                         {{ form_errors(form.message) }}
                     </div>
-                {{ form_end(form) }}
+                </div>
             </div>
+        {{ form_end(form) }}
         </div>
     </div>
-    <div class="bloc_form btn-custom btq">
+    <div class="bloc_form btn-custom btq chat">
         <span class="hover-effect btq">
                 <a href="{{ path('boutique_messagerie') }}">Retour</a>
         </span>

@@ -19,7 +19,7 @@
                     {% if is_granted('ROLE_VENDEUR') %}
                         <li class="main_li"><a href="{{ path('boutique_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% else %}
-                        <li class="main_li"><a href="{{ path('user_messagerie') }}" class="notif">Messages{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('user_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% endif %}
                 {% else %}
                     {% if app.request.attributes.get('_route')  == 'app_login' %}
@@ -38,9 +38,9 @@
                         <div id="button_dropdown" class="button_dropdown">
                             <a id="link_menu_drop" class="link_menu_drop">
                                 {% if app.user.image %}
-                                    <img src="{{ asset('uploads/profile/'~app.user.image) }}">
+                                    <img class="img_profile" src="{{ asset('uploads/profile/'~app.user.image) }}" alt="Image de profil">
                                 {% else %}
-                                    <img class="img_profile" src="{{ asset('images/default-profile-picture.jpg') }}">
+                                    <img class="img_profile" src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
                                 {% endif %}
                             </a>
                         </div>

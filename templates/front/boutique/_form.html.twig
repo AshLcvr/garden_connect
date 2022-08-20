@@ -5,12 +5,10 @@
     <div id="contener_form" class="custom">
         <div class="wrap boutique_form border_form">
             {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
-
             <div class="bloc_form">
-                <h5 class="subtitle" style="">Les informations de votre boutique</h5>
+                <h5 class="subtitle">Les informations de votre boutique</h5>
                 <p>Seuls les champs marqués d'un <span> *</span> sont obligatoires.</p>
             </div>
-
             <div id="form_upload" class="bloc_form create">
                 {{ form_label(form.upload) }}
                 {{ form_widget(form.upload) }}
@@ -25,7 +23,6 @@
                     {% endfor %}
                 </div>
             </div>
-
             <div class="bloc_form create">
                 <div class="required">
                     {{ form_label(form.title) }}<span>&nbsp*</span>
@@ -44,7 +41,6 @@
                     {{ form_errors(form.description) }}
                 </div>
             </div>
-
             <div class="bloc_form create tel">
                 {{ form_label(form.telephone) }}
                 {{ form_widget(form.telephone) }}
@@ -53,14 +49,12 @@
                     {{ form_errors(form.telephone) }}
                 </div>
             </div>
-
             <div class="bloc_form create explain">
                 <h3>Votre adresse</h3>
                 <p>Une adresse complète permet une meilleure visibilité pour vos annonces.</p>
                 <p>Votre adresse permet aux utilisateurs de situer votre boutique sur votre page publique.</p>
                 <p>Vous pouvez désactiver la carte de votre page dans l'onglet <i>'Gérer ma boutique'</i> puis <i>'Mes préférences'</i>.</p>
             </div>
-
             <div class="bloc_form bloc_adresse">
                 <div class="bloc_form create adress_form">
                     {{ form_label(form.adress) }}
@@ -70,7 +64,6 @@
                         {{ form_errors(form.adress) }}
                     </div>
                 </div>
-
                 <div class="bloc_form create city_search">
                     <div class="required">
                         {{ form_label(form.search) }}<span>&nbsp*</span>
@@ -84,7 +77,6 @@
                     <ul id="city_suggest" class="hidden"></ul>
                 </div>
             </div>
-
             <div class="bloc_form btn-custom btq">
                 <span class="hover-effect btq">
                     <button>{{ button_label|default('C\'est parti !') }}</button>

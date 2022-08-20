@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block container %}
+<<<<<<< HEAD
 <div id="container_profil">
         <h1 class="title_top">Mes boutiques favorites</h1>
     <div class="container_favory">
@@ -21,10 +22,26 @@
                                 {% if key == fav.boutique.id %}
                                     <span class="rating" data-rating="{{ globalRating }}">
                                         {% for i in 1..5 %}
-                                            {% if i <= globalRating %}
-                                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
-                                            {% else %}
-                                                <i class="fa-solid fa-star" data-checked="false" data-note="{{ i }}"></i>
+                                            <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                        {% endfor %}
+                                        <span>({{ fav.boutique.avis|length }} avis)</span>
+                                    {% else %}
+                                        {% for key, globalRating in totalGlobalRating %}
+                                            {% if key == fav.boutique.id %}
+                                                <span class="rating" data-rating="{{ globalRating }}">
+                                                    {% for i in 1..5 %}
+                                                        {% if i <= globalRating|round %}
+                                                            {% if (i - globalRating) > 0  %}
+                                                                <i class="fa-solid fa-star-half-stroke favory" data-checked="false" data-note="{{ i }}"></i>
+                                                            {% else %}
+                                                                <i class="fa-solid fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </span>
+                                                <span>({{ fav.boutique.avis|length }} avis)</span>
                                             {% endif %}
                                         {% endfor %}
                                     </span>
@@ -52,11 +69,10 @@
             {% endfor %}
         </ul>
         {% else %}
-            <h4>Vous n'avez pas de boutiques favorites.</h4>
+            <h4>Vous n'avez pas de boutiques favorites</h4>
         {% endif %}
         <div class="js-filter-pagination" id="pagination_box">
             {{ knp_pagination_render(favories) }}
         </div>
     </div>
-</div>
 {% endblock %}

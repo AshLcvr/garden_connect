@@ -15,6 +15,7 @@
     {% else %}
         {{ encore_entry_link_tags('focus_annonce') }}
     {% endif %}
+    <link href="{{ asset('bootstrap/sb-admin-2.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -44,14 +45,12 @@
             </a>
         </div>
     </section>
-
     <section id="profile" class="wrap">
         <div class="infos_vendeur">
             <p>{{ boutique.user.name|capitalize }}  |</p>
             <p>Boutique en ligne depuis le {{ boutique.createdAt|date('d/m/Y') }}</p>
         </div>
     </section>
-
     <section id="boutique" class="wrap">
         <div class="head_boutique">
             <div class="head_btq_line">
@@ -87,7 +86,6 @@
             {% endif %}
         </div>
     </section>
-
     {% if annonce == null and boutique.cardActive %}
         {% if boutique.adress == '' %}
             {% set fullAdress = 'false' %}
@@ -99,7 +97,6 @@
             <div id="boutique_coordinates" style="height: 400px; width: 80%; margin: 1rem auto;z-index: 3;" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
         </section>
     {% endif %}
-
     {% if annonce != null %}
         <section id="focus_annonce" class="wrap">
             <div class="annonce_box">
@@ -158,7 +155,6 @@
                 {% endif %}
         </section>
     {% endif %}
-
     {% if boutique.annonces|length > 0 %}
     <section id="listing_annonces_public" class="wrap">
         <h1 class="title_boutique">Les annonces de {{  boutique.user.surname|capitalize }}</h1>
@@ -168,16 +164,14 @@
                 <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
                         <div class="content_card_public">
                             <div class="image_card_public">
-{#                                <div class="annonce_img image-card flexslider slider-annonce">#}
-{#                                    <ul class="slides">#}
+
                                         {% for image in annonce.imagesAnnonces %}
 {#                                            <li class="li_annonce_img">#}
                                                     <img src="{{ asset('uploads/mini/'~image.title) }}" alt="Miniature des annonces"/>
 {#                                            </li>#}
                                         {% endfor %}
-{#                                    </ul>#}
-                                </div>
-{#                            </div>#}
+
+                            </div>
                             <div class="description_card_public">
                                 <div class="description_title">
                                     <p class="annonce_title listing">{{ annonce.title }}&nbsp&nbsp</p><span class="span_created">Mis en ligne le 30/07/2022</span>
@@ -197,7 +191,6 @@
         </ul>
     </section>
     {% endif %}
-
     {% if annonce == null %}
         {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
     {% endif %}

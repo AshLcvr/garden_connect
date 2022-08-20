@@ -8,3 +8,5 @@ import "./styles/footer/footer.css";
 // css, js profil
 import "./styles/profil/profil.css";
 import "./styles/notification/notification.css";
+
+import "./styles/form/form.css";

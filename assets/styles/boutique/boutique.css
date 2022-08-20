@@ -143,11 +143,6 @@
 .card-body table .table_actions {
     width: 20%;
 }
-/* Messagerie */
-.chatbox-holder {
-    width: 70%;
-    margin: 1rem auto 2rem;
-}
 
 @media (max-width: 850px){
     .title_top {

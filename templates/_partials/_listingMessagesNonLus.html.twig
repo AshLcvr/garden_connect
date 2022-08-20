@@ -1,26 +1,49 @@
 
 {% if newListing %}
     {% for conv in newListing %}
-        <a class="dropdown-item d-flex align-items-center" href="{{ path('boutique_messagerie_message', {id: conv.id}) }}">
-            <div class="dropdown-list-image mr-3">
-                <img class="rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}"
-                    alt="...">
-                <div class="status-indicator bg-success"></div>
-            </div>
-            <div class="font-weight-bold">
-                <div class="text-truncate">
-                    {{ conv.premierMessage }}
-                    {% if tblNbrNonlus %}
-                        {% for key, nbr in tblNbrNonlus %}
-                            {% if key == conv.id %}
-                                ({{ nbr }})
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
+        {% if is_granted('ROLE_VENDEUR') %}
+            <a class="dropdown-item d-flex align-items-center" href="{{ path('boutique_messagerie_message', {id: conv.id}) }}">
+                <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}"
+                        alt="...">
+                    <div class="status-indicator bg-success"></div>
                 </div>
-                <div class="small text-gray-500">{{ conv.user.name }} {{ conv.user.surname }} · {{ conv.createdAt|date('Y-m-d H:i:s') }}</div>
-            </div>
-        </a>
+                <div class="font-weight-bold">
+                    <div class="text-truncate">
+                        {{ conv.premierMessage }}
+                        {% if tblNbrNonlus %}
+                            {% for key, nbr in tblNbrNonlus %}
+                                {% if key == conv.id %}
+                                    ({{ nbr }})
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="small text-gray-500">{{ conv.user.name }} {{ conv.user.surname }} · {{ conv.createdAt|date('Y-m-d H:i:s') }}</div>
+                </div>
+            </a>
+        {% else %}
+            <a class="dropdown-item d-flex align-items-center" href="{{ path('user_messagerie_message', {id: conv.id}) }}">
+                <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}"
+                        alt="...">
+                    <div class="status-indicator bg-success"></div>
+                </div>
+                <div class="font-weight-bold">
+                    <div class="text-truncate">
+                        {{ conv.premierMessage }}
+                        {% if tblNbrNonlus %}
+                            {% for key, nbr in tblNbrNonlus %}
+                                {% if key == conv.id %}
+                                    ({{ nbr }})
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="small text-gray-500">{{ conv.user.name }} {{ conv.user.surname }} · {{ conv.createdAt|date('Y-m-d H:i:s') }}</div>
+                </div>
+            </a>
+        {% endif %}
     {% endfor %}
     {% if count != 0 %}
         <h3 style="text-align:center;">+{{ count }}</h3>

@@ -9,7 +9,6 @@
         <div id="contener_form">
             <form action="{{ path('app_login') }}" method="post">
                 <h1 class="title_section_home">Connexion</h1>
-
                 {% if error %}
                     <div class="bloc_form login">
                         <div class="form-error">
@@ -17,21 +16,17 @@
                         </div>
                     </div>
                 {% endif %}
-
                 <div class="bloc_form login">
                     <label for="username">Email :</label>
                     <input type="text" id="username" name="_username" value="{{ last_username }}"/>
                 </div>
-
                 <div class="bloc_form login">
                     <label for="password">Mot de passe :</label>
                     <input type="password" id="password" name="_password"/>
                 </div>
-
                 <div class="forgot">
                     <a href="{{ path('app_reset_password') }}">Mot de passe oublié ?</a>
                 </div>
-
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="bloc_form btn-custom login">
                     <span class="hover-effect">

@@ -31,7 +31,6 @@
             {% endfor %}
         </ul>
     {% endif %}
-
     <h2 class="title_boutique">Laissez votre avis</h2>
     <div class="avis_form">
         {% if app.user %}
@@ -44,7 +43,6 @@
                     </div>
                 {% endif %}
             {% endfor %}
-
             {% if avisAlreadyExist == false and app.user.id != boutique.user.id %}
                 <div>
                     {% include 'front/boutique/avis/_form.html.twig' %}
