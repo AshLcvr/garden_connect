@@ -14,24 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/boutique')]
 class FavoryController extends AbstractController
 {
-    #[Route('/favory/{id}', name: 'app_toggle_favory', methods : ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function toggleFavory(Boutique $boutique, FavoryRepository $favoryRepository): Response
-    {
-        $user = $this->getUser();
-        $alreadyFavory = $favoryRepository->findOneBy(['user'=> $user, 'boutique' => $boutique]);
-        if (empty($alreadyFavory)){
-            $newFavory = new Favory();
-            $newFavory
-                ->setBoutique($boutique)
-                ->setUser($user);
-            $favoryRepository->add($newFavory,true);
-        }else{
-            $favoryRepository->remove($alreadyFavory,true);
-        }
-
-        return $this->redirectToRoute('view_boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
-    }
-
     #[Route('/favorites/listing', name: 'app_listing_favory')]
     public function listingFavorites(Request $request, PaginatorInterface $paginator): Response
     {

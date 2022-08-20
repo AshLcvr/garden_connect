@@ -3,6 +3,10 @@
     <title>Modifier mon avis</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('avis_boutique') }}
+    {{ encore_entry_link_tags('Formulaires') }}
+{% endblock %}
 
 {% block container %}
     <h1 class="title_top">Modifier mon avis</h1>
@@ -17,4 +21,8 @@
         </div>
         {{ include('front/profil/avis/_form.html.twig', {'button_label': 'Modifier mon avis'}) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('avis_boutique') }}
 {% endblock %}

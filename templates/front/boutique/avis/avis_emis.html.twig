@@ -19,7 +19,7 @@
                         <div class="block_avis">
                             <div>
                                 {% if avi.user.image %}
-                                    <img class="avatar_avis" src="{{ asset('uploads/profile/')~avi.user.image }}" alt="photo de profil">
+                                    <img class="avatar_avis" src="{{ avi.user.image }}" alt="photo de profil">
                                 {% else %}
                                     <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                                 {% endif %}
@@ -51,7 +51,7 @@
                         <div class="block_boutique">
                             <div>
                                 {% if avi.boutique.user.image %}
-                                    <img class="avatar_avis" src="{{ asset('uploads/profile/')~avi.boutique.user.image }}" alt="photo de profil">
+                                    <img class="avatar_avis" src="{{ avi.boutique.user.image }}" alt="photo de profil">
                                 {% else %}
                                     <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                                 {% endif %}

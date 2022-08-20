@@ -100,11 +100,11 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
         $allVendeurs = $this->userRepository->getUserVendeur();
         for($i = 0; $i < count($allVendeurs); $i++){
             $imageBoutique = (new ImagesBoutique())
-                ->setTitle('imageBoutiqueDefault.jpg');
+                ->setTitle($this->callApi->generateRandomGardenPictureUsingPixaBay());
             $manager->persist($imageBoutique);
             $boutiqueVendeur = (new Boutique())
-                ->setTitle('La boutique de ' . $allVendeurs[$i]->getSurname())
-                ->setDescription('Bonjour, je m\'appelle ' .$allVendeurs[$i]->getSurname(). ' et je vous présente ma boutique!')
+                ->setTitle('La boutique de ' . $allVendeurs[$i]->getName())
+                ->setDescription('Bonjour, je m\'appelle ' .$allVendeurs[$i]->getName(). ' et je vous présente ma boutique!')
                 ->setTelephone($faker->phoneNumber);
             $this->setRandomAdress($boutiqueVendeur);
             $boutiqueVendeur

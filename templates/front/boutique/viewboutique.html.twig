@@ -22,15 +22,25 @@
         <div class="flexslider" id="slider">
             <ul class="slides relative">
                 {% for imageBoutique in boutique.imagesBoutiques %}
-                    <li>
-                        <img src="{{ asset('uploads/boutique/' ~ imageBoutique.title) }}" />
-                    </li>
+                    {% if imageBoutique == 'imageBoutiqueDefault.jpg' %}
+                        <li>
+                            <img src="{{ asset('uploads/boutique/' ~ imageBoutique.title) }}" />
+                        </li>
+                    {% else %}
+                        <li>
+                            <img style="width: 1400px;height: 400px;object-fit: cover" src="{{ imageBoutique.title }}" />
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>
         <div class="photo_profile">
             <a href="{{ path('view_boutique', {id: boutique.id}) }}">
-            <img src="{{ asset('uploads/profile/incognito-62f7bceeb2bee.png') }}" />
+                {% if boutique.user.image|length != NULL %}
+                    <img style="border-radius: 50%;border:5px solid white" src="{{ boutique.user.image }}" />
+                {% else %}
+                    <img src="{{ asset('uploads/profile/incognito-62f7bceeb2bee.png') }}" />
+                {% endif %}
             </a>
         </div>
     </section>
@@ -50,7 +60,7 @@
                 </div>
                 {% if app.user and notMyboutique %}
                     <div class="favory_boutique">
-                        <a class="favory_button {{ favory }}" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="favory_icon fa-solid fa-heart" ></i></a>
+                        <a title="Ajouter aux favoris" class="favory_button {{ favory }}" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="favory_icon fa-solid fa-heart" ></i></a>
                     </div>
                 {% endif %}
             </div>
@@ -155,13 +165,19 @@
         <ul>
             {% for annonce in annonces %}
                 <li class="annonces_card">
-                    <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
+                <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
                         <div class="content_card_public">
                             <div class="image_card_public">
-                                {% for image in annonce.imagesAnnonces %}
-                                    <img src="{{ asset('uploads/mini/'~image.title) }}" alt="Miniature des annonces"/>
-                                {% endfor %}
-                            </div>
+{#                                <div class="annonce_img image-card flexslider slider-annonce">#}
+{#                                    <ul class="slides">#}
+                                        {% for image in annonce.imagesAnnonces %}
+{#                                            <li class="li_annonce_img">#}
+                                                    <img src="{{ asset('uploads/mini/'~image.title) }}" alt="Miniature des annonces"/>
+{#                                            </li>#}
+                                        {% endfor %}
+{#                                    </ul>#}
+                                </div>
+{#                            </div>#}
                             <div class="description_card_public">
                                 <div class="description_title">
                                     <p class="annonce_title listing">{{ annonce.title }}&nbsp&nbsp</p><span class="span_created">Mis en ligne le 30/07/2022</span>

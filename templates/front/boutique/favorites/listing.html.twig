@@ -8,7 +8,7 @@
 <div id="container_profil">
     <h1 class="title_top">Mes boutiques favorites</h1>
     <div class="container_favory">
-        {% if favories|length < 0 %}
+        {% if favories|length > 0 %}
             <ul>
                 {% for fav in favories %}
                     <li>
