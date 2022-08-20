@@ -8,6 +8,7 @@
     <div id="container_profil">
             <h1 class="title_top">Mes boutiques favorites</h1>
             <div class="container_favory">
+                {% if favories|length < 0 %}
                 <ul>
                     {% for fav in favories %}
                         <li>
@@ -56,6 +57,9 @@
                         </li>
                     {% endfor %}
                 </ul>
+            {% else %}
+            <h3 class="text-center mess">Vous n'avez pas de boutiques favorites</h3>
+        {% endif %}
             <div class="js-filter-pagination" id="pagination_box">
                 {{ knp_pagination_render(favories) }}
             </div>

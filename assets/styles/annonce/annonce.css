@@ -17,6 +17,9 @@
 .annonce_box:nth-child(2n+1) {
     flex-flow: row-reverse;
 }
+.annonce_box.btq:nth-child(2n+1) {
+    flex-flow: unset;
+}
 .annonce_box:hover{
     transform: scale(1.04);
     transition: .6s;
@@ -271,14 +274,15 @@ span.span_created {
     .annonce_img .slides {
         width: 100%;
     }
-    .annonce_box {
+    .annonce_box,
+    .annonce_box:nth-child(2n+1) {
         display: flex;
         flex-flow: column wrap;
         width: 80%;
         margin: 1rem auto;
     }
-    .annonce_img {
-        width: 100%;
+    .annonce_box:nth-child(1) {
+        margin: 0 auto 1rem;
     }
     .annonce_img img {
         max-height: 200px;

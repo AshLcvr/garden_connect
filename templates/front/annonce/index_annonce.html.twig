@@ -4,9 +4,14 @@
     <title>Mes annonces</title>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('recherche_annonce') }}
+{% endblock %}
+
 {% block body %}
     <h1 class="title_top">Mes annonces</h1>
-    <div>
+
+    <div class="wrapform">
         <div class="block_btn_modify plus">
             <div class="bloc_form btn-custom modify btq plus">
                 <span class="hover-effect modify btq">
@@ -14,65 +19,41 @@
                 </span>
             </div>
         </div>
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Catégories</th>
-                        <th>Prix</th>
-                        <th>Créée le</th>
-                        <th>Actif</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% if annonces is empty %}
-                    <tr>
-                        <td colspan="6">
-                            Pas (encore) d'annonces !
-                        </td>
-                    </tr>
-                {% endif %}
-                {% for annonce in annonces %}
-                    <tr>
-                        <td>{{ annonce.title }}</td>
-                        <td>{{ annonce.subcategory.title }}</td>
-                        <td>{{ annonce.price }} €</td>
-                        <td>{{ annonce.createdAt|date('d/m/Y') }}</td>
-                        <td>
-                            {% if annonce.actif == 1 %}
-                                <div class="block_btn_modify">
-                                    <div class="bloc_form btn-custom modify btq">
-                                        <span class="hover-effect modify btq">
-                                            <a title="Désactiver l'annonce" class="" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}" onclick="return confirm('Voulez-vous vraiment désactiver votre annonce ?')"><i class="fa-regular fa-eye"></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            {% else %}
-                                <div class="block_btn_inactive">
-                                    <div class="bloc_form btn-custom inactive">
-                                        <span class="hover-effect inactive">
-                                            <a title="Activer l'annonce" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        </td>
-                        <td class="table_actions" >
-                            <div class="block_btn_modify">
-                                <div class="bloc_form btn-custom modify btq">
-                                    <span class="hover-effect modify btq">
-                                        <a title="Modifier l'annonce" class="" href="{{ path('app_annonce_edit', {'id' : annonce.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    </span>
-                                </div>
-                            </div>
-                            <span title="Supprimer l'annonce">{{ include('front/annonce/_delete_form.html.twig') }}</span>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        {% for annonce in annonces %}
+        <div class="annonce_box btq" style="width: 100%; padding: 1rem; align-items: center; justify-content: center; margin-bottom: 1rem;">
+            <div class="annonce_text">
+                    <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
+                    <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
+                    <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
+                    <p class="" style="color: var(--vertclair); front-weight: bold;">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
+            </div>
+            <div>
+            {% if annonce.actif == 1 %}
+                <div class="block_btn_modify">
+                    <div class="bloc_form btn-custom modify btq">
+                        <span class="hover-effect modify btq">
+                            <a title="Désactiver l'annonce" class="" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}" onclick="return confirm('Voulez-vous vraiment désactiver votre annonce ?')"><i class="fa-regular fa-eye"></i></a>
+                        </span>
+                    </div>
+                </div>
+            {% else %}
+                <div class="block_btn_inactive">
+                    <div class="bloc_form btn-custom inactive">
+                        <span class="hover-effect inactive">
+                            <a title="Activer l'annonce" href="{{ path('app_annonce_actif', {'id' : annonce.id}) }}"><i class="fa-regular fa-eye-slash"></i></a>
+                        </span>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="block_btn_modify">
+                <div class="bloc_form btn-custom modify btq">
+                    <span class="hover-effect modify btq">
+                        <a title="Modifier l'annonce" class="" href="{{ path('app_annonce_edit', {'id' : annonce.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </span>
+                </div>
+            </div>
+            <span title="Supprimer l'annonce">{{ include('front/annonce/_delete_form.html.twig') }}</span>
+            </div>
         </div>
-    </div>
+    {% endfor %}
 {% endblock %}
