@@ -204,10 +204,4 @@ class DefaultController extends AbstractController
 
         return $this->redirectToRoute('view_boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
-
-    #[Route('/mention-legale', name: 'mention_legale')]
-    public function mentionLegale(): Response
-    {
-        return $this->render('front/mention.html.twig');
-    }
 }

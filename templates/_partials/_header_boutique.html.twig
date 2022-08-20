@@ -53,7 +53,7 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {% block user_avatar %}
                             <span class="span_header_user small">
-                            Bonjour {{app.user.surname}}
+                            Bonjour {{app.user.name}}
                             </span>
                             {% if app.user.image %}
                                 <img class="img-profile rounded-circle" src="{{ asset('uploads/profile/'~app.user.image) }}">

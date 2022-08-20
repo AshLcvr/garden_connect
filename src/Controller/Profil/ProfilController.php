@@ -54,6 +54,7 @@ class ProfilController extends AbstractController
             'form' => $form,
         ]);
     }
+
     #[Route('/avis', name: 'profil_avis')]
     public function avis_profil(Request $request, PaginatorInterface $paginator)
     {

@@ -19,7 +19,7 @@
                             <div class="user">
                                 <span class="status busy"></span>
                                 {% if conv.user.image %}
-                                    <img src="{{ asset('uploads/profile/'~conv.user.image) }}" alt="Image de profil">
+                                    <img src="{{ conv.user.image }}" alt="Image de profil">
                                 {% else %}
                                     <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
                                 {% endif %}
@@ -27,9 +27,9 @@
                             <p class="name-time">
                                 {% if conv.user.name == app.user.name %}
                                     <span class="time init btq">Conversation commencée par vous</span><br>
-                                    <span class="name">{{ app.user.surname }}</span>
+                                    <span class="name">{{ app.user.name }}</span>
                                 {% else %}
-                                    <span class="name">{{ conv.user.surname }}</span>
+                                    <span class="name">{{ conv.user.name }}</span>
                                 {% endif %}
                                 {% if conv.modifiedAt == null %}
                                     <span class="time">{{ conv.createdAt|date('d/m/Y') }}</span>

@@ -38,7 +38,7 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
 
                 $annonce = new Annonce();
                 $annonce->setTitle($randSubcat->getTitle());
-                $randText = json_decode(file_get_contents('http://asdfast.beobit.net/api/?length='.random_int(6,50).'&type=word'));
+                $randText = json_decode(file_get_contents('http://asdfast.beobit.net/api/?length='.random_int(6,40).'&type=word'));
                 $annonce->setDescription($randText->text)
                 ->setPrice(random_int(1, 10))
                 ->setMesure($this->getReference('Kg'))
