@@ -16,7 +16,8 @@ class MessageType extends AbstractType
         $builder
             ->add('message', TextareaType::class, [
                 'attr' => [
-                    'class' => 'chat-input'
+                'class' => 'chat-input',
+                'placeholder' => 'Tapez votre message...'
                 ]
             ])
             ->add('submit', SubmitType::class, [

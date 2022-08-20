@@ -1,45 +1,68 @@
 {% extends 'layout/front_profil_base.html.twig' %}
 
+{% block title %}
+    <title>Messagerie</title>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('Messagerie') }}
+{% endblock %}
 
 {% block container %}
-    <h1>Messagerie</h1>
-    <div class="container_conversation_profil" style="display:flex;flex-flow:column;gap:1rem;">
-        {% for conv in conversations %}
-            <a href="{{ path('user_messagerie_message', {id: conv.id}) }}">
-                <div class="block_conversation_profil" style="background-color:grey;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem 1rem 2rem">
-                    <div style="display:flex;gap:1rem;">
-                        <div style="display:flex;align-items:center;">
-                            {% if app.user.id ==  conv.user.id %}
-                                <p style="margin:0;">Moi-même</p>
-                            {% else %}
-                                <p style="margin:0;">{{ conv.user.name }}</p>
-                            {% endif %}
-                        </div>
-                        <div style="display:flex;align-items:center;"><i class="fa-solid fa-arrow-right"></i></div>
-                        <div style="display:flex;align-items:center;">
-                            {% if app.user.id ==  conv.correspondant.id %}
-                                <p style="margin:0;">Moi-même</p>
-                            {% else %}
-                                <p style="margin:0;">{{ conv.correspondant.name }}</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <p style="margin:0;">
-                        Messages non lu
-                            (
+    <h1 class="title_top">Mes Conversations</h1>
+        <div class="messagerie_listing">
+            <div class="users-container">
+                <ul class="users">
+                    {% for conv in conversations %}
+                        <li class="person" data-chat="person1">
+                            <div class="box_user">
+                                <div class="user">
+                                    <span class="status busy"></span>
+                                    {% if conv.user.image %}
+                                        <img src="{{ asset('uploads/profile/'~conv.user.image) }}" alt="Image de profil">
+                                    {% else %}
+                                        <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
+                                    {% endif %}
+                                </div>
+                                <p class="name-time">
+                                    {% if conv.user.name == app.user.name %}
+                                        <span class="time init">Conversation commencée par vous</span><br>
+                                        <span class="name">{{ app.user.surname }}</span>
+                                    {% else %}
+                                        <span class="name">{{ conv.user.surname }}</span>
+                                    {% endif %}
+                                    {% if conv.modifiedAt == null %}
+                                        <span class="time">{{ conv.createdAt|date('d/m/Y') }}</span>
+                                    {% else %}
+                                        <span class="time">{{ conv.modifiedAt|date('d/m/Y') }}</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="box_name_time">
                                 {% for key, nbr in tabNbrNonlus %}
                                     {% if key == conv.id %}
-                                        {{ nbr }}
+                                        {% if nbr > 0 %}
+                                            <p class="mess_nonlus new">Messages non lus 
+                                            <span>{{ nbr }}</span>
+                                            </p>
+                                        {% else %}
+                                            <p class="mess_nonlus none">Pas de nouveaux messages
+                                            </p>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
-                            )
-                    </p>
-                    <i class="fa-solid fa-arrow-right" style="font-size:2rem;color:green;"></i>
-                </div>
-            </a>
-        {% endfor %}
-        <div class="js-filter-pagination" id="pagination_box">
-            {{ knp_pagination_render(conversations) }}
+                                <div class="block_buttons chat see">
+                                    <a title="Voir la conversation" class="conv" href="{{ path('user_messagerie_message', {id: conv.id}) }}">Voir</a>
+                                </div>
+                            </div>
+                        </li>
+                    {% else %}
+                </ul>
+                <p style="font-size: 2rem; text-align: center; color: grey; margin: 3rem 0;">Pas de conversation...</p>
+                    {% endfor %}
+            </div>
         </div>
+    <div class="js-filter-pagination" id="pagination_box">
+        {{ knp_pagination_render(conversations) }}
     </div>
 {% endblock %}
