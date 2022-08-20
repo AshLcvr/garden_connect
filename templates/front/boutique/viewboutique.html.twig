@@ -164,13 +164,7 @@
                 <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
                         <div class="content_card_public">
                             <div class="image_card_public">
-
-                                        {% for image in annonce.imagesAnnonces %}
-{#                                            <li class="li_annonce_img">#}
-                                                    <img src="{{ asset('uploads/mini/'~image.title) }}" alt="Miniature des annonces"/>
-{#                                            </li>#}
-                                        {% endfor %}
-
+                                <img src="{{ asset('uploads/mini/'~annonce.imagesAnnonces[0].title) }}" alt="Miniature des annonces"/>
                             </div>
                             <div class="description_card_public">
                                 <div class="description_title">
