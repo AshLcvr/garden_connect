@@ -51,9 +51,9 @@ class AvisController extends AbstractController
         $mesAvis = $this->maPagination($mesAvis, $paginator, $request, 6);
 
         return $this->render('front/boutique/avis/avis_recus.html.twig', [
-            'mesAvis' => $mesAvis,
+            'mesAvis'           => $mesAvis,
             'totalGlobalRating' => $totalGlobalRating,
-            'totalNumberAvis' => $totalNumberAvis
+            'totalNumberAvis'   => $totalNumberAvis
         ]);
     }
 
@@ -113,6 +113,8 @@ class AvisController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $rating = $form->get('rating')->getData();
+            $avis->setRating($rating);
             $avisRepository->add($avis, true);
 
             return $this->redirectToRoute('app_avis_sent', [], Response::HTTP_SEE_OTHER);

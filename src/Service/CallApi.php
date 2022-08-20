@@ -14,16 +14,36 @@ class CallApi
         $this->client = $client;
     }
 
-    public function getCityInfosbyName(Boutique $boutique)
+    public function generateRandomGardenPictureUsingPixaBay()
     {
-        $url = 'https://geo.api.gouv.fr/communes?codeDepartement=27';
+        $url = 'https://pixabay.com/api/?key=29388502-bab58bd474830488e6ebb4598&q=garden&per_page=50';
         $response = $this->client->request('GET', $url);
         $content = $response->getContent();
         $content = $response->toArray();
+        return $content['hits'][random_int(1,50)]['largeImageURL'];
+    }
+
+    public function generateRandomProfilePictureByGenderUsingRandomUser($randGenderIndex)
+    {
+        $url = 'https://randomuser.me/api/portraits/';
+        if ($randGenderIndex === 0){
+            $url .= 'men/'.random_int(1,80).'.jpg';
+        }else{
+            $url .= 'women/'.random_int(1,80).'.jpg';
+        }
+        return $url;
+    }
+
+    public function getCityInfosbyName(Boutique $boutique)
+    {
+        $url           = 'https://geo.api.gouv.fr/communes?codeDepartement=27';
+        $response      = $this->client->request('GET', $url);
+        $content       = $response->getContent();
+        $content       = $response->toArray();
         $randCityIndex = array_rand($content);
-        $cityname = $content[$randCityIndex]['nom'];
-        $city_code = $content[$randCityIndex]['code'];
-        $post_code = $content[$randCityIndex]['codesPostaux'][0];
+        $cityname      = $content[$randCityIndex]['nom'];
+        $city_code     = $content[$randCityIndex]['code'];
+        $post_code     = $content[$randCityIndex]['codesPostaux'][0];
         $boutique
             ->setCity($cityname)
             ->setCitycode($city_code)
@@ -42,15 +62,15 @@ class CallApi
             $url = 'https://api-adresse.data.gouv.fr/search/?q='.$formatedCityName.'&citycode='.$city_code;
         }
         $response = $this->client->request('GET', $url);
-        $content = $response->getContent();
-        $content = $response->toArray();
+        $content  = $response->getContent();
+        $content  = $response->toArray();
 
         if (!empty($content['features'][0])){
             $coordinates = $content['features'][0]['geometry']['coordinates'];
         }else{
-            $response = $this->client->request('GET','https://api-adresse.data.gouv.fr/search/?q='.$formatedCityName.'&citycode='.$city_code);
-            $content = $response->getContent();
-            $content = $response->toArray();
+            $response    = $this->client->request('GET','https://api-adresse.data.gouv.fr/search/?q='.$formatedCityName.'&citycode='.$city_code);
+            $content     = $response->getContent();
+            $content     = $response->toArray();
             $coordinates = $content['features'][0]['geometry']['coordinates'];
         }
 

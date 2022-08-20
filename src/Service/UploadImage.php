@@ -156,7 +156,6 @@ class UploadImage
         }
 
         // Resize de l'image (optionnel)
-        // Profile
         $imageCat = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
         $imageCat->crop(240, 140);
         $imageCat->save($this->getUploadDirectory() .'/category/'. $fileName);

@@ -4,8 +4,13 @@ namespace App\Controller;
 
 use App\Data\SearchData;
 use App\Entity\Annonce;
+use App\Entity\Avis;
 use App\Entity\Boutique;
+use App\Entity\Favory;
+use App\Form\AvisFormType;
 use App\Form\SearchType;
+use App\Repository\AvisRepository;
+use App\Service\CallApi;
 use Faker\Provider\Lorem;
 use App\Repository\FavoryRepository;
 use App\Repository\MesureRepository;
@@ -22,7 +27,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DefaultController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function homepage(BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
+    public function homepage(CallApi $callApi,BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $categories     = $categoryRepository->findAll();
         $annonces       = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);
@@ -33,8 +38,6 @@ class DefaultController extends AbstractController
         foreach ($allBoutiques as $boutique){
             $boutiquesInfos[] = [ $boutique->getTitle() , $boutique->getLat() , $boutique->getLng() , $boutique->getId() ];
         }
-
-        // dd($annonces);
 
         return $this->render('front/homepage.html.twig', [
             'categories'   => $categories,
@@ -111,6 +114,95 @@ class DefaultController extends AbstractController
                 'favory'        => $favory
             ]
         );
+    }
+
+    #[Route('/public/{id}', name: 'view_boutique')]
+    public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository, AvisRepository $avisRepository, Request $request, FavoryRepository $favoryRepository)
+    {
+        $user = $this->getUser();
+        $annonce = null;
+        $annonces = $annonceRepository->findBy([
+            'boutique' => $boutique->getId(),
+            'actif' => true
+        ]);
+
+        // Détection si la page actuelle est notre boutique
+        $notMyboutique = true;
+        $me = $boutique->getUser();
+        if($user){
+            if ($me->getId() === $user->getId() ){
+                $notMyboutique = false;
+            }
+        }
+
+        // Favoris
+        $favory = '';
+        $alreadyFavory = $favoryRepository->findOneBy(['user'=> $this->getUser(), 'boutique' => $boutique]);
+        if (!empty($alreadyFavory)){
+            $favory = 'favory_active';
+        }
+
+        /// Avis
+        $avis = $avisRepository->findBy(['boutique'=>$boutique]);
+        if ($avis){
+            $numberAvis = count($avis);
+            $total = [];
+            foreach ($avis as  $avi){
+                $total[] = $avi->getRating();
+            }
+            $globalRating = array_sum($total)/$numberAvis;
+        }else{
+            $globalRating = 0;
+        }
+        $avisAlreadyExist = false;
+
+        $newAvis = new Avis();
+        $form = $this->createForm(AvisFormType::class,$newAvis);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rating = $form->get('rating')->getData();
+            $newAvis
+                ->setRating($rating)
+                ->setUser($this->getUser())
+                ->setBoutique($boutique)
+                ->setActif(true)
+                ->setCreatedAt(new \DateTimeImmutable());
+            $avisRepository->add($newAvis, true);
+
+            return $this->redirectToRoute('view_boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render(
+            'front/boutique/viewboutique.html.twig', [
+                'boutique'         => $boutique,
+                'notMyboutique'    => $notMyboutique,
+                'annonces'         => $annonces,
+                'annonce'          => $annonce,
+                'avis'             => $avis,
+                'avisAlreadyExist' => $avisAlreadyExist,
+                'globalRating'     => $globalRating,
+                'form'             => $form->createView(),
+                'favory'           => $favory
+            ]
+        );
+    }
+
+    #[Route('/favory/{id}', name: 'app_toggle_favory', methods : ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    public function toggleFavory(Boutique $boutique, FavoryRepository $favoryRepository): Response
+    {
+        $user = $this->getUser();
+        $alreadyFavory = $favoryRepository->findOneBy(['user'=> $user, 'boutique' => $boutique]);
+        if (empty($alreadyFavory)){
+            $newFavory = new Favory();
+            $newFavory
+                ->setBoutique($boutique)
+                ->setUser($user);
+            $favoryRepository->add($newFavory,true);
+        }else{
+            $favoryRepository->remove($alreadyFavory,true);
+        }
+
+        return $this->redirectToRoute('view_boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/mention-legale', name: 'mention_legale')]

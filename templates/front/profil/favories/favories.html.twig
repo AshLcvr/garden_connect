@@ -5,19 +5,21 @@
 {% endblock %}
 
 {% block container %}
-    <div id="container_profil">
-            <h1 class="title_top">Mes boutiques favorites</h1>
-            <div class="container_favory">
-                {% if favories|length < 0 %}
-                <ul>
-                    {% for fav in favories %}
-                        <li>
-                            <div class="block_favory">
-                                <h4 class="favory_title text-center">La boutique de<br>{{ fav.boutique.user.surname|capitalize }}</h4>
-                                <span>{{ fav.boutique.user.name|capitalize }}</span>
-                                <p>Boutique en ligne depuis le {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
-                                <div class="block_rating">
-                                    {% if fav.boutique.avis|length == 0 %}
+<div id="container_profil">
+        <h1 class="title_top">Mes boutiques favorites</h1>
+    <div class="container_favory">
+        {% if favories|length > 0 %}
+        <ul>
+            {% for fav in favories %}
+                <li>
+                    <div class="block_favory">
+                        <h3 class="favory_title">{{ fav.boutique.title }}</h3>
+                        <span>{{ fav.boutique.user.name|capitalize }}</span>
+                        <p>Boutique en ligne depuis le {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
+                        <div class="block_rating">
+                            {% for key, globalRating in totalGlobalRating %}
+                                {% if key == fav.boutique.id %}
+                                    <span class="rating" data-rating="{{ globalRating }}">
                                         {% for i in 1..5 %}
                                             <i class="fa-regular fa-star favory" data-checked="false" data-note="{{ i }}"></i>
                                         {% endfor %}
@@ -41,23 +43,28 @@
                                                 <span>({{ fav.boutique.avis|length }} avis)</span>
                                             {% endif %}
                                         {% endfor %}
-                                    {% endif %}
-                                </div>
-                                <div class="block_buttons btn_favory">
-                                    <div class="bloc_form btn-custom favory">
-                                        <span class="hover-effect">
-                                            <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
-                                        </span>
-                                    </div>
-                                <span title="Retirer des favoris">
-                                {{ include('front/profil/favories/_delete_form.html.twig') }}
+                                    </span>
+                                    {% for key, nbr in totalNumberAvis %}
+                                        {% if key == fav.boutique.id %}
+                                            <span>({{ nbr }} avis)</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <div class="block_buttons btn_favory">
+                            <div class="bloc_form btn-custom favory">
+                                <span class="hover-effect">
+                                    <a class="" href="{{ path('view_boutique', {id: fav.boutique.id}) }}">Voir la boutique</a>
                                 </span>
-                                </div>
                             </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
             <h3 class="text-center mess">Vous n'avez pas de boutiques favorites</h3>
         {% endif %}
             <div class="js-filter-pagination" id="pagination_box">

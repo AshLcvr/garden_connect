@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Service\CallApi;
 use Faker;
 use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
@@ -21,11 +22,13 @@ class UserFixtures extends Fixture
      * @var UserPasswordHasherInterface
      */
     private UserPasswordHasherInterface $hasher;
+    private CallApi $callApi;
 
 
-    public function __construct(UserPasswordHasherInterface $hasher)
+    public function __construct(UserPasswordHasherInterface $hasher, CallApi $callApi)
     {
-        $this->hasher = $hasher;
+        $this->hasher  = $hasher;
+        $this->callApi = $callApi;
     }
 
     public function load(ObjectManager $manager): void
@@ -85,14 +88,27 @@ class UserFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
         $countVendeur =  0;
         $countUser    =  0;
-        for ($i = 0; $i < 50; $i++) {
-            $user = (new User())
-            ->setName($faker->lastName)
-            ->setSurname($faker->firstName)
-            ->setEmail($faker->email)
-            ->setActif(true);
-            $randomWeek = random_int(-10,-1);
+        $randomWeek = random_int(-10,-1);
+        $genderArray     = ['male','female'];
+        $randGenderIndex = array_rand($genderArray);
+
+        for ($i = 0; $i < 30; $i++) {
+            $user = new User();
+            // Attribution d'un prénom et d'une photo de profile selon le genre
+            if ($randGenderIndex === 0)
+            {
+                $user
+                    ->setName($faker->firstNameMale)
+                    ->setImage($this->callApi->generateRandomProfilePictureByGenderUsingRandomUser(0));
+            }else{
+                $user
+                    ->setName($faker->firstNameFemale)
+                    ->setImage($this->callApi->generateRandomProfilePictureByGenderUsingRandomUser(1));
+            }
             $user
+            ->setSurname($faker->lastName)
+            ->setEmail($faker->email)
+            ->setActif(true)
             ->setCreatedAt(new \DateTimeImmutable($randomWeek.' week'));
             $password = $this->hasher->hashPassword($user, $faker->password);
             $user->setPassword($password);
@@ -114,4 +130,6 @@ class UserFixtures extends Fixture
 
         $manager->flush();
     }
+
+
 }
