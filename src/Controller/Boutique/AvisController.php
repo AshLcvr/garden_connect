@@ -63,7 +63,7 @@ class AvisController extends AbstractController
         $user     = $this->getUser();
         $sentAvis = $avisRepository->findBy(['user' => $user]);
 
-        $mesAvis           = [];
+        $mesAvis = [];
         $globalRating = [];
         $totalGlobalRating = [];
         $numberAvis = [];
