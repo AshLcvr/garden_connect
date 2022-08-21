@@ -9,11 +9,11 @@
                 <li class="avis_box">
                     <div class="avis_box_user">
                         {% if av.user.image %}
-                            <img class="avatar_avis" src="{{ asset('uploads/profile/')~av.user.image }}" alt="photo de profil">
+                            <img class="avatar_avis" src="{{ av.user.image }}" alt="photo de profil">
                         {% else %}
                             <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                         {% endif %}
-                        <span class="user_name_avis">{{ av.user.surname|capitalize }}</span>
+                        <span class="user_name_avis">{{ av.user.name|capitalize }}</span>
                     </div>
                     <div data-rating="{{ globalRating }}">
                         {% for i in 1..5 %}

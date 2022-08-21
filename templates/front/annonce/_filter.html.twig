@@ -82,3 +82,7 @@
         {% endif %}
     </div>
 {{ form_end(form) }}
+
+{% block javascript %}
+    {{ encore_entry_script_tags('Formulaires') }}
+{% endblock %}

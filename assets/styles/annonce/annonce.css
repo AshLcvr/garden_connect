@@ -14,11 +14,11 @@
     width: 80%;
     line-height: 1.2rem;
 }
-.annonce_box.btq{
+.annonce_box.btq {
     width: 48%;
     padding: 1rem;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 1rem;
 }
 .annonce_box:nth-child(2n+1) {
@@ -89,6 +89,11 @@ span.span_created {
     position: absolute;
     bottom: 15px;
 }
+.annonce_price_btq {
+    color: var(--vertfonce);
+    font-weight: bold;
+    font-size: .9rem;
+}
 #listing_annonces_public .annonce_price.listing  {
     bottom: -10px;
     position: absolute;
@@ -117,7 +122,7 @@ span.span_created {
 #listing_annonces_public ul {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 #listing_annonces_public .annonces_card {
     width: 48%;
@@ -249,6 +254,7 @@ span.span_created {
     #listing_annonces_public ul, #avis_boutique ul {
         flex-flow: column nowrap;
         align-items: center !important;
+        justify-content: center;
     }
     #listing_annonces_public .annonces_card,
     #avis_boutique .avis_box {
@@ -282,11 +288,13 @@ span.span_created {
     }
     .annonce_box:nth-child(2n+1) {
         flex-flow: column wrap;
+        justify-content: center;
     }
     #annonces p {
         font-size: .9rem;
     }
-    .annonce_img .slides {
+    .annonce_img .slides,
+    .annonce_img {
         width: 100%;
     }
     .annonce_box,
@@ -381,5 +389,6 @@ span.span_created {
     }
     #listing_annonces_public .annonces_card .content_card_public .image_card_public img {
         max-height: 120px;
+        object-fit: cover;
     }
 }

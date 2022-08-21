@@ -1,7 +1,7 @@
 {% extends 'layout/boutique_base.html.twig' %}
 
 {% block title %}
-    <title>Boutique</title>
+    <title>Informations boutique</title>
 {% endblock %}
 
 {% block stylesheets %}
@@ -23,7 +23,7 @@
                 <div class="block_btn_modify">
                     <div class="bloc_form btn-custom modify btq">
                         <span class="hover-effect modify btq">
-                            <a title="Désactiver la boutique" class="" href="{{ path('app_boutique_actif') }}" onclick="return confirm('Voulez-vous vraiment désactiver votre boutique ?')"><i class="fa-regular fa-eye"></i></a>
+                            <a title="Désactiver la boutique" href="{{ path('app_boutique_actif') }}" onclick="return confirm('Voulez-vous vraiment désactiver votre boutique ?')"><i class="fa-regular fa-eye"></i></a>
                         </span>
                     </div>
                 </div>
@@ -39,7 +39,6 @@
             {{ include('front/boutique/_delete_form.html.twig') }}
         </div>
     </div>
-
     <div class="boutique_accueil">
         <div class="wrap border_form card-body">
             <div class="d-flex flex-column">
@@ -48,7 +47,7 @@
                     <ul class="slides relative">
                     {%  for imageboutique in boutique.imagesBoutiques %}
                         <li class=" li_annonce_img">
-                            <img src="{{ asset('uploads/boutique/'~ imageboutique.title) }}" alt="Images boutique">
+                            <img src="{{ asset('uploads/boutique/'~ imageboutique.title) }}" alt="images boutique">
                         </li>
                     {% endfor %}
                     </ul>

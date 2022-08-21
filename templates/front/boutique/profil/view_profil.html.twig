@@ -7,7 +7,7 @@
 {% block body %}
     <div class="wrap">
         <h1 class="title_top with_sub">Profil</h1>
-        <h4 class="subtitle">{{ user.surname|capitalize }} {{ user.name|capitalize }}</h4>
+        <h4 class="subtitle">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
         <div class="block_btn_modify plus">
             <div class="bloc_form btn-custom modify btq plus">
                 <span class="hover-effect modify btq">
@@ -23,7 +23,7 @@
                     <h6 class="bold">Photo : </h6>
                     <div>
                         {% if user.image %}
-                            <img class="user_img_profile" src="{{ asset('uploads/profile/'~user.image) }}" alt="Image utilisateur">
+                            <img class="user_img_profile" src="{{ asset('uploads/profile/'~user.image) }}" alt="image utilisateur"/>
                         {% endif %}
                     </div>
                 </div>

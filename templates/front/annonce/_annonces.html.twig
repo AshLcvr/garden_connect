@@ -5,7 +5,7 @@
                 <ul class="slides">
                     {% for image in annonce.imagesAnnonces %}
                     <li class="li_annonce_img">
-                        <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
+                        <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
                             <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
                         </a>
                     </li>
@@ -13,7 +13,7 @@
                 </ul>
             </div>
             <div class="annonce_text">
-                <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
+                <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
                     <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
                     <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
                     <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>

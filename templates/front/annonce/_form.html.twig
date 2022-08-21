@@ -1,3 +1,7 @@
+{% block title %}
+    <title>Créer une annonce</title>
+{% endblock %}
+
 <div class="body">
     <div class="wrap annonce_form border_form">
         {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
@@ -71,3 +75,7 @@
         {{ form_end(form) }}
     </div>
 </div>
+
+{% block javascript %}
+    {{ encore_entry_script_tags('Formulaires') }}
+{% endblock %}

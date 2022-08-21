@@ -6,7 +6,7 @@ use App\Entity\Conversation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ConversationType extends AbstractType
@@ -14,7 +14,7 @@ class ConversationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('premier_message', TextType::class, [
+            ->add('premier_message', TextareaType::class, [
                 'label' => 'Premier message'
             ])
             ->add('submit', SubmitType::class, [

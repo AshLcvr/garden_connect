@@ -1,7 +1,7 @@
 {% extends 'layout/boutique_base.html.twig' %}
 
 {% block title %}
-    <title>Boutique Messagerie</title>
+    <title>Messagerie</title>
 {% endblock %}
 
 {% block stylesheets %}
@@ -9,19 +9,29 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="title_top">Mes Conversations</h1>
-    <div class="messagerie_listing" style="">
+    <h1 class="title_top">Mes Conversations</h1>
+    <div class="messagerie_listing">
         <div class="users-container">
             <ul class="users">
                 {% for conv in conversations %}
                     <li class="person" data-chat="person1">
                         <div class="box_user">
                             <div class="user">
-                                <span class="status busy"></span>
-                                {% if conv.user.image %}
-                                    <img src="{{ conv.user.image }}" alt="Image de profil">
+                                {% if conv.user.id % 2 == 0 %}
+                                    <span class="status online"></span>
+                                {% elseif conv.user.id % 3 == 0 %}
+                                    <span class="status away"></span>
+                                {% elseif conv.user.id % 5 == 0 %}
+                                    <span class="status busy"></span>
                                 {% else %}
-                                    <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
+                                    <span class="status offline"></span>
+                                {% endif %}
+                                {% if conv.user.email == app.user.email and app.user.image %}
+                                    <img src="{{ asset('uploads/profile/'~app.user.image) }}" alt="image de profil">
+                                {% elseif conv.user.email != app.user.email %}
+                                    <img src="{{ conv.user.image }}" alt="image de profil">
+                                {% else %}
+                                    <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                                 {% endif %}
                             </div>
                             <p class="name-time">
@@ -42,7 +52,7 @@
                             {% for key, nbr in tblNbrNonlus %}
                                 {% if conv.id == key %}
                                     {% if nbr > 0 %}
-                                        <p class="mess_nonlus new">Messages non lus 
+                                        <p class="mess_nonlus new btq">Messages non lus 
                                             <span>{{ nbr }}</span>
                                         </p>
                                     {% else %}
@@ -57,7 +67,7 @@
                         </div>
                     </li>
                 {% else %}
-                <p style="font-size: 2rem; text-align: center; color: grey; margin: 3rem 0;">Pas de conversation...</p>
+                    <h3 class="text-center mess">Pas de conversation...</h3>
                 {% endfor %}
             </ul>
         </div>

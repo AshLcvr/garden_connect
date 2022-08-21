@@ -1,3 +1,13 @@
+/* Partial _listing */
+.count_list_mess {
+  text-align: center;
+  margin: 0;
+  padding: .5rem;
+}
+.count_list_mess span {
+  font-weight: bold;
+  color: var(--vertfonce);
+}
 /* Page index (listing) */
 .messagerie_listing {
   width: 80%;
@@ -10,6 +20,9 @@
 .mess_nonlus.new {
   color: var(--vertclair);
   font-weight: bold;
+}
+.mess_nonlus.new.btq {
+  color: var(--vertfonce);
 }
 .mess_nonlus.none {
   color: #8796af;
@@ -48,7 +61,6 @@
   position: relative;
   width: 100%;
   padding: 1rem;
-  cursor: pointer;
   border-width: 0 1px 1px;
   border-color: #f0f4f8;
   border-style: solid;
@@ -93,7 +105,8 @@ img {
 .users .person p.name-time .time.init.btq {
   color: var(--vertfonce);
 }
-.users .person .user .status {
+/* .users .person .user  */
+.status {
   width: 10px;
   height: 10px;
   -webkit-border-radius: 100px;
@@ -104,20 +117,25 @@ img {
   top: 0;
   right: 0;
 }
-.users .person .user .status.online {
-  background: #8cf952;
+.users .person .user .status.online,
+.topbar .dropdown-list .dropdown-item .dropdown-list-image
+.status-indicator.online {
+  background-color: #8cf952;
 }
-.users .person .user .status.away {
-  background: #f9be52;
+.users .person .user .status.away,
+.topbar .dropdown-list .dropdown-item .dropdown-list-image
+.status-indicator.away {
+  background-color: #f9be52;
 }
-.users .person .user .status.busy {
-  background: #fd7274;
+.users .person .user .status.busy,
+.topbar .dropdown-list .dropdown-item .dropdown-list-image
+.status-indicator.busy {
+  background-color: #fd7274;
 }
-.users .person .user .status.offline {
-  background: #c4d2e2;
-}
-.users .person .user .status.away {
-  background: #f9be52;
+.users .person .user .status.offline,
+.topbar .dropdown-list .dropdown-item .dropdown-list-image
+.status-indicator.offline {
+  background-color: #c4d2e2;
 }
 /* Page show */
 /* Forumlaire */
@@ -161,6 +179,7 @@ img {
 
 /* BASE */
 .chat-container {
+  background: #eee;
   position: relative;
   padding: 1rem;
   margin: 0 auto;

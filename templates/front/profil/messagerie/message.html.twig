@@ -10,7 +10,7 @@
 
 {% block container %}
     <h1 class="title_top">Conversation</h1>
-    <div class="chat-container" style="background: #eee;">
+    <div class="chat-container">
         <ul class="chat-box chatContainerScroll">
             {# Première bulle #}
             {% if conversation.user.email == app.user.email %}
@@ -18,11 +18,11 @@
                 <li class="chat-left">
                     <div class="chat-avatar">
                         {% if app.user.image %}
-                            <img src="{{ asset('uploads/profile/'~app.user.image) }}" alt="Image de profil">
+                            <img src="{{ asset('uploads/profile/'~app.user.image) }}" alt="image de profil">
                         {% else %}
-                            <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
+                            <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                         {% endif %}
-                        <div class="chat-name">{{ conversation.user.surname }}</div>
+                        <div class="chat-name">{{ conversation.user.name }}</div>
                     </div>
                     <div class="chat-text">{{ conversation.premierMessage }}</div>
                     <div class="chat-hour">{{ conversation.createdAt|date('H:i') }}<span class="fa fa-check-circle"></span></div>
@@ -32,11 +32,11 @@
                 <li class="chat-left">
                     <div class="chat-avatar">
                         {% if conversation.user.image %}
-                            <img src="{{ asset('uploads/profile/'~conversation.user.image) }}" alt="Image de profil">
+                            <img src="{{ conversation.user.image }}" alt="Image de profil">
                         {% else %}
                             <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
                         {% endif %}
-                        <div class="chat-name">{{ conversation.user.surname }}</div>
+                        <div class="chat-name">{{ conversation.user.name }}</div>
                     </div>
                     <div class="chat-text">{{ conversation.premierMessage }}</div>
                     <div class="chat-hour">{{ conversation.createdAt|date('H:i') }}<span class="fa fa-check-circle"></span></div>
@@ -53,7 +53,7 @@
                                 {% else %}
                                     <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
                                 {% endif %}
-                            <div class="chat-name">{{ conversation.user.surname }}</div>
+                            <div class="chat-name">{{ conversation.user.name }}</div>
                         </div>
                         <div class="chat-text">{{ message.message }}</div>
                         <div class="chat-hour">{{ message.createdAt|date('H:i') }}<span class="fa fa-check-circle"></span></div>
@@ -65,11 +65,11 @@
                         <div class="chat-text">{{ message.message }}</div>
                         <div class="chat-avatar">
                             {% if conversation.correspondant.image %}
-                                <img src="{{ asset('uploads/profile/'~conversation.correspondant.image) }}" alt="Image de profil">
+                                <img src="{{ asset('uploads/profile/'~conversation.correspondant.image) }}" alt="image de profil">
                             {% else %}
                                 <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
                             {% endif %}
-                            <div class="chat-name">{{ conversation.correspondant.surname }}</div>
+                            <div class="chat-name">{{ conversation.correspondant.name }}</div>
                         </div>
                     </li>
                 {% endif %}

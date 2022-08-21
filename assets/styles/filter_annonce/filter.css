@@ -155,7 +155,6 @@
     align-items: center;
     color: white;
     background-color: var(--vertclair);
-    padding: 1rem;
 }
 #pagination_box.btq span {
     background-color: var(--vertfonce);

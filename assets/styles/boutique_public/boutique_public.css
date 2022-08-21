@@ -1,3 +1,7 @@
+.img_profil_btq {
+    border-radius: 50%;
+    border:5px solid white;
+}
 .title_boutique {
     text-align: center;
     font: var(--title-font);

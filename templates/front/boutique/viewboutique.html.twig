@@ -23,13 +23,13 @@
         <div class="flexslider" id="slider">
             <ul class="slides relative">
                 {% for imageBoutique in boutique.imagesBoutiques %}
-                    {% if imageBoutique == 'imageBoutiqueDefault.jpg' %}
+                    {% if imageBoutique.title == 'imageBoutiqueDefault.jpg' %}
                         <li>
-                            <img src="{{ asset('uploads/boutique/' ~ imageBoutique.title) }}" />
+                            <img src="{{ asset('uploads/boutique/'~imageBoutique.title) }}" alt="image de la boutique"/>
                         </li>
                     {% else %}
                         <li>
-                            <img style="width: 100%;height: 400px;object-fit: cover" src="{{ imageBoutique.title }}" />
+                            <img style="width: 100%; height: 400px; object-fit: cover;" src="{{ imageBoutique.title }}" alt="image de la boutique par défaut"/>
                         </li>
                     {% endif %}
                 {% endfor %}
@@ -37,10 +37,12 @@
         </div>
         <div class="photo_profile">
             <a href="{{ path('view_boutique', {id: boutique.id}) }}">
-                {% if boutique.user.image|length != NULL %}
-                    <img style="border-radius: 50%;border:5px solid white" src="{{ boutique.user.image }}" />
+                {# {% if boutique.user.image %}
+                    <img class="img_profil_btq" src="{{ asset('uploads/profile/'~ boutique.user.image) }}" alt="image de profil"/> #}
+                {% elseif boutique.user.image|length != NULL %}
+                    <img class="img_profil_btq" src="{{ boutique.user.image }}" alt="image de profil"/>
                 {% else %}
-                    <img src="{{ asset('uploads/profile/incognito-62f7bceeb2bee.png') }}" />
+                    <img class="img_profil_btq" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut"/>
                 {% endif %}
             </a>
         </div>
@@ -59,7 +61,7 @@
                 </div>
                 {% if app.user and notMyboutique %}
                     <div class="favory_boutique">
-                        <a title="Ajouter aux favoris" class="favory_button {{ favory }}" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="favory_icon fa-solid fa-heart" ></i></a>
+                        <a title="Ajouter aux favoris" class="favory_button {{ favory }}" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="favory_icon fa-solid fa-heart"></i></a>
                     </div>
                 {% endif %}
             </div>
@@ -104,7 +106,7 @@
                     <ul class="slides">
                         {% for image in annonce.imagesAnnonces %}
                             <li class="li_annonce_img">
-                                <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
+                                <a title="Voir l'annonce" href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
                                     <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
                                 </a>
                             </li>
@@ -112,12 +114,12 @@
                     </ul>
                 </div>
                 <div class="annonce_text">
-                    <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                      <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
-                      <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
-                      <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
-                      <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
-                      <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
+                    <a title="Voir l'annonce" href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
+                        <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
+                        <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
+                        <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
+                        <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
+                        <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
                     </a>
                 </div>
             </div>
@@ -132,9 +134,9 @@
                                 <p class="telephone">{{ boutique.telephone }}</p>
                             {% endif %}
                             {% if is_granted('ROLE_VENDEUR') %}
-                                <a href="{{ path('boutique_messagerie_new_conversation', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
+                                <a title="Envoyer un message au vendeur" href="{{ path('boutique_messagerie_new_conversation', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
                             {% else %}
-                                <a href="{{ path('new_conversation_user', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
+                                <a title="Envoyer un message au vendeur" href="{{ path('new_conversation_user', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
                             {% endif %}
                         </div>
                     {% else %}
@@ -144,7 +146,7 @@
                         <div class="resp_contact">
                             <a class="message_visiteur" href="{{ path('app_login') }}">Connectez vous</a>
                             <p>ou</p>
-                            <a class="message_visiteur"  href="{{ path('app_register') }}">Inscrivez-vous</a>
+                            <a class="message_visiteur" href="{{ path('app_register') }}">Inscrivez-vous</a>
                         </div>
                     {% endif %}
                 </div>
@@ -153,18 +155,18 @@
     {% endif %}
     {% if boutique.annonces|length > 0 %}
     <section id="listing_annonces_public" class="wrap">
-        <h1 class="title_boutique">Les annonces de {{  boutique.user.surname|capitalize }}</h1>
+        <h1 class="title_boutique">Les annonces de {{  boutique.user.name|capitalize }}</h1>
         <ul>
             {% for annonce in annonces %}
                 <li class="annonces_card">
-                <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
+                <a title="Voir l'annonce" href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
                         <div class="content_card_public">
                             <div class="image_card_public">
-                                <img src="{{ asset('uploads/mini/'~annonce.imagesAnnonces[0].title) }}" alt="Miniature des annonces"/>
+                                <img src="{{ asset('uploads/mini/'~annonce.imagesAnnonces[0].title) }}" alt="miniature des annonces"/>
                             </div>
                             <div class="description_card_public">
                                 <div class="description_title">
-                                    <p class="annonce_title listing">{{ annonce.title }}&nbsp&nbsp</p><span class="span_created">Mis en ligne le 30/07/2022</span>
+                                    <p class="annonce_title listing">{{ annonce.title }}&nbsp&nbsp</p><span class="span_created">{{ annonce.createdAt|date('d/m/Y') }}</span>
                                 </div>
                                 <div class="description_category">
                                     <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
