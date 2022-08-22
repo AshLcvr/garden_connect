@@ -37,8 +37,8 @@
         </div>
         <div class="photo_profile">
             <a href="{{ path('view_boutique', {id: boutique.id}) }}">
-                {# {% if boutique.user.image %}
-                    <img class="img_profil_btq" src="{{ asset('uploads/profile/'~ boutique.user.image) }}" alt="image de profil"/> #}
+                {% if boutique.user.image %}
+                    <img class="img_profil_btq" src="{{ asset('uploads/profile/'~ boutique.user.image) }}" alt="image de profil"/>
                 {% elseif boutique.user.image|length != NULL %}
                     <img class="img_profil_btq" src="{{ boutique.user.image }}" alt="image de profil"/>
                 {% else %}

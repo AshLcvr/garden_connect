@@ -180,6 +180,12 @@ span.span_created {
         max-height: 212px;
     }
 }
+@media (min-width: 1000px) {
+    .annonce_box,
+    .annonce_box img {
+        max-height: 212px;
+    }
+}
 @media (max-width: 1050px) {
     .annonce_img {
         width: 40%;
