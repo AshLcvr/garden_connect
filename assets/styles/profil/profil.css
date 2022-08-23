@@ -105,7 +105,24 @@ span.user_name_avis {
 }
 .avis_box .avis_comm {
     margin-top: .5rem;
-    min-height: 30px;
+    height: 100px;
+    overflow: auto;
+}
+/* Pour Chrome, Edge, Safari */
+.avis_box .avis_comm::-webkit-scrollbar {
+    width: 5px;
+}
+.avis_box .avis_comm::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: var(--orange);
+}
+.avis_box .avis_comm::-webkit-scrollbar-track {
+    background: lightgrey;
+}
+/* Pour Firefox */
+.avis_box .avis_comm {
+    scrollbar-width: thin;
+    scrollbar-color: var(--orange) lightgrey;
 }
 .mess {
     color: rgb(186, 186, 186);
