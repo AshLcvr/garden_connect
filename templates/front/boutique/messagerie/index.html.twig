@@ -1,7 +1,7 @@
 {% extends 'layout/boutique_base.html.twig' %}
 
 {% block title %}
-    <title>Boutique Messagerie</title>
+    <title>Messagerie</title>
 {% endblock %}
 
 {% block stylesheets %}
@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="title_top">Mes Conversations</h1>
-    <div class="messagerie_listing" style="">
+    <h1 class="title_top">Mes Conversations</h1>
+    <div class="messagerie_listing">
         <div class="users-container">
             <ul class="users">
                 {% for conv in conversations %}
@@ -18,7 +18,15 @@
                     <li class="person" data-chat="person1">
                         <div class="box_user">
                             <div class="user">
-                                <span class="status busy "></span>
+                                {% if conv.user.id % 2 == 0 %}
+                                    <span class="status online"></span>
+                                {% elseif conv.user.id % 3 == 0 %}
+                                    <span class="status away"></span>
+                                {% elseif conv.user.id % 5 == 0 %}
+                                    <span class="status busy"></span>
+                                {% else %}
+                                    <span class="status offline"></span>
+                                {% endif %}
                                 {% include '_partials/_photo_profile.html.twig' %}
                             </div>
                             <p class="name-time">
@@ -35,29 +43,80 @@
                                 {% endif %}
                             </p>
                         </div>
-                        <div class="box_name_time">
+                        {# Si vendeur est expéditeur #}
+                        {% if conv.user.name == app.user.name %}
+                            <div class="box_user">
                             {% for key, nbr in tblNbrNonlus %}
                                 {% if conv.id == key %}
                                     {% if nbr > 0 %}
-                                        <p class="mess_nonlus new">Messages non lus 
-                                            <span>{{ nbr }}</span>
-                                        </p>
+                                        <div class="block_buttons chat see new btq" style="border: 1px solid red;">
+                                            <div class="box_name_time">
+                                                <a title="Voir la conversation" class="conv" href="{{ path('boutique_messagerie_message', {id: conv.id}) }}">
+                                                    Messages non lus {{ nbr }}
+                                                </a>
+                                            </div>
+                                        </div>
                                     {% else %}
-                                        <p class="mess_nonlus none">Pas de nouveaux messages
-                                        </p>
+                                    <div class="block_buttons chat see none">
+                                            <div class="box_name_time">
+                                            <a title="Voir la conversation" class="conv" href="{{ path('boutique_messagerie_message', {id: conv.id}) }}">
+                                                Pas de nouveaux messages
+                                            </a>
+                                        </div>
+                                    </div>
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
-                            <div class="block_buttons chat see">
-                                <a title="Voir la conversation" class="conv" href="{{ path('boutique_messagerie_message', {'id' : conv.id}) }}">Voir</a>
+                                <div class="user">
+                                    {% if conv.user.id % 2 == 0 %}
+                                        <span class="status online"></span>
+                                    {% elseif conv.user.id % 3 == 0 %}
+                                        <span class="status away"></span>
+                                    {% elseif conv.user.id % 5 == 0 %}
+                                        <span class="status busy"></span>
+                                    {% else %}
+                                        <span class="status offline"></span>
+                                    {% endif %}
+
+                                    {% if conv.user.email == app.user.email %}
+                                        <img src="{{ conv.correspondant.image }}" alt="image de profil">
+                                    {% else %}
+                                        <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
+                                    {% endif %}
+                                </div>
+                                <p class="name-time">
+                                    <span class="time dest">Destinataire</span><br><span class="name">{{ conv.correspondant.name }}</span>
+                                </p>
                             </div>
-                        </div>
+                        {% else %}
+                        {% for key, nbr in tblNbrNonlus %}
+                                {% if conv.id == key %}
+                                    {% if nbr > 0 %}
+                                        <div class="block_buttons chat see new btq">
+                                            <div class="box_name_time">
+                                                <a title="Voir la conversation" class="conv" href="{{ path('boutique_messagerie_message', {id: conv.id}) }}">
+                                                    Messages non lus {{ nbr }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                    <div class="block_buttons chat see none">
+                                        <div class="box_name_time">
+                                            <a title="Voir la conversation" class="conv" href="{{ path('boutique_messagerie_message', {id: conv.id}) }}">
+                                                Pas de nouveaux messages
+                                            </a>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                     </li>
                 {% else %}
-                <p style="font-size: 2rem; text-align: center; color: grey; margin: 3rem 0;">Pas de conversation...</p>
+                </ul>
+                <h3 class="text-center mess">Pas de conversation...</h3>
                 {% endfor %}
-            </ul>
-        </div>
+            </div>
     </div>
     <div class="js-filter-pagination btq" id="pagination_box">
         {{ knp_pagination_render(conversations) }}

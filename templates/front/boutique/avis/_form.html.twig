@@ -1,6 +1,6 @@
 <div class="body">
-    <div class="wrap boutique_form border_form">
-        {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+    {{ form_start(form, {attr : {novalidate: 'novalidate'}}) }}
+        <div class="wrap boutique_form border_form">
             <div class="bloc_form rating">
                 {{ form_label(form.rating) }}
                 <div class="rating" data-rating="0">
@@ -26,14 +26,14 @@
                         {{ form_errors(form.commentaire) }}
                     </div>
                 </div>
-                <div class="bloc_submit">
-                    <div class="bloc_form btn-custom btq">
-                        <span class="hover-effect btq">
-                            <button>{{ button_label|default('Envoyer') }}</button>
-                        </span>
-                    </div>
+            </div>
+            <div class="block_submit">
+                <div class="bloc_form btn-custom btq">
+                    <span class="hover-effect btq">
+                        <button>{{ button_label|default('Envoyer') }}</button>
+                    </span>
                 </div>
             </div>
-        {{ form_end(form) }}
-    </div>
+        </div>
+    {{ form_end(form) }}
 </div>

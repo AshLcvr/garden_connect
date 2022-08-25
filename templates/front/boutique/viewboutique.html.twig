@@ -39,7 +39,7 @@
                 </div>
                 {% if app.user and notMyboutique %}
                     <div class="favory_boutique">
-                        <a title="Ajouter aux favoris" class="favory_button {{ favory }}" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="favory_icon fa-solid fa-heart" ></i></a>
+                        <a title="Ajouter aux favoris" class="favory_button {{ favory }}" href="{{ path('app_toggle_favory', {'id' : boutique.id}) }}"><i class="favory_icon fa-solid fa-heart"></i></a>
                     </div>
                 {% endif %}
             </div>
@@ -82,12 +82,12 @@
             <div class="annonce_box">
                 {% include '_partials/_images_annonce.html.twig' %}
                 <div class="annonce_text">
-                    <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                      <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
-                      <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
-                      <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
-                      <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
-                      <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
+                    <a title="Voir l'annonce" href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
+                        <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
+                        <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
+                        <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
+                        <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
+                        <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
                     </a>
                 </div>
             </div>
@@ -102,9 +102,9 @@
                                 <p class="telephone">{{ boutique.telephone }}</p>
                             {% endif %}
                             {% if is_granted('ROLE_VENDEUR') %}
-                                <a href="{{ path('boutique_messagerie_new_conversation', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
+                                <a title="Envoyer un message au vendeur" href="{{ path('boutique_messagerie_new_conversation', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
                             {% else %}
-                                <a href="{{ path('new_conversation_user', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
+                                <a title="Envoyer un message au vendeur" href="{{ path('new_conversation_user', {id: annonce.boutique.user.id}) }}" class="message_link">Message</a>
                             {% endif %}
                         </div>
                     {% else %}
@@ -114,7 +114,7 @@
                         <div class="resp_contact">
                             <a class="message_visiteur" href="{{ path('app_login') }}">Connectez vous</a>
                             <p>ou</p>
-                            <a class="message_visiteur"  href="{{ path('app_register') }}">Inscrivez-vous</a>
+                            <a class="message_visiteur" href="{{ path('app_register') }}">Inscrivez-vous</a>
                         </div>
                     {% endif %}
                 </div>
@@ -123,11 +123,11 @@
     {% endif %}
     {% if boutique.annonces|length > 1 %}
     <section id="listing_annonces_public" class="wrap">
-        <h1 class="title_boutique">Les annonces de {{boutique.user.name|capitalize}}</h1>
+        <h1 class="title_boutique">Les annonces de {{  boutique.user.name|capitalize }}</h1>
         <ul>
             {% for annonce in annonces %}
                 <li class="annonces_card">
-                <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
+                <a title="Voir l'annonce" href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
                         <div class="content_card_public">
                             <div class="image_card_public">
                                 {% if boutique.user.id > 136 or annonce.imagesAnnonces[0].title == annonce.subcategory.parentCategory.title|replace({' ': '', ',':'-'})|lower ~ '-image.jpg' %}
@@ -138,7 +138,7 @@
                             </div>
                             <div class="description_card_public">
                                 <div class="description_title">
-                                    <p class="annonce_title listing">{{ annonce.title }}&nbsp&nbsp</p><span class="span_created">Mis en ligne le 30/07/2022</span>
+                                    <p class="annonce_title listing">{{ annonce.title }}&nbsp&nbsp</p><span class="span_created">{{ annonce.createdAt|date('d/m/Y') }}</span>
                                 </div>
                                 <div class="description_category">
                                     <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>

@@ -1,12 +1,22 @@
-
 {% if newListing %}
     {% for conv in newListing %}
         {% if is_granted('ROLE_VENDEUR') %}
             <a class="dropdown-item d-flex align-items-center" href="{{ path('boutique_messagerie_message', {id: conv.id}) }}">
                 <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}"
-                        alt="...">
-                    <div class="status-indicator bg-success"></div>
+                    {% if conv.user.image %}
+                        <img class="rounded-circle" src="{{ conv.user.image }}" alt="image de profil">
+                    {% else %}
+                        <img class="rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
+                    {% endif %}
+                    {% if conv.user.id % 2 == 0 %}
+                        <div id="status" class="status-indicator online"></div>
+                    {% elseif conv.user.id % 3 == 0 %}
+                        <div id="status" class="status-indicator away"></div>
+                    {% elseif conv.user.id % 5 == 0 %}
+                        <div id="status" class="status-indicator busy"></div>
+                    {% else %}
+                        <div id="status" class="status-indicator offline"></div>
+                    {% endif %}
                 </div>
                 <div class="font-weight-bold">
                     <div class="text-truncate">
@@ -19,34 +29,16 @@
                             {% endfor %}
                         {% endif %}
                     </div>
-                    <div class="small text-gray-500">{{ conv.user.name }} {{ conv.user.surname }} · {{ conv.createdAt|date('Y-m-d H:i:s') }}</div>
-                </div>
-            </a>
-        {% else %}
-            <a class="dropdown-item d-flex align-items-center" href="{{ path('user_messagerie_message', {id: conv.id}) }}">
-                <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}"
-                        alt="...">
-                    <div class="status-indicator bg-success"></div>
-                </div>
-                <div class="font-weight-bold">
-                    <div class="text-truncate">
-                        {{ conv.premierMessage }}
-                        {% if tblNbrNonlus %}
-                            {% for key, nbr in tblNbrNonlus %}
-                                {% if key == conv.id %}
-                                    ({{ nbr }})
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
+                    <div class="small text-gray-500">
+                        {{ conv.user.name }} {{ conv.user.surname }} / {{ conv.createdAt|date('d/m/Y H:i') }}
                     </div>
-                    <div class="small text-gray-500">{{ conv.user.name }} {{ conv.user.surname }} · {{ conv.createdAt|date('Y-m-d H:i:s') }}</div>
                 </div>
             </a>
         {% endif %}
     {% endfor %}
     {% if count != 0 %}
-        <h3 style="text-align:center;">+{{ count }}</h3>
+        <h3 class="count_list_mess">
+            <span>+ {{ count }}</span>
+        </h3>
     {% endif %}
 {% endif %}
-

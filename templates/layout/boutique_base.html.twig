@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {% block title %}
-        <title>Gestion de ma boutique</title>
+            <title>Gestion de ma boutique</title>
         {% endblock %}
         <link rel="icon" href="{{ asset('images/logo-sans-fond.png') }}" >
         <link rel="stylesheet" href="//use.fontawesome.com/releases/v6.0.0/css/all.css">
@@ -36,8 +36,7 @@
                         <span>Retour au site</span>
                     </a>
                 </li>
-
-<li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link collapsed custom" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseProfil"
                     aria-expanded="true" aria-controls="collapseUtilities" >
                         <i class="fa-solid fa-user custom"></i>
@@ -47,15 +46,9 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="{{ path('boutique_view_profil') }}">Voir mon profil</a>
                             <a class="collapse-item" href="{{ path('boutique_edit_profil') }}">Modifier mon profil</a>
-
-                            {# <a class="dropdown-item" href="{{ path('boutique_view_profil') }}">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Mon profil
-                        </a> #}
                         </div>
                     </div>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link custom" href="{{ path('app_listing_favory') }}">
                         <i class="fa-solid fa-heart custom"></i>
@@ -67,13 +60,11 @@
                     Interface
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link collapsed custom" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce"
-                       aria-expanded="true" aria-controls="collapseUtilities" >
+                    <a class="nav-link collapsed custom" href="{{ path('app_annonce_index') }}" data-toggle="collapse" data-target="#collapseAnnonce" aria-expanded="true" aria-controls="collapseUtilities" >
                         <i class="fa-solid fa-basket-shopping custom"></i>
                         <span>Mes annonces</span>
                     </a>
-                    <div id="collapseAnnonce" class="collapse" aria-labelledby="headingUtilities"
-                         data-parent="#accordionSidebar">
+                    <div id="collapseAnnonce" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="{{ path('app_annonce_new') }}">Ajouter une annonce</a>
                             <a class="collapse-item" href="{{ path('app_annonce_index') }}">Gérer mes annonces</a>
@@ -85,8 +76,7 @@
                         <i class="fa-solid fa-sliders custom"></i>
                         <span>Gérer ma boutique</span>
                     </a>
-                    <div id="collapseParam" class="collapse" aria-labelledby="headingUtilities"
-                         data-parent="#accordionSidebar">
+                    <div id="collapseParam" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="{{ path('app_boutique_detail') }}">Informations boutique</a>
                             <a class="collapse-item" href="{{ path('app_boutique_preference') }}">Mes préférences</a>
@@ -94,13 +84,11 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link collapsed custom" href="#" data-toggle="collapse" data-target="#collapseAvis"
-                       aria-expanded="true" aria-controls="collapseUtilities">
+                    <a class="nav-link collapsed custom" href="#" data-toggle="collapse" data-target="#collapseAvis" aria-expanded="true" aria-controls="collapseUtilities">
                         <i class="fa-solid fa-star custom"></i>
                         <span>Mes avis</span>
                     </a>
-                    <div id="collapseAvis" class="collapse" aria-labelledby="headingUtilities"
-                         data-parent="#accordionSidebar">
+                    <div id="collapseAvis" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="{{ path('app_avis_received') }}">Avis reçus</a>
                             <a class="collapse-item" href="{{ path('app_avis_sent') }}">Avis émis</a>
@@ -121,7 +109,6 @@
                 </div>
             </div>
         </div>
-
         {%  include '_partials/_footer_boutique.html.twig' %}
 
         <script src="{{ asset('bootstrap/vendor/jquery/jquery.min.js') }}"></script>
