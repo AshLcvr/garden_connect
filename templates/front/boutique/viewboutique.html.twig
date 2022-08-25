@@ -20,30 +20,10 @@
 
 {% block body %}
     <section id="slider-home_boutique">
-        <div class="flexslider" id="slider">
-            <ul class="slides relative">
-                {% for imageBoutique in boutique.imagesBoutiques %}
-                    {% if imageBoutique == 'imageBoutiqueDefault.jpg' %}
-                        <li>
-                            <img src="{{ asset('uploads/boutique/' ~ imageBoutique.title) }}" />
-                        </li>
-                    {% else %}
-                        <li>
-                            <img style="width: 100%;height: 400px;object-fit: cover" src="{{ imageBoutique.title }}" />
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="photo_profile">
-            <a href="{{ path('view_boutique', {id: boutique.id}) }}">
-                {% if boutique.user.image|length != NULL %}
-                    <img style="border-radius: 50%;border:5px solid white" src="{{ boutique.user.image }}" />
-                {% else %}
-                    <img src="{{ asset('uploads/profile/incognito-62f7bceeb2bee.png') }}" />
-                {% endif %}
-            </a>
-        </div>
+        {% include '_partials/_images_boutique.html.twig' %}
+        <a href="{{ path('view_boutique', {id: boutique.id}) }}">
+            {% include '_partials/_photo_profile.html.twig' %}
+        </a>
     </section>
     <section id="profile" class="wrap">
         <div class="infos_vendeur">
@@ -100,17 +80,7 @@
     {% if annonce != null %}
         <section id="focus_annonce" class="wrap">
             <div class="annonce_box">
-                <div class="annonce_img image-card flexslider slider-annonce">
-                    <ul class="slides">
-                        {% for image in annonce.imagesAnnonces %}
-                            <li class="li_annonce_img">
-                                <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                                    <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                {% include '_partials/_images_annonce.html.twig' %}
                 <div class="annonce_text">
                     <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
                       <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
@@ -151,16 +121,20 @@
                 {% endif %}
         </section>
     {% endif %}
-    {% if boutique.annonces|length > 0 %}
+    {% if boutique.annonces|length > 1 %}
     <section id="listing_annonces_public" class="wrap">
-        <h1 class="title_boutique">Les annonces de {{  boutique.user.surname|capitalize }}</h1>
+        <h1 class="title_boutique">Les annonces de {{boutique.user.name|capitalize}}</h1>
         <ul>
             {% for annonce in annonces %}
                 <li class="annonces_card">
                 <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="content_card_public_link">
                         <div class="content_card_public">
                             <div class="image_card_public">
-                                <img src="{{ asset('uploads/mini/'~annonce.imagesAnnonces[0].title) }}" alt="Miniature des annonces"/>
+                                {% if boutique.user.id > 136 or annonce.imagesAnnonces[0].title == annonce.subcategory.parentCategory.title|replace({' ': '', ',':'-'})|lower ~ '-image.jpg' %}
+                                    <img src="{{ asset('uploads/mini/'~annonce.imagesAnnonces[0].title) }}" alt="Miniature des annonces"/>
+                                {% else %}
+                                    <img style="height: 200px;width: 100%;object-fit: cover " src="{{ annonce.imagesAnnonces[0].title }}" alt="image annonce"/>
+                                {% endif %}
                             </div>
                             <div class="description_card_public">
                                 <div class="description_title">

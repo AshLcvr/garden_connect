@@ -24,7 +24,7 @@ if (link_dropdown != null) {
   });
 }
 
-// Affichage du header quand scroll up sur front
+// Affichage du header quand scroll up
 var lastScrollTop = 0;
 let header = document.getElementById("header");
 document.addEventListener(

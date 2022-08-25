@@ -9,20 +9,18 @@
 {% endblock %}
 
 {% block body %}
+    {% set user = conversation.user %}
     <h1 class="title_top">Conversation</h1>
     <div class="chat-container" style="background: #eee;">
         <ul class="chat-box chatContainerScroll">
             {# Première bulle #}
-            {% if conversation.user.email == app.user.email %}
+            {% if user.email == app.user.email %}
                 <p class="chat_date">{{ conversation.createdAt|date('d/m/y') }}</p>
                 <li class="chat-left">
                     <div class="chat-avatar">
-                        {% if app.user.image %}
-                            <img src="{{ app.user.image }}" alt="Image de profil">
-                        {% else %}
-                            <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
-                        {% endif %}
-                        <div class="chat-name">{{ conversation.user.name }}</div>
+                        {% include '_partials/_photo_profile.html.twig' %}
+
+                        <div class="chat-name">{{ user.name }}</div>
                     </div>
                     <div class="chat-text">{{ conversation.premierMessage }}</div>
                     <div class="chat-hour">{{ conversation.createdAt|date('H:i') }}<span class="fa fa-check-circle btq"></span></div>
@@ -31,12 +29,9 @@
                 <p class="chat_date">{{ conversation.createdAt|date('d/m/y') }}</p>
                 <li class="chat-left">
                     <div class="chat-avatar">
-                        {% if conversation.user.image %}
-                            <img src="{{ conversation.user.image }}" alt="Image de profil">
-                        {% else %}
-                            <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
-                        {% endif %}
-                        <div class="chat-name">{{ conversation.user.name }}</div>
+                        {% include '_partials/_photo_profile.html.twig' %}
+
+                        <div class="chat-name">{{ user.name }}</div>
                     </div>
                     <div class="chat-text">{{ conversation.premierMessage }}</div>
                     <div class="chat-hour">{{ conversation.createdAt|date('H:i') }}<span class="fa fa-check-circle btq"></span></div>
@@ -44,17 +39,17 @@
             {% endif %}
             {# Deuxième bulle et suite #}
             {% for message in conversation.messages %}
-                {% if message.expediteur.email == conversation.user.email %}
+                {% if message.expediteur.email == user.email %}
                     <p class="chat_date">{{ message.createdAt|date('d/m/y') }}</p>
                     <li class="chat-left">
                         <div class="chat-avatar">
-                            {% if conversation.user.image %}
-                                <img class="message-sender custom" src="{{ conversation.user.image }}" style="
+                            {% if user.image %}
+                                <img class="message-sender custom" src="{{ user.image }}" style="
                                 " alt="Image de profil">
                             {% else %}
                                 <img class="message-sender" src="{{ asset('images/default-profile-picture.jpg') }}" style="" alt="Image de profil par défaut">
                             {% endif %}
-                            <div class="chat-name">{{ conversation.user.name }}</div>
+                            <div class="chat-name">{{ user.name }}</div>
                         </div>
                         <div class="chat-text">{{ message.message }}</div>
                         <div class="chat-hour">{{ message.createdAt|date('H:i') }}<span class="fa fa-check-circle btq"></span></div>

@@ -14,11 +14,7 @@
                     <li>
                         <div class="block_avis">
                             <div>
-                                {% if avi.user.image %}
-                                    <img class="avatar_avis" src="{{ avi.user.image }}" alt="photo de profil">
-                                {% else %}
-                                    <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
-                                {% endif %}
+                                {% include '_partials/_photo_profile.html.twig' %}
                                 <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
                             </div>
                             <div>
@@ -46,11 +42,14 @@
                         <div class="separator down user"><i class="fa-solid fa-arrow-down"></i></div>
                         <div class="block_boutique">
                             <div>
-                                {% if avi.boutique.user.image %}
-                                    <img class="avatar_avis" src="{{ avi.boutique.user.image }}" alt="photo de profil">
-                                {% else %}
-                                    <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
-                                {% endif %}
+                                {% set user = avi.boutique.user %}
+                                {% include '_partials/_photo_profile.html.twig' %}
+
+                                {#                                {% if avi.boutique.user.image %}#}
+{#                                    <img class="avatar_avis" src="{{ avi.boutique.user.image }}" alt="photo de profil">#}
+{#                                {% else %}#}
+{#                                    <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">#}
+{#                                {% endif %}#}
                                 <span class="user_name_avis">{{ avi.boutique.user.name|capitalize }}</span>
                             </div>
                             <div>

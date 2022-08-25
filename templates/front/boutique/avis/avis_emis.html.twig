@@ -19,11 +19,13 @@
                         <div class="block_avis">
                             <div>
                                 {% if avi.user.image %}
-                                    <img class="avatar_avis" src="{{ avi.user.image }}" alt="photo de profil">
-                                {% else %}
-                                    <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
+                                    {% include '_partials/_photo_profile.html.twig' %}
+
+{#                                    <img class="avatar_avis" src="{{ avi.user.image }}" alt="photo de profil">#}
+{#                                {% else %}#}
+{#                                    <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">#}
                                 {% endif %}
-                                <span class="user_name_avis">{{ avi.user.surname|capitalize }}</span>
+                                <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
                             </div>
                             <div>
                                 {% for i in 1..5 %}
@@ -50,12 +52,9 @@
                         <div class="separator down"><i class="fa-solid fa-arrow-down"></i></div>
                         <div class="block_boutique">
                             <div>
-                                {% if avi.boutique.user.image %}
-                                    <img class="avatar_avis" src="{{ avi.boutique.user.image }}" alt="photo de profil">
-                                {% else %}
-                                    <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
-                                {% endif %}
-                                <span class="user_name_avis">{{ avi.boutique.user.surname|capitalize }}</span>
+                                {% set user = avi.boutique.user %}
+                                {% include '_partials/_photo_profile.html.twig' %}
+                                <span class="user_name_avis">{{ avi.boutique.user.name|capitalize }}</span>
                             </div>
                             <div>
                                 <p><strong>{{ avi.boutique.title }}</strong></p>

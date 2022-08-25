@@ -44,15 +44,7 @@
         <div class="wrap border_form card-body">
             <div class="d-flex flex-column">
                 <h6 class="bold">Photos : </h6>
-                <div class="flexslider" id="slider">
-                    <ul class="slides relative">
-                    {%  for imageboutique in boutique.imagesBoutiques %}
-                        <li class=" li_annonce_img">
-                            <img src="{{ asset('uploads/boutique/'~ imageboutique.title) }}" alt="Images boutique">
-                        </li>
-                    {% endfor %}
-                    </ul>
-                </div>
+                {% include '_partials/_images_boutique.html.twig' %}
             </div>
             <hr>
             <div class="d-flex flex-column">

@@ -4,6 +4,7 @@ namespace App\Controller\Boutique;
 
 use App\Entity\Avis;
 use App\Entity\Boutique;
+use App\Entity\ImagesBoutique;
 use App\Form\AvisFormType;
 use App\Form\BoutiqueType;
 use App\Form\EditProfilType;
@@ -48,7 +49,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/edit', name: 'app_boutique_edit', methods: ['GET', 'POST'])]
-    public function editBoutique(Request $request, BoutiqueRepository $boutiqueRepository, UploadImage $uploadImage, CallApi $callApi): Response
+    public function editBoutique(Request $request, BoutiqueRepository $boutiqueRepository, ImagesBoutiqueRepository $imagesBoutiqueRepository, UploadImage $uploadImage, CallApi $callApi): Response
     {
         $boutique = $this->getUserBoutique();
 
@@ -65,6 +66,7 @@ class BoutiqueController extends AbstractController
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
+                $imagesBoutiqueRepository->remove($imagesBoutiqueRepository->findImagesbyBoutiqueId($boutique->getId())[0],true);
                 $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
             }else{
                 $this->addFlash('failure','4 photos max !');

@@ -10,11 +10,11 @@ class DataCategories
         $categories = [
             [
                 'title' => 'Cereales Et Grains',
-                'image' => 'cerealesetgrains-image.jpg'
+                'image' => 'cereales-et-grains-image.jpg'
             ],
             [
                 'title' => 'Engrais naturels et accessoires',
-                'image' => 'engraisnaturelsetaccessoires-image.jpg'
+                'image' => 'engrais-naturels-et-accessoires-image.jpg'
             ],
             [
                 'title' => 'Farine',
@@ -26,7 +26,7 @@ class DataCategories
             ],
             [
                 'title' => 'Fruits à coques',
-                'image' => 'fruitsàcoques-image.jpg'
+                'image' => 'fruits-à-coques-image.jpg'
             ],
             [
                 'title' => 'Herbes, épices, aromates, graines',
@@ -34,19 +34,19 @@ class DataCategories
             ],
             [
                 'title' => 'Huiles, miel et truffes',
-                'image' => 'huiles-miel-ettruffes-image.jpg'
+                'image' => 'huiles-miel-et-truffes-image.jpg'
             ],
             [
                 'title' => 'Jus de fruits et de légumes',
-                'image' => 'jusdefruitsetdelégumes-image.jpg'
+                'image' => 'jus-de-fruits-et-de-légumes-image.jpg'
             ],
             [
                 'title' => 'Légumes et pois',
-                'image' => 'légumesetpois-image.jpg'
+                'image' => 'légumes-et-pois-image.jpg'
             ],
             [
                 'title' => 'Œufs',
-                'image' => 'œuf-image.jpg'
+                'image' => 'œufs-image.jpg'
             ],
             [
                 'title' => 'Panier',

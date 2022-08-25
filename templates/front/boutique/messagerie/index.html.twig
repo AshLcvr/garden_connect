@@ -14,15 +14,12 @@
         <div class="users-container">
             <ul class="users">
                 {% for conv in conversations %}
+                    {% set user = conv.user %}
                     <li class="person" data-chat="person1">
                         <div class="box_user">
                             <div class="user">
-                                <span class="status busy"></span>
-                                {% if conv.user.image %}
-                                    <img src="{{ conv.user.image }}" alt="Image de profil">
-                                {% else %}
-                                    <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="Image de profil par défaut">
-                                {% endif %}
+                                <span class="status busy "></span>
+                                {% include '_partials/_photo_profile.html.twig' %}
                             </div>
                             <p class="name-time">
                                 {% if conv.user.name == app.user.name %}

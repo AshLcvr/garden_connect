@@ -1,23 +1,13 @@
 <section id="annonces" class="wrap">
     {% for annonce in annonces %}
         <div class="annonce_box">
-            <div class="annonce_img image-card flexslider slider-annonce">
-                <ul class="slides">
-                    {% for image in annonce.imagesAnnonces %}
-                    <li class="li_annonce_img">
-                        <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                            <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+            {% include '_partials/_images_annonce.html.twig' %}
             <div class="annonce_text">
                 <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
                     <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
                     <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
                     <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
-                    {% if annonce.description|length < 30 %}
+                    {% if annonce.description|length < 150 %}
                         <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
                     {% else %}
                         <p class="annonce_description"><span>Description : </span>{{ annonce.description|slice(0,150) }}...</p>

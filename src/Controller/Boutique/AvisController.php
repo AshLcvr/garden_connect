@@ -23,81 +23,37 @@ class AvisController extends AbstractController
         $boutique = $boutiqueRepository->findOneBy(['user' => $user->getId()]);
         $receivedAvis = $avisRepository->findBy(['boutique' => $boutique]);
 
-        $globalRating = [];
-        $totalGlobalRating = [];
-        $numberAvis = [];
-        $totalNumberAvis = [];
-        $mesAvis = [];
-
-        if ($receivedAvis){
-            foreach ($receivedAvis as $key => $avi) {
-                $mesAvis[] = $avi;
-                $numberAvis = count($avi->getBoutique()->getAvis());
-                $totalNumberAvis[$avi->getBoutique()->getId()] = count($avi->getBoutique()->getAvis());
-                foreach ($avi->getBoutique()->getAvis() as $key => $value) {
-                    $globalRating[] = $value->getRating();
-                }
-                $totalGlobalRating[$avi->getBoutique()->getId()] = round(array_sum($globalRating)/$numberAvis);
-                $globalRating = [];
-            }
-        }else{
-            $totalGlobalRating = 0;
-        }
-
-        usort($mesAvis, function(Avis $a, Avis $b){
+        usort($this->getSentOrReceivedAvis($receivedAvis)[2], function(Avis $a, Avis $b){
             return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
         });
         
-        $mesAvis = $this->maPagination($mesAvis, $paginator, $request, 6);
+        $mesAvis = $this->maPagination($this->getSentOrReceivedAvis($receivedAvis)[2], $paginator, $request, 6);
 
         return $this->render('front/boutique/avis/avis_recus.html.twig', [
             'mesAvis'           => $mesAvis,
-            'totalGlobalRating' => $totalGlobalRating,
-            'totalNumberAvis'   => $totalNumberAvis
+            'totalGlobalRating' => $this->getSentOrReceivedAvis($receivedAvis)[0],
+            'totalNumberAvis'   => $this->getSentOrReceivedAvis($receivedAvis)[1],
+            'user'              => $boutique->getUser()
         ]);
     }
 
     #[Route('/avis-emis', name: 'app_avis_sent', methods: ['GET', 'POST'])]
-    public function sentAvis(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
+    public function sentAvis(Request $request, BoutiqueRepository $boutiqueRepository, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
     {
         $user     = $this->getUser();
+        $boutique = $boutiqueRepository->findOneBy(['user' => $user->getId()]);
         $sentAvis = $avisRepository->findBy(['user' => $user]);
 
-        $mesAvis = [];
-        $globalRating = [];
-        $totalGlobalRating = [];
-        $numberAvis = [];
-        $totalNumberAvis = [];
-        $total = [];
-
-        if ($sentAvis){
-            foreach ($sentAvis as $key => $avi) {
-                $mesAvis[] = $avi;
-                $numberAvis = count($avi->getBoutique()->getAvis());
-                $totalNumberAvis[$avi->getBoutique()->getId()] = $numberAvis;
-                foreach ($avi->getBoutique()->getAvis() as $key => $value) {
-                    $total[] = $value->getRating();
-                }
-                if ($numberAvis) {
-                    $globalRating[$avi->getBoutique()->getId()] = array_sum($total)/$numberAvis;
-                    $total = [];
-                    $totalGlobalRating[$avi->getBoutique()->getId()] = $globalRating[$avi->getBoutique()->getId()];
-                    $globalRating = [];
-                }
-            }
-        }else{
-            $totalGlobalRating = 0;
-        }
-
-        usort($mesAvis, function(Avis $a, Avis $b){
+        usort($this->getSentOrReceivedAvis($sentAvis)[2], function(Avis $a, Avis $b){
             return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
         });
-        $mesAvis = $this->maPagination($mesAvis, $paginator, $request, 5);
+        $mesAvis = $this->maPagination($this->getSentOrReceivedAvis($sentAvis)[2], $paginator, $request, 5);
 
         return $this->render('front/boutique/avis/avis_emis.html.twig', [
-            'mesAvis' => $mesAvis,
-            'totalGlobalRating' => $totalGlobalRating,
-            'totalNumberAvis' => $totalNumberAvis
+            'mesAvis'           => $mesAvis,
+            'totalGlobalRating' => $this->getSentOrReceivedAvis($sentAvis)[0],
+            'totalNumberAvis'   => $this->getSentOrReceivedAvis($sentAvis)[1],
+            'user'              => $boutique->getUser()
         ]);
     }
 
@@ -134,5 +90,30 @@ class AvisController extends AbstractController
         }
 
         return $this->redirectToRoute('app_avis_sent', [], Response::HTTP_SEE_OTHER);
+    }
+
+    private function getSentOrReceivedAvis($avis)
+    {
+        $globalRating = [];
+        $totalGlobalRating = [];
+        $totalNumberAvis = [];
+        $mesAvis = [];
+
+        if ($avis) {
+            foreach ($avis as $key => $avi) {
+                $mesAvis[] = $avi;
+                $numberAvis = count($avi->getBoutique()->getAvis());
+                $totalNumberAvis[$avi->getBoutique()->getId()] = count($avi->getBoutique()->getAvis());
+                foreach ($avi->getBoutique()->getAvis() as $key => $value) {
+                    $globalRating[] = $value->getRating();
+                }
+                $totalGlobalRating[$avi->getBoutique()->getId()] = round(array_sum($globalRating) / $numberAvis);
+                $globalRating = [];
+            }
+        } else {
+            $totalGlobalRating = 0;
+        }
+
+        return [$totalGlobalRating, $totalNumberAvis,$mesAvis];
     }
 }

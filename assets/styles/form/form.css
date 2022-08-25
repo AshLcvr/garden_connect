@@ -113,6 +113,25 @@ label.modif_password {
 #contener_form .bloc_form.login {
     margin: 1rem auto;
 }
+/* Formulaire adresse boutique */
+#city_suggest{
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid grey;
+    box-shadow: 4px 8px 0 rgba(26,26,26,.12);
+    margin-top: -1rem;
+    padding: 1rem;
+    width: 100%;
+    position: absolute;
+    top: 90px;
+    z-index: 2;
+}
+#city_suggest li:hover {
+    background-color: lightgrey;
+}
+#city_suggest li {
+    cursor: pointer;
+}
 /* Formulaire Laissez un avis Page Boutique publique */
 .wrap.border_form .avis_form {
     border: none;

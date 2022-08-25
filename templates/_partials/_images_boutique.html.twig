@@ -1,0 +1,15 @@
+<div class="flexslider" id="slider">
+    <ul class="slides relative">
+        {% for imageBoutique in boutique.imagesBoutiques %}
+            {% if boutique.user.id > 136 %}
+                <li>
+                    <img style="max-height: 400px" src="{{ asset('uploads/boutique/' ~ imageBoutique.title) }}" alt="Images de la Boutique" />
+                </li>
+            {% else %}
+                <li>
+                    <img style="width: 100%;max-height: 400px;object-fit: cover" src="{{ imageBoutique.title }}" alt="Images de la Boutique" />
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>

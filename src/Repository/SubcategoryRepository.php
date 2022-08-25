@@ -48,7 +48,7 @@ class SubcategoryRepository extends ServiceEntityRepository
             ->orderBy('RAND()')
             ->setMaxResults(1)
             ->getQuery()
-            ->getResult();
+            ->getSingleResult();
     }
 
 }

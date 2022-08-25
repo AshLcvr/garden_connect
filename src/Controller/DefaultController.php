@@ -27,7 +27,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DefaultController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function homepage(CallApi $callApi,BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
+    public function homepage(BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $categories     = $categoryRepository->findAll();
         $annonces       = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);
@@ -111,7 +111,8 @@ class DefaultController extends AbstractController
                 'annonces'      => $annonces,
                 'boutique'      => $boutique,
                 'notMyboutique' => $notMyBoutique,
-                'favory'        => $favory
+                'favory'        => $favory,
+                'user'          => $boutique->getUser()
             ]
         );
     }
@@ -182,7 +183,8 @@ class DefaultController extends AbstractController
                 'avisAlreadyExist' => $avisAlreadyExist,
                 'globalRating'     => $globalRating,
                 'form'             => $form->createView(),
-                'favory'           => $favory
+                'favory'           => $favory,
+                'user'          => $boutique->getUser()
             ]
         );
     }

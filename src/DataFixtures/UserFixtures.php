@@ -33,6 +33,19 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $admin = new User();
+        $admin->setName('Garden');
+        $admin->setSurname('Connect');
+        $admin->isIsVerified();
+        $admin->setEmail('garden-connect@garden-connect.fr');
+        $admin->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
+        $admin->setActif(true);
+        $admin->setCreatedAt(new \DateTimeImmutable('-2 week'));
+        $password = $this->hasher->hashPassword($admin, 'admin');
+        $admin->setPassword($password);
+        $this->addReference('admin', $admin);
+        $manager->persist($admin);
+        
         $adminPolo = new User();
         $adminPolo->setName('Paul');
         $adminPolo->setSurname('Joret');
@@ -86,9 +99,9 @@ class UserFixtures extends Fixture
 
         // Création d'utilisateurs factices via Faker
         $faker = Faker\Factory::create('fr_FR');
-        $countVendeur =  0;
-        $countUser    =  0;
-        $randomWeek = random_int(-10,-1);
+        $countVendeur    =  0;
+        $countUser       =  0;
+        $randomWeek      = random_int(-10,-1);
         $genderArray     = ['male','female'];
         $randGenderIndex = array_rand($genderArray);
 
@@ -113,7 +126,7 @@ class UserFixtures extends Fixture
             $password = $this->hasher->hashPassword($user, $faker->password);
             $user->setPassword($password);
             // Attribution d'un rôle aléatoire
-            $roles = [['ROLE_VENDEUR'],['ROLE_USER']];
+            $roles          = [['ROLE_VENDEUR'],['ROLE_USER']];
             $indexRandRoles = array_rand($roles);
             $user->setRoles($roles[$indexRandRoles]);
             if ($indexRandRoles === 0){
@@ -130,6 +143,4 @@ class UserFixtures extends Fixture
 
         $manager->flush();
     }
-
-
 }
