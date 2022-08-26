@@ -9,7 +9,7 @@ class DataCategories
     {
         $categories = [
             [
-                'title' => 'Cereales Et Grains',
+                'title' => 'Céréales et grains',
                 'image' => 'cerealesetgrains-image.jpg'
             ],
             [

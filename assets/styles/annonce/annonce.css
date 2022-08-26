@@ -89,7 +89,7 @@ span.span_created {
 
 #focus_annonce {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     align-items: flex-start;
     justify-content: space-between;
     padding: 0 1rem;
