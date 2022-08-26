@@ -180,6 +180,7 @@
     .resp_contact {
         flex-direction: column;
         gap: .5rem;
+        align-items: center;
     }
     .contact_vendeur {
         gap: .5rem;
@@ -197,6 +198,7 @@
 @media all and (max-width: 350px) {
     .infos_vendeur {
         width: 95%;
+        flex-direction: column;
     }
     .infos_vendeur p {
         font-size: .6rem;

@@ -10,7 +10,7 @@
     --menu_link: 18px 'Roboto', 'Arial', sana-serif;
 }
 /* RESET */
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -157,6 +157,42 @@ img {
     line-height: 1.5;
     padding: 1rem;
 }
+
+/* Scroll */
+/* Pour Chrome, Edge, Safari */
+/* .scroller::-webkit-scrollbar {
+    width: 5px;
+}
+.scroller::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: var(--orange);
+}
+.scroller::-webkit-scrollbar-track {
+    background: lightgrey;
+} */
+*::-webkit-scrollbar,
+*.scroller::-webkit-scrollbar {
+    width: 5px;
+}
+*::-webkit-scrollbar-thumb,
+*.scroller::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: var(--orange);
+}
+*::-webkit-scrollbar-track,
+*.scroller::-webkit-scrollbar-track {
+    background: lightgrey;
+}
+/* Pour Firefox */
+.scroller {
+    scrollbar-width: thin;
+    scrollbar-color: var(--orange) lightgrey;
+}
+textarea {
+    scrollbar-width: thin;
+    scrollbar-color: var(--orange) lightgrey;
+}
+
 /* RESPONSIVE */
 @media all and (max-width: 1050px){
     .title_section_home {
@@ -166,7 +202,7 @@ img {
 @media all and (max-width: 750px){
     .title_section_home {
         font-size: 1.5rem;
-        padding: 0;
+        /* padding: 0; */
     }
 }
 @media all and (max-width: 450px){

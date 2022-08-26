@@ -38,9 +38,8 @@
     filter: brightness(1);
 }
 #filter_form .noUi-handle:before,
-.noUi-handle:after {
+#filter_form .noUi-handle:after {
     border: .5px solid var(--orange);
-    left: 12px;
 }
 .noUi-touch-area {
     border: .5px solid var(--orange);
@@ -184,9 +183,9 @@
         width: 85%;
     }
 }
-@media (max-width: 850px) {
+@media (max-width: 800px) {
     #filter_form {
-        width: 75%;
+        width: 85%;
     }
     /* Pagination */
     #pagination_box span {
