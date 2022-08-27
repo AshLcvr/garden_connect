@@ -83,7 +83,6 @@ img {
   font-weight: 600;
   font-size: 0.85rem;
   display: inline-block;
-  /* Ajout */
   margin-bottom: 0;
 }
 .users .person p.name-time .time {
@@ -101,7 +100,6 @@ img {
 .users .person p.name-time .time.init.btq {
   color: var(--vertfonce);
 }
-/* .users .person .user  */
 .status {
   width: 10px;
   height: 10px;
@@ -134,6 +132,17 @@ img {
   background-color: #c4d2e2;
 }
 /* Page show */
+.conv_with_box {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: .5rem 0;
+  align-items: center;
+  flex-direction: row;
+}
+.conv_with {
+  font-weight: bold;
+}
 /* Forumlaire */
 .form-outline.custom .chat-input {
   background-color: white;
@@ -143,7 +152,6 @@ img {
   outline: unset;
   border: 1px solid var(--orange);
 }
-
 /* Boutons custom */
 .align_button {
   width: 100%;
@@ -175,7 +183,6 @@ img {
   width: 100%;
   max-width: 170px;
 }
-
 .block_buttons.chat.see.new a {
   background: var(--vertclair);
 }
@@ -192,7 +199,6 @@ img {
 .bloc_form.btn-custom.chat {
   margin: 1rem auto;
 }
-
 /* BASE */
 .chat-container {
   background: #eee;
@@ -359,9 +365,6 @@ img {
   .chat-text p {
     font-size: 0.8rem;
   }
-}
-
-@media (max-width: 800px) {
   .messagerie_listing {
     width: 100%;
   }
@@ -376,5 +379,14 @@ img {
     flex-flow: column-reverse;
     align-items: center;
     text-align: center;
+  }
+}
+@media (max-width: 300px) {
+  .conv_with_box {
+    flex-direction: column;
+    gap: 0;
+  }
+  .conv_with {
+    font-size: .8rem;
   }
 }

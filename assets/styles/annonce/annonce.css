@@ -1,5 +1,3 @@
-/* ANNONCES */
-/* Page d'accueil / Page Annonces / Page Boutique publique */
 .annonce_box {
     background-color: #FFFFFF;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -50,7 +48,6 @@ span.span_created {
     font-weight: bold;
     padding-top: 1rem;
 }
-
 #annonces {
     display: flex;
     flex-flow: column nowrap;
@@ -64,7 +61,6 @@ span.span_created {
 #annonces .annonce_box,
 #annonces .annonce_img img {
     height: 270px;
-    /* height: 100%; */
 }
 #annonces .annonce_box:hover {
     transform: scale(1.04);
@@ -73,7 +69,7 @@ span.span_created {
 #annonces .annonce_description {
     height: 80px;
     overflow: auto;
-    word-break: break-all;
+    word-break: break-word;
     padding-right: .5rem;
 }
 #annonces .annonce_img {
@@ -85,8 +81,6 @@ span.span_created {
 #annonces .span_description {
     display: block;
 }
-
-
 #focus_annonce {
     display: flex;
     flex-flow: row wrap;
@@ -111,17 +105,12 @@ span.span_created {
 #focus_annonce .annonce_description {
     height: 80px;
     overflow: auto;
-    word-break: break-all;
+    word-break: break-word;
     padding-right: .5rem;
 }
 #focus_annonce .annonce_box {
     flex: 2;
 }
-
-
-
-
-
 #listing_annonces {
     display: flex;
     flex-flow: row wrap;
@@ -148,9 +137,7 @@ span.span_created {
 .annonce_title.listing {
     line-height: unset;
 }
-
-
-/* Annonces boutique */
+/* Annonces back boutique */
 .annonce_box.btq {
     width: 48%;
     padding: 1rem;
@@ -169,7 +156,6 @@ span.span_created {
     font-weight: bold;
     font-size: .9rem;
 }
-/*  */
 
 /* RESPONSIVE */
 @media (max-width: 1370px) {
@@ -194,8 +180,7 @@ span.span_created {
         width: 85%;
     }
     #listing_annonces .annonce_box,
-    #listing_annonces .annonce_img img
-    {
+    #listing_annonces .annonce_img img {
         height: 170px;
     }
     #listing_annonces .annonce_img {
@@ -231,8 +216,6 @@ span.span_created {
     #annonces .annonce_img img {
         height: 200px;
     }
-
-
     #focus_annonce .annonce_box {
         flex-direction: column;
         height: unset;
@@ -247,25 +230,37 @@ span.span_created {
     #focus_annonce .annonce_img img {
         height: 200px;
     }
-
 }
 @media (max-width: 750px) {
+    .annonce_title,
+    p.annonce_title.listing {
+        font-size: 1.1rem;
+    }
     .annonce_box p {
         font-size: .9rem;
     }
     .annonce_text p:nth-last-child(n) {
         margin-bottom: 0;
     }
-
-
 }
 @media all and (max-width: 680px) {
+    #annonces .annonce_img img {
+        height: 180px;
+    }
+    #focus_annonce .annonce_img img {
+        height: 180px;
+    }
     span.span_created {
         display: block;
     }
-
 }
 @media (max-width: 500px) {
+    #annonces .annonce_img img {
+        height: 160px;
+    }
+    #focus_annonce .annonce_img img {
+        height: 160px;
+    }
     #listing_annonces .annonce_img,
     #listing_annonces .annonce_text {
         width: 100%;
@@ -284,9 +279,12 @@ span.span_created {
         width: 100%;
         padding: 0 0 1rem;
     }
-
 }
 @media (max-width: 400px) {
+    .annonce_title,
+    p.annonce_title.listing {
+        font-size: 1rem;
+    }
     #annonces .annonce_description {
         height: 75px;
     }
@@ -296,4 +294,15 @@ span.span_created {
         height: 60px;
     }
 }
-
+@media (max-width: 500px) {
+    #annonces .annonce_img img {
+        height: 110px;
+    }
+    #focus_annonce .annonce_img img {
+        height: 110px;
+    }
+    
+    #listing_annonces .annonce_img img {
+        height: 110px;
+    }
+}

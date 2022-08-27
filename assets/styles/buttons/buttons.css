@@ -287,8 +287,11 @@ span.avis {
     .bloc_form.btn-custom.avis {
         width: 100%;
     }
+    .btn-custom button,
     .btn-custom a {
-        font-size: 1rem;
+        font-size: .8rem;
+    }
+    .btn-custom a {
         padding: .5rem;
     }
 }

@@ -77,7 +77,6 @@
         padding: .25rem;
     }
 }
-
 @media all and (max-width: 450px) {
     #header_boutique .header_wrap,
     #header_user .header_wrap {

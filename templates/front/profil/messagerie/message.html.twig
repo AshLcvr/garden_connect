@@ -10,10 +10,9 @@
 
 {% block container %}
     <h1 class="title_top">Conversation</h1>
-    {#  #}
     {% if conversation.user.email == app.user.email %}
-        <div class="d-flex" style="justify-content: center; gap: 1rem; padding: .5rem 0; align-items: center;">
-            <div style="font-weight: bold;">Conversation avec {{ conversation.correspondant.name }}</div>
+        <div class="conv_with_box">
+            <div class="conv_with">Conversation avec {{ conversation.correspondant.name }}</div>
             <div>
             {% if conversation.correspondant.image %}
                 <img class="avatar" src="{{ asset('uploads/profile/'~conversation.correspondant.image) }}" alt="image de profil">
@@ -23,7 +22,6 @@
             </div>
         </div>
     {% endif %}
-    {#  #}
     <div class="chat-container">
         <ul class="chat-box chatContainerScroll">
             {# Première bulle #}

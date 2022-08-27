@@ -46,7 +46,6 @@
 .active {
     color: var(--vertclair);
 }
-
 /* Menu déroulant connecté */
 #button_dropdown {
     border-radius: 50%;
@@ -95,12 +94,9 @@
 .li_dropdown a:hover {
     color: var(--vertclair);
 }
-
-/* Menu burger */
 #link_burger {
     display: none;
 }
-/*  */
 @media all and (max-width: 900px) {
     #header .logo {
         width: 12%;
@@ -120,7 +116,6 @@
     #header .logo {
         width: 15%;
     }
-    
     /* Menu burger */
     .dropdown_separator {
         background-color: rgb(190, 190, 190);
@@ -185,7 +180,6 @@
     .ul_burger.open {
         transform:scaleY(1);
     }
-
     /* Menu déroulant connecté */
     #button_dropdown {
         display: none;
@@ -207,7 +201,6 @@
         text-align: center;
         font-size: large;
     }
-    /*  */
     .ul_shadow:nth-last-child(n) {
         box-shadow: rgb(222, 222, 222) 0px 5px 5px 0px;
     }
