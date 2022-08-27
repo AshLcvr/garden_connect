@@ -35,12 +35,12 @@
                 <hr>
                 <div>
                     <h6 class="detail_btq_title">Prénom :</h6>
-                    {{ user.surname }}
+                    {{ user.name }}
                 </div>
                 <hr>
                 <div>
                     <h6 class="detail_btq_title">Nom :</h6>
-                    {{ user.name }}
+                    {{ user.surname }}
                 </div>
                 <hr>
                 <a class="modif_psd btq" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>
