@@ -142,7 +142,7 @@ label.modif_password {
 /* Pages Login, Register , Mot de passe oublié */
 .security {
     margin-top: 6rem;
-    margin-bottom: 6rem;
+    margin-bottom: 12rem;
 }
 .forgot {
     text-align: center;

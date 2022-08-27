@@ -96,7 +96,7 @@ class BoutiqueController extends AbstractController
     }
 
     #[Route('/actif', name: 'app_boutique_actif', methods: ['POST', 'GET'])]
-    public function toggleActif(Request $request, Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
+    public function toggleActif(BoutiqueRepository $boutiqueRepository): Response
     {
         $boutique = $this->getUserBoutique();
 

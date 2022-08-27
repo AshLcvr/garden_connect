@@ -119,12 +119,6 @@
 .message_info p {
     text-align: left;
 }
-.boutique_accueil ul{
-    margin-left: 5%;
-}
-.boutique_accueil ul li{
-    list-style: initial;
-}
 .boutique_accueil ul li,
 .boutique_accueil p {
     font-size: 1.2rem;

@@ -139,7 +139,7 @@ span.span_created {
 }
 /* Annonces back boutique */
 .annonce_box.btq {
-    width: 48%;
+    width: 100%;
     padding: 1rem;
     align-items: center;
     justify-content: space-between;
@@ -148,9 +148,6 @@ span.span_created {
 .annonce_box.btq:nth-child(2n+1) {
     flex-flow: inherit;
 }
-.annonce_box.btq:hover{
-    transform: scale(1.01);
-}
 .annonce_price_btq {
     color: var(--vertfonce);
     font-weight: bold;
@@ -158,11 +155,6 @@ span.span_created {
 }
 
 /* RESPONSIVE */
-@media (max-width: 1370px) {
-    .annonce_box.btq {
-        width: 100%;
-    }
-}
 @media (max-width: 1050px) {
     #annonces .annonce_img {
         width: 40%;
@@ -172,6 +164,9 @@ span.span_created {
     }
 }
 @media (max-width: 900px) {
+    .annonce_box.btq {
+        flex-flow: inherit;
+    }
     .annonce_box {
         margin-bottom: 1rem;
         width: 85%;
