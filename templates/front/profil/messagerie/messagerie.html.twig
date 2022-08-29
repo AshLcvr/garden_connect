@@ -26,13 +26,8 @@
                                         {% else %}
                                             <span class="status offline"></span>
                                     {% endif %}
-                                    {% if conv.user.email == app.user.email and app.user.image %}
-                                        <img src="{{ asset('uploads/profile/'~app.user.image) }}" alt="image de profil">
-                                    {% elseif conv.user.email != app.user.email %}
-                                        <img src="{{ conv.user.image }}" alt="image de profil">
-                                    {% else %}
-                                        <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
-                                    {% endif %}
+                                    {% set user = conv.user %}
+                                    {% include '_partials/_photo_profile.html.twig' %}
                                 </div>
                                 <p class="name-time">
                                     {% if conv.user.name == app.user.name %}
@@ -83,9 +78,8 @@
                                         <span class="status offline"></span>
                                     {% endif %}
                                     {% if conv.user.email == app.user.email %}
-                                        <img src="{{ conv.correspondant.image }}" alt="image de profil">
-                                    {% else %}
-                                        <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
+                                        {% set user = conv.correspondant %}
+                                        {% include '_partials/_photo_profile.html.twig' %}
                                     {% endif %}
                                 </div>
 
