@@ -1,7 +1,7 @@
 <div class="flexslider" id="slider">
     <ul class="slides relative">
         {% for imageBoutique in boutique.imagesBoutiques %}
-            {% if boutique.user.id > 35 or imageBoutique.title == 'imageBoutiqueDefault.jpg'%}
+            {% if boutique.user.id > 31 or imageBoutique.title == 'imageBoutiqueDefault.jpg'%}
                 <li>
                     <img style="max-height: 400px" src="{{ asset('uploads/boutique/' ~ imageBoutique.title) }}" alt="Images de la Boutique" />
                 </li>
