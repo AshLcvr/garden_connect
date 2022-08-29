@@ -1,12 +1,26 @@
 # Présentation
-Garden Connect est un site visant à mettre en relation des particuliers et/ou professionnels autour de la vente de produits de potager.  
+Garden Connect est un site factice visant à mettre en relation des particuliers et/ou professionnels autour de la vente de produits du potager.  
 Son objectif premier est de favoriser le circuit court.  
-Nous travaillons toujours sur ce projet afin de rajouter de nouvelles fonctionnalités.  
-Tous vos retours sont les bienvenus ! :)  
+Ce projet a été réalisé sur Symfony 6.  
+Pour accéder à la totalité du site, vous pouvez vous connecter avec les identifiants suivants:  
+#### E-mail : admin@admin.fr
+#### Mot de passe : admin
 
-# Installation
+# Installation du projet
 
 Les instructions suivantes doivent être éxecutées dans le dossier racine du projet
+
+## Dépendances
+
+Afin d'installer les dépendances nécessaires, rentrez les lignes de commandes suivantes :
+
+### Pour Symfony
+
+`composer install`
+
+### Pour Webpack Encore :
+
+`npm install`
 
 ## Base de données
 - Créez la base de données :
@@ -21,19 +35,7 @@ Les instructions suivantes doivent être éxecutées dans le dossier racine du p
 
   `php bin/console doctrine:fixtures:load`
 
-## Dépendances
-
-Afin d'installer les dépendances nécessaires, rentrez les lignes de commandes suivantes :
-
-### Pour Symfony
-
-`composer install`
-
-### Pour Webpack Encore :
-
-`npm install`
-
-# Démarrage des serveurs
+## Démarrage des serveurs
 Les lignes de commandes suivantes doivent être éxecutées à partir du dossier racine du projet.
 
 ### Serveur Apache:
@@ -45,3 +47,40 @@ Les lignes de commandes suivantes doivent être éxecutées à partir du dossier
 `npm run watch` 
 ou 
 `npm run dev server`
+
+# Contributions 
+
+## Contributions extérieures 
+
+Les contenus (utilisateurs,boutiques,..) factices du projet ont été générés grâce aux APIs des sites suivants :  
+
+### - [Pixabay](https://pixabay.com/fr/service/about/api/)
+Recherche d'image pour les boutique et annonces.
+
+### - [RandomUser](https://randomuser.me/)
+Recherche de photos de profil.
+
+### - [Geo.api.gouv](https://geo.api.gouv.fr/decoupage-administratif/communes)
+Informations et coordonnées de villes.
+
+### - [ASDFast](http://asdfast.beobit.net/)
+Generateur de Lorem Ipsum dans la création des titres et descriptions des annonces, boutiques et avis.
+
+## A propos de nous : 
+
+Développeurs ayant travaillé sur le projet : 
+
+#### Orianne Cielat ([Ocmoz3](https://github.com/Ocmoz3)) :
+ - Front: Maquettage, Design, Intégration
+ - Langages favoris : HTML, CSS, JS
+ 
+#### Paul Joret ([PaulJORET](https://github.com/PaulJORET)):
+- Back:  Bases de données, Sécurité, Administation du site
+- Langages favoris : PHP, HTML, MYSQL
+
+ 
+#### Sacha Lechevallier ([AshLcvr](https://github.com/AshLcvr)):
+- Back : API, Fixtures, WebPack
+- Langages favoris : PHP, TWIG, JS
+
+
