@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Annonce;
 use App\Entity\Boutique;
 use App\Entity\ImagesHero;
+use App\Form\EditProfilType;
 use App\Form\ImagesHeroType;
 use App\Form\PaginationType;
 use App\Service\UploadImage;
@@ -87,7 +88,7 @@ class AdminDefaultController extends AbstractController
                 $user->setImage($uploadImage->uploadProfile($image));
             }
             $userRepository->add($user,true);
-            return $this->redirectToRoute('boutique_view_profil', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_view_profil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/profil/edit_profil.html.twig', [

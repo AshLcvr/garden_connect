@@ -49,7 +49,7 @@
                             {% for key, nbr in tblNbrNonlus %}
                                 {% if conv.id == key %}
                                     {% if nbr > 0 %}
-                                        <div class="block_buttons chat see new btq" style="border: 1px solid red;">
+                                        <div class="block_buttons chat see new btq">
                                             <div class="box_name_time">
                                                 <a title="Voir la conversation" class="conv" href="{{ path('boutique_messagerie_message', {id: conv.id}) }}">
                                                     Messages non lus {{ nbr }}

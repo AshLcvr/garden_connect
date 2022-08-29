@@ -35,9 +35,8 @@
     font-size: 1.5rem;
     text-align: center;
 }
-
 /* Slider catégories */
-.slider-category{
+.slider-category {
     display: flex;
     justify-content: center;
     background-color: white;
@@ -58,7 +57,7 @@
     margin: 1rem .4rem !important;
     transition: all 0.3s;
 }
-.slider-category .title-cat{
+.slider-category .title-cat {
     color:dimgray;
     font-family: 'Unkempt';
     display: flex;
@@ -102,7 +101,6 @@
 }
 @media all and (max-width: 750px) {
     .slider-category .contener {
-        /* border: 1px solid red; */
         width: 85%;
     }
     .slider-category .title-cat {
@@ -182,8 +180,4 @@
     .hero_text p {
         font-size: .6rem;
     }
-    /* .slider-category .title-cat {
-        font-size: .8rem;
-        height: 80px;
-    } */
 }

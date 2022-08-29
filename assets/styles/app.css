@@ -10,7 +10,7 @@
     --menu_link: 18px 'Roboto', 'Arial', sana-serif;
 }
 /* RESET */
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -43,7 +43,6 @@ img {
     max-width: 1100px ;
     width: 100%;
     margin: 0 auto;
-    /*  */
     padding: 0 1rem;
 }
 .relative {
@@ -113,7 +112,25 @@ img {
 .favory {
     color: var(--orange);
 }
-
+/* CSS Global input search location */
+#city_suggest{
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid grey;
+    box-shadow: 4px 8px 0 rgba(26,26,26,.12);
+    margin-top: -1rem;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    padding: 1rem;
+}
+#city_suggest li:hover {
+    background-color: lightgrey;
+}
+#city_suggest li {
+    cursor: pointer;
+}
+>>>>>>> dev
 /* Message flash register user et vendeur */
 .flash-register_user,
 .flash-register_vendeur {
@@ -125,11 +142,10 @@ img {
     font-family: 'Unkempt';
     background: var(--vertclair);
     color: white;
-    margin: 1.5rem 0;
     padding: 0 5rem;
+    margin: 0 auto;
+    width: 100%;
 }
-
-/* Titres Front */
 .title_section_home {
     text-align: center;
     font: var(--title-font);
@@ -138,24 +154,53 @@ img {
     line-height: 1.5;
     padding: 1rem;
 }
+/* Scroll */
+/* Pour Chrome, Edge, Safari */
+*::-webkit-scrollbar,
+*.scroller::-webkit-scrollbar {
+    width: 5px;
+}
+*::-webkit-scrollbar-thumb,
+*.scroller::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: var(--orange);
+}
+*::-webkit-scrollbar-track,
+*.scroller::-webkit-scrollbar-track {
+    background: lightgrey;
+}
+/* Pour Firefox */
+.scroller {
+    scrollbar-width: thin;
+    scrollbar-color: var(--orange) lightgrey;
+}
+textarea {
+    scrollbar-width: thin;
+    scrollbar-color: var(--orange) lightgrey;
+}
+
 /* RESPONSIVE */
-@media all and (max-width: 1050px){
+@media all and (max-width: 1050px) {
     .title_section_home {
         padding: .5rem;
     }
 }
-@media all and (max-width: 750px){
+@media all and (max-width: 750px) {
     .title_section_home {
         font-size: 1.5rem;
-        padding: 0;
+    }
+    .flash-register_user,
+    .flash-register_vendeur {
+        font-size: unset;
     }
 }
-@media all and (max-width: 450px){
+@media all and (max-width: 450px) {
+    .flash-register_user,
+    .flash-register_vendeur {
+        font-size: .9rem;
+    }
     .title_section_home {
         font-size: 1.2rem;
-    }
-    .security{
-        margin: 2rem 0;
     }
 }
 @media all and (max-width: 250px){

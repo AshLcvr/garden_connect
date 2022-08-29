@@ -15,7 +15,7 @@ class ConversationType extends AbstractType
     {
         $builder
             ->add('premier_message', TextareaType::class, [
-                'label' => 'Premier message'
+            'label' => 'Premier message',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',

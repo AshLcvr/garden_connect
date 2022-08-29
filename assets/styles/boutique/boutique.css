@@ -2,6 +2,9 @@
 .fa-envelope.btq {
     color: white;
 }
+.wrap.but_wrap {
+    padding: unset;
+}
 /** SB2 **/
 /*** Reprise des classes SB2admin pour les contrer ***/
 /* Bouton toggle sidebar responsive */
@@ -116,12 +119,6 @@
 .message_info p {
     text-align: left;
 }
-.boutique_accueil ul{
-    margin-left: 5%;
-}
-.boutique_accueil ul li{
-    list-style: initial;
-}
 .boutique_accueil ul li,
 .boutique_accueil p {
     font-size: 1.2rem;
@@ -143,15 +140,15 @@
 .card-body table .table_actions {
     width: 20%;
 }
-
 @media (max-width: 850px){
     .title_top {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
     .welcome {
         font-size: 1.5rem;
     }
-    .boutique_accueil ul li, .boutique_accueil p {
+    .boutique_accueil ul li,
+    .boutique_accueil p {
         font-size: 1rem;
     }
 }
@@ -162,14 +159,11 @@
     .container-fluid.custom {
         padding: 0rem 1rem 3rem 1rem;
     }
-    /* .navbar-nav.custom {
-        margin-top: 1rem
-    } */
     .wrapper_text_boutique {
         align-items: center;
     }
     .title_top {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         padding: 1.5rem 0 .5rem;
     }
     .welcome {
@@ -183,7 +177,7 @@
 }
 @media (max-width: 500px){
     .title_top {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     .welcome {
         font-size: 1.2rem;
@@ -192,10 +186,9 @@
         font-size: .9rem;
     }
 }
-@media (max-width: 350px){
-    /* Titres */
+@media (max-width: 350px) {
     .title_top {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
     .txt_top_boutique {
         border: none;

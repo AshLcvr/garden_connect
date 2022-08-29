@@ -22,7 +22,7 @@ class DataOeufs
             ],
             [
                 'cat' => 'Œufs',
-                'title' => 'Œufs de poule',
+                'title' => 'Œuf de poule',
             ],
         ];
         return $oeufs;

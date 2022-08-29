@@ -202,7 +202,7 @@ class DataLegumesEtPois
             ],
             [
                 'cat' => 'Légumes et pois',
-                'title' => 'Radis noirs',
+                'title' => 'Radis noir',
             ],
             [
                 'cat' => 'Légumes et pois',
@@ -226,7 +226,7 @@ class DataLegumesEtPois
             ],
             [
                 'cat' => 'Légumes et pois',
-                'title' => 'Topinanbour',
+                'title' => 'Topinambour',
             ],
         ];
         return $legumesEtPois;

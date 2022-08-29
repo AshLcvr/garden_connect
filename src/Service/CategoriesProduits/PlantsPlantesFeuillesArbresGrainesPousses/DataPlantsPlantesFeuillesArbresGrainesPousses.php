@@ -30,7 +30,7 @@ class DataPlantsPlantesFeuillesArbresGrainesPousses
             ],
             [
                 'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',
-                'title' => 'Micro Pousses',
+                'title' => 'Micro-pousses',
             ],
             [
                 'cat' => 'Plants, plantes, feuilles, arbres, graines, pousses',

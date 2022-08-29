@@ -77,11 +77,7 @@ class EditProfilType extends AbstractType
             ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Modifier',
-                // 'attr' => [
-                // 'class' => 'btn btn-primary width-100 m-t-20'
-                // 'class' => ''
-                // ]
+                'label' => 'Modifier'
             ])
         ;
     }

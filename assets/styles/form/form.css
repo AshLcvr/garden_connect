@@ -161,7 +161,7 @@ label.modif_password {
 /* Pages Login, Register , Mot de passe oublié */
 .security {
     margin-top: 6rem;
-    margin-bottom: 6rem;
+    margin-bottom: 12rem;
 }
 .forgot {
     text-align: center;
@@ -208,9 +208,6 @@ h5.subtitle {
     .wrapform.border_form {
     padding: 1rem;
     }
-    /* #contener_form button {
-        font-size: 1rem;
-    } */
     input,
     input.form-control,
     select {
@@ -231,7 +228,17 @@ h5.subtitle {
         width: 100%;
     }
 }
-@media all and (max-width: 500px){
+@media all and (max-width: 500px) {
+    input,
+    input.form-control,
+    textarea,
+    textarea.form-control,
+    select,
+    select.form-control,
+    textarea,
+    textarea.form-control {
+        padding: 5px 10px;
+    }
     #contener_form .bloc_form.bloc_adresse {
         flex-flow: row wrap;
         gap: 1rem;
@@ -245,13 +252,14 @@ h5.subtitle {
     #contener_form {
         padding: 1.5rem 0;
     }
+    #contener_form form {
+        width: 95%;
+    }
 }
-@media all and (max-width: 375px){
-    /* #contener_form label, */
+@media all and (max-width: 375px) {
     label {
         font-size: .9rem;
     }
-    /* #contener_form input, */
     input {
         font-size: 1rem;
     }
@@ -261,7 +269,4 @@ h5.subtitle {
     .forgot {
         font-size: .8rem;
     }
-    /* #contener_form button {
-        font-size: .9rem;
-    } */
 }

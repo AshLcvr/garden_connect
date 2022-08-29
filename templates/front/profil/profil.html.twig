@@ -1,5 +1,9 @@
 {% extends 'layout/front_profil_base.html.twig' %}
 
+{% block title %}
+    <title>Mon profil</title>
+{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
 {% endblock %}
@@ -7,7 +11,7 @@
 {% block container %}
     <div class="wrap">
         <h1 class="title_top with_sub">Profil</h1>
-        <h4 class="subtitle">{{ user.surname|capitalize }} {{ user.name|capitalize }}</h4>
+        <h4 class="subtitle">{{ user.name|capitalize }} {{ user.surname|capitalize }}</h4>
         <div class="block_btn_modify plus">
             <div class="bloc_form btn-custom modify plus">
                 <span class="hover-effect modify">
@@ -22,7 +26,7 @@
                         <h6 class="bold">Photo : </h6>
                         <div>
                             {% if user.image %}
-                                <img class="user_img_profile" src="{{ asset('uploads/profile/'~user.image) }}" alt="Image utilisateur">
+                                <img class="user_img_profile" src="{{ asset('uploads/profile/'~user.image) }}" alt="image utilisateur">
                             {% endif %}
                         </div>
                     </div>
@@ -34,12 +38,12 @@
                     <hr>
                     <div>
                         <h6 class="detail_btq_title">Prénom :</h6>
-                        {{ user.surname }}
+                        {{ user.name }}
                     </div>
                     <hr>
                     <div>
                         <h6 class="detail_btq_title">Nom :</h6>
-                        {{ user.name }}
+                        {{ user.surname }}
                     </div>
                     <hr>
                     <a class="modif_psd user" href="{{ path('app_modif_password', {'id' : app.user.id, token : app.user.token }) }}">Modifier mon mot de passe</a>

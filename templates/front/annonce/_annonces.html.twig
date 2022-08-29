@@ -1,20 +1,17 @@
-<section id="annonces" class="wrap">
+<div id="annonces" class="wrap">
     {% for annonce in annonces %}
         <div class="annonce_box">
             {% include '_partials/_images_annonce.html.twig' %}
             <div class="annonce_text">
-                <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
+                <a title="Voir l'annonce" href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
                     <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
                     <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
                     <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
-                    {% if annonce.description|length < 150 %}
-                        <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
-                    {% else %}
-                        <p class="annonce_description"><span>Description : </span>{{ annonce.description|slice(0,150) }}...</p>
-                    {% endif %}
+                    <span class="span_description">Description : </span>
+                    <p class="annonce_description scroller">{{ annonce.description }}</p>
                     <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
                 </a>
             </div>
         </div>
     {% endfor %}
-</section>
+</div>

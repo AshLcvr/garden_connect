@@ -1,4 +1,5 @@
 .img_profil_btq {
+
     border-radius: 50%;
     border:5px solid white;
 }
@@ -8,6 +9,7 @@
     font-size: 2rem;
     line-height: 1.5;
     color: var(--marron);
+    padding: 1rem;
 }
 .title_boutique a {
     color: var(--marron);
@@ -43,6 +45,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    padding-right: 1rem;
 }
 .infos_vendeur {
     display: flex;
@@ -118,16 +121,13 @@
     margin-bottom: 0;
 }
 /* RESPONSIVE */
-@media all and (max-width: 1050px){
-    .title_boutique {
-        padding: .5rem;
-    }
+@media all and (max-width: 1050px) {
     #slider-home_boutique .photo_profile {
         width: 120px;
         height: 120px;
     }
 }
-@media all and (max-width: 800px){
+@media all and (max-width: 800px) {
     .contact_vendeur {
         width: 100%;
         align-items: center;
@@ -144,7 +144,7 @@
         padding: .5rem 1rem;
     }
 }
-@media all and (max-width: 750px){
+@media all and (max-width: 750px) {
     .title_boutique {
         font-size: 1.5rem;
     }
@@ -180,6 +180,7 @@
     .resp_contact {
         flex-direction: column;
         gap: .5rem;
+        align-items: center;
     }
     .contact_vendeur {
         gap: .5rem;
@@ -191,14 +192,35 @@
 }
 @media all and (max-width: 450px) {
     .title_boutique {
-        font-size: 1.2rem;
+        font-size: 1.8rem;
+        padding: .5rem;
     }
 }
 @media all and (max-width: 350px) {
+    .img_profil_btq {
+        border: 2px solid white;
+    }
+    #slider-home_boutique .photo_profile {
+        width: 65px;
+        height: 65px;
+        left: 10%;
+    }
     .infos_vendeur {
         width: 95%;
+        flex-direction: column;
+        padding: 0 1rem;
     }
     .infos_vendeur p {
         font-size: .6rem;
+    }
+}
+@media all and (max-width: 300px) {
+    .img_profil_btq {
+        border: 1px solid white;
+    }
+    #slider-home_boutique .photo_profile {
+        width: 55px;
+        height: 55px;
+        left: 10%;
     }
 }

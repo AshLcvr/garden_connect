@@ -31,7 +31,7 @@
             <p>Boutique en ligne depuis le {{ boutique.createdAt|date('d/m/Y') }}</p>
         </div>
     </section>
-    <section id="boutique" class="wrap">
+    <section id="boutique" class="wrap padding-10">
         <div class="head_boutique">
             <div class="head_btq_line">
                 <div>
@@ -86,7 +86,8 @@
                         <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
                         <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
                         <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
-                        <p class="annonce_description"><span>Description : </span>{{ annonce.description }}</p>
+                        <span>Description : </span>
+                        <p class="annonce_description scroller">{{ annonce.description }}</p>
                         <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
                     </a>
                 </div>
@@ -113,46 +114,18 @@
                         </div>
                         <div class="resp_contact">
                             <a class="message_visiteur" href="{{ path('app_login') }}">Connectez vous</a>
-                            <p>ou</p>
+                            <p class="text-center">ou</p>
                             <a class="message_visiteur" href="{{ path('app_register') }}">Inscrivez-vous</a>
                         </div>
                     {% endif %}
                 </div>
-                {% endif %}
+            {% endif %}
         </section>
     {% endif %}
     {% if boutique.annonces|length > 1 %}
     <section id="listing_annonces_public" class="wrap">
         <h1 class="title_boutique">Les annonces de {{  boutique.user.name|capitalize }}</h1>
-        <ul>
-            {% for annonce in annonces %}
-                <li class="annonces_card">
-                <a title="Voir l'annonce" href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
-                        <div class="content_card_public">
-                            <div class="image_card_public">
-                                {% if boutique.user.id > 136 or annonce.imagesAnnonces[0].title == annonce.subcategory.parentCategory.title|replace({' ': '', ',':'-'})|lower ~ '-image.jpg' %}
-                                    <img src="{{ asset('uploads/mini/'~annonce.imagesAnnonces[0].title) }}" alt="Miniature des annonces"/>
-                                {% else %}
-                                    <img style="height: 200px;width: 100%;object-fit: cover " src="{{ annonce.imagesAnnonces[0].title }}" alt="image annonce"/>
-                                {% endif %}
-                            </div>
-                            <div class="description_card_public">
-                                <div class="description_title">
-                                    <p class="annonce_title listing">{{ annonce.title }}&nbsp&nbsp</p><span class="span_created">{{ annonce.createdAt|date('d/m/Y') }}</span>
-                                </div>
-                                <div class="description_category">
-                                    <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
-                                    <p class="annonce_type"><strong>Type de produit : </strong>{{ annonce.subcategory.title }}</p>
-                                </div>
-                                <div class="description_down">
-                                    <p class="annonce_price listing">{{ annonce.price }} €/kg</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+        {% include 'front/annonce/_annonces.html.twig' %}
     </section>
     {% endif %}
     {% if annonce == null %}

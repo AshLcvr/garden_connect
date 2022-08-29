@@ -1,12 +1,8 @@
-{% extends 'layout/boutique_base.html.twig' %}
+{% extends 'layout/admin_base.html.twig' %}
 
-{% block title %}
-    <title>Modifier mon profil</title>
-{% endblock %}
+{% block title %}Modifier mon profil{% endblock %}
 
 {% block body %}
     <h1 class="title_top">Modifier mon profil</h1>
-    {# <div class="card-body"> #}
-        {{ include('front/boutique/profil/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-    {# </div> #}
+        {{ include('admin/profil/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 {% endblock %}

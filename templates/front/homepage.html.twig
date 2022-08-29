@@ -1,5 +1,7 @@
 {% extends 'layout/front_base.html.twig' %}
 
+{% block title %}Page d'accueil{% endblock %}
+
 {% block stylesheets %}
   {{ encore_entry_link_tags('homepage') }}
 {% endblock %}
@@ -15,7 +17,7 @@
                 <p>Achetez ou vendez</p>
                 <p>des produits frais autour de chez vous</p>
               </div>
-              <img src="{{ asset('uploads/hero/'~imageHero.title) }}" alt="images d'illustrations">
+              <img src="{{ asset('uploads/hero/'~imageHero.title) }}" alt="images d'illustration">
             </li>
           {% endfor %}
       </ul>
@@ -28,7 +30,7 @@
         <ul class="slides relative custom">
           {% for cat in categories %}
             <li class="card_cat">
-              <img src="{{ asset('uploads/category/' ~ cat.image) }}" />
+              <img src="{{ asset('uploads/category/' ~ cat.image) }}" alt="image catégorie"/>
               <div>
                 <a href="{{ path('app_annonce_recherche')~'?category='~cat.id }}" class="title-cat" >
                   <h3>{{ cat.title }}</h3>

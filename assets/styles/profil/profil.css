@@ -15,7 +15,6 @@
 }
 /* Avis émis */
 .wrap_avis {
-    /* max-width: 800px; */
     width: 95%;
     margin: 0 auto;
 }
@@ -62,7 +61,6 @@ img.avatar_avis {
 span.user_name_avis {
     margin: auto .5rem;
 }
-
 #container_profil .container_avis ul li .separator {
     margin: auto;
     font-size: 2rem;
@@ -79,8 +77,6 @@ span.user_name_avis {
 #container_profil .container_avis ul li .block_avis.recus {
     width: 100%;
 }
-/*  */
-
 /* Avis Boutique publique */
 #avis_boutique .connect-link {
     color: var(--orange);
@@ -107,22 +103,13 @@ span.user_name_avis {
     margin-top: .5rem;
     height: 100px;
     overflow: auto;
+    word-break: break-word;
+    padding-right: .5rem;
 }
-/* Pour Chrome, Edge, Safari */
-.avis_box .avis_comm::-webkit-scrollbar {
-    width: 5px;
-}
-.avis_box .avis_comm::-webkit-scrollbar-thumb {
-    border-radius: 20px;
-    background: var(--orange);
-}
-.avis_box .avis_comm::-webkit-scrollbar-track {
-    background: lightgrey;
-}
-/* Pour Firefox */
-.avis_box .avis_comm {
-    scrollbar-width: thin;
-    scrollbar-color: var(--orange) lightgrey;
+.block_avis .avis_comm {
+    height: 50px;
+    overflow: auto;
+    word-break: break-word;
 }
 .mess {
     color: rgb(186, 186, 186);
@@ -144,6 +131,7 @@ span.user_name_avis {
 .separator_btq {
     display: none;
 }
+
 /* RESPONSIVE */
 @media (max-width: 1100px) {
     #container_profil .container_favory ul li {
@@ -172,9 +160,6 @@ span.user_name_avis {
     #container_profil .container_favory ul li {
         flex-direction: column;
     }
-    /* #container_profil .container_avis ul li {
-        width: 70%;
-    } */
     #container_profil .container_favory ul li {
         width: 80%; 
     }
@@ -192,6 +177,24 @@ span.user_name_avis {
     #container_profil .container_avis ul li .separator.right {
     display: none;
     }
+    #avis_boutique ul {
+        flex-flow: column nowrap;
+        align-items: center !important;
+        justify-content: center;
+    }
+    #avis_boutique .avis_box {
+        width: 70%;
+    }
+}
+@media (max-width: 750px) {
+    #avis_boutique .avis_box {
+        width: 80%;
+    }
+}
+@media (max-width: 680px) {
+    #avis_boutique .avis_box {
+        width: 95%;
+    }
 }
 @media (max-width: 600px) {
     #container_profil .container_avis ul li,
@@ -206,7 +209,7 @@ span.user_name_avis {
         width: 90%;
     }
     .avis_box .avis_comm {
-        height: 20px;
+        height: 70px;
         margin: .5rem 0;
     }
 }
@@ -223,11 +226,6 @@ span.user_name_avis {
     #container_profil .container_favory ul li span,
     #container_profil .container_favory ul li p {
         font-size: .8rem;
-    }
-}
-@media (max-width: 400px) {
-    .avis_box .avis_comm {
-        height: 30px;
     }
 }
 

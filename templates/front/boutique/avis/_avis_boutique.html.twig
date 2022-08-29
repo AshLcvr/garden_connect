@@ -26,7 +26,7 @@
                         <span><strong>{{ av.title }}</strong></span>
                     </div>
                     <div><i>Avis émis le {{ av.createdAt|date('d/m/Y')  }}</i> </div>
-                    <div class="avis_comm">{{ av.commentaire }}</div>
+                    <div class="avis_comm scroller">{{ av.commentaire }}</div>
                 </li>
             {% endfor %}
         </ul>
@@ -53,7 +53,7 @@
                 </div>
             {% endif %}
         {% else %}
-            <div class="text-center">
+            <div class="text-center padding-10">
                 <a class="connect-link" href="{{ path('app_login') }}">Connectez-vous</a><span> pour donner votre avis !</span>
             </div>
         {% endif %}

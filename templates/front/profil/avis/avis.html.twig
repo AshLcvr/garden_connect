@@ -1,4 +1,5 @@
 {% extends 'layout/front_profil_base.html.twig' %}
+
 {% block title %}
     <title>Avis émis</title>
 {% endblock %}
@@ -29,7 +30,7 @@
                                 <p class="p_avis"><i>Avis émis le {{ avi.createdAt|date('d/m/Y') }}</i></p>
                             </div>
                             </div>
-                            <div> {{ avi.commentaire  }} </div>
+                            <div class="avis_comm">{{ avi.commentaire  }}</div>
                             <div class="block_buttons avis">
                                 <div class="bloc_form btn-custom avis">
                                     <span class="hover-effect avis">
