@@ -37,7 +37,7 @@ class UserFixtures extends Fixture
         $admin->setName('Garden');
         $admin->setSurname('Connect');
         $admin->isIsVerified();
-        $admin->setEmail('admin');
+        $admin->setEmail('admin@admin.fr');
         $admin->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
         $admin->setActif(true);
         $admin->setCreatedAt(new \DateTimeImmutable('-2 week'));

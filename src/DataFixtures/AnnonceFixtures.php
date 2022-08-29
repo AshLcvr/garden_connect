@@ -28,24 +28,18 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $this->callApi               = $callApi;
     }
 
-    private function generateRandomCategory()
-    {
-
-    }
-
     public function load(ObjectManager $manager): void
     {
         // Création d'annonces fictives via Faker
         $allBoutiques = $this->boutiqueRepository->findAll();
         foreach ($allBoutiques as $boutique){
-            for($i = 0; $i < random_int(2,4) ; $i++) {
+            for($i = 0; $i <= random_int(2,4) ; $i++) {
                 $randSubcat = $this->subcategoryRepository->randomSubcategory();
                 $randCat = $randSubcat->getParentCategory();
 
                 $annonce = new Annonce();
                 $annonce->setTitle($randSubcat->getTitle());
-                $randText = json_decode(file_get_contents('http://asdfast.beobit.net/api/?length='.random_int(6,25).'&type=word'));
-                $annonce->setDescription($randText->text)
+                $annonce->setDescription($this->callApi->generateLipsumusingAsdfast(6,25))
                 ->setPrice(random_int(1, 10))
                 ->setMesure($this->getReference('Kg'))
                 ->setSubcategory($randSubcat)

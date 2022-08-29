@@ -93,4 +93,10 @@ class CallApi
             ->setLng($coordinates[0])
             ->setLat($coordinates[1]);
     }
+
+    public function generateLipsumusingAsdfast($min_words, $max_words)
+    {
+        $randTextContent = json_decode(file_get_contents('http://asdfast.beobit.net/api/?length='.random_int($min_words,$max_words).'&type=word'));
+        return $randTextContent->text;
+    }
 }

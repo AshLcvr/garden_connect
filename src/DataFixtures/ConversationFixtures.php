@@ -3,13 +3,15 @@
 namespace App\DataFixtures;
 
 use App\Entity\Conversation;
-use App\Entity\Message;
+use App\Service\CallApi;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class ConversationFixtures extends Fixture implements DependentFixtureInterface
 {
+    private $callApi;
+
     public function getDependencies()
     {
         return [
@@ -18,12 +20,16 @@ class ConversationFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
+    public function __construct(CallApi $callApi)
+    {
+        $this->callApi = $callApi;
+    }
+
     public function load(ObjectManager $manager): void
     {
-
         for ($i = 1;$i <= 5;$i++) {
             $conv = new Conversation();
-            $conv->setPremierMessage('Autem eum odio quas non debitis nisi?');
+            $conv->setPremierMessage($this->callApi->generateLipsumusingAsdfast(3,10));
             $conv->setCreatedAt(new \DateTimeImmutable('-2 weeks'));
             $conv->setIsRead(false);
             $conv->setUser($this->getReference('user_'.$i));
