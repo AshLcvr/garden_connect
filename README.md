@@ -12,13 +12,13 @@ Les instructions suivantes doivent être éxecutées dans le dossier racine du p
 
 ## Dépendances
 
-Afin d'installer les dépendances nécessaires, rentrez les lignes de commandes suivantes :
+Après avoir cloné le projet, installez les dépendances :
 
-### Pour Symfony
+### Symfony
 
 `composer install`
 
-### Pour Webpack Encore :
+### Webpack Encore :
 
 `npm install`
 
