@@ -3,17 +3,13 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
-use App\Entity\Annonce;
 use App\Entity\Avis;
 use App\Entity\Boutique;
 use App\Entity\Favory;
 use App\Form\AvisFormType;
 use App\Form\SearchType;
 use App\Repository\AvisRepository;
-use App\Service\CallApi;
-use Faker\Provider\Lorem;
 use App\Repository\FavoryRepository;
-use App\Repository\MesureRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\BoutiqueRepository;
 use App\Repository\CategoryRepository;

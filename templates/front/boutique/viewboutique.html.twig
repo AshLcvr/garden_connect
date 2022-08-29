@@ -24,7 +24,7 @@
         <a href="{{ path('view_boutique', {id: boutique.id}) }}">
             <div class="photo_profile">
                 {% if user.image|length != NULL %}
-                    {% if user.id > 136  %}
+                    {% if user.id > 35 or user.id == 1  %}
                         <img style="border-radius: 50%;border:5px solid white" src="{{ asset('uploads/profile/' ~ user.image) }}" alt="Photo de profil" />
                     {% else %}
                         <img style="border-radius: 50%;border:5px solid white;" src="{{ user.image }}" alt="Photo de profil"  />

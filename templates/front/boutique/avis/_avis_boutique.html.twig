@@ -8,11 +8,8 @@
             {% for av in avis %}
                 <li class="avis_box">
                     <div class="avis_box_user">
-                        {% if av.user.image %}
-                            <img class="avatar_avis" src="{{ av.user.image }}" alt="photo de profil">
-                        {% else %}
-                            <img class="avatar_avis" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
-                        {% endif %}
+                        {% set user = av.user %}
+                        {% include '_partials/_photo_profile.html.twig' %}
                         <span class="user_name_avis">{{ av.user.name|capitalize }}</span>
                     </div>
                     <div data-rating="{{ globalRating }}">
@@ -48,7 +45,7 @@
                     {% include 'front/profil/avis/_form.html.twig' %}
                 </div>
             {% elseif app.user.id == boutique.user.id %}
-                <div class="text-center">
+                <div class="text-center security">
                     <p>Vous ne pouvez pas donner un avis sur votre propre boutique.</p>
                 </div>
             {% endif %}

@@ -65,11 +65,8 @@
                         <div class="chat-hour">{{ message.createdAt|date('H:i') }}<span class="fa fa-check-circle btq"></span></div>
                         <div class="chat-text">{{ message.message }}</div>
                         <div class="chat-avatar">
-                            {% if conversation.correspondant.image %}
-                                <img src="{{ conversation.correspondant.image }}" alt="image de profil">
-                            {% else %}
-                                <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
-                            {% endif %}
+                            {% set user = conversation.correspondant %}
+                            {% include '_partials/_photo_profile.html.twig' %}
                             <div class="chat-name">{{ conversation.correspondant.name }}</div>
                         </div>
                     </li>

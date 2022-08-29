@@ -1,4 +1,3 @@
-console.log('Welcome to the Shop Area !')
 // Global CSS
 import './styles/app.css';
 import "./styles/boutique/boutique.css";

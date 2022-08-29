@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="card mb-4">
-    <div class="card-header d-flex"><p class="m-0 font-weight-bold text-primary">Titre de l'avi :&nbsp;</p><p>{{ avi.title }}</p></div>
+    <div class="card-header d-flex"><p class="m-0 font-weight-bold text-primary">Titre de l'avis :&nbsp;</p><p>{{ avi.title }}</p></div>
     <div class="card-body">
         <div class="description_card">
             <p><h6 class="m-0 font-weight-bold text-primary">Description : </h6>{{ avi.commentaire }}</p>
@@ -19,11 +19,11 @@
             </p>
             <p><h6 class="m-0 font-weight-bold text-primary">Mis en ligne le : </h6>{{ avi.createdAt|date('d/m/Y') }}</p>
             {% if avi.actif %}
-                <p><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Actif</p>
+                <p><h6 class="m-0 font-weight-bold text-primary">Statut : </h6>Actif</p>
                 <div>
                     <a href="{{ path('toggle_active_avis', {id: avi.id}) }}" class="btn btn-primary">Rendre inactif</a>
             {% else %}
-                <p><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Inactif</p>
+                <p><h6 class="m-0 font-weight-bold text-primary">Statut : </h6>Inactif</p>
                 <div>
                     <a href="{{ path('toggle_active_avis', {id: avi.id}) }}" class="btn btn-primary">Rendre actif</a>
             {% endif %}
@@ -35,9 +35,9 @@
 </div>
 <div class="m-t-20 m-b-20">
     {% if avi.actif %}
-        <a href="{{ path('all_avis_actifs') }}" class="btn btn-primary width-100">Retour listing avis</a>
+        <a href="{{ path('all_avis_actifs') }}" class="btn btn-primary width-100">Retour</a>
     {% else %}
-        <a href="{{ path('all_avis_inactifs') }}" class="btn btn-primary width-100">Retour listing avis</a>
+        <a href="{{ path('all_avis_inactifs') }}" class="btn btn-primary width-100">Retour</a>
     {% endif %}
 </div>
 {% endblock %}

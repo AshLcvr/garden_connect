@@ -28,12 +28,17 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
         $this->callApi               = $callApi;
     }
 
+    private function generateRandomCategory()
+    {
+
+    }
+
     public function load(ObjectManager $manager): void
     {
         // Création d'annonces fictives via Faker
         $allBoutiques = $this->boutiqueRepository->findAll();
         foreach ($allBoutiques as $boutique){
-            for($i = 0; $i < random_int(2,6) ; $i++) {
+            for($i = 0; $i < random_int(2,4) ; $i++) {
                 $randSubcat = $this->subcategoryRepository->randomSubcategory();
                 $randCat = $randSubcat->getParentCategory();
 
@@ -47,7 +52,6 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
                 ->setBoutique($boutique)
                 ->setActif(true)
                 ->setCreatedAt(new DateTimeImmutable('-2 weeks'));
-//                $imageAnnonce    = new ImagesAnnonces();
                 for ($i = 1; $i < random_int(2,4); $i++){
                     $imageAnnonce = (new ImagesAnnonces())
                         ->setTitle($this->callApi->generateRandomAnnoncePicturesUsingPixaBay($randSubcat->getTitle(),$randCat));

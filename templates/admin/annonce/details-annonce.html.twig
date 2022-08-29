@@ -2,20 +2,16 @@
 
 {% block title %}Annonce détails{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('Flexslider') }}
+{% endblock %}
+
 {% block body %}
 <div class="card mb-4">
     <div class="card-header d-flex"><p class="m-0 font-weight-bold text-primary">Titre de l'annonce :&nbsp;</p><p>{{ annonce.title }}</p></div>
     <div class="card-body">
         <div class="image_card">
-            {% if annonce.imagesAnnonces %}
-                    <ul style="list-style:none;" class="d-flex gap-1">
-                        {% for image in annonce.imagesAnnonces %}
-                                <li><img style="width: 200px;" src="{{ asset('../uploads/annonce/'~image.title) }}" alt="image annonce"/></li>
-                        {% endfor %}
-                    </ul>
-            {% else %}
-                <img style="width: 200px;" src="{{ asset('asset/images/logo-paul.svg') }}" alt="image annonce"/>
-            {% endif %}
+            {% include '_partials/_images_annonce.html.twig' %}
         </div>
         <div class="description_card">
             <p><h6 class="m-0 font-weight-bold text-primary">Description : </h6>{{ annonce.description }}</p>
@@ -43,4 +39,9 @@
         <a href="{{ path('all_annonces_inactives') }}" class="btn btn-primary width-100">Retour listing annonces</a>
     {% endif %}
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('Flexslider') }}
+
 {% endblock %}

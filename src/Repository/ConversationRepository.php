@@ -46,12 +46,6 @@ class ConversationRepository extends ServiceEntityRepository
     public function getListingConversationsandMessagesUnread($user): array
     {
         return $this->createQueryBuilder('c')
-//            ->leftJoin(
-//                'App\Entity\Message',
-//                'm',
-//                Join::WITH,
-//                'genus = genus_note.genus'
-//            )
             ->andWhere('c.is_read = :val')
             ->andWhere('c.correspondant = :user')
             ->setParameter('val', false)
@@ -62,14 +56,4 @@ class ConversationRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
-//    public function findOneBySomeField($value): ?Conversation
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

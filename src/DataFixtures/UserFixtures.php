@@ -37,7 +37,7 @@ class UserFixtures extends Fixture
         $admin->setName('Garden');
         $admin->setSurname('Connect');
         $admin->isIsVerified();
-        $admin->setEmail('garden-connect@garden-connect.fr');
+        $admin->setEmail('admin');
         $admin->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
         $admin->setActif(true);
         $admin->setCreatedAt(new \DateTimeImmutable('-2 week'));
@@ -45,57 +45,6 @@ class UserFixtures extends Fixture
         $admin->setPassword($password);
         $this->addReference('admin', $admin);
         $manager->persist($admin);
-        
-        $adminPolo = new User();
-        $adminPolo->setName('Paul');
-        $adminPolo->setSurname('Joret');
-        $adminPolo->isIsVerified();
-        $adminPolo->setEmail('paul.joret@hotmail.fr');
-        $adminPolo->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
-        $adminPolo->setActif(true);
-        $adminPolo->setCreatedAt(new \DateTimeImmutable('-2 week'));
-        $password = $this->hasher->hashPassword($adminPolo, 'michel');
-        $adminPolo->setPassword($password);
-        $this->addReference('polo', $adminPolo);
-        $manager->persist($adminPolo);
-
-        $userPolo = new User();
-        $userPolo->setName('Paul');
-        $userPolo->setSurname('Joret');
-        $userPolo->isIsVerified();
-        $userPolo->setEmail('paul2.joret@hotmail.fr');
-        $userPolo->setRoles(['ROLE_USER']);
-        $userPolo->setActif(true);
-        $userPolo->setCreatedAt(new \DateTimeImmutable('-2 week'));
-        $password = $this->hasher->hashPassword($userPolo, 'michel');
-        $userPolo->setPassword($password);
-        $manager->persist($userPolo);
-
-        $adminSacha = new User();
-        $adminSacha->setName('Sacha');
-        $adminSacha->setSurname('Lechevallier');
-        $adminSacha->isIsVerified();
-        $adminSacha->setEmail('sacha.lcvr@gmail.com');
-        $adminSacha->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
-        $adminSacha->setActif(true);
-        $adminSacha->setCreatedAt(new \DateTimeImmutable('-2 week'));
-        $password = $this->hasher->hashPassword($adminSacha, 'michel');
-        $adminSacha->setPassword($password);
-        $this->addReference('sacha', $adminSacha);
-        $manager->persist($adminSacha);
-
-        $adminOrianne = new User();
-        $adminOrianne->setName('Orianne');
-        $adminOrianne->setSurname('Cielat');
-        $adminOrianne->isIsVerified();
-        $adminOrianne->setEmail('orianne.cielat@gmail.com');
-        $adminOrianne->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
-        $adminOrianne->setActif(true);
-        $adminOrianne->setCreatedAt(new \DateTimeImmutable('-2 week'));
-        $password = $this->hasher->hashPassword($adminOrianne, 'michel');
-        $adminOrianne->setPassword($password);
-        $this->addReference('orianne', $adminOrianne);
-        $manager->persist($adminOrianne);
 
         // Création d'utilisateurs factices via Faker
         $faker = Faker\Factory::create('fr_FR');

@@ -79,9 +79,8 @@
                                     {% endif %}
 
                                     {% if conv.user.email == app.user.email %}
-                                        <img src="{{ conv.correspondant.image }}" alt="image de profil">
-                                    {% else %}
-                                        <img src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
+                                        {% set user = conv.correspondant %}
+                                        {% include '_partials/_photo_profile.html.twig' %}
                                     {% endif %}
                                 </div>
                                 <p class="name-time">

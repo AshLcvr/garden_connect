@@ -35,66 +35,23 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setTitle('imageBoutiqueDefault.jpg');
             $manager->persist($imageBoutique);
 
-        $boutiquePolo = (new Boutique())
-            ->setTitle('La boutique de Polo')
-            ->setDescription('La boutique qu\'elle est belle')
-            ->setAdress('')
-            ->setCity('Nointot')
-            ->setPostcode(76210)
-            ->setCitycode(76468)
-            ->setLng(0.470229)
-            ->setLat(49.596299)
-            ->setTelephone('0744556677')
-            ->setUser($this->getReference('polo'))
-            ->setActif(1)
-            ->setCardActive(1)
-            ->addImagesBoutique($imageBoutique)
-            ->setCreatedAt(new \DateTimeImmutable('-2 week'));
-        $this->addReference('boutique_polo', $boutiquePolo);
-        $manager->persist($boutiquePolo);
-
-        $imageBoutique2 = (new ImagesBoutique())
-            ->setTitle('imageBoutiqueDefault.jpg');
-            $manager->persist($imageBoutique2);
-
-        $boutiqueSacha= (new Boutique())
-            ->setTitle('La boutique de Sacha')
-            ->setDescription('La boutique qu\'elle est belle')
-            ->setAdress('')
-            ->setCity('Routot')
-            ->setPostcode(27350)
-            ->setCitycode(27500)
-            ->setLng(0.729845)
-            ->setLat(49.374605)
-            ->setUser($this->getReference('sacha'))
-            ->setActif(1)
-            ->setCardActive(1)
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->addImagesBoutique($imageBoutique2);
-        $this->addReference('boutique_sacha', $boutiqueSacha);
-        $manager->persist($boutiqueSacha);
-
-        $imageBoutique3 = (new ImagesBoutique())
-            ->setTitle('imageBoutiqueDefault.jpg');
-            $manager->persist($imageBoutique3);
-
-        $boutiqueOrianne = (new Boutique())
-            ->setTitle('La boutique de Orianne')
-            ->setDescription('La boutique qu\'elle est belle. 3 wolf moon banh mi vaporware raclette, DSA XOXO single-origin coffee chicharrones chillwave yuccie church-key vinyl small batch. Shoreditch paleo readymade narwhal pork belly four loko. Fashion axe master cleanse salvia, vexillologist flannel taxidermy swag four loko jean shorts kale chips hoodie. 3 wolf moon banh mi vaporware raclette, DSA XOXO single-origin coffee chicharrones chillwave yuccie church-key vinyl small batch. Shoreditch paleo readymade narwhal pork belly four loko. Fashion axe master cleanse salvia, vexillologist flannel taxidermy swag four loko jean shorts kale chips hoodie. 3 wolf moon banh mi vaporware raclette, DSA XOXO single-origin coffee chicharrones chillwave yuccie church-key vinyl small batch. Shoreditch paleo readymade narwhal pork belly four loko. Fashion axe master cleanse salvia, vexillologist flannel taxidermy swag four loko jean shorts kale chips hoodie.')
-            ->setAdress('')
+        $boutiqueAdmin = (new Boutique())
+            ->setTitle('La boutique Admin')
+            ->setDescription('La boutique test de Garden Connect.')
             ->setCity('Pont-Audemer')
             ->setPostcode(27500)
             ->setCitycode(27467)
             ->setLng(0.525508)
             ->setLat(49.346658)
-            ->setUser($this->getReference('orianne'))
+            ->setTelephone('')
+            ->setUser($this->getReference('admin'))
             ->setActif(1)
             ->setCardActive(1)
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->addImagesBoutique($imageBoutique3);
-        $this->addReference('boutique_orianne', $boutiqueOrianne);
-        $manager->persist($boutiqueOrianne);
-
+            ->addImagesBoutique($imageBoutique)
+            ->setCreatedAt(new \DateTimeImmutable('-2 week'));
+        $this->addReference('boutique_admin', $boutiqueAdmin);
+        $manager->persist($boutiqueAdmin);
+        
         // Création de boutiques fictives via Faker
         $faker = Faker\Factory::create('fr_FR');
         $allVendeurs = $this->userRepository->getUserVendeur();

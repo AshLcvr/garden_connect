@@ -17,11 +17,7 @@
                 {% endif %}
                 {% if app.user %}
                     {% if is_granted('ROLE_VENDEUR') %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li class="main_li"><a href="{{ path('dashboard') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
-                        {% else %}
-                            <li class="main_li"><a href="{{ path('boutique_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
-                        {% endif %}
+                        <li class="main_li"><a href="{{ path('boutique_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% else %}
                         <li class="main_li"><a href="{{ path('user_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% endif %}

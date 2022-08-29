@@ -12,11 +12,11 @@
             <p><h6 class="m-0 font-weight-bold text-primary">Adresse : </h6>{{ boutique.adress }}</p>
             <p><h6 class="m-0 font-weight-bold text-primary">Mise en ligne le : </h6>{{ boutique.createdAt|date('d/m/Y') }}</p>
             {% if boutique.actif %}
-                <p><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Actif</p>
+                <p><h6 class="m-0 font-weight-bold text-primary">Statut : </h6>Actif</p>
                 <div>
                     <a href="{{ path('toggle_active_boutique', {id: boutique.id}) }}" class="btn btn-primary">Rendre inactive</a>
             {% else %}
-                <p><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Inactif</p>
+                <p><h6 class="m-0 font-weight-bold text-primary">Statut : </h6>Inactif</p>
                 <div>
                     <a href="{{ path('toggle_active_boutique', {id: boutique.id}) }}" class="btn btn-primary">Rendre active</a>
             {% endif %}

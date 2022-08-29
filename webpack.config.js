@@ -1,9 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
 
-
-
-// Manually configure the runtime environment if not already configured yet by the "encore" command.
-// It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
@@ -16,14 +12,7 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
-    /*
-     * ENTRY CONFIG
-     *
-     * Each entry will result in one JavaScript file (e.g. app.js)
-     * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
-     */
-
-    // Bases
+    // Layout
     .addEntry('app', './assets/app.js')
     .addEntry('back_boutique', './assets/back_boutique.js')
 
@@ -33,19 +22,15 @@ Encore
     .addEntry('Leaflet', './assets/modules/Leaflet.js')
     .addEntry('Messagerie', './assets/modules/Messagerie.js')
 
-    //Front
+    // Pages front
     .addEntry('homepage', './assets/templates/front/homepage.js')
     .addEntry('recherche_annonce', './assets/templates/front/annonces/recherche_annonce.js')
     .addEntry('focus_annonce', './assets/templates/front/annonces/focus_annonce.js')
     .addEntry('public_boutique', './assets/templates/front/boutique/public_boutique.js')
 
-    // Back_boutique
+    // Pages back boutique
     .addEntry('preferences_boutique', './assets/templates/front/boutique/preferences_boutique.js')
     .addEntry('avis_boutique', './assets/templates/front/boutique/avis_boutique.js')
-
-    // Back_user
-
-    // Admin
 
     // Pages Erreurs, 404 & 403
     .addEntry('error404', './assets/templates/bundles/TwigBundle/Exception/error404.js')
@@ -60,13 +45,6 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
 
-    /*
-     * FEATURE CONFIG
-     *
-     * Enable & configure other features below. For a full
-     * list of features, see:
-     * https://symfony.com/doc/current/frontend.html#adding-more-features
-     */
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
@@ -81,39 +59,6 @@ Encore
     .configureBabelPresetEnv((config) => {
         config.useBuiltIns = 'usage';
         config.corejs = 3;
-
-
-
-        // const CopyPlugin = require("copy-webpack-plugin");
-        //
-        // module.exports = {
-        //     plugins: [
-        //         new CopyPlugin({
-        //             patterns: [
-        //                 { from: "/public/images/logo.png", to: "/build/images/" },
-        //                 // { from: "other", to: "public" },
-        //             ],
-        //         }),
-        //     ],
-        // }
-    })
-
-    // enables Sass/SCSS support
-    //.enableSassLoader()
-
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
-
-    // uncomment if you use React
-    //.enableReactPreset()
-
-    // uncomment to get integrity="..." attributes on your script & link tags
-    // requires WebpackEncoreBundle 1.4 or higher
-    //.enableIntegrityHashes(Encore.isProduction())
-
-    // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
-;
-
+    });
 
 module.exports = Encore.getWebpackConfig();
