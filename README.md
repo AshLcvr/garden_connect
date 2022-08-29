@@ -54,16 +54,16 @@ ou
 
 Les contenus (utilisateurs,boutiques,..) factices du projet ont été générés grâce aux APIs des sites suivants :  
 
-### - [Pixabay](https://pixabay.com/fr/service/about/api/)
+### - [Pixabay](https://pixabay.com/fr/service/about/api/){:target="_blank"}
 Recherche d'image pour les boutique et annonces.
 
-### - [RandomUser](https://randomuser.me/)
+### - [RandomUser](https://randomuser.me/){:target="_blank"}
 Recherche de photos de profil.
 
-### - [Geo.api.gouv](https://geo.api.gouv.fr/decoupage-administratif/communes)
+### - [Geo.api.gouv](https://geo.api.gouv.fr/decoupage-administratif/communes){:target="_blank"}
 Informations et coordonnées de villes.
 
-### - [ASDFast](http://asdfast.beobit.net/)
+### - [ASDFast](http://asdfast.beobit.net/){:target="_blank"}
 Generateur de Lorem Ipsum dans la création des titres et descriptions des annonces, boutiques et avis.
 
 ## A propos de nous : 
