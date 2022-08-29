@@ -14,11 +14,8 @@
         <div class="conv_with_box">
             <div class="conv_with">Conversation avec {{ conversation.correspondant.name }}</div>
             <div>
-            {% if conversation.correspondant.image %}
-                <img class="avatar" src="{{ asset('uploads/profile/'~conversation.correspondant.image) }}" alt="image de profil">
-            {% else %}
-                <img class="avatar" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
-            {% endif %}
+            {% set user = conversation.correspondant %}
+            {% include '_partials/_photo_profile.html.twig' %}
             </div>
         </div>
     {% endif %}

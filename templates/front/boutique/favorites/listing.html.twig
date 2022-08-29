@@ -13,8 +13,7 @@
                 {% for fav in favories %}
                     <li>
                         <div class="block_favory">
-                            <h4 class="favory_title text-center">La boutique de<br>{{ fav.boutique.user.surname|capitalize }}</h4>
-                            <span>{{ fav.boutique.user.name|capitalize }}</span>
+                            <h4 class="favory_title text-center">La boutique de<br>{{ fav.boutique.user.name|capitalize }}</h4>
                             <p>Boutique en ligne depuis le {{ fav.boutique.createdAt|date('d/m/Y') }}</p>
                             <div class="block_rating">
                                 {% if fav.boutique.avis|length == 0 %}

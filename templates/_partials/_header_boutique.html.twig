@@ -49,9 +49,9 @@
                                 Bonjour {{app.user.name}}
                                 </span>
                                 {% if app.user.image %}
-                                    <img class="img-profile rounded-circle" src="{{ asset('uploads/profile/'~app.user.image) }}" alt"image de profil">
+                                    <img class="img-profile rounded-circle" src="{{ asset('uploads/profile/'~app.user.image) }}" alt="image de profil">
                                 {% else %}
-                                    <img class="img-profile rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}" alt"image de profil par défaut">
+                                    <img class="img-profile rounded-circle" src="{{ asset('images/default-profile-picture.jpg') }}" alt="image de profil par défaut">
                                 {% endif %}
                             {% endblock %}
                         </a>

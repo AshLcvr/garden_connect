@@ -26,7 +26,7 @@ class DataCategories
             ],
             [
                 'title' => 'Fruits à coques',
-                'image' => 'fruits-à-coques-image.jpg'
+                'image' => 'fruits-a-coques-image.jpg'
             ],
             [
                 'title' => 'Herbes, épices, aromates, graines',
@@ -38,11 +38,11 @@ class DataCategories
             ],
             [
                 'title' => 'Jus de fruits et de légumes',
-                'image' => 'jus-de-fruits-et-de-légumes-image.jpg'
+                'image' => 'jus-de-fruits-et-de-legumes-image.jpg'
             ],
             [
                 'title' => 'Légumes et pois',
-                'image' => 'légumes-et-pois-image.jpg'
+                'image' => 'legumes-et-pois-image.jpg'
             ],
             [
                 'title' => 'Œufs',

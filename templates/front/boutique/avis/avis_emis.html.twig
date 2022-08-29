@@ -19,9 +19,7 @@
                     <li>
                         <div class="block_avis">
                             <div>
-                                {% if avi.user.image %}
-                                    {% include '_partials/_photo_profile.html.twig' %}
-                                {% endif %}
+                                {% include '_partials/_photo_profile.html.twig' %}
                                 <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
                             </div>
                             <div>
@@ -49,15 +47,13 @@
                         <div class="separator down"><i class="fa-solid fa-arrow-down"></i></div>
                         <div class="block_boutique">
                             <div>
-                                <div>
-                                    {% set user = avi.boutique.user %}
-                                    {% include '_partials/_photo_profile.html.twig' %}
-                                    <span class="user_name_avis">{{ avi.boutique.user.surname|capitalize }}</span>
-                                </div>
-                                <div>
-                                    <p><strong>{{ avi.boutique.title }}</strong></p>
-                                    <span><i>Boutique en ligne depuis le {{ avi.boutique.createdAt|date('d/m/Y') }}</i></span>
-                                </div>
+                                {% set user = avi.boutique.user %}
+                                {% include '_partials/_photo_profile.html.twig' %}
+                                <span class="boutique user_name_avis">{{ avi.boutique.user.name|capitalize }}</span>
+                            </div>
+                            <div>
+                                <p><strong>{{ avi.boutique.title }}</strong></p>
+                                <span><i>Boutique en ligne depuis le {{ avi.boutique.createdAt|date('d/m/Y') }}</i></span>
                             </div>
                             <div>
                                 <div>

@@ -34,7 +34,6 @@ class CallApi
         if ($maxIndex > 0){
             return $content['hits'][random_int(0,$maxIndex-1)]['webformatURL'];
         }else{
-//            dd(count($content['hits']));
             return $category->getImage();
         }
     }

@@ -22,7 +22,17 @@
     <section id="slider-home_boutique">
         {% include '_partials/_images_boutique.html.twig' %}
         <a href="{{ path('view_boutique', {id: boutique.id}) }}">
-            {% include '_partials/_photo_profile.html.twig' %}
+            <div class="photo_profile">
+                {% if user.image|length != NULL %}
+                    {% if user.id > 136  %}
+                        <img style="border-radius: 50%;border:5px solid white" src="{{ asset('uploads/profile/' ~ user.image) }}" alt="Photo de profil" />
+                    {% else %}
+                        <img style="border-radius: 50%;border:5px solid white;" src="{{ user.image }}" alt="Photo de profil"  />
+                    {% endif %}
+                {% else %}
+                    <img src="{{ asset('uploads/profile/incognito-62f7bceeb2bee.png') }}" alt="Photo de profil"  />
+                {% endif %}
+            </div>
         </a>
     </section>
     <section id="profile" class="wrap">
@@ -127,6 +137,8 @@
         <h1 class="title_boutique">Les annonces de {{  boutique.user.name|capitalize }}</h1>
         {% include 'front/annonce/_annonces.html.twig' %}
     </section>
+     {% else %}
+        <div class="security"></div>
     {% endif %}
     {% if annonce == null %}
         {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
