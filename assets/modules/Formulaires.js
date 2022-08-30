@@ -1,6 +1,3 @@
-import '../styles/form/form.css'
-import '../styles/buttons/buttons.css'
-
 // Ajax categories select
 
 $(document).on('change', '.annonce_category', function () {
