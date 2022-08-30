@@ -1,8 +1,8 @@
 # Présentation
 Garden Connect est un site factice visant à mettre en relation des particuliers et/ou professionnels autour de la vente de produits du potager.  
-Son objectif premier est de favoriser le circuit court.  
+Son objectif premier est de favoriser le circuit-court.  
 Ce projet a été réalisé sur Symfony 6.  
-Pour accéder à la totalité du site, vous pouvez vous connecter avec les identifiants suivants:  
+Pour accéder à la totalité du site, vous pouvez vous connecter avec les identifiants suivants :  
 #### E-mail : admin@admin.fr
 #### Mot de passe : admin
 
@@ -27,7 +27,7 @@ Après avoir cloné le projet, installez les dépendances :
 
   `php bin/console doctrine:database:create`
 
-- Mettez à jour la base de donnée grâce aux fichiers de migrations :
+- Mettez à jour la base de données grâce aux fichiers de migrations :
 
   `php bin/console doctrine:migrations:migrate`
 
@@ -52,10 +52,10 @@ ou
 
 ## Contributions extérieures 
 
-Les contenus (utilisateurs,boutiques,..) factices du projet ont été générés grâce aux APIs des sites suivants :  
+Les contenus (utilisateurs, boutiques, etc) factices du projet ont été générés grâce aux APIs des sites suivants :  
 
 ### - [Pixabay](https://pixabay.com/fr/service/about/api/)
-Recherche d'image pour les boutique et annonces.
+Recherche d'images pour les boutiques et annonces.
 
 ### - [RandomUser](https://randomuser.me/)
 Recherche de photos de profil.
@@ -64,19 +64,19 @@ Recherche de photos de profil.
 Informations et coordonnées de villes.
 
 ### - [ASDFast](http://asdfast.beobit.net/)
-Generateur de Lorem Ipsum dans la création des titres et descriptions des annonces, boutiques et avis.
+Générateur de Lorem Ipsum dans la création des titres et descriptions des annonces, boutiques et avis.
 
-## A propos de nous : 
+## À propos de nous : 
 
 Développeurs ayant travaillé sur le projet : 
 
 #### Orianne Cielat ([Ocmoz3](https://github.com/Ocmoz3)) :
- - Front: Maquettage, Design, Intégration
+ - Front : Maquettage, Design, Intégration
  - Langages favoris : HTML, CSS, JS
  
 #### Paul Joret ([PaulJORET](https://github.com/PaulJORET)):
-- Back:  Bases de données, Sécurité, Administation du site
-- Langages favoris : PHP, HTML, MYSQL
+- Back :  Bases de données, Sécurité, Administation du site
+- Langages favoris : PHP, HTML, MySQL
 
  
 #### Sacha Lechevallier ([AshLcvr](https://github.com/AshLcvr)):
