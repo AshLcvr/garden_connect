@@ -65,7 +65,7 @@ class BoutiqueController extends AbstractController
             $callApi->getBoutiqueAdressCoordinates($boutique, $form->get('city')->getData(),$form->get('citycode')->getData(),$form->get('adress')->getData());
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
-            if (count($boutiqueImage) <= 4 || empty($boutiqueImage)) {
+            if (count($boutiqueImage) <= 4 && count($boutiqueImage) >= 1 || empty($boutiqueImage)) {
                 $imagesBoutiqueRepository->remove($imagesBoutiqueRepository->findImagesbyBoutiqueId($boutique->getId())[0],true);
                 $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
             }else{

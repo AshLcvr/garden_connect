@@ -30,29 +30,31 @@ class AnnonceFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        // Création d'annonces fictives via Faker
+//        // Création d'annonces fictives via Faker
         $allBoutiques = $this->boutiqueRepository->findAll();
         foreach ($allBoutiques as $boutique){
-            for($i = 0; $i <= random_int(2,4) ; $i++) {
-                $randSubcat = $this->subcategoryRepository->randomSubcategory();
-                $randCat = $randSubcat->getParentCategory();
+            if ($boutique->getId() !== 1 ){
+                for($i = 0; $i <= random_int(2,5) ; $i++) {
+                    $randSubcat = $this->subcategoryRepository->randomSubcategory();
+                    $randCat    = $randSubcat->getParentCategory();
 
-                $annonce = new Annonce();
-                $annonce->setTitle($randSubcat->getTitle());
-                $annonce->setDescription($this->callApi->generateLipsumusingAsdfast(6,25))
-                ->setPrice(random_int(1, 10))
-                ->setMesure($this->getReference('Kg'))
-                ->setSubcategory($randSubcat)
-                ->setBoutique($boutique)
-                ->setActif(true)
-                ->setCreatedAt(new DateTimeImmutable('-2 weeks'));
-                for ($i = 1; $i < random_int(2,4); $i++){
-                    $imageAnnonce = (new ImagesAnnonces())
-                        ->setTitle($this->callApi->generateRandomAnnoncePicturesUsingPixaBay($randSubcat->getTitle(),$randCat));
-                    $annonce->addImagesAnnonce($imageAnnonce);
-                    $manager->persist($imageAnnonce);
+                    $annonce = new Annonce();
+                    $annonce->setTitle($randSubcat->getTitle());
+                    $annonce->setDescription($this->callApi->generateLipsumusingAsdfast(6,25))
+                        ->setPrice(random_int(1, 10))
+                        ->setMesure($this->getReference('Kg'))
+                        ->setSubcategory($randSubcat)
+                        ->setBoutique($boutique)
+                        ->setActif(true)
+                        ->setCreatedAt(new DateTimeImmutable('-2 weeks'));
+                    for ($i = 1; $i < random_int(2,4); $i++){
+                        $imageAnnonce = (new ImagesAnnonces())
+                            ->setTitle($this->callApi->generateRandomAnnoncePicturesUsingPixaBay($randSubcat->getTitle(),$randCat));
+                        $annonce->addImagesAnnonce($imageAnnonce);
+                        $manager->persist($imageAnnonce);
+                    }
+                    $manager->persist($annonce);
                 }
-                $manager->persist($annonce);
             }
         }
         $manager->flush();

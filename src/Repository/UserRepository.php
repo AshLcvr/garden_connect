@@ -77,6 +77,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
             // On compte le nombre de caractères du tableau "ROLES" de la BDD afin d'exclure les rôles User et Admin.
             ->andWhere('LENGTH(u.roles) = 16')
+            ->andWhere('u.id != 2')
             ->getQuery()
             ->getResult()
         ;

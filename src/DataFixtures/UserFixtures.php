@@ -45,6 +45,32 @@ class UserFixtures extends Fixture
         $admin->setPassword($password);
         $this->addReference('admin', $admin);
         $manager->persist($admin);
+        
+        $boutique_test = new User();
+        $boutique_test->setName('Test');
+        $boutique_test->setSurname('Boutique');
+        $boutique_test->isIsVerified();
+        $boutique_test->setEmail('vendeur@vendeur.fr');
+        $boutique_test->setRoles(['ROLE_VENDEUR']);
+        $boutique_test->setActif(true);
+        $boutique_test->setCreatedAt(new \DateTimeImmutable('-1 week'));
+        $password = $this->hasher->hashPassword($boutique_test, 'vendeur');
+        $boutique_test->setPassword($password);
+        $this->addReference('vendeur_test', $boutique_test);
+        $manager->persist($boutique_test);
+        
+        $user = new User();
+        $user->setName('Alain');
+        $user->setSurname('Connu');
+        $user->isIsVerified();
+        $user->setEmail('user@user.fr');
+        $user->setRoles(['ROLE_USER']);
+        $user->setActif(true);
+        $user->setCreatedAt(new \DateTimeImmutable('-3 day'));
+        $password = $this->hasher->hashPassword($user, 'user');
+        $user->setPassword($password);
+        $this->addReference('user', $user);
+        $manager->persist($user);
 
         // Création d'utilisateurs factices via Faker
         $faker = Faker\Factory::create('fr_FR');

@@ -24,7 +24,7 @@
         <a href="{{ path('view_boutique', {id: boutique.id}) }}">
             <div class="photo_profile">
                 {% if user.image|length != NULL %}
-                    {% if user.id > 35 or user.id == 1  %}
+                    {% if boutique.user.id > 33 or boutique.user.id == 1 or boutique.user.id == 2 or boutique.user.id == 3  %}
                         <img style="border-radius: 50%;border:5px solid white" src="{{ asset('uploads/profile/' ~ user.image) }}" alt="Photo de profil" />
                     {% else %}
                         <img style="border-radius: 50%;border:5px solid white;" src="{{ user.image }}" alt="Photo de profil"  />
@@ -138,7 +138,7 @@
         {% include 'front/annonce/_annonces.html.twig' %}
     </section>
      {% else %}
-        <div class="security"></div>
+        <div class="m-5"></div>
     {% endif %}
     {% if annonce == null %}
         {% include 'front/boutique/avis/_avis_boutique.html.twig' %}

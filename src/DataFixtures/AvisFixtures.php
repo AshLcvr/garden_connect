@@ -31,7 +31,7 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
             $avis = (new Avis())
                 ->setTitle($this->callApi->generateLipsumusingAsdfast(3,8))
                 ->setCommentaire($this->callApi->generateLipsumusingAsdfast(3,15))
-                ->setRating(random_int(1,5))
+                ->setRating(random_int(2,5))
                 ->setUser($this->getReference('user_'.random_int(1,10)))
                 ->setBoutique($this->getReference('boutique_'.random_int(1,10)))
                 ->setCreatedAt(new \DateTimeImmutable())

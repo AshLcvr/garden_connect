@@ -17,7 +17,7 @@ class CallApi
 
     public function generateRandomGardenPictureUsingPixaBay()
     {
-        $url      = 'https://pixabay.com/api/?key=29388502-bab58bd474830488e6ebb4598&q=garden&per_page=50';
+        $url      = 'https://pixabay.com/api/?key=29388502-bab58bd474830488e6ebb4598&q=garden&category=nature&per_page=50';
         $response = $this->client->request('GET', $url);
         $content  = $response->getContent();
         $content  = $response->toArray();
@@ -26,7 +26,7 @@ class CallApi
 
     public function generateRandomAnnoncePicturesUsingPixaBay($subCatTitle,$category)
     {
-        $url      = 'https://pixabay.com/api/?key=29388502-bab58bd474830488e6ebb4598&q='.$subCatTitle;
+        $url      = 'https://pixabay.com/api/?key=29388502-bab58bd474830488e6ebb4598&q='.$subCatTitle.'&category=food';
         $response = $this->client->request('GET', $url);
         $content  = $response->getContent();
         $content  = $response->toArray();

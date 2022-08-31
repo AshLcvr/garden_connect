@@ -35,8 +35,8 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setTitle('imageBoutiqueDefault.jpg');
             $manager->persist($imageBoutique);
 
-        $boutiqueAdmin = (new Boutique())
-            ->setTitle('La boutique Admin')
+        $boutiqueTest = (new Boutique())
+            ->setTitle('La boutique Test')
             ->setDescription('La boutique test de Garden Connect.')
             ->setCity('Pont-Audemer')
             ->setPostcode(27500)
@@ -44,13 +44,13 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setLng(0.525508)
             ->setLat(49.346658)
             ->setTelephone('')
-            ->setUser($this->getReference('admin'))
+            ->setUser($this->getReference('vendeur_test'))
             ->setActif(1)
             ->setCardActive(1)
             ->addImagesBoutique($imageBoutique)
             ->setCreatedAt(new \DateTimeImmutable('-2 week'));
-        $this->addReference('boutique_admin', $boutiqueAdmin);
-        $manager->persist($boutiqueAdmin);
+        $this->addReference('boutique_test', $boutiqueTest);
+        $manager->persist($boutiqueTest);
         
         // Création de boutiques fictives via Faker
         $faker = Faker\Factory::create('fr_FR');

@@ -45,12 +45,12 @@
                     {% include 'front/profil/avis/_form.html.twig' %}
                 </div>
             {% elseif app.user.id == boutique.user.id %}
-                <div class="text-center security">
-                    <p>Vous ne pouvez pas donner un avis sur votre propre boutique.</p>
+                <div class="text-center m-5">
+                    <p >Vous ne pouvez pas donner un avis sur votre propre boutique.</p>
                 </div>
             {% endif %}
         {% else %}
-            <div class="text-center padding-10">
+            <div class="text-center m-5">
                 <a class="connect-link" href="{{ path('app_login') }}">Connectez-vous</a><span> pour donner votre avis !</span>
             </div>
         {% endif %}
