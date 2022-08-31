@@ -27,12 +27,12 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 1; $i < 20; $i++) {
             $avis = (new Avis())
                 ->setTitle($this->callApi->generateLipsumusingAsdfast(3,8))
                 ->setCommentaire($this->callApi->generateLipsumusingAsdfast(3,15))
                 ->setRating(random_int(2,5))
-                ->setUser($this->getReference('user_'.random_int(1,10)))
+                ->setUser($this->getReference('user_'.random_int(0,9)))
                 ->setBoutique($this->getReference('boutique_'.random_int(1,10)))
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setActif(1);

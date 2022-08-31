@@ -263,6 +263,7 @@ class ConversationController extends AbstractController
             'nbrNonlus' => $nbrNonlus
         ]);
     }
+
     public function listing(ConversationRepository $conversationRepository, UserRepository $userRepository): Response
     {
         $user = $userRepository->findOneBy([

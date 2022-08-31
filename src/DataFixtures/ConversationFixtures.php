@@ -27,19 +27,19 @@ class ConversationFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1;$i <= 5;$i++) {
+        for ($i = 0;$i <= 7;$i++) {
             $conv = new Conversation();
             $conv->setPremierMessage($this->callApi->generateLipsumusingAsdfast(3,10));
             $conv->setCreatedAt(new \DateTimeImmutable('-2 weeks'));
             $conv->setIsRead(false);
             $conv->setUser($this->getReference('user_'.$i));
-            $conv->setCorrespondant($this->getReference('admin'));
+            $conv->setCorrespondant($this->getReference('vendeur_0'));
             $manager->persist($conv);
         }
 
-        for ($i = 1;$i <= 5;$i++) {
+        for ($i = 0;$i <= 5;$i++) {
             $conv = new Conversation();
-            $conv->setPremierMessage('Autem eum odio quas non debitis nisi');
+            $conv->setPremierMessage($this->callApi->generateLipsumusingAsdfast(3,10));
             $conv->setCreatedAt(new \DateTimeImmutable());
             $conv->setIsRead(false);
             $conv->setUser($this->getReference('vendeur_'.$i));

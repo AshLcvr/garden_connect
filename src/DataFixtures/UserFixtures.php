@@ -56,7 +56,7 @@ class UserFixtures extends Fixture
         $boutique_test->setCreatedAt(new \DateTimeImmutable('-1 week'));
         $password = $this->hasher->hashPassword($boutique_test, 'vendeur');
         $boutique_test->setPassword($password);
-        $this->addReference('vendeur_test', $boutique_test);
+        $this->addReference('vendeur_0', $boutique_test);
         $manager->persist($boutique_test);
         
         $user = new User();
@@ -69,7 +69,7 @@ class UserFixtures extends Fixture
         $user->setCreatedAt(new \DateTimeImmutable('-3 day'));
         $password = $this->hasher->hashPassword($user, 'user');
         $user->setPassword($password);
-        $this->addReference('user', $user);
+        $this->addReference('user_0', $user);
         $manager->persist($user);
 
         // Création d'utilisateurs factices via Faker

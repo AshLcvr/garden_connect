@@ -44,7 +44,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setLng(0.525508)
             ->setLat(49.346658)
             ->setTelephone('')
-            ->setUser($this->getReference('vendeur_test'))
+            ->setUser($this->getReference('vendeur_0'))
             ->setActif(1)
             ->setCardActive(1)
             ->addImagesBoutique($imageBoutique)

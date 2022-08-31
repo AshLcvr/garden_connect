@@ -9,17 +9,17 @@
 {% endblock %}
 
 {% block body %}
-    {% set user = conversation.user %}
     <h1 class="title_top">Conversation</h1>
     {% if conversation.user.email == app.user.email %}
+        {% set user = conversation.correspondant %}
         <div class="conv_with_box">
             <div class="conv_with">Conversation avec {{ conversation.correspondant.name }}</div>
             <div class="chat-avatar">
-                {% set user = conversation.correspondant %}
                 {% include '_partials/_photo_profile.html.twig' %}
             </div>
         </div>
     {% endif %}
+
     <div class="chat-container">
         <ul class="chat-box chatContainerScroll">
             {# Première bulle #}
@@ -27,7 +27,7 @@
                 <p class="chat_date">{{ conversation.createdAt|date('d/m/y') }}</p>
                 <li class="chat-left">
                     <div class="chat-avatar">
-                        {% set user = app.user %}
+                        {% set user = conversation.user %}
                         {% include '_partials/_photo_profile.html.twig' %}
                         <div class="chat-name">{{ user.name }}</div>
                     </div>
@@ -38,7 +38,7 @@
                 <p class="chat_date">{{ conversation.createdAt|date('d/m/y') }}</p>
                 <li class="chat-left">
                     <div class="chat-avatar">
-                        {% set user = app.user %}
+                        {% set user = conversation.user %}
                         {% include '_partials/_photo_profile.html.twig' %}
                         <div class="chat-name">{{ user.name }}</div>
                     </div>

@@ -1,7 +1,9 @@
-<span class="span_notif">
-    {% if nbrNonlus > 99 %}
-        99+
-    {% else %}
-        {{ nbrNonlus }}
-    {% endif %}
-</span>
+{% if nbrNonlus > 0 %}
+    <span class="span_notif">
+        {% if nbrNonlus >= 10 %}
+                9+
+        {% else %}
+            {{ nbrNonlus }}
+        {% endif %}
+    </span>
+{% endif %}
