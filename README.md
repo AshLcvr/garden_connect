@@ -89,6 +89,6 @@ Développeurs ayant travaillé sur le projet :
  
 #### Sacha Lechevallier ([AshLcvr](https://github.com/AshLcvr)):
 - Back : API, Fixtures, WebPack
-- Langages favoris : PHP, TWIG, JS
+- Langages favoris : PHP, TWIG, AJAX
 
 
