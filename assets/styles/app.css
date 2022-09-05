@@ -130,7 +130,6 @@ img {
 #city_suggest li {
     cursor: pointer;
 }
->>>>>>> dev
 /* Message flash register user et vendeur */
 .flash-register_user,
 .flash-register_vendeur {
@@ -177,6 +176,12 @@ img {
 textarea {
     scrollbar-width: thin;
     scrollbar-color: var(--orange) lightgrey;
+}
+
+/* body */
+body::-webkit-scrollbar,
+body.scroller::-webkit-scrollbar {
+    width: 15px;
 }
 
 /* RESPONSIVE */
