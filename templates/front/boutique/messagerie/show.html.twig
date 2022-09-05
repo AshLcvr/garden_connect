@@ -23,7 +23,7 @@
     <div class="chat-container">
         <ul class="chat-box chatContainerScroll">
             {# Première bulle #}
-            {% if user.email == app.user.email %}
+            {% if conversation.user.email == app.user.email %}
                 <p class="chat_date">{{ conversation.createdAt|date('d/m/y') }}</p>
                 <li class="chat-left">
                     <div class="chat-avatar">
