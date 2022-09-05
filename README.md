@@ -1,8 +1,16 @@
 # Présentation
 Garden Connect est un site factice visant à mettre en relation des particuliers et/ou professionnels autour de la vente de produits du potager.  
 Son objectif premier est de favoriser le circuit-court.  
-Ce projet a été réalisé sur Symfony 6.  
-Pour accéder à la totalité du site, vous pouvez vous connecter avec les identifiants suivants :  
+Ce projet a été réalisé sur Symfony 6.
+
+Certaines parties du site sont accessibles seulement par le biais d'une connexion.
+Pour accéder à la partie utilisateur (donc simple acheteur), connectez-vous avec les identifiants :
+#### E-mail : user@user.fr
+#### Mot de passe : user
+Pour visualiser le site en tant que vendeur, connectez-vous avec les identifiants :
+#### E-mail : vendeur@vendeur.fr
+#### Mot de passe : vendeur
+Pour accéder au site en tant qu'administrateur, connectez-vous avec les identifiants :  
 #### E-mail : admin@admin.fr
 #### Mot de passe : admin
 
