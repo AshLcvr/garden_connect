@@ -15,29 +15,6 @@ class CallApi
         $this->client = $client;
     }
 
-    public function generateRandomGardenPictureUsingPixaBay()
-    {
-        $url      = 'https://pixabay.com/api/?key=29388502-bab58bd474830488e6ebb4598&q=garden&category=nature&per_page=50';
-        $response = $this->client->request('GET', $url);
-        $content  = $response->getContent();
-        $content  = $response->toArray();
-        return $content['hits'][random_int(0,49)]['largeImageURL'];
-    }
-
-    public function generateRandomAnnoncePicturesUsingPixaBay($subCatTitle,$category)
-    {
-        $url      = 'https://pixabay.com/api/?key=29388502-bab58bd474830488e6ebb4598&q='.$subCatTitle.'&category=food';
-        $response = $this->client->request('GET', $url);
-        $content  = $response->getContent();
-        $content  = $response->toArray();
-        $maxIndex = count($content['hits']);
-        if ($maxIndex > 0){
-            return $content['hits'][random_int(0,$maxIndex-1)]['webformatURL'];
-        }else{
-            return $category->getImage();
-        }
-    }
-
     public function generateRandomProfilePictureByGenderUsingRandomUser($randGenderIndex)
     {
         $url = 'https://randomuser.me/api/portraits/';

@@ -17,6 +17,7 @@ use App\Repository\ImagesHeroRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\String\indexOf;
 use function Symfony\Config\Security\FirewallConfig\name;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -36,10 +37,10 @@ class DefaultController extends AbstractController
         }
 
         return $this->render('front/homepage.html.twig', [
-            'categories'   => $categories,
-            'annonces'     => $annonces,
-            'imagesHero'   => $imagesHero,
-            'user'         => $user,
+            'categories'     => $categories,
+            'annonces'       => $annonces,
+            'imagesHero'     => $imagesHero,
+            'user'           => $user,
             'boutiquesInfos' => $boutiquesInfos,
         ]);
     }
@@ -52,7 +53,7 @@ class DefaultController extends AbstractController
         $recherche  = $this->createForm(SearchType::class,$data);
         $recherche->handleRequest($request);
         [$min, $max] = $annonceRepository->findMinMax($data);
-        $annonces = $annonceRepository->findBySearch($data);
+        $annonces    = $annonceRepository->findBySearch($data);
 
         return $this->render('front/annonce/recherche_annonce.html.twig', [
             'annonces'  => $annonces,
@@ -98,7 +99,6 @@ class DefaultController extends AbstractController
         if (!empty($alreadyFavory)){
             $favory = 'favory_active';
         }
-
 
         return $this->render(
             'front/boutique/viewboutique.html.twig',

@@ -77,7 +77,7 @@ class BoutiqueController extends AbstractController
 
         return $this->renderForm('front/boutique/edit_boutique.html.twig', [
             'boutique' => $boutique,
-            'form' => $form,
+            'form'     => $form,
         ]);
     }
 
