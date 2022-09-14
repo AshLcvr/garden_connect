@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
-use App\DataFixtures\AnnonceFixtures;
 use App\Entity\Avis;
 use App\Entity\Boutique;
 use App\Entity\Favory;
@@ -25,7 +24,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DefaultController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function homepage(AnnonceFixtures $annonceFixtures,BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
+    public function homepage(BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $categories     = $categoryRepository->findAll();
         $annonces       = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);
@@ -54,7 +53,7 @@ class DefaultController extends AbstractController
         $recherche  = $this->createForm(SearchType::class,$data);
         $recherche->handleRequest($request);
         [$min, $max] = $annonceRepository->findMinMax($data);
-        $annonces = $annonceRepository->findBySearch($data);
+        $annonces    = $annonceRepository->findBySearch($data);
 
         return $this->render('front/annonce/recherche_annonce.html.twig', [
             'annonces'  => $annonces,
@@ -100,7 +99,6 @@ class DefaultController extends AbstractController
         if (!empty($alreadyFavory)){
             $favory = 'favory_active';
         }
-
 
         return $this->render(
             'front/boutique/viewboutique.html.twig',

@@ -21,7 +21,7 @@
 {% block body %}
     <section id="slider-home_boutique">
         {% include '_partials/_images_boutique.html.twig' %}
-        <a href="{{ path('view_boutique', {id: boutique.id}) }}">
+        <a href="{{ path('view_boutique', {id: boutique.id}) }}" title="Cliquez pour voir la boutique en détail">
             <div class="photo_profile">
                 {% if user.image|length != NULL %}
                     {% if boutique.user.id > 33 or boutique.user.id == 1 or boutique.user.id == 2 or boutique.user.id == 3  %}
@@ -45,7 +45,11 @@
         <div class="head_boutique">
             <div class="head_btq_line">
                 <div>
-                    <h1 class="title_boutique"><a href="{{ path('view_boutique', {id: boutique.id}) }}">{{ boutique.title }}</a></h1>
+                    <h1 class="title_boutique">
+                        <a title="Cliquez pour voir la boutique en détail" href="{{ path('view_boutique', {id: boutique.id}) }}">
+                            {{ boutique.title }}
+                        </a>
+                    </h1>
                 </div>
                 {% if app.user and notMyboutique %}
                     <div class="favory_boutique">
@@ -132,14 +136,27 @@
             {% endif %}
         </section>
     {% endif %}
-    {% if boutique.annonces|length > 1 %}
-    <section id="listing_annonces_public" class="wrap">
-        <h1 class="title_boutique">Les annonces de {{  boutique.user.name|capitalize }}</h1>
-        {% include 'front/annonce/_annonces.html.twig' %}
-    </section>
-     {% else %}
-        <div class="m-5"></div>
+
+    {% if annonce == null %}
+        {% if boutique.annonces|length > 0 %}
+        <section id="listing_annonces_public" class="wrap">
+            <h1 class="title_boutique">Les annonces de {{  boutique.user.name|capitalize }}</h1>
+            {% include 'front/annonce/_annonces.html.twig' %}
+        </section>
+         {% else %}
+            <div class="m-5"></div>
+        {% endif %}
+    {% else %}
+        {% if boutique.annonces|length > 1 %}
+        <section id="listing_annonces_public" class="wrap">
+            <h1 class="title_boutique">Les autres annonces de {{  boutique.user.name|capitalize }}</h1>
+            {% include 'front/annonce/_annonces.html.twig' %}
+        </section>
+        {% else %}
+            <div class="m-5"></div>
+        {% endif %}
     {% endif %}
+
     {% if annonce == null %}
         {% include 'front/boutique/avis/_avis_boutique.html.twig' %}
     {% endif %}
