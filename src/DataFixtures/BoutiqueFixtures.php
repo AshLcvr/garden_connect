@@ -56,6 +56,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
         $faker = Faker\Factory::create('fr_FR');
         $allVendeurs = $this->userRepository->getUserVendeur();
         for($i = 0; $i < count($allVendeurs); $i++){
+            $randImageBoutique = [''];
             $imageBoutique = (new ImagesBoutique())
                 ->setTitle($this->callApi->generateRandomGardenPictureUsingPixaBay());
             $manager->persist($imageBoutique);

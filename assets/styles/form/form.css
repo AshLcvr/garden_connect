@@ -39,7 +39,7 @@ textarea.form-control {
 }
 .annonce_price_form input {
     padding: 7px 20px;
-    width: 30%;
+    width: 40%;
 }
 .annonce_mesure_form {
     width: 20%;
@@ -191,7 +191,7 @@ h5.subtitle {
     color: var(--vertfonce);
 }
 /* RESPONSIVE */
-@media all and (min-width: 1400px) {
+@media all and (min-width: 1900px) {
     .security{
         margin: 16rem 0;
     }
