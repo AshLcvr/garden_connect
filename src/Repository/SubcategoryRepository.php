@@ -44,8 +44,8 @@ class SubcategoryRepository extends ServiceEntityRepository
      */
     public function randomSubcategory()
     {
-        $randomSubcats = ['Amande', 'Pêche','Raisin noir', 'Œuf de poule','Citrouilles', 'Oignon','Pistache', 'Noisette', 'Fraise','Framboise', 'Melon','Poire', 'Pomme','Blé', 'Menthe','Muscade', 'Persil','Rhubarbe', 'Miel','Champignon', 'Carottes','Haricots', 'Manioc','Poireau', 'Tomate'];
-        $randomSubcat = $randomSubcats[random_int(0,18)];
+        $randomSubcats = ['Amande','Raisin noir', 'Œuf de poule','Citrouilles', 'Oignon','Pistache', 'Noisette', 'Fraise','Framboise', 'Melon','Poire', 'Pomme','Blé', 'Menthe','Muscade', 'Persil','Rhubarbe', 'Miel','Champignon', 'Carottes','Haricots', 'Manioc','Poireau', 'Tomate'];
+        $randomSubcat = $randomSubcats[random_int(0,17)];
 
         return $this->createQueryBuilder('s')
             ->where('s.title = :val' )
@@ -55,5 +55,4 @@ class SubcategoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleResult();
     }
-
 }

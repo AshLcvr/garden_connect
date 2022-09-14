@@ -178,6 +178,12 @@ textarea {
     scrollbar-color: var(--orange) lightgrey;
 }
 
+/* body */
+body::-webkit-scrollbar,
+body.scroller::-webkit-scrollbar {
+    width: 15px;
+}
+
 /* RESPONSIVE */
 @media all and (max-width: 1050px) {
     .title_section_home {
