@@ -33,10 +33,10 @@ class Boutique
     )]
     private $description;
 
-    #[ORM\Column(type: 'string' , length: 255, nullable: true)]
+    #[ORM\Column(type: 'integer' , length: 255, nullable: true)]
     #[Assert\Length(
-    min: 9,
-    max: 12,
+    min: 10,
+    max: 10,
     minMessage: ' {{ limit }} chiffres minimum !',
     maxMessage: '{{ limit }} chiffres maximum ! ',
     )]

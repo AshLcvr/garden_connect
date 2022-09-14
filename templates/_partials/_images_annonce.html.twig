@@ -3,15 +3,7 @@
         {% for image in annonce.imagesAnnonces %}
             <li class="li_annonce_img">
                 <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                    {% if annonce.boutique.user.id > 33 or annonce.boutique.user.id == 1 or annonce.boutique.user.id == 2 %}
-                        <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
-                    {% else %}
-                        {% if image.title == annonce.subcategory.parentCategory.title|replace({' ': '-', ',':'-', ', ':'-'})|lower ~ '-image.jpg' or annonce.boutique.user.id > 33 %}
-                            <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
-                        {% else %}
-                            <img style="width: 100%; max-height:400px;object-fit: cover " src="{{ image.title }}" alt="image annonce"/>
-                      {% endif %}
-                    {% endif %}
+                    <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
                 </a>
             </li>
         {% endfor %}

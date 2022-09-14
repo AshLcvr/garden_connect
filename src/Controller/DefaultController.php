@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
+use App\DataFixtures\AnnonceFixtures;
 use App\Entity\Avis;
 use App\Entity\Boutique;
 use App\Entity\Favory;
@@ -17,13 +18,14 @@ use App\Repository\ImagesHeroRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\String\indexOf;
 use function Symfony\Config\Security\FirewallConfig\name;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function homepage(BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
+    public function homepage(AnnonceFixtures $annonceFixtures,BoutiqueRepository $boutiqueRepository, CategoryRepository $categoryRepository, AnnonceRepository $annonceRepository, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $categories     = $categoryRepository->findAll();
         $annonces       = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);
@@ -36,10 +38,10 @@ class DefaultController extends AbstractController
         }
 
         return $this->render('front/homepage.html.twig', [
-            'categories'   => $categories,
-            'annonces'     => $annonces,
-            'imagesHero'   => $imagesHero,
-            'user'         => $user,
+            'categories'     => $categories,
+            'annonces'       => $annonces,
+            'imagesHero'     => $imagesHero,
+            'user'           => $user,
             'boutiquesInfos' => $boutiquesInfos,
         ]);
     }
