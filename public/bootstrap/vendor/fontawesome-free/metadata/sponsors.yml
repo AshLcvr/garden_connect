@@ -145,8 +145,8 @@ darren-wiebe:
 deploy-dog:
   icons:
     - deploydog
-  label: deploy.dog
-  url: 'http://deploy.dog'
+  label: .deploy.dog
+  url: 'http://.deploy.dog'
 deskpro:
   icons:
     - deskpro
@@ -419,7 +419,7 @@ nutritionix:
   url: 'http://www.nutritionix.com'
 octopus-deploy:
   icons:
-    - octopus-deploy
+    - octopus-.deploy
   label: Octopus Deploy
   url: 'https://octopus.com'
 page4-corporation:
