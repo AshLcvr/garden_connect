@@ -1,0 +1,1 @@
+rsync -av ./ gardeng@ssh.cluster030.hosting.ovh.net:~/garden-connect --include=public/build --include=public/.htaccess --exclude-from=.gitignore --exclude=".*"

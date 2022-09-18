@@ -5341,7 +5341,7 @@ democrat:
 deploydog:
   changes:
     - 5.0.0
-  label: deploy.dog
+  label: .deploy.dog
   search:
     terms: []
   styles:

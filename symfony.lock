@@ -162,7 +162,7 @@
             "ref": "9d254a22efca7264203eea98b866f16f944b2f09"
         },
         "files": [
-            "./public/.htaccess"
+            "public/.htaccess"
         ]
     },
     "symfony/asset": {
@@ -208,9 +208,6 @@
         "version": "v3.1.0"
     },
     "symfony/doctrine-bridge": {
-        "version": "v6.1.0"
-    },
-    "symfony/dotenv": {
         "version": "v6.1.0"
     },
     "symfony/error-handler": {
