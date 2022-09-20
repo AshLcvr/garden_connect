@@ -40,9 +40,6 @@
 .main_li a:hover {
     color: var(--vertclair);
 }
-.notif {
-    padding-right: .75rem;
-}
 .active {
     color: var(--vertclair);
 }
@@ -100,9 +97,6 @@
 @media all and (max-width: 900px) {
     #header .logo {
         width: 12%;
-    }
-    .main_li a {
-        font-size: 1rem;
     }
     .dropdown_front {
         width: 10%;
