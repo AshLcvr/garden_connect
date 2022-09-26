@@ -173,6 +173,7 @@
         max-width: 100%;
         height: 200px;
         display: block;
+        object-fit: cover;
     }
     .infos_vendeur p {
         font-size: .8rem;
