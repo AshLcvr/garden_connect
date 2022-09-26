@@ -61,7 +61,7 @@
   {{ encore_entry_script_tags('homepage') }}
   <script>
     const carte_box = document.getElementById('card_box')
-    const carte     = L.map(carte_box).setView([49.346658, 0.525508], 11);
+    const carte     = L.map(carte_box).setView([49.05, 0.9667], 2);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom    : 19,
       attribution: '© OpenStreetMap'
