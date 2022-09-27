@@ -6,6 +6,7 @@ import "./styles/buttons/buttons.css";
 // css profil
 import "./styles/profil/profil.css";
 import "./styles/notification/notification.css";
+import "./styles/notification/_boutique.css";
 
 //Footer
 import "./styles/header/header_boutique.css";

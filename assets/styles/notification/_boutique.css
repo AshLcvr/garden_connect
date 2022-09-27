@@ -1,0 +1,9 @@
+.span_notif {
+    right: .5rem;
+}
+
+@media all and (max-width: 550px) {
+    .span_notif {
+        right: 0;
+    }
+}

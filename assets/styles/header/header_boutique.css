@@ -67,8 +67,11 @@
     .mess_header {
         display: none;
     }
+    .navbar-nav {
+        gap: 1rem;
+    }
     i.fa-envelope {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
     }
     .span_header_user {
         display: none;
