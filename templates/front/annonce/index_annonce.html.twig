@@ -22,7 +22,7 @@
             {% for annonce in annonces %}
                 <div class="annonce_box btq">
                     <div class="annonce_text">
-                        <h5 class="annonce_title">{{ annonce.title }}&nbsp&nbsp<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
+                        <h5 class="annonce_title">{{ annonce.title }}&nbsp;&nbsp;<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
                         <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
                         <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
                         <p class="annonce_price_btq">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>

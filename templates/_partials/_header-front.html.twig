@@ -1,7 +1,7 @@
 <header id="header" class="header">
     <div class="wrap">
         <div class="logo">
-            <a href="{{ path('homepage') }}" ><img src="{{ asset('images/logo.png') }}" alt="logo Garden Connect"/></a>
+            <a href="{{ path('homepage') }}" ><img src="{{ asset('images/logo.png') }}" alt="logo Garden Connect"></a>
         </div>
         <nav class="main_nav">
             <ul id="ul_burger" class="main_ul ul_shadow ul_burger">
@@ -18,11 +18,11 @@
                 {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
                         <li class="main_li"><a href="{{ path('dashboard') }}">Administration</a></li>
-                        <li class="main_li"><a href="{{ path('app_conversation_demande_user') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('app_conversation_demande_user') }}" class="notif">Messages&nbsp;</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% elseif is_granted('ROLE_VENDEUR') %}
-                        <li class="main_li"><a href="{{ path('boutique_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('boutique_messagerie') }}" class="notif">Messages&nbsp;</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% else %}
-                        <li class="main_li"><a href="{{ path('user_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw">{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</i></a></li>
+                        <li class="main_li"><a href="{{ path('user_messagerie') }}" class="notif">Messages&nbsp;</span><i class="fas fa-envelope fa-fw">{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</i></a></li>
                     {% endif %}
                 {% else %}
                     {% if app.request.attributes.get('_route')  == 'app_login' %}

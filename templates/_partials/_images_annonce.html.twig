@@ -3,7 +3,7 @@
         {% for image in annonce.imagesAnnonces %}
             <li class="li_annonce_img">
                 <a href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}" class="annonce_link">
-                    <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce"/>
+                    <img src="{{ asset('uploads/mini/'~ image.title) }}" alt="image annonce">
                 </a>
             </li>
         {% endfor %}

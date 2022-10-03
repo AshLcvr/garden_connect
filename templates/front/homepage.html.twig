@@ -1,19 +1,19 @@
 {% extends 'layout/front_base.html.twig' %}
 
-{% block title %}Bienvenue sur Garden Connect! {% endblock %}
+{% block title %}Bienvenue sur Garden Connect !{% endblock %}
 
 {% block stylesheets %}
   {{ encore_entry_link_tags('homepage') }}
 {% endblock %}
 
 {% block body %}
-  <section id="slider-home">
+  <div id="slider-home">
     <div class="flexslider" id="slider">
       <ul class="slides relative">
           {%  for imageHero in imagesHero %}
             <li>
               <div class="hero_text">
-                <p class="hero_line1">Bienvenue sur Garden Connect&nbsp!</p>
+                <p class="hero_line1">Bienvenue sur Garden Connect&nbsp;!</p>
                 <p>Achetez ou vendez</p>
                 <p>des produits frais autour de chez vous</p>
               </div>
@@ -22,7 +22,7 @@
           {% endfor %}
       </ul>
     </div>
-  </section>
+  </div>
   <section class="slider-category">
     <div class="contener carousel">
       <h2 class="title_section_home">Que cherchez-vous ?</h2>
@@ -30,7 +30,7 @@
         <ul class="slides relative custom">
           {% for cat in categories %}
             <li class="card_cat">
-              <img src="{{ asset('uploads/category/' ~ cat.image) }}" alt="image catégorie"/>
+              <img src="{{ asset('uploads/category/' ~ cat.image) }}" alt="image catégorie">
               <div>
                 <a href="{{ path('app_annonce_recherche')~'?category='~cat.id }}" class="title-cat" >
                   <h3>{{ cat.title }}</h3>

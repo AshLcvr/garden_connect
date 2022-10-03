@@ -6,7 +6,7 @@
         <div class="header_wrap">
             <div class="pad_logo">
                 <div class="logo">
-                    <a href="{{ path('homepage') }}" ><img src="{{ asset('images/logo.png') }}" alt="logo Garden Connect"/></a>
+                    <a href="{{ path('homepage') }}" ><img src="{{ asset('images/logo.png') }}" alt="logo Garden Connect"></a>
                 </div>
             </div>
             {# Avec SB2 #}
@@ -29,7 +29,7 @@
                     </li>
                     {% if is_granted('ROLE_VENDEUR') %}
                     <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle custom" href="{{ path('boutique_messagerie') }}" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mess_header">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a>
+                        <a class="nav-link dropdown-toggle custom" href="{{ path('boutique_messagerie') }}" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mess_header">Messages&nbsp;</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a>
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in custom" aria-labelledby="messagesDropdown">
                             <h6 class="dropdown-header custom">Messages non lus</h6>
                             {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
