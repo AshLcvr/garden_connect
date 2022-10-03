@@ -2,7 +2,7 @@
     position: absolute;
     transform: scale(.7);
     transform-origin: top right;
-    right: .25rem;
+    right: -.5rem;
     margin-top: -0.25rem;
     color: #fff;
     background-color: #e74a3b;
@@ -16,9 +16,4 @@
     vertical-align: baseline;
     border-radius: 0.35rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-@media all and (max-width: 550px) {
-    .span_notif {
-        right: 0;
-    }
 }

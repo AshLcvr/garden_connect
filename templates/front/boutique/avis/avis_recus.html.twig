@@ -19,8 +19,9 @@
                             <li class="recus">
                                 <div class="block_avis recus">
                                     <div>
+                                        {% set user = avi.user %}
                                         {% include '_partials/_photo_profile.html.twig' %}
-                                        <span class="user_name_avis">{{ avi.user.surname|capitalize }}</span>
+                                        <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
                                     </div>
                                     <div>
                                         {% for i in 1..5 %}

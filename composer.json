@@ -14,7 +14,6 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
         "gedmo/doctrine-extensions": "^3.7",
-        "geoip2/geoip2": "~2.0",
         "gumlet/php-image-resize": "2.0.*",
         "knplabs/knp-paginator-bundle": "^5.8",
         "sensio/framework-extra-bundle": "^6.2",

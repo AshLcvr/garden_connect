@@ -17,11 +17,12 @@
                 {% endif %}
                 {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
+                        <li class="main_li"><a href="{{ path('dashboard') }}">Administration</a></li>
                         <li class="main_li"><a href="{{ path('app_conversation_demande_user') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% elseif is_granted('ROLE_VENDEUR') %}
                         <li class="main_li"><a href="{{ path('boutique_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw btq"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
                     {% else %}
-                        <li class="main_li"><a href="{{ path('user_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw"></i>{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</a></li>
+                        <li class="main_li"><a href="{{ path('user_messagerie') }}" class="notif">Messages&nbsp</span><i class="fas fa-envelope fa-fw">{{ render(controller('App\\Controller\\Admin\\ConversationController::notification')) }}</i></a></li>
                     {% endif %}
                 {% else %}
                     {% if app.request.attributes.get('_route')  == 'app_login' %}
@@ -48,11 +49,6 @@
                         </div>
                         <ul id="ul_dropdown" class="ul_shadow ul_dropdown">
                             {% if is_granted('ROLE_ADMIN') %}
-                                <li class="li_dropdown"><a href="{{ path('dashboard') }}">Administration</a></li>
-                                <div class="dropdown_separator"></div>
-                                <li class="li_dropdown"><a href="{{ path('app_boutique_index') }}">Ma boutique</a></li>
-                                <div class="dropdown_separator"></div>
-                                <li class="li_dropdown"><a href="{{ path('admin_view_profil', {id: app.user.id}) }}">Profil</a></li>
                                 <div class="dropdown_separator"></div>
                             {% elseif is_granted('ROLE_VENDEUR') %}
                                 <li class="li_dropdown"><a href="{{ path('app_boutique_index') }}">Ma boutique</a></li>

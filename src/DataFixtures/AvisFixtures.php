@@ -3,6 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Avis;
+use App\Repository\BoutiqueRepository;
+use App\Repository\UserRepository;
 use App\Service\CallApi;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -19,24 +21,37 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
     }
 
     private $callApi;
+    private $boutiqueRepository;
+    private $userRepository;
 
-    public function __construct(CallApi $callApi)
+    public function __construct(CallApi $callApi, BoutiqueRepository $boutiqueRepository, UserRepository $userRepository)
     {
-        $this->callApi = $callApi;
+        $this->callApi            = $callApi;
+        $this->boutiqueRepository = $boutiqueRepository;
+        $this->userRepository     = $userRepository;
     }
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i < 20; $i++) {
-            $avis = (new Avis())
-                ->setTitle($this->callApi->generateLipsumusingAsdfast(3,8))
-                ->setCommentaire($this->callApi->generateLipsumusingAsdfast(3,15))
-                ->setRating(random_int(2,5))
-                ->setUser($this->getReference('user_'.random_int(0,9)))
-                ->setBoutique($this->getReference('boutique_'.random_int(1,10)))
-                ->setCreatedAt(new \DateTimeImmutable())
-                ->setActif(1);
-            $manager->persist($avis);
+        $allBoutiques  = $this->boutiqueRepository->findAll();
+        $allUsers      = $this->userRepository->findAll();
+        foreach ($allBoutiques as $boutique) {
+            $userAvisArray = [];
+            for ($i = 0; $i <= random_int(2, 5); $i++) {
+                $randomUser      = $allUsers[random_int(0, count($allUsers)-1)];
+                $userAvisArray[] = $randomUser->getId();
+                if ($randomUser !== $boutique->getUser() || !in_array($randomUser->getId(),$userAvisArray)){
+                    $avis = (new Avis())
+                        ->setTitle($this->callApi->generateLipsumusingAsdfast(3, 8))
+                        ->setCommentaire($this->callApi->generateLipsumusingAsdfast(3, 15))
+                        ->setRating(random_int(2, 5))
+                        ->setUser($randomUser)
+                        ->setBoutique($boutique)
+                        ->setCreatedAt(new \DateTimeImmutable())
+                        ->setActif(1);
+                    $manager->persist($avis);
+                }
+            }
         }
 
         $manager->flush();

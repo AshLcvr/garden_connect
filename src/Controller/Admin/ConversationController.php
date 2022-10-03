@@ -56,10 +56,10 @@ class ConversationController extends AbstractController
     #[Route('/conversation_demande_user/admin', name: 'app_conversation_demande_user')]
     public function conversation_demande_user(Request $request, PaginatorInterface $paginator): Response
     {
-        $user = $this->getUser();
-        $nbrNonlus = 0;
+        $user             = $this->getUser();
+        $nbrNonlus        = 0;
         $nbrNonlusCorresp = [];
-        $conversations = [];
+        $conversations    = [];
 
         $conversationsCorresp = $user->getConversationsCorresp();
         foreach ($conversationsCorresp as $key => $conv) {
@@ -82,7 +82,7 @@ class ConversationController extends AbstractController
 
         return $this->renderForm('admin/conversation/conversation_demande_user.html.twig', [
             'conversationsCorresp' => $conversations,
-            'nbrNonlusCorresp' => $nbrNonlusCorresp
+            'nbrNonlusCorresp'     => $nbrNonlusCorresp
         ]);
     }
 

@@ -43,7 +43,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
             ->setCitycode(27467)
             ->setLng(0.525508)
             ->setLat(49.346658)
-            ->setTelephone('')
+            ->setTelephone('0695680086')
             ->setUser($this->getReference('vendeur_0'))
             ->setActif(1)
             ->setCardActive(1)
@@ -55,10 +55,13 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
         // Création de boutiques fictives via Faker
         $faker = Faker\Factory::create('fr_FR');
         $allVendeurs = $this->userRepository->getUserVendeur();
+
         for($i = 0; $i < count($allVendeurs); $i++){
+
             $imageBoutique = (new ImagesBoutique())
-                ->setTitle($this->callApi->generateRandomGardenPictureUsingPixaBay());
+                ->setTitle($this->setRandomGardenPicture());
             $manager->persist($imageBoutique);
+
             $boutiqueVendeur = (new Boutique())
                 ->setTitle('La boutique de ' . $allVendeurs[$i]->getName())
                 ->setDescription('Bonjour, je m\'appelle ' .$allVendeurs[$i]->getName(). ' et je vous présente ma boutique!')
@@ -80,5 +83,14 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
     {
         $boutiqueVendeur->setAdress('');
         $this->callApi->getCityInfosbyName($boutiqueVendeur);
+    }
+
+    private function setRandomGardenPicture()
+    {
+        $randImageBoutique = ['1-azalea-5120368-1920-6321a2eb213f3.jpg','1-castle-5511046-1920-6321a2ea972f4.jpg', '1-country-house-2699713-1920-6321a2ffdfa91.jpg', '1-finland-909742-1920-6321a2ebda6ba.jpg', '1-hd-wallpaper-3251607-1920-6321a2eb82875.jpg', '1-insect-1278820-1920-6321a2d67ecaf.jpg', '1-lavender-1507499-1920-6321a2d6dfb53.jpg', '1-marguerite-1507550-1920-6321a3005102f.jpg', '1-marguerite-1510602-1920-6321a311bd965.jpg', '1-pathway-2289978-1920-6321a3123c5f8.jpg', '1-poppies-3441348-1920-6321a2d621445.jpg', '1-poppy-3137588-1920-6321a3115bdb3.jpg','1-stones-2040340-1920-6321a312a5f65.jpg', '1-vegetables-landscape-2943500-1920-6321a2d5a78bb.jpg', '1-wheelbarrow-1232408-1920-6321a2ff04fbd.jpg', '1-white-cabbage-2521700-1920-6321a2ff76805.jpg'];
+        $imageIndex = array_rand($randImageBoutique);
+        $imageTitle = $randImageBoutique[$imageIndex];
+
+        return $imageTitle;
     }
 }
