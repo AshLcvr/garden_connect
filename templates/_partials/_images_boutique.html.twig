@@ -3,11 +3,11 @@
         <ul class="slides relative">
             {% for imageBoutique in boutique.imagesBoutiques %}
                 <li>
-                    <img src="{{ asset('uploads/boutique/' ~ imageBoutique.title) }}" alt="Images de la Boutique" />
+                    <img src="{{ asset('uploads/boutique/' ~ imageBoutique.title) }}" alt="images de la boutique">
                 </li>
             {% endfor %}
         </ul>
     </div>
 {% else %}
-    <img style="max-height: 400px" src="{{ asset('uploads/boutique/imageBoutiqueDefault.jpg' ) }}" alt="Images de la Boutique" />
+    <img style="max-height: 400px" src="{{ asset('uploads/boutique/imageBoutiqueDefault.jpg' ) }}" alt="images de la boutique" />
 {% endif %}
