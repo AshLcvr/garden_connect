@@ -45,3 +45,17 @@ document.addEventListener(
     },
     false
 );
+
+// Modale
+$("#envoi-cookie").click(function () {
+  sessionStorage.setItem("session", "en cours");
+});
+if (sessionStorage.getItem("session") == "en cours") {
+  $(document).ready(function () {
+    $("#myModal").hide();
+  });
+} else {
+  $(document).ready(function () {
+    $("#myModal").show();
+  });
+}

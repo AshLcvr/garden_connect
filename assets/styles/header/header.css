@@ -94,6 +94,102 @@
 #link_burger {
     display: none;
 }
+
+/* MODAL */
+.fa-solid.fa-info {
+    color: grey;
+}
+.w3-button {
+    border: 1px solid grey;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+.w3-button:hover .fa-solid.fa-info,
+.w3-button:hover {
+    color: var(--vertclair);
+    border-color: var(--vertclair);
+}
+.w3-display-topright {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.w3-modal {
+    z-index: 3;
+    display: none;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.w3-modal-content {
+    margin: auto;
+    background-color: #fff;
+    position: relative;
+    width: 75%;
+    height: 100%;
+    overflow: auto;
+    box-shadow: 2px 2px 25px 0px rgb(0 0 0 / 5%) inset, -6px -2px 25px 0px rgb(0 0 0 / 8%) inset;
+}
+.w3-container.modal_padding {
+    padding: 2.5rem;
+}
+.modal_title {
+    font-family: 'Unkempt', sans-serif;
+    font-size: 2rem;
+    padding: 1rem;
+    text-align: center;
+    color: var(--marron);
+    font-weight: bold;
+}
+.modal_p, .modal_ul {
+    padding: .5rem;
+}
+.modal_strong {
+    font-size: 1.1rem;
+}
+.modal_strong.modal_str_color {
+    color: var(--vertclair);
+}
+.modal_subtitle {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.modal_sub_span {
+    font-family: 'Unkempt';
+    color: var(--orange);
+    font-size: 1.6rem;
+}
+.fa-seedling {
+    color: var(--vertclair);
+}
+.modal_li {
+    padding: .5rem .5rem .5rem 3rem;
+}
+.modal_git {
+    border: 1px solid grey;
+    margin: 1rem 0;
+}
+.fa-github {
+    font-size: 2rem;
+}
+.modal_link_git {
+    font-weight: bold;
+    word-break: break-all;
+}
 @media all and (max-width: 900px) {
     #header .logo {
         width: 12%;
@@ -103,6 +199,37 @@
     }
 }
 @media all and (max-width: 750px) {
+    .w3-button {
+        width: 40px;
+        height: 40px;
+    }
+    .w3-container.modal_padding {
+        padding: 2rem;
+    }
+    .w3-modal-content {
+        width: 80%;
+    }
+    .modal_title {
+        font-size: 1.7rem;
+    }
+    .modal_p, .modal_li {
+        font-size: .9rem;
+    }
+    .modal_li {
+        padding: .2rem .5rem .2rem 1rem;
+    }
+    .modal_strong {
+        font-size: 1rem;
+    }
+    .modal_subtitle {
+        font-size: 1.3rem;
+    }
+    .modal_sub_span {
+        font-size: 1.5rem;
+    }
+    .fa-github {
+        font-size: 1.7rem;
+    }
     #header {
         position: relative;
         max-width:750px;
@@ -211,17 +338,42 @@
     }
 }
 @media all and (max-width: 550px) {
+    .w3-modal {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+    .w3-modal-content {
+        width: 85%;
+    }
+    .modal_li {
+        padding: .5rem;
+    }
+    .w3-container.modal_padding {
+        padding: 1rem;
+    }
+    .w3-display-topright {
+        padding: .5rem;
+        font-size: 1.7rem;
+    }
+    .modal_title {
+        font-size: 1.6rem;
+    }
     #header .logo {
         width: 20%;
     }
 }
 @media all and (max-width: 450px) {
+    .w3-button {
+        font-size: 1rem;
+        width: 30px;
+        height: 30px;
+    }
     #header .logo {
         width: 22%;
     }
 }
 @media all and (max-width: 350px) {
     #header .logo {
-        width: 25%;
+        width: 35%;
     }
 }
