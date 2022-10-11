@@ -1,6 +1,7 @@
 # UPDATE :  
 Le site est en ligne! Vous pouvez le visiter en cliquant sur le lien suivant:  
-[https://garden-connect.fr](https://garden-connect.fr)
+[](https://garden-connect.fr)
+<a href="https://garden-connect.fr" target="_blank">https://garden-connect.fr</a>
 
 # Présentation
 Garden Connect est un site factice visant à mettre en relation des particuliers et/ou professionnels autour de la vente de produits du potager.  
