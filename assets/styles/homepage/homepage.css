@@ -15,6 +15,11 @@
     width: 50%;
     margin: 0 auto .5rem;
 }
+/* Carte boutiques */
+#card_box {
+    height: 400px;
+    z-index: 3;
+}
 
 /* RESPONSIVE */
 @media all and (max-width: 750px){

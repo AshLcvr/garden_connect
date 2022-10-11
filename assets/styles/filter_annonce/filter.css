@@ -2,6 +2,9 @@
 .js-filter-content {
     min-height: 105vh;
 }
+.js-filter-form {
+    position: relative;
+}
 #filter_form {
     box-shadow: grey 0px 7px 29px 0px;
     width: 55%;
@@ -28,7 +31,9 @@
     width: 38% !important;
 }
 #filter_form form #city_suggest {
-    width: 32%;
+    position: absolute;
+    width: 60%;
+    top: 60px;
 }
 #filter_form .noUi-connect {
     background: whitesmoke;
@@ -164,6 +169,7 @@
 }
 #pagination_box span a {
     color: white;
+    padding: .5rem 1rem;
 }
 
 /* RESPONSIVE */
@@ -201,7 +207,8 @@
         width: 100%;
     }
     .bloc_form .location_box,
-    .bloc_form .distance_box {
+    .bloc_form .distance_box,
+    #filter_form form #city_suggest{
         width: 100% !important;
     }
 }
@@ -211,8 +218,11 @@
         padding: 1rem;
     }
 }
-@media (max-width: 450px) {
+@media (max-width: 500px) {
     .recherche-tri {
         gap: .3rem;
+    }
+    #filter_form form #city_suggest {
+        top: 50px;
     }
 }

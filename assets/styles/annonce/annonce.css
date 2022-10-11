@@ -48,37 +48,36 @@ span.span_created {
     font-weight: bold;
     padding-top: 1rem;
 }
-#annonces {
+#annonce {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     gap: 2rem;
 }
-#annonces .annonce_box:nth-child(2n+1) {
+#annonce .annonce_box:nth-child(2n+1) {
     flex-flow: row-reverse;
 }
-
-#annonces .annonce_box,
-#annonces .annonce_img img {
+#annonce .annonce_box,
+#annonce .annonce_img img {
     height: 270px;
 }
-#annonces .annonce_box:hover {
+#annonce .annonce_box:hover {
     transform: scale(1.04);
     transition: .6s;
 }
-#annonces .annonce_description {
+#annonce .annonce_description {
     height: 80px;
     overflow: auto;
     word-break: break-word;
     padding-right: .5rem;
 }
-#annonces .annonce_img {
+#annonce .annonce_img {
     width: 35%;
 }
-#annonces .annonce_text {
+#annonce .annonce_text {
     width: 65%;
 }
-#annonces .span_description {
+#annonce .span_description {
     display: block;
 }
 #focus_annonce {
@@ -111,33 +110,33 @@ span.span_created {
 #focus_annonce .annonce_box {
     flex: 2;
 }
-#listing_annonces {
+#listing_annonce {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     gap: 1rem;
 }
-#listing_annonces .annonce_box {
+#listing_annonce .annonce_box {
     width: 48%;
 }
-#listing_annonces .annonce_box,
-#listing_annonces .annonce_img img {
+#listing_annonce .annonce_box,
+#listing_annonce .annonce_img img {
     height: 150px;
 }
-#listing_annonces .annonce_box:hover {
+#listing_annonce .annonce_box:hover {
     transform: scale(1.04);
     transition: .6s;
 }
-#listing_annonces .annonce_img {
+#listing_annonce .annonce_img {
     width: 40%;
 }
-#listing_annonces .annonce_text {
+#listing_annonce .annonce_text {
     width: 60%;
 }
 .annonce_title.listing {
     line-height: unset;
 }
-/* Annonces back boutique */
+/* annonce back boutique */
 .annonce_box.btq {
     width: 100%;
     padding: 1rem;
@@ -156,10 +155,10 @@ span.span_created {
 
 /* RESPONSIVE */
 @media (max-width: 1050px) {
-    #annonces .annonce_img {
+    #annonce .annonce_img {
         width: 40%;
     }
-    #annonces .annonce_text {
+    #annonce .annonce_text {
         width: 60%;
     }
 }
@@ -171,17 +170,17 @@ span.span_created {
         margin-bottom: 1rem;
         width: 85%;
     }
-    #listing_annonces .annonce_box {
+    #listing_annonce .annonce_box {
         width: 85%;
     }
-    #listing_annonces .annonce_box,
-    #listing_annonces .annonce_img img {
+    #listing_annonce .annonce_box,
+    #listing_annonce .annonce_img img {
         height: 170px;
     }
-    #listing_annonces .annonce_img {
+    #listing_annonce .annonce_img {
         width: 45%;
     }
-    #listing_annonces .annonce_text {
+    #listing_annonce .annonce_text {
         width: 55%;
     }
     p.annonce_title.listing {
@@ -197,18 +196,18 @@ span.span_created {
     .annonce_box {
         width: 95%;
     }
-    #annonces .annonce_box {
+    #annonce .annonce_box {
         flex-direction: column;
         height: unset;
     }
-    #annonces .annonce_box:nth-child(2n+1) {
+    #annonce .annonce_box:nth-child(2n+1) {
         flex-flow: column wrap;
     }
-    #annonces .annonce_img,
-    #annonces .annonce_text {
+    #annonce .annonce_img,
+    #annonce .annonce_text {
         width: 100%;
     }
-    #annonces .annonce_img img {
+    #annonce .annonce_img img {
         height: 200px;
     }
     #focus_annonce .annonce_box {
@@ -239,7 +238,7 @@ span.span_created {
     }
 }
 @media all and (max-width: 680px) {
-    #annonces .annonce_img img {
+    #annonce .annonce_img img {
         height: 180px;
     }
     #focus_annonce .annonce_img img {
@@ -250,21 +249,21 @@ span.span_created {
     }
 }
 @media (max-width: 500px) {
-    #annonces .annonce_img img {
+    #annonce .annonce_img img {
         height: 200px;
     }
     #focus_annonce .annonce_img img {
         height: 100%;
         max-height: 360px;
     }
-    #listing_annonces .annonce_img img {
+    #listing_annonce .annonce_img img {
         height: 200px;
     }
-    #listing_annonces .annonce_img,
-    #listing_annonces .annonce_text {
+    #listing_annonce .annonce_img,
+    #listing_annonce .annonce_text {
         width: 100%;
     }
-    #listing_annonces .annonce_box {
+    #listing_annonce .annonce_box {
         flex-direction: column;
         width: 95%;
         height: unset;
@@ -284,12 +283,12 @@ span.span_created {
     p.annonce_title.listing {
         font-size: 1rem;
     }
-    #annonces .annonce_description {
+    #annonce .annonce_description {
         height: 75px;
     }
 }
 @media (max-width: 300px) {
-    #annonces .annonce_description {
+    #annonce .annonce_description {
         height: 60px;
     }
 }

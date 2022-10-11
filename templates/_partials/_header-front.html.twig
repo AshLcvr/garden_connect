@@ -4,31 +4,31 @@
             <a href="{{ path('homepage') }}" ><img src="{{ asset('images/logo.png') }}" alt="logo Garden Connect"></a>
         </div>
         <div class="w3-container">
-            <button onclick="document.getElementById('myModal').style.display='block'" class="w3-button"><i class="fa-solid fa-info"></i></button>
+            <button type="button" id="modal_button" class="w3-button" title="Informations de connexion"><i class="fa-solid fa-info"></i></button>
             <div id="myModal" class="modal w3-modal">
                 <div class="w3-modal-content scroller scroll_mod">
                     <div class="w3-container modal_padding">
-                        <button type="button" id="envoi-cookie" class="w3-display-topright" data-dismiss="modal" onclick="$('.modal').hide()">&times;</button>
+                        <button type="button" id="isSessionActive" class="w3-display-topright" data-dismiss="modal" onclick="$('.modal').hide()">&times;</button>
                         <p class="modal_title">Bienvenue sur Garden Connect&nbsp;!</p>
                         <p class="modal_p">Ce site est factice, tout ce que vous y trouverez (profils, annonces…) est <strong class="modal_strong modal_str_color">faux</strong> !</p>
                         <p class="modal_p">Garden Connect est, en réalité, un <strong class="modal_strong modal_str_color">site de démonstration</strong> du savoir-faire de trois intégrateurs-développeurs web en herbe qui souhaitent montrer leurs compétences.</p>
                         <p class="modal_p">Ce site a été pensé dans le cadre d’un projet de fin de formation de développeur-codeur web et il est le résultat du travail de notre équipe qui a perduré après la fin du cursus.</p>
                         <p class="modal_p">Certains espaces ne sont <strong class="modal_strong modal_str_color">accessibles qu’en se connectant</strong>. Pour profiter pleinement de votre navigation, voir et tester les différents espaces, vous pouvez vous connecter avec les comptes suivants :</p>
+                        <p class="modal_subtitle">Compte <span class="modal_sub_span">acheteur</span></p>
+                        <p class="modal_p">Pour voir le site du côté acheteur et avoir accès à l’espace personnel, contacter un (faux) vendeur, etc.</p>
                         <ul class="modal_ul">
-                            <p class="modal_subtitle">Compte <span class="modal_sub_span">acheteur</span></p>
-                            <p class="modal_p">Pour voir le site du côté acheteur et avoir accès à l’espace personnel, contacter un (faux) vendeur, etc.</p>
                             <li class="modal_li"><i class="fa-sharp fa-solid fa-seedling"></i>&nbsp;identifiant : user@user.fr</li>
                             <li class="modal_li"><i class="fa-sharp fa-solid fa-seedling"></i>&nbsp;mot de passe : user</li>
                         </ul>
+                        <p class="modal_subtitle">Compte <span class="modal_sub_span">vendeur</span></p>
+                        <p class="modal_p">Pour voir le site du côté vendeur et avoir accès à l’espace boutique, créer des annonces, les gérer, etc.</p>
                         <ul class="modal_ul">
-                            <p class="modal_subtitle">Compte <span class="modal_sub_span">vendeur</span></p>
-                            <p class="modal_p">Pour voir le site du côté vendeur et avoir accès à l’espace boutique, créer des annonces, les gérer, etc.</p>
                             <li class="modal_li"><i class="fa-sharp fa-solid fa-seedling"></i>&nbsp;identifiant : vendeur@vendeur.fr</li>
                             <li class="modal_li"><i class="fa-sharp fa-solid fa-seedling"></i>&nbsp;mot de passe : vendeur</li>
                         </ul>
+                        <p class="modal_subtitle">Compte <span class="modal_sub_span">administrateur</span></p>
+                        <p class="modal_p">Pour voir le site du côté administrateur et pouvoir gérer les différents profils des (faux) utilisateurs, les boutiques, les annonces, etc.</p>
                         <ul class="modal_ul">
-                            <p class="modal_subtitle">Compte <span class="modal_sub_span">administrateur</span></p>
-                            <p class="modal_p">Pour voir le site du côté administrateur et pouvoir gérer les différents profils des (faux) utilisateurs, les boutiques, les annonces, etc.</p>
                             <li class="modal_li"><i class="fa-sharp fa-solid fa-seedling"></i>&nbsp;identifiant : admin@admin.fr</li>
                             <li class="modal_li"><i class="fa-sharp fa-solid fa-seedling"></i>&nbsp;mot de passe : admin</li>
                         </ul>
@@ -90,7 +90,7 @@
                             {% if is_granted('ROLE_ADMIN') %}
                                 <div class="dropdown_separator"></div>
                             {% elseif is_granted('ROLE_VENDEUR') %}
-                                <li class="li_dropdown"><a href="{{ path('app_boutique_index') }}">Ma boutique</a></li>
+                                <li class="li_dropdown"><a href="{{ path('app_boutique_index') }}">Espace Boutique</a></li>
                                 <div class="dropdown_separator"></div>
                                 <li class="li_dropdown"><a href="{{ path('boutique_view_profil', {id: app.user.id}) }}">Profil</a></li>
                                 <div class="dropdown_separator"></div>
@@ -104,7 +104,7 @@
                 {% endif %}
             </ul>
         </nav>
-        <a id="link_burger" href="#">
+        <a id="link_burger" href="#" title="Menu">
             <span id="burger"></span>
         </a>
     </div>

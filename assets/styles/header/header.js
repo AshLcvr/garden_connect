@@ -1,61 +1,41 @@
-// Menu burger
-/* Sélection des éléments HTML */
-let link_burger = document.getElementById("link_burger");
-let burger = document.getElementById("burger");
-let ul = document.getElementById("ul_burger");
+$(document).ready(function () {
 
-/* gestionnaire d'événement sur le a#link pour venir changer l'attribution de la classe .open à la ul et au span#burger */
-link_burger.addEventListener("click", function (e) {
-  e.preventDefault();
-  burger.classList.toggle("open");
-  ul.classList.toggle("open");
-});
+  // Menu burger
+  let link_burger = document.getElementById("link_burger");
+  let burger      = document.getElementById("burger");
+  let ul          = document.getElementById("ul_burger");
 
-// Menu dropdown connecté
-let link_dropdown = document.getElementById("link_menu_drop");
-let dropdown = document.getElementById("button_dropdown");
-let ul_drop = document.getElementById("ul_dropdown");
-
-if (link_dropdown != null) {
-  link_dropdown.addEventListener("click", function (e) {
+  link_burger.addEventListener("click", function (e) {
     e.preventDefault();
-    dropdown.classList.toggle("open_drop");
-    ul_drop.classList.toggle("open_drop");
+    burger.classList.toggle("open");
+    ul.classList.toggle("open");
   });
-}
 
-// Affichage du header quand scroll up
-var lastScrollTop = 0;
-let header = document.getElementById("header");
-document.addEventListener(
-    "scroll",
-    function () {
-      var st = window.pageYOffset || document.documentElement.scrollTop;
-      if (st > lastScrollTop) {
-        header.classList.remove("fixed");
-        header.classList.add("hidden");
-      } else {
-        header.classList.add("fixed");
-        header.classList.remove("hidden");
-      }
-      lastScrollTop = st <= 0 ? 0 : st;
-      if (st === 0) {
-        header.classList.remove("fixed");
-      }
-    },
-    false
-);
+  // Menu dropdown quand connecté
+  let link_dropdown = document.getElementById("link_menu_drop");
+  let dropdown      = document.getElementById("button_dropdown");
+  let ul_drop       = document.getElementById("ul_dropdown");
 
-// Modale
-$("#envoi-cookie").click(function () {
-  sessionStorage.setItem("session", "en cours");
+  if (link_dropdown != null) {
+    link_dropdown.addEventListener("click", function (e) {
+      e.preventDefault();
+      dropdown.classList.toggle("open_drop");
+      ul_drop.classList.toggle("open_drop");
+    });
+  }
+
+  // Modale
+  $("#modal_button").click(function () {
+    $("#myModal").css("display","block");
+  });
+
+  $("#isSessionActive").click(function () {
+    sessionStorage.setItem("session", "en cours");
+  });
+  if (sessionStorage.getItem("session") === "en cours") {
+      $("#myModal").hide();
+  } else {
+      $("#myModal").show();
+  }
+
 });
-if (sessionStorage.getItem("session") == "en cours") {
-  $(document).ready(function () {
-    $("#myModal").hide();
-  });
-} else {
-  $(document).ready(function () {
-    $("#myModal").show();
-  });
-}

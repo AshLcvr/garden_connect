@@ -16,26 +16,25 @@
                 {% include 'front/annonce/_filter.html.twig' with {form : recherche, min : min, max : max} only %}
             </div>
             {% if annonces|length > 0 %}
-            <section id="annonces" class="wrap">
-
-            <div>
-                    <p class="title_section_home">Résultats</p>
-                </div>
-                <div class="wrap sort">
-                    <div class="recherche-tri js-filter-sort">
-                        <p>Trier par :</p>
-                        {% include 'front/annonce/_sort.html.twig' %}
+                <section id="listing_annonces" class="wrap">
+                    <div>
+                        <p class="title_section_home">Résultats</p>
                     </div>
-                </div>
-                <div class="js-filter-content">
-                    {% include 'front/annonce/_annonces.html.twig' %}
-                </div>
+                    <div class="wrap sort">
+                        <div class="recherche-tri js-filter-sort">
+                            <p>Trier par :</p>
+                            {% include 'front/annonce/_sort.html.twig' %}
+                        </div>
+                    </div>
+                    <div class="js-filter-content">
+                        {% include 'front/annonce/_annonces.html.twig' %}
+                    </div>
+                </section>
             {% else %}
                 <div class="no_result_annonces">
                     <h1>Oups..! :(</h1>
                     <p>Nous n'avons pas trouvé d'annonces respectant vos critères !</p>
                 </div>
-                </section>
             {% endif %}
             <div class="js-filter-pagination" id="pagination_box">
                 {{ knp_pagination_render(annonces) }}

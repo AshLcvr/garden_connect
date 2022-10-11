@@ -247,6 +247,9 @@ h5.subtitle {
     #contener_form .bloc_form.bloc_adresse .city_search {
         width: 100%;
     }
+    #city_suggest{
+        top: 80px;
+    }
 }
 @media all and (max-width: 450px) {
     #contener_form {

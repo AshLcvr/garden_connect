@@ -25,9 +25,9 @@
             <div class="photo_profile">
                 {% if user.image|length != NULL %}
                     {% if boutique.user.id > 33 or boutique.user.id == 1 or boutique.user.id == 2 or boutique.user.id == 3  %}
-                        <img style="border-radius: 50%;border:5px solid white" src="{{ asset('uploads/profile/' ~ user.image) }}" alt="Photo de profil" />
+                        <img src="{{ asset('uploads/profile/' ~ user.image) }}" alt="Photo de profil" />
                     {% else %}
-                        <img style="border-radius: 50%;border:5px solid white;" src="{{ user.image }}" alt="Photo de profil"  />
+                        <img src="{{ user.image }}" alt="Photo de profil"  />
                     {% endif %}
                 {% else %}
                     <img src="{{ asset('uploads/profile/incognito-62f7bceeb2bee.png') }}" alt="Photo de profil"  />
@@ -59,7 +59,7 @@
             </div>
             {% if annonce == null %}
                 <div class="rating_boutique">
-                    <a href="#avis_listing">
+                    <a href="#avis_listing" title="Les avis">
                         <span class="rating" data-rating="{{ globalRating }}">
                             {% for i in 1..5 %}
                                 {% if i <= globalRating|round %}
@@ -88,7 +88,7 @@
         {% endif %}
         <section class="wrap">
             <h1 class="title_boutique">Où me trouver ?</h1>
-            <div id="boutique_coordinates" style="height: 400px; width: 80%; margin: 1rem auto;z-index: 3;" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
+            <div id="boutique_coordinates" style="" data-full="{{ fullAdress }}" data-boutique_title="{{ boutique.title }}" data-lng="{{boutique.lng}}" data-lat="{{boutique.lat}}"></div>
         </section>
     {% endif %}
     {% if annonce != null %}

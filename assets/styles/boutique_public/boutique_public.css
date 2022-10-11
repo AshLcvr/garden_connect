@@ -1,5 +1,4 @@
 .img_profil_btq {
-
     border-radius: 50%;
     border:5px solid white;
 }
@@ -13,6 +12,10 @@
 }
 .title_boutique a {
     color: var(--marron);
+}
+.photo_profile img {
+    border:5px solid white;
+    border-radius: 50%;
 }
 .rating_stars_hover {
     color: var(--orange);
@@ -119,6 +122,12 @@
 .resp_contact p,
 .contact_vendeur p {
     margin-bottom: 0;
+}
+#boutique_coordinates {
+    height: 400px;
+    width: 80%;
+    margin: 1rem auto;
+    z-index: 3;
 }
 /* RESPONSIVE */
 @media all and (max-width: 1050px) {
