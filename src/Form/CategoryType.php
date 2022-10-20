@@ -23,10 +23,7 @@ class CategoryType extends AbstractType
                 'mapped' => false,
                 'required' => false,
                 'data_class' => null,
-                // 'multiple' => true,
                 'constraints' => [
-                    // new All([
-
                     new File([
                         'maxSize' => '10000k',
                         'mimeTypes' => [

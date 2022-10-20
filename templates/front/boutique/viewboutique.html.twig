@@ -24,7 +24,7 @@
         <a href="{{ path('view_boutique', {id: boutique.id}) }}" title="Cliquez pour voir la boutique en détail">
             <div class="photo_profile">
                 {% if user.image|length != NULL %}
-                    {% if boutique.user.id > 33 or boutique.user.id == 1 or boutique.user.id == 2 or boutique.user.id == 3  %}
+                    {% if boutique.user.id > 53 or boutique.user.id == 1 or boutique.user.id == 2 or boutique.user.id == 3  %}
                         <img src="{{ asset('uploads/profile/' ~ user.image) }}" alt="Photo de profil" />
                     {% else %}
                         <img src="{{ user.image }}" alt="Photo de profil"  />
@@ -94,16 +94,24 @@
     {% if annonce != null %}
         <section id="focus_annonce" class="wrap">
             <div class="annonce_box">
-                {% include '_partials/_images_annonce.html.twig' %}
+{#                {% include '_partials/_images_annonce.html.twig' %}#}
+                <div class="annonce_img image-card flexslider slider-annonce ">
+                    <ul class="slides">
+                        {% for image in annonce.imagesAnnonces %}
+                            <li class="li_annonce_img">
+                                <img src="{{ asset('uploads/annonce/'~ image.title) }}" alt="image annonce">
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
                 <div class="annonce_text">
-                    <a title="Voir l'annonce" href="{{ path('view_boutique_annonce_focus', { 'id':annonce.boutique.id, 'id_annonce':annonce.id }) }}">
-                        <h5 class="annonce_title">{{ annonce.title }}&nbsp;&nbsp;<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
-                        <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
-                        <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
-                        <span>Description : </span>
-                        <p class="annonce_description scroller">{{ annonce.description }}</p>
-                        <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
-                    </a>
+                    <h5 class="annonce_title">{{ annonce.title }}&nbsp;&nbsp;<span class="span_created">Mis en ligne le {{ annonce.createdAt|date('d/m/Y') }}</span></h5>
+                    <p class="annonce_type"><strong>Catégorie : </strong>{{ annonce.subcategory.parentCategory.title }}</p>
+                    <p class="annonce_type"><span>Type de produit : </span>{{ annonce.subcategory.title }}</p>
+                    <span>Description : </span>
+                    <p class="annonce_description scroller">{{ annonce.description }}</p>
+                    <p class="annonce_price">{{ annonce.price }}€/{{ annonce.mesure.title }}</p>
                 </div>
             </div>
             {% if notMyboutique %}

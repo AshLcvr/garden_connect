@@ -1,5 +1,5 @@
 {% if user.image|length != NULL %}
-    {% if user.id > 33 or user.id == 1 or user.id == 2 or user.id == 3 %}
+    {% if user.id > 53 or user.id == 1 or user.id == 2 or user.id == 3 %}
         <img  class="avatar_avis" src="{{ asset('uploads/profile/' ~ user.image) }}" alt="Photo de profil" />
     {% else %}
         <img class="avatar_avis" src="{{ user.image }}" alt="Photo de profil"  />

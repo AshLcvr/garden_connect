@@ -70,7 +70,7 @@
     <div class="bloc_form d-flex justify-content-center align-items-center gap1">
         <div class="bloc_form btn-custom search">
             <span class="hover-effect search">
-                {{ form_row(form.submit, { 'attr' : {'class' : '' }}) }}
+                {{ form_row(form.submit) }}
             </span>
         </div>
         {% if app.request.query.get('q') is not null %}
@@ -83,6 +83,6 @@
     </div>
 {{ form_end(form) }}
 
-{% block javascript %}
+{% block javascripts %}
     {{ encore_entry_script_tags('Formulaires') }}
 {% endblock %}

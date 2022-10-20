@@ -41,9 +41,9 @@ class ProfilController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('image')->getData();
-            if($image){
-                $user->setImage($uploadImage->uploadProfile($image));
+            $image[] = $form->get('image')->getData();
+            if(!empty($image)){
+                $uploadImage->uploadAndResizeImage($image, $user);
             }
             $userRepository->add($user,true);
             return $this->redirectToRoute('profil', [], Response::HTTP_SEE_OTHER);

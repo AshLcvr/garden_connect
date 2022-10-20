@@ -28,7 +28,7 @@ class DefaultController extends AbstractController
     {
         $categories     = $categoryRepository->findAll();
         $annonces       = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);
-        $imagesHero     = $imagesHeroRepository->findAll();
+        $imagesHero     = $imagesHeroRepository->findBy([],['position'=>'ASC']);
         $user           = $this->getUser();
         $allBoutiques   = $boutiqueRepository->findAll();
         $boutiquesInfos = [];
@@ -50,10 +50,10 @@ class DefaultController extends AbstractController
     {
         $data       = new SearchData();
         $data->page = $request->get('page',1);
-        $recherche  = $this->createForm(SearchType::class,$data);
-        $recherche->handleRequest($request);
         [$min, $max] = $annonceRepository->findMinMax($data);
         $annonces    = $annonceRepository->findBySearch($data);
+        $recherche  = $this->createForm(SearchType::class,$data);
+        $recherche->handleRequest($request);
 
         return $this->render('front/annonce/recherche_annonce.html.twig', [
             'annonces'  => $annonces,

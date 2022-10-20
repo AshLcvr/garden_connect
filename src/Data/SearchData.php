@@ -47,6 +47,21 @@ class SearchData
     public $category ;
 
     /**
+     * @var Subcategory
+     */
+    public $subcategory;
+
+    /**
+     * @var null|integer
+     */
+    public $max;
+
+    /**
+     * @var null|integer
+     */
+    public $min;
+
+    /**
      * @return int
      */
     public function getPage()
@@ -206,18 +221,4 @@ class SearchData
         $this->min = $min;
     }
 
-    /**
-     * @var Subcategory
-     */
-    public $subcategory;
-
-    /**
-     * @var null|integer
-     */
-    public $max;
-
-    /**
-     * @var null|integer
-     */
-    public $min;
 }

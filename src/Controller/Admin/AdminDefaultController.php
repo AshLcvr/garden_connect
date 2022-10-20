@@ -97,8 +97,6 @@ class AdminDefaultController extends AbstractController
         ]);
     }
 
-
-    // users
     #[Route('/users/actifs', name: 'all_users_actifs')]
     public function allUsersActifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
@@ -113,6 +111,7 @@ class AdminDefaultController extends AbstractController
             'usersActif' => $usersActif
         ]);
     }
+
     #[Route('/users/inactifs', name: 'all_users_inactifs')]
     public function allUsersInactifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
@@ -133,6 +132,7 @@ class AdminDefaultController extends AbstractController
             'user' => $user,
         ]);
     }
+
     #[Route('/users/active/{id}', name: 'toggle_active_user', requirements: ['id' => '\d+'])]
     public function toggleActiveUser(User $user, UserRepository $userRepository): Response
     {
@@ -146,7 +146,6 @@ class AdminDefaultController extends AbstractController
     }
 
 
-    // annonces
     #[Route('/annonces/actives', name: 'all_annonces_actives')]
     public function allAnnonceActives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
     {
@@ -159,6 +158,7 @@ class AdminDefaultController extends AbstractController
             'annoncesActif' => $annoncesActif
         ]);
     }
+
     #[Route('/annonces/inactives', name: 'all_annonces_inactives')]
     public function allAnnonceInactives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
     {
@@ -171,6 +171,7 @@ class AdminDefaultController extends AbstractController
             'annoncesInactif' => $annoncesInactif
         ]);
     }
+
     #[Route('/annonce/{id}', name: 'details-annonce')]
     public function detailsAnnonce(Annonce $annonce): Response
     {
@@ -178,6 +179,7 @@ class AdminDefaultController extends AbstractController
             'annonce' => $annonce,
         ]);
     }
+
     #[Route('/annonce/active/{id}', name: 'toggle_active_annonce')]
     public function toggleActiveAnnonce(Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
@@ -190,7 +192,6 @@ class AdminDefaultController extends AbstractController
         return $this->redirectToRoute('details-annonce', ['id' => $annonce->getId()], Response::HTTP_SEE_OTHER);
     }
 
-    // boutiques
     #[Route('/boutiques/actives', name: 'all_boutiques_actives')]
     public function allBoutiquesActives(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
     {
@@ -203,6 +204,7 @@ class AdminDefaultController extends AbstractController
             'boutiquesActif' => $boutiquesActif
         ]);
     }
+
     #[Route('/boutiques/inactives', name: 'all_boutiques_inactives')]
     public function allBoutiquesInactives(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
     {
@@ -215,6 +217,7 @@ class AdminDefaultController extends AbstractController
             'boutiquesInactif' => $boutiquesInactif
         ]);
     }
+
     #[Route('/boutique/{id}', name: 'details-boutique')]
     public function detailsBoutique(Boutique $boutique): Response
     {
@@ -222,6 +225,7 @@ class AdminDefaultController extends AbstractController
             'boutique' => $boutique,
         ]);
     }
+
     #[Route('/boutique/active/{id}', name: 'toggle_active_boutique')]
     public function toggleActiveBoutique(Boutique $boutique, BoutiqueRepository $boutiqueRepository): Response
     {
@@ -234,51 +238,115 @@ class AdminDefaultController extends AbstractController
         return $this->redirectToRoute('details-boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
     
-    // diapo page home
     #[Route('/hero', name: 'images_hero')]
     public function imagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, PaginatorInterface $paginator): Response
     {
-        $imagesHero = $imagesHeroRepository->findAll();
-        $imagesHero = $this->maPagination($imagesHero, $paginator, $request, 5);
+        $imagesHero = $imagesHeroRepository->findBy([],['position'=>'ASC']);
+        $imagesHero = $this->maPagination($imagesHero, $paginator, $request, 10);
 
         return $this->render('admin/diapo_home/hero.html.twig', [
             'imagesHero' => $imagesHero
         ]);
     }
-    #[Route('/hero/new', name: 'new_images_hero', methods: ['GET', 'POST'])]
-    public function newImagesHero(Request $request, UploadImage $uploadImage): Response
-    {
-        $image = new ImagesHero();
-        $form = $this->createForm(ImagesHeroType::class, $image);
-        $form->handleRequest($request);
 
+    #[Route('/hero/new', name: 'new_images_hero', methods: ['GET', 'POST'])]
+    public function newImagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, UploadImage $uploadImage): Response
+    {
+        $nbImagesHero = count($imagesHeroRepository->findAll())+1;
+        $image        = new ImagesHero();
+        $form         = $this->createForm(ImagesHeroType::class, $image);
+        $form->get('position')->setData(1);
+
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $image->setPosition($form->get('position')->getData());
-            $imageHero = $form->get('upload')->getData();
-            $uploadImage->uploadHero($imageHero, $image);
+            $newImagePosition        = $form->get('position')->getData();
+            $imagesSuperiorPositions = $imagesHeroRepository->superiorPositionImagesHero($newImagePosition);
+            foreach ($imagesSuperiorPositions as $imagesPosition) {
+                $actualPosition = $imagesPosition->getPosition();
+                $imagesPosition->setPosition($actualPosition+1);
+                $imagesHeroRepository->add($imagesPosition,true);
+            }
+            $image->setPosition($newImagePosition);
+
+            if(!empty($form->get('upload')->getData())){
+                $imageHero[] = $form->get('upload')->getData();
+                $uploadImage->uploadAndResizeImage($imageHero, $image);
+                $imagesHeroRepository->add($image,true);
+            }else{
+                $this->addFlash('failure','Ajoutez une image');
+                return $this->redirectToRoute('new_images_hero', [], Response::HTTP_SEE_OTHER);
+            }
             return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/diapo_home/new.html.twig', [
-            'form' => $form->createView(),
+            'form'         => $form->createView(),
+            'nbImagesHero' => $nbImagesHero
         ]);
     }
+
     #[Route('/hero/edit/{id}', name: 'edit_images_hero', methods: ['GET', 'POST'])]
     public function editImagesHero(Request $request, ImagesHero $image, UploadImage $uploadImage, ImagesHeroRepository $imagesHeroRepository): Response
     {
+        $nbImagesHero = count($imagesHeroRepository->findAll());
         $form = $this->createForm(ImagesHeroType::class, $image);
+        $form->get('position')->setData($image->getPosition());
         $form->handleRequest($request);
 
+        $actualImagePosition = $image->getPosition();
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->get('position')->getData()) {
-                $image->setPosition($form->get('position')->getData());
+            if ($form->get('position')->getData() != $actualImagePosition) {
+                if ($form->get('position')->getData() > $actualImagePosition) {
+                    $newImagePosition = $form->get('position')->getData();
+                    $imagesSuperiorPositions = $imagesHeroRepository->superiorPositionImagesHero($newImagePosition);
+                    foreach ($imagesSuperiorPositions as $imagesSuperiorPosition) {
+                        $actualPosition = $imagesSuperiorPosition->getPosition();
+                        $imagesSuperiorPosition->setPosition($actualPosition + 1);
+                        $imagesHeroRepository->add($imagesSuperiorPosition, true);
+                    }
+                    $image->setPosition($newImagePosition);
+                    $imagesHeroRepository->add($image, true);
+                    
+
+                }
+
+                if ($form->get('position')->getData() < $actualImagePosition) {
+                    $newImagePosition = $form->get('position')->getData();
+                    $imagesSuperiorPositions = $imagesHeroRepository->superiorPositionImagesHero($newImagePosition);
+                    foreach ($imagesSuperiorPositions as $imagesSuperiorPosition) {
+                        $actualPosition = $imagesSuperiorPosition->getPosition();
+                        $imagesSuperiorPosition->setPosition($actualPosition - 1);
+                        $imagesHeroRepository->add($imagesSuperiorPosition, true);
+                    }
+                    $image->setPosition($newImagePosition);
+                    $imagesHeroRepository->add($image, true);
+                }
+                if ($imagesHeroRepository->findBy(['position' => 1]) === []) {
+                    $oldLastPositionImage = $imagesHeroRepository->lastPositionImagesHero();
+//                        dd($oldLastPositionImage[0][0]);
+                    $oldLastPositionImage[0][0]->setPosition(1);
+                    $imagesHeroRepository->add($oldLastPositionImage[0][0],true);
+                }
+                if ($image->getPosition() === $nbImagesHero) {
+                    $oldLastPositionImage = $imagesHeroRepository->lastPositionImagesHero();
+//                        dd($oldLastPositionImage[0][0]);
+                    $oldLastPositionImage[0][0]->setPosition(1);
+                    $imagesHeroRepository->add($oldLastPositionImage[0][0],true);
+                }
+                if (!empty($imagesHeroRepository->isPositionEgalToZero()))
+                {
+                    $oldFirstPositionImage = $imagesHeroRepository->isPositionEgalToZero();
+                    $oldFirstPositionImage->setPosition($nbImagesHero);
+                    $imagesHeroRepository->add($oldFirstPositionImage,true);
+                }
+
             }
+
             if ($form->get('upload')->getData()) {
-                $imageHero = $form->get('upload')->getData();
-                $uploadImage->uploadHero($imageHero, $image);
+                $imageHero[] = $form->get('upload')->getData();
+                $uploadImage->uploadAndResizeImage($imageHero, $image);
             }
             else {
-                $image->setTitle($image->getTitle());
                 $imagesHeroRepository->add($image, true);
             }
             
@@ -286,9 +354,11 @@ class AdminDefaultController extends AbstractController
         }
 
         return $this->render('admin/diapo_home/edit.html.twig', [
-            'form' => $form->createView(),
+            'form'         => $form->createView(),
+            'nbImagesHero' => $nbImagesHero
         ]);
     }
+
     #[Route('/hero/delete/{id}', name: 'delete_images_hero', methods: ['POST'])]
     public function deleteImagesHero(Request $request, ImagesHero $imageHero, ImagesHeroRepository $imagesHeroRepository): Response
     {
@@ -299,7 +369,6 @@ class AdminDefaultController extends AbstractController
         return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
     }
 
-    // avis
     #[Route('/avis/actifs', name: 'all_avis_actifs')]
     public function allAvisActifs(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
     {
@@ -312,6 +381,7 @@ class AdminDefaultController extends AbstractController
             'avisActif' => $avisActif
         ]);
     }
+
     #[Route('/avis/inactifs', name: 'all_avis_inactifs')]
     public function allAvisInactifs(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
     {
@@ -324,6 +394,7 @@ class AdminDefaultController extends AbstractController
             'avisInactif' => $avisInactif
         ]);
     }
+
     #[Route('/avis/{id}', name: 'details-avis')]
     public function detailsAvis(Avis $avis): Response
     {
@@ -331,6 +402,7 @@ class AdminDefaultController extends AbstractController
             'avi' => $avis,
         ]);
     }
+
     #[Route('/avis/active/{id}', name: 'toggle_active_avis')]
     public function toggleActiveAvis(Avis $avis, AvisRepository $avisRepository): Response
     {

@@ -39,14 +39,14 @@ class ImagesBoutiqueRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @return ImagesBoutique[] Returns an array of ImagesBoutique objects
-     */
-    public function findImagesbyBoutiqueId($id): array
+
+    public function findFirstImagesbyBoutiqueId($id): array
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.boutique = :val')
             ->setParameter('val', $id)
+            ->orderBy('i.boutique' , 'DESC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;

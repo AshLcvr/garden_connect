@@ -76,13 +76,12 @@ class SearchType extends AbstractType
             ])
             ->add('submit', SubmitType::class,[
                 'label' => 'Rechercher'
-            ])
-        ; 
+        ]);
 
         $builder->get('category')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event){
-                $form = $event->getForm()->getParent();
+                $form     = $event->getForm()->getParent();
                 $category = $event->getForm()->getData();
                 $this->addSubCategoryField($form, $category);
             }
@@ -94,7 +93,7 @@ class SearchType extends AbstractType
                 $data = $event->getData();
                 $form = $event->getForm();
                 /* @var $subcat Subcategory */
-                $subcat = $data->subcategory;
+                $subcat = $data->getSubcategory();
                 if($subcat){
                     $category = $subcat->getParentCategory();
                     $this->addSubCategoryField($event->getForm(), $category);
@@ -125,7 +124,7 @@ class SearchType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SearchData::class,
-            'method' => 'GET',
+            'method'  => 'GET',
             'crsf_protection' => false
         ]);
     }

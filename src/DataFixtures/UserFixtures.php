@@ -80,7 +80,7 @@ class UserFixtures extends Fixture
         $genderArray     = ['male','female'];
         $randGenderIndex = array_rand($genderArray);
 
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $user = new User();
             // Attribution d'un prénom et d'une photo de profile selon le genre
             if ($randGenderIndex === 0)

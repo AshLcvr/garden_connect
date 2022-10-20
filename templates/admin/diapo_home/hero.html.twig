@@ -24,26 +24,16 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Titre</th>
                             <th>Position</th>
+                            <th>Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Titre</th>
-                            <th>Position</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         {% for image in imagesHero %}
                             <tr>
-                                <td>{{ image.id }}</td>
-                                <td>{{ image.title }}</td>
-                                <td>{{ image.position }}</td>
+                                <td class="m-auto">{{ image.position }}</td>
+                                <td><img style="width: 50%" src="{{ asset('/uploads/hero/'~image.title) }}" alt="Image du diaporama d'accueil"></td>
                                 <td>
                                     <a href="{{ path('edit_images_hero', {id: image.id}) }}" class="btn btn-primary">Modifier</a>
                                     {{ include('admin/diapo_home/_delete_form.html.twig') }}
@@ -51,7 +41,7 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td>Aucune données</td>
+                                <td>Aucune donnée</td>
                             </tr>
                         {% endfor %}
                     </tbody>
