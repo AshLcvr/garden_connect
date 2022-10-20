@@ -1,3 +1,9 @@
+[draggable] {
+  user-select: none;
+  -webkit-user-drag: element;
+  cursor: move;
+}
+
 .title{
     text-align: center;
     margin-bottom: 1rem;
@@ -78,10 +84,8 @@
   color: red;
 }
 
-
-
-
 /* slider hero */
+
 #slider-home{
     margin-bottom: 3rem;
 }

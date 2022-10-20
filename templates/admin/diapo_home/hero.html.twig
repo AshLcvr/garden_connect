@@ -4,9 +4,6 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
 {% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('asset/js/admin.js') }}"></script>
-{% endblock %}
 
 {% block body %}
     <div class="p-t-10 p-b-10">
@@ -16,24 +13,22 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Images diaporama page d'accueil</h6>
         </div>
+        <p>Vous pouvez "glisser-déposer" les images pour changer leurs places.</p>
         <div class="card-body">
             <div class="table-responsive">
-                <div class="js-filter-pagination" id="pagination_box">
-                    {{ knp_pagination_render(imagesHero) }}
-                </div>
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="sortable table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Position</th>
                             <th>Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for image in imagesHero %}
-                            <tr>
-                                <td class="m-auto">{{ image.position }}</td>
-                                <td><img style="width: 50%" src="{{ asset('/uploads/hero/'~image.title) }}" alt="Image du diaporama d'accueil"></td>
+                            <tr draggable="true" rel="{{ image.id }}">
+                                <td>
+                                    <img style="width: 50%" src="{{ asset('/uploads/hero/'~image.title) }}" alt="Image du diaporama d'accueil">
+                                </td>
                                 <td>
                                     <a href="{{ path('edit_images_hero', {id: image.id}) }}" class="btn btn-primary">Modifier</a>
                                     {{ include('admin/diapo_home/_delete_form.html.twig') }}
@@ -46,10 +41,12 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                <div class="js-filter-pagination" id="pagination_box">
-                    {{ knp_pagination_render(imagesHero) }}
-                </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('asset/js/admin.js') }}"></script>
+
 {% endblock %}

@@ -239,10 +239,9 @@ class AdminDefaultController extends AbstractController
     }
     
     #[Route('/hero', name: 'images_hero')]
-    public function imagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, PaginatorInterface $paginator): Response
+    public function imagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $imagesHero = $imagesHeroRepository->findBy([],['position'=>'ASC']);
-        $imagesHero = $this->maPagination($imagesHero, $paginator, $request, 10);
 
         return $this->render('admin/diapo_home/hero.html.twig', [
             'imagesHero' => $imagesHero
@@ -254,19 +253,14 @@ class AdminDefaultController extends AbstractController
     {
         $nbImagesHero = count($imagesHeroRepository->findAll())+1;
         $image        = new ImagesHero();
+
         $form         = $this->createForm(ImagesHeroType::class, $image);
         $form->get('position')->setData(1);
-
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $newImagePosition        = $form->get('position')->getData();
-            $imagesSuperiorPositions = $imagesHeroRepository->superiorPositionImagesHero($newImagePosition);
-            foreach ($imagesSuperiorPositions as $imagesPosition) {
-                $actualPosition = $imagesPosition->getPosition();
-                $imagesPosition->setPosition($actualPosition+1);
-                $imagesHeroRepository->add($imagesPosition,true);
-            }
-            $image->setPosition($newImagePosition);
+
+            $image->setPosition($form->get('position')->getData());
 
             if(!empty($form->get('upload')->getData())){
                 $imageHero[] = $form->get('upload')->getData();
@@ -289,59 +283,17 @@ class AdminDefaultController extends AbstractController
     public function editImagesHero(Request $request, ImagesHero $image, UploadImage $uploadImage, ImagesHeroRepository $imagesHeroRepository): Response
     {
         $nbImagesHero = count($imagesHeroRepository->findAll());
+        $actualImagePosition = $image->getPosition();
+
         $form = $this->createForm(ImagesHeroType::class, $image);
         $form->get('position')->setData($image->getPosition());
         $form->handleRequest($request);
 
-        $actualImagePosition = $image->getPosition();
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             if ($form->get('position')->getData() != $actualImagePosition) {
-                if ($form->get('position')->getData() > $actualImagePosition) {
-                    $newImagePosition = $form->get('position')->getData();
-                    $imagesSuperiorPositions = $imagesHeroRepository->superiorPositionImagesHero($newImagePosition);
-                    foreach ($imagesSuperiorPositions as $imagesSuperiorPosition) {
-                        $actualPosition = $imagesSuperiorPosition->getPosition();
-                        $imagesSuperiorPosition->setPosition($actualPosition + 1);
-                        $imagesHeroRepository->add($imagesSuperiorPosition, true);
-                    }
-                    $image->setPosition($newImagePosition);
-                    $imagesHeroRepository->add($image, true);
-                    
-
-                }
-
-                if ($form->get('position')->getData() < $actualImagePosition) {
-                    $newImagePosition = $form->get('position')->getData();
-                    $imagesSuperiorPositions = $imagesHeroRepository->superiorPositionImagesHero($newImagePosition);
-                    foreach ($imagesSuperiorPositions as $imagesSuperiorPosition) {
-                        $actualPosition = $imagesSuperiorPosition->getPosition();
-                        $imagesSuperiorPosition->setPosition($actualPosition - 1);
-                        $imagesHeroRepository->add($imagesSuperiorPosition, true);
-                    }
-                    $image->setPosition($newImagePosition);
-                    $imagesHeroRepository->add($image, true);
-                }
-                if ($imagesHeroRepository->findBy(['position' => 1]) === []) {
-                    $oldLastPositionImage = $imagesHeroRepository->lastPositionImagesHero();
-//                        dd($oldLastPositionImage[0][0]);
-                    $oldLastPositionImage[0][0]->setPosition(1);
-                    $imagesHeroRepository->add($oldLastPositionImage[0][0],true);
-                }
-                if ($image->getPosition() === $nbImagesHero) {
-                    $oldLastPositionImage = $imagesHeroRepository->lastPositionImagesHero();
-//                        dd($oldLastPositionImage[0][0]);
-                    $oldLastPositionImage[0][0]->setPosition(1);
-                    $imagesHeroRepository->add($oldLastPositionImage[0][0],true);
-                }
-                if (!empty($imagesHeroRepository->isPositionEgalToZero()))
-                {
-                    $oldFirstPositionImage = $imagesHeroRepository->isPositionEgalToZero();
-                    $oldFirstPositionImage->setPosition($nbImagesHero);
-                    $imagesHeroRepository->add($oldFirstPositionImage,true);
-                }
-
+              $image->setPosition($form->get('position')->getData());
             }
-
             if ($form->get('upload')->getData()) {
                 $imageHero[] = $form->get('upload')->getData();
                 $uploadImage->uploadAndResizeImage($imageHero, $image);
@@ -357,6 +309,16 @@ class AdminDefaultController extends AbstractController
             'form'         => $form->createView(),
             'nbImagesHero' => $nbImagesHero
         ]);
+    }
+
+    #[Route('/hero/sort/{id}/{position}', name: 'admin_imageshero_sort', methods: ['GET'])]
+    public function sortAction(ImagesHero $imagesHero, Request $request, ImagesHeroRepository $imagesHeroRepository)
+    {
+        $position = $request->attributes->get('position');
+        $imagesHero->setPosition($position);
+        $imagesHeroRepository->add($imagesHero,true);
+
+        return $this->imagesHero($request,$imagesHeroRepository);
     }
 
     #[Route('/hero/delete/{id}', name: 'delete_images_hero', methods: ['POST'])]
