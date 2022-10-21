@@ -34,9 +34,13 @@
                             <h6 class="dropdown-header custom">Messages non lus</h6>
                             {{ render(controller('App\\Controller\\Admin\\ConversationController::listing')) }}
                             {% if is_granted('ROLE_VENDEUR') %}
-                                <a class="dropdown-item text-center small text-gray-500" href="{{ path('boutique_messagerie') }}">Messagerie</a>
+                                <div class="messagerie_boutique_link">
+                                    <a class="dropdown-item text-center " href="{{ path('boutique_messagerie') }}">Ma messagerie</a>
+                                </div>
                             {% else %}
-                                <a class="dropdown-item text-center small text-gray-500" href="{{ path('user_messagerie') }}">Messagerie</a>
+                            <div class="messagerie_user_link">
+                                <a class="dropdown-item text-center small" href="{{ path('user_messagerie') }}">Ma messagerie</a>
+                            </div>
                             {% endif %}
                         </div>
                     </li>

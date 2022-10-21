@@ -27,7 +27,7 @@ const city_input      = $('#boutique_city');
 const postcode_input  = $('#boutique_postcode');
 const citycode_input  = $('#boutique_citycode');
 
-citySearch(search_input, city_ul)
+citySearch(search_input, city_ul);
 
 //
 

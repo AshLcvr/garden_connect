@@ -18,17 +18,6 @@
         </div>
 
         <div class="bloc_form">
-            {{ form_label(form.position) }}
-            {{ form_widget(form.position, {attr : {min: 1, max: nbImagesHero}}) }}
-
-            <small>{{ form_help(form.position) }}</small>
-
-            <div class="form-error">
-                {{ form_errors(form.position) }}
-            </div>
-        </div>
-
-        <div class="bloc_form">
             <button class="btn btn-primary">{{ button_label|default('Créer') }}</button>
         </div>
     {{ form_end(form) }}

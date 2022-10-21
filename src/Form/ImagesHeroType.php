@@ -37,10 +37,6 @@ class ImagesHeroType extends AbstractType
                         'uploadNoFileErrorMessage' => 'Aucun fichier n\'a été enregistré !',
                     ])
                 ],
-            ])
-            ->add('position', IntegerType::class, [
-                'label'  => 'Position',
-                'mapped' => false
             ]);
     }
 

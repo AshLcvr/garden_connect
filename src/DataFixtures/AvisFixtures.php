@@ -36,6 +36,8 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
         $allBoutiques  = $this->boutiqueRepository->findAll();
         $allUsers      = $this->userRepository->findAll();
         foreach ($allBoutiques as $boutique) {
+            $boutiqueCreationDate = $boutique->getCreatedAt();
+            $avisDate             = $boutiqueCreationDate->modify(random_int(1,5) . 'days');
             $userAvisArray = [];
             for ($i = 0; $i <= random_int(2, 5); $i++) {
                 $randomUser      = $allUsers[random_int(0, count($allUsers)-1)];
@@ -47,7 +49,7 @@ class AvisFixtures extends Fixture implements DependentFixtureInterface
                         ->setRating(random_int(2, 5))
                         ->setUser($randomUser)
                         ->setBoutique($boutique)
-                        ->setCreatedAt(new \DateTimeImmutable())
+                        ->setCreatedAt($avisDate)
                         ->setActif(1);
                     $manager->persist($avis);
                 }

@@ -54,14 +54,12 @@ class UploadImage
         $this->annonceRepository        = $annonceRepository;
         $this->userRepository           = $userRepository;
         $this->imagesHeroRepository     = $imagesHeroRepository;
-    $this->categoryRepository           = $categoryRepository;
+        $this->categoryRepository       = $categoryRepository;
 
     }
 
     public function uploadAndResizeImage(array $files, $entity)
     {
-
-
         $entity_class = get_class($entity);
         $id           = $entity->getId();
 
@@ -143,155 +141,8 @@ class UploadImage
         }
     }
 
-    public function uploadBoutique(array $files, $boutique_id)
-    {
-        foreach($files as $file)
-        {
-            $image    = new ImagesBoutique();
-            $boutique = $this->boutiqueRepository->find($boutique_id);
-            // Renommage du fichier + set name en BDD
-            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename     = $this->slugger->slug($originalFilename);
-            $fileName         = $boutique->getId().'-'.$safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-            $image->setTitle($fileName);
-            // Set Boutique
-            $image->setBoutique($boutique);
-            // Flush
-            $this->imagesBoutiqueRepository->add($image, true);
-
-            // Déplacement vers dossier uploads
-            $file->move($this->getUploadDirectory(), $fileName);
-            unset($file);
-
-            // Resize de l'image (optionnel)
-            // Images boutique publique
-            $miniature = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
-            $miniature->crop(1400, 400 );
-            $miniature->save($this->getUploadDirectory() .'/boutique/'. $fileName);
-
-            // Suppression de l'originale
-            $file_path = $this->getUploadDirectory() . '/' . $fileName;
-            if (file_exists($file_path)) unlink($file_path);
-        }
-    }
-
-    public function uploadAnnonce(array $files, $annonce_id)
-    {
-        foreach($files as $file)
-        {
-            $image   = new ImagesAnnonces();
-            $annonce = $this->annonceRepository->find($annonce_id);
-
-            // Renommage du fichier + set name en BDD
-            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $this->slugger->slug($originalFilename);
-            $fileName = $annonce_id.'-'.$safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-            $image->setTitle($fileName);
-            // Set Annonces
-            $image->setAnnonce($annonce);
-            // Flush
-            $this->imagesAnnoncesRepository->add($image, true);
-
-            // Déplacement vers dossier uploads
-            $file->move($this->getUploadDirectory(), $fileName);
-            unset($file);
-
-            // Resize de l'image (optionnel)
-            // Miniature
-            $miniature = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
-            $miniature->crop(200, 200, true,ImageResize::CROPCENTER);
-            $miniature->save($this->getUploadDirectory() .'/mini/'. $fileName);
-            // Images annonces
-            $miniature = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
-            $miniature->resizeToBestFit(500, 500);
-            $miniature->save($this->getUploadDirectory() .'/annonce/'. $fileName);
-
-            // Suppression de l'originale
-            $file_path = $this->getUploadDirectory() . '/' . $fileName;
-            if (file_exists($file_path)) unlink($file_path);
-        }
-    }
-
-    public function uploadHero(UploadedFile $file, $image)
-    {
-        // Renommage du fichier + set name en BDD
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $safeFilename = $this->slugger->slug($originalFilename);
-        $fileName = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
-        $image->setTitle($fileName);
-
-        // Flush
-        $this->imagesHeroRepository->add($image, true);
-
-        try {
-            $file->move($this->getUploadDirectory(), $fileName);
-        } catch (FileException $e) {
-            dd($e);
-        }
-
-        // Resize de l'image (optionnel)
-        // Hero
-        $imgHero = new ImageResize($this->getUploadDirectory() . '/' . $fileName);
-        $imgHero->crop(1400, 500, true, ImageResize::CROPCENTER);
-        $imgHero->save($this->getUploadDirectory() . '/hero/' . $fileName);
-
-        // Suppression de l'originale
-        $file_path = $this->getUploadDirectory() . '/' . $fileName;
-        if (file_exists($file_path)) unlink($file_path);
-    }
-
-    public function uploadCat(UploadedFile $file)
-    {
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $safeFilename = $this->slugger->slug($originalFilename);
-        $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-
-        try {
-            $file->move($this->getUploadDirectory(), $fileName);
-        } catch (FileException $e) {
-            dd($e);
-        }
-
-        // Resize de l'image (optionnel)
-        $imageCat = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
-        $imageCat->crop(240, 140);
-        $imageCat->save($this->getUploadDirectory() .'/category/'. $fileName);
-
-        // Suppression de l'originale
-        $file_path = $this->getUploadDirectory() . '/' . $fileName;
-        if (file_exists($file_path)) unlink($file_path);
-
-        return $fileName;
-    }
-
-    public function uploadProfile(UploadedFile $file)
-    {
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $safeFilename = $this->slugger->slug($originalFilename);
-        $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-
-        try {
-            $file->move($this->getUploadDirectory(), $fileName);
-        } catch (FileException $e) {
-            dd($e);
-        }
-
-        // Resize de l'image (optionnel)
-        // Profile
-        $avatar = new ImageResize($this->getUploadDirectory() .'/'. $fileName);
-        $avatar->crop(100, 100);
-        $avatar->save($this->getUploadDirectory() .'/profile/'. $fileName);
-
-        // Suppression de l'originale
-        $file_path = $this->getUploadDirectory() . '/' . $fileName;
-        if (file_exists($file_path)) unlink($file_path);
-
-        return $fileName;
-    }
-
     public function getUploadDirectory()
     {
         return $this->uploadDirectory;
     }
-
 }

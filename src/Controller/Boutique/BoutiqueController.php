@@ -66,6 +66,7 @@ class BoutiqueController extends AbstractController
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 && count($boutiqueImage) >= 1 || empty($boutiqueImage)) {
+                $imagesBoutiqueRepository->remove($imagesBoutiqueRepository->find(1),true);
                 if (count($boutique->getImagesBoutiques()) > 4){
                     $imagesBoutiqueRepository->remove($imagesBoutiqueRepository->findFirstImagesbyBoutiqueId($boutique->getId())[0],true);
                 }
@@ -139,7 +140,7 @@ class BoutiqueController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image[] = $form->get('image')->getData();
-            if($image){
+            if(!empty($image[0])){
                 $uploadImage->uploadAndResizeImage($image, $user);
             }
             $userRepository->add($user,true);

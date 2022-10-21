@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use function Symfony\Config\em;
 
 #[Route('/profil')]
 class ProfilController extends AbstractController
@@ -42,7 +43,7 @@ class ProfilController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image[] = $form->get('image')->getData();
-            if(!empty($image)){
+            if(!empty($image[0])){
                 $uploadImage->uploadAndResizeImage($image, $user);
             }
             $userRepository->add($user,true);

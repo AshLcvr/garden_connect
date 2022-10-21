@@ -36,7 +36,7 @@ class SearchType extends AbstractType
                 'required'=> false,
                 'choices' => [
                     'Distance' => '',
-                    '5 km' => 5,
+                    '5 km'  => 5,
                     '10 km' => 10,
                     '15 km' => 15,
                     '20 km' => 20,
@@ -47,36 +47,33 @@ class SearchType extends AbstractType
             ->add('lat', HiddenType::class)
             ->add('lng', HiddenType::class)
             ->add('q', TextType::class, [
-                'label' => false,
+                'label'   => false,
                 'required'=> false,
-                'attr' => [
+                'attr'    => [
                     'placeholder' => 'Mots clés'
                 ]
             ])
             ->add('category', EntityType::class, [
-                'label' => false,
-                'required' => false,
-                'class' => Category::class,
+                'label'        => false,
+                'required'     => false,
+                'class'        => Category::class,
                 'choice_label' => 'title',
-                'placeholder' => 'Catégories',
+                'placeholder'  => 'Catégories',
             ])
             ->add('min', NumberType::class, [
-                'label' => false,
+                'label'    => false,
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'placeholder' => 'Prix min'
                 ]
             ])
             ->add('max', NumberType::class, [
-                'label' => false,
+                'label'    => false,
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'placeholder' => 'Prix max'
                 ]
-            ])
-            ->add('submit', SubmitType::class,[
-                'label' => 'Rechercher'
-        ]);
+            ]);
 
         $builder->get('category')->addEventListener(
             FormEvents::POST_SUBMIT,
@@ -88,7 +85,7 @@ class SearchType extends AbstractType
         );
 
         $builder->addEventListener(
-            FormEvents::POST_SET_DATA,
+            FormEvents::PRE_SET_DATA,
             function(FormEvent $event){
                 $data = $event->getData();
                 $form = $event->getForm();
@@ -112,10 +109,10 @@ class SearchType extends AbstractType
     private function addSubCategoryField(FormInterface $form, ?Category $category)
     {
         $form->add('subcategory',EntityType::class,[
-            'class' => Subcategory::class,
-            'label' =>  false ,
-            'placeholder' => $category? 'Type de produit' : 'Sous-catégories',
-            'choices' => $category? $category->getSubcategories() : [],
+            'class'        => Subcategory::class,
+            'label'        =>  false ,
+            'placeholder'  => $category? 'Type de produit' : 'Sous-catégories',
+            'choices'      => $category? $category->getSubcategories() : [],
             'choice_label' => 'title',
         ]);
     }
@@ -123,8 +120,8 @@ class SearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => SearchData::class,
-            'method'  => 'GET',
+            'data_class'      => SearchData::class,
+            'method'          => 'GET',
             'crsf_protection' => false
         ]);
     }

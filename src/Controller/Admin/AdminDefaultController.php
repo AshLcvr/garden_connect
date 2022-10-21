@@ -251,17 +251,11 @@ class AdminDefaultController extends AbstractController
     #[Route('/hero/new', name: 'new_images_hero', methods: ['GET', 'POST'])]
     public function newImagesHero(Request $request, ImagesHeroRepository $imagesHeroRepository, UploadImage $uploadImage): Response
     {
-        $nbImagesHero = count($imagesHeroRepository->findAll())+1;
         $image        = new ImagesHero();
-
         $form         = $this->createForm(ImagesHeroType::class, $image);
-        $form->get('position')->setData(1);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $image->setPosition($form->get('position')->getData());
-
             if(!empty($form->get('upload')->getData())){
                 $imageHero[] = $form->get('upload')->getData();
                 $uploadImage->uploadAndResizeImage($imageHero, $image);
@@ -275,25 +269,16 @@ class AdminDefaultController extends AbstractController
 
         return $this->render('admin/diapo_home/new.html.twig', [
             'form'         => $form->createView(),
-            'nbImagesHero' => $nbImagesHero
         ]);
     }
 
     #[Route('/hero/edit/{id}', name: 'edit_images_hero', methods: ['GET', 'POST'])]
     public function editImagesHero(Request $request, ImagesHero $image, UploadImage $uploadImage, ImagesHeroRepository $imagesHeroRepository): Response
     {
-        $nbImagesHero = count($imagesHeroRepository->findAll());
-        $actualImagePosition = $image->getPosition();
-
         $form = $this->createForm(ImagesHeroType::class, $image);
-        $form->get('position')->setData($image->getPosition());
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            if ($form->get('position')->getData() != $actualImagePosition) {
-              $image->setPosition($form->get('position')->getData());
-            }
+        if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('upload')->getData()) {
                 $imageHero[] = $form->get('upload')->getData();
                 $uploadImage->uploadAndResizeImage($imageHero, $image);
@@ -301,13 +286,11 @@ class AdminDefaultController extends AbstractController
             else {
                 $imagesHeroRepository->add($image, true);
             }
-            
             return $this->redirectToRoute('images_hero', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/diapo_home/edit.html.twig', [
             'form'         => $form->createView(),
-            'nbImagesHero' => $nbImagesHero
         ]);
     }
 

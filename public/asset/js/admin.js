@@ -23,7 +23,6 @@ $(document).ready(function () {
     toggleMenu();
 })
 
-
 var adminNs =
     {
         initDraggableEntityRows: function() {
@@ -37,9 +36,11 @@ var adminNs =
                 entityId = $(this).attr('rel');
                 dragSrcEl.style.opacity = '0.4';
                 parent = dragSrcEl.parentNode;
-                startPosition = Array.prototype.indexOf.call(parent.children, dragSrcEl);
+                startPosition = Array.prototype.indexOf.call(parent.children, dragSrcEl)+1;
+                console.log("start: "+startPosition);
                 e.dataTransfer.effectAllowed = 'move';
                 e.dataTransfer.setData('text/html', this.innerHTML);
+                console.log(entityId);
             }
             function handleDragOver(e) {
                 if (e.preventDefault) {
@@ -58,8 +59,8 @@ var adminNs =
                 if (e.stopPropagation) {
                     e.stopPropagation();
                 }
-                if (dragSrcEl != this) {
-                    endPosition = Array.prototype.indexOf.call(parent.children, this);
+                if (dragSrcEl !== this) {
+                    endPosition = Array.prototype.indexOf.call(parent.children, this)+1;
                     console.log("end: "+endPosition);
                     dragSrcEl.innerHTML = this.innerHTML;
                     this.innerHTML = e.dataTransfer.getData('text/html');
@@ -106,4 +107,3 @@ var adminNs =
 $(function() {
     adminNs.init();
 });
-

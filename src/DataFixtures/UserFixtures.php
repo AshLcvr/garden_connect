@@ -40,7 +40,7 @@ class UserFixtures extends Fixture
         $admin->setEmail('admin@admin.fr');
         $admin->setRoles(['ROLE_USER','ROLE_VENDEUR','ROLE_ADMIN','ROLE_SUPER_ADMIN']);
         $admin->setActif(true);
-        $admin->setCreatedAt(new \DateTimeImmutable('-2 week'));
+        $admin->setCreatedAt(new \DateTimeImmutable('-10 week'));
         $password = $this->hasher->hashPassword($admin, 'admin');
         $admin->setPassword($password);
         $this->addReference('admin', $admin);
@@ -87,17 +87,17 @@ class UserFixtures extends Fixture
             {
                 $user
                     ->setName($faker->firstNameMale)
-                    ->setImage($this->callApi->generateRandomProfilePictureByGenderUsingRandomUser(0));
+                    ->setImage($this->callApi->generateRandomProfilePictureByGenderUsingRandomUser(0,$i));
             }else{
                 $user
                     ->setName($faker->firstNameFemale)
-                    ->setImage($this->callApi->generateRandomProfilePictureByGenderUsingRandomUser(1));
+                    ->setImage($this->callApi->generateRandomProfilePictureByGenderUsingRandomUser(1,$i));
             }
             $user
             ->setSurname($faker->lastName)
             ->setEmail($faker->email)
             ->setActif(true)
-            ->setCreatedAt(new \DateTimeImmutable($randomWeek.' week'));
+            ->setCreatedAt(new \DateTimeImmutable(random_int(-10,-1).' weeks'));
             $password = $this->hasher->hashPassword($user, $faker->password);
             $user->setPassword($password);
             // Attribution d'un rôle aléatoire
