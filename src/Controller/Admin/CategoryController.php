@@ -16,10 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryController extends AbstractController
 {
     #[Route('/category', name: 'app_category_index', methods: ['GET'])]
-    public function index(Request $request, CategoryRepository $categoryRepository, PaginatorInterface $paginator): Response
+    public function index(PaginatorInterface $paginator,Request $request, CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findAll();
-        $categories = $this->maPagination($categories, $paginator, $request, 5);
+//        $categories = $this->maPagination($categories, $paginator, $request, 5);
+        $categories = $paginator->paginate($categories, $request->get('page',1), 5);
         return $this->render('admin/category/index.html.twig', [
             'categories' => $categories,
         ]);
@@ -33,9 +34,9 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageCat = $form->get('image')->getData();
-            if ($imageCat){
-                $category->setImage($uploadImage->uploadCat($imageCat));
+            if ($form->get('image')->getData()){
+                $imageCat[] = $form->get('image')->getData();
+                $uploadImage->uploadAndResizeImage($imageCat, $category);
             }
             $categoryRepository->add($category, true);
 
@@ -45,7 +46,7 @@ class CategoryController extends AbstractController
 
         return $this->renderForm('admin/category/new.html.twig', [
             'category' => $category,
-            'form' => $form,
+            'form'     => $form,
         ]);
     }
 
@@ -68,9 +69,8 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('image')->getData()) {
-                $imageCat = $form->get('image')->getData();
-                $category->setImage($uploadImage->uploadCat($imageCat));
-            }
+                $imageCat[] = $form->get('image')->getData();
+                $uploadImage->uploadAndResizeImage($imageCat, $category);            }
             $categoryRepository->add($category, true);
             return $this->redirectToRoute('app_category_show', ['id' => $category->getId()], Response::HTTP_SEE_OTHER);
         }

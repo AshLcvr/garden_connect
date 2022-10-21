@@ -19,6 +19,7 @@
                     <li>
                         <div class="block_avis">
                             <div>
+                                {% set user = avi.user %}
                                 {% include '_partials/_photo_profile.html.twig' %}
                                 <span class="user_name_avis">{{ avi.user.name|capitalize }}</span>
                             </div>

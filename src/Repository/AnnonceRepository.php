@@ -79,7 +79,6 @@ class AnnonceRepository extends ServiceEntityRepository
                 ->createQueryBuilder('a')
                 ->select('c', 'a')
                 ->join('a.subcategory', 'c')
-
                 ->andWhere('a.actif = 1')
                 ->orderBy('a.created_at', 'DESC');
 
@@ -137,6 +136,7 @@ class AnnonceRepository extends ServiceEntityRepository
             }
          return $query;
     }
+
     public function newAnnonces($value1): array
     {
         return $this->createQueryBuilder('a')

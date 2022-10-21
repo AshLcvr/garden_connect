@@ -28,7 +28,7 @@ class DefaultController extends AbstractController
     {
         $categories     = $categoryRepository->findAll();
         $annonces       = $annonceRepository->findBy(['actif' => 1], ['created_at' => 'DESC'], 4);
-        $imagesHero     = $imagesHeroRepository->findAll();
+        $imagesHero     = $imagesHeroRepository->findBy([],['position'=>'ASC']);
         $user           = $this->getUser();
         $allBoutiques   = $boutiqueRepository->findAll();
         $boutiquesInfos = [];
@@ -48,9 +48,9 @@ class DefaultController extends AbstractController
     #[Route('/recherche', name: 'app_annonce_recherche', methods: ['GET'])]
     public function recherche(AnnonceRepository $annonceRepository,Request $request): Response
     {
-        $data       = new SearchData();
-        $data->page = $request->get('page',1);
-        $recherche  = $this->createForm(SearchType::class,$data);
+        $data        = new SearchData();
+        $data->page  = $request->get('page',1);
+        $recherche   = $this->createForm(SearchType::class,$data);
         $recherche->handleRequest($request);
         [$min, $max] = $annonceRepository->findMinMax($data);
         $annonces    = $annonceRepository->findBySearch($data);
@@ -116,16 +116,16 @@ class DefaultController extends AbstractController
     #[Route('/public/{id}', name: 'view_boutique')]
     public function oneBoutique(Boutique $boutique, AnnonceRepository $annonceRepository, AvisRepository $avisRepository, Request $request, FavoryRepository $favoryRepository)
     {
-        $user = $this->getUser();
-        $annonce = null;
+        $user     = $this->getUser();
+        $annonce  = null;
         $annonces = $annonceRepository->findBy([
             'boutique' => $boutique->getId(),
-            'actif' => true
+            'actif'    => true
         ]);
 
         // Détection si la page actuelle est notre boutique
         $notMyboutique = true;
-        $me = $boutique->getUser();
+        $me            = $boutique->getUser();
         if($user){
             if ($me->getId() === $user->getId() ){
                 $notMyboutique = false;
@@ -143,7 +143,7 @@ class DefaultController extends AbstractController
         $avis = $avisRepository->findBy(['boutique'=>$boutique]);
         if ($avis){
             $numberAvis = count($avis);
-            $total = [];
+            $total      = [];
             foreach ($avis as  $avi){
                 $total[] = $avi->getRating();
             }
@@ -154,7 +154,7 @@ class DefaultController extends AbstractController
         $avisAlreadyExist = false;
 
         $newAvis = new Avis();
-        $form = $this->createForm(AvisFormType::class,$newAvis);
+        $form    = $this->createForm(AvisFormType::class,$newAvis);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $rating = $form->get('rating')->getData();
@@ -180,7 +180,7 @@ class DefaultController extends AbstractController
                 'globalRating'     => $globalRating,
                 'form'             => $form->createView(),
                 'favory'           => $favory,
-                'user'          => $boutique->getUser()
+                'user'             => $boutique->getUser()
             ]
         );
     }

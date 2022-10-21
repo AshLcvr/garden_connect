@@ -32,6 +32,17 @@
     background-color: var(--orange);
     border: 1px solid var(--orange);
 }
+.messagerie_boutique_link a {
+    background-color: var(--vertfonce);
+    font-size: 1.2rem;
+    color: white;
+}
+.messagerie_boutique_link a:hover {
+    background-color: var(--vertfonce);
+    filter: brightness(0.9);
+    color: white;
+
+}
 .topbar .dropdown .dropdown-menu {
     top: 80%;
     right: 0;

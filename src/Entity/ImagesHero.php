@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ImagesHeroRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: ImagesHeroRepository::class)]
 class ImagesHero
@@ -13,9 +14,11 @@ class ImagesHero
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Gedmo\SortableGroup]
+    #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
+    #[Gedmo\SortablePosition]
     #[ORM\Column(type: 'integer')]
     private $position;
 

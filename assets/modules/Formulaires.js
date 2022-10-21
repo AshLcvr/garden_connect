@@ -1,22 +1,21 @@
 // Ajax categories select
 
 $(document).on('change', '.annonce_category', function () {
-    let $field = $(this)
-    let $form = $field.closest('form')
-    let data = {}
-    data[$field.attr('name')] = $field.val()
+    let $field = $(this);
+    let $form  = $field.closest('form');
+    let data   = {};
+    data[$field.attr('name')] = $field.val();
     $.ajax({
         url : $form.attr('action'),
         type: $form.attr('method'),
         data : data,
         complete: function(html) {
-            // Erreur 500?
             $('.annonce_subcategory').replaceWith(
                 $(html.responseText).find('.annonce_subcategory')
             );
         }
     });
-})
+});
 
 // Ajax API Request for City Coordinates
 
@@ -28,13 +27,13 @@ const city_input      = $('#boutique_city');
 const postcode_input  = $('#boutique_postcode');
 const citycode_input  = $('#boutique_citycode');
 
-citySearch(search_input, city_ul)
+citySearch(search_input, city_ul);
 
 //
 
 const location_input = $('#location');
 
-citySearch(location_input, city_ul)
+citySearch(location_input, city_ul);
 
 function citySearch($input, $ul)
 {
@@ -54,7 +53,7 @@ function citySearch($input, $ul)
                 success: function(result){
                     $ul.empty();
                     if (result.length > 0){
-                        $ul.removeClass('hidden')
+                        $ul.removeClass('hidden');
                         for (let i = 0; i < result.length; i++)
                         {
                             let city_name     = result[i].nom;
@@ -76,24 +75,24 @@ function citySearch($input, $ul)
                     let li = $ul.children();
 
                     li.on('click',function () {
-                        $ul.addClass('hidden')
+                        $ul.addClass('hidden');
                         $ul.empty();
                         let city_infos = $(this).html();
                         $input.val(city_infos);
-                        let city_name      = $(this).attr('data-city')
-                        let city_postcode  = $(this).attr('data-postcode')
-                        let city_code      = $(this).attr('data-citycode')
+                        let city_name      = $(this).attr('data-city');
+                        let city_postcode  = $(this).attr('data-postcode');
+                        let city_code      = $(this).attr('data-citycode');
                         city_input.val(city_name)
-                        postcode_input.val(city_postcode)
-                        citycode_input.val(city_code)
+                        postcode_input.val(city_postcode);
+                        citycode_input.val(city_code);
                         if (location_input !== null){
                             $.ajax({
                                 url: 'https://api-adresse.data.gouv.fr/search/?q='+city_name+'&citycode='+city_code,
                                 contentType: "application/json",
                                 dataType: 'json',
                                 success: function(result){
-                                    $('#lng').val(result.features[0].geometry.coordinates[0])
-                                    $('#lat').val(result.features[0].geometry.coordinates[1])
+                                    $('#lng').val(result.features[0].geometry.coordinates[0]);
+                                    $('#lat').val(result.features[0].geometry.coordinates[1]);
                                 }
                             })
                         }

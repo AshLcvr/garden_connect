@@ -66,8 +66,11 @@ class BoutiqueController extends AbstractController
             $boutiqueRepository->add($boutique, true);
             $boutiqueImage = $form->get('upload')->getData();
             if (count($boutiqueImage) <= 4 && count($boutiqueImage) >= 1 || empty($boutiqueImage)) {
-                $imagesBoutiqueRepository->remove($imagesBoutiqueRepository->findImagesbyBoutiqueId($boutique->getId())[0],true);
-                $uploadImage->uploadBoutique($boutiqueImage, $boutique->getId());
+                $imagesBoutiqueRepository->remove($imagesBoutiqueRepository->find(1),true);
+                if (count($boutique->getImagesBoutiques()) > 4){
+                    $imagesBoutiqueRepository->remove($imagesBoutiqueRepository->findFirstImagesbyBoutiqueId($boutique->getId())[0],true);
+                }
+                $uploadImage->uploadAndResizeImage($boutiqueImage, $boutique);
             }else{
                 $this->addFlash('failure','4 photos max !');
                 return $this->redirectToRoute('app_boutique_edit', ['id'=> $boutique->getId()], Response::HTTP_SEE_OTHER);
@@ -136,9 +139,9 @@ class BoutiqueController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('image')->getData();
-            if($image){
-                $user->setImage($uploadImage->uploadProfile($image));
+            $image[] = $form->get('image')->getData();
+            if(!empty($image[0])){
+                $uploadImage->uploadAndResizeImage($image, $user);
             }
             $userRepository->add($user,true);
             return $this->redirectToRoute('boutique_view_profil', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);

@@ -9,7 +9,6 @@ class Security
 
     public function security($boutique_user, $boutique_users)
     {
-//        dd('gg');
         $tableau = [];
         foreach ($boutique_users as $key => $value) {
             $tableau[] = $value;

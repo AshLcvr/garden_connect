@@ -38,4 +38,35 @@ class ImagesHeroRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function superiorPositionImagesHero($position){
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.position >= :val')
+            ->setParameter('val', $position)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function inferiorPositionImagesHero($position){
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.position <= :val')
+            ->setParameter('val', $position)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function isPositionEgalToZero(){
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.position = :val')
+            ->setParameter('val', 0)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function lastPositionImagesHero(){
+        return $this->createQueryBuilder('i')
+            ->select('i , MAX(i.position)')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -15,13 +15,13 @@ class CallApi
         $this->client = $client;
     }
 
-    public function generateRandomProfilePictureByGenderUsingRandomUser($randGenderIndex)
+    public function generateRandomProfilePictureByGenderUsingRandomUser($randGenderIndex,$number)
     {
         $url = 'https://randomuser.me/api/portraits/';
         if ($randGenderIndex === 0){
-            $url .= 'men/'.random_int(1,80).'.jpg';
+            $url .= 'men/'.$number.'.jpg';
         }else{
-            $url .= 'women/'.random_int(1,80).'.jpg';
+            $url .= 'women/'.$number.'.jpg';
         }
         return $url;
     }

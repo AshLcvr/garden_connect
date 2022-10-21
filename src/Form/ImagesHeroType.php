@@ -17,13 +17,11 @@ class ImagesHeroType extends AbstractType
     {
         $builder
             ->add('upload', FileType::class, [
-                'label' => 'Modifier les images du slider',
-                'mapped' => false,
-                'required' => false,
-                'data_class' => null,
-                // 'multiple' => true,
+                'label'       => 'Modifier les images du slider',
+                'mapped'      => false,
+                'required'    => true,
+                'data_class'  => null,
                 'constraints' => [
-                    // new All([
                     new File([
                         'maxSize' => '10000k',
                         'mimeTypes' => [
@@ -38,11 +36,7 @@ class ImagesHeroType extends AbstractType
                         'uploadFormSizeErrorMessage' => 'Votre fichier est trop volumineux !',
                         'uploadNoFileErrorMessage' => 'Aucun fichier n\'a été enregistré !',
                     ])
-                    // ])
                 ],
-            ])
-            ->add('position', IntegerType::class, [
-                'label' => 'Position'
             ]);
     }
 

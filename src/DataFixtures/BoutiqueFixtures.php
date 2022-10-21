@@ -53,7 +53,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($boutiqueTest);
         
         // Création de boutiques fictives via Faker
-        $faker = Faker\Factory::create('fr_FR');
+        $faker       = Faker\Factory::create('fr_FR');
         $allVendeurs = $this->userRepository->getUserVendeur();
 
         for($i = 0; $i < count($allVendeurs); $i++){
@@ -71,7 +71,7 @@ class   BoutiqueFixtures extends Fixture implements DependentFixtureInterface
                 ->setUser($allVendeurs[$i])
                 ->setActif(1)
                 ->setCardActive(1)
-                ->setCreatedAt(new \DateTimeImmutable())
+                ->setCreatedAt($allVendeurs[$i]->getCreatedAt())
                 ->addImagesBoutique( $imageBoutique);
             $this->addReference('boutique_'.$i , $boutiqueVendeur);
             $manager->persist($boutiqueVendeur);

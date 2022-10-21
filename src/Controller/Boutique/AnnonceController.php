@@ -46,15 +46,15 @@ class AnnonceController extends AbstractController
             $annonce->setActif(1);
             $annonce->setCreatedAt(new \DateTimeImmutable());
             $annonceRepository->add($annonce, true);
-            $annonceImage = $form->get('upload')->getData();
-            if (count($annonceImage) <= 4 || empty($annonceImage)) {
-                if (empty($annonceImage)) {
+            $annonceImages = $form->get('upload')->getData();
+            if (count($annonceImages) <= 4 || empty($annonceImages)) {
+                if (empty($annonceImages)) {
                     $imageDefault = new ImagesAnnonces();
                     $imageDefault->setTitle('logo-sans-fond.png');
                     $imageDefault->setAnnonce($annonce);
                     $imagesAnnoncesRepository->add($imageDefault, true);
                 } else {
-                    $uploadImage->uploadAnnonce($annonceImage, $annonce->getId());
+                    $uploadImage->uploadAndResizeImage($annonceImages, $annonce);
                 }
             } else {
                 $this->addFlash('failure', '4 photos max !');
@@ -85,9 +85,9 @@ class AnnonceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $annonce->setModifiedAt(new \DateTimeImmutable());
             $annonceRepository->add($annonce, true);
-            $annonceImage = $form->get('upload')->getData();
-            if (count($annonceImage) <= 4 || empty($annonceImage)) {
-                $uploadImage->uploadAnnonce($annonceImage, $annonce->getId());
+            $annonceImages = $form->get('upload')->getData();
+            if (count($annonceImages) <= 4 || empty($annonceImages)) {
+                $uploadImage->uploadAndResizeImage($annonceImages, $annonce);
             } else {
                 $this->addFlash('failure', '4 photos max !');
                 return $this->redirectToRoute('app_annonce_new', [], Response::HTTP_SEE_OTHER);
