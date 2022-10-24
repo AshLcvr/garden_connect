@@ -9,13 +9,9 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <div class="js-filter-pagination" id="pagination_box">
-                    {{ knp_pagination_render(usersActif) }}
-                </div>
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>E-mail</th>
                             <th>Rôles</th>
                             <th>Vérifié</th>
@@ -24,21 +20,9 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>E-mail</th>
-                            <th>Rôles</th>
-                            <th>Vérifié</th>
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         {% for user in usersActif %}
                             <tr>
-                                <td>{{ user.id }}</td>
                                 <td>{{ user.email|length > 20 ? user.email|striptags|slice(0, 20) ~ '...' : user.email }}</td>
                                 <td><p>{{user.roles[user.roles|length - 1]}}</p></td>
                                 {% if user.isVerified == true %}
@@ -51,8 +35,8 @@
                                 <td><a href="{{ path('details-user', {id: user.id}) }}" class="btn btn-primary">Détails</a></td>
                             </tr>
                         {% else %}
-                            <tr colspan="7">
-                                <td>Aucune donnée</td>
+                            <tr>
+                                <td colspan="6" class="text-center">Aucune donnée</td>
                             </tr>
                         {% endfor %}
                     </tbody>

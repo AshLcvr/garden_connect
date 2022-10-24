@@ -155,9 +155,9 @@ class BoutiqueController extends AbstractController
 
     public function getUserBoutique()
     {
-        $user = $this->getUser();
+        $user      = $this->getUser();
         $boutiques = $user->getBoutiques();
-        $boutique = $boutiques[0];
+        $boutique  = $boutiques[0];
 
         return $boutique;
     }

@@ -32,27 +32,17 @@
                 <div class="js-filter-pagination" id="pagination_box">
                     {{ knp_pagination_render(sousCategory) }}
                 </div>
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Titre</th>
                             <th>Id Parent</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Titre</th>
-                            <th>Id Parent</th>
-                            <th>Actions</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         {% for cat in sousCategory %}
                             <tr>
-                                <td>{{ cat.id }}</td>
                                 <td>{{ cat.title }}</td>
                                 <td>{{ cat.parentCategory.id }}</td>
                                 <td><a href="{{ path('details-sous-cat', {'id': cat.id}) }}" class="btn btn-primary">Détails</a></td>

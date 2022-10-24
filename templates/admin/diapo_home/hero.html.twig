@@ -1,22 +1,19 @@
 {% extends 'layout/admin_base.html.twig' %}
 
 {% block title %}Diaporama{% endblock %}
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('asset/flex/flexslider.css') }}" type="text/css">
-{% endblock %}
 
 {% block body %}
-    <div class="p-t-10 p-b-10">
-        <a href="{{ path('new_images_hero') }}" class="btn btn-primary width-100">Créer une nouvelle image</a>
-    </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Images diaporama page d'accueil</h6>
         </div>
-        <p>Vous pouvez "glisser-déposer" les images pour changer leurs places.</p>
+        <p class="font-weight-bold text-center mt-4">Vous pouvez "glisser-déposer" les images pour changer leurs places.</p>
         <div class="card-body">
+            <div class="p-t-10 p-b-10">
+                <a href="{{ path('new_images_hero') }}" class="btn btn-primary width-100">Ajouter une nouvelle image</a>
+            </div>
             <div class="table-responsive">
-                <table class="sortable table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="sortable table table-bordered  text-center" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Image</th>
@@ -25,13 +22,17 @@
                     </thead>
                     <tbody>
                         {% for image in imagesHero %}
-                            <tr draggable="true" rel="{{ image.id }}">
+                            <tr draggable="true" rel="{{ image.id }}" id="box">
                                 <td>
-                                    <img style="width: 50%" src="{{ asset('/uploads/hero/'~image.title) }}" alt="Image du diaporama d'accueil">
+                                    <div class="hero_image_box">
+                                        <img src="{{ asset('/uploads/hero/'~image.title) }}" alt="Image du diaporama d'accueil">
+                                    </div>
                                 </td>
                                 <td>
-                                    <a href="{{ path('edit_images_hero', {id: image.id}) }}" class="btn btn-primary">Modifier</a>
-                                    {{ include('admin/diapo_home/_delete_form.html.twig') }}
+                                    <div class="td_actions_box">
+                                        <a href="{{ path('edit_images_hero', {id: image.id}) }}" class="btn btn-primary td_action">Modifier</a>
+                                        {{ include('admin/diapo_home/_delete_form.html.twig') }}
+                                    </div>
                                 </td>
                             </tr>
                         {% else %}
@@ -44,9 +45,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-<script src="{{ asset('asset/js/admin.js') }}"></script>
-
 {% endblock %}

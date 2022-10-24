@@ -29,47 +29,47 @@ class AdminDefaultController extends AbstractController
     #[Route('/', name: 'dashboard')]
     public function index(UserRepository $userRepository, AnnonceRepository $annonceRepository, BoutiqueRepository $boutiqueRepository, AvisRepository $avisRepository): Response
     {
-        $users = $userRepository->findAll();
-        $totalUsers = count($users);
-        $newUsers = $userRepository->newUsers(new \DateTimeImmutable('-1 week'));
+        $users         = $userRepository->findAll();
+        $totalUsers    = count($users);
+        $newUsers      = $userRepository->newUsers(new \DateTimeImmutable('-1 week'));
         $totalNewUsers = count($newUsers);
 
-        $annonces = $annonceRepository->findAll();
-        $totalAnnonces = count($annonces);
-        $newAnnonces = $annonceRepository->newAnnonces(new \DateTimeImmutable('-1 week'));
+        $annonces         = $annonceRepository->findAll();
+        $totalAnnonces    = count($annonces);
+        $newAnnonces      = $annonceRepository->newAnnonces(new \DateTimeImmutable('-1 week'));
         $totalNewAnnonces = count($newAnnonces);
 
-        $boutiques = $boutiqueRepository->findAll();
-        $totalBoutiques = count($boutiques);
-        $newBoutiques = $boutiqueRepository->newBoutiques(new \DateTimeImmutable('-1 week'));
+        $boutiques         = $boutiqueRepository->findAll();
+        $totalBoutiques    = count($boutiques);
+        $newBoutiques      = $boutiqueRepository->newBoutiques(new \DateTimeImmutable('-1 week'));
         $totalNewBoutiques = count($newBoutiques);
 
-        $avis = $avisRepository->findAll();
-        $totalAvis = count($avis);
-        $newAvis = $avisRepository->newAvis(new \DateTimeImmutable('-1 week'));
+        $avis         = $avisRepository->findAll();
+        $totalAvis    = count($avis);
+        $newAvis      = $avisRepository->newAvis(new \DateTimeImmutable('-1 week'));
         $totalNewAvis = count($newAvis);
         
         return $this->render('admin/dashboard.html.twig', [
-            'totalUsers' => $totalUsers,
-            'totalNewUsers' => $totalNewUsers,
-            'totalAnnonces' => $totalAnnonces,
-            'totalNewAnnonces' => $totalNewAnnonces,
-            'totalBoutiques' => $totalBoutiques,
+            'totalUsers'        => $totalUsers,
+            'totalNewUsers'     => $totalNewUsers,
+            'totalAnnonces'     => $totalAnnonces,
+            'totalNewAnnonces'  => $totalNewAnnonces,
+            'totalBoutiques'    => $totalBoutiques,
             'totalNewBoutiques' => $totalNewBoutiques,
-            'totalAvis' => $totalAvis,
-            'totalNewAvis' => $totalNewAvis
+            'totalAvis'         => $totalAvis,
+            'totalNewAvis'      => $totalNewAvis
         ]);
     }
 
     #[Route('/viewprofil', name: 'admin_view_profil', methods: ['GET', 'POST'])]
     public function viewProfile(TokenGeneratorInterface $tokenGenerator, UserRepository $userRepository)
     {
-        $user = $this->getUser();
+        $user  = $this->getUser();
         $token = $tokenGenerator->generateToken();
         $user->setToken($token);
         $userRepository->add($user, true);
         return $this->render('admin/profil/view_profil.html.twig', [
-                'user' => $user,
+                'user'  => $user,
                 'token' => $token
             ]
         );
@@ -100,11 +100,9 @@ class AdminDefaultController extends AbstractController
     #[Route('/users/actifs', name: 'all_users_actifs')]
     public function allUsersActifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
-        
         $usersActif = $userRepository->findBy([
             'actif' => true
         ]);
-
         $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
 
         return $this->render('admin/user/users_actifs.html.twig',[
@@ -142,9 +140,9 @@ class AdminDefaultController extends AbstractController
             $user->setActif(true);
         }
         $userRepository->add($user, true);
+
         return $this->redirectToRoute('details-user', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
     }
-
 
     #[Route('/annonces/actives', name: 'all_annonces_actives')]
     public function allAnnonceActives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
@@ -294,11 +292,17 @@ class AdminDefaultController extends AbstractController
         ]);
     }
 
-    #[Route('/hero/sort/{id}/{position}', name: 'admin_imageshero_sort', methods: ['GET'])]
+    #[Route('/hero/sort/{id}/{startposition}/{endposition}', name: 'admin_imageshero_sort', methods: ['GET'])]
     public function sortAction(ImagesHero $imagesHero, Request $request, ImagesHeroRepository $imagesHeroRepository)
     {
-        $position = $request->attributes->get('position');
-        $imagesHero->setPosition($position);
+        $oldPosition = $request->attributes->get('startposition');
+        $newPosition = $request->attributes->get('endposition');
+
+        $movedImage  = $imagesHeroRepository->findby(['position'=>$newPosition]);
+        $movedImage[0]->setPosition($oldPosition);
+        $imagesHeroRepository->add($movedImage[0],true);
+
+        $imagesHero->setPosition($newPosition);
         $imagesHeroRepository->add($imagesHero,true);
 
         return $this->imagesHero($request,$imagesHeroRepository);

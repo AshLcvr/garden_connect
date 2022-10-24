@@ -4,66 +4,58 @@
     <title>Conversation</title>
 {% endblock %}
 
-{% block stylesheets %}
-{% endblock %}
-
 {% block body %}
-<div class="d-flex">
-    <section id="side-nav" class="width-20">
-        <ul>
-            {% for conv in conversation %}
-                {% if conv.user.name == app.user.name %}
-                    <li>{{ conv.correspondant.name }}</li>
-                {% else %}
-                    <li>{{ conv.user.name }}</li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </section>
-    <section id="contenu" class="width-80">
-        <h2 class="title">Conversation</h2>
-            <div class="chatbox-holder">
-                <div class="chatbox">
-                    <div class="chatbox-top">
-                        {% if conversation.user.email == app.user.email %}
-                            <div class="message-box-holder background-white-plus">
-                                <div class="message-box">{{ conversation.premierMessage }}</div>
-                            </div>
-                        {% else %}
-                            <div class="message-box-holder background-lightgrey">
-                                <div class="message-sender">{{ conversation.user.name }}</div>
-                                <div class="message-box message-partner">{{ conversation.premierMessage }}</div>
-                            </div>
-                        {% endif %}
-                        {% for message in conversation.messages %}
-                            {% if message.expediteur.email == app.user.email %}
+    <div class="d-flex">
+        <section id="side-nav" class="width-20">
+            <ul>
+                {% for conv in conversation %}
+                    {% if conv.user.name == app.user.name %}
+                        <li>{{ conv.correspondant.name }}</li>
+                    {% else %}
+                        <li>{{ conv.user.name }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </section>
+        <section id="contenu" class="width-80">
+            <h2 class="title">Conversation</h2>
+                <div class="chatbox-holder">
+                    <div class="chatbox">
+                        <div class="chatbox-top">
+                            {% if conversation.user.email == app.user.email %}
                                 <div class="message-box-holder background-white-plus">
-                                    <div class="message-box">{{ message.message }}</div>
+                                    <div class="message-box">{{ conversation.premierMessage }}</div>
                                 </div>
                             {% else %}
                                 <div class="message-box-holder background-lightgrey">
-                                    <div class="message-sender">{{ message.expediteur.name }}</div>
-                                    <div class="message-box message-partner">{{ message.message }}</div>
+                                    <div class="message-sender">{{ conversation.user.name }}</div>
+                                    <div class="message-box message-partner">{{ conversation.premierMessage }}</div>
                                 </div>
                             {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div class="chat-input-holder">
-                        {{ form_start(form, {attr : {novalidate: 'novalidate', class: 'width-100 d-flex row-wrap'}}) }}
-                            {{ form_widget(form.message) }}
-                            {{ form_widget(form.submit) }}
-                            <div class="form-error width-100">
-                                {{ form_errors(form.message) }}
-                            </div>
-                        {{ form_end(form) }}
+                            {% for message in conversation.messages %}
+                                {% if message.expediteur.email == app.user.email %}
+                                    <div class="message-box-holder background-white-plus">
+                                        <div class="message-box">{{ message.message }}</div>
+                                    </div>
+                                {% else %}
+                                    <div class="message-box-holder background-lightgrey">
+                                        <div class="message-sender">{{ message.expediteur.name }}</div>
+                                        <div class="message-box message-partner">{{ message.message }}</div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="chat-input-holder">
+                            {{ form_start(form, {attr : {novalidate: 'novalidate', class: 'width-100 d-flex row-wrap'}}) }}
+                                {{ form_widget(form.message) }}
+                                {{ form_widget(form.submit) }}
+                                <div class="form-error width-100">
+                                    {{ form_errors(form.message) }}
+                                </div>
+                            {{ form_end(form) }}
+                        </div>
                     </div>
                 </div>
-            </div>
-    </section>
-</div>
-
-{% endblock %}
-
-{% block javascripts %}
-
+        </section>
+    </div>
 {% endblock %}

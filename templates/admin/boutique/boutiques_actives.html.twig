@@ -9,50 +9,32 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <div class="js-filter-pagination" id="pagination_box">
-                    {{ knp_pagination_render(boutiquesActif) }}
-                </div>
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Titre</th>
                             <th>Description</th>
-                            <th>Adresse</th>
-                            <th>Créée le :</th>
-                            <th>Actif</th>
+                            <th>Créée le </th>
+                            <th>Active</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Titre</th>
-                            <th>Description</th>
-                            <th>Adresse</th>
-                            <th>Créée le :</th>
-                            <th>Actif</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         {% for boutique in boutiquesActif %}
                             <tr>
-                                <td>{{ boutique.id }}</td>
                                 <td>{{ boutique.title|length > 20 ? boutique.title|striptags|slice(0, 20) ~ '...' : boutique.title }}</td>
                                 <td>{{ boutique.description|length > 20 ? boutique.description|striptags|slice(0, 20) ~ '...' : boutique.description }}</td>
-                                <td>{{ boutique.adress|length > 20 ? boutique.adress|striptags|slice(0, 20) ~ '...' : boutique.adress }}</td>
                                 <td>{{ boutique.createdAt|date('Y-m-d H:i:s') }}</td>
                                 {% if boutique.actif %}
-                                    <td>Actif</td>
+                                    <td>Active</td>
                                 {% else %}
-                                    <td>Inactif</td>
+                                    <td>Inactive</td>
                                 {% endif %}
                                 <td><a href="{{ path('details-boutique', {id: boutique.id}) }}" class="btn btn-primary">Détails</a></td>
                             </tr>
                         {% else %}
                             <tr>
-                                <td>Pas de données</td>
+                                <td colspan="5">Pas de données</td>
                             </tr>
                         {% endfor %}
                     </tbody>

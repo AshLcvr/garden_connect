@@ -10,19 +10,25 @@
 <div class="card mb-4">
     <div class="card-header d-flex"><p class="m-0 font-weight-bold text-primary">Titre de l'annonce :&nbsp;</p><p>{{ annonce.title }}</p></div>
     <div class="card-body">
-        <div class="image_card">
+        <div class="image_card" style="width: 30%">
+            <h6 class="m-0 font-weight-bold text-primary">Images </h6>
             {% include '_partials/_images_annonce.html.twig' %}
         </div>
         <div class="description_card">
-            <p><h6 class="m-0 font-weight-bold text-primary">Description : </h6>{{ annonce.description }}</p>
-            <p><h6 class="m-0 font-weight-bold text-primary">Prix : </h6>{{ annonce.price }} €</p>
-            <p><h6 class="m-0 font-weight-bold text-primary">Mis en ligne le : </h6>{{ annonce.createdAt|date('d/m/Y') }}</p>
+            <h6 class="m-0 font-weight-bold text-primary">Description : </h6>
+            <p>{{ annonce.description }}</p>
+            <h6 class="m-0 font-weight-bold text-primary">Prix : </h6>
+            <p>{{ annonce.price }} €</p>
+            <h6 class="m-0 font-weight-bold text-primary">Mis en ligne le : </h6>
+            <p>{{ annonce.createdAt|date('d/m/Y') }}</p>
             {% if annonce.actif %}
-                <p><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Actif</p>
+                <h6 class="m-0 font-weight-bold text-primary">Status : </h6>
+                <p>Actif</p>
                 <div>
                     <a href="{{ path('toggle_active_annonce', {id: annonce.id}) }}" class="btn btn-primary">Rendre inactive</a>
             {% else %}
-                <p><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Inactif</p>
+                <h6 class="m-0 font-weight-bold text-primary">Status : </h6>
+                <p>Inactif</p>
                 <div>
                     <a href="{{ path('toggle_active_annonce', {id: annonce.id}) }}" class="btn btn-primary">Rendre active</a>
             {% endif %}
@@ -43,5 +49,4 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('Flexslider') }}
-
 {% endblock %}

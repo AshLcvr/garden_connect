@@ -8,15 +8,11 @@
     <div class="card-body">
         <div class="image_card">
             <div><h6 class="m-0 font-weight-bold text-primary">Photo de profil : </h6></div>
-            {% if user.image %}
-                <img style="width: 200px;" src="{{ asset('../uploads/profile/'~user.image) }}"/>
-            {% else %}
-                <img style="width: 200px;" src="{{ asset('asset/images/logo-paul.svg') }}"/>
-            {% endif %}
+            {% include '_partials/_photo_profile.html.twig' %}
         </div>
         <div class="description_card">
             <div><h6 class="m-0 font-weight-bold text-primary">Nom : </h6><p>{{ user.surname }}</p></div>
-            <div><h6 class="m-0 font-weight-bold text-primary">Prénom : </h6><p>{{ user.name }} €</p></div>
+            <div><h6 class="m-0 font-weight-bold text-primary">Prénom : </h6><p>{{ user.name }}</p></div>
             <div>
                 <h6 class="m-0 font-weight-bold text-primary">Rôles : </h6>
                 <ul>
@@ -31,7 +27,7 @@
                 <div><h6 class="m-0 font-weight-bold text-primary">Vérifié : </h6><p>Non</p></div>
             {% endif %}
             {% if user.actif %}
-                <div class="m-b-10"><h6 class="m-0 font-weight-bold text-primary">Status : </h6>Actif</div>
+                <div class="m-b-10"><h6 class="m-0 font-weight-bold text-primary">Statut : </h6>Actif</div>
                 <div>
                     <a href="{{ path('toggle_active_user', {id: user.id}) }}" class="btn btn-primary">Rendre inactif</a>
             {% else %}

@@ -9,32 +9,18 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <div class="js-filter-pagination" id="pagination_box">
-                    {{ knp_pagination_render(conversationsCorresp) }}
-                </div>
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Initiateur</th>
+                            <th>Expéditeur</th>
                             <th>Premier message</th>
                             <th>Messages non lus</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Initiateur</th>
-                            <th>Premier message</th>
-                            <th>Messages non lus</th>
-                            <th>Actions</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         {% for conv in conversationsCorresp %}
                             <tr>
-                                <td>{{ conv.id }}</td>
                                 <td>{{ conv.user.name}}</td>
                                 <td>{{ conv.premierMessage|length > 20 ? conv.premierMessage|striptags|slice(0, 20) ~ '...' : conv.premierMessage }}</td>
                                 {% for key, nbr in nbrNonlusCorresp %}
@@ -42,11 +28,13 @@
                                         <td>{{ nbr }}</td>
                                     {% endif %}
                                 {% endfor %}
-                                <td><a href="{{ path('conversation_message', {id: conv.id}) }}" class="btn btn-primary">Détails</a></td>
+                                <td>
+                                    <a href="{{ path('conversation_message', {id: conv.id}) }}" class="btn btn-primary">Détails</a>
+                                </td>
                             </tr>
                         {% else %}
-                            <tr colspan="6">
-                                <td>Aucune donnée</td>
+                            <tr>
+                                <td colspan="4" class="text-center">Aucune donnée</td>
                             </tr>
                         {% endfor %}
                     </tbody>

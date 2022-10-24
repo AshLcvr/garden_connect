@@ -12,30 +12,17 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <div class="js-filter-pagination" id="pagination_box">
-                    {{ knp_pagination_render(categories) }}
-                </div>
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Titre</th>
                             <th>Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Titre</th>
-                            <th>Image</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         {% for category in categories %}
                             <tr>
-                                <td>{{ category.id }}</td>
                                 <td>{{ category.title }}</td>
                                 <td>{{ category.image }}</td>
                                 <td>

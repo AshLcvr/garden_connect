@@ -15,8 +15,10 @@ Encore
     // Layout
     .addEntry('app', './assets/app.js')
     .addEntry('back_boutique', './assets/back_boutique.js')
+    .addEntry('admin', './assets/admin.js')
 
     // Modules
+    .addEntry('DragAndDrop', './assets/modules/DragAndDrop.js')
     .addEntry('Flexslider', './assets/modules/Flexslider.js')
     .addEntry('Formulaires', './assets/modules/Formulaires.js')
     .addEntry('Leaflet', './assets/modules/Leaflet.js')
