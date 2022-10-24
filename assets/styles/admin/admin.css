@@ -395,9 +395,20 @@
   margin: auto;
 }
 
-@media (max-width: 767px){
+@media (max-width: 768px){
   #sidebarToggleTop {
     background-color: #eaecf4;
     display: block;
+  }
+
+}
+@media (max-width: 480px){
+  .td_actions_box
+  {
+    display: none;
+  }
+  .hero_image_box img{
+    width: 100%;
+    margin: auto;
   }
 }

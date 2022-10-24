@@ -17,7 +17,7 @@
                     <thead>
                         <tr>
                             <th>Image</th>
-                            <th>Action</th>
+                            <th class="td_actions_box">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,8 +28,8 @@
                                         <img src="{{ asset('/uploads/hero/'~image.title) }}" alt="Image du diaporama d'accueil">
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="td_actions_box">
+                                <td  class="td_actions_box">
+                                    <div>
                                         <a href="{{ path('edit_images_hero', {id: image.id}) }}" class="btn btn-primary td_action">Modifier</a>
                                         {{ include('admin/diapo_home/_delete_form.html.twig') }}
                                     </div>
@@ -45,4 +45,93 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let adminNs =
+            {
+                initDraggableEntityRows: function() {
+                    let dragSrcEl     = null;
+                    let startPosition = null;
+                    let endPosition   = null;
+                    let parent;
+                    let entityId;
+                    function handleDragStart(e) {
+                        dragSrcEl = this;
+                        entityId = $(this).attr('rel');
+                        dragSrcEl.style.opacity = '0.4';
+                        parent = dragSrcEl.parentNode;
+                        startPosition = Array.prototype.indexOf.call(parent.children, dragSrcEl)+1;
+                        e.dataTransfer.effectAllowed = 'move';
+                        e.dataTransfer.setData('text/html', this.innerHTML);
+                    }
+                    function handleDragOver(e) {
+                        if (e.preventDefault) {
+                            e.preventDefault();
+                        }
+                        e.dataTransfer.dropEffect = 'move';
+                        return false;
+                    }
+                    function handleDragEnter(e) {
+                        this.classList.add('over');
+                    }
+                    function handleDragLeave(e) {
+                        this.classList.remove('over');
+                    }
+                    function handleDrop(e) {
+                        if (e.stopPropagation) {
+                            e.stopPropagation();
+                        }
+                        if (dragSrcEl !== this) {
+                            endPosition = Array.prototype.indexOf.call(parent.children, this)+1;
+                            dragSrcEl.innerHTML = this.innerHTML;
+                            this.innerHTML      = e.dataTransfer.getData('text/html');
+                            $.ajax({
+                                url: '/admin/hero/sort/'+entityId+'/'+startPosition+'/'+endPosition,
+                            })
+                                .done(function(res) {
+                                    $("table.sortable tbody").replaceWith($(res).find("table.sortable tbody"));
+                                })
+                                .fail(function(err) {
+                                    alert("Une erreur est survenue. Veuillez rafraichir la page ou contacter l'administrateur du site.")
+                                })
+                                .always(function() {
+                                    adminNs.initDraggableEntityRows();
+                                });
+                        }
+                        return false;
+                    }
+                    function handleDragEnd(e) {
+                        this.style.opacity = '1';
+                        [].forEach.call(rows, function (row) {
+                            row.classList.remove('over');
+                        });
+                    }
+                    let rows = document.querySelectorAll('table.sortable > tbody tr');
+                    [].forEach.call(rows, function(row) {
+                        row.addEventListener('dragstart', handleDragStart, false);
+                        row.addEventListener('dragenter', handleDragEnter, false);
+                        row.addEventListener('dragover', handleDragOver, false);
+                        row.addEventListener('dragleave', handleDragLeave, false);
+                        row.addEventListener('drop', handleDrop, false);
+                        row.addEventListener('dragend', handleDragEnd, false);
+                    });
+                },
+                /**
+                 * Primary Admin initialization method.
+                 * @returns {boolean}
+                 */
+                init: function() {
+                    this.initDraggableEntityRows();
+                    return true;
+                }
+            };
+
+        $(function() {
+            adminNs.init();
+        });
+    </script>
+//     Polyfill for mobile Drag n Drop use.
+    <script id="DragDropTouch" src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js"></script>
 {% endblock %}
