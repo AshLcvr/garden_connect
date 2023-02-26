@@ -16,25 +16,22 @@
         "gedmo/doctrine-extensions": "^3.9",
         "gumlet/php-image-resize": "2.0.*",
         "knplabs/knp-paginator-bundle": "^5.8",
-        "sensio/framework-extra-bundle": "^6.2",
         "symfony/apache-pack": "^1.0",
-        "symfony/console": "6.1.*",
-        "symfony/debug-bundle": "6.1.*",
-        "symfony/dotenv": "6.1.*",
+        "symfony/console": "6.2.*",
+        "symfony/debug-bundle": "6.2.*",
+        "symfony/dotenv": "6.2.*",
         "symfony/flex": "^2",
-        "symfony/form": "6.1.*",
-        "symfony/framework-bundle": "6.1.*",
-        "symfony/http-client": "6.1.*",
-        "symfony/intl": "6.1.*",
-        "symfony/mailer": "6.1.*",
-        "symfony/proxy-manager-bridge": "6.1.*",
-        "symfony/runtime": "6.1.*",
-        "symfony/security-bundle": "6.1.*",
-        "symfony/translation": "6.1.*",
-        "symfony/twig-bundle": "6.1.*",
-        "symfony/validator": "6.1.*",
+        "symfony/form": "6.2.*",
+        "symfony/framework-bundle": "6.2.*",
+        "symfony/http-client": "6.2.*",
+        "symfony/intl": "6.2.*",
+        "symfony/mailer": "6.2.*",
+        "symfony/runtime": "6.2.*",
+        "symfony/security-bundle": "6.2.*",
+        "symfony/twig-bundle": "6.2.*",
+        "symfony/validator": "6.2.*",
         "symfony/webpack-encore-bundle": "^1.14",
-        "symfony/yaml": "6.1.*",
+        "symfony/yaml": "6.2.*",
         "symfonycasts/verify-email-bundle": "^1.10",
         "twig/extra-bundle": "^3.4",
         "twig/intl-extra": "^3.4",
@@ -44,8 +41,9 @@
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "fzaninotto/faker": "^1.5",
         "symfony/maker-bundle": "^1.43",
-        "symfony/stopwatch": "6.1.*",
-        "symfony/web-profiler-bundle": "6.1.*"
+        "symfony/phpunit-bridge": "^6.2",
+        "symfony/stopwatch": "6.2.*",
+        "symfony/web-profiler-bundle": "6.2.*"
     },
     "config": {
         "allow-plugins": {
@@ -96,7 +94,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "6.1.*",
+            "require": "6.2.*",
             "docker": false
         }
     }

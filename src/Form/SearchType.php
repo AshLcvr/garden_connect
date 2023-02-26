@@ -125,9 +125,4 @@ class SearchType extends AbstractType
             'crsf_protection' => false
         ]);
     }
-
-    public function getBlockPrefix()
-    {
-        return '';
-    }
 }
