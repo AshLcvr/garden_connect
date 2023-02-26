@@ -202,4 +202,13 @@ class DefaultController extends AbstractController
 
         return $this->redirectToRoute('view_boutique', ['id' => $boutique->getId()], Response::HTTP_SEE_OTHER);
     }
+
+    static function maPagination($donnees, $paginator, $request, $nbr)
+    {
+        return $donnees = $paginator->paginate(
+            $donnees, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            $nbr // Nombre de résultats par page
+        );
+    }
 }

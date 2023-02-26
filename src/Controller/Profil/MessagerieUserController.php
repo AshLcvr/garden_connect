@@ -2,6 +2,7 @@
 
 namespace App\Controller\Profil;
 
+use App\Controller\DefaultController;
 use App\Entity\User;
 use App\Entity\Message;
 use App\Form\MessageType;
@@ -19,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MessagerieUserController extends AbstractController
 {
     #[Route('/user/messagerie', name: 'user_messagerie')]
-    public function messagerieUser(Request $request, PaginatorInterface $paginator)
+    public function messagerieUser(Request $request, PaginatorInterface $paginator, DefaultController $defaultController)
     {
         $user = $this->getUser();
         $conversationsCorresp = $user->getConversationsCorresp();
@@ -56,7 +57,7 @@ class MessagerieUserController extends AbstractController
         usort($conversations, function(Conversation $a, Conversation $b){
             return $a->getModifiedAt()>$b->getModifiedAt()?-1:1;
         });
-        $conversations = $this->maPagination($conversations, $paginator, $request, 5);
+        $conversations = $defaultController::maPagination($conversations, $paginator, $request, 5);
 
         return $this->renderForm('front/profil/messagerie/messagerie.html.twig', [
             'conversations' => $conversations,

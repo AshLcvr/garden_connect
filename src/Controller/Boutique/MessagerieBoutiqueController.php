@@ -2,6 +2,7 @@
 
 namespace App\Controller\Boutique;
 
+use App\Controller\DefaultController;
 use App\Entity\User;
 use App\Entity\Message;
 use App\Form\MessageType;
@@ -21,7 +22,7 @@ class MessagerieBoutiqueController extends AbstractController
 {
 
     #[Route('/messagerie', name: 'boutique_messagerie')]
-    public function boutiqueMessagerie(Request $request, PaginatorInterface $paginator)
+    public function boutiqueMessagerie(Request $request, PaginatorInterface $paginator, DefaultController $defaultController)
     {
         $user = $this->getUser();
         $conversationsCorresp = $user->getConversationsCorresp();
@@ -54,7 +55,7 @@ class MessagerieBoutiqueController extends AbstractController
             $tblNbrNonlus[$value->getId()] = $nbrNonlus;
             $nbrNonlus = 0;
         }
-        $conversations = $this->maPagination($conversations, $paginator, $request, 5);
+        $conversations = $defaultController::maPagination($conversations, $paginator, $request, 5);
 
         return $this->renderForm('front/boutique/messagerie/index.html.twig', [
             'conversations' => $conversations,

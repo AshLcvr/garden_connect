@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\DefaultController;
 use App\Entity\User;
 use App\Entity\Message;
 use App\Form\MessageType;
@@ -24,7 +25,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ConversationController extends AbstractController
 {
     #[Route('/conversation_moderation/admin', name: 'app_conversation_moderation')]
-    public function conversation_moderation(Request $request, PaginatorInterface $paginator): Response
+    public function conversation_moderation(Request $request, PaginatorInterface $paginator,DefaultController $defaultController): Response
     {
         $user = $this->getUser();
         $nbrNonlus = 0;
@@ -45,7 +46,7 @@ class ConversationController extends AbstractController
         usort($conversations, function(Conversation $a, Conversation $b){
             return $a->getModifiedAt()>$b->getModifiedAt()?-1:1;
         });
-        $conversations = $this->maPagination($conversations, $paginator, $request, 5);
+        $conversations = $defaultController::maPagination($conversations, $paginator, $request, 5);
 
         return $this->renderForm('admin/conversation/conversation_moderation.html.twig', [
             'conversationsInit' => $conversations,
@@ -54,7 +55,7 @@ class ConversationController extends AbstractController
     }
 
     #[Route('/conversation_demande_user/admin', name: 'app_conversation_demande_user')]
-    public function conversation_demande_user(Request $request, PaginatorInterface $paginator): Response
+    public function conversation_demande_user(Request $request, PaginatorInterface $paginator,DefaultController $defaultController): Response
     {
         $user             = $this->getUser();
         $nbrNonlus        = 0;
@@ -78,7 +79,7 @@ class ConversationController extends AbstractController
         usort($conversations, function(Conversation $a, Conversation $b){
             return $a->getModifiedAt()>$b->getModifiedAt()?-1:1;
         });
-        $conversations = $this->maPagination($conversations, $paginator, $request, 5);
+        $conversations = $defaultController::maPagination($conversations, $paginator, $request, 5);
 
         return $this->renderForm('admin/conversation/conversation_demande_user.html.twig', [
             'conversationsCorresp' => $conversations,
