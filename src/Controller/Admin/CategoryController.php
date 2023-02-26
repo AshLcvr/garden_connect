@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\DefaultController;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Service\UploadImage;
@@ -16,11 +17,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryController extends AbstractController
 {
     #[Route('/category', name: 'app_category_index', methods: ['GET'])]
-    public function index(PaginatorInterface $paginator,Request $request, CategoryRepository $categoryRepository): Response
+    public function index(PaginatorInterface $paginator,Request $request, CategoryRepository $categoryRepository,DefaultController $defaultController): Response
     {
         $categories = $categoryRepository->findAll();
-//        $categories = $this->maPagination($categories, $paginator, $request, 5);
-        $categories = $paginator->paginate($categories, $request->get('page',1), 5);
+        $categories = $defaultController::maPagination($categories, $paginator, $request, 5);
         return $this->render('admin/category/index.html.twig', [
             'categories' => $categories,
         ]);
@@ -51,10 +51,10 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_category_show', methods: ['GET'])]
-    public function show(Request $request, Category $category, PaginatorInterface $paginator): Response
+    public function show(Request $request, Category $category, PaginatorInterface $paginator, DefaultController $defaultController): Response
     {
         $sousCategory = $category->getSubcategories();
-        $sousCategory = $this->maPagination($sousCategory, $paginator, $request, 5);
+        $sousCategory = $defaultController::maPagination($sousCategory, $paginator, $request, 5);
         return $this->render('admin/category/show.html.twig', [
             'category' => $category,
             'sousCategory' => $sousCategory

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Boutique;
 
+use App\Controller\DefaultController;
 use App\Entity\Avis;
 use App\Form\AvisType;
 use App\Form\AvisFormType;
@@ -17,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AvisController extends AbstractController
 {
     #[Route('/avis-recus', name: 'app_avis_received', methods: ['GET'])]
-    public function receivedAvis(Request $request, AvisRepository $avisRepository, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
+    public function receivedAvis(Request $request, AvisRepository $avisRepository, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator,DefaultController $defaultController): Response
     {
         $user = $this->getUser();
         $boutique = $boutiqueRepository->findOneBy(['user' => $user->getId()]);
@@ -27,7 +28,7 @@ class AvisController extends AbstractController
             return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
         });
         
-        $mesAvis = $this->maPagination($this->getSentOrReceivedAvis($receivedAvis)[2], $paginator, $request, 6);
+        $mesAvis = $defaultController::maPagination($this->getSentOrReceivedAvis($receivedAvis)[2], $paginator, $request, 6);
 
         return $this->render('front/boutique/avis/avis_recus.html.twig', [
             'mesAvis'           => $mesAvis,
@@ -38,7 +39,7 @@ class AvisController extends AbstractController
     }
 
     #[Route('/avis-emis', name: 'app_avis_sent', methods: ['GET', 'POST'])]
-    public function sentAvis(Request $request, BoutiqueRepository $boutiqueRepository, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
+    public function sentAvis(Request $request, BoutiqueRepository $boutiqueRepository, AvisRepository $avisRepository, PaginatorInterface $paginator, DefaultController $defaultController): Response
     {
         $user     = $this->getUser();
         $boutique = $boutiqueRepository->findOneBy(['user' => $user->getId()]);
@@ -47,7 +48,7 @@ class AvisController extends AbstractController
         usort($this->getSentOrReceivedAvis($sentAvis)[2], function(Avis $a, Avis $b){
             return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
         });
-        $mesAvis = $this->maPagination($this->getSentOrReceivedAvis($sentAvis)[2], $paginator, $request, 5);
+        $mesAvis = $defaultController::maPagination($this->getSentOrReceivedAvis($sentAvis)[2], $paginator, $request, 5);
 
         return $this->render('front/boutique/avis/avis_emis.html.twig', [
             'mesAvis'           => $mesAvis,

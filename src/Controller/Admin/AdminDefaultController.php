@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\DefaultController;
 use App\Entity\Avis;
 use App\Entity\User;
 use App\Entity\Annonce;
@@ -98,12 +99,12 @@ class AdminDefaultController extends AbstractController
     }
 
     #[Route('/users/actifs', name: 'all_users_actifs')]
-    public function allUsersActifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
+    public function allUsersActifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator,DefaultController $defaultController): Response
     {
         $usersActif = $userRepository->findBy([
             'actif' => true
         ]);
-        $usersActif = $this->maPagination($usersActif, $paginator, $request, 5);
+        $usersActif = $defaultController::maPagination($usersActif, $paginator, $request, 5);
 
         return $this->render('admin/user/users_actifs.html.twig',[
             'usersActif' => $usersActif
@@ -111,12 +112,12 @@ class AdminDefaultController extends AbstractController
     }
 
     #[Route('/users/inactifs', name: 'all_users_inactifs')]
-    public function allUsersInactifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
+    public function allUsersInactifs(Request $request, UserRepository $userRepository, PaginatorInterface $paginator,DefaultController $defaultController): Response
     {
         $usersInactif = $userRepository->findBy([
             'actif' => false
         ]);
-        $usersInactif = $this->maPagination($usersInactif, $paginator, $request, 5);
+        $usersInactif = $defaultController::maPagination($usersInactif, $paginator, $request, 5);
 
         return $this->render('admin/user/users_inactifs.html.twig',[
             'usersInactif' => $usersInactif,
@@ -145,12 +146,12 @@ class AdminDefaultController extends AbstractController
     }
 
     #[Route('/annonces/actives', name: 'all_annonces_actives')]
-    public function allAnnonceActives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
+    public function allAnnonceActives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator,DefaultController $defaultController): Response
     {
         $annoncesActif = $annonceRepository->findBy([
             'actif' => true
         ]);
-        $annoncesActif = $this->maPagination($annoncesActif, $paginator, $request, 5);
+        $annoncesActif = $defaultController::maPagination($annoncesActif, $paginator, $request, 5);
 
         return $this->render('admin/annonce/annonces_actives.html.twig',[
             'annoncesActif' => $annoncesActif
@@ -158,12 +159,12 @@ class AdminDefaultController extends AbstractController
     }
 
     #[Route('/annonces/inactives', name: 'all_annonces_inactives')]
-    public function allAnnonceInactives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
+    public function allAnnonceInactives(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator, DefaultController $defaultController): Response
     {
         $annoncesInactif = $annonceRepository->findBy([
             'actif' => false
         ]);
-        $annoncesInactif = $this->maPagination($annoncesInactif, $paginator, $request, 5);
+        $annoncesInactif = $defaultController::maPagination($annoncesInactif, $paginator, $request, 5);
 
         return $this->render('admin/annonce/annonces_inactives.html.twig',[
             'annoncesInactif' => $annoncesInactif
@@ -191,12 +192,12 @@ class AdminDefaultController extends AbstractController
     }
 
     #[Route('/boutiques/actives', name: 'all_boutiques_actives')]
-    public function allBoutiquesActives(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
+    public function allBoutiquesActives(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator,DefaultController $defaultController): Response
     {
         $boutiquesActif = $boutiqueRepository->findBy([
             'actif' => true
         ]);
-        $boutiquesActif = $this->maPagination($boutiquesActif, $paginator, $request, 5);
+        $boutiquesActif = $defaultController::maPagination($boutiquesActif, $paginator, $request, 5);
 
         return $this->render('admin/boutique/boutiques_actives.html.twig',[
             'boutiquesActif' => $boutiquesActif
@@ -204,12 +205,12 @@ class AdminDefaultController extends AbstractController
     }
 
     #[Route('/boutiques/inactives', name: 'all_boutiques_inactives')]
-    public function allBoutiquesInactives(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator): Response
+    public function allBoutiquesInactives(Request $request, BoutiqueRepository $boutiqueRepository, PaginatorInterface $paginator,DefaultController $defaultController): Response
     {
         $boutiquesInactif = $boutiqueRepository->findBy([
             'actif' => false
         ]);
-        $boutiquesInactif = $this->maPagination($boutiquesInactif, $paginator, $request, 5);
+        $boutiquesInactif = $defaultController::maPagination($boutiquesInactif, $paginator, $request, 5);
 
         return $this->render('admin/boutique/boutiques_inactives.html.twig',[
             'boutiquesInactif' => $boutiquesInactif
@@ -319,12 +320,12 @@ class AdminDefaultController extends AbstractController
     }
 
     #[Route('/avis/actifs', name: 'all_avis_actifs')]
-    public function allAvisActifs(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
+    public function allAvisActifs(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator,DefaultController $defaultController): Response
     {
         $avisActif = $avisRepository->findBy([
             'actif' => true
         ]);
-        $avisActif = $this->maPagination($avisActif, $paginator, $request, 5);
+        $avisActif = $defaultController::maPagination($avisActif, $paginator, $request, 5);
 
         return $this->render('admin/avis/avis_actifs.html.twig',[
             'avisActif' => $avisActif
@@ -332,12 +333,12 @@ class AdminDefaultController extends AbstractController
     }
 
     #[Route('/avis/inactifs', name: 'all_avis_inactifs')]
-    public function allAvisInactifs(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator): Response
+    public function allAvisInactifs(Request $request, AvisRepository $avisRepository, PaginatorInterface $paginator, DefaultController $defaultController): Response
     {
         $avisInactif = $avisRepository->findBy([
             'actif' => false
         ]);
-        $avisInactif = $this->maPagination($avisInactif, $paginator, $request, 5);
+        $avisInactif = $defaultController::maPagination($avisInactif, $paginator, $request, 5);
 
         return $this->render('admin/avis/avis_inactifs.html.twig',[
             'avisInactif' => $avisInactif

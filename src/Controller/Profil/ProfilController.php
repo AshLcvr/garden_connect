@@ -2,6 +2,7 @@
 
 namespace App\Controller\Profil;
 
+use App\Controller\DefaultController;
 use App\Entity\Avis;
 use App\Entity\User;
 use App\Entity\Favory;
@@ -57,7 +58,7 @@ class ProfilController extends AbstractController
     }
 
     #[Route('/avis', name: 'profil_avis')]
-    public function avis_profil(Request $request, PaginatorInterface $paginator)
+    public function avis_profil(Request $request, PaginatorInterface $paginator,DefaultController $defaultController)
     {
         $user = $this->getUser();
         $avis = $user->getAvis();
@@ -90,7 +91,7 @@ class ProfilController extends AbstractController
         usort($mesAvis, function(Avis $a, Avis $b){
             return $a->getCreatedAt()>$b->getCreatedAt()?-1:1;
         });
-        $mesAvis = $this->maPagination($mesAvis, $paginator, $request, 5);
+        $mesAvis = $defaultController::maPagination($mesAvis, $paginator, $request, 5);
 
         return $this->render('front/profil/avis/avis.html.twig', [
             'user' => $user,
@@ -130,13 +131,12 @@ class ProfilController extends AbstractController
     }
 
     #[Route('/favory', name: 'profil_favory')]
-    public function profil_favory(Request $request, PaginatorInterface $paginator): Response
+    public function profil_favory(Request $request, PaginatorInterface $paginator,DefaultController $defaultController): Response
     {
         $favories = $this->getUser()->getFavories();
 
         $globalRating = [];
         $totalGlobalRating = [];
-        $numberAvis = [];
         $totalNumberAvis = [];
 
         if ($favories){
@@ -154,7 +154,7 @@ class ProfilController extends AbstractController
         }else{
             $totalGlobalRating = 0;
         }
-        $favories = $this->maPagination($favories, $paginator, $request, 5);
+        $favories = $defaultController::maPagination($favories, $paginator, $request, 5);
 
         return $this->renderForm('front/profil/favories/favories.html.twig', [
             'favories' => $favories,

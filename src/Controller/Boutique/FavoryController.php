@@ -2,6 +2,7 @@
 
 namespace App\Controller\Boutique;
 
+use App\Controller\DefaultController;
 use App\Entity\Favory;
 use App\Entity\Boutique;
 use App\Repository\FavoryRepository;
@@ -15,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FavoryController extends AbstractController
 {
     #[Route('/favorites/listing', name: 'app_listing_favory')]
-    public function listingFavorites(Request $request, PaginatorInterface $paginator): Response
+    public function listingFavorites(Request $request, PaginatorInterface $paginator, DefaultController $defaultController): Response
     {
         $user     = $this->getUser();
         $favories = $user->getFavories();
@@ -43,7 +44,7 @@ class FavoryController extends AbstractController
         }else{
             $totalGlobalRating = 0;
         }
-        $favories = $this->maPagination($favories, $paginator, $request, 5);
+        $favories = $defaultController::maPagination($favories, $paginator, $request, 5);
 
         return $this->render('front/boutique/favorites/listing.html.twig',[
             'favories' => $favories,
